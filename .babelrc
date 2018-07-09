@@ -1,0 +1,23 @@
+{
+  "env": {
+    "development": {
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
+    }
+  },
+  "presets": [
+    "babel-preset-env",
+    "babel-preset-stage-0",
+    "babel-preset-react",
+    [
+      "es2015",
+      {
+        "modules": false
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-class-properties"
+  ]
+}

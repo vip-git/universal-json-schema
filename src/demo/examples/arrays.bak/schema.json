@@ -1,0 +1,62 @@
+{
+  "type": "object",
+  "properties": {
+    "Technical": {
+      "type": "object",
+      "title": "Technical",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "title": "Product Sn"
+        },
+        "Indchangecontent": {
+          "type": "string",
+          "title": "Indchangecontent"
+        },
+        "Indchangepriceavail": {
+          "type": "string",
+          "title": "Indchangepriceavail"
+        },
+        "Indchangesuppprop": {
+          "type": "string",
+          "title": "Indchangesuppprop"
+        },
+        "Indchangeproducttrack": {
+          "type": "string",
+          "title": "Indchangeproducttrack"
+        },
+        "Indchangerelation": {
+          "type": "string",
+          "title": "Indchangerelation"
+        },
+        "Indproductfused": {
+          "type": "string",
+          "title": "Indproductfused"
+        }
+      },
+      "required": [
+        "Indproductfused",
+        "Indchangerelation",
+        "Indchangeproducttrack"
+      ]
+    },
+    "Changedata": {
+      "title": "Change Data",
+      "type": "object",
+      "properties": {
+        "Createdon": {
+          "type": "string",
+          "title": "Createdon"
+        },
+        "Createdby": {
+          "type": "string",
+          "title": "Createdby"
+        }
+      },
+      "required": [
+        "Createdon",
+        "Createdby"
+      ]
+    }
+  }
+}

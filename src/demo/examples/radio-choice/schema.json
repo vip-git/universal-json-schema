@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "title": "Radio choice",
+  "properties": {
+    "numberEnumRadio": {
+      "type": "number",
+      "title": "Number enum",
+      "enum": [
+        1,
+        2,
+        3
+      ]
+    }
+  }
+}
