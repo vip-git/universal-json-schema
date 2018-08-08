@@ -1,6 +1,7 @@
 import React from 'react';
-import Radio, { RadioGroup } from 'material-ui/Radio';
-import { FormControlLabel } from 'material-ui/Form';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 export default ({ path, options = [], value, onChange, inputProps, nullOption, ...rest }) => (
   <RadioGroup

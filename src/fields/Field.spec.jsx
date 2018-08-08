@@ -7,8 +7,8 @@ import chaiEnzyme from 'chai-enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
-import Input from 'material-ui/Input';
-import { FormControl, FormHelperText, FormLabel } from 'material-ui/Form';
+import Input from '@material-ui/core/Input';
+import { FormControl, FormHelperText, FormLabel } from '@material-ui/core/Form';
 import { RadioGroup } from './components';
 import { ConfiguredField } from './Field';
 

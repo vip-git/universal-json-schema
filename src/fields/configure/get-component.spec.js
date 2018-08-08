@@ -21,7 +21,7 @@ describe('getComponent', () => {
     CheckboxSpy = sinon.spy();
     SelectSpy = sinon.spy();
     getComponent = inject({
-      'material-ui/Input': {
+      '@material-ui/core/Input': {
         default: InputSpy,
       },
       '../components': {

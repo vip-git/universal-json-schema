@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import keys from 'lodash/keys';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import FormField from '../FormField';
 import fieldSetStyles from './field-set-styles';
 

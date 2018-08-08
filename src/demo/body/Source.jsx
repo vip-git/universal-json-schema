@@ -6,7 +6,7 @@ import 'codemirror/theme/material.css';
 import 'codemirror/mode/javascript/javascript'; // eslint-disable-line
 import Valid from '@material-ui/icons/CheckCircle';
 import Invalid from '@material-ui/icons/HighlightOff';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import sourceStyles from './editor-styles';
 
 const cmOptions = {

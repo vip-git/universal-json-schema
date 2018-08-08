@@ -1,8 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-import { withStyles } from 'material-ui/styles';
-import { FormControl, FormHelperText } from 'material-ui/Form';
-import Input from 'material-ui/Input';
+import { withStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Input from '@material-ui/core/Input';
 import fieldStyles from './field-styles';
 
 // for unit testing only

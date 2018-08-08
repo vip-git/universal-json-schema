@@ -1,6 +1,6 @@
 import React from 'react';
-import Select from 'material-ui/Select';
-import { MenuItem } from 'material-ui/Menu';
+import Select from '@material-ui/core/Select';
+import { MenuItem } from '@material-ui/core/Menu';
 
 export default ({ type, value = '', options, nullOption, onChange, ...rest }) => (
   <Select

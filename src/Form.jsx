@@ -1,8 +1,8 @@
 import React from 'react';
 import isEqual from 'lodash/isEqual';
 import { generate } from 'shortid';
-import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import formStyles from './form-styles';
 import FormField from './FormField';
 import updateFormData, { addListItem, removeListItem, moveListItem } from './helpers/update-form-data';

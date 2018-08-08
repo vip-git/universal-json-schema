@@ -1,7 +1,7 @@
 import React from 'react';
 import keys from 'lodash/keys';
-import { withStyles } from 'material-ui/styles';
-import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
+import { withStyles } from '@material-ui/core/styles';
+import List, { ListItem, ListItemText, ListSubheader } from '@material-ui/core/List';
 import examples from '../examples';
 
 import menuStyles from './menu-styles';
