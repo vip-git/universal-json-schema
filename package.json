@@ -2,14 +2,15 @@
   "author": "Vipin Tanna",
   "scripts": {
     "build": "webpack",
-    "build:demo": "webpack --config webpack.config.demo.js",
+    "build:demo": "cross-env NODE_ENV=production webpack --env.NODE_ENV=production --config webpack.config.demo.js",
     "test": "npm run test:ci -- --watch",
     "heroku-postbuild": "npm run build:demo",
-    "start": "node src/demo/server.js",
+    "start": "cross-env NODE_ENV=production node src/demo/server.js",
     "deploy": "npm run build && npm version patch && npm publish",
     "test:ci": "mocha-webpack --glob \"*.spec.js*\" --reporter mochawesome --require mocha.setup.js --reporter-options reportDir=mochawesome-report-unit --recursive src"
   },
   "dependencies": {
+    "@material-ui/core": "^1.4.3",
     "@material-ui/icons": "^1.0.0-beta.42",
     "babel-core": "^6.26.0",
     "babel-plugin-module-resolver": "^3.1.1",
@@ -21,6 +22,7 @@
     "body-parser": "^1.18.2",
     "classnames": "^2.2.5",
     "codemirror": "^5.36.0",
+    "cross-env": "^5.2.0",
     "express": "^4.16.3",
     "immutability-helper": "^2.6.6",
     "lodash": "^4.17.5",

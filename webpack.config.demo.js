@@ -86,6 +86,7 @@ var config = {
   plugins: [
     extractCss,
     extractScss,
+    new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("production") }),
     new HtmlWebpackPlugin({
       template: 'src/demo/index.html',
     }),
