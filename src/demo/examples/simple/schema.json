@@ -24,7 +24,7 @@
       "title": "Bio"
     },
     "date": {
-      "type": "material-datetime",
+      "type": "material-date",
       "title": "Date"
     },
     "password": {
