@@ -61,14 +61,14 @@ class Form extends React.Component {
     }
   }
   render() {
-    const { classes, formData, onSubmit, actionButtonPos, onChange, onCancel, ...rest } = this.props;
+    const { classes, formData, onSubmit, actionButtonPos, onChange, onCancel, submitValue, ...rest } = this.props;
     const { validation, id } = this.state;
     return (
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <Paper className={classes.root}>
           {
             (actionButtonPos === 'top') ? 
-                  <FormButtons onSubmit={this.onSubmit} onCancel={onCancel} classes={classes} />
+                  <FormButtons onSubmit={this.onSubmit} submitValue={submitValue} onCancel={onCancel} classes={classes} />
                   : null
             
           }
@@ -88,7 +88,7 @@ class Form extends React.Component {
           />
           {
             (!actionButtonPos) ? 
-                  <FormButtons onSubmit={this.onSubmit} onCancel={onCancel} classes={classes} />
+                  <FormButtons onSubmit={this.onSubmit} submitValue={submitValue} onCancel={onCancel} classes={classes} />
                   : null
             
           }
