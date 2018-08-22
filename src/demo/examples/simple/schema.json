@@ -23,6 +23,10 @@
       "type": "string",
       "title": "Bio"
     },
+    "date": {
+      "type": "material-datetime",
+      "title": "Date"
+    },
     "password": {
       "type": "string",
       "title": "Password",

@@ -12,6 +12,6 @@ export default ({ schema, uiSchema = {} }) => {
     return FormLabel;
   }
   // boolean
-  if (type === 'boolean' || widget === 'checkboxes') return null;
+  if (type === 'boolean' || widget === 'checkboxes' || type === 'material-date' || type === 'material-time' || type === 'material-datetime') return null;
   return InputLabel;
 };

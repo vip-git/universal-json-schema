@@ -1,6 +1,10 @@
 module.exports = {
   extends: 'airbnb',
   "rules": {
+    "no-trailing-spaces": "off",
+    "react/jsx-indent": "off",
+    "no-unused-vars": "off",
+    "react/jsx-indent-props": "off",
     "react/prop-types": "off",
     "react/jsx-curly-brace-presence": "off",
     "react/prefer-stateless-function": "off",

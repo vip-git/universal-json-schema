@@ -1,4 +1,5 @@
 import without from 'lodash/without';
+import moment from 'moment';
 import getMuiProps from './get-mui-props';
 import getInputType from './get-input-type';
 import valuesToOptions from './values-to-options';
@@ -23,7 +24,8 @@ const coerceValue = (type, value) => {
   }
 };
 const onChangeHandler = (onChange, type) => (e) => {
-  const value = coerceValue(type, e.target.value);
+  const value = (type === 'material-date' || type === 'material-time' || type === 'material-datetime') ?
+                   moment(e).format() : coerceValue(type, e.target.value);
   if (value !== undefined) onChange(value);
 };
 const onCheckboxChangeHandler = (onChange, title) => (e) => {
