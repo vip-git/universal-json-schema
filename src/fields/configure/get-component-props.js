@@ -23,9 +23,12 @@ const coerceValue = (type, value) => {
       return value;
   }
 };
-const onChangeHandler = (onChange, type) => (e) => {
+
+const onChangeHandler = (onChange, type, widget) => (e) => {
   const value = (type === 'material-date' || type === 'material-time' || type === 'material-datetime') ?
-                  e.format() : coerceValue(type, e.target.value);
+                  e.format() : 
+                  (widget === 'material-multiselect' || widget === 'material-select') ?  coerceValue(type, JSON.stringify(e))
+                  : coerceValue(type, e.target.value);
   if (value !== undefined) onChange(value);
 };
 const onCheckboxChangeHandler = (onChange, title) => (e) => {
@@ -46,7 +49,7 @@ export default ({ schema = {}, uiSchema = {}, onChange, htmlId, data, objectData
   const { type } = schema;
   const rv = {
     type: getInputType(type, uiSchema),
-    onChange: onChange && onChangeHandler(onChange, type),
+    onChange: onChange && onChangeHandler(onChange, type, widget),
     ...getMuiProps(uiSchema),
   };
   if (schema.enum) {

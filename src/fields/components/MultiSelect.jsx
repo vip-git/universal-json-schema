@@ -1,16 +1,16 @@
 import React from 'react';
 import MultiSelect from './MaterialSelect';
 
-export default ({ type, value = '', options, label, multiSelect, nullOption, onChange, ...rest }) => {
+export default ({ type, value = '[]', options, label, multiSelect, nullOption, onChange, ...rest }) => {
+  const suggestions = options.map((suggestion) => ({
+    value: suggestion.key,
+    label: suggestion.value,
+  }));
+  value = (value) ? JSON.parse(value) : '';
   return (
-    // <Select
-    //   {...rest}
-    //   value={String(value)}
-    //   onChange={onChange}
-    // >
-    //   {value === null && <MenuItem value={''}>{nullOption}</MenuItem>}
-    //   {options.map(o => <MenuItem key={o.key} value={String(o.key)}>{String(o.value)}</MenuItem>)}
-    // </Select>
-    <MultiSelect suggestions={[{ label: 'Afghanistan', value: 'AFG'}]} label={label} multiple={multiSelect} />
+    <MultiSelect suggestions={suggestions} 
+                 value={value} 
+                 onChange={onChange}
+                 label={label} multiple={multiSelect} />
   );
 };

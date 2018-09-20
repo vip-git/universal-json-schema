@@ -174,12 +174,6 @@ class IntegrationReactSelect extends React.Component {
     multi: null,
   };
 
-  handleChange = name => value => {
-    this.setState({
-      [name]: value,
-    });
-  };
-
   render() {
     const { classes, theme } = this.props;
 
@@ -206,8 +200,8 @@ class IntegrationReactSelect extends React.Component {
             }}
             options={this.props.suggestions}
             components={components}
-            value={this.state.multi}
-            onChange={this.handleChange('multi')}
+            value={this.props.value}
+            onChange={this.props.onChange}
             isMulti={this.props.multiple}
           />
       </div>
