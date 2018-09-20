@@ -69,6 +69,7 @@ export default ({ schema = {}, uiSchema = {}, onChange, htmlId, data, objectData
     rv.onChange = onChange;
   }
   else {
+    rv.label = schema.title || '';
     rv.inputProps = {
       id: htmlId,
     };

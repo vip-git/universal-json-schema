@@ -33,7 +33,7 @@ const renderPickerComp = (type) => {
     }
 }
 
-export default ({ path, label, value, type, onChange, ...rest }) => {
+export default ({ path, label, title, value, type, onChange, ...rest }) => {
     const PickerComp = renderPickerComp(type).comp;
     const maskedInput = renderPickerComp(type).maskInput;
     const placeholder = renderPickerComp(type).placeholder;
@@ -43,6 +43,7 @@ export default ({ path, label, value, type, onChange, ...rest }) => {
             keyboard
             format={format}
             placeholder={placeholder}
+            label={label}
             // handle clearing outside => pass plain array if you are not controlling value outside
             mask={value => (value ? maskedInput : [])}
             value={value}
