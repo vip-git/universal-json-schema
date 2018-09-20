@@ -1,5 +1,5 @@
 // import Input, { InputLabel } from 'material-ui/Input'; // eslint-disable-line import/no-named-default
-const { RadioGroup, Select, Checkbox, Picker } = require('../components');
+const { RadioGroup, Select, Checkbox, Picker, MultiSelect } = require('../components');
 
 const Input = require('material-ui/Input').default;
 
@@ -14,7 +14,10 @@ export default ({ schema, uiSchema = {} }) => {
     }
     else if (widget === 'checkboxes') {
       return Checkbox;
+    } else if (widget === 'material-select' || widget === 'material-multiselect') {
+      return MultiSelect;
     }
+    
     return Select;
   }
   else if (type === 'boolean') {

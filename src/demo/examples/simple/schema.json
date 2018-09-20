@@ -19,6 +19,11 @@
       "type": "integer",
       "title": "Age"
     },
+    "selectTest": {
+      "type": "string",
+      "title": "BE Discount Agreement",
+      "enum": ["Yes", "No"]
+    },
     "bio": {
       "type": "string",
       "title": "Bio"

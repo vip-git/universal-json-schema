@@ -18,6 +18,9 @@
   "date": {
     "ui:widget": "alt-datetime"
   },
+  "selectTest":{
+    "ui:widget": "material-multiselect"
+  },
   "telephone": {
     "ui:options": {
       "inputType": "tel"

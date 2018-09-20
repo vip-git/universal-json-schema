@@ -62,6 +62,8 @@ export default ({ schema = {}, uiSchema = {}, onChange, htmlId, data, objectData
     else {
       rv.nullOption = 'Please select...';
     }
+    rv.label = schema.title || '';
+    rv.multiSelect = (widget === 'material-multiselect');
     rv.options = valuesToOptions(schema.enum);
   }
   else if (type === 'boolean') {
