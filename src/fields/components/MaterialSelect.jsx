@@ -16,8 +16,7 @@ import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
-    height: 250,
+    flexGrow: 1
   },
   input: {
     display: 'flex',
@@ -188,7 +187,7 @@ class IntegrationReactSelect extends React.Component {
     };
 
     return (
-      <div className={classes.root}>
+      <div id="material-form-select" className={classes.root}>
           <Select
             classes={classes}
             styles={selectStyles}

@@ -39,17 +39,19 @@ export default ({ path, label, title, value, type, onChange, ...rest }) => {
     const placeholder = renderPickerComp(type).placeholder;
     const format = renderPickerComp(type).format;
     return (
-        <PickerComp
-            keyboard
-            format={format}
-            placeholder={placeholder}
-            label={label}
-            // handle clearing outside => pass plain array if you are not controlling value outside
-            mask={value => (value ? maskedInput : [])}
-            value={value}
-            onChange={onChange}
-            disableOpenOnEnter
-            animateYearScrolling={false}
-        />
+        <div id="material-form-datepicker" style={{ display: 'contents' }}>
+            <PickerComp
+                keyboard
+                format={format}
+                placeholder={placeholder}
+                label={label}
+                // handle clearing outside => pass plain array if you are not controlling value outside
+                mask={value => (value ? maskedInput : [])}
+                value={value}
+                onChange={onChange}
+                disableOpenOnEnter
+                animateYearScrolling={false}
+            />
+        </div>
 )
 };
