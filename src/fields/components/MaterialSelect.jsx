@@ -187,7 +187,7 @@ class IntegrationReactSelect extends React.Component {
     };
 
     return (
-      <div key={'material-form-select-' + this.props.label } className={['material-form-select', classes.root].join(',')}>
+      <div key={'material-form-select-' + this.props.label } className={['material-form-select', classes.root].join(' ')}>
           <Select
             classes={classes}
             styles={selectStyles}

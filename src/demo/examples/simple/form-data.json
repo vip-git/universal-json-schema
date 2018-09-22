@@ -3,5 +3,6 @@
   "lastName": "Norris",
   "age": 75,
   "bio": "Roundhouse kicking asses since 1940",
-  "password": "noneed"
+  "password": "noneed",
+  "selectTest": "{\"value\":\"H\",\"label\":\"Hoog tarief\"}"
 }
