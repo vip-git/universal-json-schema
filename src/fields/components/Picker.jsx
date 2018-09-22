@@ -39,7 +39,7 @@ export default ({ path, label, title, value, type, onChange, ...rest }) => {
     const placeholder = renderPickerComp(type).placeholder;
     const format = renderPickerComp(type).format;
     return (
-        <div class="material-form-datepicker" style={{ display: 'contents' }}>
+        <div key={'material-date-picker-' + label } className="material-form-datepicker" style={{ display: 'contents' }}>
             <PickerComp
                 keyboard
                 format={format}
