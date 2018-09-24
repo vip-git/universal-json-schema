@@ -49,6 +49,7 @@ export default ({ path, label, title, value, type, onChange, ...rest }) => {
                 mask={value => (value ? maskedInput : [])}
                 value={value}
                 onChange={onChange}
+                maxDate={'2200-01-01'}
                 disableOpenOnEnter
                 animateYearScrolling={false}
             />
