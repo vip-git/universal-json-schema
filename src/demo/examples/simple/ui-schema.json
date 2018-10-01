@@ -21,6 +21,9 @@
   "selectTest":{
     "ui:widget": "material-multiselect"
   },
+  "creatableSelectTest":{
+    "ui:widget": "creatable-select"
+  },
   "telephone": {
     "ui:options": {
       "inputType": "tel"

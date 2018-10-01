@@ -12,21 +12,21 @@ const renderPickerComp = (type) => {
                 comp: DatePicker,
                 maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
                 format: "DD-MM-YYYY",
-                placeholder: "10-10-2018"
+                placeholder: "__-__-____"
             }
         case 'material-time':
             return {
                 comp: TimePicker,
                 maskInput: [/\d/, /\d/, ':', /\d/, /\d/, ' ', /a|p/i, 'M'],
                 format: "hh:mm A",
-                placeholder: "08:00 AM"
+                placeholder: "__:__ __"
             }
         case 'material-datetime':
             return {
                 comp: DateTimePicker,
                 maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ':', /\d/, /\d/, ' ', /a|p/i, 'M'],
                 format: "DD-MM-YYYY hh:mm A",
-                placeholder: "10/10/2018 08:00 AM"
+                placeholder: "__-__-___ __:__ __"
             }
         default:
             return DatePicker;

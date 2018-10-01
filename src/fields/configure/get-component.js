@@ -1,5 +1,5 @@
 // import Input, { InputLabel } from 'material-ui/Input'; // eslint-disable-line import/no-named-default
-const { RadioGroup, Select, Checkbox, Picker, MultiSelect } = require('../components');
+const { RadioGroup, Select, Checkbox, Picker, MultiSelect, CreatableSelect } = require('../components');
 
 const Input = require('material-ui/Input').default;
 
@@ -16,6 +16,8 @@ export default ({ schema, uiSchema = {} }) => {
       return Checkbox;
     } else if (widget === 'material-select' || widget === 'material-multiselect') {
       return MultiSelect;
+    } else if (widget === 'creatable-select') {
+      return CreatableSelect;
     }
     
     return Select;
