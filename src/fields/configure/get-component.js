@@ -14,10 +14,9 @@ export default ({ schema, uiSchema = {} }) => {
     }
     else if (widget === 'checkboxes') {
       return Checkbox;
-    } else if (widget === 'material-select' || widget === 'material-multiselect') {
+    } 
+    else if (widget === 'material-select' || widget === 'material-multiselect') {
       return MultiSelect;
-    } else if (widget === 'creatable-select') {
-      return CreatableSelect;
     }
     
     return Select;
@@ -28,5 +27,10 @@ export default ({ schema, uiSchema = {} }) => {
   else if (type === 'material-date' || type === 'material-time' || type === 'material-datetime') {
     return Picker;
   }
+  
+  if (widget === 'creatable-select') {
+    return CreatableSelect;
+  }
+  
   return Input;
 };

@@ -9,6 +9,7 @@ const toNumber = (v) => {
   const n = Number(v);
   return (!Number.isNaN(n) ? n : v);
 };
+
 const coerceValue = (type, value) => {
   switch (type) {
     case 'string':
@@ -28,8 +29,9 @@ const onChangeHandler = (onChange, type, widget) => (e) => {
   console.log('value is: ', e);
   const value = (type === 'material-date' || type === 'material-time' || type === 'material-datetime') ?
                   e.format() : 
-                  (widget === 'material-multiselect' || widget === 'material-select') ?  coerceValue(type, JSON.stringify(e))
-                  : coerceValue(type, e.target.value);
+                  (widget === 'material-multiselect' || widget === 'material-select') ?  
+                    coerceValue(type, JSON.stringify(e))
+                    : coerceValue(type, e.target.value);
   if (value !== undefined) onChange(value);
 };
 const onCheckboxChangeHandler = (onChange, title) => (e) => {
@@ -44,7 +46,7 @@ const onCheckboxChangeHandler = (onChange, title) => (e) => {
   return onChange(spec);
 };
 
-export default ({ schema = {}, uiSchema = {}, onChange, htmlId, data, objectData }) => {
+export default ({ schema = {}, uiSchema = {}, inputValue, onChange, onKeyDown, creatableSelectValue, onCreatableSelectChange, onInputChange, htmlId, data, objectData }) => {
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'] || {};
   const { type } = schema;
@@ -70,6 +72,7 @@ export default ({ schema = {}, uiSchema = {}, onChange, htmlId, data, objectData
     if (widget === 'material-select' || widget === 'material-multiselect') {
       rv.multiSelect = (widget === 'material-multiselect');
     }
+
     rv.options = valuesToOptions(schema.enum);
   }
   else if (type === 'boolean') {
@@ -86,6 +89,15 @@ export default ({ schema = {}, uiSchema = {}, onChange, htmlId, data, objectData
     rv.multiline = true;
     rv.rows = 5;
   }
+
+  if (widget === 'creatable-select') {
+    rv.onKeyDown = onKeyDown;
+    rv.onInputChange = onInputChange;
+    rv.onChange = onCreatableSelectChange;
+    rv.inputValue = inputValue;
+    rv.creatableSelectValue = creatableSelectValue;
+  }
+
   if (options.disabled) {
     if (typeof options.disabled === 'boolean') {
       rv.disabled = options.disabled;

@@ -1,11 +1,18 @@
 import React from 'react';
 import CreatableSelect from './lib/CreatableReactSelect';
 
-export default ({ type, value = '[]', options, label, nullOption, onChange, ...rest }) => {
-  value = (value) ? JSON.parse(value) : [];
+export default ({ type, value, creatableSelectValue, inputValue, options, label, nullOption, onChange, onKeyDown, onInputChange, ...rest }) => {
+  console.log('value is', creatableSelectValue);
+  const newVal = (creatableSelectValue) ? JSON.parse(creatableSelectValue) : [];
+  console.log('onChange is', onChange);
   return (
-    <CreatableSelect value={value}  
-                          onChange={onChange} 
-                          label={label} />
+    <CreatableSelect 
+      value={newVal}
+      inputValue={inputValue}
+      onChange={onChange} 
+      onKeyDown={onKeyDown}
+      onInputChange={onInputChange}
+      label={label}
+    />
   );
 };

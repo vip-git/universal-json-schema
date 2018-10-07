@@ -2,7 +2,7 @@ import keys from 'lodash/keys';
 
 export default (values) => {
   if (values instanceof Array) {
-    return values.map(e => {
+    return values.map((e) => {
       return (typeof e === 'object') ? ({ key: e.key, value: e.value }) : ({ key: e, value: e });
     });
   }

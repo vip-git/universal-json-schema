@@ -12,6 +12,11 @@ import getValidationResult from './helpers/validation';
 import ValidationMessages from './ValidationMessages';
 import FormButtons from './FormButtons';
 
+const createOption = label => ({
+  label,
+  value: label,
+});
+
 class Form extends React.Component {
   state = {
     data: this.props.formData,
@@ -31,6 +36,7 @@ class Form extends React.Component {
       data: nextProps.formData,
     });
   }
+
   onChange = field => (value) => {
     const data = updateFormData(this.state.data, field, value);
     this.setState({
@@ -53,11 +59,41 @@ class Form extends React.Component {
   onSubmit = () => {
     this.props.onSubmit({ formData: this.state.data });
   }
+  handleCreatableSelectChange = (value, actionMeta) => {
+    console.group('Value Changed');
+    console.log(value);
+    console.log(`action: ${actionMeta.action}`);
+    console.groupEnd();
+    this.setState({ value }, this.notifyChange);
+  };
+  handleCreatableSelectInputChange = (inputValue) => {
+    this.setState({ inputValue }, this.notifyChange);
+  };
+  handleCreatableSelectKeyDown = (event) => {
+    const { inputValue, value } = this.state;
+    if (!inputValue) return;
+    const finalVal = (value) ? [...JSON.parse(value), createOption(inputValue)] : [createOption(inputValue)];
+    switch (event.key) {
+      case 'Enter':
+      case 'Tab':
+        console.group('Value Added');
+        console.log(finalVal);
+        console.groupEnd();
+        this.setState({
+          inputValue: '',
+          value: JSON.stringify(finalVal),
+        });
+        event.preventDefault();
+        break;
+      default:
+        break;
+    }
+  };
   notifyChange = () => {
     const { onChange } = this.props;
-    const { data } = this.state;
+    const { data, inputValue, value } = this.state;
     if (onChange) {
-      onChange({ formData: data });
+      onChange({ formData: data, inputValue, value });
     }
   }
   render() {
@@ -77,7 +113,12 @@ class Form extends React.Component {
             path={''}
             data={this.state.data}
             id={id}
+            inputValue={this.state.inputValue}
+            creatableSelectValue={this.state.value}
             onChange={this.onChange}
+            onKeyDown={this.handleCreatableSelectKeyDown}
+            onCreatableSelectChange={this.handleCreatableSelectChange}
+            onInputChange={this.handleCreatableSelectInputChange}
             onSubmit={this.onSubmit}
             validation={validation}
             onMoveItemUp={this.onMoveItemUp}

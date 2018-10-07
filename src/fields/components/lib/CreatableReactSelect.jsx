@@ -6,62 +6,52 @@ const components = {
   DropdownIndicator: null,
 };
 
-const createOption = (label) => ({
-  label,
-  value: label,
-});
+const colourStyles = {
+  control: styles => ({
+    ...styles,
+    top: 0,
+    height: 10,
+    overflow: 'auto',
+    borderTop: 'none',
+    boxShadow: 'none!important',
+    background: 'white',
+    borderLeft: 'none',
+    borderColor: 'rgba(0, 0, 0, 0.42)!important',
+    borderRight: 'none',
+    borderBottom: '1px solid rgba(0, 0, 0, 0.42)',
+    borderRadius: 0,
+    marginTop: 10,
+    marginBottom: 10,
+  }),
+};
 
 export default class CreatableInputOnly extends Component {
-  state = {
-    inputValue: '',
-    value: [],
-  };
-
-  handleChange = (value, actionMeta) => {
-    console.group('Value Changed');
-    console.log(value);
-    console.log(`action: ${actionMeta.action}`);
-    console.groupEnd();
-    this.setState({ value });
-  };
-
-  handleInputChange = (inputValue) => {
-    this.setState({ inputValue });
-  };
-
-  handleKeyDown = (event) => {
-    const { inputValue, value } = this.state;
-    // const { value } = this.props;
-    if (!inputValue) return;
-    switch (event.key) {
-      case 'Enter':
-      case 'Tab':
-        console.group('Value Added');
-        console.log(value);
-        console.groupEnd();
-        this.setState({
-          inputValue: '',
-          value: [...value, createOption(inputValue)],
-        });
-        event.preventDefault();
-    }
-  };
-
   render() {
-    const { inputValue, value } = this.state;
     return (
-      <CreatableReactSelect
-        components={components}
-        inputValue={inputValue}
-        isClearable
-        isMulti
-        menuIsOpen={false}
-        onChange={this.onChange}
-        onInputChange={this.handleInputChange}
-        onKeyDown={this.handleKeyDown}
-        placeholder="Type something and press enter..."
-        value={value}
-      />
+      <div>
+        <span style={{
+            fontSize: '0.7rem',
+            color: 'gray',
+            top: 13,
+            position: 'relative',
+          }}
+        > 
+          { this.props.label } 
+        </span>
+        <CreatableReactSelect
+          components={components}
+          inputValue={this.props.inputValue}
+          isClearable
+          isMulti
+          menuIsOpen={false}
+          onChange={this.props.onChange}
+          onInputChange={this.props.onInputChange}
+          onKeyDown={this.props.onKeyDown}
+          styles={colourStyles}
+          placeholder={'Type something and press enter...'}
+          value={this.props.value}
+        />
+      </div>
     );
   }
 }
