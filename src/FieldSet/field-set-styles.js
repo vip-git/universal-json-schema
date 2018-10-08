@@ -69,7 +69,7 @@ export default ({
     },
     remove: {
       background: theme.palette.error.main,
-      color: theme.palette.grey[800],
+      color: theme.palette.common.white,
     },
   }),
   fieldSetContent: {
