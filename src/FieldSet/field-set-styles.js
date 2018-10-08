@@ -35,6 +35,10 @@ export default ({
         'color': theme.palette.common.white,
         'height': '1.25em',
         'borderRadius': 5,
+        '&> span': {
+          fontSize: 'small',
+          textIndent: 12,
+        },
       },
     },
   }),

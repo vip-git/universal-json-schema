@@ -38,7 +38,7 @@ export const RawFieldSetArray = (props) => {
           ))}
           <div className={classes.addItemBtn}>
             <IconButton onClick={rest.onAddItem && rest.onAddItem(path, getDefaultValue(schema.items))}>
-              <AddCircle />
+              <AddCircle /> { schema.items.title }
             </IconButton>
           </div>
         </div>
