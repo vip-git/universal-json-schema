@@ -2,7 +2,7 @@ import React from 'react';
 import IconButton from 'material-ui/IconButton';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
-import RemoveCircle from '@material-ui/icons/RemoveCircle';
+import RemoveCircle from '@material-ui/icons/Close';
 import { withStyles } from 'material-ui/styles';
 import fieldSetStyles from './field-set-styles';
 

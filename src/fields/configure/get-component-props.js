@@ -26,7 +26,6 @@ const coerceValue = (type, value) => {
 };
 
 const onChangeHandler = (onChange, type, widget) => (e) => {
-  console.log('value is: ', e);
   const value = (type === 'material-date' || type === 'material-time' || type === 'material-datetime') ?
                   e.format() : 
                   (widget === 'material-multiselect' || widget === 'material-select') ?  

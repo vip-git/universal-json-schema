@@ -5,7 +5,7 @@ import { withStyles } from 'material-ui/styles';
 import FormField from '../FormField';
 import fieldSetStyles from './field-set-styles';
 
-export const RawFieldSetObject = ({ className, classes, schema = {}, uiSchema = {}, data = {}, path, ...rest }) => {
+export const RawFieldSetObject = ({ className, classes, schema = {}, uiSchema = {}, data = {}, idxKey, path, ...rest }) => {
   const orientation = (uiSchema['ui:orientation'] === 'row' ? classes.row : null);
   return (
     <div className={classNames(classes.root, orientation)}>

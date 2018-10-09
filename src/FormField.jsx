@@ -9,7 +9,7 @@ import styles from './form-field-styles';
 export class RawFormField extends React.Component {
   shouldComponentUpdate = nextProps => !isEqual(this.props.data, nextProps.data)
   render() {
-    const { classes, schema, data, uiSchema = {}, onChange, path, ...rest } = this.props;
+    const { classes, schema, data, uiSchema = {}, onChange, path, idxKey, ...rest } = this.props;
     const { type } = schema;
     if (type === 'object' || type === 'array') {
       return <FieldSet path={path} schema={schema} data={data} uiSchema={uiSchema} onChange={onChange} {...rest} />;

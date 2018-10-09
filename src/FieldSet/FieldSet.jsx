@@ -27,11 +27,11 @@ export const FieldSetContent = withStyles(fieldSetStyles.fieldSetContent)(RawFie
 export class RawFieldSet extends React.Component {
   shouldComponentUpdate = nextProps => !isEqual(this.props.data, nextProps.data)
   render() {
-    const { className, path, classes, schema = {} } = this.props;
+    const { className, path, classes, schema = {}, hideTitle, idxKey } = this.props;
     return (
       <fieldset className={classNames(className, classes.root, { [classes.listItem]: endsWith(path, ']') })}>
-        {schema.title &&
-          <InputLabel>{schema.title}</InputLabel>
+        {schema.title && (Number.isNaN(parseInt(path.replace(/[^\d.]/g, ''), 0)) || parseInt(path.replace(/[^\d.]/g, ''), 0) === 0) &&
+          <InputLabel> {schema.title} </InputLabel>
         }
         <FieldSetContent path={path} {...this.props} />
       </fieldset>

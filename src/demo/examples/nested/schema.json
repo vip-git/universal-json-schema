@@ -13,6 +13,7 @@
       "type": "array",
       "title": "Tasks",
       "items": {
+        "title": "Media (NL)",
         "type": "object",
         "required": [
           "title"

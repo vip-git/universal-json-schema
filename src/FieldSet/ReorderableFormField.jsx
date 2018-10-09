@@ -7,20 +7,20 @@ import ReorderControls from './ReorderControls';
 
 export const RawReorderableFormField = ({
   first, last, className, classes, path, onMoveItemUp, onMoveItemDown, onDeleteItem, ...rest
-}) =>
-  (
-    <div className={classNames(className, classes.root)}>
-      <FormField
-        path={path}
-        {...rest}
-      />
-      <ReorderControls
-        first={first}
-        last={last}
-        onMoveItemUp={onMoveItemUp}
-        onMoveItemDown={onMoveItemDown}
-        onDeleteItem={onDeleteItem}
-      />
-    </div>
-  );
+}) => (
+  <div className={classNames(className, classes.root)}>
+    <FormField
+      path={path}
+      {...rest}
+    />
+    <ReorderControls
+      first={first}
+      last={last}
+      onMoveItemUp={onMoveItemUp}
+      onMoveItemDown={onMoveItemDown}
+      onDeleteItem={onDeleteItem}
+    />
+  </div>
+);
+
 export default withStyles(fieldSetStyles.reorderable)(RawReorderableFormField);
