@@ -44,7 +44,7 @@ export default ({ path, label, title, value, type, onChange, ...rest }) => {
                 label={label}
                 // handle clearing outside => pass plain array if you are not controlling value outside
                 mask={val => (val ? maskInput : [])}
-                value={value}
+                value={(!value) ? null : value}
                 onChange={onChange}
                 maxDate={'2200-01-01'}
                 disableOpenOnEnter
