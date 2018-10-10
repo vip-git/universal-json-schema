@@ -48,19 +48,6 @@ const MARK_TAGS = {
 };
 
 /**
- * A styled image block component.
- *
- * @type {Component}
- */
-
-const Image = styled('img')`
-  display: block;
-  max-width: 100%;
-  max-height: 20em;
-  box-shadow: ${props => (props.selected ? '0 0 0 2px blue;' : 'none')};
-`;
-
-/**
  * Serializer rules.
  *
  * @type {Array}
@@ -119,7 +106,7 @@ const RULES = [
  * @type {Html}
  */
 
-const serializer = new Html({ rules: RULES });
+export const serializer = new Html({ rules: RULES });
 
 /**
  * Define the default node type.
@@ -147,31 +134,6 @@ const isCodeHotkey = isKeyHotkey('mod+`');
  */
 
 class RichText extends React.Component {
-  /**
-   * Deserialize the initial editor value.
-   *
-   * @type {Object}
-   */
-
-  state = {
-    value: Value.fromJSON(initialValue),
-  }
-
-  componentDidMount = () => {
-    this.setState({
-      value: Plain.deserialize(this.props.value),
-    });
-  }
-
-  /**
-   * On change, save the new `value`.
-   *
-   * @param {Change} change
-   */
-
-  onChange = ({ value }) => {
-    this.setState({ value });
-  }
 
   /**
    * On key down, if it's a formatting command toggle a mark.
@@ -281,8 +243,9 @@ class RichText extends React.Component {
    */
 
   hasMark = (type) => {
-    const { value } = this.state;
-    return value.activeMarks.some(mark => mark.type === type);
+    const { value } = this.props;
+    const val = serializer.deserialize(value);
+    return val.activeMarks.some(mark => mark.type === type);
   }
 
   /**
@@ -293,8 +256,9 @@ class RichText extends React.Component {
    */
 
   hasBlock = (type) => {
-    const { value } = this.state;
-    return value.blocks.some(node => node.type === type);
+    const { value } = this.props;
+    const val = serializer.deserialize(value);
+    return val.blocks.some(node => node.type === type);
   }
 
   /**
@@ -340,8 +304,9 @@ class RichText extends React.Component {
     let isActive = this.hasBlock(type);
 
     if (['numbered-list', 'bulleted-list'].includes(type)) {
-      const { value } = this.state;
-      const parent = value.document.getParent(value.blocks.first().key);
+      const { value } = this.props;
+      const val = serializer.deserialize(value);
+      const parent = val.document.getParent(val.blocks.first().key);
       isActive = this.hasBlock('list-item') && parent && parent.type === type;
     }
 
@@ -442,8 +407,8 @@ class RichText extends React.Component {
           autoFocus
           placeholder={'Enter some rich text...'}
           ref={this.ref}
-          value={this.state.value}
-          onChange={this.onChange}
+          value={serializer.deserialize(this.props.value)}
+          onChange={this.props.onChange}
           onKeyDown={this.onKeyDown}
           renderNode={this.renderNode}
           renderMark={this.renderMark}

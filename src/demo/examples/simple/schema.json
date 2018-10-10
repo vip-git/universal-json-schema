@@ -23,6 +23,11 @@
       "type": "string",
       "title": "NL Discount Agreement"
     },
+    "select": {
+      "type": "string",
+      "title": "BE select",
+      "enum": ["Yes", "No"]
+    },
     "selectTest": {
       "type": "string",
       "title": "BE Discount Agreement",

@@ -1,5 +1,5 @@
 import without from 'lodash/without';
-import moment from 'moment';
+import { serializer } from '../components/lib/RichText';
 import getMuiProps from './get-mui-props';
 import getInputType from './get-input-type';
 import valuesToOptions from './values-to-options';
@@ -25,12 +25,15 @@ const coerceValue = (type, value) => {
   }
 };
 
-const onChangeHandler = (onChange, type, widget) => (e) => {
+const onChangeHandler = (onChange, type, widget, options) => (e) => {
+  console.log('e is', e);
+  console.log('options is', options);
+  console.log('serialize is', (options === 'rich-text-editor') ? 'hello workd' : 'nothing');
   const value = (type === 'material-date' || type === 'material-time' || type === 'material-datetime') ?
                   e.format() : 
                   (widget === 'material-multiselect' || widget === 'material-select') ?  
                     coerceValue(type, JSON.stringify(e))
-                    : coerceValue(type, e.target.value);
+                    : (options === 'rich-text-editor') ? '' : coerceValue(type, e.target.value);
   if (value !== undefined) onChange(value);
 };
 const onCheckboxChangeHandler = (onChange, title) => (e) => {
@@ -51,7 +54,7 @@ export default ({ schema = {}, uiSchema = {}, inputValue, onChange, onKeyDown, c
   const { type } = schema;
   const rv = {
     type: getInputType(type, uiSchema),
-    onChange: onChange && onChangeHandler(onChange, type, widget),
+    onChange: onChange && onChangeHandler(onChange, type, widget, options),
     ...getMuiProps(uiSchema),
   };
   if (schema.enum) {
