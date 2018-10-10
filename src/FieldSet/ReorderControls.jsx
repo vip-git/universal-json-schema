@@ -11,7 +11,7 @@ export const RawReorderControls = ({ first, last, classes, onMoveItemUp, onMoveI
     {/* Needs improvement - we will enable this later in stage !
     <IconButton className={classes.up} onClick={onMoveItemUp} disabled={first}><ArrowUpward /></IconButton>
     <IconButton className={classes.down} onClick={onMoveItemDown} disabled={last}><ArrowDownward /></IconButton> */}
-    {!first && <IconButton className={classes.remove} onClick={onDeleteItem} ><RemoveCircle /></IconButton> }
+    <IconButton className={classes.remove} onClick={onDeleteItem} ><RemoveCircle /></IconButton>
   </div>
 );
 export default withStyles(fieldSetStyles.reorderControls)(RawReorderControls);
