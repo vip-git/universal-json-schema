@@ -1,11 +1,12 @@
 // import Input, { InputLabel } from 'material-ui/Input'; // eslint-disable-line import/no-named-default
-const { RadioGroup, Select, Checkbox, Picker, MultiSelect, CreatableSelect } = require('../components');
+const { RadioGroup, Select, Checkbox, Picker, MultiSelect, CreatableSelect, RichTextEditor } = require('../components');
 
 const Input = require('material-ui/Input').default;
 
 export default ({ schema, uiSchema = {} }) => {
   // console.log('getComponent schema: %o, uiSchema: %o', schema, uiSchema);
   const widget = uiSchema['ui:widget'];
+  const options = uiSchema['ui:options'];
   const { type } = schema;
 
   if (schema.enum) {
@@ -32,5 +33,9 @@ export default ({ schema, uiSchema = {} }) => {
     return CreatableSelect;
   }
   
+  if (options === 'rich-text-editor') {
+    return RichTextEditor;
+  }
+
   return Input;
 };

@@ -16,7 +16,7 @@ import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   input: {
     display: 'flex',
@@ -63,7 +63,7 @@ const styles = theme => ({
 function NoOptionsMessage(props) {
   return (
     <Typography
-      color="textSecondary"
+      color='textSecondary'
       className={props.selectProps.classes.noOptionsMessage}
       {...props.innerProps}
     >
@@ -99,7 +99,7 @@ function Option(props) {
     <MenuItem
       buttonRef={props.innerRef}
       selected={props.isFocused}
-      component="div"
+      component='div'
       style={{
         fontWeight: props.isSelected ? 500 : 400,
       }}
@@ -113,7 +113,7 @@ function Option(props) {
 function Placeholder(props) {
   return (
     <Typography
-      color="textSecondary"
+      color='textSecondary'
       className={props.selectProps.classes.placeholder}
       {...props.innerProps}
     >
@@ -187,7 +187,7 @@ class IntegrationReactSelect extends React.Component {
     };
 
     return (
-      <div key={'material-form-select-' + this.props.label } className={['material-form-select', classes.root].join(' ')}>
+      <div key={`material-form-select- ${this.props.label}`} className={['material-form-select', classes.root].join(' ')}>
           <Select
             classes={classes}
             styles={selectStyles}
@@ -207,10 +207,5 @@ class IntegrationReactSelect extends React.Component {
     );
   }
 }
-
-IntegrationReactSelect.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles, { withTheme: true })(IntegrationReactSelect);

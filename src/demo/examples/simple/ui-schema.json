@@ -9,7 +9,8 @@
     "ui:description": "(earthian year)"
   },
   "bio": {
-    "ui:widget": "textarea"
+    "ui:widget": "textarea",
+    "ui:options": "rich-text-editor"
   },
   "password": {
     "ui:widget": "password",
