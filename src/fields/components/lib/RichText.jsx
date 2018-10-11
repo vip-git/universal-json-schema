@@ -1,14 +1,10 @@
 // Library
 import React from 'react';
-import Plain from 'slate-plain-serializer';
 import Html from 'slate-html-serializer';
 import { Editor } from 'slate-react';
-import { Value } from 'slate';
 import { isKeyHotkey } from 'is-hotkey';
-import styled from 'react-emotion';
 
 // Internal
-import initialValue from './value.json';
 import { Button, Icon, Toolbar } from './components';
 
 
@@ -53,48 +49,60 @@ const MARK_TAGS = {
  * @type {Array}
  */
 
-const RULES = [
+export const RULES = [
   {
     deserialize(el, next) {
-      const block = BLOCK_TAGS[el.tagName.toLowerCase()];
-
-      if (block) {
+      const type = BLOCK_TAGS[el.tagName.toLowerCase()];
+      if (type) {
         return {
           object: 'block',
-          type: block,
+          type,
+          data: {
+            className: el.getAttribute('class'),
+          },
           nodes: next(el.childNodes),
         };
       }
     },
+    serialize(obj, children) {
+      if (obj.object === 'block') {
+        switch (obj.type) {
+          case 'code':
+            return (
+              <pre>
+                <code>{children}</code>
+              </pre>
+            );
+          case 'paragraph':
+            return <p className={obj.data.get('className')}>{children}</p>;
+          case 'quote':
+            return <blockquote>{children}</blockquote>;
+        }
+      }
+    },
   },
+  // Add a new rule that handles marks...
   {
     deserialize(el, next) {
-      const mark = MARK_TAGS[el.tagName.toLowerCase()]
-
-      if (mark) {
+      const type = MARK_TAGS[el.tagName.toLowerCase()];
+      if (type) {
         return {
           object: 'mark',
-          type: mark,
+          type,
           nodes: next(el.childNodes),
         };
       }
     },
-  },
-  {
-    // Special case for code blocks, which need to grab the nested childNodes.
-    deserialize(el, next) {
-      if (el.tagName.toLowerCase() === 'pre') {
-        const code = el.childNodes[0];
-        const childNodes =
-          code && code.tagName.toLowerCase() === 'code'
-            ? code.childNodes
-            : el.childNodes;
-
-        return {
-          object: 'block',
-          type: 'code',
-          nodes: next(childNodes),
-        };
+    serialize(obj, children) {
+      if (obj.object === 'mark') {
+        switch (obj.type) {
+          case 'bold':
+            return <strong>{children}</strong>;
+          case 'italic':
+            return <em>{children}</em>;
+          case 'underline':
+            return <u>{children}</u>;
+        }
       }
     },
   },

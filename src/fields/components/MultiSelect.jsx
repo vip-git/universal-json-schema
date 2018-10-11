@@ -11,7 +11,6 @@ export default ({ type, value = '[]', options, label, multiSelect, nullOption, o
 
   return (
     <MultiSelect 
-      isDisabled
       suggestions={suggestions} 
       value={newVal} 
       onChange={onChange}
