@@ -8,8 +8,9 @@ import { isKeyHotkey } from 'is-hotkey';
 // Internal
 import { Button, Icon, Toolbar } from './components';
 import WordCount from './WordCount';
+import SoftBreak from './SoftBreak';
 
-const plugins = [WordCount()];
+const plugins = [WordCount(), SoftBreak()];
 
 /**
  * Tags to blocks.
@@ -416,12 +417,8 @@ class RichText extends React.Component {
           {this.renderMarkButton('bold', 'format_bold')}
           {this.renderMarkButton('italic', 'format_italic')}
           {this.renderMarkButton('underlined', 'format_underlined')}
-          {this.renderMarkButton('code', 'code')}
           {wordCount && this.renderBlockButton('heading-one', 'looks_one')}
           {wordCount && this.renderBlockButton('heading-two', 'looks_two')}
-          {wordCount && this.renderBlockButton('block-quote', 'format_quote')}
-          {wordCount && this.renderBlockButton('numbered-list', 'format_list_numbered')}
-          {wordCount && this.renderBlockButton('bulleted-list', 'format_list_bulleted')}
         </Toolbar>
         <Editor
           spellCheck
