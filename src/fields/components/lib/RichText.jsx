@@ -1,12 +1,15 @@
 // Library
 import React from 'react';
+import Plain from 'slate-plain-serializer';
 import Html from 'slate-html-serializer';
 import { Editor } from 'slate-react';
 import { isKeyHotkey } from 'is-hotkey';
 
 // Internal
 import { Button, Icon, Toolbar } from './components';
+import WordCount from './WordCount';
 
+const plugins = [WordCount()];
 
 /**
  * Tags to blocks.
@@ -142,7 +145,6 @@ const isCodeHotkey = isKeyHotkey('mod+`');
  */
 
 class RichText extends React.Component {
-
   /**
    * On key down, if it's a formatting command toggle a mark.
    *
@@ -153,7 +155,12 @@ class RichText extends React.Component {
 
   onKeyDown = (event, change, next) => {
     let mark;
-
+    const wordCount = serializer.deserialize(this.props.value).document
+      .getBlocks()
+      .reduce((memo, b) => memo + b.text.length, 0) - 1;
+    if (!wordCount) {
+      return;
+    }
     if (isBoldHotkey(event)) {
       mark = 'bold';
     }
@@ -265,7 +272,10 @@ class RichText extends React.Component {
 
   hasBlock = (type) => {
     const { value } = this.props;
-    const val = serializer.deserialize(value);
+    const wordCount = serializer.deserialize(this.props.value).document
+      .getBlocks()
+      .reduce((memo, b) => memo + b.text.length, 0);
+    const val = (wordCount) ? serializer.deserialize(value) : serializer.deserialize('<p> </p>');
     return val.blocks.some(node => node.type === type);
   }
 
@@ -397,7 +407,9 @@ class RichText extends React.Component {
    */
 
   render() {
-    console.log('value is: ', this.props.value);
+    const wordCount = serializer.deserialize(this.props.value).document
+      .getBlocks()
+      .reduce((memo, b) => memo + b.text.length, 0);
     return (
       <div>
         <Toolbar>
@@ -405,19 +417,20 @@ class RichText extends React.Component {
           {this.renderMarkButton('italic', 'format_italic')}
           {this.renderMarkButton('underlined', 'format_underlined')}
           {this.renderMarkButton('code', 'code')}
-          {this.renderBlockButton('heading-one', 'looks_one')}
-          {this.renderBlockButton('heading-two', 'looks_two')}
-          {this.renderBlockButton('block-quote', 'format_quote')}
-          {this.renderBlockButton('numbered-list', 'format_list_numbered')}
-          {this.renderBlockButton('bulleted-list', 'format_list_bulleted')}
+          {wordCount && this.renderBlockButton('heading-one', 'looks_one')}
+          {wordCount && this.renderBlockButton('heading-two', 'looks_two')}
+          {wordCount && this.renderBlockButton('block-quote', 'format_quote')}
+          {wordCount && this.renderBlockButton('numbered-list', 'format_list_numbered')}
+          {wordCount && this.renderBlockButton('bulleted-list', 'format_list_bulleted')}
         </Toolbar>
         <Editor
           spellCheck
           autoFocus
           placeholder={'Enter some rich text...'}
           ref={this.ref}
-          value={serializer.deserialize(this.props.value)}
+          value={(wordCount) ? serializer.deserialize(this.props.value) : Plain.deserialize('hello')}
           onChange={this.props.onChange}
+          plugins={plugins}
           onKeyDown={this.onKeyDown}
           renderNode={this.renderNode}
           renderMark={this.renderMark}

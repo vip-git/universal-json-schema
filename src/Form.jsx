@@ -12,11 +12,6 @@ import getValidationResult from './helpers/validation';
 import ValidationMessages from './ValidationMessages';
 import FormButtons from './FormButtons';
 
-const createOption = label => ({
-  label,
-  value: label,
-});
-
 class Form extends React.Component {
   state = {
     data: this.props.formData,
@@ -68,26 +63,6 @@ class Form extends React.Component {
   };
   handleCreatableSelectInputChange = (inputValue) => {
     this.setState({ inputValue }, this.notifyChange);
-  };
-  handleCreatableSelectKeyDown = (event) => {
-    const { inputValue, value } = this.state;
-    if (!inputValue) return;
-    const finalVal = (value) ? [...JSON.parse(value), createOption(inputValue)] : [createOption(inputValue)];
-    switch (event.key) {
-      case 'Enter':
-      case 'Tab':
-        console.group('Value Added');
-        console.log(finalVal);
-        console.groupEnd();
-        this.setState({
-          inputValue: '',
-          value: JSON.stringify(finalVal),
-        });
-        event.preventDefault();
-        break;
-      default:
-        break;
-    }
   };
   notifyChange = () => {
     const { onChange } = this.props;
