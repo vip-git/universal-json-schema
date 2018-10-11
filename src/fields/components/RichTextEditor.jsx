@@ -1,7 +1,7 @@
 import React from 'react';
 import RichTextEditor from './lib/RichText';
 
-export default ({ type, value = '', options, label, nullOption, onChange, ...rest }) => (
+export default ({ type, value, options, label, nullOption, onChange, ...rest }) => (
     <div>
         <div style={{
             color: 'rgba(0, 0, 0, 0.54)',
@@ -13,6 +13,6 @@ export default ({ type, value = '', options, label, nullOption, onChange, ...res
         }}
         > { label } 
         </div>
-        <RichTextEditor value={String(value)} onChange={onChange} {...rest} />
+        <RichTextEditor value={(value) ? String(value) : '<p> </p>'} onChange={onChange} {...rest} />
     </div>
 );

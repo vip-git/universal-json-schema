@@ -397,6 +397,7 @@ class RichText extends React.Component {
    */
 
   render() {
+    console.log('value is: ', this.props.value);
     return (
       <div>
         <Toolbar>

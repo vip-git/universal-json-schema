@@ -26,9 +26,6 @@ const coerceValue = (type, value) => {
 };
 
 const onChangeHandler = (onChange, type, widget, options) => (e) => {
-  console.log('e is', e);
-  console.log('options is', options);
-  console.log('serialize is', (options === 'rich-text-editor') ? serializer.serialize(e.value) : 'nothing');
   const value = (type === 'material-date' || type === 'material-time' || type === 'material-datetime') ?
                   e.format() : 
                   (widget === 'material-multiselect' || widget === 'material-select') ?  
