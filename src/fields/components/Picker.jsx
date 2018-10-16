@@ -36,10 +36,20 @@ const renderPickerComp = (type) => {
 export default ({ path, label, title, value, type, onChange, ...rest }) => {
   const { PickerComp, maskInput, placeholder, format } = renderPickerComp(type);
   return (
-        <div key={`material-date-picker-${label}`} className='material-form-datepicker' style={{ display: 'contents' }}>
+        <div
+          key={`material-date-picker-${label}`}
+          className='material-form-datepicker'
+          style={{ 
+            'display': 'contents',
+            '&>div': {
+              flexBasis: '100%',
+            },
+          }}
+        >
             <PickerComp
                 keyboard
                 format={format}
+                style={{ flexBasis: '100%' }}
                 placeholder={placeholder}
                 label={label}
                 // handle clearing outside => pass plain array if you are not controlling value outside

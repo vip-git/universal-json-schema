@@ -191,7 +191,7 @@ class RichText extends React.Component {
 
   onClickMark = (event, type) => {
     event.preventDefault();
-
+    console.log('i was called with type', type);
     this.editor.change((change) => {
       change.toggleMark(type);
     });
@@ -229,7 +229,7 @@ class RichText extends React.Component {
       else {
         // Handle the extra wrapping required for list buttons.
         const isList = this.hasBlock('list-item');
-        const isType = value.blocks.some(block => !!document.getClosest(block.key, parent => parent.type == type));
+        const isType = value.blocks.some(block => !!document.getClosest(block.key, parent => parent.type === type));
 
         if (isList && isType) {
           change

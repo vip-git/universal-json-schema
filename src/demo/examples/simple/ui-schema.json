@@ -17,6 +17,7 @@
     "ui:help": "Hint: Make it strong!"
   },
   "date": {
+    "ui:activeCompColor": "red",
     "ui:widget": "alt-datetime"
   },
   "selectTest":{

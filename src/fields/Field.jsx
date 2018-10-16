@@ -11,6 +11,7 @@ export default (props) => {
   } = configureComponent({ ...props, htmlId });
 
   const descriptionText = uiSchema['ui:description'];
+  const activeCompColor = uiSchema['ui:activeCompColor'];
   const helpText = uiSchema['ui:help'];
   return (
     <ConfiguredField
@@ -23,6 +24,7 @@ export default (props) => {
       LabelComponent={LabelComponent}
       labelComponentProps={labelComponentProps}
       title={title}
+      activeCompColor={activeCompColor}
       descriptionText={descriptionText}
       helpText={helpText}
     />
