@@ -12,14 +12,6 @@
     "ui:widget": "textarea",
     "ui:options": "rich-text-editor"
   },
-  "mediumDescription": {
-    "ui:widget": "textarea",
-    "ui:options": "rich-text-editor"
-  },
-  "shortDescription": {
-    "ui:widget": "textarea",
-    "ui:options": "rich-text-editor"
-  },
   "password": {
     "ui:widget": "password",
     "ui:help": "Hint: Make it strong!"

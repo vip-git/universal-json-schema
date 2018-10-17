@@ -37,14 +37,6 @@
       "type": "string",
       "title": "Bio"
     },
-    "mediumDescription": {
-      "type": "string",
-      "title": "Medium Description"
-    },
-    "shortDescription": {
-      "type": "string",
-      "title": "Short Description"
-    },
     "date": {
       "type": "material-date",
       "title": "Date"

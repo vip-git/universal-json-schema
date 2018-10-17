@@ -30,7 +30,7 @@ const onChangeHandler = (onChange, type, widget, options) => (e) => {
                   e.format() : 
                   (widget === 'material-multiselect' || widget === 'material-select') ?  
                     coerceValue(type, JSON.stringify(e))
-                    : (options === 'rich-text-editor') ? serializer.serialize(e.value) : coerceValue(type, e.target.value);
+                    : (options === 'rich-text-editor') ? serializer.serialize(e) : coerceValue(type, e.target.value);
   if (value !== undefined) onChange(value);
 };
 const onCheckboxChangeHandler = (onChange, title) => (e) => {
