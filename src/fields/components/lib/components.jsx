@@ -3,10 +3,13 @@ import styled from 'react-emotion';
 
 export const Button = styled('span')`
   cursor: pointer;
+  background: ${props => props.active ? '#253858' : 'transparent'};
+  padding: 5px;
+  border-radius: 5px;
   color: ${props =>
     (props.reversed
       ? props.active ? 'white' : '#aaa'
-      : props.active ? 'black' : '#ccc')};
+      : props.active ? 'white' : 'black')};
 `;
 
 export const Icon = styled(({ className, ...rest }) => <span className={`material-icons ${className}`} {...rest} />)`
