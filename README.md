@@ -5,10 +5,10 @@ A [Material UI](http://www.material-ui.com/) port of [react-jsonschema-form](htt
 A [live playground](https://material-ui-jsonschema-form.herokuapp.com/) is hosted on [heroku](https://dashboard.heroku.com/)
 
 ### New components integrated
-- Material Date          [Done]
-- Multi-selecbox         [Done]
+- Material Date                [Done]
+- Multi-selecbox               [Done]
+- Component active / inactive  [Done]
+- Text Editor                  [Done]
 
 #### In Progress (To be added)
-- Component sync / active - inactive
 - Mulit-select Inut text (Creatable)
-- Text Editor
