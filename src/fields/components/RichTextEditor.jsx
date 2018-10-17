@@ -20,6 +20,6 @@ export default ({ type, value, options, label, nullOption, onChange, ...rest }) 
         }}
         > { label } 
         </div>
-        <RichTextEditor value={(value) ? String(value) : '<p></p>'} onChange={onChange} {...rest} />
+        <RichTextEditor value={String(value)} onChange={onChange} {...rest} />
     </div>
 );

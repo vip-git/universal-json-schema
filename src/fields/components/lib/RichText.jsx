@@ -1,4 +1,5 @@
 import React from 'react';
+import Plain from 'slate-plain-serializer';
 import Html from 'slate-html-serializer';
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
@@ -151,7 +152,7 @@ class RichText extends React.Component {
 
   componentDidMount = () => {
     this.setState({
-      value: serializer.deserialize(this.props.value),
+      value: (this.props.value === 'undefined') ? serializer.deserialize('') : serializer.deserialize(this.props.value),
     });
   }
 
