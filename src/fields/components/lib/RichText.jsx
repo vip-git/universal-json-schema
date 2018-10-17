@@ -1,6 +1,6 @@
 import React from 'react';
 import Html from 'slate-html-serializer';
-import { Editor } from 'slate-react';
+import { Editor, getEventTransfer } from 'slate-react';
 import { Value } from 'slate';
 import { isKeyHotkey } from 'is-hotkey';
 
@@ -83,7 +83,7 @@ export const RULES = [
           case 'heading-two':
             return <h2>{children}</h2>;
           case 'heading-three':
-            return <h2>{children}</h2>;
+            return <h3>{children}</h3>;
           case 'list-item':
             return <li>{children}</li>;
           case 'numbered-list':
@@ -220,6 +220,20 @@ class RichText extends React.Component {
     this.editor.change((change) => {
       change.toggleMark(type);
     });
+  }
+
+  /**
+   * On paste, deserialize the HTML and then insert the fragment.
+   *
+   * @param {Event} event
+   * @param {Change} change
+   */
+
+  onPaste = (event, change, next) => {
+    const transfer = getEventTransfer(event)
+    if (transfer.type != 'html') return next()
+    const { document } = serializer.deserialize(transfer.html)
+    change.insertFragment(document)
   }
 
   /**
@@ -378,6 +392,14 @@ class RichText extends React.Component {
         return <h1 {...attributes}>{children}</h1>;
       case 'heading-two':
         return <h2 {...attributes}>{children}</h2>;
+      case 'heading-three':
+        return <h3 {...attributes}>{children}</h3>;
+      case 'heading-four':
+        return <h4 {...attributes}>{children}</h4>;
+      case 'heading-five':
+        return <h5 {...attributes}>{children}</h5>;
+      case 'heading-six':
+        return <h6 {...attributes}>{children}</h6>;
       case 'list-item':
         return <li {...attributes}>{children}</li>;
       case 'numbered-list':
@@ -410,6 +432,7 @@ class RichText extends React.Component {
         return next();
     }
   }
+  
   /**
    * Render.
    *
@@ -434,6 +457,7 @@ class RichText extends React.Component {
           {this.renderMarkButton('underlined', 'format_underlined')}
           {this.renderBlockButton('heading-one', 'looks_one')}
           {this.renderBlockButton('heading-two', 'looks_two')}
+          {this.renderBlockButton('heading-three', 'looks_3')}
           {this.renderBlockButton('numbered-list', 'format_list_numbered')}
           {this.renderBlockButton('bulleted-list', 'format_list_bulleted')}
         </Toolbar>
@@ -445,6 +469,7 @@ class RichText extends React.Component {
           value={this.state.value}
           onChange={this.onChange}
           plugins={plugins}
+          onPaste={this.onPaste}
           onKeyDown={this.onKeyDown}
           renderNode={this.renderNode}
           renderMark={this.renderMark}
