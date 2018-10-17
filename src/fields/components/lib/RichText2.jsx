@@ -146,9 +146,15 @@ class RichText2 extends React.Component {
    */
 
   state = {
-    value: serializer.deserialize(this.props.value), // Value.fromJSON(initialValue)
+    value: Value.fromJSON(initialValue),
   }
 
+
+  componentDidMount = () => {
+    this.setState({
+      value: serializer.deserialize(this.props.value),
+    });
+  }
 
   /**
    * On change, save the new `value`.
@@ -408,10 +414,8 @@ class RichText2 extends React.Component {
           {this.renderMarkButton('bold', 'format_bold')}
           {this.renderMarkButton('italic', 'format_italic')}
           {this.renderMarkButton('underlined', 'format_underlined')}
-          {this.renderMarkButton('code', 'code')}
           {this.renderBlockButton('heading-one', 'looks_one')}
           {this.renderBlockButton('heading-two', 'looks_two')}
-          {this.renderBlockButton('block-quote', 'format_quote')}
           {this.renderBlockButton('numbered-list', 'format_list_numbered')}
           {this.renderBlockButton('bulleted-list', 'format_list_bulleted')}
         </Toolbar>

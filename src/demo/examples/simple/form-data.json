@@ -2,7 +2,9 @@
   "firstName": "Chuck",
   "lastName": "Norris",
   "age": 75,
-  "bio": "Hello world",
+  "mediumDescription": "Werelden botsen op elkaar in seizoen 3! Zijn liefdesrelatie met Penny opent een fantastische, ...",
+  "shortDescription": "Werelden botsen op elkaar in seizoen 3! Zijn liefdesrelatie met Penny opent een fantastische, grote, wijde wereld vol romantiek voor Leonard.",
+  "bio": "Werelden botsen op elkaar in seizoen 3! Zijn liefdesrelatie met Penny opent een fantastische, grote, wijde wereld vol romantiek voor Leonard. Maar Sheldon heeft de wereld toch liever zoals hij was. Dé ingrediënten voor een absurd komische formule met de hoogbegaafde, wereldvreemde Sheldon en de praktische, nuchtere Penny die op hilarische wijze wedijveren om de rol van de belangrijkste factor. ↵<br /> ↵<br /> In dit derde seizoen, bestaande uit 3 disks met 23 afleveringen, zijn natuurlijk ook Raj en Howard weer van de partij. Verder zien we tatoeages, football, genante afspraakjes, een gevangenis, Stan Lee, een ring uit The Lord of the Rings en heel veel humor in een serie die alleen maar beter wordt. ↵<br /> ↵<br /> De serie The Big Bang Theorie is winnaar van 10 Emmys en 1 Golden Globe - Jim Parsons.",
   "password": "noneed",
   "selectTest": "[{\"key\":\"220\",\"value\":\"Vanaf 6 jaar\",\"allowableOptionValues\":{\"210\":\"Alle Leeftijden\",\"220\":\"Vanaf 6 jaar\",\"225\":\"Vanaf 9 jaar\",\"230\":\"Vanaf 12 jaar\",\"240\":\"Vanaf 16 jaar\",\"250\":\"Vanaf 18 jaar\"}},{\"key\":\"210\",\"value\":\"Alle Leeftijden\",\"allowableOptionValues\":{\"210\":\"Alle Leeftijden\",\"220\":\"Vanaf 6 jaar\",\"225\":\"Vanaf 9 jaar\",\"230\":\"Vanaf 12 jaar\",\"240\":\"Vanaf 16 jaar\",\"250\":\"Vanaf 18 jaar\"}},{\"key\":\"225\",\"value\":\"Vanaf 9 jaar\",\"allowableOptionValues\":{\"210\":\"Alle Leeftijden\",\"220\":\"Vanaf 6 jaar\",\"225\":\"Vanaf 9 jaar\",\"230\":\"Vanaf 12 jaar\",\"240\":\"Vanaf 16 jaar\",\"250\":\"Vanaf 18 jaar\"}}]"
 }
