@@ -1,5 +1,4 @@
 import React from 'react';
-import Plain from 'slate-plain-serializer';
 import Html from 'slate-html-serializer';
 import { Editor } from 'slate-react';
 import { Value } from 'slate';
@@ -419,7 +418,16 @@ class RichText extends React.Component {
   render() {
     return (
       <div>
-        <Toolbar>
+        <Toolbar style={{
+            borderBottom: 'solid 1px #0000001c !important',
+            marginTop: 14,
+            marginBottom: 10,
+            marginRight: 15,
+            paddingBottom: 6,
+            background: '#f4f5f7',
+            paddingTop: 10,
+          }}
+        >
           {this.renderMarkButton('bold', 'format_bold')}
           {this.renderMarkButton('italic', 'format_italic')}
           {this.renderMarkButton('underlined', 'format_underlined')}
