@@ -7,9 +7,8 @@ import { isKeyHotkey } from 'is-hotkey';
 import initialValue from './value.json';
 import { Button, Icon, Toolbar } from './components';
 import WordCount from './WordCount';
-import SoftBreak from './SoftBreak';
 
-const plugins = [WordCount(), SoftBreak()];
+const plugins = [WordCount()];
 
 /**
  * Tags to blocks.
@@ -82,6 +81,8 @@ export const RULES = [
           case 'heading-one':
             return <h1>{children}</h1>;
           case 'heading-two':
+            return <h2>{children}</h2>;
+          case 'heading-three':
             return <h2>{children}</h2>;
           case 'list-item':
             return <li>{children}</li>;
