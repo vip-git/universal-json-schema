@@ -14,7 +14,7 @@ export default function WordCount(options) {
       const children = next();
       const wordCount = props.value.document
         .getBlocks()
-        .reduce((memo, b) => memo + b.text.length, 0) - 1;
+        .reduce((memo, b) => memo + b.text.length, 0);
       return (
         <div>
           <div>{children}</div>

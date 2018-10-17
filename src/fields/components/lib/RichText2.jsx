@@ -1,11 +1,11 @@
-// Library
 import React from 'react';
 import Plain from 'slate-plain-serializer';
 import Html from 'slate-html-serializer';
 import { Editor } from 'slate-react';
+import { Value } from 'slate';
 import { isKeyHotkey } from 'is-hotkey';
 
-// Internal
+import initialValue from './value.json';
 import { Button, Icon, Toolbar } from './components';
 import WordCount from './WordCount';
 import SoftBreak from './SoftBreak';
@@ -32,13 +32,13 @@ const BLOCK_TAGS = {
   h5: 'heading-five',
   h6: 'heading-six',
 };
-
-/**
- * Tags to marks.
- *
- * @type {Object}
- */
-
+  
+  /**
+   * Tags to marks.
+   *
+   * @type {Object}
+   */
+  
 const MARK_TAGS = {
   strong: 'bold',
   em: 'italic',
@@ -46,7 +46,6 @@ const MARK_TAGS = {
   s: 'strikethrough',
   code: 'code',
 };
-
 /**
  * Serializer rules.
  *
@@ -73,9 +72,9 @@ export const RULES = [
         switch (obj.type) {
           case 'code':
             return (
-              <pre>
-                <code>{children}</code>
-              </pre>
+                <pre>
+                  <code>{children}</code>
+                </pre>
             );
           case 'paragraph':
             return <p className={obj.data.get('className')}>{children}</p>;
@@ -112,12 +111,6 @@ export const RULES = [
   },
 ];
 
-/**
- * Create a new HTML serializer with `RULES`.
- *
- * @type {Html}
- */
-
 export const serializer = new Html({ rules: RULES });
 
 /**
@@ -145,7 +138,28 @@ const isCodeHotkey = isKeyHotkey('mod+`');
  * @type {Component}
  */
 
-class RichText extends React.Component {
+class RichText2 extends React.Component {
+  /**
+   * Deserialize the initial editor value.
+   *
+   * @type {Object}
+   */
+
+  state = {
+    value: serializer.deserialize(this.props.value), // Value.fromJSON(initialValue)
+  }
+
+
+  /**
+   * On change, save the new `value`.
+   *
+   * @param {Change} change
+   */
+
+  onChange = ({ value }) => {
+    this.setState({ value });
+  }
+
   /**
    * On key down, if it's a formatting command toggle a mark.
    *
@@ -156,12 +170,7 @@ class RichText extends React.Component {
 
   onKeyDown = (event, change, next) => {
     let mark;
-    const wordCount = serializer.deserialize(this.props.value).document
-      .getBlocks()
-      .reduce((memo, b) => memo + b.text.length, 0) - 1;
-    if (!wordCount) {
-      return;
-    }
+
     if (isBoldHotkey(event)) {
       mark = 'bold';
     }
@@ -180,6 +189,7 @@ class RichText extends React.Component {
 
     event.preventDefault();
     change.toggleMark(mark);
+    return true;
   }
 
   /**
@@ -191,7 +201,7 @@ class RichText extends React.Component {
 
   onClickMark = (event, type) => {
     event.preventDefault();
-    console.log('i was called with type', type);
+
     this.editor.change((change) => {
       change.toggleMark(type);
     });
@@ -206,7 +216,6 @@ class RichText extends React.Component {
 
   onClickBlock = (event, type) => {
     event.preventDefault();
-    console.log('i was called with clickblock type', type);
 
     this.editor.change((change) => {
       const { value } = change;
@@ -230,7 +239,7 @@ class RichText extends React.Component {
       else {
         // Handle the extra wrapping required for list buttons.
         const isList = this.hasBlock('list-item');
-        const isType = value.blocks.some(block => !!document.getClosest(block.key, parent => parent.type === type));
+        const isType = value.blocks.some(block => !!document.getClosest(block.key, parent => parent.type == type));
 
         if (isList && isType) {
           change
@@ -260,9 +269,8 @@ class RichText extends React.Component {
    */
 
   hasMark = (type) => {
-    const { value } = this.props;
-    const val = serializer.deserialize(value);
-    return val.activeMarks.some(mark => mark.type === type);
+    const { value } = this.state;
+    return value.activeMarks.some(mark => mark.type == type);
   }
 
   /**
@@ -273,12 +281,8 @@ class RichText extends React.Component {
    */
 
   hasBlock = (type) => {
-    const { value } = this.props;
-    const wordCount = serializer.deserialize(this.props.value).document
-      .getBlocks()
-      .reduce((memo, b) => memo + b.text.length, 0);
-    const val = (wordCount) ? serializer.deserialize(value) : serializer.deserialize('<p> </p>');
-    return val.blocks.some(node => node.type === type);
+    const { value } = this.state;
+    return value.blocks.some(node => node.type === type);
   }
 
   /**
@@ -291,6 +295,7 @@ class RichText extends React.Component {
     this.editor = editor;
   }
 
+
   /**
    * Render a mark-toggling toolbar button.
    *
@@ -301,6 +306,7 @@ class RichText extends React.Component {
 
   renderMarkButton = (type, icon) => {
     const isActive = this.hasMark(type);
+
     return (
       <Button
         active={isActive}
@@ -310,7 +316,6 @@ class RichText extends React.Component {
       </Button>
     );
   }
-
 
   /**
    * Render a block-toggling toolbar button.
@@ -324,9 +329,8 @@ class RichText extends React.Component {
     let isActive = this.hasBlock(type);
 
     if (['numbered-list', 'bulleted-list'].includes(type)) {
-      const { value } = this.props;
-      const val = serializer.deserialize(value);
-      const parent = val.document.getParent(val.blocks.first().key);
+      const { value } = this.state;
+      const parent = value.document.getParent(value.blocks.first().key);
       isActive = this.hasBlock('list-item') && parent && parent.type === type;
     }
 
@@ -351,7 +355,7 @@ class RichText extends React.Component {
     const { attributes, children, node } = props;
 
     switch (node.type) {
-      case 'quote':
+      case 'block-quote':
         return <blockquote {...attributes}>{children}</blockquote>;
       case 'bulleted-list':
         return <ul {...attributes}>{children}</ul>;
@@ -359,22 +363,12 @@ class RichText extends React.Component {
         return <h1 {...attributes}>{children}</h1>;
       case 'heading-two':
         return <h2 {...attributes}>{children}</h2>;
-      case 'heading-three':
-        return <h3 {...attributes}>{children}</h3>;
-      case 'heading-four':
-        return <h4 {...attributes}>{children}</h4>;
-      case 'heading-five':
-        return <h5 {...attributes}>{children}</h5>;
-      case 'heading-six':
-        return <h6 {...attributes}>{children}</h6>;
       case 'list-item':
         return <li {...attributes}>{children}</li>;
       case 'numbered-list':
         return <ol {...attributes}>{children}</ol>;
-
-      default: {
+      default:
         return next();
-      }
     }
   }
 
@@ -401,7 +395,6 @@ class RichText extends React.Component {
         return next();
     }
   }
-
   /**
    * Render.
    *
@@ -409,25 +402,26 @@ class RichText extends React.Component {
    */
 
   render() {
-    const wordCount = serializer.deserialize(this.props.value).document
-      .getBlocks()
-      .reduce((memo, b) => memo + b.text.length, 0);
     return (
       <div>
         <Toolbar>
           {this.renderMarkButton('bold', 'format_bold')}
           {this.renderMarkButton('italic', 'format_italic')}
           {this.renderMarkButton('underlined', 'format_underlined')}
-          {wordCount && this.renderBlockButton('heading-one', 'looks_one')}
-          {wordCount && this.renderBlockButton('heading-two', 'looks_two')}
+          {this.renderMarkButton('code', 'code')}
+          {this.renderBlockButton('heading-one', 'looks_one')}
+          {this.renderBlockButton('heading-two', 'looks_two')}
+          {this.renderBlockButton('block-quote', 'format_quote')}
+          {this.renderBlockButton('numbered-list', 'format_list_numbered')}
+          {this.renderBlockButton('bulleted-list', 'format_list_bulleted')}
         </Toolbar>
         <Editor
           spellCheck
           autoFocus
-          placeholder={'Enter some rich text...'}
+          placeholder='Enter some rich text...'
           ref={this.ref}
-          value={(wordCount) ? serializer.deserialize(this.props.value) : Plain.deserialize('hello')}
-          onChange={this.props.onChange}
+          value={this.state.value}
+          onChange={this.onChange}
           plugins={plugins}
           onKeyDown={this.onKeyDown}
           renderNode={this.renderNode}
@@ -441,5 +435,4 @@ class RichText extends React.Component {
 /**
  * Export.
  */
-
-export default RichText;
+export default RichText2;

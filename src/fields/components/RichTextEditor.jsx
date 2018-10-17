@@ -1,5 +1,5 @@
 import React from 'react';
-import RichTextEditor from './lib/RichText';
+import RichTextEditor from './lib/RichText2';
 
 export default ({ type, value, options, label, nullOption, onChange, ...rest }) => (
     <div>
