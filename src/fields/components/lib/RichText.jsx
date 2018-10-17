@@ -78,8 +78,16 @@ export const RULES = [
             );
           case 'paragraph':
             return <p className={obj.data.get('className')}>{children}</p>;
-          case 'quote':
-            return <blockquote>{children}</blockquote>;
+          case 'bulleted-list':
+            return <ul>{children}</ul>;
+          case 'heading-one':
+            return <h1>{children}</h1>;
+          case 'heading-two':
+            return <h2>{children}</h2>;
+          case 'list-item':
+            return <li>{children}</li>;
+          case 'numbered-list':
+            return <ol>{children}</ol>;
         }
       }
     },
@@ -103,7 +111,7 @@ export const RULES = [
             return <strong>{children}</strong>;
           case 'italic':
             return <em>{children}</em>;
-          case 'underline':
+          case 'underlined':
             return <u>{children}</u>;
         }
       }
