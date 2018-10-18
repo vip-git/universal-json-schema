@@ -43,10 +43,6 @@ export default class CreatableInputOnly extends Component {
   }
 
   handleChange = (value, actionMeta) => {
-    console.group('Value Changed');
-    console.log(value);
-    console.log(`action: ${actionMeta.action}`);
-    console.groupEnd();
     this.props.onChange(value);
     this.setState({ value });
   };
@@ -61,9 +57,6 @@ export default class CreatableInputOnly extends Component {
     switch (event.key) {
       case 'Enter':
       case 'Tab':
-        console.group('Value Added');
-        console.log(value);
-        console.groupEnd();
         const finalValue = [...value, createOption(inputValue)];
         this.props.onChange(finalValue);
         this.setState({
