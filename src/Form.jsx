@@ -54,13 +54,6 @@ class Form extends React.Component {
   onSubmit = () => {
     this.props.onSubmit({ formData: this.state.data });
   }
-  handleCreatableSelectChange = (value, actionMeta) => {
-    console.group('Value Changed');
-    console.log(value);
-    console.log(`action: ${actionMeta.action}`);
-    console.groupEnd();
-    this.setState({ value }, this.notifyChange);
-  };
   handleCreatableSelectInputChange = (inputValue) => {
     this.setState({ inputValue }, this.notifyChange);
   };
@@ -88,12 +81,7 @@ class Form extends React.Component {
             path={''}
             data={this.state.data}
             id={id}
-            inputValue={this.state.inputValue}
-            creatableSelectValue={this.state.value}
             onChange={this.onChange}
-            onKeyDown={this.handleCreatableSelectKeyDown}
-            onCreatableSelectChange={this.handleCreatableSelectChange}
-            onInputChange={this.handleCreatableSelectInputChange}
             onSubmit={this.onSubmit}
             validation={validation}
             onMoveItemUp={this.onMoveItemUp}

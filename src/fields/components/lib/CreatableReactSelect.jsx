@@ -6,6 +6,11 @@ const components = {
   DropdownIndicator: null,
 };
 
+const createOption = label => ({
+  label,
+  value: label,
+});
+
 const colourStyles = {
   control: styles => ({
     ...styles,
@@ -26,7 +31,51 @@ const colourStyles = {
 };
 
 export default class CreatableInputOnly extends Component {
+  state = {
+    inputValue: '',
+    value: [],
+  };
+
+  componentWillMount = () => {
+    this.setState({
+      value: this.props.value,
+    });
+  }
+
+  handleChange = (value, actionMeta) => {
+    console.group('Value Changed');
+    console.log(value);
+    console.log(`action: ${actionMeta.action}`);
+    console.groupEnd();
+    this.props.onChange(value);
+    this.setState({ value });
+  };
+
+  handleInputChange = (inputValue) => {
+    this.setState({ inputValue });
+  };
+
+  handleKeyDown = (event) => {
+    const { inputValue, value } = this.state;
+    if (!inputValue) return;
+    switch (event.key) {
+      case 'Enter':
+      case 'Tab':
+        console.group('Value Added');
+        console.log(value);
+        console.groupEnd();
+        const finalValue = [...value, createOption(inputValue)];
+        this.props.onChange(finalValue);
+        this.setState({
+          inputValue: '',
+          value: finalValue,
+        });
+        event.preventDefault();
+    }
+  };
+
   render() {
+    const { inputValue, value } = this.state;
     return (
       <div>
         <span style={{
@@ -40,16 +89,16 @@ export default class CreatableInputOnly extends Component {
         </span>
         <CreatableReactSelect
           components={components}
-          inputValue={this.props.inputValue}
+          inputValue={inputValue}
           isClearable
           isMulti
           menuIsOpen={false}
-          onChange={this.props.onChange}
-          onInputChange={this.props.onInputChange}
-          onKeyDown={this.props.onKeyDown}
+          onChange={this.handleChange}
+          onInputChange={this.handleInputChange}
+          onKeyDown={this.handleKeyDown}
           styles={colourStyles}
           placeholder={'Type something and press enter...'}
-          value={this.props.value}
+          value={value}
         />
       </div>
     );

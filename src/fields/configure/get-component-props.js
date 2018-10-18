@@ -28,7 +28,7 @@ const coerceValue = (type, value) => {
 const onChangeHandler = (onChange, type, widget, options) => (e) => {
   const value = (type === 'material-date' || type === 'material-time' || type === 'material-datetime') ?
                   e.format() : 
-                  (widget === 'material-multiselect' || widget === 'material-select') ?  
+                  (widget === 'material-multiselect' || widget === 'material-select' || widget === 'creatable-select') ?  
                     coerceValue(type, JSON.stringify(e))
                     : (options === 'rich-text-editor') ? serializer.serialize(e) : coerceValue(type, e.target.value);
   if (value !== undefined) onChange(value);
@@ -87,14 +87,6 @@ export default ({ schema = {}, uiSchema = {}, inputValue, onChange, onKeyDown, c
   if (widget === 'textarea') {
     rv.multiline = true;
     rv.rows = 5;
-  }
-
-  if (widget === 'creatable-select') {
-    rv.onKeyDown = onKeyDown;
-    rv.onInputChange = onInputChange;
-    rv.onChange = onCreatableSelectChange;
-    rv.inputValue = inputValue;
-    rv.creatableSelectValue = creatableSelectValue;
   }
 
   if (options.disabled) {

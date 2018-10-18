@@ -3,8 +3,6 @@ import DatePicker from 'material-ui-pickers/DatePicker';
 import TimePicker from 'material-ui-pickers/TimePicker';
 import DateTimePicker from 'material-ui-pickers/DateTimePicker';
 
-const doOnChange = onChange => (e, checked) => onChange(checked);
-
 const renderPickerComp = (type) => {
   switch (type) {
     case 'material-date':
