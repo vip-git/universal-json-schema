@@ -99,7 +99,7 @@
     "@material-ui/icons": "^1.0.0-beta.42",
     "immutability-helper": "^2.6.5",
     "lodash": "^4.17.5",
-    "material-ui": "^1.0.0-beta.41",
+    "material-ui": "https://github.com/vip-git/material-ui-jsonschema-patch.git",
     "react": "^16.2.0",
     "shortid": "^2.2.8"
   },
