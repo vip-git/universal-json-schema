@@ -69,21 +69,25 @@ export default class CreatableInputOnly extends Component {
     return multiValueArray;
   }
 
-  handleKeyDown = (event) => {
+  saveValuesToObject = () => {
     const { inputValue, value } = this.state;
     if (!inputValue) return;
+    const multiValueArray = [...value];
+    const combinedInputValue = (inputValue.split(' ').length === 1) ? 
+      this.addSingleValue(inputValue, multiValueArray) : 
+      this.addMultipleValue(inputValue.split(' '), multiValueArray);
+    this.props.onChange(combinedInputValue);
+    this.setState({
+      inputValue: '',
+      value: combinedInputValue,
+    });
+  }
+
+  handleKeyDown = (event) => {
     switch (event.key) {
       case 'Enter':
       case 'Tab':
-        let multiValueArray = [...value];
-        const combinedInputValue = (inputValue.split(" ").length === 1) ? 
-                                    this.addSingleValue(inputValue, multiValueArray) : 
-                                    this.addMultipleValue(inputValue.split(" "), multiValueArray);
-        this.props.onChange(combinedInputValue);
-        this.setState({
-          inputValue: '',
-          value: combinedInputValue,
-        });
+        this.saveValuesToObject();
         event.preventDefault();
     }
   };
@@ -108,6 +112,7 @@ export default class CreatableInputOnly extends Component {
           isMulti
           menuIsOpen={false}
           onChange={this.handleChange}
+          onBlur={this.saveValuesToObject}
           onInputChange={this.handleInputChange}
           onKeyDown={this.handleKeyDown}
           styles={colourStyles}
