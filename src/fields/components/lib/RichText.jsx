@@ -441,7 +441,7 @@ class RichText extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id={this.props.htmlId}>
         <Toolbar style={{
             borderBottom: 'solid 1px #0000001c !important',
             marginTop: 14,

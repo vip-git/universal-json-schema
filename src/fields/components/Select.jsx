@@ -2,10 +2,11 @@ import React from 'react';
 import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
 
-export default ({ type, value = '', options, label, nullOption, onChange, ...rest }) => {
+export default ({ type, value = '', options, label, htmlId, nullOption, onChange, ...rest }) => {
   return (
     <Select
       {...rest}
+      id={htmlId}
       value={String(value)}
       onChange={onChange}
     >

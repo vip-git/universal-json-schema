@@ -97,5 +97,8 @@ export default ({ schema = {}, uiSchema = {}, inputValue, onChange, onKeyDown, c
       rv.disabled = (options.disabled).call(null, data, objectData);
     }
   }
+
+  rv.htmlId = htmlId;
+  
   return rv;
 };

@@ -31,10 +31,11 @@ const renderPickerComp = (type) => {
   }
 };
 
-export default ({ path, label, title, value, type, onChange, ...rest }) => {
+export default ({ path, label, title, value, htmlId, type, onChange, ...rest }) => {
   const { PickerComp, maskInput, placeholder, format } = renderPickerComp(type);
   return (
         <div
+          id={htmlId}
           key={`material-date-picker-${label}`}
           className='material-form-datepicker'
           style={{ 

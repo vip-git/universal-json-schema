@@ -16,7 +16,7 @@ class Form extends React.Component {
   state = {
     data: this.props.formData,
     validation: getValidationResult(this.props.schema, this.props.formData),
-    id: generate(),
+    id: this.props.prefixId || generate(),
   }
   componentWillReceiveProps = (nextProps) => {
     let validation;
