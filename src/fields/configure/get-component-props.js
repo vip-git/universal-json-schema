@@ -45,7 +45,7 @@ const onCheckboxChangeHandler = (onChange, title) => (e) => {
   return onChange(spec);
 };
 
-export default ({ schema = {}, uiSchema = {}, inputValue, onChange, onKeyDown, creatableSelectValue, onCreatableSelectChange, onInputChange, htmlId, data, objectData }) => {
+export default ({ schema = {}, uiSchema = {}, inputValue, onChange, onKeyDown, creatableSelectValue, onCreatableSelectChange, onInputChange, htmlid, data, objectData }) => {
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'] || {};
   const { type } = schema;
@@ -81,7 +81,7 @@ export default ({ schema = {}, uiSchema = {}, inputValue, onChange, onKeyDown, c
   else {
     rv.label = schema.title || '';
     rv.inputProps = {
-      id: htmlId,
+      id: htmlid,
     };
   }
   if (widget === 'textarea') {
@@ -98,7 +98,7 @@ export default ({ schema = {}, uiSchema = {}, inputValue, onChange, onKeyDown, c
     }
   }
 
-  rv.htmlId = htmlId;
+  rv.htmlid = htmlid;
   
   return rv;
 };

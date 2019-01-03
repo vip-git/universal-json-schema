@@ -95,7 +95,7 @@ export default class CreatableInputOnly extends Component {
   render() {
     const { inputValue, value } = this.state;
     return (
-      <div id={`${this.props.htmlId}_parent`}>
+      <div id={`${this.props.htmlid}_parent`}>
         <span style={{
             fontSize: '0.7rem',
             color: 'gray',
@@ -106,7 +106,7 @@ export default class CreatableInputOnly extends Component {
           { this.props.label } 
         </span>
         <CreatableReactSelect
-          id={this.props.htmlId}
+          id={this.props.htmlid}
           components={components}
           inputValue={inputValue}
           isClearable

@@ -5,10 +5,10 @@ import ConfiguredField from './ConfiguredField';
 export default (props) => {
   const { path, id, schema, data, uiSchema } = props;
   const { type } = schema;
-  const htmlId = `${id}_${path}`;
+  const htmlid = `${id}_${path}`;
   const {
     Component, LabelComponent, componentProps, labelComponentProps, className, title,
-  } = configureComponent({ ...props, htmlId });
+  } = configureComponent({ ...props, htmlid });
 
   const descriptionText = uiSchema['ui:description'];
   const activeCompColor = uiSchema['ui:activeCompColor'];

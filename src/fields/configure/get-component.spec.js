@@ -40,9 +40,9 @@ describe('getComponent', () => {
     const path = 'firstName';
     const uiSchema = {};
     // const data = 'Maxamillian';
-    const htmlId = 'unq';
+    const htmlid = 'unq';
     const onChange = sinon.spy();
-    const Component = getComponent({ schema, uiSchema, required, path, htmlId, onChange });
+    const Component = getComponent({ schema, uiSchema, required, path, htmlid, onChange });
     expect(Component.id).to.equal(InputSpy.id);
   });
   describe('yields Component', () => {

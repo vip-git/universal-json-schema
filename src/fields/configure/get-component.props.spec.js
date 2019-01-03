@@ -17,12 +17,12 @@ describe('getComponentProps', () => {
     const required = [];
     const path = 'firstName';
     const uiSchema = {};
-    const htmlId = 'unq';
+    const htmlid = 'unq';
     const onChange = sinon.spy();
     const expectedInputProps = {
-      id: htmlId,
+      id: htmlid,
     };
-    const componentProps = getComponentProps({ schema, uiSchema, required, path, htmlId, onChange });
+    const componentProps = getComponentProps({ schema, uiSchema, required, path, htmlid, onChange });
     expect(componentProps).to.haveOwnProperty('inputProps');
     expect(componentProps.inputProps).to.deep.equal(expectedInputProps);
     expect(componentProps.type).to.equal('string');

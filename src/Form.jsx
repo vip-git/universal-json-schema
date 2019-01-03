@@ -65,7 +65,7 @@ class Form extends React.Component {
     }
   }
   render() {
-    const { classes, formData, onSubmit, actionButtonPos, onChange, onCancel, submitValue, ...rest } = this.props;
+    const { classes, formData, onSubmit, formButtons, actionButtonPos, onChange, onCancel, submitValue, ...rest } = this.props;
     const { validation, id } = this.state;
     return (
       <MuiPickersUtilsProvider utils={MomentUtils}>

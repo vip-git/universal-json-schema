@@ -11,12 +11,12 @@ describe('getLabelComponentProps', () => {
     };
     const required = [];
     // const data = 'Maxamillian';
-    const htmlId = 'unq';
+    const htmlid = 'unq';
     const expectedLabelProps = {
-      htmlFor: htmlId,
+      htmlFor: htmlid,
       required: false,
     };
-    const labelComponentProps = getLabelComponentProps({ schema, required, htmlId });
+    const labelComponentProps = getLabelComponentProps({ schema, required, htmlid });
     expect(labelComponentProps).to.deep.equal(expectedLabelProps);
   });
 });

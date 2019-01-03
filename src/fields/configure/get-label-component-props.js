@@ -1,8 +1,8 @@
 import includes from 'lodash/includes';
 
-export default ({ htmlId, required, path }) => {
+export default ({ htmlid, required, path }) => {
   const rv = {
-    htmlFor: htmlId,
+    htmlFor: htmlid,
     required: includes(required, path),
   };
   return rv;

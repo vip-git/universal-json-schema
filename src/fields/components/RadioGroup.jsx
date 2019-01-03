@@ -2,10 +2,10 @@ import React from 'react';
 import Radio, { RadioGroup } from 'material-ui/Radio';
 import { FormControlLabel } from 'material-ui/Form';
 
-export default ({ path, options = [], value, onChange, htmlId, inputProps, nullOption, ...rest }) => (
+export default ({ path, options = [], value, onChange, htmlid, inputProps, nullOption, ...rest }) => (
   <RadioGroup
     {...rest}
-    id={htmlId}
+    id={htmlid}
     aria-label={path}
     name={path}
     value={String(value)}

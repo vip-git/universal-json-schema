@@ -193,7 +193,7 @@ class IntegrationReactSelect extends React.Component {
             styles={selectStyles}
             textFieldProps={{
               label: this.props.label,
-              id: this.props.htmlId,
+              id: this.props.htmlid,
               InputLabelProps: {
                 shrink: true,
               },

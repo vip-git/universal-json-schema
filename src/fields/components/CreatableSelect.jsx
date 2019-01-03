@@ -1,11 +1,11 @@
 import React from 'react';
 import CreatableSelect from './lib/CreatableReactSelect';
 
-export default ({ type, value, label, htmlId, onChange, ...rest }) => (
+export default ({ type, value, label, htmlid, onChange, ...rest }) => (
     <CreatableSelect 
       value={(value) ? JSON.parse(value) : []}
       onChange={onChange}
-      htmlId={htmlId}
+      htmlid={htmlid}
       label={label}
     />
 );
