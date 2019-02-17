@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import Button from 'material-ui/Button';
 
 export class RawFormButtons extends React.Component {
-  shouldComponentUpdate = () => false
   render() {
     const { classes, onCancel, onSubmit, submitValue, disabled } = this.props;
     return (onCancel || onSubmit) && (
