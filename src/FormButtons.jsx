@@ -5,7 +5,7 @@ import Button from 'material-ui/Button';
 export class RawFormButtons extends React.Component {
   shouldComponentUpdate = () => false
   render() {
-    const { classes, onCancel, onSubmit, submitValue } = this.props;
+    const { classes, onCancel, onSubmit, submitValue, disabled } = this.props;
     return (onCancel || onSubmit) && (
       <div className={classes.formButtons}>
         {onCancel &&
@@ -23,6 +23,7 @@ export class RawFormButtons extends React.Component {
             variant={'raised'}
             color={'primary'}
             onClick={onSubmit}
+            disabled={disabled}
           >
             { submitValue || 'Submit'}
           </Button>
