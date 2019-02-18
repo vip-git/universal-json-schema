@@ -110,12 +110,13 @@ export default class CreatableInputOnly extends Component {
           components={components}
           inputValue={inputValue}
           isClearable
+          isValidNewOption={() => false}
           isMulti
-          menuIsOpen={false}
           onChange={this.handleChange}
           onBlur={this.saveValuesToObject}
           onInputChange={this.handleInputChange}
           onKeyDown={this.handleKeyDown}
+          options={this.props.options}
           styles={colourStyles}
           placeholder={'Type something and press enter...'}
           value={value}

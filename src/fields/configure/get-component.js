@@ -9,6 +9,10 @@ export default ({ schema, uiSchema = {} }) => {
   const options = uiSchema['ui:options'];
   const { type } = schema;
 
+  if (widget === 'creatable-select') {
+    return CreatableSelect;
+  }
+
   if (schema.enum) {
     if (widget === 'radio') {
       return RadioGroup;
@@ -27,10 +31,6 @@ export default ({ schema, uiSchema = {} }) => {
   }
   else if (type === 'material-date' || type === 'material-time' || type === 'material-datetime') {
     return Picker;
-  }
-  
-  if (widget === 'creatable-select') {
-    return CreatableSelect;
   }
   
   if (options === 'rich-text-editor') {

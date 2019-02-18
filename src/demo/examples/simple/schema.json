@@ -21,7 +21,8 @@
     },
     "creatableSelectTest": {
       "type": "string",
-      "title": "NL Discount Agreement"
+      "title": "NL Discount Agreement",
+      "enum": ["test", "teete", "etetet"]
     },
     "select": {
       "type": "string",
