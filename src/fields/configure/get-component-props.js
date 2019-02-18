@@ -72,6 +72,10 @@ export default ({ schema = {}, uiSchema = {}, inputValue, onChange, onKeyDown, c
       rv.multiSelect = (widget === 'material-multiselect');
     }
 
+    if (widget === 'creatable-select') {
+      rv.optionsOnly = true;
+    }
+
     rv.options = valuesToOptions(schema.enum);
   }
   else if (type === 'boolean') {
