@@ -4,7 +4,7 @@ A [Material UI](http://www.material-ui.com/) port of [react-jsonschema-form](htt
 
 A [live playground](https://react-jsonschema-form-material.herokuapp.com/)
 
-### New components integrated
+## New components integrated
 - Material UI Date / time picker
 - Material UI Multi-selecbox
 - Creatable multi selectbox
