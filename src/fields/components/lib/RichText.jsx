@@ -183,29 +183,7 @@ class RichText extends React.Component {
    * @return {Change}
    */
 
-  onKeyDown = (event, change, next) => {
-    let mark;
-
-    if (isBoldHotkey(event)) {
-      mark = 'bold';
-    }
-    else if (isItalicHotkey(event)) {
-      mark = 'italic';
-    }
-    else if (isUnderlinedHotkey(event)) {
-      mark = 'underlined';
-    }
-    else if (isCodeHotkey(event)) {
-      mark = 'code';
-    }
-    else {
-      return next();
-    }
-
-    event.preventDefault();
-    change.toggleMark(mark);
-    return true;
-  }
+  onKeyDown = (event, change, next) => next()
 
   /**
    * When a mark button is clicked, toggle the current mark.
@@ -230,10 +208,10 @@ class RichText extends React.Component {
    */
 
   onPaste = (event, change, next) => {
-    const transfer = getEventTransfer(event)
-    if (transfer.type != 'html') return next()
-    const { document } = serializer.deserialize(transfer.html)
-    change.insertFragment(document)
+    const transfer = getEventTransfer(event);
+    if (transfer.type != 'html') return next();
+    const { document } = serializer.deserialize(transfer.html);
+    change.insertFragment(document);
   }
 
   /**
