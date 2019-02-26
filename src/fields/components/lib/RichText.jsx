@@ -40,7 +40,7 @@ const BLOCK_TAGS = {
 const MARK_TAGS = {
   strong: 'bold',
   em: 'italic',
-  u: 'underline',
+  u: 'underlined',
   s: 'strikethrough',
   code: 'code',
 };
@@ -337,6 +337,7 @@ class RichText extends React.Component {
 
     if (['numbered-list', 'bulleted-list'].includes(type)) {
       const { value } = this.state;
+      if (!value.blocks.size) return true;
       const parent = value.document.getParent(value.blocks.first().key);
       isActive = this.hasBlock('list-item') && parent && parent.type === type;
     }
