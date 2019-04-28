@@ -154,14 +154,16 @@ class RichText extends React.Component {
    */
 
   state = {
-    value: Value.fromJSON(initialValue),
+    value: (this.props.value !== 'undefined') ? serializer.deserialize(this.props.value) : Value.fromJSON(initialValue),
   }
 
 
   componentDidMount = () => {
-    this.setState({
-      value: (this.props.value === 'undefined') ? serializer.deserialize('') : serializer.deserialize(this.props.value),
-    });
+    if ((this.props.value !== 'undefined')) {
+      this.setState({
+        value: serializer.deserialize(this.props.value),
+      });
+    }
   }
 
   /**
