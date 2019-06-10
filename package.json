@@ -77,7 +77,7 @@
     "mocha-webpack": "1.1.0",
     "mochawesome": "3.0.3",
     "node-sass": "4.12.0",
-    "raf": "3.4.0",
+    "raf": "3.4.1",
     "sass-loader": "6.0.7",
     "sinon": "4.5.0",
     "sinon-chai": "2.14.0",
