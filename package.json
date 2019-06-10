@@ -67,7 +67,7 @@
     "eslint-plugin-jsx-a11y": "6.1.1",
     "eslint-plugin-react": "7.13.0",
     "extract-text-webpack-plugin": "3.0.2",
-    "file-loader": "1.1.11",
+    "file-loader": "4.0.0",
     "html-webpack-plugin": "2.30.1",
     "image-webpack-loader": "4.6.0",
     "immutable": "3.8.2",
