@@ -1,4 +1,4 @@
 # Table of contents
 
-* [Initial page](README.md)
+* [React Material-ui-jsonschema-form](README.md)
 
