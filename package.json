@@ -49,7 +49,7 @@
   },
   "description": "Material UI implementation of react-jsonschema-form",
   "devDependencies": {
-    "babel-eslint": "10.0.1",
+    "babel-eslint": "10.0.2",
     "babel-loader": "7.1.5",
     "babel-polyfill": "6.26.0",
     "chai": "4.2.0",
