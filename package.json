@@ -2,6 +2,7 @@
   "author": "Vipin Tanna",
   "scripts": {
     "build": "webpack",
+    "now-build: "npm run build:demo",
     "build:demo": "cross-env NODE_ENV=production webpack --env.NODE_ENV=production --config webpack.config.demo.js",
     "test": "npm run test:ci -- --watch",
     "heroku-postbuild": "npm run build:demo",
