@@ -21,8 +21,7 @@
     "ui:widget": "alt-datetime"
   },
   "selectTest":{
-    "ui:widget": "material-multiselect",
-    "ui:options": { "disabled": true }
+    "ui:widget": "material-multiselect"
   },
   "creatableSelectTest":{
     "ui:widget": "creatable-select"

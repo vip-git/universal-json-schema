@@ -5,5 +5,5 @@
   "bio": "<p><u>ads</u></p>",
   "password": "noneed",
   "creatableSelectTest": "[{\"label\":\"hello\",\"value\":\"hello\"},{\"label\":\"yes\",\"value\":\"yes\"}]",
-  "selectTest": "[{\"key\":\"220\",\"value\":\"Vanaf 6 jaar\",\"allowableOptionValues\":{\"210\":\"Alle Leeftijden\",\"220\":\"Vanaf 6 jaar\",\"225\":\"Vanaf 9 jaar\",\"230\":\"Vanaf 12 jaar\",\"240\":\"Vanaf 16 jaar\",\"250\":\"Vanaf 18 jaar\"}},{\"key\":\"210\",\"value\":\"Alle Leeftijden\",\"allowableOptionValues\":{\"210\":\"Alle Leeftijden\",\"220\":\"Vanaf 6 jaar\",\"225\":\"Vanaf 9 jaar\",\"230\":\"Vanaf 12 jaar\",\"240\":\"Vanaf 16 jaar\",\"250\":\"Vanaf 18 jaar\"}},{\"key\":\"225\",\"value\":\"Vanaf 9 jaar\",\"allowableOptionValues\":{\"210\":\"Alle Leeftijden\",\"220\":\"Vanaf 6 jaar\",\"225\":\"Vanaf 9 jaar\",\"230\":\"Vanaf 12 jaar\",\"240\":\"Vanaf 16 jaar\",\"250\":\"Vanaf 18 jaar\"}}]"
+  "selectTest": "[{\"value\":\"Yes\",\"label\":\"Yes\"},{\"value\":\"No\",\"label\":\"No\"}]"
 }
