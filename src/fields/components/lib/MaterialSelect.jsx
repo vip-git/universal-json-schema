@@ -198,6 +198,7 @@ class IntegrationReactSelect extends React.Component {
                 shrink: true,
               },
             }}
+            isDisabled={this.props.isDisabled}
             options={this.props.suggestions}
             components={components}
             value={this.props.value}

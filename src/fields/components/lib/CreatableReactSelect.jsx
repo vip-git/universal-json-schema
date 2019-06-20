@@ -100,6 +100,7 @@ export default class CreatableInputOnly extends Component {
         isClearable
         isValidNewOption={() => false}
         isMulti
+        isDisabled={this.props.isDisabled}
         onChange={this.handleChange}
         onBlur={this.saveValuesToObject}
         onInputChange={this.handleInputChange}
@@ -116,6 +117,7 @@ export default class CreatableInputOnly extends Component {
         inputValue={inputValue}
         isClearable
         isMulti
+        isDisabled={this.props.isDisabled}
         menuIsOpen={false}
         onChange={this.handleChange}
         onBlur={this.saveValuesToObject}

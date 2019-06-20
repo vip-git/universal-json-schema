@@ -1,7 +1,7 @@
 import React from 'react';
 import MultiSelect from './lib/MaterialSelect';
 
-export default ({ type, value = '[]', options, label, multiSelect, nullOption, onChange, ...rest }) => {
+export default ({ type, value = '[]', options, label, multiSelect, nullOption, disabled, onChange, ...rest }) => {
   const suggestions = options.map(suggestion => ({
     value: suggestion.key,
     label: suggestion.value,
@@ -15,6 +15,7 @@ export default ({ type, value = '[]', options, label, multiSelect, nullOption, o
       value={newVal} 
       onChange={onChange}
       label={label} 
+      isDisabled={disabled}
       multiple={multiSelect} 
     />
   );
