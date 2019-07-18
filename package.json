@@ -78,7 +78,7 @@
 		"jsdom": "11.12.0",
 		"mocha": "6.1.4",
 		"mocha-webpack": "1.1.0",
-		"mochawesome": "3.0.3",
+		"mochawesome": "3.1.2",
 		"node-sass": "4.12.0",
 		"raf": "3.4.0",
 		"sass-loader": "6.0.7",
