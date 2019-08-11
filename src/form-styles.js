@@ -1,9 +1,10 @@
 export default theme => ({
   root: {
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
   },
   formButtons: {
-    marginTop: theme.spacing.unit * 2,
+    marginTop: theme.spacing(2),
+    display: 'flex',
     justifyContent: 'flex-end',
   },
   submit: {
@@ -11,6 +12,7 @@ export default theme => ({
   },
   cancel: {
     fontSize: '100%',
+    marginRight: 15,
   },
   button: {
     fontSize: '100%',

@@ -37,7 +37,7 @@ export default theme => ({
       marginLeft: 250,
     },
     '& h2': {
-      marginLeft: theme.spacing.unit * 3,
+      marginLeft: theme.spacing(3),
     },
   },
 });

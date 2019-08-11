@@ -1,7 +1,7 @@
-// import Input, { InputLabel } from 'material-ui/Input'; // eslint-disable-line import/no-named-default
+// import Input, { InputLabel } from '@material-ui/core/Input'; // eslint-disable-line import/no-named-default
 const { RadioGroup, Select, Checkbox, Picker, MultiSelect, CreatableSelect, RichTextEditor } = require('../components');
 
-const Input = require('material-ui/Input').default;
+const Input = require('@material-ui/core/Input').default;
 
 export default ({ schema, uiSchema = {} }) => {
   // console.log('getComponent schema: %o, uiSchema: %o', schema, uiSchema);

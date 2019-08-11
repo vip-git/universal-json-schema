@@ -1,17 +1,17 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Controlled as CodeMirror } from 'react-codemirror2';
+import { UnControlled as CodeMirror } from 'react-codemirror2';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 import 'codemirror/mode/javascript/javascript'; // eslint-disable-line
 import Valid from '@material-ui/icons/CheckCircle';
 import Invalid from '@material-ui/icons/HighlightOff';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import sourceStyles from './editor-styles';
 
 const cmOptions = {
-  // mode: { name: 'javascript', json: true },
-  // theme: 'material',
+  mode: { name: 'javascript', json: true },
+  theme: 'material',
   smartIndent: true,
   lineNumbers: true,
   lineWrapping: true,
@@ -68,18 +68,18 @@ class Source extends React.Component {
       <div className={classes.root}>
         <div className={classNames(classes.ctr, { [classes.invalid]: !valid })}>
           <div>
-            <Icon fontSize className={classes.icon} />
+            {/* <Icon fontSize className={classes.icon} /> */}
             <div className={classes.title}>
               <p>{title}</p>
             </div>
           </div>
           <div className={classes.source}>
-            <CodeMirror
+            {/* <CodeMirror
               value={source}
               onChange={this.onChange}
               onBeforeChange={this.onBeforeChange}
               options={cmOptions}
-            />
+            /> */}
           </div>
         </div>
       </div>
