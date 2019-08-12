@@ -21,6 +21,9 @@ export class RawConfiguredField extends React.Component {
         {LabelComponent && title &&
           <LabelComponent
             {...labelComponentProps}
+            style={{
+              left: 10,
+            }}
           >{title}
           </LabelComponent>
         }
