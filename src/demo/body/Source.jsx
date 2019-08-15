@@ -1,22 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
-import { UnControlled as CodeMirror } from 'react-codemirror2';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/material.css';
-import 'codemirror/mode/javascript/javascript'; // eslint-disable-line
+import brace from 'brace';
+import AceEditor from 'react-ace';
+import 'brace/mode/json';
+import 'brace/theme/textmate';
 import Valid from '@material-ui/icons/CheckCircle';
 import Invalid from '@material-ui/icons/HighlightOff';
 import { withStyles } from '@material-ui/core/styles';
 import sourceStyles from './editor-styles';
-
-const cmOptions = {
-  mode: { name: 'javascript', json: true },
-  theme: 'material',
-  smartIndent: true,
-  lineNumbers: true,
-  lineWrapping: true,
-  readOnly: false,
-};
 
 const isValid = (value) => {
   let obj;
@@ -45,20 +36,20 @@ class Source extends React.Component {
       valid: isValid(source),
     });
   }
-  onChange = (editor, data, value) => {
-    this.setState({ source: value });
+  onChange = (newValue) => {
+    this.setState({ source: newValue });
   }
   onBeforeChange = (editor, data, value) => {
-    const { onChange } = this.props;
-    const parsed = isValid(value);
+    // const { onChange } = this.props;
+    // const parsed = isValid(value);
 
-    this.setState({
-      valid: parsed,
-      source: value,
-    });
-    if (parsed && onChange) {
-      onChange(parsed);
-    }
+    // this.setState({
+    //   valid: parsed,
+    //   source: value,
+    // });
+    // if (parsed && onChange) {
+    //   onChange(parsed);
+    // }
   }
   render() {
     const { source, valid } = this.state;
@@ -74,12 +65,24 @@ class Source extends React.Component {
             </div>
           </div>
           <div className={classes.source}>
-            {/* <CodeMirror
-              value={source}
+            <AceEditor
+              mode='json'
+              theme='textmate'
+              value={this.state.source}
               onChange={this.onChange}
-              onBeforeChange={this.onBeforeChange}
-              options={cmOptions}
-            /> */}
+              name='ace_editor_1'
+              editorProps={{ $blockScrolling: true }}
+              showPrintMargin
+              showGutter
+              highlightActiveLine
+              setOptions={{
+                enableBasicAutocompletion: true,
+                enableLiveAutocompletion: true,
+                enableSnippets: true,
+                showLineNumbers: true,
+                tabSize: 2,
+              }}
+            />
           </div>
         </div>
       </div>
