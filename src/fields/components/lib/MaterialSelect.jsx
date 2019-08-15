@@ -1,66 +1,69 @@
 /* eslint-disable react/prop-types, react/jsx-handler-names */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import Select from 'react-select';
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import NoSsr from '@material-ui/core/NoSsr';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import Chip from '@material-ui/core/Chip';
-import MenuItem from '@material-ui/core/MenuItem';
-import CancelIcon from '@material-ui/icons/Cancel';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import Select from "react-select";
+import { withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import NoSsr from "@material-ui/core/NoSsr";
+import TextField from "@material-ui/core/TextField";
+import Paper from "@material-ui/core/Paper";
+import Chip from "@material-ui/core/Chip";
+import MenuItem from "@material-ui/core/MenuItem";
+import CancelIcon from "@material-ui/icons/Cancel";
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   input: {
-    display: 'flex',
+    display: "flex",
     padding: 0,
-    height: 'auto',
+    height: "auto"
   },
   valueContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    display: "flex",
+    flexWrap: "wrap",
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center"
   },
   chip: {
-    margin: `${theme.spacing(1) / 2}px ${theme.spacing(1) / 4}px`,
+    margin: `${theme.spacing(1) / 2}px ${theme.spacing(1) / 4}px`
   },
   chipFocused: {
-    backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[300] : theme.palette.grey[700],
+    backgroundColor:
+      theme.palette.type === "light"
+        ? theme.palette.grey[300]
+        : theme.palette.grey[700]
   },
   noOptionsMessage: {
-    padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
+    padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`
   },
   singleValue: {
-    fontSize: 16,
+    fontSize: 16
   },
   placeholder: {
-    position: 'absolute',
+    position: "absolute",
     left: 2,
-    fontSize: 16,
+    fontSize: 16
   },
   paper: {
-    position: 'absolute',
+    position: "absolute",
     zIndex: 1,
     marginTop: theme.spacing(1),
     left: 0,
-    right: 0,
+    right: 0
   },
   divider: {
-    height: theme.spacing(2),
-  },
+    height: theme.spacing(2)
+  }
 });
 
 function NoOptionsMessage(props) {
   return (
     <Typography
-      color='textSecondary'
+      color="textSecondary"
       className={props.selectProps.classes.noOptionsMessage}
       {...props.innerProps}
     >
@@ -83,8 +86,8 @@ function Control(props) {
           className: props.selectProps.classes.input,
           inputRef: props.innerRef,
           children: props.children,
-          ...props.innerProps,
-        },
+          ...props.innerProps
+        }
       }}
       {...props.selectProps.textFieldProps}
     />
@@ -96,9 +99,9 @@ function Option(props) {
     <MenuItem
       buttonRef={props.innerRef}
       selected={props.isFocused}
-      component='div'
+      component="div"
       style={{
-        fontWeight: props.isSelected ? 500 : 400,
+        fontWeight: props.isSelected ? 500 : 400
       }}
       {...props.innerProps}
     >
@@ -110,7 +113,7 @@ function Option(props) {
 function Placeholder(props) {
   return (
     <Typography
-      color='textSecondary'
+      color="textSecondary"
       className={props.selectProps.classes.placeholder}
       {...props.innerProps}
     >
@@ -121,14 +124,21 @@ function Placeholder(props) {
 
 function SingleValue(props) {
   return (
-    <Typography className={props.selectProps.classes.singleValue} {...props.innerProps}>
+    <Typography
+      className={props.selectProps.classes.singleValue}
+      {...props.innerProps}
+    >
       {props.children}
     </Typography>
   );
 }
 
 function ValueContainer(props) {
-  return <div className={props.selectProps.classes.valueContainer}>{props.children}</div>;
+  return (
+    <div className={props.selectProps.classes.valueContainer}>
+      {props.children}
+    </div>
+  );
 }
 
 function MultiValue(props) {
@@ -137,7 +147,7 @@ function MultiValue(props) {
       tabIndex={-1}
       label={props.children}
       className={classNames(props.selectProps.classes.chip, {
-        [props.selectProps.classes.chipFocused]: props.isFocused,
+        [props.selectProps.classes.chipFocused]: props.isFocused
       })}
       onDelete={props.removeProps.onClick}
       deleteIcon={<CancelIcon {...props.removeProps} />}
@@ -147,7 +157,11 @@ function MultiValue(props) {
 
 function Menu(props) {
   return (
-    <Paper square className={props.selectProps.classes.paper} {...props.innerProps}>
+    <Paper
+      square
+      className={props.selectProps.classes.paper}
+      {...props.innerProps}
+    >
       {props.children}
     </Paper>
   );
@@ -161,13 +175,13 @@ const components = {
   Option,
   Placeholder,
   SingleValue,
-  ValueContainer,
+  ValueContainer
 };
 
 class IntegrationReactSelect extends React.Component {
   state = {
     single: null,
-    multi: null,
+    multi: null
   };
 
   render() {
@@ -176,33 +190,36 @@ class IntegrationReactSelect extends React.Component {
     const selectStyles = {
       input: base => ({
         ...base,
-        height: 'auto',
+        height: "auto",
         color: theme.palette.text.primary,
-        '& input': {
-          font: 'inherit',
-        },
-      }),
+        "& input": {
+          font: "inherit"
+        }
+      })
     };
 
     return (
-      <div key={`material-form-select- ${this.props.label}`} className={['material-form-select', classes.root].join(' ')}>
-          <Select
-            classes={classes}
-            styles={selectStyles}
-            textFieldProps={{
-              label: this.props.label,
-              id: this.props.htmlid,
-              InputLabelProps: {
-                shrink: true,
-              },
-            }}
-            isDisabled={this.props.isDisabled}
-            options={this.props.suggestions}
-            components={components}
-            value={this.props.value}
-            onChange={this.props.onChange}
-            isMulti={this.props.multiple}
-          />
+      <div
+        key={`material-form-select- ${this.props.label}`}
+        className={["material-form-select", classes.root].join(" ")}
+      >
+        <Select
+          classes={classes}
+          styles={selectStyles}
+          textFieldProps={{
+            label: this.props.label,
+            id: this.props.htmlid,
+            InputLabelProps: {
+              shrink: true
+            }
+          }}
+          isDisabled={this.props.isDisabled}
+          options={this.props.suggestions}
+          components={components}
+          value={this.props.value}
+          onChange={this.props.onChange}
+          isMulti={this.props.multiple}
+        />
       </div>
     );
   }

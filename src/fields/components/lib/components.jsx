@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react';
-import { cx, css } from 'emotion';
+import React from "react";
+import { cx, css } from "emotion";
 
 export const Button = React.forwardRef(
   ({ className, active, reversed, ...props }, ref) => (
@@ -12,12 +12,16 @@ export const Button = React.forwardRef(
         css`
           cursor: pointer;
           color: ${reversed
-            ? active ? 'white' : '#aaa'
-            : active ? 'black' : '#ccc'};
-        `,
+            ? active
+              ? "white"
+              : "#aaa"
+            : active
+              ? "black"
+              : "#ccc"};
+        `
       )}
     />
-  ),
+  )
 );
 
 export const EditorValue = React.forwardRef(
@@ -25,7 +29,7 @@ export const EditorValue = React.forwardRef(
     const textLines = value.document.nodes
       .map(node => node.text)
       .toArray()
-      .join('\n');
+      .join("\n");
     return (
       <div
         ref={ref}
@@ -34,7 +38,7 @@ export const EditorValue = React.forwardRef(
           className,
           css`
             margin: 30px -20px 0;
-          `,
+          `
         )}
       >
         <div
@@ -63,19 +67,19 @@ export const EditorValue = React.forwardRef(
         </div>
       </div>
     );
-  },
+  }
 );
 export const Icon = React.forwardRef(({ className, ...props }, ref) => (
   <span
     {...props}
     ref={ref}
     className={cx(
-      'material-icons',
+      "material-icons",
       className,
       css`
         font-size: 18px;
         vertical-align: text-bottom;
-      `,
+      `
     )}
   />
 ));
@@ -91,7 +95,7 @@ export const Instruction = React.forwardRef(({ className, ...props }, ref) => (
         padding: 10px 20px;
         font-size: 14px;
         background: #f8f8e8;
-      `,
+      `
     )}
   />
 ));
@@ -108,7 +112,7 @@ export const Menu = React.forwardRef(({ className, ...props }, ref) => (
         & > * + * {
           margin-left: 15px;
         }
-      `,
+      `
     )}
   />
 ));
@@ -124,7 +128,7 @@ export const Toolbar = React.forwardRef(({ className, ...props }, ref) => (
         margin: 0 -20px;
         border-bottom: 2px solid #eee;
         margin-bottom: 20px;
-      `,
+      `
     )}
   />
 ));

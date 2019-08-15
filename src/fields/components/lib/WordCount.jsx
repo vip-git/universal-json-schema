@@ -1,5 +1,5 @@
-import React from 'react';
-import { css } from 'emotion';
+import React from "react";
+import { css } from "emotion";
 
 export default function WordCount(options) {
   return {
@@ -23,6 +23,6 @@ export default function WordCount(options) {
           </span>
         </div>
       );
-    },
+    }
   };
 }

@@ -1,20 +1,19 @@
-import React from 'react';
-import classNames from 'classnames';
-import brace from 'brace';
-import AceEditor from 'react-ace';
-import 'brace/mode/json';
-import 'brace/theme/textmate';
-import Valid from '@material-ui/icons/CheckCircle';
-import Invalid from '@material-ui/icons/HighlightOff';
-import { withStyles } from '@material-ui/core/styles';
-import sourceStyles from './editor-styles';
+import React from "react";
+import classNames from "classnames";
+import brace from "brace";
+import AceEditor from "react-ace";
+import "brace/mode/json";
+import "brace/theme/textmate";
+import Valid from "@material-ui/icons/CheckCircle";
+import Invalid from "@material-ui/icons/HighlightOff";
+import { withStyles } from "@material-ui/core/styles";
+import sourceStyles from "./editor-styles";
 
-const isValid = (value) => {
+const isValid = value => {
   let obj;
   try {
     obj = JSON.parse(value);
-  }
-  catch (e) {
+  } catch (e) {
     return false;
   }
   return obj;
@@ -26,23 +25,22 @@ class Source extends React.Component {
     const source = JSON.stringify(this.props.source, null, 2);
     this.state = {
       source,
-      valid: isValid(source),
+      valid: isValid(source)
     };
   }
-  componentWillReceiveProps = (nextProps) => {
+  componentWillReceiveProps = nextProps => {
     const source = JSON.stringify(nextProps.source, null, 2);
     this.setState({
       source,
-      valid: isValid(source),
+      valid: isValid(source)
     });
-  }
-  onChange = (newValue) => {
+  };
+  onChange = newValue => {
     this.setState({ source: newValue });
-  }
+  };
   onBeforeChange = (editor, data, value) => {
     // const { onChange } = this.props;
     // const parsed = isValid(value);
-
     // this.setState({
     //   valid: parsed,
     //   source: value,
@@ -50,7 +48,7 @@ class Source extends React.Component {
     // if (parsed && onChange) {
     //   onChange(parsed);
     // }
-  }
+  };
   render() {
     const { source, valid } = this.state;
     const { classes, title } = this.props;
@@ -66,11 +64,11 @@ class Source extends React.Component {
           </div>
           <div className={classes.source}>
             <AceEditor
-              mode='json'
-              theme='textmate'
+              mode="json"
+              theme="textmate"
               value={this.state.source}
               onChange={this.onChange}
-              name='ace_editor_1'
+              name="ace_editor_1"
               editorProps={{ $blockScrolling: true }}
               showPrintMargin
               showGutter
@@ -80,7 +78,7 @@ class Source extends React.Component {
                 enableLiveAutocompletion: true,
                 enableSnippets: true,
                 showLineNumbers: true,
-                tabSize: 2,
+                tabSize: 2
               }}
             />
           </div>

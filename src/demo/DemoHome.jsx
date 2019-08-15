@@ -1,19 +1,19 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Menu from './menu';
-import Body from './body';
-import './main.scss'; // eslint-disable-line import/no-unresolved,import/no-extraneous-dependencies
-import examples from './examples';
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Menu from "./menu";
+import Body from "./body";
+import "./main.scss"; // eslint-disable-line import/no-unresolved,import/no-extraneous-dependencies
+import examples from "./examples";
 
-const styles = ({});
+const styles = {};
 
 class Demo extends React.Component {
   state = {
-    selectedDemo: examples.simple,
-  }
+    selectedDemo: examples.simple
+  };
   onSelectMenuItem = type => () => {
     this.setState({ selectedDemo: type });
-  }
+  };
   render() {
     const { classes } = this.props;
     return (
