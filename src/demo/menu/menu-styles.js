@@ -1,4 +1,3 @@
-
 export default theme => ({
   // root: {
   //   width: '100%',
@@ -26,18 +25,17 @@ export default theme => ({
   // popperClose: {
   //   pointerEvents: 'none',
   // },
-  permanentLeftDrawer: {
-  },
+  permanentLeftDrawer: {},
   drawerList: {
-    width: 250,
+    width: 250
   },
   toolbar: {
-    [theme.breakpoints.up('lg')]: {
-      width: 'calc(100% - 250px)',
-      marginLeft: 250,
+    [theme.breakpoints.up("lg")]: {
+      width: "calc(100% - 250px)",
+      marginLeft: 250
     },
-    '& h2': {
-      marginLeft: theme.spacing(3),
-    },
-  },
+    "& h2": {
+      marginLeft: theme.spacing(3)
+    }
+  }
 });

@@ -1,9 +1,18 @@
-import React from 'react';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import React from "react";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
-export default ({ path, options = [], value, onChange, htmlid, inputProps, nullOption, ...rest }) => (
+export default ({
+  path,
+  options = [],
+  value,
+  onChange,
+  htmlid,
+  inputProps,
+  nullOption,
+  ...rest
+}) => (
   <RadioGroup
     {...rest}
     id={htmlid}
@@ -12,6 +21,13 @@ export default ({ path, options = [], value, onChange, htmlid, inputProps, nullO
     value={String(value)}
     onChange={onChange}
   >
-    {options.map(o => <FormControlLabel key={o.key} value={String(o.key)} control={<Radio />} label={o.value} />)}
+    {options.map(o => (
+      <FormControlLabel
+        key={o.key}
+        value={String(o.key)}
+        control={<Radio />}
+        label={o.value}
+      />
+    ))}
   </RadioGroup>
 );
