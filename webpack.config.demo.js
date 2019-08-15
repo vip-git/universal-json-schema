@@ -5,7 +5,8 @@ const webpack = require('webpack');
 const babelExclude = /node_modules/;
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const cssLoaderClient = {
 	test: /\.(css|scss)$/,
@@ -110,9 +111,7 @@ var config = {
 
 // PROD ONLY
 if (process.env.NODE_ENV === 'production') {
-  // config.plugins.push(
-  //   new webpack.optimize.UglifyJsPlugin(),
-  // );
+  config.plugins.push(new CompressionPlugin());
 }
 // NON-PROD ONLY
 else {

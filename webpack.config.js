@@ -3,6 +3,10 @@ const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const babelExclude = /node_modules/;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+// 	.BundleAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
+
 
 const alias = {}
 if (process.env.NODE_ENV !== 'production' && process.env.NO_STUBS === undefined) {
@@ -33,7 +37,9 @@ var config = {
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production')
-		})
+		}),
+		// new BundleAnalyzerPlugin()
+		new CompressionPlugin()
 	],
 	optimization: {
 		minimize: true
