@@ -9,7 +9,7 @@ A [live playground](https://react-jsonschema-form-material-ui-f01zil2hk.now.sh/)
 npm install --save react-jsonschema-form-material-ui
 ```
 
-# Version 2.0 (Material UI 4+)
+# Version 2.0.4 (Material UI 4+)
 - New version 2.0 support for material ui 4
 - Webpack 4 integration
 - Material UI picker module updated
