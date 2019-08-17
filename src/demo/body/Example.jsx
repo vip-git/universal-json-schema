@@ -23,6 +23,9 @@ class Example extends React.Component {
   onSubmit = (value) => {
     console.log('onSubmit: %s', JSON.stringify(value)); // eslint-disable-line no-console
   }
+  onUpload = (value) => {
+    console.log('onUpload:', value); // eslint-disable-line no-console
+  }
   onCancel = () => {
     this.setState({
       ...this.props.data,
@@ -52,6 +55,7 @@ class Example extends React.Component {
               formData={formData}
               onCancel={this.onCancel}
               onSubmit={this.onSubmit}
+              onUpload={this.onUpload}
               onChange={this.onFormChanged}
             />
           </div>

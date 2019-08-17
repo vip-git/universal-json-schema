@@ -16,6 +16,8 @@ import getValidationResult from './helpers/validation';
 import ValidationMessages from './ValidationMessages';
 import FormButtons from './FormButtons';
 
+export const UploadContext = React.createContext('upload');
+
 class Form extends React.Component {
   state = {
     data: this.props.formData,
@@ -72,6 +74,7 @@ class Form extends React.Component {
     const { 
       classes, 
       formData, 
+      onUpload,
       onSubmit, 
       formButtons, 
       actionButtonPos, 
@@ -102,19 +105,21 @@ class Form extends React.Component {
             
           }
           <ValidationMessages validation={validation} />
-          <FormField
-            path={''}
-            data={this.state.data}
-            id={id}
-            onChange={this.onChange}
-            onSubmit={this.onSubmit}
-            validation={validation}
-            onMoveItemUp={this.onMoveItemUp}
-            onMoveItemDown={this.onMoveItemDown}
-            onDeleteItem={this.onDeleteItem}
-            onAddItem={this.onAddItem}
-            {...rest}
-          />
+          <UploadContext.Provider value={onUpload}>
+            <FormField
+                path={''}
+                data={this.state.data}
+                id={id}
+                onChange={this.onChange}
+                onSubmit={this.onSubmit}
+                validation={validation}
+                onMoveItemUp={this.onMoveItemUp}
+                onMoveItemDown={this.onMoveItemDown}
+                onDeleteItem={this.onDeleteItem}
+                onAddItem={this.onAddItem}
+                {...rest}
+            />
+          </UploadContext.Provider>
           {
             (!actionButtonPos) ? 
                   <FormButtons 

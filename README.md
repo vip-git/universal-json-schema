@@ -25,4 +25,5 @@ npm install --save react-jsonschema-form-material-ui
 * Creatable multi selectbox    
 * Component active / inactive    
 * Rich Text Editor
+* Upload File
 

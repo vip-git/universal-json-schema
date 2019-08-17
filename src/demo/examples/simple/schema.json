@@ -19,19 +19,23 @@
       "type": "integer",
       "title": "Age"
     },
+    "upload": {
+      "type": "upload",
+      "title": "Please upload your file"
+    },
     "creatableSelectTest": {
       "type": "string",
-      "title": "NL Discount Agreement",
+      "title": "Example creatable select",
       "enum": ["test", "teete", "etetet"]
     },
     "select": {
       "type": "string",
-      "title": "BE select",
+      "title": "Example select",
       "enum": ["Yes", "No"]
     },
     "selectTest": {
       "type": "string",
-      "title": "BE Discount Agreement",
+      "title": "Example Multi Select",
       "enum": ["Yes", "No"]
     },
     "bio": {
