@@ -1,7 +1,7 @@
-// import Input, { InputLabel } from 'material-ui/Input'; // eslint-disable-line import/no-named-default
-import { FormLabel } from 'material-ui/Form';
+// import Input, { InputLabel } from '@material-ui/core/Input'; // eslint-disable-line import/no-named-default
+import FormLabel from '@material-ui/core/FormLabel';
 
-const { InputLabel } = require('material-ui/Input');
+const InputLabel = require('@material-ui/core/InputLabel').default;
 
 
 export default ({ schema, uiSchema = {} }) => {
@@ -13,6 +13,6 @@ export default ({ schema, uiSchema = {} }) => {
     return FormLabel;
   }
   // boolean
-  if (type === 'boolean' || widget === 'checkboxes' || options === 'rich-text-editor' || type === 'material-date' || widget === 'creatable-select' || widget === 'material-multiselect' || widget === 'material-select' || type === 'material-time' || type === 'material-datetime') return null;
+  if (type === 'boolean' || type === 'upload' || widget === 'checkboxes' || options === 'rich-text-editor' || type === 'material-date' || widget === 'creatable-select' || widget === 'material-multiselect' || widget === 'material-select' || type === 'material-time' || type === 'material-datetime') return null;
   return InputLabel;
 };

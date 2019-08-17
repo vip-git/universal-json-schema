@@ -5,8 +5,8 @@ export default ({
     },
     listItem: {
       'border': `1px dotted ${theme.palette.primary.main}`,
-      'margin': theme.spacing.unit,
-      'padding': theme.spacing.unit,
+      'margin': theme.spacing(1),
+      'padding': theme.spacing(1),
     },
   }),
   fieldSetObject: {

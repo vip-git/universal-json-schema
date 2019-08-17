@@ -1,16 +1,24 @@
 import React from 'react';
 import classNames from 'classnames';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 
 export class RawFormButtons extends React.Component {
   render() {
-    const { classes, onCancel, onSubmit, submitValue, disabled } = this.props;
+    const { 
+      classes, 
+      onCancel, 
+      onSubmit, 
+      submitValue, 
+      disabled,
+      cancelVariant,
+      submitVariant,
+    } = this.props;
     return (onCancel || onSubmit) && (
       <div className={classes.formButtons}>
         {onCancel &&
           <Button
             className={classNames(classes.cancel, classes.button)}
-            variant={'flat'}
+            variant={cancelVariant || 'outlined'}
             onClick={onCancel}
           >
             Cancel
@@ -19,7 +27,7 @@ export class RawFormButtons extends React.Component {
         {onSubmit &&
           <Button
             className={classNames(classes.submit, classes.button)}
-            variant={'raised'}
+          variant={submitVariant || 'contained'}
             color={'primary'}
             onClick={onSubmit}
             disabled={disabled}

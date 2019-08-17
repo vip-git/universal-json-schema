@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Menu from './menu';
 import Body from './body';
 import './main.scss'; // eslint-disable-line import/no-unresolved,import/no-extraneous-dependencies

@@ -1,3 +1,14 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-shadow */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-mixed-operators */
+/* eslint-disable no-void */
+/* eslint-disable consistent-return */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable max-len */
 import without from 'lodash/without';
 import { serializer } from '../components/lib/RichText';
 import getMuiProps from './get-mui-props';
@@ -8,6 +19,24 @@ const toNumber = (v) => {
   if (v === '' || v === undefined) return v;
   const n = Number(v);
   return (!Number.isNaN(n) ? n : v);
+};
+
+const stringify = (val, depth, replacer, space, onGetObjID) => {
+  depth = isNaN(+depth) ? 1 : depth;
+  const recursMap = new WeakMap();
+  function _build(val, depth, o, a, r) {
+    return !val || typeof val !== 'object' ? val
+      : (r = recursMap.has(val),
+      recursMap.set(val, true),
+      a = Array.isArray(val),
+      r ? (o = onGetObjID && onGetObjID(val) || null) : JSON.stringify(val, (k, v) => {
+        if (a || depth > 0) {
+          if (replacer) v = replacer(k, v); if (!k) return (a = Array.isArray(v), val = v); !o && (o = a ? [] : {}); o[k] = _build(v, a ? depth : depth - 1); 
+        } 
+      }),
+      o === void 0 ? {} : o);
+  }
+  return JSON.stringify(_build(val, depth), null, space);
 };
 
 const coerceValue = (type, value) => {
@@ -27,12 +56,13 @@ const coerceValue = (type, value) => {
 
 const onChangeHandler = (onChange, type, widget, options) => (e) => {
   const value = (type === 'material-date' || type === 'material-time' || type === 'material-datetime') ?
-                  e.format() : 
-                  (widget === 'material-multiselect' || widget === 'material-select' || widget === 'creatable-select') ?  
-                    coerceValue(type, JSON.stringify(e))
-                    : (options === 'rich-text-editor') ? serializer.serialize(e) : coerceValue(type, e.target.value);
+    e.format() : 
+    (widget === 'material-multiselect' || widget === 'material-select' || widget === 'creatable-select') ?  
+      coerceValue(type, stringify(e))
+      : (type === 'upload') ? coerceValue(type, e) : (options === 'rich-text-editor') ? serializer.serialize(e) : coerceValue(type, e.target.value);
   if (value !== undefined) onChange(value);
 };
+
 const onCheckboxChangeHandler = (onChange, title) => (e) => {
   const spec = {
   };
@@ -81,6 +111,14 @@ export default ({ schema = {}, uiSchema = {}, inputValue, onChange, onKeyDown, c
   else if (type === 'boolean') {
     rv.label = schema.title;
     rv.onChange = onChange;
+  } 
+  else if (type === 'upload') {
+    rv.label = schema.title;
+    rv.buttonType = widget || 'outlined';
+    rv.acceptValues = uiSchema['ui:accept'] || '*';
+    rv.isMulti = uiSchema['ui:isMulti'] || false;
+    rv.buttonIcon = uiSchema['ui:icon'] || 'add_circle';
+    rv.buttonTitle = uiSchema['ui:buttonTitle'] || 'Upload';
   }
   else {
     rv.label = schema.title || '';

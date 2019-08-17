@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import CreatableReactSelect from 'react-select/lib/Creatable';
+import CreatableReactSelect from 'react-select/creatable';
 
 const components = {
   DropdownIndicator: null,

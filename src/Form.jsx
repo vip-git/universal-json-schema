@@ -1,17 +1,22 @@
 /* eslint-disable max-len */
+// Library
 import React from 'react';
-import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
-import MomentUtils from 'material-ui-pickers/utils/moment-utils';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
 import isEqual from 'lodash/isEqual';
 import { generate } from 'shortid';
-import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+
+// Internal
 import formStyles from './form-styles';
 import FormField from './FormField';
 import updateFormData, { addListItem, removeListItem, moveListItem } from './helpers/update-form-data';
 import getValidationResult from './helpers/validation';
 import ValidationMessages from './ValidationMessages';
 import FormButtons from './FormButtons';
+
+export const UploadContext = React.createContext('upload');
 
 class Form extends React.Component {
   state = {
@@ -66,34 +71,66 @@ class Form extends React.Component {
     }
   }
   render() {
-    const { classes, formData, onSubmit, formButtons, actionButtonPos, onChange, onCancel, submitValue, disabled, ...rest } = this.props;
+    const { 
+      classes, 
+      formData, 
+      onUpload,
+      onSubmit, 
+      formButtons, 
+      actionButtonPos, 
+      onChange, 
+      onCancel, 
+      submitValue, 
+      disabled, 
+      cancelVariant,
+      submitVariant,
+      ...rest 
+    } = this.props;
     const { validation, id } = this.state;
     return (
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <Paper className={classes.root}>
           {
             (actionButtonPos === 'top') ? 
-                  <FormButtons onSubmit={this.onSubmit} submitValue={submitValue} disabled={disabled} onCancel={onCancel} classes={classes} />
+                  <FormButtons 
+                    onSubmit={this.onSubmit} 
+                    submitValue={submitValue} 
+                    disabled={disabled} 
+                    onCancel={onCancel}
+                    cancelVariant={cancelVariant}
+                    submitVariant={submitVariant}
+                    classes={classes} 
+                  />
                   : null
             
           }
           <ValidationMessages validation={validation} />
-          <FormField
-            path={''}
-            data={this.state.data}
-            id={id}
-            onChange={this.onChange}
-            onSubmit={this.onSubmit}
-            validation={validation}
-            onMoveItemUp={this.onMoveItemUp}
-            onMoveItemDown={this.onMoveItemDown}
-            onDeleteItem={this.onDeleteItem}
-            onAddItem={this.onAddItem}
-            {...rest}
-          />
+          <UploadContext.Provider value={onUpload}>
+            <FormField
+                path={''}
+                data={this.state.data}
+                id={id}
+                onChange={this.onChange}
+                onSubmit={this.onSubmit}
+                validation={validation}
+                onMoveItemUp={this.onMoveItemUp}
+                onMoveItemDown={this.onMoveItemDown}
+                onDeleteItem={this.onDeleteItem}
+                onAddItem={this.onAddItem}
+                {...rest}
+            />
+          </UploadContext.Provider>
           {
             (!actionButtonPos) ? 
-                  <FormButtons onSubmit={this.onSubmit} disabled={disabled} submitValue={submitValue} onCancel={onCancel} classes={classes} />
+                  <FormButtons 
+                    onSubmit={this.onSubmit} 
+                    disabled={disabled} 
+                    submitValue={submitValue} 
+                    onCancel={onCancel}
+                    cancelVariant={cancelVariant}
+                    submitVariant={submitVariant}
+                    classes={classes} 
+                  />
                   : null
             
           }

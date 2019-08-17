@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import styles from './example-styles';
 import Source from './Source';
 import Form from '../../Form';
@@ -22,6 +22,9 @@ class Example extends React.Component {
   }
   onSubmit = (value) => {
     console.log('onSubmit: %s', JSON.stringify(value)); // eslint-disable-line no-console
+  }
+  onUpload = (value) => {
+    console.log('onUpload:', value); // eslint-disable-line no-console
   }
   onCancel = () => {
     this.setState({
@@ -52,6 +55,7 @@ class Example extends React.Component {
               formData={formData}
               onCancel={this.onCancel}
               onSubmit={this.onSubmit}
+              onUpload={this.onUpload}
               onChange={this.onFormChanged}
             />
           </div>
