@@ -16,7 +16,7 @@ npm install --save react-jsonschema-form-material-ui
 - Performance efficient refactored library size (233kb gzip and 914kb non-gzip)
 
 # Support for Material UI < 3.9
-- Please use [version 1](https://github.com/vip-git/react-jsonschema-form-material-ui/tree/v1.x) of React Material-ui-jsonschema-form.
+- Please use [version 1.0.109](https://github.com/vip-git/react-jsonschema-form-material-ui/tree/v1.x) of React Material-ui-jsonschema-form.
 
 ### New components integrated
 
