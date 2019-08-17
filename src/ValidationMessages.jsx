@@ -1,7 +1,7 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import keys from 'lodash/keys';
-import filter from 'lodash/filter';
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import keys from "lodash/keys";
+import filter from "lodash/filter";
 
 const validationStyles = {};
 
@@ -13,19 +13,19 @@ const Validation = ({ validation }) => (
 
 const Validations = ({ validation }) => (
   <div>
-    {validation.map((v, idx) => (<Validation key={idx} validation={v} />)) // eslint-disable-line react/no-array-index-key,max-len
+    {validation.map((v, idx) => (
+      <Validation key={idx} validation={v} />
+    )) // eslint-disable-line react/no-array-index-key,max-len
     }
   </div>
 );
 const ValidationMessages = ({ validation }) => (
   <div>
-    {validation && filter(keys(validation), (k) => {
-      const v = validation[k];
-      return v && v.length > 0;
-    }).map(v => (
-      <Validations key={v} validation={validation[v]} />
-    ))
-    }
+    {validation &&
+      filter(keys(validation), k => {
+        const v = validation[k];
+        return v && v.length > 0;
+      }).map(v => <Validations key={v} validation={validation[v]} />)}
   </div>
 );
 
