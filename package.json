@@ -59,7 +59,7 @@
 		"chai": "4.2.0",
 		"chai-enzyme": "1.0.0-beta.1",
 		"cheerio": "1.0.0-rc.2",
-		"compression-webpack-plugin": "^3.0.0",
+		"compression-webpack-plugin": "3.0.0",
 		"css-hot-loader": "1.4.4",
 		"css-loader": "2.1.1",
 		"date-fns": "2.0.0-alpha.7",
