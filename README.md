@@ -18,12 +18,11 @@ npm install --save react-jsonschema-form-material-ui
 # Support for Material UI < 3.9
 - Please use [version 1.0.109](https://github.com/vip-git/react-jsonschema-form-material-ui/tree/v1.x) of React Material-ui-jsonschema-form.
 
-### New components integrated
-
+### New components integrated / Updates
 * Material UI Date / time picker    
 * Material UI Multi-selecbox    
 * Creatable multi selectbox    
 * Component active / inactive    
 * Rich Text Editor
 * Upload File
-
+* `submitOnEnter` prop - enables to submit form on key press 'Enter'
