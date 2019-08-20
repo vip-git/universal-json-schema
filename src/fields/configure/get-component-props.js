@@ -82,6 +82,7 @@ export default ({ schema = {}, uiSchema = {}, inputValue, onChange, onKeyDown, c
   const rv = {
     type: getInputType(type, uiSchema),
     onChange: onChange && onChangeHandler(onChange, type, widget, options),
+    onKeyDown,
     ...getMuiProps(uiSchema),
   };
   if (schema.enum) {
