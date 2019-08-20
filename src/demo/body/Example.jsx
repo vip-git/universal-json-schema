@@ -57,6 +57,7 @@ class Example extends React.Component {
               onSubmit={this.onSubmit}
               onUpload={this.onUpload}
               onChange={this.onFormChanged}
+              submitOnEnter
             />
           </div>
         </div>

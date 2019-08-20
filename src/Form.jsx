@@ -60,6 +60,12 @@ class Form extends React.Component {
   onSubmit = () => {
     this.props.onSubmit({ formData: this.state.data });
   }
+  handleKeyEnter = (e) => {
+    if (e.keyCode === 13 && this.props.submitOnEnter) {
+      this.onSubmit();
+      // put the login here
+    }
+  }
   handleCreatableSelectInputChange = (inputValue) => {
     this.setState({ inputValue }, this.notifyChange);
   };
@@ -113,6 +119,7 @@ class Form extends React.Component {
                 onChange={this.onChange}
                 onSubmit={this.onSubmit}
                 validation={validation}
+                onKeyDown={this.handleKeyEnter}
                 onMoveItemUp={this.onMoveItemUp}
                 onMoveItemDown={this.onMoveItemDown}
                 onDeleteItem={this.onDeleteItem}
