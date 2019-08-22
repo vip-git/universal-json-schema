@@ -26,7 +26,7 @@
 		"express": "4.17.1",
 		"immutability-helper": "3.0.1",
 		"is-hotkey": "0.1.4",
-		"lodash": "4.17.14",
+		"lodash": "4.17.15",
 		"moment": "2.24.0",
 		"prop-types": "^15.6.2",
 		"react": "16.9.0",
