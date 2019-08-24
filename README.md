@@ -9,6 +9,47 @@ A [live playground](https://react-jsonschema-form-material-ui-f01zil2hk.now.sh/)
 npm install --save react-jsonschema-form-material-ui
 ```
 
+# Example Usage
+>More detailed example can be seen [here](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/src/demo/body/Example.jsx)
+```
+// Library
+import React from 'react';
+import MaterialJsonSchemaForm from 'react-jsonschema-form-material-ui';
+
+// Internals
+const schema = require('./path-to your-schema.json');
+const uiSchema = require('./path-to your-ui-schema.json');
+const formData = require('./path-to your-ui-formData.json');
+
+class Example extends React.Component {
+    onSubmit = (value, callback) => {
+        console.log('onSubmit: %s', JSON.stringify(value)); // eslint-disable-line no-console
+        setTimeout(() => callback && callback(), 2000);
+    }
+    onCancel = () => {
+        console.log('on reset being called');
+    }
+    onUpload = (value) => {
+        console.log('onUpload:', value); // eslint-disable-line no-console
+    }
+    render() {
+        return (
+             <Form
+              schema={schema}
+              uiSchema={uiSchema}
+              formData={formData}
+              onCancel={this.onCancel}
+              onSubmit={this.onSubmit}
+              onUpload={this.onUpload}
+              onChange={this.onFormChanged}
+              submitOnEnter
+              activityIndicatorEnabled
+            />
+        );
+    }
+}
+```
+
 # Version 2.0.4 (Material UI 4+)
 - New version 2.0 support for material ui 4
 - Webpack 4 integration
