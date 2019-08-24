@@ -26,3 +26,4 @@ npm install --save react-jsonschema-form-material-ui
 * Rich Text Editor
 * Upload File
 * `submitOnEnter` prop - enables to submit form on key press 'Enter'
+* `activityIndicatorEnabled` prop - enables nice activity indicator besides your submit button allowing you to control the timing via a callback.
