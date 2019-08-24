@@ -37,16 +37,16 @@ class Example extends React.Component {
     }
     render() {
         return (
-             <Form
-              schema={schema}
-              uiSchema={uiSchema}
-              formData={formData}
-              onCancel={this.onCancel}
-              onSubmit={this.onSubmit}
-              onUpload={this.onUpload}
-              onChange={this.onFormChanged}
-              submitOnEnter
-              activityIndicatorEnabled
+             <MaterialJsonSchemaForm
+                  schema={schema}
+                  uiSchema={uiSchema}
+                  formData={formData}
+                  onCancel={this.onCancel}
+                  onSubmit={this.onSubmit}
+                  onUpload={this.onUpload}
+                  onChange={this.onFormChanged}
+                  submitOnEnter
+                  activityIndicatorEnabled
             />
         );
     }
