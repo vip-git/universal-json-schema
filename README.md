@@ -24,13 +24,16 @@ const formData = require('./path-to your-ui-formData.json');
 class Example extends React.Component {
     onSubmit = (value, callback) => {
         console.log('onSubmit: %s', JSON.stringify(value)); // eslint-disable-line no-console
-        setTimeout(() => callback && callback(), 2000);
+        setTimeout(() => callback && callback(), 2000); // just an example in real world can be your XHR call
     }
     onCancel = () => {
         console.log('on reset being called');
     }
+    onFormChanged = ({ formData }) => {
+        console.log('onFormChanged: ',formData); // eslint-disable-line no-console
+    }
     onUpload = (value) => {
-        console.log('onUpload:', value); // eslint-disable-line no-console
+        console.log('onUpload: ', value); // eslint-disable-line no-console
     }
     render() {
         return (
