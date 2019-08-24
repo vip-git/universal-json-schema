@@ -1,18 +1,27 @@
 import React from 'react';
 import classNames from 'classnames';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 
 export class RawFormButtons extends React.Component {
+  state = {
+    inProgress: false,
+  };
   render() {
+    const { inProgress } = this.state;
     const { 
       classes, 
       onCancel, 
       onSubmit, 
       submitValue, 
+      cancelValue,
+      inProgressValue,
       disabled,
       cancelVariant,
       submitVariant,
+      activityIndicatorEnabled,
     } = this.props;
+    const canProgress = activityIndicatorEnabled && inProgress;
     return (onCancel || onSubmit) && (
       <div className={classes.formButtons}>
         {onCancel &&
@@ -20,19 +29,34 @@ export class RawFormButtons extends React.Component {
             className={classNames(classes.cancel, classes.button)}
             variant={cancelVariant || 'outlined'}
             onClick={onCancel}
+            disabled={canProgress}
           >
-            Cancel
+            {cancelValue || 'Reset'}
           </Button>
         }
         {onSubmit &&
           <Button
             className={classNames(classes.submit, classes.button)}
-          variant={submitVariant || 'contained'}
+            variant={submitVariant || 'contained'}
             color={'primary'}
-            onClick={onSubmit}
-            disabled={disabled}
+            onClick={() => this.setState({ 
+              inProgress: true,
+            }, () => onSubmit(
+              () => this.setState({ inProgress: false }),
+            ))}
+            disabled={disabled || canProgress}
           >
-            { submitValue || 'Submit'}
+          {canProgress && 
+          <CircularProgress
+              size={24}
+              style={{
+                color: 'gray',
+                width: 19,
+                height: 19,
+                marginRight: 10,
+              }}
+          />}
+          {(canProgress) ? inProgressValue || 'Processing...' : submitValue || 'Submit'}
           </Button>
         }
       </div>

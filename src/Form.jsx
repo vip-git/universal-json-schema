@@ -57,8 +57,8 @@ class Form extends React.Component {
   onAddItem = (path, defaultValue) => () => {
     this.setState({ data: addListItem(this.state.data, path, defaultValue || '') }, this.notifyChange);
   }
-  onSubmit = () => {
-    this.props.onSubmit({ formData: this.state.data });
+  onSubmit = (callback) => {
+    this.props.onSubmit({ formData: this.state.data }, () => callback && callback());
   }
   handleKeyEnter = (e) => {
     if (e.keyCode === 13 && this.props.submitOnEnter) {
@@ -86,7 +86,10 @@ class Form extends React.Component {
       actionButtonPos, 
       onChange, 
       onCancel, 
-      submitValue, 
+      activityIndicatorEnabled,
+      submitValue,
+      cancelValue,
+      inProgressValue,
       disabled, 
       cancelVariant,
       submitVariant,
@@ -99,13 +102,16 @@ class Form extends React.Component {
           {
             (actionButtonPos === 'top') ? 
                   <FormButtons 
-                    onSubmit={this.onSubmit} 
+                    onSubmit={callback => this.onSubmit(callback)}
                     submitValue={submitValue} 
+                    inProgressValue={inProgressValue}
                     disabled={disabled} 
                     onCancel={onCancel}
+                    cancelValue={cancelValue} 
                     cancelVariant={cancelVariant}
                     submitVariant={submitVariant}
                     classes={classes} 
+                    activityIndicatorEnabled={activityIndicatorEnabled}
                   />
                   : null
             
@@ -129,14 +135,16 @@ class Form extends React.Component {
           </UploadContext.Provider>
           {
             (!actionButtonPos) ? 
-                  <FormButtons 
-                    onSubmit={this.onSubmit} 
-                    disabled={disabled} 
-                    submitValue={submitValue} 
+                  <FormButtons
+                    onSubmit={callback => this.onSubmit(callback)}
+                    disabled={disabled}
+                    submitValue={submitValue}
+                    cancelValue={cancelValue} 
                     onCancel={onCancel}
                     cancelVariant={cancelVariant}
                     submitVariant={submitVariant}
                     classes={classes} 
+                    activityIndicatorEnabled={activityIndicatorEnabled}
                   />
                   : null
             

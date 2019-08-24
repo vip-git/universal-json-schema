@@ -20,8 +20,9 @@ class Example extends React.Component {
   onFormChanged = ({ formData }) => {
     this.setState({ formData });
   }
-  onSubmit = (value) => {
+  onSubmit = (value, callback) => {
     console.log('onSubmit: %s', JSON.stringify(value)); // eslint-disable-line no-console
+    setTimeout(() => callback && callback(), 2000);
   }
   onUpload = (value) => {
     console.log('onUpload:', value); // eslint-disable-line no-console
@@ -58,6 +59,7 @@ class Example extends React.Component {
               onUpload={this.onUpload}
               onChange={this.onFormChanged}
               submitOnEnter
+              activityIndicatorEnabled
             />
           </div>
         </div>
