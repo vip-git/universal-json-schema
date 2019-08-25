@@ -77,8 +77,6 @@ export default ({ path, label, title, value, htmlid, type, onChange, ...rest }) 
                 style={{ flexBasis: '100%' }}
                 placeholder={placeholder}
                 label={label}
-                // handle clearing outside => pass plain array if you are not controlling value outside
-                mask={val => (val ? maskInput : [])}
                 value={(!value) ? null : value}
                 onChange={onChange}
                 maxDate={'2200-01-01'}

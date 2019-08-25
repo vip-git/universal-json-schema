@@ -36,7 +36,9 @@ const stringify = (val, depth, replacer, space, onGetObjID) => {
       }),
       o === void 0 ? {} : o);
   }
-  return JSON.stringify(_build(val, depth), null, space);
+  const stageVal = _build(val, depth);
+  const finalVal = (JSON.stringify(stageVal) === '{}') ? null : stageVal;
+  return JSON.stringify(finalVal, null, space);
 };
 
 const coerceValue = (type, value) => {
@@ -54,9 +56,11 @@ const coerceValue = (type, value) => {
   }
 };
 
+const formatDateValue = val => val.format();
+
 const onChangeHandler = (onChange, type, widget, options) => (e) => {
   const value = (type === 'material-date' || type === 'material-time' || type === 'material-datetime') ?
-    e.format() : 
+    formatDateValue(e) : 
     (widget === 'material-multiselect' || widget === 'material-select' || widget === 'creatable-select') ?  
       coerceValue(type, stringify(e))
       : (type === 'upload') ? coerceValue(type, e) : (options === 'rich-text-editor') ? serializer.serialize(e) : coerceValue(type, e.target.value);
