@@ -2,7 +2,7 @@
 
 A [Material UI](http://www.material-ui.com/) port of [react-jsonschema-form](https://github.com/mozilla-services/react-jsonschema-form).
 
-A [live playground](https://react-jsonschema-form-material-ui-f01zil2hk.now.sh/)
+A [live playground](https://react-jsonschema-form-material-ui.github56.now.sh/)
 
 # Install instructions via npm
 ```
