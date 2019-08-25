@@ -56,7 +56,7 @@ const coerceValue = (type, value) => {
   }
 };
 
-const formatDateValue = val => val.format();
+const formatDateValue = val => val && val.format && val.format() || '';
 
 const onChangeHandler = (onChange, type, widget, options) => (e) => {
   const value = (type === 'material-date' || type === 'material-time' || type === 'material-datetime') ?
