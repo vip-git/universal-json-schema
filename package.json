@@ -35,7 +35,7 @@
 		"react-hot-loader": "4.12.10",
 		"react-select": "3.0.4",
 		"shortid": "2.2.14",
-		"slate": "0.47.4",
+		"slate": "0.47.8",
 		"slate-collapse-on-escape": "0.8.1",
 		"slate-html-serializer": "0.8.6",
 		"slate-plain-serializer": "0.7.6",
