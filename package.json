@@ -82,7 +82,7 @@
 		"mini-css-extract-plugin": "0.8.0",
 		"mocha": "6.2.0",
 		"mocha-webpack": "1.1.0",
-		"mochawesome": "3.1.2",
+		"mochawesome": "4.1.0",
 		"node-sass": "4.12.0",
 		"postcss-assets": "5.0.0",
 		"postcss-custom-properties": "9.0.1",
