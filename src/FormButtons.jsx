@@ -1,3 +1,4 @@
+/* eslint-disable react/state-in-constructor */
 import React from 'react';
 import classNames from 'classnames';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -7,6 +8,7 @@ export class RawFormButtons extends React.Component {
   state = {
     inProgress: false,
   };
+
   render() {
     const { inProgress } = this.state;
     const { 
@@ -24,17 +26,20 @@ export class RawFormButtons extends React.Component {
     const canProgress = activityIndicatorEnabled && inProgress;
     return (onCancel || onSubmit) && (
       <div className={classes.formButtons}>
-        {onCancel &&
-          <Button
-            className={classNames(classes.cancel, classes.button)}
-            variant={cancelVariant || 'outlined'}
-            onClick={onCancel}
-            disabled={canProgress}
-          >
-            {cancelValue || 'Reset'}
-          </Button>
+        {onCancel
+          && (
+            <Button
+              className={classNames(classes.cancel, classes.button)}
+              variant={cancelVariant || 'outlined'}
+              onClick={onCancel}
+              disabled={canProgress}
+            >
+              {cancelValue || 'Reset'}
+            </Button>
+          )
         }
-        {onSubmit &&
+        {onSubmit
+          && (
           <Button
             className={classNames(classes.submit, classes.button)}
             variant={submitVariant || 'contained'}
@@ -46,8 +51,9 @@ export class RawFormButtons extends React.Component {
             ))}
             disabled={disabled || canProgress}
           >
-          {canProgress && 
-          <CircularProgress
+          {canProgress 
+          && (
+            <CircularProgress
               size={24}
               style={{
                 color: 'gray',
@@ -55,9 +61,11 @@ export class RawFormButtons extends React.Component {
                 height: 19,
                 marginRight: 10,
               }}
-          />}
+            />
+          )}
           {(canProgress) ? inProgressValue || 'Processing...' : submitValue || 'Submit'}
           </Button>
+          )
         }
       </div>
     );

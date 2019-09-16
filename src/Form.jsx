@@ -1,3 +1,5 @@
+/* eslint-disable react/state-in-constructor */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable max-len */
 // Library
 import React from 'react';
@@ -24,6 +26,7 @@ class Form extends React.Component {
     validation: getValidationResult(this.props.schema, this.props.formData),
     id: this.props.prefixId || generate(),
   }
+
   componentWillReceiveProps = (nextProps) => {
     let validation;
     if (!isEqual(nextProps.schema, this.props.schema)) {
@@ -38,37 +41,45 @@ class Form extends React.Component {
     });
   }
 
-  onChange = field => (value) => {
+  onChange = (field) => (value) => {
     const data = updateFormData(this.state.data, field, value);
     this.setState({
       data,
       validation: getValidationResult(this.props.schema, data),
     }, this.notifyChange);
   }
+
   onMoveItemUp = (path, idx) => () => {
     this.setState({ data: moveListItem(this.state.data, path, idx, -1) }, this.notifyChange);
   }
+
   onMoveItemDown = (path, idx) => () => {
     this.setState({ data: moveListItem(this.state.data, path, idx, 1) }, this.notifyChange);
   }
+
   onDeleteItem = (path, idx) => () => {
     this.setState({ data: removeListItem(this.state.data, path, idx) }, this.notifyChange);
   }
+
   onAddItem = (path, defaultValue) => () => {
     this.setState({ data: addListItem(this.state.data, path, defaultValue || '') }, this.notifyChange);
   }
+
   onSubmit = (callback) => {
     this.props.onSubmit({ formData: this.state.data }, () => callback && callback());
   }
+
   handleKeyEnter = (e) => {
     if (e.keyCode === 13 && this.props.submitOnEnter) {
       this.onSubmit();
       // put the login here
     }
   }
+
   handleCreatableSelectInputChange = (inputValue) => {
     this.setState({ inputValue }, this.notifyChange);
   };
+
   notifyChange = () => {
     const { onChange } = this.props;
     const { data, inputValue, value } = this.state;
@@ -76,6 +87,7 @@ class Form extends React.Component {
       onChange({ formData: data, inputValue, value });
     }
   }
+
   render() {
     const { 
       classes, 
@@ -100,9 +112,10 @@ class Form extends React.Component {
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <Paper className={classes.root}>
           {
-            (actionButtonPos === 'top') ? 
+            (actionButtonPos === 'top') 
+              ? (
                   <FormButtons 
-                    onSubmit={callback => this.onSubmit(callback)}
+                    onSubmit={(callback) => this.onSubmit(callback)}
                     submitValue={submitValue} 
                     inProgressValue={inProgressValue}
                     disabled={disabled} 
@@ -113,7 +126,8 @@ class Form extends React.Component {
                     classes={classes} 
                     activityIndicatorEnabled={activityIndicatorEnabled}
                   />
-                  : null
+              )
+              : null
             
           }
           <ValidationMessages validation={validation} />
@@ -134,9 +148,10 @@ class Form extends React.Component {
             />
           </UploadContext.Provider>
           {
-            (!actionButtonPos) ? 
+            (!actionButtonPos) 
+              ? (
                   <FormButtons
-                    onSubmit={callback => this.onSubmit(callback)}
+                    onSubmit={(callback) => this.onSubmit(callback)}
                     disabled={disabled}
                     submitValue={submitValue}
                     cancelValue={cancelValue} 
@@ -146,7 +161,8 @@ class Form extends React.Component {
                     classes={classes} 
                     activityIndicatorEnabled={activityIndicatorEnabled}
                   />
-                  : null
+              )
+              : null
             
           }
         </Paper>
