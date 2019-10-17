@@ -22,7 +22,7 @@
 		"braces": "3.0.2",
 		"classnames": "2.2.6",
 		"cross-env": "5.2.0",
-		"emotion": "10.0.14",
+		"emotion": "10.0.17",
 		"express": "4.17.1",
 		"immutability-helper": "3.0.1",
 		"is-hotkey": "0.1.4",
