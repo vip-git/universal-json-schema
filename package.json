@@ -46,7 +46,7 @@
 	"description": "Material UI implementation of react-jsonschema-form",
 	"devDependencies": {
 		"@babel/core": "7.6.4",
-		"autoprefixer": "9.6.1",
+		"autoprefixer": "9.7.0",
 		"babel-eslint": "10.0.3",
 		"babel-loader": "7.1.5",
 		"babel-plugin-module-resolver": "3.2.0",
