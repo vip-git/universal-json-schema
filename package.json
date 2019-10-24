@@ -83,7 +83,7 @@
 		"mocha": "6.2.2",
 		"mocha-webpack": "1.1.0",
 		"mochawesome": "4.1.0",
-		"node-sass": "4.12.0",
+		"node-sass": "4.13.0",
 		"postcss-assets": "5.0.0",
 		"postcss-custom-properties": "9.0.1",
 		"postcss-flexbugs-fixes": "4.1.0",
