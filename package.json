@@ -21,7 +21,7 @@
 		"brace": "^0.11.1",
 		"braces": "3.0.2",
 		"classnames": "2.2.6",
-		"cross-env": "5.2.0",
+		"cross-env": "5.2.1",
 		"emotion": "10.0.17",
 		"express": "4.17.1",
 		"immutability-helper": "3.0.1",
