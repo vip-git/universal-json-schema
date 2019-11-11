@@ -92,13 +92,17 @@ function Control(props) {
 }
 
 function Option(props) {
+  console.log('props are', props);
   return (
     <MenuItem
       buttonRef={props.innerRef}
       selected={props.isFocused}
       component='div'
-      style={{
+      style={props.data.style ? {
         fontWeight: props.isSelected ? 500 : 400,
+        ...props.data.style
+      } : {
+          fontWeight: props.isSelected ? 500 : 400,
       }}
       {...props.innerProps}
     >
@@ -202,6 +206,7 @@ class IntegrationReactSelect extends React.Component {
             value={this.props.value}
             onChange={this.props.onChange}
             isMulti={this.props.multiple}
+            isOptionDisabled={(option) => option.disabled}
           />
       </div>
     );

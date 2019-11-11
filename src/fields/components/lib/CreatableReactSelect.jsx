@@ -6,13 +6,13 @@ const components = {
   DropdownIndicator: null,
 };
 
-const createOption = label => ({
+const createOption = (label) => ({
   label,
   value: label,
 });
 
 const colourStyles = {
-  control: styles => ({
+  control: (styles) => ({
     ...styles,
     top: 0,
     height: 10,
@@ -73,9 +73,9 @@ export default class CreatableInputOnly extends Component {
     const { inputValue, value } = this.state;
     if (!inputValue || (this.props.optionsOnly && _.values(_.mapValues(this.props.option, 'value')).indexOf(inputValue) === -1)) return;
     const multiValueArray = [...value];
-    const combinedInputValue = (inputValue.split(' ').length === 1) ? 
-      this.addSingleValue(inputValue, multiValueArray) : 
-      this.addMultipleValue(inputValue.split(' '), multiValueArray);
+    const combinedInputValue = (inputValue.split(' ').length === 1) 
+      ? this.addSingleValue(inputValue, multiValueArray) 
+      : this.addMultipleValue(inputValue.split(' '), multiValueArray);
     this.props.onChange(combinedInputValue);
     this.setState({
       inputValue: '',
@@ -135,11 +135,11 @@ export default class CreatableInputOnly extends Component {
     return (
       <div id={`${this.props.htmlid}_parent`}>
         <span style={{
-            fontSize: '0.7rem',
-            color: 'gray',
-            top: 13,
-            position: 'relative',
-          }}
+          fontSize: '0.7rem',
+          color: 'gray',
+          top: 13,
+          position: 'relative',
+        }}
         > 
           { this.props.label } 
         </span>
