@@ -1,3 +1,5 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-tabs */
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
@@ -31,44 +33,58 @@ const styles = {
   },
 };
 
-const UploadButton = ({ path, classes, label, value, buttonType, isMulti, acceptValues, buttonIcon, buttonTitle, type, onChange, ...rest }) => (
-    <UploadContext.Consumer>
-        {(onUpload) => (
-            <FormControlLabel
-                control={(
-                    <>
-                        <input
-                            accept={acceptValues}
-                            id='button-file'
-                            style={{
-                              display: 'none',
-                            }}
-                            multiple={isMulti}
-                            type='file'
-                            onChange={doOnChange(onChange, onUpload)}
-                        />
-                        <Button
-                            style={{
-                              marginRight: 10,
-                            }}
-                            variant={buttonType}
-                            component='span'
-                        >
-                            <Icon style={{
-                              marginRight: 5,
-                            }}
-                            >
-                                {buttonIcon}
-                            </Icon>
-                            {buttonTitle}
-                        </Button>
-                    </>
-                  )}
-                label={uploadLabel || label}
-                className={classes.labelDescription}
-            />
-        )}
-    </UploadContext.Consumer>
+const UploadButton = ({
+  path,
+  classes,
+  label,
+  value,
+  buttonType,
+  isMulti,
+  acceptValues,
+  buttonIcon,
+  buttonTitle,
+  type,
+  onChange,
+  ...rest
+}) => (
+	<UploadContext.Consumer>
+		{(onUpload) => (
+			<FormControlLabel
+				control={(
+                    <div>
+						<input
+							accept={acceptValues}
+							id='button-file'
+							style={{
+							  display: 'none',
+							}}
+							multiple={isMulti}
+							type='file'
+							onChange={doOnChange(onChange, onUpload)}
+						/>
+						<Button
+							style={{
+							  marginRight: 10,
+							}}
+							variant={buttonType}
+							component='span'
+						>
+							<Icon
+								style={{
+								  marginRight: 5,
+								}}
+							>
+								{buttonIcon}
+							</Icon>
+							{buttonTitle}
+						</Button>
+                    </div>
+   )}
+				label={uploadLabel || label}
+				className={classes.labelDescription}
+			/>
+		)}
+	</UploadContext.Consumer>
 );
 
 export default withStyles(styles)(UploadButton);
