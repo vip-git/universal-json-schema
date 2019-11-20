@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-expressions */
-/* eslint-disable jsx-a11y/label-has-for */
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -34,15 +33,15 @@ const styles = {
 
 const UploadButton = ({ path, classes, label, value, buttonType, isMulti, acceptValues, buttonIcon, buttonTitle, type, onChange, ...rest }) => (
     <UploadContext.Consumer>
-        {onUpload => (
+        {(onUpload) => (
             <FormControlLabel
-                control={
-                    <React.Fragment>
+                control={(
+                    <>
                         <input
                             accept={acceptValues}
                             id='button-file'
                             style={{
-                                display: 'none',
+                              display: 'none',
                             }}
                             multiple={isMulti}
                             type='file'
@@ -50,21 +49,21 @@ const UploadButton = ({ path, classes, label, value, buttonType, isMulti, accept
                         />
                         <Button
                             style={{
-                                marginRight: 10,
+                              marginRight: 10,
                             }}
                             variant={buttonType}
                             component='span'
                         >
                             <Icon style={{
-                                marginRight: 5,
+                              marginRight: 5,
                             }}
                             >
                                 {buttonIcon}
                             </Icon>
                             {buttonTitle}
                         </Button>
-                    </React.Fragment>
-                }
+                    </>
+                  )}
                 label={uploadLabel || label}
                 className={classes.labelDescription}
             />

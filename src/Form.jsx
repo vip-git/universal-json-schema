@@ -27,7 +27,7 @@ class Form extends React.Component {
     id: this.props.prefixId || generate(),
   }
 
-  componentWillReceiveProps = (nextProps) => {
+  UNSAFE_componentWillReceiveProps = (nextProps) => {
     let validation;
     if (!isEqual(nextProps.schema, this.props.schema)) {
       validation = {};

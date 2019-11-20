@@ -36,7 +36,7 @@ export default class CreatableInputOnly extends Component {
     value: [],
   };
 
-  componentWillMount = () => {
+  UNSAFE_componentWillMount = () => {
     this.setState({
       value: this.props.value,
     });

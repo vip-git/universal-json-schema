@@ -29,7 +29,7 @@ class Source extends React.Component {
       valid: isValid(source),
     };
   }
-  componentWillReceiveProps = (nextProps) => {
+  UNSAFE_componentWillReceiveProps = (nextProps) => {
     const source = JSON.stringify(nextProps.source, null, 2);
     this.setState({
       source,

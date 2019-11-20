@@ -9,7 +9,7 @@ class Example extends React.Component {
   state = {
     ...this.props.data,
   }
-  componentWillReceiveProps = (nextProps) => {
+  UNSAFE_componentWillReceiveProps = (nextProps) => {
     this.setState({
       ...nextProps.data,
     });
