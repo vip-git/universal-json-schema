@@ -15,6 +15,11 @@
       "type": "string",
       "title": "Last name"
     },
+    "select": {
+      "type": "string",
+      "title": "Example select",
+      "enum": ["Yes", "No"]
+    },
     "age": {
       "type": "integer",
       "title": "Age"
@@ -27,11 +32,6 @@
       "type": "string",
       "title": "Example creatable select",
       "enum": ["test", "teete", "etetet"]
-    },
-    "select": {
-      "type": "string",
-      "title": "Example select",
-      "enum": ["Yes", "No"]
     },
     "selectTest": {
       "type": "string",
