@@ -2,9 +2,9 @@
 	"author": "Vipin Tanna",
 	"repository": {
 	  "type": "git",
-          "url": "https://github.com/vip-git/react-jsonschema-form-material-ui",
+          "url": "https://github.com/vip-git/react-jsonschema-form-material-ui"
         },
-          "bugs": {
+        "bugs": {
           "url": "https://github.com/vip-git/react-jsonschema-form-material-ui/issues"
         },	
 	"scripts": {
