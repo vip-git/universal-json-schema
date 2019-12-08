@@ -12,8 +12,8 @@ export const Button = React.forwardRef(
         css`
           cursor: pointer;
           color: ${reversed
-            ? active ? 'white' : '#aaa'
-            : active ? 'black' : '#ccc'};
+          ? active ? 'white' : '#aaa'
+          : active ? 'black' : '#ccc'};
         `,
       )}
     />
@@ -23,7 +23,7 @@ export const Button = React.forwardRef(
 export const EditorValue = React.forwardRef(
   ({ className, value, ...props }, ref) => {
     const textLines = value.document.nodes
-      .map(node => node.text)
+      .map((node) => node.text)
       .toArray()
       .join('\n');
     return (

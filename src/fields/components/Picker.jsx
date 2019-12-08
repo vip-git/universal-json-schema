@@ -72,7 +72,6 @@ export default ({ path, label, title, value, htmlid, type, onChange, ...rest }) 
           }}
         >
             <PickerComp
-                keyboard
                 format={format}
                 style={{ flexBasis: '100%' }}
                 placeholder={placeholder}
@@ -80,7 +79,6 @@ export default ({ path, label, title, value, htmlid, type, onChange, ...rest }) 
                 value={(!value) ? null : value}
                 onChange={onChange}
                 maxDate={'2200-01-01'}
-                disableOpenOnEnter
                 animateYearScrolling={false}
             />
         </div>

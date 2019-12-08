@@ -6,7 +6,7 @@
 		"test": "npm run test:ci -- --watch",
 		"heroku-postbuild": "npm run build:demo",
 		"now-build": "npm run build:demo",
-		"start": "cross-env NODE_ENV=production node src/demo/server.js",
+		"start": "cross-env NODE_ENV=development node src/demo/server.js",
 		"start:demo": "npm run build:demo && npm start",
 		"deploy:alpha": "npm run build && npm version prerelease --preid=alpha && npm publish",
 		"deploy": "npm run build && npm version patch && npm publish",

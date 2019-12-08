@@ -31,7 +31,7 @@ const BLOCK_TAGS = {
   h6: 'heading-six',
 };
   
-  /**
+/**
    * Tags to marks.
    *
    * @type {Object}
@@ -248,7 +248,7 @@ class RichText extends React.Component {
       else {
         // Handle the extra wrapping required for list buttons.
         const isList = this.hasBlock('list-item');
-        const isType = value.blocks.some(block => !!document.getClosest(block.key, parent => parent.type == type));
+        const isType = value.blocks.some((block) => !!document.getClosest(block.key, (parent) => parent.type == type));
 
         if (isList && isType) {
           change
@@ -279,7 +279,7 @@ class RichText extends React.Component {
 
   hasMark = (type) => {
     const { value } = this.state;
-    return value.activeMarks.some(mark => mark.type === type);
+    return value.activeMarks.some((mark) => mark.type === type);
   }
 
   /**
@@ -291,7 +291,7 @@ class RichText extends React.Component {
 
   hasBlock = (type) => {
     const { value } = this.state;
-    return value.blocks.some(node => node.type === type);
+    return value.blocks.some((node) => node.type === type);
   }
 
   /**
@@ -319,7 +319,7 @@ class RichText extends React.Component {
     return (
       <Button
         active={isActive}
-        onMouseDown={event => this.onClickMark(event, type)}
+        onMouseDown={(event) => this.onClickMark(event, type)}
       >
         <Icon>{icon}</Icon>
       </Button>
@@ -347,47 +347,11 @@ class RichText extends React.Component {
     return (
       <Button
         active={isActive}
-        onMouseDown={event => this.onClickBlock(event, type)}
+        onMouseDown={(event) => this.onClickBlock(event, type)}
       >
         <Icon>{icon}</Icon>
       </Button>
     );
-  }
-
-  /**
-   * Render a Slate node.
-   *
-   * @param {Object} props
-   * @return {Element}
-   */
-
-  renderNode = (props, next) => {
-    const { attributes, children, node } = props;
-
-    switch (node.type) {
-      case 'block-quote':
-        return <blockquote {...attributes}>{children}</blockquote>;
-      case 'bulleted-list':
-        return <ul {...attributes}>{children}</ul>;
-      case 'heading-one':
-        return <h1 {...attributes}>{children}</h1>;
-      case 'heading-two':
-        return <h2 {...attributes}>{children}</h2>;
-      case 'heading-three':
-        return <h3 {...attributes}>{children}</h3>;
-      case 'heading-four':
-        return <h4 {...attributes}>{children}</h4>;
-      case 'heading-five':
-        return <h5 {...attributes}>{children}</h5>;
-      case 'heading-six':
-        return <h6 {...attributes}>{children}</h6>;
-      case 'list-item':
-        return <li {...attributes}>{children}</li>;
-      case 'numbered-list':
-        return <ol {...attributes}>{children}</ol>;
-      default:
-        return next();
-    }
   }
 
   /**
@@ -424,14 +388,14 @@ class RichText extends React.Component {
     return (
       <div id={this.props.htmlid}>
         <Toolbar style={{
-            borderBottom: 'solid 1px #0000001c !important',
-            marginTop: 14,
-            marginBottom: 10,
-            marginRight: 15,
-            paddingBottom: 6,
-            background: '#f4f5f7',
-            paddingTop: 10,
-          }}
+          borderBottom: 'solid 1px #0000001c !important',
+          marginTop: 14,
+          marginBottom: 10,
+          marginRight: 15,
+          paddingBottom: 6,
+          background: '#f4f5f7',
+          paddingTop: 10,
+        }}
         >
           {this.renderMarkButton('bold', 'format_bold')}
           {this.renderMarkButton('italic', 'format_italic')}
@@ -452,7 +416,6 @@ class RichText extends React.Component {
           plugins={plugins}
           onPaste={this.onPaste}
           onKeyDown={this.onKeyDown}
-          renderNode={this.renderNode}
           renderMark={this.renderMark}
         />
       </div>

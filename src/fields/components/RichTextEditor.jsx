@@ -6,14 +6,15 @@ export default ({ type, value, options, label, htmlid, nullOption, onChange, ...
         <div 
             className={'richTextLabel'}
             style={{
-                'color': 'rgba(0, 0, 0, 0.54)',
-                'padding': 0,
-                'fontSize': '0.8rem',
-                'fontFamily': '"Roboto", "Helvetica", "Arial", sans-serif',
-                'lineHeight': 1,
-                'marginBottom': 5,
+              'color': 'rgba(0, 0, 0, 0.54)',
+              'padding': 0,
+              'fontSize': '0.8rem',
+              'fontFamily': '"Roboto", "Helvetica", "Arial", sans-serif',
+              'lineHeight': 1,
+              'marginBottom': 5,
             }}
-        > { label } 
+        >
+        { label } 
         </div>
         <RichTextEditor htmlid={htmlid} value={String(value)} onChange={onChange} {...rest} />
     </div>

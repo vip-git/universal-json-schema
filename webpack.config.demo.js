@@ -93,7 +93,7 @@ var config = {
 	mode: process.env.NODE_ENV,
 	plugins: [
 		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify('production')
+			'process.env.NODE_ENV': JSON.stringify('development')
 		}),
 		new HtmlWebpackPlugin({
 			template: 'src/demo/index.html'
@@ -133,10 +133,10 @@ else {
     //   openAnalyzer: false,
     // }),
   );
-  config.entry.splice(0, 0, 'webpack-hot-middleware/client');
-  config.entry.splice(0, 0, 'react-hot-loader/patch');
-  config.module.rules.push(
-    { enforce: 'pre', test: /\.jsx?$/, loader: 'eslint-loader', exclude: babelExclude },
-  );
+//   config.entry.splice(0, 0, 'webpack-hot-middleware/client');
+//   config.entry.splice(0, 0, 'react-hot-loader/patch');
+//   config.module.rules.push(
+//     { enforce: 'pre', test: /\.jsx?$/, loader: 'eslint-loader', exclude: babelExclude },
+//   );
 }
 module.exports = config
