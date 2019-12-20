@@ -15,7 +15,7 @@ export const RawFieldSetContent = (props) => {
   if (type === 'array') {
     return <FieldSetArray {...props} />;
   }
-  else if (type === 'object') {
+  if (type === 'object') {
     return <FieldSetObject {...props} />;
   }
   return null;
@@ -25,14 +25,16 @@ export const FieldSetContent = withStyles(fieldSetStyles.fieldSetContent)(RawFie
 
 // for unit testing
 export class RawFieldSet extends React.Component {
-  shouldComponentUpdate = nextProps => !isEqual(this.props.data, nextProps.data)
+  shouldComponentUpdate = (nextProps) => !isEqual(this.props.data, nextProps.data)
+
   render() {
     const { className, path, classes, schema = {}, hideTitle, idxKey } = this.props;
     return (
       <fieldset className={classNames(className, classes.root, { [classes.listItem]: endsWith(path, ']') })}>
-        {schema.title && (Number.isNaN(parseInt(path.replace(/[^\d.]/g, ''), 0)) || parseInt(path.replace(/[^\d.]/g, ''), 0) === 0) &&
-          <InputLabel> {schema.title} </InputLabel>
-        }
+        {schema.title && (Number.isNaN(parseInt(path.replace(/[^\d.]/g, ''), 0)) || parseInt(path.replace(/[^\d.]/g, ''), 0) === 0)
+          && <InputLabel> 
+          {schema.title}
+          </InputLabel>}
         <FieldSetContent path={path} {...this.props} />
       </fieldset>
     );
