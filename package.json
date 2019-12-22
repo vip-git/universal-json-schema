@@ -70,7 +70,7 @@
 		"css-hot-loader": "1.4.4",
 		"css-loader": "2.1.1",
 		"date-fns": "2.0.0-alpha.7",
-		"enzyme": "3.10.0",
+		"enzyme": "3.11.0",
 		"enzyme-adapter-react-16": "1.15.1",
 		"eslint": "6.7.2",
 		"eslint-config-airbnb": "18.0.1",
