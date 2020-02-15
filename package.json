@@ -94,7 +94,7 @@
 		"node-sass": "4.13.1",
 		"postcss-assets": "5.0.0",
 		"postcss-custom-properties": "9.0.1",
-		"postcss-flexbugs-fixes": "4.1.0",
+		"postcss-flexbugs-fixes": "4.2.0",
 		"postcss-import": "12.0.1",
 		"postcss-loader": "3.0.0",
 		"postcss-nested": "4.2.1",
