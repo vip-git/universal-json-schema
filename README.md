@@ -1,5 +1,5 @@
 # React Material-ui-jsonschema-form
-[![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=bkMwUXZDaGFIOTdzc08rNi82UkNubDd4b05ONWk4c2I3enM5dGVsN0NwYz0tLXZqNmFsVXR0WTd3TlhmQlZwVG1nWXc9PQ==--c04a2675c50759f40bea9f23fb65c33ee7689aca%)](https://automate.browserstack.com/public-build/bkMwUXZDaGFIOTdzc08rNi82UkNubDd4b05ONWk4c2I3enM5dGVsN0NwYz0tLXZqNmFsVXR0WTd3TlhmQlZwVG1nWXc9PQ==--c04a2675c50759f40bea9f23fb65c33ee7689aca%)
+[![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=QStsZ21iSHErWEh6UGVaZCt5MHNYTEZvbTR2azR2TnM5SWJMcmFOWjNDOD0tLUJlblVZbEVxR0lkb3JTUkUrV3JCOHc9PQ==--f5d3b4d260853b52c498f676e78e8d695a140542%)](https://automate.browserstack.com/public-build/QStsZ21iSHErWEh6UGVaZCt5MHNYTEZvbTR2azR2TnM5SWJMcmFOWjNDOD0tLUJlblVZbEVxR0lkb3JTUkUrV3JCOHc9PQ==--f5d3b4d260853b52c498f676e78e8d695a140542%)
 
 A [Material UI](http://www.material-ui.com/) port of [react-jsonschema-form](https://github.com/mozilla-services/react-jsonschema-form).
 
