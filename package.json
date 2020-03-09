@@ -102,7 +102,7 @@
 		"raf": "3.4.1",
 		"sass-loader": "8.0.0",
 		"sinon": "7.5.0",
-		"selenium-webdriver": "4.0.0-alpha.5",
+		"selenium-webdriver": "4.0.0-alpha.7",
 		"sinon-chai": "3.3.0",
 		"testdom": "2.0.0",
 		"url-loader": "0.6.2",
