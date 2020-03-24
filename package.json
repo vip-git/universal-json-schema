@@ -106,7 +106,7 @@
 		"sinon-chai": "3.3.0",
 		"testdom": "2.0.0",
 		"url-loader": "0.6.2",
-		"webpack": "4.42.0",
+		"webpack": "4.42.1",
 		"webpack-bundle-analyzer": "3.6.1",
 		"webpack-cli": "3.3.10",
 		"webpack-dev-middleware": "2.0.6",
