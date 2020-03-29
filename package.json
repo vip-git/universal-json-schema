@@ -82,7 +82,7 @@
 		"eslint-plugin-jsx-a11y": "6.1.1",
 		"eslint-plugin-react": "7.19.0",
 		"file-loader": "6.0.0",
-		"html-webpack-plugin": "4.0.2",
+		"html-webpack-plugin": "4.0.3",
 		"image-webpack-loader": "6.0.0",
 		"immutable": "3.8.2",
 		"inject-loader": "4.0.1",
