@@ -32,7 +32,7 @@
 		"cross-env": "5.2.1",
 		"emotion": "10.0.27",
 		"express": "4.17.1",
-		"immutability-helper": "3.0.1",
+		"immutability-helper": "3.0.2",
 		"is-hotkey": "0.1.4",
 		"lodash": "4.17.15",
 		"moment": "2.24.0",
