@@ -109,7 +109,7 @@
 		"webpack": "4.42.1",
 		"webpack-bundle-analyzer": "3.6.1",
 		"webpack-cli": "3.3.10",
-		"webpack-dev-middleware": "2.0.6",
+		"webpack-dev-middleware": "3.7.2",
 		"webpack-hot-middleware": "2.25.0"
 	},
 	"license": "ISC",
