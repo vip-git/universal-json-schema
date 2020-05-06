@@ -17,9 +17,10 @@ export class RawConfiguredField extends React.Component {
       title, className, componentProps = {}, id,
     } = this.props;
     return (
-      <FormControl className={classNames(classes.root, { [classes.withLabel]: LabelComponent })} style={{ flexDirection: (activeCompColor) ? 'row' : 'column' }}>
+      <FormControl id={`${id}-formControl`} className={classNames(classes.root, { [classes.withLabel]: LabelComponent })} style={{ flexDirection: (activeCompColor) ? 'row' : 'column' }}>
         {LabelComponent && title &&
           <LabelComponent
+             id={`${id}-labelControl`}
             {...labelComponentProps}
             style={{
               left: 10,
@@ -28,7 +29,7 @@ export class RawConfiguredField extends React.Component {
           </LabelComponent>
         }
         {descriptionText && <p className={classes.description}>{descriptionText}</p>}
-        {activeCompColor && <ActiveComp style={{
+        {activeCompColor && <ActiveComp id={`${id}-activeComp`} style={{
               flexBasis: '6%',
               top: 22,
               position: 'relative',

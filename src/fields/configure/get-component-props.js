@@ -16,7 +16,8 @@ import getInputType from './get-input-type';
 import valuesToOptions from './values-to-options';
 
 const toNumber = (v, options = false) => {
-  if (v === '' || v === undefined || options && options.useLocaleString) return v;
+  if (v === '' || v === undefined) return v;
+  if (options && options.useLocaleString) return v.replace(/[^\d,.]/g, '');
   const n = Number(v);
   return (!Number.isNaN(n) ? n : v);
 };
@@ -56,16 +57,22 @@ const coerceValue = (type, value, options = false) => {
   }
 };
 
-const formatDateValue = val => val && val.format && val.format() || '';
+const formatDateValue = (val) => val && val.format && val.format() || '';
+
+const parseCurrencyValue = (value, useLocaleString) => {
+  let n = 1.1;
+  n = n.toLocaleString(useLocaleString).substring(1, 2);
+  const whatDecimalSeparatorRegex = n === '.' ? /[^\d]/g : /[^\d,.]/g;
+  return n === '.' ? value.replace(whatDecimalSeparatorRegex, '') : value.replace(whatDecimalSeparatorRegex, '').replace(/\./g, '').replace(/,/g, '.');
+};
 
 const onChangeHandler = (onChange, type, widget, options) => (e) => {
-  const value = (type === 'material-date' || type === 'material-time' || type === 'material-datetime') ?
-    formatDateValue(e) : 
-    (widget === 'material-multiselect' || widget === 'material-select' || widget === 'creatable-select') ?  
-      coerceValue(type, stringify(e))
+  const value = (type === 'material-date' || type === 'material-time' || type === 'material-datetime')
+    ? formatDateValue(e) 
+    : (widget === 'material-multiselect' || widget === 'material-select' || widget === 'creatable-select')  
+      ? coerceValue(type, stringify(e))
       : (type === 'upload') ? coerceValue(type, e) : (options === 'rich-text-editor') ? serializer.serialize(e) : coerceValue(type, e.target.value, options);
-  const finalValue = options.useLocaleString ? Number(value.replace(/[^\d]/g, '')).toLocaleString(options.useLocaleString) : value;
-  if (finalValue !== undefined) onChange(finalValue);
+  if (value !== undefined) onChange(value);
 };
 
 const onCheckboxChangeHandler = (onChange, title) => (e) => {
@@ -75,7 +82,7 @@ const onCheckboxChangeHandler = (onChange, title) => (e) => {
     spec.$push = [title];
   }
   else {
-    spec.$apply = arr => without(arr, title);
+    spec.$apply = (arr) => without(arr, title);
   }
   return onChange(spec);
 };
@@ -135,6 +142,17 @@ export default ({ schema = {}, uiSchema = {}, inputValue, onChange, onKeyDown, c
   if (widget === 'textarea') {
     rv.multiline = true;
     rv.rows = 5;
+  }
+
+  if (options.useLocaleString) {
+    rv.onBlur = (event) => {
+      const { value } = event.target;
+      return value && onChange(
+        Number(
+          parseCurrencyValue(value, options.useLocaleString),
+        ).toLocaleString(options.useLocaleString),
+      );
+    };
   }
 
   if (options.disabled) {
