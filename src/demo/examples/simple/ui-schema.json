@@ -4,14 +4,19 @@
 		"ui:emptyValue": ""
 	},
 	"selectTest": {
-    "ui:widget": "material-multiselect",
-    "mui:inputProps": {"className": "money"}
+		"ui:widget": "material-multiselect",
+		"mui:inputProps": { "className": "money" }
+	},
+	"currency": {
+		"ui:options": {
+			"useLocaleString": "nl"
+		}
 	},
 	"age": {
 		"ui:widget": "updown",
 		"ui:title": "Age of person",
 		"ui:description": "(earthian year)",
-    "mui:className": "money"
+		"mui:className": "money"
 	},
 	"upload": {
 		"ui:widget": "outlined",

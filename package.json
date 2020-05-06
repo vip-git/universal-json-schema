@@ -1,12 +1,12 @@
 {
 	"author": "Vipin Tanna",
 	"repository": {
-	  "type": "git",
-          "url": "https://github.com/vip-git/react-jsonschema-form-material-ui"
-        },
-        "bugs": {
-          "url": "https://github.com/vip-git/react-jsonschema-form-material-ui/issues"
-        },	
+		"type": "git",
+		"url": "https://github.com/vip-git/react-jsonschema-form-material-ui"
+	},
+	"bugs": {
+		"url": "https://github.com/vip-git/react-jsonschema-form-material-ui/issues"
+	},
 	"scripts": {
 		"build": "webpack",
 		"build:demo": "cross-env NODE_ENV=production webpack --env.NODE_ENV=production --config webpack.config.demo.js",

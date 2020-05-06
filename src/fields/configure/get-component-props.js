@@ -15,8 +15,8 @@ import getMuiProps from './get-mui-props';
 import getInputType from './get-input-type';
 import valuesToOptions from './values-to-options';
 
-const toNumber = (v) => {
-  if (v === '' || v === undefined) return v;
+const toNumber = (v, options = false) => {
+  if (v === '' || v === undefined || options && options.useLocaleString) return v;
   const n = Number(v);
   return (!Number.isNaN(n) ? n : v);
 };
@@ -41,7 +41,7 @@ const stringify = (val, depth, replacer, space, onGetObjID) => {
   return JSON.stringify(finalVal, null, space);
 };
 
-const coerceValue = (type, value) => {
+const coerceValue = (type, value, options = false) => {
   switch (type) {
     case 'string':
       return (typeof value === 'string' ? value : String(value));
@@ -50,7 +50,7 @@ const coerceValue = (type, value) => {
     case 'double':
     case 'float':
     case 'decimal':
-      return toNumber(value);
+      return toNumber(value, options);
     default:
       return value;
   }
@@ -63,8 +63,9 @@ const onChangeHandler = (onChange, type, widget, options) => (e) => {
     formatDateValue(e) : 
     (widget === 'material-multiselect' || widget === 'material-select' || widget === 'creatable-select') ?  
       coerceValue(type, stringify(e))
-      : (type === 'upload') ? coerceValue(type, e) : (options === 'rich-text-editor') ? serializer.serialize(e) : coerceValue(type, e.target.value);
-  if (value !== undefined) onChange(value);
+      : (type === 'upload') ? coerceValue(type, e) : (options === 'rich-text-editor') ? serializer.serialize(e) : coerceValue(type, e.target.value, options);
+  const finalValue = options.useLocaleString ? Number(value.replace(/[^\d]/g, '')).toLocaleString(options.useLocaleString) : value;
+  if (finalValue !== undefined) onChange(finalValue);
 };
 
 const onCheckboxChangeHandler = (onChange, title) => (e) => {
