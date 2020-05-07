@@ -13,39 +13,67 @@ export class RawConfiguredField extends React.Component {
   shouldComponentUpdate = nextProps => this.props.data !== nextProps.data
   render() {
     const {
-      classes = {}, data, type, descriptionText, activeCompColor, helpText, Component = Input, LabelComponent, labelComponentProps = {},
-      title, className, componentProps = {}, id,
-    } = this.props;
+			classes = {},
+			data,
+			type,
+			descriptionText,
+			activeCompColor,
+			helpText,
+			Component = Input,
+			LabelComponent,
+			labelComponentProps = {},
+			title,
+			className,
+			componentProps = {},
+			id,
+			htmlid,
+		} = this.props;
+
     return (
-      <FormControl id={`${id}-formControl`} className={classNames(classes.root, { [classes.withLabel]: LabelComponent })} style={{ flexDirection: (activeCompColor) ? 'row' : 'column' }}>
-        {LabelComponent && title &&
-          <LabelComponent
-             id={`${id}-labelControl`}
-            {...labelComponentProps}
-            style={{
-              left: 10,
-            }}
-          >{title}
-          </LabelComponent>
-        }
-        {descriptionText && <p className={classes.description}>{descriptionText}</p>}
-        {activeCompColor && <ActiveComp id={`${id}-activeComp`} style={{
-              flexBasis: '6%',
-              top: 22,
-              position: 'relative',
-              marginRight: 10,
-              color: activeCompColor || 'grey',
-            }}
-        />}
-        <Component
-          className={className && classes[className]}
-          value={data}
-          type={type}
-          {...componentProps}
-        />
-        {helpText && <FormHelperText id={`${id}-help`}>{helpText}</FormHelperText>}
-      </FormControl>
-    );
+			<FormControl
+				id={`${htmlid}-formControl`}
+				className={classNames(classes.root, {
+					[classes.withLabel]: LabelComponent
+				})}
+				style={{ flexDirection: activeCompColor ? 'row' : 'column' }}
+			>
+				{LabelComponent && title && (
+					<LabelComponent
+						id={`${htmlid}-labelControl`}
+						{...labelComponentProps}
+						style={{
+							left: 10
+						}}
+					>
+						{title}
+					</LabelComponent>
+				)}
+				{descriptionText && (
+					<p className={classes.description}>{descriptionText}</p>
+				)}
+				{activeCompColor && (
+					<ActiveComp
+						id={`${htmlid}-activeComp`}
+						style={{
+							flexBasis: '6%',
+							top: 22,
+							position: 'relative',
+							marginRight: 10,
+							color: activeCompColor || 'grey'
+						}}
+					/>
+				)}
+				<Component
+					className={className && classes[className]}
+					value={data}
+					type={type}
+					{...componentProps}
+				/>
+				{helpText && (
+					<FormHelperText id={`${id}-help`}>{helpText}</FormHelperText>
+				)}
+			</FormControl>
+		);
   }
 }
 export default withStyles(fieldStyles)(RawConfiguredField);
