@@ -54,7 +54,7 @@ class Example extends React.Component {
 }
 ```
 
-# Latest Version - 2.0.15 (Material UI 4+)
+# Latest Version - 2.0.18 (Material UI 4+)
 - New version 2.0 support for material ui 4
 - Webpack 4 integration
 - Material UI picker module updated
