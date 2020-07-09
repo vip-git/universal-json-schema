@@ -35,7 +35,7 @@
 		"immutability-helper": "3.1.1",
 		"is-hotkey": "0.1.6",
 		"lodash": "4.17.19",
-		"moment": "2.26.0",
+		"moment": "2.27.0",
 		"prop-types": "^15.6.2",
 		"react": "16.13.1",
 		"react-ace": "7.0.5",
