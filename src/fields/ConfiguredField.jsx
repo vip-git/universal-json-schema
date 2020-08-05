@@ -27,6 +27,7 @@ export class RawConfiguredField extends React.Component {
 			componentProps = {},
 			id,
 			htmlid,
+			isHidden,
 		} = this.props;
 
     return (
@@ -35,7 +36,10 @@ export class RawConfiguredField extends React.Component {
 				className={classNames(classes.root, {
 					[classes.withLabel]: LabelComponent
 				})}
-				style={{ flexDirection: activeCompColor ? 'row' : 'column' }}
+				style={{ 
+					display: isHidden ? 'none' : 'flex',
+					flexDirection: activeCompColor ? 'row' : 'column'
+				}}
 			>
 				{LabelComponent && title && (
 					<LabelComponent

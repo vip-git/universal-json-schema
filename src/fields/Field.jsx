@@ -14,6 +14,7 @@ export default (props) => {
   const descriptionText = uiSchema['ui:description'];
   const activeCompColor = uiSchema['ui:activeCompColor'];
   const helpText = uiSchema['ui:help'];
+  const isHidden = uiSchema['mui:type'] === 'hidden';
   return (
 		<ConfiguredField
 			id={id}
@@ -29,6 +30,7 @@ export default (props) => {
 			descriptionText={descriptionText}
 			helpText={helpText}
 			htmlid={htmlid}
+			isHidden={isHidden}
 		/>
   );
 };
