@@ -24,6 +24,11 @@
       "title": "Example select",
       "enum": ["Yes", "No"]
     },
+    "react-select": {
+      "type": "string",
+      "title": "Example select",
+      "enum": ["Yes", "No"]
+    },
     "age": {
       "type": "integer",
       "title": "Age"

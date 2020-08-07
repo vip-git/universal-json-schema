@@ -113,6 +113,7 @@ export default ({ schema = {}, uiSchema = {}, inputValue, onChange, onKeyDown, c
     rv.label = schema.title || '';
     if (widget === 'material-select' || widget === 'material-multiselect') {
       rv.multiSelect = (widget === 'material-multiselect');
+      rv.isClearable = uiSchema['ui:isClearable'] || false;
     }
 
     if (widget === 'creatable-select') {

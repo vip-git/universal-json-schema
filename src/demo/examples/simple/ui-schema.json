@@ -7,6 +7,10 @@
 		"ui:widget": "material-multiselect",
 		"mui:inputProps": { "className": "money" }
 	},
+	"react-select": {
+		"ui:widget": "material-select",
+		"ui:isClearable": true
+	},
 	"currency": {
 		"ui:options": {
 			"useLocaleString": "nl"

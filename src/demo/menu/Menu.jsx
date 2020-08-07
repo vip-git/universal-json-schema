@@ -14,7 +14,7 @@ class RawMenuAppBar extends React.Component {
     drawerOpen: false,
   };
 
-  toggleDrawer = visible => () => {
+  toggleDrawer = (visible) => () => {
     this.setState({ drawerOpen: visible });
   };
 
@@ -22,6 +22,7 @@ class RawMenuAppBar extends React.Component {
     const { classes, onSelectMenuItem } = this.props;
     const { drawerOpen } = this.state;
     return (
+      // eslint-disable-next-line react/jsx-fragments
       <React.Fragment>
         <AppBar position={'static'} className={classes.toolbar}>
           <Toolbar>
