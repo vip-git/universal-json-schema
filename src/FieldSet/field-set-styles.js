@@ -37,6 +37,7 @@ export default {
 				height: '1.25em',
 				borderRadius: 5,
 				'&> span': {
+					position: 'absolute',
 					fontSize: 'small',
 					textIndent: 12,
 				},
@@ -71,6 +72,9 @@ export default {
 		remove: {
 			background: theme.palette.error.main,
 			color: theme.palette.common.white,
+			'& >span': {
+				position: 'absolute',
+			},
 		},
 	}),
 	fieldSetContent: {
