@@ -54,10 +54,11 @@ class Example extends React.Component {
 }
 ```
 
-# Latest Version - 2.0.18 (Material UI 4+)
+# Latest Version - 2.0.21 (Material UI 4+)
 - New version 2.0 support for material ui 4
 - Webpack 4 integration
 - Material UI picker module updated
+- Support for File Upload and many more components
 - Performance efficient refactored library size (233kb gzip and 914kb non-gzip)
 
 # Support for Material UI < 3.9
