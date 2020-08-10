@@ -54,7 +54,7 @@ class Example extends React.Component {
 }
 ```
 
-# Latest Version - 2.0.21 (Material UI 4+)
+# Latest Version [![npm version](https://badge.fury.io/js/react-jsonschema-form-material-ui.svg)](https://badge.fury.io/js/react-jsonschema-form-material-ui) (Material UI 4+)
 - New version 2.0 support for material ui 4
 - Webpack 4 integration
 - Material UI picker module updated
