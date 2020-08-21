@@ -21,7 +21,7 @@
 		"test:ci": "mocha-webpack --glob \"*.spec.js*\" --reporter mochawesome --require mocha.setup.js --reporter-options reportDir=mochawesome-report-unit --recursive src"
 	},
 	"dependencies": {
-		"@date-io/moment": "1.3.9",
+		"@date-io/moment": "1.3.13",
 		"@material-ui/lab": "4.0.0-alpha.56",
 		"@material-ui/core": "4.11.0",
 		"@material-ui/icons": "4.9.1",
