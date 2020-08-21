@@ -1,65 +1,124 @@
-import React from 'react';
+/* eslint-disable max-len */
+/* eslint-disable no-mixed-operators */
+import React, { useState } from 'react';
+import { TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import styles from './example-styles';
 import Source from './Source';
 import Form from '../../Form';
 
+const CustomComponent = ({ onChange, formData }) => {
+  const [data, setData] = useState(formData.customComponent || '');
+  return (
+      <TextField
+        id='standard-basic'
+        label='Standard'
+        value={data}
+        onChange={(e) => setData(e.target.value)}
+        onBlur={(e) => onChange(e.target.value)}
+      />
+  );
+};
+
+const FormComponent = React.memo(({
+  schema,
+  uiSchema,
+  formData,
+  onCancel,
+  onSubmit,
+  onUpload,
+  onFormChanged,
+}) => (
+  <Form
+    schema={schema}
+    uiSchema={uiSchema}
+    formData={formData}
+    onCancel={onCancel}
+    onSubmit={onSubmit}
+    onUpload={onUpload}
+    onChange={onFormChanged}
+    components={{
+      customComponent: ({ onChange }) => <CustomComponent onChange={onChange} formData={formData} />,
+    }}
+    submitOnEnter
+    activityIndicatorEnabled
+  />
+));
+
+const SourceSchema = ({
+  classes,
+  schema,
+  uiSchema,
+  formData,
+  onChange,
+}) => (
+    <div className={classes.sourceCtr}>
+      <div>
+        <Source title={'JSONSchema'} source={schema} onChange={onChange('schema')} />
+      </div>
+      <div>
+        <Source title={'uiSchema'} source={uiSchema} onChange={onChange('uiSchema')} />
+        <Source title={'formData'} source={formData} onChange={onChange('formData')} />
+      </div>
+    </div>
+);
+
 class Example extends React.Component {
-  state = {
-    ...this.props.data,
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...props.data,
+    };
   }
-  UNSAFE_componentWillReceiveProps = (nextProps) => {
-    this.setState({
-      ...nextProps.data,
-    });
-  }
-  onChange = type => (value) => {
+
+  onChange = (type) => (value) => {
     this.setState({ [type]: value });
   }
+
   onFormChanged = ({ formData }) => {
     this.setState({ formData });
   }
+
   onSubmit = (value, callback) => {
     console.log('onSubmit: %s', JSON.stringify(value)); // eslint-disable-line no-console
     setTimeout(() => callback && callback(), 2000);
   }
+
   onUpload = (value) => {
     console.log('onUpload:', value); // eslint-disable-line no-console
   }
+
   onCancel = () => {
+    const { data } = this.props;
     this.setState({
-      ...this.props.data,
+      ...data,
     });
   }
+
   render() {
-    const { data, classes } = this.props;
-    const { title } = data;
+    const { data: { schema: givenSchema, uiSchema: givenUISchema, formData: givenFormData, title }, classes } = this.props;
     const { schema, uiSchema, formData } = this.state;
     return (
       <Paper className={classes.root}>
         <h3>{title}</h3>
         <div className={classes.ctr}>
-          <div className={classes.sourceCtr}>
-            <div>
-              <Source title={'JSONSchema'} source={schema} onChange={this.onChange('schema')} />
-            </div>
-            <div>
-              <Source title={'uiSchema'} source={uiSchema} onChange={this.onChange('uiSchema')} />
-              <Source title={'formData'} source={formData} onChange={this.onChange('formData')} />
-            </div>
-          </div>
+          <SourceSchema 
+            classes={classes}
+            schema={schema}
+            uiSchema={uiSchema}
+            formData={formData}
+            onChange={this.onChange}
+          />
           <div className={classes.display}>
-            <Form
-              schema={schema}
-              uiSchema={uiSchema}
-              formData={formData}
+            <FormComponent 
+              schema={givenSchema}
+              uiSchema={givenUISchema}
+              formData={givenFormData}
               onCancel={this.onCancel}
               onSubmit={this.onSubmit}
               onUpload={this.onUpload}
-              onChange={this.onFormChanged}
-              submitOnEnter
-              activityIndicatorEnabled
+              onFormChanged={this.onFormChanged}
             />
           </div>
         </div>

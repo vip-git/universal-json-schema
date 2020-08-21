@@ -79,7 +79,7 @@ const UploadButton = ({
 							{buttonTitle}
 						</Button>
                     </div>
-   )}
+   				)}
 				label={uploadLabel || label}
 				className={classes.labelDescription}
 			/>

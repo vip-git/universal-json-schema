@@ -1,3 +1,5 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-tabs */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-shadow */
@@ -66,7 +68,7 @@ const parseCurrencyValue = (value, useLocaleString) => {
   return n === '.' ? value.replace(whatDecimalSeparatorRegex, '') : value.replace(whatDecimalSeparatorRegex, '').replace(/\./g, '').replace(/,/g, '.');
 };
 
-const onChangeHandler = (onChange, type, widget, options) => (e) => {
+const onChangeHandler = (onChange, type, widget, options, isCustomComponent) => (e) => {
   const value = (type === 'material-date' || type === 'material-time' || type === 'material-datetime')
     ? formatDateValue(e) 
     : (widget === 'material-multiselect' || widget === 'material-select' || widget === 'creatable-select')  
@@ -87,81 +89,109 @@ const onCheckboxChangeHandler = (onChange, title) => (e) => {
   return onChange(spec);
 };
 
-export default ({ schema = {}, uiSchema = {}, inputValue, onChange, onKeyDown, creatableSelectValue, onCreatableSelectChange, onInputChange, htmlid, data, objectData }) => {
+export default ({ schema = {}, uiSchema = {}, isCustomComponent, inputValue, onChange, onKeyDown, creatableSelectValue, onCreatableSelectChange, onInputChange, htmlid, data, objectData }) => {
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'] || {};
   const { type } = schema;
-  const rv = {
-    type: getInputType(type, uiSchema),
-    onChange: onChange && onChangeHandler(onChange, type, widget, options),
-    onKeyDown,
-    ...getMuiProps(uiSchema),
-  };
-  if (schema.enum) {
-    if (widget === 'radio') {
-      if (options.inline) {
-        rv.row = true;
-      }
-    }
-    else if (widget === 'checkboxes') {
-      rv.onChange = onChange && onCheckboxChangeHandler(onChange, schema.title);
-      rv.label = schema.title;
-    }
-    else {
-      rv.nullOption = 'Please select...';
-    }
-    rv.label = schema.title || '';
-    if (widget === 'material-select' || widget === 'material-multiselect') {
-      rv.multiSelect = (widget === 'material-multiselect');
-      rv.isClearable = uiSchema['ui:isClearable'] || false;
-    }
+  const rv = isCustomComponent
+    ? {
+      type: getInputType(type, uiSchema),
+      onChange:
+            !isCustomComponent
+            && onChange
+            && onChangeHandler(onChange, type, widget, options),
+      onKeyDown,
+      ...getMuiProps(uiSchema),
+      ...isCustomComponent({ onChange }).props,
+		  }
+    : {
+      type: getInputType(type, uiSchema),
+      onChange:
+            !isCustomComponent
+            && onChange
+            && onChangeHandler(onChange, type, widget, options),
+      onKeyDown,
+      ...getMuiProps(uiSchema),
+		  };
 
-    if (widget === 'creatable-select') {
-      rv.optionsOnly = true;
-    }
-
-    rv.options = valuesToOptions(schema.enum);
-  }
-  else if (type === 'boolean') {
-    rv.label = schema.title;
-    rv.onChange = onChange;
-  } 
-  else if (type === 'upload') {
-    rv.label = schema.title;
-    rv.buttonType = widget || 'outlined';
-    rv.acceptValues = uiSchema['ui:accept'] || '*';
-    rv.isMulti = uiSchema['ui:isMulti'] || false;
-    rv.buttonIcon = uiSchema['ui:icon'] || 'add_circle';
-    rv.buttonTitle = uiSchema['ui:buttonTitle'] || 'Upload';
+  if (
+    isCustomComponent
+		&& isCustomComponent({ onChange })
+		&& isCustomComponent({ onChange }).props
+		&& isCustomComponent({ onChange }).props.onChange
+  ) {
+    rv.onChange = isCustomComponent({ onChange }).props.onChange;
   }
   else {
-    rv.label = schema.title || '';
-    rv.inputProps = {
-      id: htmlid,
-    };
-  }
-  if (widget === 'textarea') {
-    rv.multiline = true;
-    rv.rows = 5;
-  }
+    if (schema.enum) {
+      if (widget === 'radio') {
+        if (options.inline) {
+          rv.row = true;
+        }
+      }
+      else if (widget === 'checkboxes') {
+        rv.onChange =	onChange && onCheckboxChangeHandler(onChange, schema.title);
+        rv.label = schema.title;
+      }
+      else {
+        rv.nullOption = 'Please select...';
+      }
+      rv.label = schema.title || '';
+      if (widget === 'material-select' || widget === 'material-multiselect') {
+        rv.multiSelect = widget === 'material-multiselect';
+        rv.isClearable = uiSchema['ui:isClearable'] || false;
+      }
 
-  if (options.useLocaleString) {
-    rv.onBlur = (event) => {
-      const { value } = event.target;
-      return value && onChange(
-        Number(
-          parseCurrencyValue(value, options.useLocaleString),
-        ).toLocaleString(options.useLocaleString),
-      );
-    };
-  }
+      if (widget === 'creatable-select') {
+        rv.optionsOnly = true;
+      }
 
-  if (options.disabled) {
-    if (typeof options.disabled === 'boolean') {
-      rv.disabled = options.disabled;
+      rv.options = valuesToOptions(schema.enum);
     }
-    else if (typeof options.disabled === 'function') {
-      rv.disabled = (options.disabled).call(null, data, objectData);
+    else if (type === 'boolean') {
+      rv.label = schema.title;
+      rv.onChange = onChange;
+    }
+    else if (type === 'upload') {
+      rv.label = schema.title;
+      rv.buttonType = widget || 'outlined';
+      rv.acceptValues = uiSchema['ui:accept'] || '*';
+      rv.isMulti = uiSchema['ui:isMulti'] || false;
+      rv.buttonIcon = uiSchema['ui:icon'] || 'add_circle';
+      rv.buttonTitle = uiSchema['ui:buttonTitle'] || 'Upload';
+    }
+    else {
+      rv.label = schema.title || '';
+      rv.inputProps = {
+        id: htmlid,
+      };
+    }
+    if (widget === 'textarea') {
+      rv.multiline = true;
+      rv.rows = 5;
+    }
+
+    if (options.useLocaleString) {
+      rv.onBlur = (event) => {
+        const { value } = event.target;
+        return (
+          value
+					&& onChange(
+					  Number(
+					    parseCurrencyValue(value, options.useLocaleString),
+					  ).toLocaleString(options.useLocaleString),
+					)
+        );
+      };
+    }
+
+    if (options.disabled) {
+      if (typeof options.disabled === 'boolean') {
+        rv.disabled = options.disabled;
+      }
+      else if (typeof options.disabled === 'function') {
+        rv.disabled = options.disabled.call(null, data, objectData);
+      }
     }
   }
 

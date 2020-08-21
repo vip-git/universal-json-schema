@@ -1,4 +1,5 @@
 /* eslint-disable no-tabs */
+/* eslint-disable no-mixed-spaces-and-tabs */
 import React from 'react';
 import configureComponent from './configure';
 import ConfiguredField from './ConfiguredField';
@@ -8,7 +9,13 @@ export default (props) => {
   const { type } = schema;
   const htmlid = `${id}_${path}`;
   const {
-    Component, LabelComponent, componentProps, labelComponentProps, className, title,
+    Component, 
+    LabelComponent, 
+    componentProps, 
+    labelComponentProps, 
+    className, 
+    title, 
+    isCustomComponent,
   } = configureComponent({ ...props, htmlid });
 
   const descriptionText = uiSchema['ui:description'];
@@ -31,6 +38,7 @@ export default (props) => {
 			helpText={helpText}
 			htmlid={htmlid}
 			isHidden={isHidden}
+		  isCustomComponent={isCustomComponent}
 		/>
   );
 };

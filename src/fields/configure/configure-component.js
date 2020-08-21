@@ -10,8 +10,20 @@ const getClassName = ({ uiSchema = {} }) => {
 };
 
 export default (props) => {
-  const { schema, uiSchema = {} } = props;
+  const { schema, uiSchema = {}, components } = props;
   const title = uiSchema['ui:title'] || schema.title;
+  const component = (schema && 'component' in schema) && schema.component;
+  const isCustomComponent = (component 
+      && components 
+      && component in components 
+      && components[component]) 
+      || false;
+
+  if (isCustomComponent && typeof isCustomComponent === 'function') {
+    // eslint-disable-next-line no-param-reassign
+    props.isCustomComponent = isCustomComponent;
+  }
+
   return {
     title,
     className: getClassName(props),
@@ -19,5 +31,6 @@ export default (props) => {
     componentProps: getComponentProps(props),
     LabelComponent: title && getLabelComponent(props),
     labelComponentProps: getLabelComponentProps(props),
+    isCustomComponent,
   };
 };

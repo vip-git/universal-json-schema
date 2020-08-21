@@ -11,9 +11,11 @@ class Demo extends React.Component {
   state = {
     selectedDemo: examples.simple,
   }
-  onSelectMenuItem = type => () => {
+
+  onSelectMenuItem = (type) => () => {
     this.setState({ selectedDemo: type });
   }
+
   render() {
     const { classes } = this.props;
     return (

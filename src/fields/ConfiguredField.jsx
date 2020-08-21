@@ -28,8 +28,8 @@ export class RawConfiguredField extends React.Component {
 			id,
 			htmlid,
 			isHidden,
+		    isCustomComponent,
 		} = this.props;
-
     return (
 			<FormControl
 				id={`${htmlid}-formControl`}
@@ -41,7 +41,7 @@ export class RawConfiguredField extends React.Component {
 					flexDirection: activeCompColor ? 'row' : 'column'
 				}}
 			>
-				{LabelComponent && title && (
+			{LabelComponent && title && !isCustomComponent && (
 					<LabelComponent
 						id={`${htmlid}-labelControl`}
 						{...labelComponentProps}
@@ -52,10 +52,10 @@ export class RawConfiguredField extends React.Component {
 						{title}
 					</LabelComponent>
 				)}
-				{descriptionText && (
+				{descriptionText && !isCustomComponent && (
 					<p className={classes.description}>{descriptionText}</p>
 				)}
-				{activeCompColor && (
+				{activeCompColor && !isCustomComponent && (
 					<ActiveComp
 						id={`${htmlid}-activeComp`}
 						style={{
@@ -73,7 +73,7 @@ export class RawConfiguredField extends React.Component {
 					type={type}
 					{...componentProps}
 				/>
-				{helpText && (
+				{helpText && !isCustomComponent && (
 					<FormHelperText id={`${id}-help`}>{helpText}</FormHelperText>
 				)}
 			</FormControl>
