@@ -20,6 +20,11 @@
       "title": "Custom Component",
       "component": "customComponent"
     },
+    "customRating": {
+      "type": "integer",
+      "title": "Custom Rating",
+      "component": "customRating"
+    },
     "currency": {
       "type": "number",
       "title": "Currency"

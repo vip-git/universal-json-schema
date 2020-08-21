@@ -1,3 +1,5 @@
+/* eslint-disable no-tabs */
+/* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable max-len */
 /* eslint-disable no-mixed-operators */
 import React, { useState } from 'react';
@@ -7,13 +9,14 @@ import Paper from '@material-ui/core/Paper';
 import styles from './example-styles';
 import Source from './Source';
 import Form from '../../Form';
+import SimpleRating from './custom-rating';
 
 const CustomComponent = ({ onChange, formData }) => {
   const [data, setData] = useState(formData.customComponent || '');
   return (
       <TextField
         id='standard-basic'
-        label='Standard'
+        label='Custom Text'
         value={data}
         onChange={(e) => setData(e.target.value)}
         onBlur={(e) => onChange(e.target.value)}
@@ -21,30 +24,46 @@ const CustomComponent = ({ onChange, formData }) => {
   );
 };
 
-const FormComponent = React.memo(({
-  schema,
-  uiSchema,
-  formData,
-  onCancel,
-  onSubmit,
-  onUpload,
-  onFormChanged,
-}) => (
-  <Form
-    schema={schema}
-    uiSchema={uiSchema}
-    formData={formData}
-    onCancel={onCancel}
-    onSubmit={onSubmit}
-    onUpload={onUpload}
-    onChange={onFormChanged}
-    components={{
-      customComponent: ({ onChange }) => <CustomComponent onChange={onChange} formData={formData} />,
-    }}
-    submitOnEnter
-    activityIndicatorEnabled
-  />
-));
+const CustomRating = ({ onChange, formData }) => (
+	<SimpleRating
+		id='standard-basic'
+		label='Standard'
+		value={formData.customRating}
+		persistData={onChange}
+	/>
+);
+
+const FormComponent = React.memo(
+  ({
+    schema,
+    uiSchema,
+    formData,
+    onCancel,
+    onSubmit,
+    onUpload,
+    onFormChanged,
+  }) => (
+		<Form
+			schema={schema}
+			uiSchema={uiSchema}
+			formData={formData}
+			onCancel={onCancel}
+			onSubmit={onSubmit}
+			onUpload={onUpload}
+			onChange={onFormChanged}
+			components={{
+			  customComponent: ({ onChange }) => (
+					<CustomComponent onChange={onChange} formData={formData} />
+			  ),
+			  customRating: ({ onChange }) => (
+					<CustomRating onChange={onChange} formData={formData} />
+			  ),
+			}}
+			submitOnEnter
+			activityIndicatorEnabled
+		/>
+  ),
+);
 
 const SourceSchema = ({
   classes,

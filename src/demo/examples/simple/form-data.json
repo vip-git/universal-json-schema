@@ -7,5 +7,7 @@
 	"password": "noneed",
 	"creatableSelectTest": "[{\"label\":\"hello\",\"value\":\"hello\"},{\"label\":\"yes\",\"value\":\"yes\"}]",
 	"selectTest": "[{\"value\":\"Yes\",\"label\":\"Yes\"},{\"value\":\"No\",\"label\":\"No\"}]",
-	"telephone": ""
+	"telephone": "",
+	"customComponent": "Custom Component",
+	"customRating": 3
 }
