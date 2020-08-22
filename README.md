@@ -1,4 +1,4 @@
-# React Json Schema Form \(Material UI\)
+# React - Json Schema Form \(Material UI\)
 
 [![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=MzZ5RE5vdml6Yk5EM0JTZ3l5cGxJKzVLRWlqNVdHbDkzdkprejFkSWZtZz0tLTdxdGFIY3F5a2pXSmNMM2ZLaVMwQ3c9PQ==--74a6da6f146182f21dbe380708e81c257b1cefab%)](https://automate.browserstack.com/public-build/MzZ5RE5vdml6Yk5EM0JTZ3l5cGxJKzVLRWlqNVdHbDkzdkprejFkSWZtZz0tLTdxdGFIY3F5a2pXSmNMM2ZLaVMwQ3c9PQ==--74a6da6f146182f21dbe380708e81c257b1cefab%) [![GitHub package.json version](https://img.shields.io/github/package-json/v/vip-git/react-jsonschema-form-material-ui?style=plastic)](https://github.com/vip-git/react-jsonschema-form-material-ui) [![npm](https://img.shields.io/npm/dt/react-jsonschema-form-material-ui)](https://www.npmjs.com/package/react-jsonschema-form-material-ui)
 
