@@ -1,6 +1,6 @@
 # Table of contents
 
-* [React Material-ui-jsonschema-form](README.md)
+* [React Material UI JsonSchemaForm](README.md)
 * [Components](docs/README.md)
   * [Select box](docs/select-box/README.md)
     * [React-select](docs/select-box/react-select.md)
