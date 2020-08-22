@@ -10,6 +10,19 @@ description: This page describes how you can integrated file upload widget
 
 ![File upload widget](../.gitbook/assets/image%20%284%29.png)
 
+
+
+{% code title="Example.jsx" %}
+```jsx
+<MaterialJsonSchemaForm
+  schema={schema}
+  uiSchema={uiSchema}
+  formData={formData}
+  onUpload={(file) => console.log("get uploaded file object")} // New addition
+/>
+```
+{% endcode %}
+
 {% code title="schema.json" %}
 ```bash
 {
