@@ -1,6 +1,6 @@
 # Table of contents
 
-* [React JsonSchemaForm \(MUI\)](README.md)
+* [React Json Schema Form \(Mui\)](README.md)
 * [Components](docs/README.md)
   * [Select box](docs/select-box/README.md)
     * [React-select](docs/select-box/react-select.md)
