@@ -6,15 +6,15 @@ description: React jsonschema form comes with inbuilt components
 
 | **Component Name** | **Status** |
 | :--- | :--- |
-| **Material UI - Date / Time Picker** | **✅** [**Done**](https://react-json-schema.app/docs/rich-text-editor)\*\*\*\* |
+| **Material UI - Date / Time Picker** | **✅** [**Done**](material-ui-date-time-picker.md)\*\*\*\* |
 | **Material UI Multi-selecbox** | In Progress |
 | **Creatable multi selectbox** | In Progress |
 | **Component active / inactive** | In Progress |
-| **Rich Text Editor** | **✅** [**Done**](https://react-json-schema.app/docs/rich-text-editor)\*\*\*\* |
-| **Upload File** | **✅** [**Done**](https://react-json-schema.app/docs/upload-file)\*\*\*\* |
+| **Rich Text Editor** | **✅** [**Done**](rich-text-editor.md)\*\*\*\* |
+| **Upload File** | **✅** [**Done**](upload-file.md)\*\*\*\* |
 | **Number / Up down widget** | **✅ Done** |
 | **Telephone** | **✅ Done** |
-| **Currency** | **✅** [**Done**](https://react-json-schema.app/docs/currency)\*\*\*\* |
+| **Currency** | **✅** [**Done**](currency.md)\*\*\*\* |
 | **Nested** | In Progress |
 | **Password** | In Progress |
 | **Checkbox** | In Progress |
