@@ -29,7 +29,7 @@ describe('Testing forms', () => {
   });
 
   it('can load the initial page', async () => {
-    await driver.get('https://laughing-davinci-f1455d.netlify.com');
+    await driver.get('https://react-jsonschema-form-material-ui.github56.now.sh');
 
     const autocomplete = await driver.findElement(
       By.xpath("//input[@value='Chuck']"),
