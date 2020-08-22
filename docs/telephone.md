@@ -4,7 +4,7 @@
 **Input Telephone Integration**
 {% endhint %}
 
-![Telephone input type](../.gitbook/assets/image%20%2811%29.png)
+![Telephone input type](../.gitbook/assets/image%20%2812%29.png)
 
 {% code title="schema.json" %}
 ```bash

@@ -4,7 +4,7 @@
 **Material Select Component integration**
 {% endhint %}
 
-![Material Select](../../.gitbook/assets/image%20%2814%29.png)
+![Material Select](../../.gitbook/assets/image%20%2815%29.png)
 
 {% code title="schema.json" %}
 ```bash

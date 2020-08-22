@@ -7,7 +7,7 @@ Detailed Example can be seen here :
 **Rating Component Example**
 {% endhint %}
 
-![Custom Rating Component](../../.gitbook/assets/image%20%2815%29.png)
+![Custom Rating Component](../../.gitbook/assets/image%20%2816%29.png)
 
 {% code title="schema.json" %}
 ```bash

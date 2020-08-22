@@ -8,7 +8,7 @@ description: This component pre fixes against a dot with color as defined in uiS
 **Component Active integration**
 {% endhint %}
 
-![Component Active / Inactive](../.gitbook/assets/image%20%288%29.png)
+![Component Active / Inactive](../.gitbook/assets/image%20%289%29.png)
 
 {% code title="schema.json" %}
 ```bash
