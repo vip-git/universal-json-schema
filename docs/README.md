@@ -10,23 +10,23 @@ description: React jsonschema form comes with inbuilt components
 npm install --save react-jsonschema-form-material-ui
 ```
 
-| **Component Name** | Type | **Status** |
-| :--- | :--- | :--- |
-| \*\*\*\*[**Material UI - Date / Time Picker**](material-ui-date-time-picker.md)\*\*\*\* | Inbuilt | **✅** [**Done**](material-ui-date-time-picker.md)\*\*\*\* |
-| \*\*\*\*[**Material UI Selectbox**](select-box/material-select.md)\*\*\*\* | Inbuilt | ✅ [**Done**](select-box/react-select.md)\*\*\*\* |
-| \*\*\*\*[**React Select and Multi Select**](select-box/react-select.md)\*\*\*\* | Inbuilt | ✅ [**Done**](select-box/react-select.md)\*\*\*\* |
-| \*\*\*\*[**React Creatable Select**](select-box/creatable-select.md)\*\*\*\* | Inbuilt | ✅ [**Done**](select-box/creatable-select.md)\*\*\*\* |
-| \*\*\*\*[**Component active / inactive**](component-active-inactive.md)\*\*\*\* | Inbuilt | ✅ [**Done**](component-active-inactive.md)\*\*\*\* |
-| \*\*\*\*[**Rich Text Editor**](rich-text-editor.md)\*\*\*\* | Inbuilt | **✅** [**Done**](rich-text-editor.md)\*\*\*\* |
-| \*\*\*\*[**Upload File**](upload-file.md)\*\*\*\* | Inbuilt | **✅** [**Done**](upload-file.md)\*\*\*\* |
-| \*\*\*\*[**Number / Up down widget**](number-up-down-widget.md)\*\*\*\* | Inbuilt | **✅** [**Done**](number-up-down-widget.md)\*\*\*\* |
-| \*\*\*\*[**Telephone**](telephone.md)\*\*\*\* | Inbuilt | **✅** [**Done**](currency.md)\*\*\*\* |
-| \*\*\*\*[**Currency**](currency.md)\*\*\*\* | Inbuilt | **✅** [**Done**](currency.md)\*\*\*\* |
-| \*\*\*\*[**Nested**](nested.md)\*\*\*\* | Inbuilt | ✅ [**Done**](nested.md)\*\*\*\* |
-| \*\*\*\*[**Password**](password.md)\*\*\*\* | Inbuilt | ✅ [**Done**](password.md)\*\*\*\* |
-| \*\*\*\*[**Checkbox**](checkbox.md)\*\*\*\* | Inbuilt | ✅ [**Done**](checkbox.md)\*\*\*\* |
-| \*\*\*\*[**Radio Button**](radio-button.md)\*\*\*\* | Inbuilt | ✅ [**Done**](radio-button.md)\*\*\*\* |
-| \*\*\*\*[**Rating Component**](custom-components/rating-component-example.md)\*\*\*\* | Custom | ✅ [**Done**](custom-components/rating-component-example.md)\*\*\*\* |
+| **Component Name** | Schema | UISchema | FormData | Type | **Status** |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| \*\*\*\*[**Material UI - Date / Time Picker**](material-ui-date-time-picker.md)\*\*\*\* |     **✅**  |     **✅**  |     **✅**   | Inbuilt |  ****[**Done**](material-ui-date-time-picker.md)\*\*\*\* |
+| \*\*\*\*[**Material UI Selectbox**](select-box/material-select.md)\*\*\*\* |     **✅**   |   ****❌  |     **✅**   | Inbuilt |  [**Done**](select-box/react-select.md)\*\*\*\* |
+| \*\*\*\*[**React Select and Multi Select**](select-box/react-select.md)\*\*\*\* |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](select-box/react-select.md)\*\*\*\* |
+| \*\*\*\*[**React Creatable Select**](select-box/creatable-select.md)\*\*\*\* |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](select-box/creatable-select.md)\*\*\*\* |
+| \*\*\*\*[**Component active / inactive**](component-active-inactive.md)\*\*\*\* |   ****❌  **** |     **✅**   |   ****❌  | Inbuilt |  [**Done**](component-active-inactive.md)\*\*\*\* |
+| \*\*\*\*[**Rich Text Editor**](rich-text-editor.md)\*\*\*\* |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](rich-text-editor.md)\*\*\*\* |
+| \*\*\*\*[**Upload File**](upload-file.md)\*\*\*\* |     **✅**   |     **✅**   |     **✅**   | Inbuilt |  [**Done**](upload-file.md)\*\*\*\* |
+| \*\*\*\*[**Number / Up down widget**](number-up-down-widget.md)\*\*\*\* |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](number-up-down-widget.md)\*\*\*\* |
+| \*\*\*\*[**Telephone**](telephone.md)\*\*\*\* |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](currency.md)\*\*\*\* |
+| \*\*\*\*[**Currency**](currency.md)\*\*\*\* |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](currency.md)\*\*\*\* |
+| \*\*\*\*[**Nested**](nested.md)\*\*\*\* |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](nested.md)\*\*\*\* |
+| \*\*\*\*[**Password**](password.md)\*\*\*\* |     **✅**   |     **✅**   |     **✅**   | Inbuilt |  [**Done**](password.md)\*\*\*\* |
+| \*\*\*\*[**Checkbox**](checkbox.md)\*\*\*\* |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](checkbox.md)\*\*\*\* |
+| \*\*\*\*[**Radio Button**](radio-button.md)\*\*\*\* |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](radio-button.md)\*\*\*\* |
+| \*\*\*\*[**Rating Component**](custom-components/rating-component-example.md)\*\*\*\* |     **✅**  |     **✅**   |     **✅**   | Custom |  [**Done**](custom-components/rating-component-example.md)\*\*\*\* |
 
 ## Example Usage
 

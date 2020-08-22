@@ -5,7 +5,7 @@ description: This component pre fixes against a dot with color as defined in uiS
 # Component active / inactive
 
 {% hint style="success" %}
-**Component Active integration**
+**Component Active / Inactive integration \(UI Schema Only\)**
 {% endhint %}
 
 ![Component Active / Inactive](../.gitbook/assets/image%20%289%29.png)
