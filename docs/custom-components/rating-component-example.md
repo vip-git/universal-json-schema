@@ -26,7 +26,7 @@ Detailed Example can be seen here :
 ```
 {% endcode %}
 
-{% code title="Example.js" %}
+{% code title="Example.jsx" %}
 ```bash
 <Form
   schema={schema}
