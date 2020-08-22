@@ -7,6 +7,7 @@
     * [Material Select](docs/select-box/material-select.md)
     * [Creatable select](docs/select-box/creatable-select.md)
   * [Material UI Date / Time picker](docs/material-ui-date-time-picker.md)
+  * [Component active / inactive](docs/component-active-inactive.md)
   * [Rich Text Editor](docs/rich-text-editor.md)
   * [Upload File](docs/upload-file.md)
   * [Currency](docs/currency.md)

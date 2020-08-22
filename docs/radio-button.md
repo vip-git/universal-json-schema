@@ -4,7 +4,7 @@
 **Radio Button Component Integration**
 {% endhint %}
 
-![Radio Button component](../.gitbook/assets/image%20%289%29.png)
+![Radio Button component](../.gitbook/assets/image%20%2810%29.png)
 
 {% code title="schema.json" %}
 ```bash
