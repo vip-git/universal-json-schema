@@ -13,7 +13,7 @@
   "description": "A simple form with currency component",
   "type": "object",
   "properties": {
-    "bio": {
+    "currency": {
       "type": "number",
       "title": "Currency"
     },
