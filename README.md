@@ -1,12 +1,10 @@
-# Main
-
-## React Material-ui-jsonschema-form
+# React Material-ui-jsonschema-form
 
 [![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=QStsZ21iSHErWEh6UGVaZCt5MHNYTEZvbTR2azR2TnM5SWJMcmFOWjNDOD0tLUJlblVZbEVxR0lkb3JTUkUrV3JCOHc9PQ==--f5d3b4d260853b52c498f676e78e8d695a140542%)](https://automate.browserstack.com/public-build/QStsZ21iSHErWEh6UGVaZCt5MHNYTEZvbTR2azR2TnM5SWJMcmFOWjNDOD0tLUJlblVZbEVxR0lkb3JTUkUrV3JCOHc9PQ==--f5d3b4d260853b52c498f676e78e8d695a140542%)
 
-A [Material UI](http://www.material-ui.com/) port of [react-jsonschema-form](https://github.com/mozilla-services/react-jsonschema-form).
+A [Material UI](http://www.material-ui.com/) port of [jsonschema-form.](https://json-schema.org/)
 
-A [live playground](https://react-jsonschema-form-material-ui.github56.now.sh/)
+A [live playground](https://react-jsonschema-form-material-ui.github56.now.sh/) and [Detailed Docs](https://react-json-schema.app/)
 
 ## Install instructions via npm
 
