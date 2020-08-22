@@ -6,8 +6,6 @@ description: >-
 
 # React-select
 
-
-
 {% hint style="success" %}
 **React Select Component integration**
 {% endhint %}
