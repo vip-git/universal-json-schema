@@ -1,3 +1,9 @@
+---
+description: >-
+  Currency widget is an extension to number format here you can see the example
+  to use for changing uiSchema.json
+---
+
 # Currency
 
 {% hint style="success" %}
