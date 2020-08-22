@@ -12,6 +12,8 @@ description: >-
 
 ![React Select Component](../../.gitbook/assets/image%20%286%29.png)
 
+![Material Multi Select](../../.gitbook/assets/image%20%2813%29.png)
+
 {% code title="schema.json" %}
 ```bash
 {
@@ -32,11 +34,12 @@ description: >-
 ```
 {% endcode %}
 
-{% code title="uiSchema.json" %}
+{% code title="uiSchema.json // multiselect and single select example" %}
 ```bash
 {
   "react-select": {
-    "ui:widget": "material-select",
+    "ui:widget": "material-select", 
+    "ui:widget": "material-multiselect",
     "ui:isClearable": true
   },
 }
