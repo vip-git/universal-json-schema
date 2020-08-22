@@ -1,5 +1,6 @@
 {
 	"author": "Vipin Tanna",
+	"homepage": "https://react-json-schema.app",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/vip-git/react-jsonschema-form-material-ui"
