@@ -10,4 +10,5 @@
   * [Rich Text Editor](docs/rich-text-editor.md)
   * [Upload File](docs/upload-file.md)
   * [Custom components](docs/custom-components.md)
+* [Back to Github](https://github.com/vip-git/react-jsonschema-form-material-ui)
 
