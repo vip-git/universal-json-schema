@@ -17,14 +17,50 @@ npm install --save react-jsonschema-form-material-ui
 ## Example Usage
 
 > More detailed example can be seen [here](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/src/demo/body/Example.jsx)
->
-> \`\`\` // Library import React from 'react'; import MaterialJsonSchemaForm from 'react-jsonschema-form-material-ui';
 
-// Internals const schema = require\('./path-to your-schema.json'\); const uiSchema = require\('./path-to your-ui-schema.json'\); const formData = require\('./path-to your-ui-formData.json'\);
+{% code title="Example.jsx" %}
+```text
+// Library
+import React from 'react';
+import MaterialJsonSchemaForm from 'react-jsonschema-form-material-ui';
 
-class Example extends React.Component { onSubmit = \(value, callback\) =&gt; { console.log\('onSubmit: %s', JSON.stringify\(value\)\); // eslint-disable-line no-console setTimeout\(\(\) =&gt; callback && callback\(\), 2000\); // just an example in real world can be your XHR call } onCancel = \(\) =&gt; { console.log\('on reset being called'\); } onFormChanged = \({ formData }\) =&gt; { console.log\('onFormChanged: ',formData\); // eslint-disable-line no-console } onUpload = \(value\) =&gt; { console.log\('onUpload: ', value\); // eslint-disable-line no-console } render\(\) { return \(  \); } }
+// Internals
+const schema = require('./path-to your-schema.json');
+const uiSchema = require('./path-to your-ui-schema.json');
+const formData = require('./path-to your-ui-formData.json');
 
-\`\`\`
+class Example extends React.Component {
+    onSubmit = (value, callback) => {
+        console.log('onSubmit: %s', JSON.stringify(value)); // eslint-disable-line no-console
+        setTimeout(() => callback && callback(), 2000); // just an example in real world can be your XHR call
+    }
+    onCancel = () => {
+        console.log('on reset being called');
+    }
+    onFormChanged = ({ formData }) => {
+        console.log('onFormChanged: ',formData); // eslint-disable-line no-console
+    }
+    onUpload = (value) => {
+        console.log('onUpload: ', value); // eslint-disable-line no-console
+    }
+    render() {
+        return (
+             <MaterialJsonSchemaForm
+                  schema={schema}
+                  uiSchema={uiSchema}
+                  formData={formData}
+                  onCancel={this.onCancel}
+                  onSubmit={this.onSubmit}
+                  onUpload={this.onUpload}
+                  onChange={this.onFormChanged}
+                  submitOnEnter
+                  activityIndicatorEnabled
+            />
+        );
+    }
+}
+```
+{% endcode %}
 
 ## Latest Version [![npm version](https://badge.fury.io/js/react-jsonschema-form-material-ui.svg)](https://react-jsonschema-form-material-ui.github56.now.sh) \(Material UI 4+\)
 
