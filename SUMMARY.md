@@ -16,7 +16,7 @@
   * [Password](docs/password.md)
   * [Checkbox](docs/checkbox.md)
   * [Radio Button](docs/radio-button.md)
-  * [Nested](docs/nested.md)
+  * [Nested Array](docs/nested.md)
   * [Custom components](docs/custom-components/README.md)
     * [Rating Component Example](docs/custom-components/rating-component-example.md)
 * [Back to Github](https://github.com/vip-git/react-jsonschema-form-material-ui)

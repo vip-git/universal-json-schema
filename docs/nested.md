@@ -1,4 +1,4 @@
-# Nested
+# Nested Array
 
 {% hint style="success" %}
 **Nested Array Component Integration**
