@@ -1,8 +1,12 @@
 ---
-description: This page explains how you can integrate react select component
+description: >-
+  This page explains how you can integrate react select component using
+  uiSchema.json
 ---
 
 # React-select
+
+
 
 {% hint style="success" %}
 **React Select Component integration**
