@@ -1,10 +1,17 @@
+---
+description: Please read on custom components - before reading this article.
+---
+
 # Rating Component Example
 
-Detailed Example can be seen here :  
-- [https://github.com/vip-git/react-jsonschema-form-material-ui/blob/6b9956479fe5a57ea3f98919fbac25a1e4bc10d9/src/demo/body/Example.jsx\#L27](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/6b9956479fe5a57ea3f98919fbac25a1e4bc10d9/src/demo/body/Example.jsx#L27)
+{% hint style="danger" %}
+Please Read on [**how to install custom components**](./) - before reading this article.
+{% endhint %}
 
 {% hint style="success" %}
-**Rating Component Example**
+**Rating Component Example**  
+Detailed Example can be seen here :  
+- [https://github.com/vip-git/react-jsonschema-form-material-ui/blob/6b9956479fe5a57ea3f98919fbac25a1e4bc10d9/src/demo/body/Example.jsx\#L27](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/6b9956479fe5a57ea3f98919fbac25a1e4bc10d9/src/demo/body/Example.jsx#L27)
 {% endhint %}
 
 ![Custom Rating Component](../../.gitbook/assets/image%20%2818%29.png)
