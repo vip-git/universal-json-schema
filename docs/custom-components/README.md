@@ -54,7 +54,24 @@ const CustomRating = ({ onChange, formData }) => (
 ```
 {% endcode %}
 
-FormData.json then will have the following value
+**Schema.json** and **FormData.json** then will have the following value
+
+{% code title="Schema.json" %}
+```bash
+{
+  "title": "Example for rendering custom rating example",
+  "description": "A simple form for rendering custom rating example",
+  "type": "object",
+  "properties": {
+    "customRating": {
+      "type": "integer",
+      "title": "Custom Rating Component",
+      "component": "customRating"
+    },
+  }
+}
+```
+{% endcode %}
 
 {% code title="formData.json" %}
 ```bash
