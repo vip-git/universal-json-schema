@@ -29,15 +29,10 @@ description: Material UI Date / Time picker component integration
 {% code title="uiSchema.json" %}
 ```bash
 {
-  "title": "Example for rendering date component",
-  "description": "A simple form with date component",
-  "type": "object",
-  "properties": {
-    "date": {
-      "type": "material-date",
-      "title": "Date"
-    },
-  }
+  "date": {
+     "type": "material-date",
+     "title": "Date"
+   },
 }
 ```
 {% endcode %}
