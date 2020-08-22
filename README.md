@@ -1,6 +1,6 @@
 # React Material-ui-jsonschema-form
 
-[![GitHub package.json version](https://img.shields.io/github/package-json/v/vip-git/react-jsonschema-form-material-ui?style=plastic)](https://github.com/vip-git/react-jsonschema-form-material-ui) [![GitHub stars](https://img.shields.io/github/stars/vip-git/react-jsonschema-form-material-ui?style=social)](https://github.com/vip-git/react-jsonschema-form-material-ui) ![npm](https://img.shields.io/npm/dt/react-jsonschema-form-material-ui)
+[![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=MzZ5RE5vdml6Yk5EM0JTZ3l5cGxJKzVLRWlqNVdHbDkzdkprejFkSWZtZz0tLTdxdGFIY3F5a2pXSmNMM2ZLaVMwQ3c9PQ==--74a6da6f146182f21dbe380708e81c257b1cefab%)](https://automate.browserstack.com/public-build/MzZ5RE5vdml6Yk5EM0JTZ3l5cGxJKzVLRWlqNVdHbDkzdkprejFkSWZtZz0tLTdxdGFIY3F5a2pXSmNMM2ZLaVMwQ3c9PQ==--74a6da6f146182f21dbe380708e81c257b1cefab%) [![GitHub package.json version](https://img.shields.io/github/package-json/v/vip-git/react-jsonschema-form-material-ui?style=plastic)](https://github.com/vip-git/react-jsonschema-form-material-ui) [![GitHub stars](https://img.shields.io/github/stars/vip-git/react-jsonschema-form-material-ui?style=social)](https://github.com/vip-git/react-jsonschema-form-material-ui) ![npm](https://img.shields.io/npm/dt/react-jsonschema-form-material-ui)
 
 A [Material UI](http://www.material-ui.com/) port of [jsonschema-form.](https://json-schema.org/)
 
@@ -81,4 +81,3 @@ class Example extends React.Component {
 * `submitOnEnter` prop - enables to submit form on key press 'Enter'
 * `activityIndicatorEnabled` prop - enables nice activity indicator besides your submit button allowing you to control the timing via a callback.
 
-[![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=QStsZ21iSHErWEh6UGVaZCt5MHNYTEZvbTR2azR2TnM5SWJMcmFOWjNDOD0tLUJlblVZbEVxR0lkb3JTUkUrV3JCOHc9PQ==--f5d3b4d260853b52c498f676e78e8d695a140542%)](https://automate.browserstack.com/public-build/QStsZ21iSHErWEh6UGVaZCt5MHNYTEZvbTR2azR2TnM5SWJMcmFOWjNDOD0tLUJlblVZbEVxR0lkb3JTUkUrV3JCOHc9PQ==--f5d3b4d260853b52c498f676e78e8d695a140542%) 
