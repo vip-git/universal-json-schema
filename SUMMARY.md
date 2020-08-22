@@ -1,13 +1,13 @@
 # Table of contents
 
 * [Main](README.md)
-* [Docs](inbuilt-components/README.md)
-  * [Select box](inbuilt-components/select-box/README.md)
-    * [React-select](inbuilt-components/select-box/react-select.md)
-    * [Material Select](inbuilt-components/select-box/material-select.md)
-    * [Creatable select](inbuilt-components/select-box/creatable-select.md)
-  * [Material UI Date / Time picker](inbuilt-components/material-ui-date-time-picker.md)
-  * [Rich Text Editor](inbuilt-components/rich-text-editor.md)
-  * [Upload File](inbuilt-components/upload-file.md)
-  * [Custom components](inbuilt-components/custom-components.md)
+* [Components](docs/README.md)
+  * [Select box](docs/select-box/README.md)
+    * [React-select](docs/select-box/react-select.md)
+    * [Material Select](docs/select-box/material-select.md)
+    * [Creatable select](docs/select-box/creatable-select.md)
+  * [Material UI Date / Time picker](docs/material-ui-date-time-picker.md)
+  * [Rich Text Editor](docs/rich-text-editor.md)
+  * [Upload File](docs/upload-file.md)
+  * [Custom components](docs/custom-components.md)
 

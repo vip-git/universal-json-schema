@@ -18,7 +18,6 @@ npm install --save react-jsonschema-form-material-ui
 
 > More detailed example can be seen [here](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/src/demo/body/Example.jsx)
 
-{% code title="Example.jsx" %}
 ```text
 // Library
 import React from 'react';
@@ -60,7 +59,6 @@ class Example extends React.Component {
     }
 }
 ```
-{% endcode %}
 
 ## Latest Version [![npm version](https://badge.fury.io/js/react-jsonschema-form-material-ui.svg)](https://react-jsonschema-form-material-ui.github56.now.sh) \(Material UI 4+\)
 

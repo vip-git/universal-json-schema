@@ -2,7 +2,7 @@
 description: React jsonschema form comes with inbuilt components
 ---
 
-# Docs
+# Components
 
 | Component Name | Comments |
 | :--- | :--- |
