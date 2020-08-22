@@ -7,7 +7,7 @@ description: React jsonschema form comes with inbuilt components
 | **Component Name** | Type | **Status** |
 | :--- | :--- | :--- |
 | **Material UI - Date / Time Picker** | Inbuilt | **✅** [**Done**](material-ui-date-time-picker.md)\*\*\*\* |
-| **Material UI Selectbox** | Inbuilt |  ✅ [**Done**](select-box/react-select.md)\*\*\*\* |
+| **Material UI Selectbox** | Inbuilt | ✅ [**Done**](select-box/react-select.md)\*\*\*\* |
 | **React Select and Multi Select** | Inbuilt | ✅ [**Done**](select-box/react-select.md)\*\*\*\* |
 | **React Creatable Select** | Inbuilt | ✅ [**Done**](select-box/creatable-select.md)\*\*\*\* |
 | **Component active / inactive** | Inbuilt | ✅ [**Done**](component-active-inactive.md)\*\*\*\* |
