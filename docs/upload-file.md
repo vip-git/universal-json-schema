@@ -14,6 +14,8 @@ description: This page describes how you can integrated file upload widget
 
 {% code title="Example.jsx" %}
 ```jsx
+import MaterialJsonSchemaForm from 'react-jsonschema-form-material-ui';
+
 <MaterialJsonSchemaForm
   schema={schema}
   uiSchema={uiSchema}
