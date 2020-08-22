@@ -1,5 +1,5 @@
 ---
-description: React jsonschema form comes with inbuilt components
+description: React jsonschema form comes with inbuilt and custom components
 ---
 
 # Components
