@@ -4,3 +4,6 @@ node_modules
 mocheawesome-report-unit
 docs/
 src/
+.gitbook/
+.idea/
+.github/
