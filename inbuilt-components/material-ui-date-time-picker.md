@@ -4,8 +4,6 @@ description: Material UI Date / Time picker component integration
 
 # Material UI Date / Time picker
 
-
-
 {% hint style="success" %}
 ## Material UI Date / Time picker
 {% endhint %}
