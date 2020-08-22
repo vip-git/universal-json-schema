@@ -4,7 +4,7 @@
 **Checkbox Component Integration**
 {% endhint %}
 
-![Checkbox component integration](../.gitbook/assets/image%20%2810%29.png)
+![Checkbox component integration](../.gitbook/assets/image%20%2811%29.png)
 
 {% code title="schema.json" %}
 ```bash

@@ -4,7 +4,7 @@
 **Number / Up Down Integration**
 {% endhint %}
 
-![Currency Component](../.gitbook/assets/image%20%285%29.png)
+![](../.gitbook/assets/image%20%287%29.png)
 
 {% code title="schema.json" %}
 ```bash
@@ -13,10 +13,10 @@
   "description": "A simple form with currency component",
   "type": "object",
   "properties": {
-    "currency": {
-      "type": "number",
-      "title": "Currency"
-    },
+    "age": {
+      "type": "integer",
+      "title": "Age"
+    }
   }
 }
 ```
@@ -25,11 +25,12 @@
 {% code title="uiSchema.json" %}
 ```bash
 {
- "currency": {
-    "ui:options": {
-      "useLocaleString": "nl"
-    }
-  },
+ "age": {
+    "ui:widget": "updown",
+    "ui:title": "Age of person",
+    "ui:description": "(earthian year)",
+    "mui:className": "money"
+  }
 }
 ```
 {% endcode %}
@@ -37,7 +38,7 @@
 {% code title="formData.json" %}
 ```bash
 {
-  "currency": "123.123",
+  "age": 75
 }
 ```
 {% endcode %}
