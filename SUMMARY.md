@@ -8,5 +8,6 @@
     * [Creatable select](inbuilt-components/select-box/creatable-select.md)
   * [Material UI Date / Time picker](inbuilt-components/material-ui-date-time-picker.md)
   * [Rich Text Editor](inbuilt-components/rich-text-editor.md)
+  * [Upload File](inbuilt-components/upload-file.md)
 * [Custom components](custom-components.md)
 

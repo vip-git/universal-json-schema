@@ -13,8 +13,8 @@ description: This page describes rich text editor integration
 {% code title="schema.json" %}
 ```bash
 {
-  "title": "Example for rendering date component",
-  "description": "A simple form with date component",
+  "title": "Example for rendering rich text editor component",
+  "description": "A simple form with rich text editor component",
   "type": "object",
   "properties": {
     "bio": {
@@ -29,15 +29,10 @@ description: This page describes rich text editor integration
 {% code title="uiSchema.json" %}
 ```bash
 {
-  "title": "Example for rendering date component",
-  "description": "A simple form with date component",
-  "type": "object",
-  "properties": {
-    "bio": {
-      "ui:widget": "textarea",
-      "ui:options": "rich-text-editor"
-    },
-  }
+ "bio": {
+   "ui:widget": "textarea",
+   "ui:options": "rich-text-editor"
+  },
 }
 ```
 {% endcode %}
