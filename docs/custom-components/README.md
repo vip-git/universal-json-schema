@@ -33,7 +33,7 @@ To enable your standalone component - Define your component to prop `components`
 ```
 {% endcode %}
 
-In the above example - important bit is initialise a function with takes in parameter `onChange` and returns your custom component to forward that prop. This `onChange` can then be invoked whenever data needs to be persisted to formData as seen below.
+In the above example - important bit is to initialise a function with takes in parameter `onChange` and returns your custom component to forward that prop. This `onChange` can then be invoked whenever data needs to be persisted to formData as seen below.
 
 {% code title="CustomRating.jsx" %}
 ```jsx
