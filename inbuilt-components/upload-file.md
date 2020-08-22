@@ -13,13 +13,13 @@ description: This page describes how you can integrated file upload widget
 {% code title="schema.json" %}
 ```bash
 {
-  "title": "Example for rendering date component",
-  "description": "A simple form with date component",
+  "title": "Example for rendering upload component",
+  "description": "A simple form with upload component",
   "type": "object",
   "properties": {
-    "bio": {
-      "type": "string",
-      "title": "Bio"
+    "upload": {
+      "type": "upload",
+      "title": "Please upload your file"
     },
   }
 }
@@ -29,15 +29,13 @@ description: This page describes how you can integrated file upload widget
 {% code title="uiSchema.json" %}
 ```bash
 {
-  "title": "Example for rendering date component",
-  "description": "A simple form with date component",
-  "type": "object",
-  "properties": {
-    "bio": {
-      "ui:widget": "textarea",
-      "ui:options": "rich-text-editor"
-    },
-  }
+  "upload": {
+    "ui:widget": "outlined",
+    "ui:accept": "image/*",
+    "ui:isMulti": true,
+    "ui:buttonTitle": "Upload",
+    "ui:icon": "add_circle"
+  },
 }
 ```
 {% endcode %}
@@ -45,7 +43,7 @@ description: This page describes how you can integrated file upload widget
 {% code title="formData.json" %}
 ```bash
 {
-  "bio": "<p><u>ads</u></p><p><strong>Something nice</strong></p><p><em>Nice italic</em></p><ul><li>Some normal text</li></ul>",
+  "upload": "",
 }
 ```
 {% endcode %}
