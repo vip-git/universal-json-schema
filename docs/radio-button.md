@@ -4,7 +4,7 @@
 **Radio Button Component Integration**
 {% endhint %}
 
-![Currency Component](../.gitbook/assets/image%20%285%29.png)
+![Radio Button component](../.gitbook/assets/image%20%287%29.png)
 
 {% code title="schema.json" %}
 ```bash
@@ -13,10 +13,15 @@
   "description": "A simple form with currency component",
   "type": "object",
   "properties": {
-    "bio": {
+    "numberEnumRadio": {
       "type": "number",
-      "title": "Currency"
-    },
+      "title": "Number enum",
+      "enum": [
+        1,
+        2,
+        3
+      ]
+    }
   }
 }
 ```
@@ -25,11 +30,12 @@
 {% code title="uiSchema.json" %}
 ```bash
 {
- "currency": {
+ "numberEnumRadio": {
+    "ui:widget": "radio",
     "ui:options": {
-      "useLocaleString": "nl"
+      "inline": true
     }
-  },
+  }
 }
 ```
 {% endcode %}
@@ -37,7 +43,7 @@
 {% code title="formData.json" %}
 ```bash
 {
-  "currency": "123.123",
+  "numberEnumRadio": 3
 }
 ```
 {% endcode %}

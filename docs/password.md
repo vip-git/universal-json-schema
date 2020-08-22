@@ -4,7 +4,7 @@
 **Password Component Integration**
 {% endhint %}
 
-![Password Component Integration](../.gitbook/assets/image%20%288%29.png)
+![Password Component Integration](../.gitbook/assets/image%20%289%29.png)
 
 {% code title="schema.json" %}
 ```bash
