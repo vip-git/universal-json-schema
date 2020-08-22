@@ -1,3 +1,9 @@
+---
+description: >-
+  When you add enum values without any uiSchema.json it will fallback to default
+  material select
+---
+
 # Material Select
 
 {% hint style="success" %}
@@ -20,19 +26,6 @@
         "Yes",
         "No"
       ]
-    }
-  }
-}
-```
-{% endcode %}
-
-{% code title="uiSchema.json" %}
-```bash
-{
-  "selectTest": {
-    "ui:widget": "material-multiselect",
-    "mui:inputProps": {
-      "className": "money"
     }
   }
 }
