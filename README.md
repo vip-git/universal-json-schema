@@ -16,7 +16,7 @@ npm install --save react-jsonschema-form-material-ui
 
 > More detailed example can be seen [here](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/src/demo/body/Example.jsx)
 
-```text
+```jsx
 // Library
 import React from 'react';
 import MaterialJsonSchemaForm from 'react-jsonschema-form-material-ui';
