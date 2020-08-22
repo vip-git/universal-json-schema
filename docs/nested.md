@@ -1,22 +1,52 @@
 # Nested
 
 {% hint style="success" %}
-**Nested Component Integration**
+**Nested Array Component Integration**
 {% endhint %}
 
-![Currency Component](../.gitbook/assets/image%20%285%29.png)
+![Nested Array Component](../.gitbook/assets/image%20%287%29.png)
 
 {% code title="schema.json" %}
 ```bash
 {
-  "title": "Example for rendering currency component",
-  "description": "A simple form with currency component",
+  "title": "A list of tasks",
   "type": "object",
+  "required": [
+    "title"
+  ],
   "properties": {
-    "bio": {
-      "type": "number",
-      "title": "Currency"
+    "title": {
+      "type": "string",
+      "title": "Task list title"
     },
+    "tasks": {
+      "type": "array",
+      "title": "Tasks",
+      "items": {
+        "title": "Media (NL)",
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "description": "A sample title"
+          },
+          "details": {
+            "type": "string",
+            "title": "Task details",
+            "description": "Enter the task details"
+          },
+          "done": {
+            "type": "boolean",
+            "title": "Done?",
+            "default": false
+          }
+        }
+      }
+    }
   }
 }
 ```
@@ -25,11 +55,13 @@
 {% code title="uiSchema.json" %}
 ```bash
 {
- "currency": {
-    "ui:options": {
-      "useLocaleString": "nl"
+  "tasks": {
+    "items": {
+      "details": {
+        "ui:widget": "textarea"
+      }
     }
-  },
+  }
 }
 ```
 {% endcode %}
@@ -37,7 +69,14 @@
 {% code title="formData.json" %}
 ```bash
 {
-  "currency": "123.123",
+  "title": "My current tasks",
+  "tasks": [
+    {
+      "title": "My first task",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "done": true
+    }
+  ]
 }
 ```
 {% endcode %}
