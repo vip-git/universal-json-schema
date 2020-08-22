@@ -56,7 +56,7 @@ const CustomRating = ({ onChange, formData }) => (
 
 FormData.json then will have the following value
 
-{% code title="CustomRating.jsx" %}
+{% code title="formData.json" %}
 ```bash
 {
   "customRating": 3
