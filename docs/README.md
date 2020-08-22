@@ -12,14 +12,14 @@ description: React jsonschema form comes with inbuilt components
 | **Component active / inactive** | In Progress |
 | **Rich Text Editor** | **✅** [**Done**](rich-text-editor.md)\*\*\*\* |
 | **Upload File** | **✅** [**Done**](upload-file.md)\*\*\*\* |
-| **Number / Up down widget** | **✅ Done** |
-| **Telephone** | **✅ Done** |
+| **Number / Up down widget** | **✅** [**Done**](number-up-down-widget.md)\*\*\*\* |
+| **Telephone** | **✅** [**Done**](currency.md)\*\*\*\* |
 | **Currency** | **✅** [**Done**](currency.md)\*\*\*\* |
-| **Nested** | In Progress |
-| **Password** | In Progress |
-| **Checkbox** | In Progress |
-| **Radio Button** | In Progress |
-| **Custom Components** | In Progress |
+| **Nested** | ✅ [**Done**](nested.md)\*\*\*\* |
+| **Password** | ✅ [**Done**](password.md)\*\*\*\* |
+| **Checkbox** | ✅ [**Done**](checkbox.md)\*\*\*\* |
+| **Radio Button** | ✅ [**Done**](radio-button.md)\*\*\*\* |
+| **Custom Components** | ✅ [**Done**](custom-components/)\*\*\*\* |
 
 
 
