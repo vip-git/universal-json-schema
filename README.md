@@ -1,4 +1,4 @@
-# React Material-ui-jsonschema-form
+# [React Material-ui-jsonschema-form](https://github.com/vip-git/react-jsonschema-form-material-ui)
 
 [![GitHub package.json version](https://img.shields.io/github/package-json/v/vip-git/react-jsonschema-form-material-ui?style=plastic)](https://github.com/vip-git/react-jsonschema-form-material-ui) [![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=QStsZ21iSHErWEh6UGVaZCt5MHNYTEZvbTR2azR2TnM5SWJMcmFOWjNDOD0tLUJlblVZbEVxR0lkb3JTUkUrV3JCOHc9PQ==--f5d3b4d260853b52c498f676e78e8d695a140542%)](https://automate.browserstack.com/public-build/QStsZ21iSHErWEh6UGVaZCt5MHNYTEZvbTR2azR2TnM5SWJMcmFOWjNDOD0tLUJlblVZbEVxR0lkb3JTUkUrV3JCOHc9PQ==--f5d3b4d260853b52c498f676e78e8d695a140542%)
 
