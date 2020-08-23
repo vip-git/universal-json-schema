@@ -28,7 +28,7 @@ npm install --save react-jsonschema-form-material-ui
 | \*\*\*\*[**Radio Button**](radio-button.md)\*\*\*\* |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](radio-button.md)\*\*\*\* |
 | \*\*\*\*[**Rating Component**](custom-components/rating-component-example.md)\*\*\*\* |     **✅**  |     **✅**   |     **✅**   | Custom |  [**Done**](custom-components/rating-component-example.md)\*\*\*\* |
 
-## Example Usage
+### **Example Usage**
 
 > More detailed example can be seen [here](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/src/demo/body/Example.jsx)
 
