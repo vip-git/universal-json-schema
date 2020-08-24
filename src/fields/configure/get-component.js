@@ -13,6 +13,7 @@ export default ({ schema, uiSchema = {}, components }) => {
 
   if (
     component
+    && components
 		&& component in components
 		&& typeof components[component] === 'function'
   ) {

@@ -1,5 +1,4 @@
 // import Input, { InputLabel } from '@material-ui/core/Input'; // eslint-disable-line import/no-named-default
-import has from 'lodash/has';
 import getComponentProps from './get-component-props';
 import getLabelComponentProps from './get-label-component-props';
 import getLabelComponent from './get-label-component';
@@ -13,10 +12,10 @@ const getClassName = ({ uiSchema = {} }) => {
 export default (props) => {
   const { schema, uiSchema = {}, components } = props;
   const title = uiSchema['ui:title'] || schema.title;
-  const component = (schema && has(schema, 'component')) && schema.component;
+  const component = (schema && 'component' in schema) && schema.component;
   const isCustomComponent = (component 
       && components 
-      && has(components, component)
+      && component in components 
       && components[component]) 
       || false;
 
