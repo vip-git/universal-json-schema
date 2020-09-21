@@ -182,6 +182,13 @@ describe('getComponentProps', () => {
     expect(componentProps).to.haveOwnProperty('myprop');
     expect(componentProps.myprop).to.equal('boo');
   });
+  it('passes custom:* properties', () => {
+    const schema = { 'title': 'First name', customComponent: 'customComponent' };
+    const uiSchema = { 'custom:myprop': 'boo' };
+    const componentProps = getComponentProps({ schema, uiSchema });
+    expect(componentProps).to.haveOwnProperty('myprop');
+    expect(componentProps.myprop).to.equal('boo');
+  });
   describe('onChange callback', () => {
     it('is called with event target value', () => {
       // prepare

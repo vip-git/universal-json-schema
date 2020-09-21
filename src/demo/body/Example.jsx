@@ -11,12 +11,13 @@ import Source from './Source';
 import Form from '../../Form';
 import SimpleRating from './custom-rating';
 
-const CustomComponent = ({ onChange, formData }) => {
+const CustomComponent = ( { onChange, formData, label }) => {
   const [data, setData] = useState(formData.customComponent || '');
+  const customLabel = label || '';
   return (
       <TextField
         id='standard-basic'
-        label='Custom Text'
+        label={customLabel}
         value={data}
         onChange={(e) => setData(e.target.value)}
         onBlur={(e) => onChange(e.target.value)}
@@ -52,9 +53,10 @@ const FormComponent = React.memo(
 			onUpload={onUpload}
 			onChange={onFormChanged}
 			components={{
-			  customComponent: ({ onChange }) => (
-					<CustomComponent onChange={onChange} formData={formData} />
-			  ),
+			  customComponent: ({onChange, label}) => {
+			    return (
+					<CustomComponent onChange={onChange} formData={formData} label={label}  />
+			  )},
 			  customRating: ({ onChange }) => (
 					<CustomRating onChange={onChange} formData={formData} />
 			  ),

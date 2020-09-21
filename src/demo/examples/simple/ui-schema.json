@@ -16,6 +16,9 @@
 			"useLocaleString": "nl"
 		}
 	},
+	"customComponent": {
+		"custom:label": "Custom label"
+	},
 	"age": {
 		"ui:widget": "updown",
 		"ui:title": "Age of person",
