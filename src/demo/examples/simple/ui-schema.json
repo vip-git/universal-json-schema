@@ -9,7 +9,8 @@
 	},
 	"react-select": {
 		"ui:widget": "material-select",
-		"ui:isClearable": true
+    "ui:isClearable": true,
+    "ui:placeholder": "Test me now"
 	},
 	"currency": {
 		"ui:options": {

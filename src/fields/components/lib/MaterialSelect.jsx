@@ -199,6 +199,7 @@ class IntegrationReactSelect extends React.Component {
                 shrink: true,
               },
             }}
+            placeholder={this.props.placeholder}
             isClearable={this.props.isClearable}
             isDisabled={this.props.isDisabled}
             options={this.props.suggestions}

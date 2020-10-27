@@ -140,6 +140,7 @@ export default ({ schema = {}, uiSchema = {}, isCustomComponent, inputValue, onC
       if (widget === 'material-select' || widget === 'material-multiselect') {
         rv.multiSelect = widget === 'material-multiselect';
         rv.isClearable = uiSchema['ui:isClearable'] || false;
+        rv.placeholder = uiSchema['ui:placeholder'] || '';
       }
 
       if (widget === 'creatable-select') {
