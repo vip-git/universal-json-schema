@@ -10,7 +10,7 @@
 	"react-select": {
 		"ui:widget": "material-select",
     "ui:isClearable": true,
-    "ui:placeholder": "Test me now"
+    "ui:placeholder": "Example Placeholder"
 	},
 	"currency": {
 		"ui:options": {

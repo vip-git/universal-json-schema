@@ -41,7 +41,7 @@ const stringify = (val, depth, replacer, space, onGetObjID) => {
   }
   const stageVal = _build(val, depth);
   const finalVal = (JSON.stringify(stageVal) === '{}') ? null : stageVal;
-  return JSON.stringify(finalVal, null, space);
+  return finalVal && JSON.stringify(finalVal, null, space) || '';
 };
 
 const coerceValue = (type, value, options = false) => {
