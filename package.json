@@ -11,7 +11,7 @@
 	"scripts": {
 		"build": "webpack",
 		"build:demo": "cross-env NODE_ENV=production webpack --env.NODE_ENV=production --config webpack.config.demo.js",
-		"test": "npm run test:ci -- --watch",
+		"test": "npm run test:ci",
 		"heroku-postbuild": "npm run build:demo",
 		"now-build": "npm run build:demo",
 		"start": "cross-env NODE_ENV=development node src/demo/server.js",

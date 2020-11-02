@@ -22,8 +22,7 @@
     },
     "customRating": {
       "type": "integer",
-      "title": "Custom Rating",
-      "component": "customRating"
+      "title": "Custom Rating"
     },
     "currency": {
       "type": "number",

@@ -9,7 +9,9 @@ export default ({ schema, uiSchema = {}, components }) => {
   // console.log('getComponent schema: %o, uiSchema: %o', schema, uiSchema);
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'];
-  const { type, component } = schema;
+  const newComponent = uiSchema['ui:component'];
+  const { type, component: backwardsCompatibleComponent } = schema;
+  const component = backwardsCompatibleComponent || newComponent;
 
   if (
     component

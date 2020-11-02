@@ -97,19 +97,20 @@ export default ({ schema = {}, uiSchema = {}, isCustomComponent, inputValue, onC
     ? {
       type: getInputType(type, uiSchema),
       onChange:
-            !isCustomComponent
-            && onChange
-            && onChangeHandler(onChange, type, widget, options),
+					!isCustomComponent
+					&& onChange
+					&& onChangeHandler(onChange, type, widget, options),
       onKeyDown,
       ...getMuiProps(uiSchema),
       ...isCustomComponent({ onChange }).props,
+      ...options,
 		  }
     : {
       type: getInputType(type, uiSchema),
       onChange:
-            !isCustomComponent
-            && onChange
-            && onChangeHandler(onChange, type, widget, options),
+					!isCustomComponent
+					&& onChange
+					&& onChangeHandler(onChange, type, widget, options),
       onKeyDown,
       ...getMuiProps(uiSchema),
 		  };

@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box';
 export default function SimpleRating({
   value: givenValue,
   persistData,
+  color,
 }) {
   const [value, setValue] = React.useState(givenValue || 0);
 
@@ -21,6 +22,9 @@ export default function SimpleRating({
 					onChange={(event, newValue) => {
 					  setValue(newValue);
 					  persistData(newValue);
+					}}
+					style={{
+					  color,
 					}}
 				/>
 			</Box>

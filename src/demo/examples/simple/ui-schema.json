@@ -9,8 +9,8 @@
 	},
 	"react-select": {
 		"ui:widget": "material-select",
-    "ui:isClearable": true,
-    "ui:placeholder": "Example Placeholder"
+		"ui:isClearable": true,
+		"ui:placeholder": "Example Placeholder"
 	},
 	"currency": {
 		"ui:options": {
@@ -44,6 +44,12 @@
 	},
 	"creatableSelectTest": {
 		"ui:widget": "creatable-select"
+	},
+	"customRating": {
+		"ui:component": "customRating",
+		"ui:options": {
+			"color": "red"
+		}
 	},
 	"telephone": {
 		"ui:options": {

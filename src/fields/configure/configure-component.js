@@ -12,13 +12,15 @@ const getClassName = ({ uiSchema = {} }) => {
 export default (props) => {
   const { schema, uiSchema = {}, components } = props;
   const title = uiSchema['ui:title'] || schema.title;
-  const component = (schema && 'component' in schema) && schema.component;
+  const backwardsCompatibleComponent = (schema && 'component' in schema) && schema.component;
+  const newComponent = uiSchema['ui:component'];
+  const component = backwardsCompatibleComponent || newComponent;
   const isCustomComponent = (component 
       && components 
       && component in components 
       && components[component]) 
       || false;
-
+      
   if (isCustomComponent && typeof isCustomComponent === 'function') {
     // eslint-disable-next-line no-param-reassign
     props.isCustomComponent = isCustomComponent;

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-tabs */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable max-len */
@@ -24,12 +25,13 @@ const CustomComponent = ({ onChange, formData }) => {
   );
 };
 
-const CustomRating = ({ onChange, formData }) => (
+const CustomRating = ({ onChange, formData, ...rest }) => (
 	<SimpleRating
 		id='standard-basic'
 		label='Standard'
 		value={formData.customRating}
-		persistData={onChange}
+    persistData={onChange}
+    {...rest}
 	/>
 );
 
@@ -52,11 +54,11 @@ const FormComponent = React.memo(
 			onUpload={onUpload}
 			onChange={onFormChanged}
 			components={{
-			  customComponent: ({ onChange }) => (
-					<CustomComponent onChange={onChange} formData={formData} />
+			  customComponent: ({ onChange, ...rest }) => (
+					<CustomComponent onChange={onChange} formData={formData} {...rest} />
 			  ),
-			  customRating: ({ onChange }) => (
-					<CustomRating onChange={onChange} formData={formData} />
+			  customRating: ({ onChange, ...rest }) => (
+					<CustomRating onChange={onChange} formData={formData} {...rest} />
 			  ),
 			}}
 			submitOnEnter
