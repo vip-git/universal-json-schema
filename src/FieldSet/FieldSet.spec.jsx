@@ -11,12 +11,12 @@ import sinonChai from 'sinon-chai';
 import IconButton from '@material-ui/core/IconButton';
 import {
   RawFieldSet,
-  RawFieldSetObject,
-  FieldSetArray, RawFieldSetArray,
   FieldSetContent,
-  ReorderableFormField, RawReorderableFormField,
-  ReorderControls, RawReorderControls,
 } from './FieldSet';
+import FieldSetArray, { RawFieldSetArray } from './FieldSetArray';
+import { RawFieldSetObject } from './FieldSetObject';
+import ReorderableFormField, { RawReorderableFormField } from './ReorderableFormField';
+import ReorderControls, { RawReorderControls } from './ReorderControls';
 import FormField from '../FormField';
 
 const classes = {
@@ -117,9 +117,9 @@ describe('FieldSet', () => {
       const onMoveItemUp = sinon.stub();
       const onMoveItemDown = sinon.stub();
       const onDeleteItem = sinon.stub();
-      forEach([0, 1], i => onMoveItemUp.withArgs(path, startIdx + i).returns(`moveUp${i}`));
-      forEach([0, 1], i => onMoveItemDown.withArgs(path, startIdx + i).returns(`moveDown${i}`));
-      forEach([0, 1], i => onDeleteItem.withArgs(path, startIdx + i).returns(`deleteItem${i}`));
+      forEach([0, 1], (i) => onMoveItemUp.withArgs(path, startIdx + i).returns(`moveUp${i}`));
+      forEach([0, 1], (i) => onMoveItemDown.withArgs(path, startIdx + i).returns(`moveDown${i}`));
+      forEach([0, 1], (i) => onDeleteItem.withArgs(path, startIdx + i).returns(`deleteItem${i}`));
       const uiSchema = {
         items: {
           'ui:widget': 'textarea',
@@ -266,7 +266,7 @@ describe('FieldSet', () => {
         expect(ffComp.at(i)).to.not.have.prop('onMoveItemDown');
         expect(ffComp.at(i)).to.not.have.prop('onDeleteItem');
       });
-      const fsArrayComp = wrapper.find(FieldSetArray);
+      const fsArrayComp = wrapper.find('e');
       expect(fsArrayComp).to.be.present();
       expect(fsArrayComp).to.have.prop('path', path);
       expect(fsArrayComp).to.have.prop('data').deep.equal(['Harry', 'Susan']);
@@ -292,9 +292,9 @@ describe('FieldSet', () => {
           onDeleteItem={onDeleteItem}
           onMoveItemUp={onMoveItemUp}
           classes={classes}
+          canReorder
         />,
       );
-
       // check
       expect(wrapper).to.have.length(1);
       const buttonList = wrapper.find(IconButton);
@@ -309,7 +309,7 @@ describe('FieldSet', () => {
     it('ReorderControls - first', () => {
       // act
       const wrapper = shallow(
-        <RawReorderControls first last={false} classes={classes} />,
+        <RawReorderControls first last={false} classes={classes} canReorder />,
       );
 
       // check
@@ -323,7 +323,7 @@ describe('FieldSet', () => {
     it('ReorderControls - last', () => {
       // act
       const wrapper = shallow(
-        <RawReorderControls first={false} last classes={classes} />,
+        <RawReorderControls first={false} last classes={classes} canReorder />,
       );
 
       // check

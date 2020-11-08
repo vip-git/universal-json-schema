@@ -44,10 +44,10 @@ export class RawConfiguredField extends React.Component {
 			{LabelComponent && title && !isCustomComponent && (
 					<LabelComponent
 						id={`${htmlid}-labelControl`}
-						{...labelComponentProps}
 						style={{
 							left: 10
 						}}
+						{...labelComponentProps}
 					>
 						{title}
 					</LabelComponent>

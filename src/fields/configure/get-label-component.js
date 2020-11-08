@@ -3,16 +3,45 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 const InputLabel = require('@material-ui/core/InputLabel').default;
 
-
 export default ({ schema, uiSchema = {} }) => {
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'];
-  const { type } = schema;
+  
+  const nonInputTypes = [
+    'boolean',
+    'upload',
+    'material-date',
+    'material-time',
+    'material-datetime',
+  ];
+  
+  const nonInputWidgets = [
+    'checkboxes',
+    'creatable-select',
+    'material-multiselect',
+    'material-select',
+  ];
+
+  const nonInputOptions = ['rich-text-editor'];
 
   if (schema.enum && widget === 'radio') {
     return FormLabel;
   }
-  // boolean
-  if (type === 'boolean' || type === 'upload' || widget === 'checkboxes' || options === 'rich-text-editor' || type === 'material-date' || widget === 'creatable-select' || widget === 'material-multiselect' || widget === 'material-select' || type === 'material-time' || type === 'material-datetime') return null;
+  
+  if (options && nonInputOptions.includes(options)) {
+    return null;
+  }
+  
+  if (widget && nonInputWidgets.includes(widget)) {
+    return null;
+  }
+  
+  if (schema && schema.type) {
+    const { type } = schema;
+    if (nonInputTypes.includes(type)) {
+      return null;
+    }
+  }
+
   return InputLabel;
 };

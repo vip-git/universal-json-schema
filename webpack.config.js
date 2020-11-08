@@ -41,6 +41,7 @@ var config = {
 		// new BundleAnalyzerPlugin()
 		new CompressionPlugin()
 	],
+	target: 'node',
 	optimization: {
 		minimize: true
 	}

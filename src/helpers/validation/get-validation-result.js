@@ -19,15 +19,15 @@ const validationResult = (schema, value) => {
 
 const getFieldSpec = (schema, value) => {
   if (value === null) {
-    return { $set: [] };
+    return [];
   }
-  if (typeof value === 'number') {
-    return { $set: validationResult(schema, value) };
+  if (typeof value === 'number' || typeof value === 'string') {
+    return validationResult(schema, value);
   }
   return mapValues(schema.properties, (s, p) => getFieldSpec(s, value[p]));
 };
 
 export default (schema, data) => {
   const spec = getFieldSpec(schema, data);
-  return Object.create({}, spec);
+  return { ...spec };
 };

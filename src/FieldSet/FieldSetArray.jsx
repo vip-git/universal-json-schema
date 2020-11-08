@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import includes from 'lodash/includes';
 import slice from 'lodash/slice';
@@ -15,14 +16,14 @@ export const RawFieldSetArray = (props) => {
     startIdx = 0, className, classes,
     schema = {}, uiSchema = {}, data, path, onMoveItemUp, onMoveItemDown, onDeleteItem, ...rest
   } = props;
+  const canReorder = uiSchema && uiSchema['ui:options'] && uiSchema['ui:options'].canReorder;
   return (
     <div className={classes.root}>
       {!isArray(schema.items) && !schema.uniqueItems && (
         <div>
           {(data || []).map((d, idx) => (
             <ReorderableFormField
-              key={`${path}[${idx}]` // eslint-disable-line react/no-array-index-key
-              }
+              key={`${path + idx}`}
               path={`${path}[${startIdx + idx}]`}
               required={schema.required}
               schema={schema.items}
@@ -33,56 +34,62 @@ export const RawFieldSetArray = (props) => {
               uiSchema={uiSchema.items}
               first={idx === 0}
               last={idx === data.length - 1}
+              canReorder
               {...rest}
             />
           ))}
           <div className={classes.addItemBtn}>
             <IconButton onClick={rest.onAddItem && rest.onAddItem(path, getDefaultValue(schema.items))}>
-              <AddCircle /> { schema.items.title }
+              <AddCircle /> 
+                {' '}
+                { schema.items.title }
             </IconButton>
           </div>
         </div>
       )}
       {isArray(schema.items) && (data || []).map((d, idx) => {
         if (idx < schema.items.length) {
-          return (<FormField
-            key={`${path}[${idx}]` // eslint-disable-line react/no-array-index-key
-            }
-            path={`${path}[${startIdx + idx}]`}
-            required={schema.required}
-            schema={schema.items[idx]}
-            data={d}
-            uiSchema={(uiSchema.items || [])[idx]}
-            {...rest}
-          />);
+          return (
+            <FormField
+                key={`${path + idx}`}
+                path={`${path}[${startIdx + idx}]`}
+                required={schema.required}
+                schema={schema.items[idx]}
+                data={d}
+                uiSchema={(uiSchema.items || [])[idx]}
+                {...rest}
+            />
+          );
         }
         return null;
       })}
-      {(!isArray(schema.items) && schema.uniqueItems && schema.items.enum) && schema.items.enum.map(d => (<FormField
-        key={`${path}[${d}]` // eslint-disable-line react/no-array-index-key
-        }
-        path={`${path}`}
-        required={schema.required}
-        schema={{ ...schema.items, title: d }}
-        data={includes(data, d)}
-        uiSchema={uiSchema}
-        {...rest}
-      />))}
-      {schema.additionalItems &&
-        <RawFieldSetArray
-          classes={classes}
-          path={path}
-          startIdx={2}
+      {(!isArray(schema.items) && schema.uniqueItems && schema.items.enum) && schema.items.enum.map((d) => (
+        <FormField
+          key={`${path + d}`}
+          path={`${path}`}
           required={schema.required}
-          schema={{ type: 'array', items: schema.additionalItems }}
-          data={slice(data, schema.items.length)}
-          uiSchema={uiSchema.additionalItems}
-          onMoveItemUp={onMoveItemUp}
-          onMoveItemDown={onMoveItemDown}
-          onDeleteItem={onDeleteItem}
+          schema={{ ...schema.items, title: d }}
+          data={includes(data, d)}
+          uiSchema={uiSchema}
           {...rest}
         />
-      }
+      ))}
+      {schema.additionalItems
+        && (
+          <RawFieldSetArray
+            classes={classes}
+            path={path}
+            startIdx={2}
+            required={schema.required}
+            schema={{ type: 'array', items: schema.additionalItems }}
+            data={slice(data, schema.items.length)}
+            uiSchema={uiSchema.additionalItems}
+            onMoveItemUp={onMoveItemUp}
+            onMoveItemDown={onMoveItemDown}
+            onDeleteItem={onDeleteItem}
+            {...rest}
+          />
+        )}
     </div>
   );
 };

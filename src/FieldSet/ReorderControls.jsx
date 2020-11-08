@@ -6,11 +6,24 @@ import RemoveCircle from '@material-ui/icons/Close';
 import { withStyles } from '@material-ui/core/styles';
 import fieldSetStyles from './field-set-styles';
 
-export const RawReorderControls = ({ first, last, classes, onMoveItemUp, onMoveItemDown, onDeleteItem }) => (
+export const RawReorderControls = (
+  { 
+    first,
+    last,
+    classes,
+    onMoveItemUp,
+    onMoveItemDown,
+    onDeleteItem,
+    canReorder,
+  },
+) => (
   <div className={classes.root}>
-    {/* Needs improvement - we will enable this later in stage !
-    <IconButton className={classes.up} onClick={onMoveItemUp} disabled={first}><ArrowUpward /></IconButton>
-    <IconButton className={classes.down} onClick={onMoveItemDown} disabled={last}><ArrowDownward /></IconButton> */}
+    {canReorder && (
+      <div>
+        <IconButton className={classes.up} onClick={onMoveItemUp} disabled={first}><ArrowUpward /></IconButton>
+        <IconButton className={classes.down} onClick={onMoveItemDown} disabled={last}><ArrowDownward /></IconButton>
+      </div>
+    )}
     <IconButton className={classes.remove} onClick={onDeleteItem}><RemoveCircle /></IconButton>
   </div>
 );

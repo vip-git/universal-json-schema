@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -6,7 +7,16 @@ import fieldSetStyles from './field-set-styles';
 import ReorderControls from './ReorderControls';
 
 export const RawReorderableFormField = ({
-  first, last, className, classes, path, onMoveItemUp, onMoveItemDown, onDeleteItem, ...rest
+  first, 
+  last, 
+  className, 
+  classes, 
+  path, 
+  onMoveItemUp, 
+  onMoveItemDown, 
+  onDeleteItem, 
+  canReorder,
+  ...rest
 }) => (
   <div className={classNames(className, classes.root)}>
     <FormField
@@ -19,6 +29,7 @@ export const RawReorderableFormField = ({
       onMoveItemUp={onMoveItemUp}
       onMoveItemDown={onMoveItemDown}
       onDeleteItem={onDeleteItem}
+      canReorder={canReorder}
     />
   </div>
 );

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* globals describe,it */
 /* eslint-disable no-unused-expressions */
 import React from 'react';
@@ -12,7 +13,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { RadioGroup } from './components';
-import { ConfiguredField } from './Field';
+import ConfiguredField from './ConfiguredField';
 
 const classes = {
   description: 'description',
@@ -34,7 +35,8 @@ describe('Field', () => {
     const type = 'string';
     const wrapper = shallow(
       <ConfiguredField type={type} data={data} classes={classes} componentProps={componentProps} />,
-    );
+    ).find('RawConfiguredField').dive();
+    
     // test FormControl properties
     const FC = wrapper.find(FormControl);
     expect(FC).to.have.length(1);
@@ -52,13 +54,14 @@ describe('Field', () => {
     expect(Component).to.not.have.prop('className'); // control
   });
   it('applies given className', () => {
-    const wrapper = shallow(<ConfiguredField classes={classes} className={'myComp'} />);
+    const wrapper = shallow(<ConfiguredField classes={classes} className={'myComp'} />)
+      .find('RawConfiguredField').dive();
     const Component = wrapper.find(Input);
     expect(Component).to.be.present();
-    expect(Component).to.have.prop('className', classes.myComp);
+    expect(Component).to.have.prop('className').contain('myComp');
   });
   it('renders provided Component', () => {
-    const wrapper = shallow(<ConfiguredField Component={RadioGroup} />);
+    const wrapper = shallow(<ConfiguredField Component={RadioGroup} />).find('RawConfiguredField').dive();
     expect(wrapper.find(Input)).to.not.be.present();
     expect(wrapper.find(RadioGroup)).to.be.present();
   });
@@ -71,7 +74,7 @@ describe('Field', () => {
 
     const wrapper = shallow(
       <ConfiguredField title={title} labelComponentProps={labelComponentProps} LabelComponent={DummyLabel} />,
-    );
+    ).find('RawConfiguredField').dive();
 
     const labelComp = wrapper.find(DummyLabel);
     expect(labelComp).to.be.present();
@@ -81,17 +84,17 @@ describe('Field', () => {
   });
   it('renders provided descriptionText', () => {
     const descriptionText = 'This is a field';
-    const wrapper = shallow(<ConfiguredField classes={classes} descriptionText={descriptionText} />);
+    const wrapper = shallow(<ConfiguredField classes={classes} descriptionText={descriptionText} />).find('RawConfiguredField').dive();
 
     const descriptionComp = wrapper.find('p');
     expect(descriptionComp).to.have.length(1);
-    expect(descriptionComp).to.have.prop('className', classes.description);
+    expect(descriptionComp).to.have.prop('className').contain(classes.description);
     expect(descriptionComp).to.have.text(descriptionText);
   });
   it('renders provided helpText', () => {
     const helpText = 'Help! I need somebody!';
     const id = 'unq-id';
-    const wrapper = shallow(<ConfiguredField id={id} helpText={helpText} />);
+    const wrapper = shallow(<ConfiguredField id={id} helpText={helpText} />).find('RawConfiguredField').dive();
 
     const helpComp = wrapper.find(FormHelperText);
     expect(helpComp).to.be.present();
@@ -105,14 +108,14 @@ describe('Field', () => {
     const componentProps = {
       onChange,
     };
-    const wrapper = shallow(<ConfiguredField componentProps={componentProps} data={data} />);
+    const wrapper = shallow(<ConfiguredField componentProps={componentProps} data={data} />).find('RawConfiguredField').dive();
 
     const inputComp = wrapper.find(Input);
     inputComp.simulate('change', 'value');
     expect(onChange).to.be.calledWith('value');
   });
   it('has withLabel className ', () => {
-    const wrapper = shallow(<ConfiguredField LabelComponent={FormLabel} classes={classes} />);
+    const wrapper = shallow(<ConfiguredField LabelComponent={FormLabel} classes={classes} />).find('RawConfiguredField').dive();
 
     expect(wrapper).prop('className').match(/withLabelClass/);
   });

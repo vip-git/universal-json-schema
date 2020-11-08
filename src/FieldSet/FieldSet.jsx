@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import classNames from 'classnames';
 import endsWith from 'lodash/endsWith';
@@ -7,7 +8,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import fieldSetStyles from './field-set-styles';
 import FieldSetArray from './FieldSetArray';
 import FieldSetObject from './FieldSetObject';
-
 
 export const RawFieldSetContent = (props) => {
   const { schema = {} } = props;
@@ -20,8 +20,8 @@ export const RawFieldSetContent = (props) => {
   }
   return null;
 };
-export const FieldSetContent = withStyles(fieldSetStyles.fieldSetContent)(RawFieldSetContent);
 
+export const FieldSetContent = withStyles(fieldSetStyles.fieldSetContent)(RawFieldSetContent);
 
 // for unit testing
 export class RawFieldSet extends React.Component {
@@ -31,10 +31,14 @@ export class RawFieldSet extends React.Component {
     const { className, path, classes, schema = {}, hideTitle, idxKey } = this.props;
     return (
       <fieldset className={classNames(className, classes.root, { [classes.listItem]: endsWith(path, ']') })}>
-        {schema.title && (Number.isNaN(parseInt(path.replace(/[^\d.]/g, ''), 0)) || parseInt(path.replace(/[^\d.]/g, ''), 0) === 0)
-          && <InputLabel> 
-          {schema.title}
-          </InputLabel>}
+        {schema.title 
+        && (Number.isNaN(parseInt(path.replace(/[^\d.]/g, ''), 0)) 
+        || parseInt(path.replace(/[^\d.]/g, ''), 0) === 0)
+          && (
+              <InputLabel> 
+                {schema.title}
+              </InputLabel>
+          )}
         <FieldSetContent path={path} {...this.props} />
       </fieldset>
     );

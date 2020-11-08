@@ -18,10 +18,10 @@ export default (props) => {
     isCustomComponent,
   } = configureComponent({ ...props, htmlid });
 
-  const descriptionText = uiSchema['ui:description'];
-  const activeCompColor = uiSchema['ui:activeCompColor'];
-  const helpText = uiSchema['ui:help'];
-  const isHidden = uiSchema['mui:type'] === 'hidden';
+  const descriptionText = uiSchema && uiSchema['ui:description'];
+  const activeCompColor = uiSchema && uiSchema['ui:activeCompColor'];
+  const helpText = uiSchema && uiSchema['ui:help'];
+  const isHidden = uiSchema && uiSchema['mui:type'] === 'hidden';
   return (
 		<ConfiguredField
 			id={id}

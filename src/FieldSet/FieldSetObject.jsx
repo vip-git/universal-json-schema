@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable max-len */
 import React from 'react';
 import classNames from 'classnames';
 import keys from 'lodash/keys';
