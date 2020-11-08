@@ -34,7 +34,7 @@ export const RawFieldSetArray = (props) => {
               uiSchema={uiSchema.items}
               first={idx === 0}
               last={idx === data.length - 1}
-              canReorder
+              canReorder={canReorder}
               {...rest}
             />
           ))}

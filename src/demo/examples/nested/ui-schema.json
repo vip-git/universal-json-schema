@@ -1,5 +1,8 @@
 {
   "tasks": {
+    "ui:options": {
+      "canReorder": true
+    },
     "items": {
       "details": {
         "ui:widget": "textarea"

@@ -24,7 +24,14 @@ export const RawReorderControls = (
         <IconButton className={classes.down} onClick={onMoveItemDown} disabled={last}><ArrowDownward /></IconButton>
       </div>
     )}
-    <IconButton className={classes.remove} onClick={onDeleteItem}><RemoveCircle /></IconButton>
+    <IconButton
+      className={
+        canReorder ? [classes.remove, classes.removeCanReorder].join(' ') : classes.remove
+      }
+      onClick={onDeleteItem}
+    >
+<RemoveCircle />
+    </IconButton>
   </div>
 );
 export default withStyles(fieldSetStyles.reorderControls)(RawReorderControls);

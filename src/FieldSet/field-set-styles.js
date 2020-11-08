@@ -59,6 +59,10 @@ export default {
 		root: {
 			display: 'flex',
 			border: `1px solid ${theme.palette.grey[400]}`,
+			alignItems: 'center',
+			borderRadius: 5,
+			alignSelf: 'flex-start',
+			marginTop: 7,
 			borderRadius: 5,
 			'& >button': {
 				borderRadius: 0,
@@ -75,6 +79,9 @@ export default {
 			'& >span': {
 				position: 'absolute',
 			},
+		},
+		removeCanReorder: {
+			marginRight: 10,
 		},
 	}),
 	fieldSetContent: {
