@@ -5,7 +5,9 @@
 	},
 	"selectTest": {
 		"ui:widget": "material-multiselect",
-		"mui:inputProps": { "className": "money" }
+		"mui:inputProps": { 
+			"className": "money" 
+		}
 	},
 	"react-select": {
 		"ui:widget": "material-select",
@@ -36,7 +38,14 @@
 	},
 	"password": {
 		"ui:widget": "password",
-		"ui:help": "Hint: Make it strong!"
+		"ui:help": "Hint: Make it strong!",
+		"ui:validations": {
+      		"minLength": {
+				"value": 3,
+				"message": "'Password' must be at least 3 characters",
+				"inline": true
+			}
+		}
 	},
 	"date": {
 		"ui:activeCompColor": "red",
@@ -54,6 +63,13 @@
 	"telephone": {
 		"ui:options": {
 			"inputType": "tel"
+		},
+		"ui:validations": {
+      		"minLength": {
+				"value": 10,
+				"message": "'Telephone' must be at least 10 digits",
+				"inline": true
+			}
 		}
 	}
 }

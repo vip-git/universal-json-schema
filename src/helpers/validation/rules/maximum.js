@@ -1,6 +1,10 @@
-export default (schema, value) => {
-  if (schema.maximum && typeof value === 'number' && value > schema.maximum) {
-    return ({ message: `'${schema.title}' should be <= ${schema.maximum}` });
-  }
-  return null;
+export default (schema, uiSchema, value) => {
+	const isRuleInValid = (maximum) => typeof value === 'number' && value > maximum;
+	return {
+		ruleName: 'maximum',
+		schema,
+		uiSchema,
+		isRuleInValid,
+		errorMessage: `'${schema.title}' should be <= ${schema.maximum}`,
+	};
 };

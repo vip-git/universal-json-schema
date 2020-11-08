@@ -54,7 +54,18 @@
     "selectTest": {
       "type": "string",
       "title": "Example Multi Select",
-      "enum": [{"key": "Yes","style": {"borderBottom": "solid 1px black"}, "value": "Yes", "disabled": true}, "No", "etetet"]
+      "enum": [
+        {
+          "key": "Yes",
+          "style": {
+            "borderBottom": "solid 1px black"
+          },
+          "value": "Yes", 
+          "disabled": true
+        },
+        "No",
+        "etetet"
+      ]
     },
     "bio": {
       "type": "string",
@@ -71,8 +82,7 @@
     },
     "telephone": {
       "type": "string",
-      "title": "Telephone",
-      "minLength": 10
+      "title": "Telephone"
     }
   }
 }

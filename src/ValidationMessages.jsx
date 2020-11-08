@@ -13,8 +13,7 @@ const Validation = ({ validation }) => (
 
 const Validations = ({ validation }) => (
   <div>
-    {validation.map((v, idx) => (<Validation key={idx} validation={v} />)) // eslint-disable-line react/no-array-index-key,max-len
-    }
+    {validation.map((v, idx) => !v.inline && (<Validation key={`${v + idx}`} validation={v} />))}
   </div>
 );
 const ValidationMessages = ({ validation }) => (
@@ -22,10 +21,9 @@ const ValidationMessages = ({ validation }) => (
     {validation && filter(keys(validation), (k) => {
       const v = validation[k];
       return v && v.length > 0;
-    }).map(v => (
+    }).map((v) => (
       <Validations key={v} validation={validation[v]} />
-    ))
-    }
+    ))}
   </div>
 );
 

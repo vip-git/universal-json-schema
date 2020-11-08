@@ -28,7 +28,9 @@ export class RawConfiguredField extends React.Component {
 			id,
 			htmlid,
 			isHidden,
-		    isCustomComponent,
+			isCustomComponent,
+			hasError,
+			hasInlineError
 		} = this.props;
     return (
 			<FormControl
@@ -71,10 +73,11 @@ export class RawConfiguredField extends React.Component {
 					className={className && classes[className]}
 					value={data}
 					type={type}
+					error={hasError && true || false}
 					{...componentProps}
 				/>
 				{helpText && !isCustomComponent && (
-					<FormHelperText id={`${id}-help`}>{helpText}</FormHelperText>
+					<FormHelperText error={hasInlineError && true || false} id={`${id}-help`}>{helpText}</FormHelperText>
 				)}
 			</FormControl>
 		);

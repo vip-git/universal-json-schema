@@ -5,7 +5,7 @@ import configureComponent from './configure';
 import ConfiguredField from './ConfiguredField';
 
 export default (props) => {
-  const { path, id, schema, data, uiSchema } = props;
+  const { path, id, schema, data, uiSchema, validation } = props;
   const { type } = schema;
   const htmlid = `${id}_${path}`;
   const {
@@ -20,7 +20,8 @@ export default (props) => {
 
   const descriptionText = uiSchema && uiSchema['ui:description'];
   const activeCompColor = uiSchema && uiSchema['ui:activeCompColor'];
-  const helpText = uiSchema && uiSchema['ui:help'];
+  const hasInlineError = validation && validation.length && validation.find((vd) => vd.inline === true);
+  const helpText = hasInlineError ? hasInlineError.message : uiSchema && uiSchema['ui:help'];
   const isHidden = uiSchema && uiSchema['mui:type'] === 'hidden';
   return (
 		<ConfiguredField
@@ -38,7 +39,9 @@ export default (props) => {
 			helpText={helpText}
 			htmlid={htmlid}
 			isHidden={isHidden}
-		  isCustomComponent={isCustomComponent}
+      isCustomComponent={isCustomComponent}
+      hasError={validation && validation.length}
+      hasInlineError={hasInlineError}
 		/>
   );
 };

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/state-in-constructor */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable max-len */
@@ -23,7 +24,7 @@ export const UploadContext = React.createContext('upload');
 class Form extends React.Component {
   state = {
     data: this.props.formData,
-    validation: getValidationResult(this.props.schema, this.props.formData),
+    validation: getValidationResult(this.props.schema, this.props.uiSchema, this.props.formData),
     id: this.props.prefixId || generate(),
   }
 
@@ -33,7 +34,7 @@ class Form extends React.Component {
       validation = {};
     }
     else {
-      validation = getValidationResult(this.props.schema, nextProps.formData);
+      validation = getValidationResult(this.props.schema, this.props.uiSchema, nextProps.formData);
     }
     this.setState({
       validation,
@@ -45,7 +46,7 @@ class Form extends React.Component {
     const data = updateFormData(this.state.data, field, value);
     this.setState({
       data,
-      validation: getValidationResult(this.props.schema, data),
+      validation: getValidationResult(this.props.schema, this.props.uiSchema, data),
     }, this.notifyChange);
   }
 

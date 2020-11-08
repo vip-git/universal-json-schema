@@ -1,8 +1,12 @@
 import size from 'lodash/size';
 
-export default (schema, value) => {
-  if ((schema.minLength !== undefined) && (size(value) < schema.minLength)) {
-    return ({ message: `'${schema.title}' must be at least ${schema.minLength}` });
-  }
-  return null;
+export default (schema, uiSchema, value) => {
+  const isRuleInValid = (minLength) => size(value) < minLength;
+  return {
+	ruleName: 'minLength',
+	schema,
+	uiSchema,
+	isRuleInValid,
+	errorMessage: `'${schema.title}' must be at least ${schema.minLength}`,
+  };
 };
