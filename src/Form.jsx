@@ -24,7 +24,7 @@ export const UploadContext = React.createContext('upload');
 class Form extends React.Component {
   state = {
     data: this.props.formData,
-    validation: getValidationResult(this.props.schema, this.props.uiSchema, this.props.formData),
+    validation: getValidationResult(this.props.schema, this.props.uiSchema, this.props.formData, this.props.validations),
     id: this.props.prefixId || generate(),
   }
 
@@ -34,7 +34,7 @@ class Form extends React.Component {
       validation = {};
     }
     else {
-      validation = getValidationResult(this.props.schema, this.props.uiSchema, nextProps.formData);
+      validation = getValidationResult(nextProps.schema, nextProps.uiSchema, nextProps.formData, this.props.validations);
     }
     this.setState({
       validation,
@@ -46,7 +46,7 @@ class Form extends React.Component {
     const data = updateFormData(this.state.data, field, value);
     this.setState({
       data,
-      validation: getValidationResult(this.props.schema, this.props.uiSchema, data),
+      validation: getValidationResult(this.props.schema, this.props.uiSchema, data, this.props.validations),
     }, this.notifyChange);
   }
 

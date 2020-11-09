@@ -61,6 +61,12 @@ const FormComponent = React.memo(
 					<CustomRating onChange={onChange} formData={formData} {...rest} />
 			  ),
 			}}
+      validations={{
+        confirmPassword: (givenSchema, givenUISchema, value) => value !== formData.pass1 && ({
+          message: givenUISchema['ui:validations'].confirmPassword.message,
+          inline: true,
+        }),
+      }}
 			submitOnEnter
 			activityIndicatorEnabled
 		/>
