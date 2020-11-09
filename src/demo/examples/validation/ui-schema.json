@@ -7,7 +7,7 @@
     "ui:validations": {
       "confirmPassword": {
 				"message": "Both passwords should be the same (2)",
-				"inline": false
+				"inline": true
       }
     }
   }
