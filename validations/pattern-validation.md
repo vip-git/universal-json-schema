@@ -9,9 +9,9 @@
   "description": "A simple form example.",
   "type": "object",
   "properties": {
-    "telephone": {
+    "email": {
       "type": "string",
-      "title": "Telephone"
+      "title": "Email"
     }
   }
 }
@@ -22,11 +22,11 @@
 {% code title="UISchema.json" %}
 ```javascript
 {
-	"telephone": {
+	"email": {
 		"ui:validations": {
-      "minLength": {
-				"value": 10,
-				"message": "'Telephone' must be at least 10 digits",
+      "pattern": {
+				"value": "[a-zA-Z]{1}[a-zA-Z\\-\\+_]@[a-zA-Z\\-_]+\\.com",
+				"message": "Please enter valid email",
 				"inline": true
 			}
 		}
