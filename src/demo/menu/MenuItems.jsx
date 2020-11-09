@@ -20,7 +20,7 @@ export default withStyles(menuStyles)(({ toggleDrawer, classes, onSelectMenuItem
     <List subheader={<ListSubheader component='div'>Showcase</ListSubheader>}>
       {keys(examples).map((e) => (
         <ListItem key={e} button>
-          <ListItemText primary={examples[e].title} onClick={onSelectMenuItem(examples[e])} />
+          <ListItemText primary={examples[e].title} onClick={onSelectMenuItem(examples[e], e)} />
         </ListItem>
       ))}
     </List>

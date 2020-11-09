@@ -12,7 +12,15 @@ class Demo extends React.Component {
     selectedDemo: examples.simple,
   }
 
-  onSelectMenuItem = (type) => () => {
+  componentDidMount() {
+    const selectedHash = window.location.hash.replace('#', '');
+    if (examples[selectedHash]) {
+      this.setState({ selectedDemo: examples[selectedHash] });
+    }
+  }
+
+  onSelectMenuItem = (type, keyType) => () => {
+    window.location.hash = keyType;
     this.setState({ selectedDemo: type });
   }
 
