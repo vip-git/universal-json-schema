@@ -19,7 +19,8 @@
   * [Nested Array](docs/nested.md)
   * [Custom components](docs/custom-components/README.md)
     * [Rating Component Example](docs/custom-components/rating-component-example.md)
-* [Validations](validations.md)
+* [Validations](validations/README.md)
+  * [Max Length \(Validation\)](validations/max-length-validation.md)
 * [Back to Github](https://github.com/vip-git/react-jsonschema-form-material-ui)
 * [Demo App](https://react-jsonschema-form-material-ui.github56.now.sh/)
 
