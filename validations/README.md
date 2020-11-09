@@ -10,12 +10,12 @@ Below table provides information on available validation rules
 
 | Rule Name | Schema | UISchema | FormData | Type | **Status** |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Max Length** |     **✅**  |     **✅**  |     **✅**   | Inbuilt |  ****[**Done**](../docs/material-ui-date-time-picker.md)\*\*\*\* |
-| **Min Length** |     **✅**   |     **✅**  |     **✅**   | Inbuilt |  [**Done**](../docs/select-box/react-select.md)\*\*\*\* |
-| **Maximum** |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](../docs/select-box/react-select.md)\*\*\*\* |
-| **Minimum** |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](../docs/select-box/creatable-select.md)\*\*\*\* |
-| **Pattern** |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](../docs/custom-components/rating-component-example.md)\*\*\*\* |
-| **Custom Rule** |     **✅**  |     **✅**   |     **✅**   | Custom |  [**Done**](../docs/custom-components/rating-component-example.md)\*\*\*\* |
+| **Max Length** |     **✅**  |     **✅**  |     **✅**   | Inbuilt |  ****[**Done**](max-length-validation.md)\*\*\*\* |
+| **Min Length** |     **✅**   |     **✅**  |     **✅**   | Inbuilt |  [**Done**](min-length-validation.md)\*\*\*\* |
+| **Maximum** |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](maximum-validation.md)\*\*\*\* |
+| **Minimum** |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](minimum-validation.md)\*\*\*\* |
+| **Pattern** |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](pattern-validation.md)\*\*\*\* |
+| **Custom Rule** |     **✅**  |     **✅**   |     **✅**   | Custom |  [**Done**](custom-validation.md)\*\*\*\* |
 
 ## **Example \(Using Inbuilt rule\)**
 
