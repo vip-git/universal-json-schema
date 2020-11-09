@@ -9,9 +9,9 @@
   "description": "A simple form example.",
   "type": "object",
   "properties": {
-    "telephone": {
-      "type": "string",
-      "title": "Telephone"
+    "integerRange": {
+      "title": "Integer range",
+      "type": "integer"
     }
   }
 }
@@ -22,11 +22,16 @@
 {% code title="UISchema.json" %}
 ```javascript
 {
-	"telephone": {
+	"integerRange": {
 		"ui:validations": {
-      "minLength": {
-				"value": 10,
-				"message": "'Telephone' must be at least 10 digits",
+      "minimum": {
+				"value": 42,
+				"message": "Integer should be in range between 42 and 100",
+				"inline": true
+			}
+			"maximum": {
+				"value": 100,
+				"message": "Integer should be in range between 42 and 100",
 				"inline": true
 			}
 		}
