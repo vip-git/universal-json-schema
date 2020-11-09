@@ -12,9 +12,9 @@ Below table provides information on available validation rules
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Max Length** |     **✅**  |     **✅**  |     **✅**   | Inbuilt |  ****[**Done**](max-length-validation.md)\*\*\*\* |
 | **Min Length** |     **✅**   |     **✅**  |     **✅**   | Inbuilt |  [**Done**](min-length-validation.md)\*\*\*\* |
-| **Maximum** |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](maximum-validation.md)\*\*\*\* |
-| **Minimum** |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](minimum-validation.md)\*\*\*\* |
-| **Pattern** |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](pattern-validation.md)\*\*\*\* |
+| \*\*\*\*[**Maximum**](maximum-validation.md)\*\*\*\* |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](maximum-validation.md)\*\*\*\* |
+| \*\*\*\*[**Minimum**](minimum-validation.md)\*\*\*\* |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](minimum-validation.md)\*\*\*\* |
+| \*\*\*\*[**Pattern**](pattern-validation.md)\*\*\*\* |     **✅**  |     **✅**   |     **✅**   | Inbuilt |  [**Done**](pattern-validation.md)\*\*\*\* |
 | **Custom Rule** |     **✅**  |     **✅**   |     **✅**   | Custom |  [**Done**](custom-validation.md)\*\*\*\* |
 
 ## **Example \(Using Inbuilt rule\)**
