@@ -2,7 +2,7 @@
 description: React jsonschema form comes with inbuilt and custom components
 ---
 
-# Components
+# Documentation
 
 ## Install instructions via npm
 
@@ -30,7 +30,7 @@ npm install --save react-jsonschema-form-material-ui
 
 ### **Example Usage**
 
-> More detailed example can be seen [here](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/src/demo/body/Example.jsx)
+> More detailed example can be seen [here](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/src/demo/body/Example.jsx) and for usage on validations please [**see here**](validations/)\*\*\*\*
 
 ```jsx
 // Library
@@ -73,4 +73,6 @@ class Example extends React.Component {
     }
 }
 ```
+
+
 
