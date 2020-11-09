@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
+import isEqual from 'lodash/isEqual';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
@@ -10,7 +11,7 @@ import fieldStyles from './field-styles';
 
 // for unit testing only
 export class RawConfiguredField extends React.Component {
-  shouldComponentUpdate = nextProps => this.props.data !== nextProps.data
+  shouldComponentUpdate = (nextProps) => !isEqual(this.props, nextProps)
   render() {
     const {
 			classes = {},
@@ -73,11 +74,11 @@ export class RawConfiguredField extends React.Component {
 					className={className && classes[className]}
 					value={data}
 					type={type}
-					error={hasError && true || false}
+					error={hasError && true || undefined}
 					{...componentProps}
 				/>
 				{helpText && !isCustomComponent && (
-					<FormHelperText error={hasInlineError && true || false} id={`${id}-help`}>{helpText}</FormHelperText>
+					<FormHelperText error={hasInlineError && true || undefined} id={`${id}-help`}>{helpText}</FormHelperText>
 				)}
 			</FormControl>
 		);

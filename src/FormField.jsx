@@ -8,7 +8,7 @@ import styles from './form-field-styles';
 
 // exported for unit testing
 export class RawFormField extends React.Component {
-  shouldComponentUpdate = (nextProps) => !isEqual(this.props.data, nextProps.data)
+  shouldComponentUpdate = (nextProps) => !isEqual(this.props, nextProps)
   
   render() {
     const { classes, schema, data, uiSchema = {}, onChange, onKeyDown, path, ...rest } = this.props;

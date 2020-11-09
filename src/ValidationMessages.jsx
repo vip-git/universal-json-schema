@@ -1,4 +1,5 @@
 import React from 'react';
+import Alert from '@material-ui/lab/Alert';
 import { withStyles } from '@material-ui/core/styles';
 import keys from 'lodash/keys';
 import filter from 'lodash/filter';
@@ -6,8 +7,8 @@ import filter from 'lodash/filter';
 const validationStyles = {};
 
 const Validation = ({ validation }) => (
-  <div>
-    <p>{validation.message}</p>
+  <div style={{ marginBottom: 20 }}>
+    <Alert severity='error'>{validation.message}</Alert>
   </div>
 );
 

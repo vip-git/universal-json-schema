@@ -25,7 +25,7 @@ export const FieldSetContent = withStyles(fieldSetStyles.fieldSetContent)(RawFie
 
 // for unit testing
 export class RawFieldSet extends React.Component {
-  shouldComponentUpdate = (nextProps) => !isEqual(this.props.data, nextProps.data)
+  shouldComponentUpdate = (nextProps) => !isEqual(this.props, nextProps)
 
   render() {
     const { className, path, classes, schema = {}, hideTitle, idxKey } = this.props;

@@ -29,6 +29,7 @@ class Source extends React.Component {
       valid: isValid(source),
     };
   }
+
   UNSAFE_componentWillReceiveProps = (nextProps) => {
     const source = JSON.stringify(nextProps.source, null, 2);
     this.setState({
@@ -36,21 +37,24 @@ class Source extends React.Component {
       valid: isValid(source),
     });
   }
+
   onChange = (newValue) => {
     this.setState({ source: newValue });
   }
-  onBeforeChange = (editor, data, value) => {
-    // const { onChange } = this.props;
-    // const parsed = isValid(value);
 
-    // this.setState({
-    //   valid: parsed,
-    //   source: value,
-    // });
-    // if (parsed && onChange) {
-    //   onChange(parsed);
-    // }
+  onBeforeChange = (editor, data, value) => {
+    const { onChange } = this.props;
+    const parsed = isValid(editor);
+
+    this.setState({
+      valid: parsed,
+      source: editor,
+    });
+    if (parsed && onChange) {
+      onChange(parsed);
+    }
   }
+
   render() {
     const { source, valid } = this.state;
     const { classes, title } = this.props;
@@ -59,7 +63,7 @@ class Source extends React.Component {
       <div className={classes.root}>
         <div className={classNames(classes.ctr, { [classes.invalid]: !valid })}>
           <div>
-            {/* <Icon fontSize className={classes.icon} /> */}
+            <Icon fontSize={'default'} className={classes.icon} />
             <div className={classes.title}>
               <p>{title}</p>
             </div>
@@ -68,13 +72,14 @@ class Source extends React.Component {
             <AceEditor
               mode='json'
               theme='textmate'
-              value={this.state.source}
-              onChange={this.onChange}
+              value={source}
+              onChange={this.onBeforeChange}
               name='ace_editor_1'
               editorProps={{ $blockScrolling: true }}
               showPrintMargin
               showGutter
               highlightActiveLine
+              width={title === 'JSONSchema' ? '100%' : 500}
               setOptions={{
                 enableBasicAutocompletion: true,
                 enableLiveAutocompletion: true,

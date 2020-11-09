@@ -93,6 +93,15 @@ class Example extends React.Component {
     };
   }
 
+  UNSAFE_componentWillReceiveProps = (nextProps) => {
+    const { data: { schema, uiSchema, formData } } = nextProps;
+    this.setState({
+      schema, 
+      uiSchema, 
+      formData,
+    });
+  }
+
   onChange = (type) => (value) => {
     this.setState({ [type]: value });
   }
@@ -118,7 +127,7 @@ class Example extends React.Component {
   }
 
   render() {
-    const { data: { schema: givenSchema, uiSchema: givenUISchema, formData: givenFormData, title }, classes } = this.props;
+    const { data: { title }, classes } = this.props;
     const { schema, uiSchema, formData } = this.state;
     return (
       <Paper className={classes.root}>
@@ -132,10 +141,10 @@ class Example extends React.Component {
             onChange={this.onChange}
           />
           <div className={classes.display}>
-            <FormComponent 
-              schema={givenSchema}
-              uiSchema={givenUISchema}
-              formData={givenFormData}
+            <FormComponent
+              schema={schema}
+              uiSchema={uiSchema}
+              formData={formData}
               onCancel={this.onCancel}
               onSubmit={this.onSubmit}
               onUpload={this.onUpload}
