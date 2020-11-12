@@ -26,36 +26,40 @@ const schema = require('./path-to your-schema.json');
 const uiSchema = require('./path-to your-ui-schema.json');
 const formData = require('./path-to your-ui-formData.json');
 
-class Example extends React.Component {
-    onSubmit = (value, callback) => {
+const Example () => {
+    const onSubmit = (value, callback) => {
         console.log('onSubmit: %s', JSON.stringify(value)); // eslint-disable-line no-console
         setTimeout(() => callback && callback(), 2000); // just an example in real world can be your XHR call
     }
-    onCancel = () => {
+    
+    const onCancel = () => {
         console.log('on reset being called');
     }
-    onFormChanged = ({ formData }) => {
+    
+    const onFormChanged = ({ formData }) => {
         console.log('onFormChanged: ',formData); // eslint-disable-line no-console
     }
-    onUpload = (value) => {
+    
+    const onUpload = (value) => {
         console.log('onUpload: ', value); // eslint-disable-line no-console
     }
-    render() {
-        return (
-             <MaterialJsonSchemaForm
-                  schema={schema}
-                  uiSchema={uiSchema}
-                  formData={formData}
-                  onCancel={this.onCancel}
-                  onSubmit={this.onSubmit}
-                  onUpload={this.onUpload}
-                  onChange={this.onFormChanged}
-                  submitOnEnter
-                  activityIndicatorEnabled
-            />
-        );
-    }
+    
+    return (
+         <MaterialJsonSchemaForm
+              schema={schema}
+              uiSchema={uiSchema}
+              formData={formData}
+              onCancel={onCancel}
+              onSubmit={onSubmit}
+              onUpload={onUpload}
+              onChange={onFormChanged}
+              submitOnEnter
+              activityIndicatorEnabled
+         />
+    );
 }
+
+export default Example;
 ```
 
 ## Latest Version [![npm version](https://badge.fury.io/js/react-jsonschema-form-material-ui.svg)](https://react-jsonschema-form-material-ui.github56.now.sh) \(Material UI 4+\)
