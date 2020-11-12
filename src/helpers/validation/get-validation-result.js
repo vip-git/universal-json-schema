@@ -6,7 +6,7 @@ import difference from 'lodash/difference';
 import rules from './rules';
 
 const isSubset = (source, target) => !difference(flatten(source), flatten(target)).length;
-const validationResult = (schema, uiSchema, value, customValidations) => {
+const validationResult = (schema, uiSchema, value, customValidations, formData) => {
   const rv = [];
   forOwn(rules, (rule, ruleId) => {
     const result = rule(schema, uiSchema, value);
@@ -27,7 +27,12 @@ const validationResult = (schema, uiSchema, value, customValidations) => {
     )
   ) {
     forOwn(customValidations, (rule, ruleId) => {
-      const result = rule(schema, uiSchema, value);
+      const result = rule({
+        schema,
+        validations: uiSchema['ui:validations'],
+        value,
+        formData,
+      });
       if (result) {
         rv.push({
           rule: ruleId,
@@ -39,17 +44,24 @@ const validationResult = (schema, uiSchema, value, customValidations) => {
   return rv;
 };
 
-const getFieldSpec = (schema, uiSchema, value, customValidations) => {
+const getFieldSpec = (schema, uiSchema, value, customValidations, formData) => {
   if (value === null) {
     return [];
   }
   if (typeof value === 'number' || typeof value === 'string') {
-    return validationResult(schema, uiSchema, value, customValidations);
+    return validationResult(
+      schema,
+      uiSchema,
+      value,
+      customValidations,
+      formData,
+    );
   }
-  return mapValues(schema.properties, (s, p) => getFieldSpec(s, uiSchema[p], value[p], customValidations));
+  return mapValues(schema.properties, (s, p) => getFieldSpec(s, uiSchema[p], value[p], customValidations, formData),
+  );
 };
 
 export default (schema, uiSchema, data, customValidations) => {
-  const spec = getFieldSpec(schema, uiSchema, data, customValidations);
+  const spec = getFieldSpec(schema, uiSchema, data, customValidations, data);
   return { ...spec };
 };

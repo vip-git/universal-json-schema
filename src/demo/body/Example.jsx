@@ -37,33 +37,33 @@ const CustomRating = ({ onChange, formData, ...rest }) => (
 
 const FormComponent = React.memo(
   ({
-    schema,
-    uiSchema,
-    formData,
+    givenSchema,
+    givenUISchema,
+    givenFormData,
     onCancel,
     onSubmit,
     onUpload,
     onFormChanged,
   }) => (
 		<Form
-			schema={schema}
-			uiSchema={uiSchema}
-			formData={formData}
+			schema={givenSchema}
+			uiSchema={givenUISchema}
+			formData={givenFormData}
 			onCancel={onCancel}
 			onSubmit={onSubmit}
 			onUpload={onUpload}
 			onChange={onFormChanged}
 			components={{
 			  customComponent: ({ onChange, ...rest }) => (
-					<CustomComponent onChange={onChange} formData={formData} {...rest} />
+					<CustomComponent onChange={onChange} formData={givenFormData} {...rest} />
 			  ),
 			  customRating: ({ onChange, ...rest }) => (
-					<CustomRating onChange={onChange} formData={formData} {...rest} />
+					<CustomRating onChange={onChange} formData={givenFormData} {...rest} />
 			  ),
 			}}
       validations={{
-        confirmPassword: (givenSchema, givenUISchema, value) => value !== formData.pass1 && ({
-          message: givenUISchema['ui:validations'].confirmPassword.message,
+        confirmPassword: ({ schema, validations, formData, value }) => value !== formData.pass1 && ({
+          message: validations.confirmPassword.message,
           inline: true,
         }),
       }}
@@ -148,9 +148,9 @@ class Example extends React.Component {
           />
           <div className={classes.display}>
             <FormComponent
-              schema={schema}
-              uiSchema={uiSchema}
-              formData={formData}
+              givenSchema={schema}
+              givenUISchema={uiSchema}
+              givenFormData={formData}
               onCancel={this.onCancel}
               onSubmit={this.onSubmit}
               onUpload={this.onUpload}
