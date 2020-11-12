@@ -11,7 +11,7 @@
 ```jsx
 <Form
 	schema={givenSchema}
-	uiSchema={givenSchema}
+	uiSchema={givenUISchema}
 	formData={givenFormData}
 	onCancel={onCancel}
 	onSubmit={onSubmit}
