@@ -10,18 +10,18 @@
 
 ```jsx
 <Form
-	schema={schema}
-	uiSchema={uiSchema}
-	formData={formData}
+	schema={givenSchema}
+	uiSchema={givenSchema}
+	formData={givenFormData}
 	onCancel={onCancel}
 	onSubmit={onSubmit}
 	onUpload={onUpload}
 	onChange={onFormChanged}
 	validations={{
-     confirmPassword: (givenSchema, givenUISchema, value) => value !== formData.pass1 && ({
-          message: givenUISchema['ui:validations'].confirmPassword.message,
+     confirmPassword: ({ schema, validations, formData, value }) => value !== formData.pass1 && ({
+          message: validations.confirmPassword.message,
           inline: true,
-     }),
+      }),
   }}
 />
 ```
