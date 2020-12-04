@@ -12,6 +12,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable max-len */
 import without from 'lodash/without';
+import { string, object, number, mixed, lazy, array } from 'yup';
 import { serializer } from '../components/lib/RichText';
 import getMuiProps from './get-mui-props';
 import getInputType from './get-input-type';
@@ -89,7 +90,20 @@ const onCheckboxChangeHandler = (onChange, title) => (e) => {
   return onChange(spec);
 };
 
-export default ({ schema = {}, uiSchema = {}, isCustomComponent, inputValue, onChange, onKeyDown, creatableSelectValue, onCreatableSelectChange, onInputChange, htmlid, data, objectData }) => {
+export default ({
+  schema = {},
+  uiSchema = {},
+  isCustomComponent,
+  inputValue,
+  onChange,
+  onKeyDown,
+  creatableSelectValue,
+  onCreatableSelectChange,
+  onInputChange,
+  htmlid,
+  data,
+  objectData,
+}) => {
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'] || {};
   const { type } = schema;
@@ -131,7 +145,7 @@ export default ({ schema = {}, uiSchema = {}, isCustomComponent, inputValue, onC
         }
       }
       else if (widget === 'checkboxes') {
-        rv.onChange =	onChange && onCheckboxChangeHandler(onChange, schema.title);
+        rv.onChange =					onChange && onCheckboxChangeHandler(onChange, schema.title);
         rv.label = schema.title;
       }
       else {
@@ -198,6 +212,6 @@ export default ({ schema = {}, uiSchema = {}, isCustomComponent, inputValue, onC
   }
 
   rv.htmlid = htmlid;
-  
+
   return rv;
 };

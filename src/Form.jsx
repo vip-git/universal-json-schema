@@ -10,6 +10,7 @@ import isEqual from 'lodash/isEqual';
 import { generate } from 'shortid';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import each from 'lodash/each';
 
 // Internal
 import formStyles from './form-styles';
@@ -90,6 +91,29 @@ class Form extends React.Component {
   }
 
   render() {
+    try {
+      const transformedSchema = JSON.parse(JSON.stringify(this.props.schema));
+      const notAllowedTypes = ['upload', 'material-date'];
+      each(transformedSchema, (value, key) => {
+        console.log('value is', value);
+        console.log('key us', key);
+        if (key === 'properties') {
+          each(value, (propVal, propKey) => {
+            if (notAllowedTypes.includes(propVal.type)) {
+              transformedSchema.properties[propKey].type = 'string';
+            }
+          });
+        }
+      });
+      console.log('transformedSchema is', transformedSchema);
+      // eslint-disable-next-line global-require
+      const { buildYup } = require('schema-to-yup');
+      const yupSchema = buildYup(transformedSchema, {});
+      console.log(yupSchema);
+    }
+    catch (err) {
+      // console.log('err' , err);
+    }
     const { 
       classes, 
       formData, 
