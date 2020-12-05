@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
 import React from 'react';
@@ -5,11 +6,11 @@ import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-export default function SimpleRating({
+const SimpleRating = ({
   value: givenValue,
   persistData,
   color,
-}) {
+}) => {
   const [value, setValue] = React.useState(givenValue || 0);
 
   return (
@@ -30,4 +31,16 @@ export default function SimpleRating({
 			</Box>
 		</div>
   );
-}
+};
+
+const CustomRating = ({ onChange, formData, ...rest }) => (
+	<SimpleRating
+		id='standard-basic'
+		label='Standard'
+		value={formData.customRating}
+        persistData={onChange}
+        {...rest}
+	/>
+);
+
+export default CustomRating;

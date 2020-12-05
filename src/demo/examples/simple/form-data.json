@@ -8,6 +8,6 @@
 	"creatableSelectTest": "[{\"label\":\"hello\",\"value\":\"hello\"},{\"label\":\"yes\",\"value\":\"yes\"}]",
 	"selectTest": "[{\"value\":\"Yes\",\"label\":\"Yes\"},{\"value\":\"No\",\"label\":\"No\"}]",
 	"telephone": "",
-	"customComponent": "Custom Component",
+	"customComponent": "",
 	"customRating": 3
 }

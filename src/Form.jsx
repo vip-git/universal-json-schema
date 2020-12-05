@@ -109,7 +109,14 @@ class Form extends React.Component {
       // eslint-disable-next-line global-require
       const { buildYup } = require('schema-to-yup');
       const yupSchema = buildYup(transformedSchema, {});
-      console.log(yupSchema);
+      const isValid = async (schema, data) => {
+        const valid = await schema.isValid(data);
+        console.log(schema);
+        console.log('formData is', data);
+        console.log('valid is', valid);
+        return valid;
+      };
+      const valid = isValid(yupSchema, this.props.formData);
     }
     catch (err) {
       // console.log('err' , err);

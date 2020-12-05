@@ -4,36 +4,15 @@
 /* eslint-disable max-len */
 /* eslint-disable no-mixed-operators */
 import React, { useState } from 'react';
-import { TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import styles from './example-styles';
 import Source from './Source';
 import Form from '../../Form';
-import SimpleRating from './custom-rating';
 
-const CustomComponent = ({ onChange, formData }) => {
-  const [data, setData] = useState(formData.customComponent || '');
-  return (
-      <TextField
-        id='standard-basic'
-        label='Custom Text'
-        value={data}
-        onChange={(e) => setData(e.target.value)}
-        onBlur={(e) => onChange(e.target.value)}
-      />
-  );
-};
-
-const CustomRating = ({ onChange, formData, ...rest }) => (
-	<SimpleRating
-		id='standard-basic'
-		label='Standard'
-		value={formData.customRating}
-    persistData={onChange}
-    {...rest}
-	/>
-);
+// Custom Components
+import CustomRating from './custom-components/rating.component';
+import CustomComponent from './custom-components/range-picker.component';
 
 const FormComponent = React.memo(
   ({
