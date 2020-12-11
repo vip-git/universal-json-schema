@@ -12,7 +12,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable max-len */
 import without from 'lodash/without';
-import { string, object, number, mixed, lazy, array } from 'yup';
 import { serializer } from '../components/lib/RichText';
 import getMuiProps from './get-mui-props';
 import getInputType from './get-input-type';

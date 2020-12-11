@@ -11,7 +11,7 @@ const CustomDateRangePicker = ({ onChange, formData }) => {
   const [open, setOpen] = React.useState(false);
   const [dateRange, setDateRange] = React.useState({});
   const [data, setData] = React.useState(formData.customComponent || '');
-
+    
   const toggle = () => setOpen(!open);
 
   const RangePicker = () => (
@@ -20,6 +20,12 @@ const CustomDateRangePicker = ({ onChange, formData }) => {
         onClose={toggle}
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
+        PaperProps={{
+          style: {
+            maxWidth: 585,
+            overflow: 'hidden',
+          },
+        }}
     >
       <DateRangePicker
         open={open}

@@ -1,0 +1,13 @@
+{
+	"name": "JSON Schema Components",
+	"com§ponents": {
+        "RadioGroup": "1.0.0",
+        "Select": "1.0.0",
+        "Checkbox": "1.0.0",
+        "Picker": "1.0.0",
+        "MultiSelect": "1.0.0",
+        "CreatableSelect": "1.0.0",
+        "RichTextEditor": "1.0.0",
+        "Upload": "1.0.0"
+    }
+}
