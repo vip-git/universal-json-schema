@@ -1,6 +1,6 @@
 {
 	"name": "JSON Schema Components",
-	"com§ponents": {
+	"components": {
         "RadioGroup": "1.0.0",
         "Select": "1.0.0",
         "Checkbox": "1.0.0",
