@@ -1,13 +1,47 @@
 {
 	"name": "JSON Schema Components",
 	"components": {
-        "RadioGroup": "1.0.0",
-        "Select": "1.0.0",
-        "Checkbox": "1.0.0",
-        "Picker": "1.0.0",
-        "MultiSelect": "1.0.0",
-        "CreatableSelect": "1.0.0",
-        "RichTextEditor": "1.0.0",
-        "Upload": "1.0.0"
+        "@react-jsonschema-form-components/radio-group": {
+            "version": "1.0.0",
+            "type": "string",
+            "isEnum": true,
+            "name": "radio"
+        },
+        "@react-jsonschema-form-components/react-select": {
+            "version": "1.0.0",
+            "type": "string",
+            "isEnum": true,
+            "name": "react-select"
+        },
+        "@react-jsonschema-form-components/switch-checkbox": {
+            "version": "1.0.0",
+            "type": "string",
+            "isEnum": true,
+            "name": "switch"
+        },
+        "@react-jsonschema-form-components/picker": {
+            "version": "1.0.0",
+            "type": "string",
+            "isEnum": false,
+            "name": "picker"
+        },
+        "@react-jsonschema-form-components/rich-text-editor": {
+            "version": "1.0.0",
+            "type": "string",
+            "isEnum": false,
+            "name": "rich-text-editor"
+        },
+        "@react-jsonschema-form-components/upload": {
+            "version": "1.0.0",
+            "type": "string",
+            "isEnum": false,
+            "name": "upload"
+        },
+        "@react-jsonschema-form-components/ratings": {
+            "version": "1.0.0",
+            "type": "string",
+            "isEnum": false,
+            "name": "ratings"
+        }
     }
 }
