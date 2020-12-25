@@ -18,3 +18,20 @@
   * Step 4: Should be able to run the tests and compile the project 
   * Step 5: Should be able to publish the newly defined name to npm.
   */
+
+const ejs = require('ejs');
+
+const componentSettings = require('./components.json');
+
+const templateFile = require('./templates/app-config.template.js');
+
+const template = ejs.compile(templateFile, {});
+
+const finalString = template({ components: componentSettings.components });
+
+console.log(
+  'componentSettings',
+  componentSettings.components['@react-jsonschema-form-components/material-picker'].name,
+);
+
+console.log('finalString', finalString);

@@ -33,6 +33,7 @@
 		"braces": "3.0.2",
 		"classnames": "2.2.6",
 		"cross-env": "7.0.2",
+		"ejs": "3.1.5",
 		"emotion": "10.0.27",
 		"express": "4.17.1",
 		"immutability-helper": "3.1.1",

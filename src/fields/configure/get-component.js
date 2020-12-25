@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 // import Input, { InputLabel } from '@material-ui/core/Input'; // eslint-disable-line import/no-named-default
 const Input = require('@material-ui/core/Input').default;
-const componentConfig = require('../generated/component.config').default;
+const componentConfig = require('./component.config').default;
 const {
   APP_CONFIG: {
     V2_DEPRECATED_TYPES,

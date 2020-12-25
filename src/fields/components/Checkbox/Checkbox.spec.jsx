@@ -9,7 +9,7 @@ import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { default as CheckboxComp } from './Checkbox'; // eslint-disable-line import/no-named-default
+import { default as CheckboxComp } from '.'; // eslint-disable-line import/no-named-default
 
 chai.use(sinonChai);
 

@@ -1,29 +1,48 @@
 {
 	"name": "JSON Schema Components",
 	"components": {
-        "@react-jsonschema-form-components/radio-group": {
+        "@react-jsonschema-form-components/material-radio-group": {
             "version": "1.0.0",
             "type": "string",
             "isEnum": true,
-            "name": "radio"
+            "name": "material-radio"
+        },
+        "@react-jsonschema-form-components/creatable-react-select": {
+            "version": "1.0.0",
+            "type": "string",
+            "isEnum": true,
+            "name": "creatable-react-select"
         },
         "@react-jsonschema-form-components/react-select": {
-            "version": "1.0.0",
+            "version": "1.0.1",
             "type": "string",
             "isEnum": true,
             "name": "react-select"
+        },
+        "@react-jsonschema-form-components/material-select": {
+            "version": "1.0.0",
+            "type": "string",
+            "isEnum": true,
+            "name": "material-select"
+        },
+        "@react-jsonschema-form-components/material-checkbox": {
+            "version": "1.0.0",
+            "type": "string",
+            "isEnum": true,
+            "name": "material-checkbox"
         },
         "@react-jsonschema-form-components/switch-checkbox": {
             "version": "1.0.0",
             "type": "string",
             "isEnum": true,
-            "name": "switch"
+            "name": "material-switch",
+            "notAvailable": true
         },
-        "@react-jsonschema-form-components/picker": {
+        "@react-jsonschema-form-components/material-picker": {
             "version": "1.0.0",
             "type": "string",
             "isEnum": false,
-            "name": "picker"
+            "name": "material-picker"
         },
         "@react-jsonschema-form-components/rich-text-editor": {
             "version": "1.0.0",
@@ -41,7 +60,8 @@
             "version": "1.0.0",
             "type": "string",
             "isEnum": false,
-            "name": "ratings"
+            "name": "ratings",
+            "notAvailable": true
         }
     }
 }
