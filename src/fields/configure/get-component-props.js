@@ -212,5 +212,7 @@ export default ({
 
   rv.htmlid = htmlid;
 
+  console.log('rv is', rv);
+
   return rv;
 };

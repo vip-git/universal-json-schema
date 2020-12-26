@@ -1,5 +1,5 @@
 const appConfigTemplate = `/* eslint-disable global-require */
-const ENUM_COMPONENTS = {
+export const ENUM_COMPONENTS = {
  <% Object.values(components).filter((c) => c.isEnum && !c.notAvailable).forEach((comp) => { %>
   <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
     name: '<%= comp.name %>',
@@ -59,6 +59,7 @@ export const APP_CONFIG = {
     'material-time',
   ],
   V2_DEPRECATED_OPTIONS: ['rich-text-editor'],
+  V2_DEPRECATED_ENUMS: ['material-select', 'material-multiselect'],
   COMPONENT_MAPPING: {
     STRING: {
       ...ENUM_COMPONENTS,

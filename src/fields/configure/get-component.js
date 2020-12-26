@@ -1,3 +1,4 @@
+/* eslint-disable no-fallthrough */
 /* eslint-disable no-tabs */
 /* eslint-disable max-len */
 // import Input, { InputLabel } from '@material-ui/core/Input'; // eslint-disable-line import/no-named-default
@@ -7,11 +8,14 @@ const {
   APP_CONFIG: {
     V2_DEPRECATED_TYPES,
     V2_DEPRECATED_OPTIONS,
+    V2_DEPRECATED_ENUMS,
+    V2_DEPRECATED_CREATABLE_ENUMS,
     SUPPORTED_TYPES: { STRING },
   },
+  ENUM_COMPONENTS,
 } = require('../generated/app.config');
 
-export default ({ schema, uiSchema = {}, components }) => {
+export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
   // console.log('getComponent schema: %o, uiSchema: %o', schema, uiSchema);
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'];
@@ -20,14 +24,34 @@ export default ({ schema, uiSchema = {}, components }) => {
   const component = backwardsCompatibleComponent || newComponent;
   const dataType = V2_DEPRECATED_TYPES.includes(type) ? STRING : type;
   const getDefaultComponent = (isEnum) => (isEnum ? 'DEFAULT_ENUM' : 'DEFAULT');
-  // Todo: Remove this in v4 to be only  widget || getDefaultComponent(schema.enum)
-  // Todo: Once removed this will be a breaking change to be strictly compliant to jsonSchema
-  const formWidget = V2_DEPRECATED_TYPES.includes(type)
-    ? type
-    : (V2_DEPRECATED_OPTIONS.includes(options) && options) 
-      || widget 
-      || getDefaultComponent(schema.enum);
-  
+  const transformVersion2FormWidgets = (givenSchema, givenType, widgetString) => {
+    if (
+      givenSchema.enum
+      && V2_DEPRECATED_ENUMS.includes(widgetString)
+    ) {
+      return ENUM_COMPONENTS.REACT_SELECT.name;
+    }
+
+    if (
+      givenSchema.enum
+       && V2_DEPRECATED_CREATABLE_ENUMS.includes(widgetString)
+    ) {
+      return ENUM_COMPONENTS.CREATABLE_REACT_SELECT.name;
+    }
+
+    if (V2_DEPRECATED_TYPES.includes(givenType)) {
+      return givenType;
+    }
+    
+    return (V2_DEPRECATED_OPTIONS.includes(options) && options)
+          || widgetString
+          || getDefaultComponent(givenSchema.enum);
+  };
+
+  const formWidget = !schemaVersion || String(schemaVersion) === '2'
+    ? transformVersion2FormWidgets(schema, type, widget)
+    : widget || getDefaultComponent(schema.enum);
+    
   try {
     const selectedComponent = componentConfig.get(dataType).get(formWidget)
       || componentConfig.get(dataType).get(getDefaultComponent(schema.enum));

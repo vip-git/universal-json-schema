@@ -13,6 +13,7 @@ export class RawFormField extends React.Component {
   render() {
     const { classes, schema, data, uiSchema = {}, onChange, onKeyDown, path, ...rest } = this.props;
     const { type } = schema;
+    // Todo: condition for array should change
     if (type === 'object' || type === 'array') {
       return (
         <FieldSet

@@ -25,6 +25,7 @@ export const UploadContext = React.createContext('upload');
 class Form extends React.Component {
   state = {
     data: this.props.formData,
+    schemaVersion: this.props.schema.version,
     validation: getValidationResult(this.props.schema, this.props.uiSchema, this.props.formData, this.props.validations),
     id: this.props.prefixId || generate(),
   }
@@ -167,6 +168,7 @@ class Form extends React.Component {
             <FormField
                 path={''}
                 data={this.state.data}
+                schemaVersion={this.state.schemaVersion}
                 id={id}
                 onChange={this.onChange}
                 onSubmit={this.onSubmit}
