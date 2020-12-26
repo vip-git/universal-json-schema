@@ -12,7 +12,7 @@ import { UploadContext } from '../../Form';
 
 let uploadLabel = null;
 
-const doOnChange = (onChange, onUpload) => (event: any) => {
+const doOnChange = (onChange, onUpload) => (event) => {
   const file = event.target.files[0];
   uploadLabel = file.name;
   if (onUpload) {
@@ -20,7 +20,6 @@ const doOnChange = (onChange, onUpload) => (event: any) => {
   }
   return onChange(uploadLabel);
 };
-
 
 const styles = {
   labelDescription: {

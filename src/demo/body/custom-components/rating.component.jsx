@@ -14,22 +14,20 @@ const SimpleRating = ({
   const [value, setValue] = React.useState(givenValue || 0);
 
   return (
-		<div>
-			<Box component='fieldset' mb={0} borderColor='transparent'>
-				<Typography component='legend'>Custom Rating Component</Typography>
-				<Rating
-					name='simple-controlled'
-					value={value}
-					onChange={(event, newValue) => {
-					  setValue(newValue);
-					  persistData(newValue);
-					}}
-					style={{
-					  color,
-					}}
-				/>
-			</Box>
-		</div>
+	<>
+		<Typography component='legend'>Custom Rating Component</Typography>
+		<Rating
+			name='simple-controlled'
+			value={value}
+			onChange={(event, newValue) => {
+			  setValue(newValue);
+			  persistData(newValue);
+			}}
+			style={{
+			  color,
+			}}
+		/>
+	</>
   );
 };
 

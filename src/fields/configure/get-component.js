@@ -10,9 +10,11 @@ const {
     V2_DEPRECATED_OPTIONS,
     V2_DEPRECATED_ENUMS,
     V2_DEPRECATED_CREATABLE_ENUMS,
+    V2_DEPRECATED_PICKERS,
     SUPPORTED_TYPES: { STRING },
   },
   ENUM_COMPONENTS,
+  V2_PICKER_COMPONENT,
 } = require('../generated/app.config');
 
 export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
@@ -39,6 +41,10 @@ export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
       return ENUM_COMPONENTS.CREATABLE_REACT_SELECT.name;
     }
 
+    if (V2_DEPRECATED_PICKERS.includes(givenType)) {
+      return V2_PICKER_COMPONENT.MATERIAL_PICKER.name;
+    }
+
     if (V2_DEPRECATED_TYPES.includes(givenType)) {
       return givenType;
     }
@@ -51,7 +57,7 @@ export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
   const formWidget = !schemaVersion || String(schemaVersion) === '2'
     ? transformVersion2FormWidgets(schema, type, widget)
     : widget || getDefaultComponent(schema.enum);
-    
+
   try {
     const selectedComponent = componentConfig.get(dataType).get(formWidget)
       || componentConfig.get(dataType).get(getDefaultComponent(schema.enum));

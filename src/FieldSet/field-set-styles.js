@@ -3,6 +3,9 @@ export default {
 		root: {
 			display: 'flex',
 			flexDirection: 'column',
+			border: 'none',
+			padding: 0,
+			margin: 0,
 		},
 		listItem: {
 			border: `1px dotted ${theme.palette.primary.main}`,

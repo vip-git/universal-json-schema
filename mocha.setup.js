@@ -1,6 +1,17 @@
 // require('testdom')('<html><body></body></html>');
 require('./jsdom-setup');
-require('babel-register');
+require('@babel/register')({
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          node: 'current',
+        },
+      },
+    ],
+  ],
+});
 
 const gs = JSON.stringify;
 global.JSON_stringify = gs;

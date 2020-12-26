@@ -42,6 +42,13 @@ const DEFAULT_BOOLEAN_COMPONENTS = {
   },
 };
 
+export const V2_PICKER_COMPONENT = {
+  MATERIAL_PICKER: {
+    name: 'material-picker',
+    component: require('./components/material-picker').default,
+  },
+};
+
 export const APP_CONFIG = {
   SUPPORTED_TYPES: {
     STRING: 'string',
@@ -60,6 +67,8 @@ export const APP_CONFIG = {
   ],
   V2_DEPRECATED_OPTIONS: ['rich-text-editor'],
   V2_DEPRECATED_ENUMS: ['material-select', 'material-multiselect'],
+  V2_DEPRECATED_CREATABLE_ENUMS: ['creatable-select'],
+  V2_DEPRECATED_PICKERS: ['material-date', 'material-datetime', 'material-time'],
   COMPONENT_MAPPING: {
     STRING: {
       ...ENUM_COMPONENTS,

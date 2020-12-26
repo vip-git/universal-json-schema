@@ -7,17 +7,18 @@
     }
   },
   "presets": [
-    "babel-preset-env",
-    "babel-preset-stage-0",
-    "babel-preset-react",
-    [
-      "es2015",
-      {
-        "modules": false
-      }
-    ]
+    ["@babel/preset-env",{
+        "targets": {
+              "ie": 11,
+            "browsers": ["> 0.2%, not dead, not op_mini all, Explorer 11, last 4 Edge versions"]
+        },
+        "useBuiltIns": "usage",
+        "modules": false,
+        "corejs" : "3"
+    }],
+    "@babel/preset-react"
   ],
   "plugins": [
-    "transform-class-properties"
+    ["@babel/plugin-proposal-class-properties", { "loose": true }]
   ]
 }

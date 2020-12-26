@@ -16,7 +16,7 @@
     "@react-jsonschema-form-components/material-select": "1.0.0",
     "@react-jsonschema-form-components/react-select": "1.0.1",
     "@react-jsonschema-form-components/rich-text-editor": "1.0.0",
-    "@react-jsonschema-form-components/upload": "1.0.0"
+    "@react-jsonschema-form-components/upload": "1.0.1"
   },
   "devDependencies": {},
   "description": ""
