@@ -12,7 +12,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable max-len */
 import without from 'lodash/without';
-import { serializer } from '../components/lib/RichText';
+import { serializer } from '../generated/components/rich-text-editor/lib/RichText';
 import getMuiProps from './get-mui-props';
 import getInputType from './get-input-type';
 import valuesToOptions from './values-to-options';
