@@ -1,8 +1,4 @@
 /* eslint-disable no-fallthrough */
-/* eslint-disable no-tabs */
-/* eslint-disable max-len */
-// import Input, { InputLabel } from '@material-ui/core/Input'; // eslint-disable-line import/no-named-default
-const Input = require('@material-ui/core/Input').default;
 const componentConfig = require('./component.config').default;
 const {
   APP_CONFIG: {
@@ -15,6 +11,7 @@ const {
   },
   ENUM_COMPONENTS,
   V2_PICKER_COMPONENT,
+  COMMON_COMPONENTS,
 } = require('../generated/app.config');
 
 export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
@@ -75,9 +72,9 @@ export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
       return selectedComponent;
     }
 
-    return Input;
+    return COMMON_COMPONENTS.NORMAL_INPUT.component;
   }
   catch (err) {
-    return Input;
+    return COMMON_COMPONENTS.NORMAL_INPUT.component;
   }
 };

@@ -7,8 +7,8 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-// internal
-import { UploadContext } from '../../Form';
+// internal Todo: should be removed
+import { UploadContext } from '../../../../Form';
 
 let uploadLabel = null;
 

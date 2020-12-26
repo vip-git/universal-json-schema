@@ -1,8 +1,7 @@
-
 export default (type, uiSchema) => {
   const widget = uiSchema['ui:widget'];
   if (type === 'number' || type === 'integer') {
-    if (widget === 'updown' || widget === 'radio') {
+    if (widget === 'updown') {
       return 'number';
     }
     return 'text';

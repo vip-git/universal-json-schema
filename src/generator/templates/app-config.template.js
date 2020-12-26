@@ -8,10 +8,10 @@ export const ENUM_COMPONENTS = {
  <% }); %>
 };
 
-const COMMON_COMPONENTS = {
+export const COMMON_COMPONENTS = {
   NORMAL_INPUT: {
-    name: 'input',
-    component: require('@material-ui/core/Input').default,
+    name: '<%= Object.values(components).find((c) => c.isDefault).name %>',
+    component: require('./components/<%= Object.values(components).find((c) => c.isDefault).name %>').default,
   },
 };
 
@@ -74,7 +74,7 @@ export const APP_CONFIG = {
       ...ENUM_COMPONENTS,
       ...COMMON_COMPONENTS,
      <% Object.values(components)
-          .filter((c) => !c.isEnum && c.type === "string" && !c.notAvailable).forEach((comp) => { %>
+          .filter((c) => !c.isEnum && c.type === "string" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
       <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
         name: '<%= comp.name %>',
         component: require('./components/<%= comp.name %>').default,
@@ -86,7 +86,7 @@ export const APP_CONFIG = {
       ...ENUM_COMPONENTS,
       ...COMMON_COMPONENTS,
       <% Object.values(components)
-          .filter((c) => !c.isEnum && c.type === "boolean" && !c.notAvailable).forEach((comp) => { %>
+          .filter((c) => !c.isEnum && c.type === "boolean" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
       <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
         name: '<%= comp.name %>',
         component: require('./components/<%= comp.name %>').default,
@@ -97,7 +97,7 @@ export const APP_CONFIG = {
       ...COMMON_INT_COMPONENTS,
       ...DEFAULT_COMPONENTS,
       <% Object.values(components)
-          .filter((c) => !c.isEnum && c.type === "number" && !c.notAvailable).forEach((comp) => { %>
+          .filter((c) => !c.isEnum && c.type === "number" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
       <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
         name: '<%= comp.name %>',
         component: require('./components/<%= comp.name %>').default,
@@ -108,7 +108,7 @@ export const APP_CONFIG = {
       ...COMMON_INT_COMPONENTS,
       ...DEFAULT_COMPONENTS,
       <% Object.values(components)
-          .filter((c) => !c.isEnum && c.type === "integer" && !c.notAvailable).forEach((comp) => { %>
+          .filter((c) => !c.isEnum && c.type === "integer" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
       <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
         name: '<%= comp.name %>',
         component: require('./components/<%= comp.name %>').default,

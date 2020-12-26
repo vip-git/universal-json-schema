@@ -1,20 +1,8 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable no-tabs */
-/* eslint-disable no-nested-ternary */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-shadow */
-/* eslint-disable no-return-assign */
-/* eslint-disable no-param-reassign */
 /* eslint-disable no-mixed-operators */
-/* eslint-disable no-void */
-/* eslint-disable consistent-return */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable max-len */
+/* eslint-disable no-tabs */
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-nested-ternary */
 import without from 'lodash/without';
-import { serializer } from '../generated/components/rich-text-editor/lib/RichText';
-import getMuiProps from './get-mui-props';
-import getInputType from './get-input-type';
 import valuesToOptions from './values-to-options';
 
 const toNumber = (v, options = false) => {
@@ -61,19 +49,12 @@ const coerceValue = (type, value, options = false) => {
 
 const formatDateValue = (val) => val && val.format && val.format() || '';
 
-const parseCurrencyValue = (value, useLocaleString) => {
-  let n = 1.1;
-  n = n.toLocaleString(useLocaleString).substring(1, 2);
-  const whatDecimalSeparatorRegex = n === '.' ? /[^\d]/g : /[^\d,.]/g;
-  return n === '.' ? value.replace(whatDecimalSeparatorRegex, '') : value.replace(whatDecimalSeparatorRegex, '').replace(/\./g, '').replace(/,/g, '.');
-};
-
 const onChangeHandler = (onChange, type, widget, options, isCustomComponent) => (e) => {
   const value = (type === 'material-date' || type === 'material-time' || type === 'material-datetime')
     ? formatDateValue(e) 
     : (widget === 'material-multiselect' || widget === 'material-select' || widget === 'creatable-select')  
       ? coerceValue(type, stringify(e))
-      : (type === 'upload') ? coerceValue(type, e) : (options === 'rich-text-editor') ? serializer.serialize(e) : coerceValue(type, e.target.value, options);
+      : (type === 'upload') ? coerceValue(type, e) : coerceValue(type, e.target.value, options);
   if (value !== undefined) onChange(value);
 };
 
@@ -104,29 +85,21 @@ export default ({
   objectData,
 }) => {
   const widget = uiSchema['ui:widget'];
-  const options = uiSchema['ui:options'] || {};
+  const options = uiSchema['ui:options'] || uiSchema['ui:props'] || {};
   const { type } = schema;
-  const rv = isCustomComponent
+  const rv = isCustomComponent 
     ? {
-      type: getInputType(type, uiSchema),
-      onChange:
-					!isCustomComponent
-					&& onChange
-					&& onChangeHandler(onChange, type, widget, options),
       onKeyDown,
-      ...getMuiProps(uiSchema),
       ...isCustomComponent({ onChange }).props,
       ...options,
-		  }
+    }
     : {
-      type: getInputType(type, uiSchema),
-      onChange:
-					!isCustomComponent
-					&& onChange
-					&& onChangeHandler(onChange, type, widget, options),
+      onChange,
       onKeyDown,
-      ...getMuiProps(uiSchema),
-		  };
+      uiSchema,
+      schema,
+      options,
+    };
 
   if (
     isCustomComponent
@@ -144,7 +117,7 @@ export default ({
         }
       }
       else if (widget === 'checkboxes') {
-        rv.onChange =					onChange && onCheckboxChangeHandler(onChange, schema.title);
+        rv.onChange =	onChange && onCheckboxChangeHandler(onChange, schema.title);
         rv.label = schema.title;
       }
       else {
@@ -174,30 +147,6 @@ export default ({
       rv.isMulti = uiSchema['ui:isMulti'] || false;
       rv.buttonIcon = uiSchema['ui:icon'] || 'add_circle';
       rv.buttonTitle = uiSchema['ui:buttonTitle'] || 'Upload';
-    }
-    else {
-      rv.label = schema.title || '';
-      rv.inputProps = {
-        id: htmlid,
-      };
-    }
-    if (widget === 'textarea') {
-      rv.multiline = true;
-      rv.rows = 5;
-    }
-
-    if (options.useLocaleString) {
-      rv.onBlur = (event) => {
-        const { value } = event.target;
-        return (
-          value
-					&& onChange(
-					  Number(
-					    parseCurrencyValue(value, options.useLocaleString),
-					  ).toLocaleString(options.useLocaleString),
-					)
-        );
-      };
     }
 
     if (options.disabled) {

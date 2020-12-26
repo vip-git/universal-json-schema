@@ -304,7 +304,6 @@ class RichText extends React.Component {
     this.editor = editor;
   }
 
-
   /**
    * Render a mark-toggling toolbar button.
    *

@@ -31,7 +31,10 @@ const template = ejs.compile(templateFile, {});
 const finalString = template({ components: componentSettings.components });
 const shellFileString = new shelljs.ShellString(finalString);
 
-shelljs.rm('-rf', 'src/fields/generated/componentss');
+shelljs.rm('-rf', 'src/fields/generated/components');
+shelljs.rm('-rf', 'src/generator/node_modules');
+shelljs.rm('-rf', 'src/generator/package-lock.json');
+shelljs.rm('-rf', 'src/generator/package.json');
 
 console.log('generating app config file');
 

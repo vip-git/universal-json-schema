@@ -96,8 +96,8 @@ class Form extends React.Component {
       const transformedSchema = JSON.parse(JSON.stringify(this.props.schema));
       const notAllowedTypes = ['upload', 'material-date'];
       each(transformedSchema, (value, key) => {
-        console.log('value is', value);
-        console.log('key us', key);
+        // console.log('value is', value);
+        // console.log('key us', key);
         if (key === 'properties') {
           each(value, (propVal, propKey) => {
             if (notAllowedTypes.includes(propVal.type)) {
@@ -106,15 +106,15 @@ class Form extends React.Component {
           });
         }
       });
-      console.log('transformedSchema is', transformedSchema);
+      // console.log('transformedSchema is', transformedSchema);
       // eslint-disable-next-line global-require
       const { buildYup } = require('schema-to-yup');
       const yupSchema = buildYup(transformedSchema, {});
       const isValid = async (schema, data) => {
         const valid = await schema.isValid(data);
-        console.log(schema);
-        console.log('formData is', data);
-        console.log('valid is', valid);
+        // console.log(schema);
+        // console.log('formData is', data);
+        // console.log('valid is', valid);
         return valid;
       };
       const valid = isValid(yupSchema, this.props.formData);
