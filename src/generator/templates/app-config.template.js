@@ -1,11 +1,10 @@
-const appConfigTemplate = `
-/* eslint-disable global-require */
+const appConfigTemplate = `/* eslint-disable global-require */
 const ENUM_COMPONENTS = {
- <% Object.values(components).filter((c) => c.isEnum).forEach((comp) => { %>
-    <%= comp.name.toUpperCase().replace('-', '_') %>: {
-      name: '<%= comp.name %>',
-      component: require('./components/<%= comp.name %>').default,
-    },
+ <% Object.values(components).filter((c) => c.isEnum && !c.notAvailable).forEach((comp) => { %>
+  <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
+    name: '<%= comp.name %>',
+    component: require('./components/<%= comp.name %>').default,
+  },
  <% }); %>
 };
 
@@ -64,21 +63,21 @@ export const APP_CONFIG = {
     STRING: {
       ...ENUM_COMPONENTS,
       ...COMMON_COMPONENTS,
-
-     <% Object.values(components).filter((c) => !c.isEnum && c.type === "string").forEach((comp) => { %>
-      <%= comp.name.toUpperCase().replace('-', '_') %>: {
+     <% Object.values(components)
+          .filter((c) => !c.isEnum && c.type === "string" && !c.notAvailable).forEach((comp) => { %>
+      <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
         name: '<%= comp.name %>',
         component: require('./components/<%= comp.name %>').default,
       },
       <% }); %>
-
       ...DEFAULT_COMPONENTS,
     },
     BOOLEAN: {
       ...ENUM_COMPONENTS,
       ...COMMON_COMPONENTS,
-      <% Object.values(components).filter((c) => !c.isEnum && c.type === "boolean").forEach((comp) => { %>
-      <%= comp.name.toUpperCase().replace('-', '_') %>: {
+      <% Object.values(components)
+          .filter((c) => !c.isEnum && c.type === "boolean" && !c.notAvailable).forEach((comp) => { %>
+      <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
         name: '<%= comp.name %>',
         component: require('./components/<%= comp.name %>').default,
       },
@@ -87,8 +86,9 @@ export const APP_CONFIG = {
     NUMBER: {
       ...COMMON_INT_COMPONENTS,
       ...DEFAULT_COMPONENTS,
-      <% Object.values(components).filter((c) => !c.isEnum && c.type === "number").forEach((comp) => { %>
-      <%= comp.name.toUpperCase().replace('-', '_') %>: {
+      <% Object.values(components)
+          .filter((c) => !c.isEnum && c.type === "number" && !c.notAvailable).forEach((comp) => { %>
+      <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
         name: '<%= comp.name %>',
         component: require('./components/<%= comp.name %>').default,
       },
@@ -97,8 +97,9 @@ export const APP_CONFIG = {
     INTEGER: {
       ...COMMON_INT_COMPONENTS,
       ...DEFAULT_COMPONENTS,
-      <% Object.values(components).filter((c) => !c.isEnum && c.type === "integer").forEach((comp) => { %>
-      <%= comp.name.toUpperCase().replace('-', '_') %>: {
+      <% Object.values(components)
+          .filter((c) => !c.isEnum && c.type === "integer" && !c.notAvailable).forEach((comp) => { %>
+      <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
         name: '<%= comp.name %>',
         component: require('./components/<%= comp.name %>').default,
       },

@@ -5,7 +5,7 @@
             "version": "1.0.0",
             "type": "string",
             "isEnum": true,
-            "name": "material-radio"
+            "name": "material-radio-group"
         },
         "@react-jsonschema-form-components/creatable-react-select": {
             "version": "1.0.0",

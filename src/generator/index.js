@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /**
  * Todo: 
  * This file will generate all custom components and integrate within react-json-schema project
@@ -20,18 +21,39 @@
   */
 
 const ejs = require('ejs');
+const shelljs = require('shelljs');
 
 const componentSettings = require('./components.json');
 
 const templateFile = require('./templates/app-config.template.js');
 
 const template = ejs.compile(templateFile, {});
-
 const finalString = template({ components: componentSettings.components });
+const shellFileString = new shelljs.ShellString(finalString);
 
-console.log(
-  'componentSettings',
-  componentSettings.components['@react-jsonschema-form-components/material-picker'].name,
+shelljs.rm('-rf', 'src/fields/generated/componentss');
+
+console.log('generating app config file');
+
+shellFileString.to('src/fields/generated/app.config.js');
+
+console.log('app config file generated');
+
+console.log('Downloading component dependencies');
+
+shelljs.cd('src/generator');
+shelljs.exec('npm init --yes');
+Object.keys(componentSettings.components)
+  .filter((c) => !componentSettings.components[c].notAvailable)
+  .forEach((compName) => {
+    shelljs.exec(
+      `npm install ${compName}@${componentSettings.components[compName].version} --save-exact`,
+    );
+  });
+shelljs.cp(
+  '-R',
+  'node_modules/@react-jsonschema-form-components/',
+  '../fields/generated/components',
 );
 
-console.log('finalString', finalString);
+console.log('Components downloaded successfully');

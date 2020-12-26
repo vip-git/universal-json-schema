@@ -48,6 +48,7 @@
 		"react-hot-loader": "4.12.21",
 		"react-select": "3.1.0",
 		"schema-to-yup": "1.10.0",
+		"shelljs": "0.8.4",
 		"shortid": "2.2.15",
 		"slate": "0.47.9",
 		"slate-collapse-on-escape": "0.8.1",
