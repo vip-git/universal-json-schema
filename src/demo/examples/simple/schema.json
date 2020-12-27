@@ -28,6 +28,26 @@
       "type": "number",
       "title": "Currency"
     },
+    "default": {
+      "type": "boolean",
+      "title": "checkbox (default)",
+      "description": "This is the checkbox-description"
+    },
+    "radio": {
+      "type": "boolean",
+      "title": "radio buttons",
+      "description": "This is the radio-description",
+      "enum": [
+        {
+          "key": true,
+          "value": "Yes"
+        },
+        {
+          "key": false,
+          "value": "No"
+        }
+      ]
+    },
     "select": {
       "type": "string",
       "title": "Example select",

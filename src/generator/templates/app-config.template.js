@@ -69,6 +69,9 @@ export const APP_CONFIG = {
   V2_DEPRECATED_ENUMS: ['material-select', 'material-multiselect'],
   V2_DEPRECATED_CREATABLE_ENUMS: ['creatable-select'],
   V2_DEPRECATED_PICKERS: ['material-date', 'material-datetime', 'material-time'],
+  V2_DEPRECATED_WIDGET_RADIO: 'radio',
+  V2_DEPRECATED_WIDGET_RANGE: 'range',
+  V2_DEPRECATED_WIDGET_CHECKBOXES: 'checkboxes',
   COMPONENT_MAPPING: {
     STRING: {
       ...ENUM_COMPONENTS,
@@ -92,6 +95,7 @@ export const APP_CONFIG = {
         component: require('./components/<%= comp.name %>').default,
       },
       <% }); %>
+      ...DEFAULT_BOOLEAN_COMPONENTS,
     },
     NUMBER: {
       ...COMMON_INT_COMPONENTS,

@@ -7,6 +7,9 @@ const {
     V2_DEPRECATED_ENUMS,
     V2_DEPRECATED_CREATABLE_ENUMS,
     V2_DEPRECATED_PICKERS,
+    V2_DEPRECATED_WIDGET_RADIO,
+    V2_DEPRECATED_WIDGET_RANGE,
+    V2_DEPRECATED_WIDGET_CHECKBOXES,
     SUPPORTED_TYPES: { STRING },
   },
   ENUM_COMPONENTS,
@@ -45,10 +48,20 @@ export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
     if (V2_DEPRECATED_TYPES.includes(givenType)) {
       return givenType;
     }
+
+    if (V2_DEPRECATED_WIDGET_RADIO === widgetString) {
+      return ENUM_COMPONENTS.MATERIAL_RADIO_GROUP.name;
+    }
+
+    if (V2_DEPRECATED_WIDGET_CHECKBOXES === widgetString) {
+      return ENUM_COMPONENTS.MATERIAL_CHECKBOX.name;
+    }
     
-    return (V2_DEPRECATED_OPTIONS.includes(options) && options)
-          || widgetString
-          || getDefaultComponent(givenSchema.enum);
+    return (
+      (V2_DEPRECATED_OPTIONS.includes(options) && options)
+        || widgetString
+        || getDefaultComponent(givenSchema.enum)
+    );
   };
 
   const formWidget = !schemaVersion || String(schemaVersion) === '2'

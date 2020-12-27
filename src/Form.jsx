@@ -20,7 +20,7 @@ import getValidationResult from './helpers/validation';
 import ValidationMessages from './ValidationMessages';
 import FormButtons from './FormButtons';
 
-export const UploadContext = React.createContext('upload');
+export const EventContext = React.createContext('fieldEvent');
 
 class Form extends React.Component {
   state = {
@@ -164,7 +164,7 @@ class Form extends React.Component {
             
           }
           <ValidationMessages validation={validation} />
-          <UploadContext.Provider value={onUpload}>
+          <EventContext.Provider value={onUpload}>
             <FormField
                 path={''}
                 data={this.state.data}
@@ -180,7 +180,7 @@ class Form extends React.Component {
                 onAddItem={this.onAddItem}
                 {...rest}
             />
-          </UploadContext.Provider>
+          </EventContext.Provider>
           {
             (!actionButtonPos) 
               ? (

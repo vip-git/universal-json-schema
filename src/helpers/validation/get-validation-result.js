@@ -6,7 +6,7 @@ import difference from 'lodash/difference';
 import rules from './rules';
 
 const isSubset = (source, target) => !difference(flatten(source), flatten(target)).length;
-const validationResult = (schema, uiSchema, value, customValidations, formData) => {
+const validationResult = (schema = {}, uiSchema = {}, value, customValidations, formData) => {
   const rv = [];
   forOwn(rules, (rule, ruleId) => {
     const result = rule(schema, uiSchema, value);
@@ -44,7 +44,7 @@ const validationResult = (schema, uiSchema, value, customValidations, formData) 
   return rv;
 };
 
-const getFieldSpec = (schema, uiSchema, value, customValidations, formData) => {
+const getFieldSpec = (schema = {}, uiSchema = {}, value, customValidations, formData) => {
   if (value === null) {
     return [];
   }
@@ -61,7 +61,7 @@ const getFieldSpec = (schema, uiSchema, value, customValidations, formData) => {
   );
 };
 
-export default (schema, uiSchema, data, customValidations) => {
+export default (schema = {}, uiSchema = {}, data, customValidations) => {
   const spec = getFieldSpec(schema, uiSchema, data, customValidations, data);
   return { ...spec };
 };

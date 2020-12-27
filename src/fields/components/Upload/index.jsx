@@ -1,89 +1,18 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable no-tabs */
-/* eslint-disable no-unused-expressions */
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import MaterialUploadButton from './lib';
+import uploadProps from './upload.props';
 
-// internal Todo: should be removed
-import { UploadContext } from '../../../../Form';
-
-let uploadLabel = null;
-
-const doOnChange = (onChange, onUpload) => (event) => {
-  const file = event.target.files[0];
-  uploadLabel = file.name;
-  if (onUpload) {
-    onUpload(file);
-  }
-  return onChange(uploadLabel);
-};
-
-const styles = {
-  labelDescription: {
-    '&>span+span': {
-      maxWidth: 200,
-      textOverflow: 'ellipsis',
-      overflow: 'hidden',
-      whiteSpace: 'nowrap',
-    },
-  },
-};
-
-const UploadButton = ({
-  path,
-  classes,
-  label,
-  value,
-  buttonType,
-  isMulti,
-  acceptValues,
-  buttonIcon,
-  buttonTitle,
-  type,
-  onChange,
+export default ({ 
+  onChange, 
+  schema = {}, 
+  widget, 
+  uiSchema = {}, 
+  htmlid, 
   ...rest
 }) => (
-	<UploadContext.Consumer>
-		{(onUpload) => (
-			<FormControlLabel
-				control={(
-                    <div>
-						<input
-							accept={acceptValues}
-							id='button-file'
-							style={{
-							  display: 'none',
-							}}
-							multiple={isMulti}
-							type='file'
-							onChange={doOnChange(onChange, onUpload)}
-						/>
-						<Button
-							style={{
-							  marginRight: 10,
-							}}
-							variant={buttonType}
-							component='span'
-						>
-							<Icon
-								style={{
-								  marginRight: 5,
-								}}
-							>
-								{buttonIcon}
-							</Icon>
-							{buttonTitle}
-						</Button>
-                    </div>
-   				)}
-				label={uploadLabel || label}
-				className={classes.labelDescription}
-			/>
-		)}
-	</UploadContext.Consumer>
+   <MaterialUploadButton 
+        htmlid={htmlid} 
+        {...rest}
+        {...uploadProps({ onChange, schema, widget })}
+   />
 );
-
-export default withStyles(styles)(UploadButton);

@@ -2,8 +2,10 @@
 /* eslint-disable no-tabs */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-nested-ternary */
-import without from 'lodash/without';
 import valuesToOptions from './values-to-options';
+
+// Context
+import { EventContext } from '../../Form';
 
 const toNumber = (v, options = false) => {
   if (v === '' || v === undefined) return v;
@@ -54,20 +56,8 @@ const onChangeHandler = (onChange, type, widget, options, isCustomComponent) => 
     ? formatDateValue(e) 
     : (widget === 'material-multiselect' || widget === 'material-select' || widget === 'creatable-select')  
       ? coerceValue(type, stringify(e))
-      : (type === 'upload') ? coerceValue(type, e) : coerceValue(type, e.target.value, options);
+      : coerceValue(type, e.target.value, options);
   if (value !== undefined) onChange(value);
-};
-
-const onCheckboxChangeHandler = (onChange, title) => (e) => {
-  const spec = {
-  };
-  if (e) {
-    spec.$push = [title];
-  }
-  else {
-    spec.$apply = (arr) => without(arr, title);
-  }
-  return onChange(spec);
 };
 
 export default ({
@@ -87,7 +77,7 @@ export default ({
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'] || uiSchema['ui:props'] || {};
   const { type } = schema;
-  const rv = isCustomComponent 
+  const rv = isCustomComponent
     ? {
       onKeyDown,
       ...isCustomComponent({ onChange }).props,
@@ -99,6 +89,9 @@ export default ({
       uiSchema,
       schema,
       options,
+      widget,
+      type,
+      EventContext,
     };
 
   if (
@@ -110,19 +103,8 @@ export default ({
     rv.onChange = isCustomComponent({ onChange }).props.onChange;
   }
   else {
-    if (schema.enum) {
-      if (widget === 'radio') {
-        if (options.inline) {
-          rv.row = true;
-        }
-      }
-      else if (widget === 'checkboxes') {
-        rv.onChange =	onChange && onCheckboxChangeHandler(onChange, schema.title);
-        rv.label = schema.title;
-      }
-      else {
-        rv.nullOption = 'Please select...';
-      }
+    if (schema.enum && widget !== 'radio') {
+      rv.nullOption = 'Please select...';
       rv.label = schema.title || '';
       if (widget === 'material-select' || widget === 'material-multiselect') {
         rv.multiSelect = widget === 'material-multiselect';
@@ -135,18 +117,6 @@ export default ({
       }
 
       rv.options = valuesToOptions(schema.enum);
-    }
-    else if (type === 'boolean') {
-      rv.label = schema.title;
-      rv.onChange = onChange;
-    }
-    else if (type === 'upload') {
-      rv.label = schema.title;
-      rv.buttonType = widget || 'outlined';
-      rv.acceptValues = uiSchema['ui:accept'] || '*';
-      rv.isMulti = uiSchema['ui:isMulti'] || false;
-      rv.buttonIcon = uiSchema['ui:icon'] || 'add_circle';
-      rv.buttonTitle = uiSchema['ui:buttonTitle'] || 'Upload';
     }
 
     if (options.disabled) {

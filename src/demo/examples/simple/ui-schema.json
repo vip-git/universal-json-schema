@@ -19,6 +19,12 @@
 			"useLocaleString": "nl"
 		}
 	},
+	"radio": {
+		"ui:widget": "radio",
+		"ui:options": {
+			"inline": true
+		}
+	},
 	"age": {
 		"ui:widget": "updown",
 		"ui:title": "Age of person",

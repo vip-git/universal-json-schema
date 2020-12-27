@@ -3,15 +3,43 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-export default ({ path, options = [], value, onChange, htmlid, inputProps, nullOption, ...rest }) => (
-  <RadioGroup
-    {...rest}
-    id={htmlid}
-    aria-label={path}
-    name={path}
-    value={String(value)}
-    onChange={onChange}
-  >
-    {options.map(o => <FormControlLabel key={o.key} value={String(o.key)} control={<Radio />} label={o.value} />)}
-  </RadioGroup>
-);
+// Props
+import radioGroupProps from './radio-group.props';
+
+export default ({ 
+  path, 
+  options = {},
+  value,
+  htmlid, 
+  inputProps, 
+  nullOption,
+  schema = {},
+  onChange,
+  ...rest 
+}) => {
+  const { choices } = radioGroupProps({ onChange, schema, options });
+  return (
+      <RadioGroup
+        {...rest}
+        id={htmlid}
+        aria-label={path}
+        name={path}
+        value={String(value)} 
+        {...radioGroupProps({ onChange, schema, options })}
+      >
+        {
+          choices 
+          && choices.length 
+          && choices.map((o) => (
+              <FormControlLabel 
+                key={o.key} 
+                value={String(o.key)} 
+                control={<Radio />} 
+                label={o.value} 
+              />
+          ),
+          )
+        }
+      </RadioGroup>
+  );
+};
