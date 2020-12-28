@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import { 
   KeyboardDatePicker,
@@ -7,6 +8,7 @@ import {
   TimePicker, 
   DateTimePicker, 
 } from '@material-ui/pickers';
+import pickerProps from './picker.props';
 
 const renderPickerComp = (type) => {
   switch (type) {
@@ -57,7 +59,7 @@ const renderPickerComp = (type) => {
   }
 };
 
-export default ({ path, label, title, value, htmlid, type, onChange, ...rest }) => {
+export default ({ path, label, title, value, options = {}, htmlid, type, onChange, ...rest }) => {
   const { PickerComp, maskInput, placeholder, format } = renderPickerComp(type);
   return (
         <div
@@ -77,9 +79,10 @@ export default ({ path, label, title, value, htmlid, type, onChange, ...rest }) 
                 placeholder={placeholder}
                 label={label}
                 value={(!value) ? null : value}
-                onChange={onChange}
                 maxDate={'2200-01-01'}
                 animateYearScrolling={false}
+                {...pickerProps({ onChange })}
+                {...options}
             />
         </div>
   );

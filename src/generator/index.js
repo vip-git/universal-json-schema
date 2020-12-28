@@ -60,3 +60,20 @@ shelljs.cp(
 );
 
 console.log('Components downloaded successfully');
+
+console.log('Downloading utils dependencies');
+
+Object.keys(componentSettings.utils)
+  .filter((c) => !componentSettings.utils[c].notAvailable)
+  .forEach((utilName) => {
+    shelljs.exec(
+      `npm install ${utilName}@${componentSettings.utils[utilName].version} --save-exact`,
+    );
+  });
+shelljs.cp(
+  '-R',
+  'node_modules/@react-jsonschema-form-utils/',
+  '../fields/generated/utils',
+);
+
+console.log('Utils downloaded successfully');

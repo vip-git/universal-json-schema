@@ -49,14 +49,10 @@ const coerceValue = (type, value, options = false) => {
   }
 };
 
-const formatDateValue = (val) => val && val.format && val.format() || '';
-
 const onChangeHandler = (onChange, type, widget, options, isCustomComponent) => (e) => {
-  const value = (type === 'material-date' || type === 'material-time' || type === 'material-datetime')
-    ? formatDateValue(e) 
-    : (widget === 'material-multiselect' || widget === 'material-select' || widget === 'creatable-select')  
-      ? coerceValue(type, stringify(e))
-      : coerceValue(type, e.target.value, options);
+  const value = (widget === 'material-multiselect' || widget === 'material-select' || widget === 'creatable-select')  
+    ? coerceValue(type, stringify(e))
+    : coerceValue(type, e.target.value, options);
   if (value !== undefined) onChange(value);
 };
 

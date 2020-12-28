@@ -3,20 +3,17 @@ import without from 'lodash/without';
 
 const doOnChange = (onChange) => (e, checked) => onChange(checked);
 
-const onCheckboxChangeHandler = (onChange, title) => (e) => {
-  const spec = {};
-  if (e) {
-    spec.$push = [title];
+const onCheckboxChangeHandler = (givenOnChange, value) => (e, checked) => {
+  if (checked) {
+    givenOnChange(value);
   }
   else {
-    spec.$apply = (arr) => without(arr, title);
+    givenOnChange('');
   }
-  return onChange(spec);
 };
 
 export default ({ onChange, schema = {} }) => ({
   onChange: doOnChange(onChange),
-  onGroupChange: onChange
-      && onCheckboxChangeHandler(onChange, schema.title),
+  onGroupChange: (value) => onChange && onCheckboxChangeHandler(onChange, value),
   label: schema.title,
 });

@@ -1,45 +1,57 @@
 {
-	"name": "JSON Schema Components",
+    "name": "JSON Schema Components",
+    "utils": {
+        "@react-jsonschema-form-utils/enum-utils": {
+            "version": "1.0.0",
+            "name": "enum-utils"
+        }
+    },
 	"components": {
         "@react-jsonschema-form-components/material-radio-group": {
             "version": "1.0.1",
             "type": "string",
             "isEnum": true,
-            "name": "material-radio-group"
+            "name": "material-radio-group",
+            "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/creatable-react-select": {
             "version": "1.0.0",
             "type": "string",
             "isEnum": true,
-            "name": "creatable-react-select"
+            "name": "creatable-react-select",
+            "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/react-select": {
             "version": "1.0.1",
             "type": "string",
             "isEnum": true,
-            "name": "react-select"
+            "name": "react-select",
+            "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/material-select": {
             "version": "1.0.0",
             "type": "string",
             "isEnum": true,
-            "name": "material-select"
+            "name": "material-select",
+            "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/material-checkbox": {
-            "version": "1.0.1",
+            "version": "1.0.3",
             "type": "string",
             "isEnum": true,
-            "name": "material-checkbox"
+            "name": "material-checkbox",
+            "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/switch-checkbox": {
             "version": "1.0.0",
             "type": "string",
             "isEnum": true,
             "name": "material-switch",
-            "notAvailable": true
+            "notAvailable": true,
+            "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/material-picker": {
-            "version": "1.0.0",
+            "version": "1.0.1",
             "type": "string",
             "isEnum": false,
             "name": "material-picker"
