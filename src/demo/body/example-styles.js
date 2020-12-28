@@ -1,10 +1,11 @@
-export default theme => ({
-  'root': {
+export default (theme) => ({
+  root: {
     'padding': theme.spacing(1),
     '& $ctr': {
       'display': 'flex',
       '& $sourceCtr': {
         'flex': 21,
+        'width': '55%',
         'display': 'flex',
         'marginRight': theme.spacing(1),
         'flexDirection': 'column',
@@ -27,7 +28,7 @@ export default theme => ({
       },
     },
   },
-  'sourceCtr': {},
-  'display': {},
-  'ctr': {},
+  sourceCtr: {},
+  display: {},
+  ctr: {},
 });

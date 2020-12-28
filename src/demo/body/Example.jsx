@@ -65,6 +65,8 @@ const SourceSchema = ({
       </div>
       <div>
         <Source title={'uiSchema'} source={uiSchema} onChange={onChange('uiSchema')} />
+      </div>
+      <div>
         <Source title={'formData'} source={formData} onChange={onChange('formData')} />
       </div>
     </div>

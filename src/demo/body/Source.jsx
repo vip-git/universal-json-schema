@@ -60,7 +60,7 @@ class Source extends React.Component {
     const { classes, title } = this.props;
     const Icon = valid ? Valid : Invalid;
     return (
-      <div className={classes.root}>
+      <div className={classes.root} style={title === 'uiSchema' ? { marginBottom: 10 } : {}}>
         <div className={classNames(classes.ctr, { [classes.invalid]: !valid })}>
           <div>
             <Icon fontSize={'default'} className={classes.icon} />
@@ -79,7 +79,7 @@ class Source extends React.Component {
               showPrintMargin
               showGutter
               highlightActiveLine
-              width={title === 'JSONSchema' ? '100%' : 500}
+              width={'100%'}
               setOptions={{
                 enableBasicAutocompletion: true,
                 enableLiveAutocompletion: true,

@@ -37,7 +37,7 @@ class RawMenuAppBar extends React.Component {
               </IconButton>
             </Hidden>
             <div className={classes.flexCtr}>
-              <Typography color='inherit'>material-ui-jsonschema-form</Typography>
+              <Typography color='inherit'>React JSONSchema Form (Material UI)</Typography>
             </div>
           </Toolbar>
         </AppBar>

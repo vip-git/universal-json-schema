@@ -63,16 +63,19 @@ export class RawConfiguredField extends React.Component {
 					<p className={classes.description}>{descriptionText}</p>
 				)}
 				{activeCompColor && !isCustomComponent && (
-					<ActiveComp
-						id={`${htmlid}-activeComp`}
+					<div
 						style={{
 							flexBasis: '6%',
-							top: 22,
+							top: 7,
 							position: 'relative',
 							marginRight: 10,
 							color: activeCompColor || 'grey'
 						}}
-					/>
+					>
+						<ActiveComp
+							id={`${htmlid}-activeComp`}
+						/>
+					</div>
 				)}
 				<Component
 					className={className && classes[className]}
