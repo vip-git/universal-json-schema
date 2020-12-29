@@ -19,38 +19,47 @@ export const RawFieldSetObject = ({
   idxKey,
   path,
   validation = {}, 
-  isTabContent,
+  isTabContent = false,
   tabKey,
   ...rest 
 }) => {
   const orientation = (uiSchema['ui:orientation'] === 'row' ? classes.row : null);
-  const FormFieldContent = ({ propId }) => {
-    const newPath = path ? `${path}.${propId}` : propId;
-    return (
-      <FormField
-          key={propId}
-          objectData={data}
-          path={newPath}
-          required={schema.required}
-          schema={schema.properties[propId]}
-          data={data[propId]}
-          uiSchema={uiSchema[propId] || {}}
-          validation={validation[propId] || {}}
-          {...rest}
-      />
-    );
-  };
   if (isTabContent) {
     const newPath = path ? `${path}.${tabKey}` : tabKey;
     return (
       <div className={classNames(classes.root, orientation)}>
-        <FormFieldContent propId={tabKey} />
+        <FormField
+            key={tabKey}
+            objectData={data}
+            path={newPath}
+            required={schema.required}
+            schema={schema.properties[tabKey]}
+            data={data[tabKey]}
+            uiSchema={uiSchema[tabKey] || {}}
+            validation={validation[tabKey] || {}}
+            {...rest}
+        />
       </div>
     );
   }
   return (
     <div className={classNames(classes.root, orientation)}>
-      {keys(schema.properties).map((p) => <FormFieldContent propId={p} />)}
+      {keys(schema.properties).map((propId) => {
+        const newPath = path ? `${path}.${propId}` : propId;
+        return (
+          <FormField
+              key={propId}
+              objectData={data}
+              path={newPath}
+              required={schema.required}
+              schema={schema.properties[propId]}
+              data={data[propId]}
+              uiSchema={uiSchema[propId] || {}}
+              validation={validation[propId] || {}}
+              {...rest}
+          />
+        );
+      })}
     </div>
   );
 };
