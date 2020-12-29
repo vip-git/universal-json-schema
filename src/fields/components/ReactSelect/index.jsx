@@ -1,4 +1,8 @@
+// Library
 import React from 'react';
+import { values, mapValues } from 'lodash';
+
+// Internal
 import MultiSelect from './lib/ReactSelect';
 
 // Props
@@ -12,6 +16,7 @@ export default ({
   disabled,
   widget,
   onChange, 
+  schemaVersion,
   ...rest 
 }) => {
   const { 
@@ -28,6 +33,7 @@ export default ({
     uiSchema,
     type, 
     widget,
+    schemaVersion,
   });
   
   const suggestions = choices.map((suggestion) => ({
@@ -37,7 +43,31 @@ export default ({
     style: suggestion.style,
   }));
 
-  const newVal = (value) ? JSON.parse(value) : '';
+  let newVal = value;
+
+  try {
+    if (String(schemaVersion) === '2') {
+      newVal = (value) ? JSON.parse(value) : '';
+    }
+    else {
+      const backwardsCompatibleFormat = (givenValue) => JSON.parse(givenValue)
+        .some((t) => typeof t === 'object' && 'value' in t);
+      const parseMultiSelectValues = (givenValue) => {
+        const isBackwardsCompatibleFormat = backwardsCompatibleFormat(givenValue);
+        if (isBackwardsCompatibleFormat) {
+          const finalValues = values(mapValues(JSON.parse(givenValue), 'value'));
+          return suggestions.filter((sg) => finalValues.includes(sg.value));
+        }
+        return suggestions.filter((sg) => JSON.parse(value).includes(sg.value));
+      };
+      newVal = multiSelect 
+        ? parseMultiSelectValues(value) 
+        : suggestions.find((sg) => sg.value === value);
+    }
+  }
+  catch (err) {
+    newVal = value;
+  }
 
   return (
     <MultiSelect 
