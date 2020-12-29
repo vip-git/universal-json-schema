@@ -50,7 +50,7 @@ const coerceValue = (type, value, options = false) => {
 };
 
 const onChangeHandler = (onChange, type, widget, options, isCustomComponent) => (e) => {
-  const value = (widget === 'material-multiselect' || widget === 'material-select' || widget === 'creatable-select')  
+  const value = (widget === 'creatable-select')  
     ? coerceValue(type, stringify(e))
     : coerceValue(type, e.target.value, options);
   if (value !== undefined) onChange(value);
@@ -99,19 +99,10 @@ export default ({
     rv.onChange = isCustomComponent({ onChange }).props.onChange;
   }
   else {
-    if (schema.enum && widget !== 'radio') {
+    if (schema.enum && widget === 'creatable-select') {
       rv.nullOption = 'Please select...';
       rv.label = schema.title || '';
-      if (widget === 'material-select' || widget === 'material-multiselect') {
-        rv.multiSelect = widget === 'material-multiselect';
-        rv.isClearable = uiSchema['ui:isClearable'] || false;
-        rv.placeholder = uiSchema['ui:placeholder'] || '';
-      }
-
-      if (widget === 'creatable-select') {
-        rv.optionsOnly = true;
-      }
-
+      rv.optionsOnly = true;
       rv.options = valuesToOptions(schema.enum);
     }
 

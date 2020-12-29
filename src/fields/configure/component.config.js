@@ -2,7 +2,7 @@
 // Config
 const {
   APP_CONFIG: { SUPPORTED_TYPES, COMPONENT_MAPPING },
-} = require('../generated/app.config');
+} = require('../../generated/app.config');
 
 const componentConfig = new Map();
 

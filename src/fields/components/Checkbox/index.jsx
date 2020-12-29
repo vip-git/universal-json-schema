@@ -8,14 +8,14 @@ import FormGroup from '@material-ui/core/FormGroup';
 // Props
 import checkboxProps from './checkbox.props';
 
-export default ({ value, type, onChange, schema = {}, options = [], ...rest }) => {
-  const { onChange: givenOnChange, onGroupChange, label } = checkboxProps({ onChange, schema });
+export default ({ value, type, onChange, schema = {}, ...rest }) => {
+  const { onChange: givenOnChange, onGroupChange, label, choices } = checkboxProps({ onChange, schema });
   const GroupCheckbox = () => (
     <FormControl component='fieldset'>
       <FormLabel component='legend'>{label}</FormLabel>
       <FormGroup>
         {
-          options.map((o) => (
+          choices.map((o) => (
             <FormControlLabel
               control={(
                 <Checkbox

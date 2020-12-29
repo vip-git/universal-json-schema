@@ -31,20 +31,25 @@ const template = ejs.compile(templateFile, {});
 const finalString = template({ components: componentSettings.components });
 const shellFileString = new shelljs.ShellString(finalString);
 
-shelljs.rm('-rf', 'src/fields/generated/components');
-shelljs.rm('-rf', 'src/generator/node_modules');
-shelljs.rm('-rf', 'src/generator/package-lock.json');
-shelljs.rm('-rf', 'src/generator/package.json');
+// Folder Variables
+const generatedLocation = `${shelljs.pwd()}/src/generated`;
+const generatorLocation = `${shelljs.pwd()}/generator`;
+
+shelljs.rm('-rf', `${generatedLocation}/components`);
+shelljs.rm('-rf', `${generatedLocation}/utils`);
+shelljs.rm('-rf', `${generatorLocation}/node_modules`);
+shelljs.rm('-rf', `${generatorLocation}/package-lock.json`);
+shelljs.rm('-rf', `${generatorLocation}/package.json`);
 
 console.log('generating app config file');
 
-shellFileString.to('src/fields/generated/app.config.js');
+shellFileString.to(`${generatedLocation}/app.config.js`);
 
 console.log('app config file generated');
 
 console.log('Downloading component dependencies');
 
-shelljs.cd('src/generator');
+shelljs.cd(generatorLocation);
 shelljs.exec('npm init --yes');
 Object.keys(componentSettings.components)
   .filter((c) => !componentSettings.components[c].notAvailable)
@@ -56,7 +61,7 @@ Object.keys(componentSettings.components)
 shelljs.cp(
   '-R',
   'node_modules/@react-jsonschema-form-components/',
-  '../fields/generated/components',
+  `${generatedLocation}/components`,
 );
 
 console.log('Components downloaded successfully');
@@ -73,7 +78,7 @@ Object.keys(componentSettings.utils)
 shelljs.cp(
   '-R',
   'node_modules/@react-jsonschema-form-utils/',
-  '../fields/generated/utils',
+  `${generatedLocation}/utils`,
 );
 
 console.log('Utils downloaded successfully');

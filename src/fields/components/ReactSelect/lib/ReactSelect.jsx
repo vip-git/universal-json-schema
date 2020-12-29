@@ -96,6 +96,7 @@ function Option(props) {
     <MenuItem
       buttonRef={props.innerRef}
       selected={props.isFocused}
+      disabled={props.isDisabled}
       component='div'
       style={props.data.style ? {
         fontWeight: props.isSelected ? 500 : 400,

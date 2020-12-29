@@ -11,14 +11,15 @@
   "license": "ISC",
   "dependencies": {
     "@react-jsonschema-form-components/creatable-react-select": "1.0.0",
-    "@react-jsonschema-form-components/material-checkbox": "1.0.3",
+    "@react-jsonschema-form-components/material-checkbox": "1.0.4",
     "@react-jsonschema-form-components/material-input": "1.0.1",
     "@react-jsonschema-form-components/material-picker": "1.0.1",
-    "@react-jsonschema-form-components/material-radio-group": "1.0.1",
-    "@react-jsonschema-form-components/material-select": "1.0.0",
-    "@react-jsonschema-form-components/react-select": "1.0.1",
+    "@react-jsonschema-form-components/material-radio-group": "1.0.2",
+    "@react-jsonschema-form-components/material-select": "1.0.2",
+    "@react-jsonschema-form-components/react-select": "1.0.3",
     "@react-jsonschema-form-components/rich-text-editor": "1.0.1",
     "@react-jsonschema-form-components/upload": "1.0.3",
-    "@react-jsonschema-form-utils/enum-utils": "1.0.0"
+    "@react-jsonschema-form-utils/enum-utils": "1.0.0",
+    "@react-jsonschema-form-utils/parse-values": "1.0.0"
   }
 }

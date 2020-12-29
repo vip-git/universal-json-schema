@@ -1,5 +1,5 @@
 // Utils
-import { valuesToOptions } from '../utils/enum-utils';
+import { valuesToOptions } from '../../utils/enum-utils';
 
 const onChangeHandler = (givenOnChange) => (e) => {
   if (e.target.value !== undefined) {

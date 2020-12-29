@@ -15,7 +15,7 @@ const {
   ENUM_COMPONENTS,
   V2_PICKER_COMPONENT,
   COMMON_COMPONENTS,
-} = require('../generated/app.config');
+} = require('../../generated/app.config');
 
 export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
   // console.log('getComponent schema: %o, uiSchema: %o', schema, uiSchema);
