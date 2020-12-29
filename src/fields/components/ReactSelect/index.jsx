@@ -50,15 +50,16 @@ export default ({
       newVal = (value) ? JSON.parse(value) : '';
     }
     else {
-      const backwardsCompatibleFormat = (givenValue) => JSON.parse(givenValue)
+      const backwardsCompatibleFormat = (givenValue) => givenValue
         .some((t) => typeof t === 'object' && 'value' in t);
       const parseMultiSelectValues = (givenValue) => {
-        const isBackwardsCompatibleFormat = backwardsCompatibleFormat(givenValue);
+        const parsedValue = schema.parsedArray ? givenValue : JSON.parse(givenValue);
+        const isBackwardsCompatibleFormat = backwardsCompatibleFormat(parsedValue);
         if (isBackwardsCompatibleFormat) {
-          const finalValues = values(mapValues(JSON.parse(givenValue), 'value'));
+          const finalValues = values(mapValues(parsedValue, 'value'));
           return suggestions.filter((sg) => finalValues.includes(sg.value));
         }
-        return suggestions.filter((sg) => JSON.parse(value).includes(sg.value));
+        return suggestions.filter((sg) => parsedValue.includes(sg.value));
       };
       newVal = multiSelect 
         ? parseMultiSelectValues(value) 

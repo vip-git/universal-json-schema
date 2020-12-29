@@ -6,7 +6,7 @@
 	"bio": "<p><u>ads</u></p>",
 	"password": "noneed",
 	"creatableSelectTest": "[{\"label\":\"hello\",\"value\":\"hello\"},{\"label\":\"yes\",\"value\":\"yes\"}]",
-	"selectTest": "[{\"value\":\"Yes\",\"label\":\"Yes\"},{\"value\":\"No\",\"label\":\"No\"}]",
+	"selectTest": ["Yes", "No"],
 	"telephone": "",
 	"customComponent": "",
 	"customRating": 3

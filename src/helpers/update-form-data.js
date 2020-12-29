@@ -24,16 +24,14 @@ const applyAtPath = (path, data, spec) => {
   return {};
 };
 
-const setValueSpec = value => () => {
-  if (typeof value === 'object' && size(value) === 1) return value;
-  return ({ $set: value });
-};
-const pushItemSpec = value => (data) => {
+// if (typeof value === 'object' && size(value) === 1) return value;
+const setValueSpec = (value) => () => ({ $set: value });
+const pushItemSpec = (value) => (data) => {
   if (data) return ({ $push: [value] });
   return ({ $set: [value] });
 };
-const removeItemSpec = idx => () => ({ $splice: [[idx, 1]] });
-const moveItemSpec = (idx, direction) => value => ({
+const removeItemSpec = (idx) => () => ({ $splice: [[idx, 1]] });
+const moveItemSpec = (idx, direction) => (value) => ({
   [idx]: { $set: value[idx + direction] },
   [idx + direction]: { $set: value[idx] },
 });

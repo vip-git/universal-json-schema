@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 import FormField from '../FormField';
 import fieldSetStyles from './field-set-styles';
 import getDefaultValue from '../helpers/get-default-value';
+import { valuesToOptions } from '../generated/utils/enum-utils';
 import ReorderableFormField from './ReorderableFormField';
 
 export const RawFieldSetArray = (props) => {
@@ -63,17 +64,18 @@ export const RawFieldSetArray = (props) => {
         }
         return null;
       })}
-      {(!isArray(schema.items) && schema.uniqueItems && schema.items.enum) && schema.items.enum.map((d) => (
-        <FormField
-          key={`${path + d}`}
-          path={`${path}`}
-          required={schema.required}
-          schema={{ ...schema.items, title: d }}
-          data={includes(data, d)}
-          uiSchema={uiSchema}
-          {...rest}
-        />
-      ))}
+      {(!isArray(schema.items) && schema.uniqueItems && schema.items.enum) 
+        && (
+          <FormField
+            key={path}
+            path={path}
+            required={schema.required}
+            schema={{ ...schema.items, title: schema.title, parsedArray: true }}
+            data={data}
+            uiSchema={uiSchema}
+            {...rest}
+          />
+        )}
       {schema.additionalItems
         && (
           <RawFieldSetArray

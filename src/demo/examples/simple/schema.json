@@ -72,20 +72,24 @@
       "enum": ["test", "teete", "etetet"]
     },
     "selectTest": {
-      "type": "string",
+      "type": "array",
       "title": "Example Multi Select",
-      "enum": [
-        {
-          "key": "Yes",
-          "style": {
-            "borderBottom": "solid 1px black"
+      "items": {
+        "type": "string",
+        "enum": [
+          {
+            "key": "Yes",
+            "style": {
+              "borderBottom": "solid 1px black"
+            },
+            "value": "Yes", 
+            "disabled": true
           },
-          "value": "Yes", 
-          "disabled": true
-        },
-        "No",
-        "etetet"
-      ]
+          "No",
+          "etetet"
+        ]
+      },
+      "uniqueItems": true
     },
     "bio": {
       "type": "string",

@@ -5,9 +5,15 @@ import { values, mapValues } from 'lodash';
 import { valuesToOptions } from '../../utils/enum-utils';
 import { coerceValue, deepStringify } from '../../utils/parse-values';
 
-const onChangeHandler = (onChange, type, schemaVersion, isMultiSelect) => (e) => {
+const onChangeHandler = (
+  onChange,
+  type,
+  schemaVersion,
+  isMultiSelect,
+  schema,
+) => (e) => {
   let value = '';
-  if (String(schemaVersion) === '2') { 
+  if (String(schemaVersion) === '2') {
     value = coerceValue(type, deepStringify(e));
   }
   else {
@@ -15,7 +21,7 @@ const onChangeHandler = (onChange, type, schemaVersion, isMultiSelect) => (e) =>
       const val = coerceValue(type, deepStringify(e));
       const parseMultiSelectValues = (parsedValue) => {
         const finalValues = values(mapValues(JSON.parse(parsedValue), 'value'));
-        return type === 'array' ? finalValues : JSON.stringify(finalValues);
+        return schema.parsedArray ? finalValues : JSON.stringify(finalValues);
       };
       value = isMultiSelect
         ? parseMultiSelectValues(val)
@@ -43,6 +49,7 @@ export default ({
       type,
       schemaVersion,
       widget === 'material-multiselect',
+      schema,
     ),
   choices: valuesToOptions(schema.enum),
   multiSelect: widget === 'material-multiselect',
