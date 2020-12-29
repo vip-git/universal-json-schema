@@ -1,5 +1,5 @@
 // Context
-import { EventContext } from '../../Form';
+import { EventContext } from '../../../Form';
 
 export default ({
   schema = {},

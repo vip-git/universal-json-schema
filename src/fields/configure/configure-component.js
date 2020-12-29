@@ -1,8 +1,7 @@
-// import Input, { InputLabel } from '@material-ui/core/Input'; // eslint-disable-line import/no-named-default
-import getComponentProps from './get-component-props';
-import getLabelComponentProps from './get-label-component-props';
-import getLabelComponent from './get-label-component';
-import getComponent from './get-component';
+import getComponentProps from './component/get-component-props';
+import getLabelComponentProps from './label/get-label-component-props';
+import getLabelComponent from './label/get-label-component';
+import getComponent from './component/get-component';
 
 const getClassName = ({ uiSchema = {} }) => {
   const widget = uiSchema['ui:widget'];
