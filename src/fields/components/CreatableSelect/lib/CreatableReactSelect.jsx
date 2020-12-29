@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
+import { values, mapValues, isEmpty } from 'lodash';
 import CreatableReactSelect from 'react-select/creatable';
 
 const components = {
@@ -71,8 +71,8 @@ export default class CreatableInputOnly extends Component {
 
   saveValuesToObject = () => {
     const { inputValue, value } = this.state;
-    if (!inputValue || (this.props.optionsOnly && _.values(_.mapValues(this.props.option, 'value')).indexOf(inputValue) === -1)) return;
-    const multiValueArray = [...value];
+    if (!inputValue || (this.props.optionsOnly && values(mapValues(this.props.option, 'value')).indexOf(inputValue) === -1)) return;
+    const multiValueArray = isEmpty(value) ? [] : [...value];
     const combinedInputValue = (inputValue.split(' ').length === 1) 
       ? this.addSingleValue(inputValue, multiValueArray) 
       : this.addMultipleValue(inputValue.split(' '), multiValueArray);

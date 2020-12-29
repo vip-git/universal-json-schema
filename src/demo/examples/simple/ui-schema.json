@@ -58,7 +58,10 @@
 		"ui:widget": "alt-datetime"
 	},
 	"creatableSelectTest": {
-		"ui:widget": "creatable-select"
+		"ui:widget": "creatable-select",
+		"ui:options": {
+			"optionsOnly": true
+		}
 	},
 	"customRating": {
 		"ui:component": "customRating",
