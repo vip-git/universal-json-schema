@@ -1,9 +1,3 @@
-/* eslint-disable no-mixed-operators */
-/* eslint-disable no-tabs */
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable no-nested-ternary */
-import valuesToOptions from './values-to-options';
-
 // Context
 import { EventContext } from '../../Form';
 
@@ -44,9 +38,9 @@ export default ({
 
   if (
     isCustomComponent
-		&& isCustomComponent({ onChange })
-		&& isCustomComponent({ onChange }).props
-		&& isCustomComponent({ onChange }).props.onChange
+    && isCustomComponent({ onChange })
+    && isCustomComponent({ onChange }).props
+    && isCustomComponent({ onChange }).props.onChange
   ) {
     rv.onChange = isCustomComponent({ onChange }).props.onChange;
   }
