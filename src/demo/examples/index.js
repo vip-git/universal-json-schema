@@ -2,7 +2,8 @@ import simple from './simple';
 import nested from './nested';
 import single from './single';
 import numbers from './numbers';
-import arrays from './arrays.bak';
+import arrays from './arrays';
+import tabsUI from './arrays.bak';
 import validation from './validation';
 import budget from './budget';
 import multipleChoice from './multiple-choice';
@@ -14,6 +15,7 @@ export default ({
   nested,
   numbers,
   arrays,
+  tabsUI,
   validation,
   budget,
   multipleChoice,

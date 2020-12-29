@@ -1,22 +1,33 @@
+/* eslint-disable radix */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import classNames from 'classnames';
 import endsWith from 'lodash/endsWith';
 import isEqual from 'lodash/isEqual';
+
+// Material UI
 import { withStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
+
+// Internal
 import fieldSetStyles from './field-set-styles';
 import FieldSetArray from './FieldSetArray';
 import FieldSetObject from './FieldSetObject';
+import FieldSetTabs from './FieldSetTabs';
+
+export const isPageLayoutTabs = (uiSchema) => {
+  const pageSchema = uiSchema['ui:page'];
+  return (pageSchema && pageSchema['ui:layout'] && pageSchema['ui:layout'] === 'tabs') || false;
+};
 
 export const RawFieldSetContent = (props) => {
-  const { schema = {} } = props;
+  const { schema = {}, uiSchema = {} } = props;
   const { type } = schema;
   if (type === 'array') {
     return <FieldSetArray {...props} />;
   }
   if (type === 'object') {
-    return <FieldSetObject {...props} />;
+    return isPageLayoutTabs(uiSchema) ? <FieldSetTabs {...props} /> : <FieldSetObject {...props} />;
   }
   return null;
 };
@@ -29,16 +40,19 @@ export class RawFieldSet extends React.Component {
 
   render() {
     const { className, path, classes, schema = {}, hideTitle, idxKey } = this.props;
+    const LegendTitle = () => (!hideTitle && (
+      schema.title 
+      && (Number.isNaN(parseInt(path.replace(/[^\d.]/g, ''), 0)) 
+      || parseInt(path.replace(/[^\d.]/g, ''), 0) === 0)
+        && (
+            <InputLabel> 
+              {schema.title}
+            </InputLabel>
+        )
+    ));
     return (
       <fieldset className={classNames(className, classes.root, { [classes.listItem]: endsWith(path, ']') })}>
-        {schema.title 
-        && (Number.isNaN(parseInt(path.replace(/[^\d.]/g, ''), 0)) 
-        || parseInt(path.replace(/[^\d.]/g, ''), 0) === 0)
-          && (
-              <InputLabel> 
-                {schema.title}
-              </InputLabel>
-          )}
+        {LegendTitle()}
         <FieldSetContent path={path} {...this.props} />
       </fieldset>
     );

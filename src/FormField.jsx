@@ -2,7 +2,7 @@
 import React from 'react';
 import isEqual from 'lodash/isEqual';
 import { withStyles } from '@material-ui/core/styles';
-import FieldSet from './FieldSet';
+import FieldSet, { isPageLayoutTabs } from './FieldSet';
 import Field from './fields';
 import styles from './form-field-styles';
 
@@ -23,6 +23,7 @@ export class RawFormField extends React.Component {
           uiSchema={uiSchema}
           onKeyDown={onKeyDown}
           onChange={onChange}
+          hideTitle={isPageLayoutTabs(uiSchema)}
           {...rest} 
         />
       );
