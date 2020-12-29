@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/no-access-state-in-setstate */
 import React from 'react';
 import classNames from 'classnames';
 import brace from 'brace';
@@ -27,6 +30,7 @@ class Source extends React.Component {
     this.state = {
       source,
       valid: isValid(source),
+      isOpen: true,
     };
   }
 
@@ -56,19 +60,41 @@ class Source extends React.Component {
   }
 
   render() {
-    const { source, valid } = this.state;
+    const { source, valid, isOpen } = this.state;
     const { classes, title } = this.props;
     const Icon = valid ? Valid : Invalid;
     return (
-      <div className={classes.root} style={title === 'uiSchema' ? { marginBottom: 10 } : {}}>
+      <div 
+        className={classes.root} 
+        style={title === 'uiSchema' ? { 
+          marginBottom: 10, 
+          cursor: 'pointer', 
+        } : { 
+          cursor: 'pointer',
+        }} 
+      >
         <div className={classNames(classes.ctr, { [classes.invalid]: !valid })}>
-          <div>
+          <div
+            onClick={() => this.setState({
+              isOpen: !isOpen,
+            })}
+          >
             <Icon fontSize={'default'} className={classes.icon} />
             <div className={classes.title}>
               <p>{title}</p>
+              <span> 
+                  {' '}
+                  {isOpen ? '[-]' : '[+]' }
+                  {' '}
+              </span>
             </div>
           </div>
-          <div className={classes.source}>
+          <div
+            className={classes.source}
+            style={{
+              display: isOpen ? 'block' : 'none',
+            }}
+          >
             <AceEditor
               mode='json'
               theme='textmate'

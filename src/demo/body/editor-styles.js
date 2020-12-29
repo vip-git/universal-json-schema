@@ -1,4 +1,4 @@
-export default theme => ({
+export default (theme) => ({
   'root': {
     '& $ctr': {
       'borderStyle': 'solid',
@@ -31,6 +31,9 @@ export default theme => ({
   },
   'title': {
     'marginLeft': theme.spacing(2),
+    'display': 'flex',
+    'justifyContent': 'space-between',
+    'width': '90%',
   },
   'invalid': {
 

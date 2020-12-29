@@ -16,7 +16,6 @@ export default (theme) => ({
           'display': 'flex',
           '& >div:first-child': {
             flex: 13,
-            marginRight: theme.spacing(1),
           },
           '& >div:nth-child(2)': {
             flex: 21,
