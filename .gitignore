@@ -5,3 +5,5 @@ mochawesome-report-unit
 todo
 generated
 
+generator/package-lock.json
+generator/package.json
