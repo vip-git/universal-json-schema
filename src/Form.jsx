@@ -41,21 +41,16 @@ const Form = ({
 }) => {
   const classes = formStyles();
   const [data, setData] = useState(formData);
-  const [inputValue, setInputValue] = useState('');
-  const [value, setValue] = useState('');
+  // const [inputValue, setInputValue] = useState('');
+  // const [value, setValue] = useState('');
   const [validation, setValidation] = useState(getValidationResult(schema, uiSchema, formData, validations));
   const id = prefixId || generate();
 
-  useEffect(() => {
-    if (onChange) {
-      onChange({ formData: data, inputValue, value });
-    }
-  }, [data]);
-
-  const onFormValuesChange = (field) => (givenValue) => {
-    const newFormData = updateFormData(data, field, givenValue);
-    setData(newFormData);
-    setValidation(getValidationResult(schema, uiSchema, newFormData, validations));
+  const onFormValuesChange = (field) => async (givenValue) => {
+    const newFormData = updateFormData(formData, field, givenValue);
+    // await setData(newFormData);
+    // await setValidation(getValidationResult(schema, uiSchema, newFormData, validations));
+    onChange({ formData: newFormData, inputValue: givenValue, value: givenValue });
   };
 
   const onMoveItemUp = (path, idx) => () => setData(moveListItem(data, path, idx, -1));
@@ -75,38 +70,38 @@ const Form = ({
     }
   };
 
-  const handleCreatableSelectInputChange = (givenInputValue) => setInputValue(givenInputValue);
+  // const handleCreatableSelectInputChange = (givenInputValue) => setInputValue(givenInputValue);
 
-  try {
-    const transformedSchema = JSON.parse(JSON.stringify(schema));
-    const notAllowedTypes = ['upload', 'material-date'];
-    each(transformedSchema, (givenValue, key) => {
-      // console.log('value is', value);
-      // console.log('key us', key);
-      if (key === 'properties') {
-        each(value, (propVal, propKey) => {
-          if (notAllowedTypes.includes(propVal.type)) {
-            transformedSchema.properties[propKey].type = 'string';
-          }
-        });
-      }
-    });
-    // console.log('transformedSchema is', transformedSchema);
-    // eslint-disable-next-line global-require
-    const { buildYup } = require('schema-to-yup');
-    const yupSchema = buildYup(transformedSchema, {});
-    const isValid = async (givenSchema, givenData) => {
-      const valid = await givenSchema.isValid(givenData);
-      // console.log(schema);
-      // console.log('formData is', data);
-      // console.log('valid is', valid);
-      return valid;
-    };
-    const valid = isValid(yupSchema, formData);
-  }
-  catch (err) {
-    // console.log('err' , err);
-  }
+  // try {
+  //   const transformedSchema = JSON.parse(JSON.stringify(schema));
+  //   const notAllowedTypes = ['upload', 'material-date'];
+  //   each(transformedSchema, (givenValue, key) => {
+  //     // console.log('value is', value);
+  //     // console.log('key us', key);
+  //     if (key === 'properties') {
+  //       each(value, (propVal, propKey) => {
+  //         if (notAllowedTypes.includes(propVal.type)) {
+  //           transformedSchema.properties[propKey].type = 'string';
+  //         }
+  //       });
+  //     }
+  //   });
+  //   // console.log('transformedSchema is', transformedSchema);
+  //   // eslint-disable-next-line global-require
+  //   const { buildYup } = require('schema-to-yup');
+  //   const yupSchema = buildYup(transformedSchema, {});
+  //   const isValid = async (givenSchema, givenData) => {
+  //     const valid = await givenSchema.isValid(givenData);
+  //     // console.log(schema);
+  //     // console.log('formData is', data);
+  //     // console.log('valid is', valid);
+  //     return valid;
+  //   };
+  //   const valid = isValid(yupSchema, formData);
+  // }
+  // catch (err) {
+  //   // console.log('err' , err);
+  // }
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -134,7 +129,7 @@ const Form = ({
         <EventContext.Provider value={onUpload}>
           <FormField
               path={''}
-              data={data}
+              data={formData}
               schemaVersion={schema.version}
               schema={schema}
               uiSchema={uiSchema}

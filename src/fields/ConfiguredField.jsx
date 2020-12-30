@@ -4,7 +4,6 @@
 import React from 'react';
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
-import omit from 'lodash/omit';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
