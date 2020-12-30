@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+/** Todo: fix - this is the place where label sticks sometimes */
 let uploadLabel = null;
 
 const doOnChange = (onChange, onUpload) => (event) => {

@@ -1,4 +1,6 @@
-/* eslint-disable no-fallthrough */
+// Library
+import React from 'react';
+
 const componentConfig = require('../component.config').default;
 const {
   APP_CONFIG: {
@@ -78,7 +80,7 @@ export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
         && component in components
         && typeof components[component] === 'function'
     ) {
-      return components[component];
+      return React.memo(components[component]);
     }
 
     if (selectedComponent) {

@@ -7,15 +7,20 @@ import Field from './fields';
 import styles from './form-field-styles';
 
 // exported for unit testing
-export class RawFormField extends React.Component {
-  shouldComponentUpdate = (nextProps) => !isEqual(this.props, nextProps)
-  
-  render() {
-    const { classes, schema, data, uiSchema = {}, onChange, onKeyDown, path, ...rest } = this.props;
-    const { type } = schema;
-    // Todo: condition for array should change
-    if (type === 'object' || type === 'array') {
-      return (
+export const RawFormField = React.memo(({
+  schema, 
+  data, 
+  uiSchema = {},
+  onChange, 
+  onKeyDown,
+  path, 
+  ...rest 
+}) => {
+  const classes = styles();
+  const { type } = schema;
+  // Todo: condition for array should change
+  if (type === 'object' || type === 'array') {
+    return (
         <FieldSet
           path={path}
           schema={schema}
@@ -26,9 +31,9 @@ export class RawFormField extends React.Component {
           hideTitle={isPageLayoutTabs(uiSchema)}
           {...rest} 
         />
-      );
-    }
-    return (
+    );
+  }
+  return (
       <Field
         className={classes.field}
         path={path}
@@ -39,8 +44,10 @@ export class RawFormField extends React.Component {
         onKeyDown={onKeyDown}
         {...rest}
       />
-    );
-  }
-}
+  );
+}, (prevProps, nextProps) => isEqual(prevProps.data, nextProps.data) 
+                            && isEqual(prevProps.schema, nextProps.schema)
+                            && isEqual(prevProps.uiSchema, nextProps.uiSchema),
+);
 
-export default withStyles(styles)(RawFormField);
+export default RawFormField;

@@ -49,10 +49,10 @@ export class RawFieldSet extends React.Component {
               {schema.title}
             </InputLabel>
         )
-    ));
+    )) || <div />;
     return (
       <fieldset className={classNames(className, classes.root, { [classes.listItem]: endsWith(path, ']') })}>
-        {LegendTitle()}
+        <LegendTitle />
         <FieldSetContent path={path} {...this.props} />
       </fieldset>
     );
