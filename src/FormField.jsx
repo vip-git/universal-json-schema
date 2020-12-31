@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import isEqual from 'lodash/isEqual';
 import { withStyles } from '@material-ui/core/styles';
