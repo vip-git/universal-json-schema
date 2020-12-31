@@ -1,9 +1,14 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/state-in-constructor */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable max-len */
 // Library
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 import isEqual from 'lodash/isEqual';
 import { generate } from 'shortid';
+import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import each from 'lodash/each';
 
@@ -17,155 +22,187 @@ import FormButtons from './FormButtons';
 
 export const EventContext = React.createContext('fieldEvent');
 
-const Form = ({
-  formData,
-  schema,
-  uiSchema,
-  validations,
-  prefixId,
-  submitOnEnter,
-  onChange,
-  onUpload,
-  onSubmit, 
-  formButtons,
-  actionButtonPos,
-  onCancel, 
-  activityIndicatorEnabled,
-  submitValue,
-  cancelValue,
-  inProgressValue,
-  disabled, 
-  cancelVariant,
-  submitVariant,
-  ...rest 
-}) => {
-  const classes = formStyles();
-  const [data, setData] = useState(formData);
-  // const [inputValue, setInputValue] = useState('');
-  // const [value, setValue] = useState('');
-  const [validation, setValidation] = useState(getValidationResult(schema, uiSchema, formData, validations));
-  const id = prefixId || generate();
+class Form extends React.Component {
+  state = {
+    data: this.props.formData,
+    schemaVersion: this.props.schema.version,
+    validation: getValidationResult(this.props.schema, this.props.uiSchema, this.props.formData, this.props.validations),
+    id: this.props.prefixId || generate(),
+  }
 
-  const onFormValuesChange = (field) => async (givenValue) => {
-    const newFormData = updateFormData(formData, field, givenValue);
-    // await setData(newFormData);
-    // await setValidation(getValidationResult(schema, uiSchema, newFormData, validations));
-    onChange({ formData: newFormData, inputValue: givenValue, value: givenValue });
-  };
+  UNSAFE_componentWillReceiveProps = (nextProps) => {
+    let validation;
+    if (!isEqual(nextProps.schema, this.props.schema)) {
+      validation = {};
+    }
+    else {
+      validation = getValidationResult(nextProps.schema, nextProps.uiSchema, nextProps.formData, this.props.validations);
+    }
+    this.setState({
+      validation,
+      data: nextProps.formData,
+    });
+  }
 
-  const onMoveItemUp = (path, idx) => () => setData(moveListItem(data, path, idx, -1));
+  onChange = (field) => (value) => {
+    const data = updateFormData(this.state.data, field, value);
+    this.setState({
+      data,
+      validation: getValidationResult(this.props.schema, this.props.uiSchema, data, this.props.validations),
+    }, this.notifyChange);
+  }
 
-  const onMoveItemDown = (path, idx) => () => setData(moveListItem(data, path, idx, 1));
+  onMoveItemUp = (path, idx) => () => {
+    this.setState({ data: moveListItem(this.state.data, path, idx, -1) }, this.notifyChange);
+  }
 
-  const onDeleteItem = (path, idx) => () => setData(removeListItem(data, path, idx));
+  onMoveItemDown = (path, idx) => () => {
+    this.setState({ data: moveListItem(this.state.data, path, idx, 1) }, this.notifyChange);
+  }
 
-  const onAddItem = (path, defaultValue) => () => setData(addListItem(data, path, defaultValue || ''));
+  onDeleteItem = (path, idx) => () => {
+    this.setState({ data: removeListItem(this.state.data, path, idx) }, this.notifyChange);
+  }
 
-  const onFormSubmit = (callback) => onSubmit({ formData: data }, () => callback && callback());
+  onAddItem = (path, defaultValue) => () => {
+    this.setState({ data: addListItem(this.state.data, path, defaultValue || '') }, this.notifyChange);
+  }
 
-  const handleKeyEnter = (e) => {
-    if (e.keyCode === 13 && submitOnEnter) {
-      onSubmit();
+  onSubmit = (callback) => {
+    this.props.onSubmit({ formData: this.state.data }, () => callback && callback());
+  }
+
+  handleKeyEnter = (e) => {
+    if (e.keyCode === 13 && this.props.submitOnEnter) {
+      this.onSubmit();
       // put the login here
     }
+  }
+
+  handleCreatableSelectInputChange = (inputValue) => {
+    this.setState({ inputValue }, this.notifyChange);
   };
 
-  // const handleCreatableSelectInputChange = (givenInputValue) => setInputValue(givenInputValue);
+  notifyChange = () => {
+    const { onChange } = this.props;
+    const { data, inputValue, value } = this.state;
+    if (onChange) {
+      onChange({ formData: data, inputValue, value });
+    }
+  }
 
-  // try {
-  //   const transformedSchema = JSON.parse(JSON.stringify(schema));
-  //   const notAllowedTypes = ['upload', 'material-date'];
-  //   each(transformedSchema, (givenValue, key) => {
-  //     // console.log('value is', value);
-  //     // console.log('key us', key);
-  //     if (key === 'properties') {
-  //       each(value, (propVal, propKey) => {
-  //         if (notAllowedTypes.includes(propVal.type)) {
-  //           transformedSchema.properties[propKey].type = 'string';
-  //         }
-  //       });
-  //     }
-  //   });
-  //   // console.log('transformedSchema is', transformedSchema);
-  //   // eslint-disable-next-line global-require
-  //   const { buildYup } = require('schema-to-yup');
-  //   const yupSchema = buildYup(transformedSchema, {});
-  //   const isValid = async (givenSchema, givenData) => {
-  //     const valid = await givenSchema.isValid(givenData);
-  //     // console.log(schema);
-  //     // console.log('formData is', data);
-  //     // console.log('valid is', valid);
-  //     return valid;
-  //   };
-  //   const valid = isValid(yupSchema, formData);
-  // }
-  // catch (err) {
-  //   // console.log('err' , err);
-  // }
-
-  return (
-    <MuiPickersUtilsProvider utils={MomentUtils}>
-      <Paper className={classes.root}>
-        {
-          (actionButtonPos === 'top') 
-            ? (
-                <FormButtons 
-                  onSubmit={(callback) => onSubmit(callback)}
-                  submitValue={submitValue} 
-                  inProgressValue={inProgressValue}
-                  disabled={disabled} 
-                  onCancel={onCancel}
-                  cancelValue={cancelValue} 
-                  cancelVariant={cancelVariant}
-                  submitVariant={submitVariant}
-                  classes={classes} 
-                  activityIndicatorEnabled={activityIndicatorEnabled}
-                />
-            )
-            : null
-          
+  render() {
+    try {
+      const transformedSchema = JSON.parse(JSON.stringify(this.props.schema));
+      const notAllowedTypes = ['upload', 'material-date'];
+      each(transformedSchema, (value, key) => {
+        // console.log('value is', value);
+        // console.log('key us', key);
+        if (key === 'properties') {
+          each(value, (propVal, propKey) => {
+            if (notAllowedTypes.includes(propVal.type)) {
+              transformedSchema.properties[propKey].type = 'string';
+            }
+          });
         }
-        <ValidationMessages validation={validation} />
-        <EventContext.Provider value={onUpload}>
-          <FormField
-              path={''}
-              data={formData}
-              schemaVersion={schema.version}
-              schema={schema}
-              uiSchema={uiSchema}
-              id={id}
-              onChange={onFormValuesChange}
-              onSubmit={onFormSubmit}
-              validation={validation}
-              onKeyDown={handleKeyEnter}
-              onMoveItemUp={onMoveItemUp}
-              onMoveItemDown={onMoveItemDown}
-              onDeleteItem={onDeleteItem}
-              onAddItem={onAddItem}
-              {...rest}
-          />
-        </EventContext.Provider>
-        {
-          (!actionButtonPos) 
-            ? (
-                <FormButtons
-                  onSubmit={(callback) => onSubmit(callback)}
-                  disabled={disabled}
-                  submitValue={submitValue}
-                  cancelValue={cancelValue} 
-                  onCancel={onCancel}
-                  cancelVariant={cancelVariant}
-                  submitVariant={submitVariant}
-                  classes={classes} 
-                  activityIndicatorEnabled={activityIndicatorEnabled}
-                />
-            )
-            : null
-          
-        }
-      </Paper>
-    </MuiPickersUtilsProvider>
-  );
-};
+      });
+      // console.log('transformedSchema is', transformedSchema);
+      // eslint-disable-next-line global-require
+      const { buildYup } = require('schema-to-yup');
+      const yupSchema = buildYup(transformedSchema, {});
+      const isValid = async (schema, data) => {
+        const valid = await schema.isValid(data);
+        // console.log(schema);
+        // console.log('formData is', data);
+        // console.log('valid is', valid);
+        return valid;
+      };
+      const valid = isValid(yupSchema, this.props.formData);
+    }
+    catch (err) {
+      // console.log('err' , err);
+    }
+    const { 
+      classes, 
+      formData, 
+      onUpload,
+      onSubmit, 
+      formButtons, 
+      actionButtonPos, 
+      onChange, 
+      onCancel, 
+      activityIndicatorEnabled,
+      submitValue,
+      cancelValue,
+      inProgressValue,
+      disabled, 
+      cancelVariant,
+      submitVariant,
+      ...rest 
+    } = this.props;
+    const { validation, id } = this.state;
+    return (
+      <MuiPickersUtilsProvider utils={MomentUtils}>
+        <Paper className={classes.root}>
+          {
+            (actionButtonPos === 'top') 
+              ? (
+                  <FormButtons 
+                    onSubmit={(callback) => this.onSubmit(callback)}
+                    submitValue={submitValue} 
+                    inProgressValue={inProgressValue}
+                    disabled={disabled} 
+                    onCancel={onCancel}
+                    cancelValue={cancelValue} 
+                    cancelVariant={cancelVariant}
+                    submitVariant={submitVariant}
+                    classes={classes} 
+                    activityIndicatorEnabled={activityIndicatorEnabled}
+                  />
+              )
+              : null
+            
+          }
+          <ValidationMessages validation={validation} />
+          <EventContext.Provider value={onUpload}>
+            <FormField
+                path={''}
+                data={this.state.data}
+                schemaVersion={this.state.schemaVersion}
+                id={id}
+                onChange={this.onChange}
+                onSubmit={this.onSubmit}
+                validation={validation}
+                onKeyDown={this.handleKeyEnter}
+                onMoveItemUp={this.onMoveItemUp}
+                onMoveItemDown={this.onMoveItemDown}
+                onDeleteItem={this.onDeleteItem}
+                onAddItem={this.onAddItem}
+                {...rest}
+            />
+          </EventContext.Provider>
+          {
+            (!actionButtonPos) 
+              ? (
+                  <FormButtons
+                    onSubmit={(callback) => this.onSubmit(callback)}
+                    disabled={disabled}
+                    submitValue={submitValue}
+                    cancelValue={cancelValue} 
+                    onCancel={onCancel}
+                    cancelVariant={cancelVariant}
+                    submitVariant={submitVariant}
+                    classes={classes} 
+                    activityIndicatorEnabled={activityIndicatorEnabled}
+                  />
+              )
+              : null
+            
+          }
+        </Paper>
+      </MuiPickersUtilsProvider>
+    );
+  }
+}
 
-export default Form;
+export default withStyles(formStyles)(Form);
