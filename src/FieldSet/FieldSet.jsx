@@ -43,7 +43,7 @@ export class RawFieldSet extends React.Component {
 
   render() {
     const { className, path, classes, schema = {}, hideTitle, idxKey } = this.props;
-    const LegendTitle = () => (!hideTitle && schema.type !== 'array' && (
+    const LegendTitle = () => (!hideTitle && !(has(schema, 'items.enum')) && (
       schema.title 
       && (Number.isNaN(parseInt(path.replace(/[^\d.]/g, ''), 0)) 
       || parseInt(path.replace(/[^\d.]/g, ''), 0) === 0)
