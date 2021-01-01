@@ -11,8 +11,10 @@ export const RawFormField = React.memo(({
   data, 
   uiSchema = {},
   onChange, 
+  dynamicKeyField,
+  onUpdateKeyProperty,
   onKeyDown,
-  path, 
+  path,
   ...rest 
 }) => {
   const classes = styles();
@@ -32,6 +34,7 @@ export const RawFormField = React.memo(({
         />
     );
   }
+  const onGivenChange = dynamicKeyField === 'key' ? onUpdateKeyProperty : onChange;
   return (
       <Field
         className={classes.field}
@@ -39,8 +42,9 @@ export const RawFormField = React.memo(({
         schema={schema}
         data={data}
         uiSchema={uiSchema}
-        onChange={onChange && onChange(path)}
+        onChange={onGivenChange && onGivenChange(path)}
         onKeyDown={onKeyDown}
+        dynamicKeyField={dynamicKeyField}
         {...rest}
       />
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import RemoveCircle from '@material-ui/icons/Close';
@@ -20,8 +21,12 @@ export const RawReorderControls = (
   <div className={classes.root}>
     {canReorder && (
       <div>
-        <IconButton className={classes.up} onClick={onMoveItemUp} disabled={first}><ArrowUpward /></IconButton>
-        <IconButton className={classes.down} onClick={onMoveItemDown} disabled={last}><ArrowDownward /></IconButton>
+        <IconButton className={classes.up} onClick={onMoveItemUp} disabled={first}>
+          <ArrowUpward />
+        </IconButton>
+        <IconButton className={classes.down} onClick={onMoveItemDown} disabled={last}>
+          <ArrowDownward />
+        </IconButton>
       </div>
     )}
     <IconButton
@@ -30,7 +35,7 @@ export const RawReorderControls = (
       }
       onClick={onDeleteItem}
     >
-<RemoveCircle />
+      <RemoveCircle />
     </IconButton>
   </div>
 );

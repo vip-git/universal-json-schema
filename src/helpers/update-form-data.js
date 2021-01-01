@@ -30,7 +30,9 @@ const pushItemSpec = (value) => (data) => {
   if (data) return ({ $push: [value] });
   return ({ $set: [value] });
 };
+
 const removeItemSpec = (idx) => () => ({ $splice: [[idx, 1]] });
+
 const moveItemSpec = (idx, direction) => (value) => ({
   [idx]: { $set: value[idx + direction] },
   [idx + direction]: { $set: value[idx] },
@@ -41,6 +43,8 @@ export default (data, path, value) => {
   const spec = applyAtPath(path, data, s);
   return update(data, spec);
 };
+
+export const removeValueFromSpec = (data, path) => update(data, { $unset: [path] });
 
 export const addListItem = (data, path, value) => {
   const spec = applyAtPath(path, data, pushItemSpec(value));

@@ -11,7 +11,12 @@ import each from 'lodash/each';
 // Internal
 import formStyles from './form-styles';
 import FormField from './FormField';
-import updateFormData, { addListItem, removeListItem, moveListItem } from './helpers/update-form-data';
+import updateFormData, { 
+  addListItem, 
+  removeListItem, 
+  moveListItem,
+  removeValueFromSpec,
+} from './helpers/update-form-data';
 import getValidationResult from './helpers/validation';
 import ValidationMessages from './ValidationMessages';
 import FormButtons from './FormButtons';
@@ -63,6 +68,17 @@ const Form = ({
   const onDeleteItem = (path, idx) => () => setData(removeListItem(data, path, idx), onChange);
 
   const onAddItem = (path, defaultValue) => () => setData(addListItem(data, path, defaultValue || ''), onChange);
+
+  const onAddNewProperty = (path, defaultValue) => () => setData(
+    updateFormData(data, generate(), defaultValue || ''),
+    onChange);
+
+  const onRemoveProperty = (path) => () => setData(removeValueFromSpec(data, path), onChange);
+
+  const onUpdateKeyProperty = (path) => (givenValue) => {
+    setData(updateFormData(data, givenValue, data[path]), onChange);
+    setData(removeValueFromSpec(data, path), onChange);
+  };
 
   const onFormSubmit = (callback) => onSubmit({ formData: data }, () => callback && callback());
 
@@ -143,6 +159,9 @@ const Form = ({
               onMoveItemDown={onMoveItemDown}
               onDeleteItem={onDeleteItem}
               onAddItem={onAddItem}
+              onAddNewProperty={onAddNewProperty}
+              onRemoveProperty={onRemoveProperty}
+              onUpdateKeyProperty={onUpdateKeyProperty}
               {...rest}
           />
         </EventContext.Provider>

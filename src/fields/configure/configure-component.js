@@ -9,8 +9,11 @@ const getClassName = ({ uiSchema = {} }) => {
 };
 
 export default (props) => {
-  const { schema, uiSchema = {}, components } = props;
-  const title = uiSchema['ui:title'] || schema.title;
+  const { schema, uiSchema = {}, components, dynamicKeyField } = props;
+  const dynamicKeyFieldTitle = dynamicKeyField
+                               && uiSchema['ui:title']
+                               && uiSchema['ui:title'][dynamicKeyField];
+  const title = dynamicKeyFieldTitle || dynamicKeyField || uiSchema['ui:title'] || schema.title;
   const backwardsCompatibleComponent = (schema && 'component' in schema) && schema.component;
   const newComponent = uiSchema['ui:component'];
   const component = backwardsCompatibleComponent || newComponent;
@@ -25,12 +28,14 @@ export default (props) => {
     props.isCustomComponent = isCustomComponent;
   }
 
+  const isValidTitle = typeof title === 'string';
+
   return {
-    title,
+    title: isValidTitle ? title : '',
     className: getClassName(props),
     Component: getComponent(props),
     componentProps: getComponentProps(props),
-    LabelComponent: title && getLabelComponent(props),
+    LabelComponent: isValidTitle && title && getLabelComponent(props),
     labelComponentProps: getLabelComponentProps(props),
     isCustomComponent,
   };

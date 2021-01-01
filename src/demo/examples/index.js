@@ -8,8 +8,9 @@ import validation from './validation';
 import budget from './budget';
 import multipleChoice from './multiple-choice';
 import radioChoice from './radio-choice';
+import additionalProps from './additional-props';
 
-export default ({
+export default {
   simple,
   single,
   nested,
@@ -20,4 +21,5 @@ export default ({
   budget,
   multipleChoice,
   radioChoice,
-});
+  additionalProps,
+};
