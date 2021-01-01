@@ -1,2 +1,2 @@
 /* eslint-disable import/no-cycle */
-export { default, isPageLayoutTabs } from './FieldSet';
+export { default, shouldHideTitle } from './FieldSet';

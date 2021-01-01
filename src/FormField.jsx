@@ -1,7 +1,7 @@
 import React from 'react';
 import isEqual from 'lodash/isEqual';
 import { withStyles } from '@material-ui/core/styles';
-import FieldSet, { isPageLayoutTabs } from './FieldSet';
+import FieldSet, { shouldHideTitle } from './FieldSet';
 import Field from './fields';
 import styles from './form-field-styles';
 
@@ -27,7 +27,7 @@ export const RawFormField = React.memo(({
           uiSchema={uiSchema}
           onKeyDown={onKeyDown}
           onChange={onChange}
-          hideTitle={isPageLayoutTabs(uiSchema)}
+          hideTitle={shouldHideTitle(uiSchema, schema)}
           {...rest} 
         />
     );

@@ -88,7 +88,9 @@ export default {
 		},
 	}),
 	fieldSetContent: {
-		root: {},
+		root: {
+			marginTop: 20,
+		},
 		listItem: {},
 	},
 };

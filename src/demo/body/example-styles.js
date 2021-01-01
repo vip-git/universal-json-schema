@@ -15,10 +15,12 @@ export default (theme) => ({
         '& >div:nth-child(2)': {
           'display': 'flex',
           '& >div:first-child': {
-            flex: 13,
+            flex: 21,
+            marginRight: 5,
           },
           '& >div:nth-child(2)': {
             flex: 21,
+            marginLeft: 5,
           },
         },
       },

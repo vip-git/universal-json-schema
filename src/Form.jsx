@@ -73,8 +73,6 @@ const Form = ({
     }
   };
 
-  // const handleCreatableSelectInputChange = (givenInputValue) => setInputValue(givenInputValue);
-
   // try {
   //   const transformedSchema = JSON.parse(JSON.stringify(schema));
   //   const notAllowedTypes = ['upload', 'material-date'];

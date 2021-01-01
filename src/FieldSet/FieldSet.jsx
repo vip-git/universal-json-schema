@@ -4,6 +4,7 @@ import React from 'react';
 import classNames from 'classnames';
 import endsWith from 'lodash/endsWith';
 import isEqual from 'lodash/isEqual';
+import has from 'lodash/has';
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
@@ -15,10 +16,12 @@ import FieldSetArray from './FieldSetArray';
 import FieldSetObject from './FieldSetObject';
 import FieldSetTabs from './FieldSetTabs';
 
-export const isPageLayoutTabs = (uiSchema) => {
+const isPageLayoutTabs = (uiSchema) => {
   const pageSchema = uiSchema['ui:page'];
   return (pageSchema && pageSchema['ui:layout'] && pageSchema['ui:layout'] === 'tabs') || false;
 };
+
+export const shouldHideTitle = (uiSchema, schema) => isPageLayoutTabs(uiSchema) || has(schema, 'items.enum');
 
 export const RawFieldSetContent = (props) => {
   const { schema = {}, uiSchema = {} } = props;
@@ -40,7 +43,7 @@ export class RawFieldSet extends React.Component {
 
   render() {
     const { className, path, classes, schema = {}, hideTitle, idxKey } = this.props;
-    const LegendTitle = () => (!hideTitle && (
+    const LegendTitle = () => (!hideTitle && schema.type !== 'array' && (
       schema.title 
       && (Number.isNaN(parseInt(path.replace(/[^\d.]/g, ''), 0)) 
       || parseInt(path.replace(/[^\d.]/g, ''), 0) === 0)
