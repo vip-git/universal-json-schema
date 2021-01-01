@@ -19,8 +19,9 @@ import FormButtons from './FormButtons';
 // Initial Contexts
 export const EventContext = React.createContext('fieldEvent');
 let data = {};
-const setData = (givenData) => {
+const setData = (givenData, onChange) => {
   data = givenData;
+  onChange({ formData: givenData });
 };
 
 const Form = ({
@@ -48,21 +49,20 @@ const Form = ({
   const classes = formStyles();
   const validation = getValidationResult(schema, uiSchema, formData, validations);
   const id = prefixId || generate();
-  setData(formData);
+  setData(formData, onChange);
 
   const onFormValuesChange = (field) => (givenValue) => {
     const newFormData = updateFormData(data, field, givenValue);
-    setData(newFormData);
-    onChange({ formData: newFormData });
+    setData(newFormData, onChange);
   };
 
-  const onMoveItemUp = (path, idx) => () => setData(moveListItem(data, path, idx, -1));
+  const onMoveItemUp = (path, idx) => () => setData(moveListItem(data, path, idx, -1), onChange);
 
-  const onMoveItemDown = (path, idx) => () => setData(moveListItem(data, path, idx, 1));
+  const onMoveItemDown = (path, idx) => () => setData(moveListItem(data, path, idx, 1), onChange);
 
-  const onDeleteItem = (path, idx) => () => setData(removeListItem(data, path, idx));
+  const onDeleteItem = (path, idx) => () => setData(removeListItem(data, path, idx), onChange);
 
-  const onAddItem = (path, defaultValue) => () => setData(addListItem(data, path, defaultValue || ''));
+  const onAddItem = (path, defaultValue) => () => setData(addListItem(data, path, defaultValue || ''), onChange);
 
   const onFormSubmit = (callback) => onSubmit({ formData: data }, () => callback && callback());
 
