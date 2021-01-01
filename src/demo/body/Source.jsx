@@ -80,7 +80,9 @@ class Source extends React.Component {
             })}
           >
             <Icon fontSize={'default'} className={classes.icon} />
-            <div className={classes.title}>
+            <div
+              className={classes.title}
+            >
               <p>{title}</p>
               <span> 
                   {' '}

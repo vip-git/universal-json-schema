@@ -44,6 +44,7 @@ export const RawConfiguredField = React.memo(({
 		style={{ 
 		  display: isHidden ? 'none' : 'flex',
 		  flexDirection: activeCompColor ? 'row' : 'column',
+		  flexBasis: '100%',
 		}}
 	>
 		{

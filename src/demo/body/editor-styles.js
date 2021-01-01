@@ -33,7 +33,8 @@ export default (theme) => ({
     'marginLeft': theme.spacing(2),
     'display': 'flex',
     'justifyContent': 'space-between',
-    'width': '90%',
+    'width': '100%',
+    'marginRight': 6,
   },
   'invalid': {
 
