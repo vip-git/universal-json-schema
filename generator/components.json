@@ -2,11 +2,11 @@
     "name": "JSON Schema Components",
     "utils": {
         "@react-jsonschema-form-utils/enum-utils": {
-            "version": "1.0.0",
+            "version": "1.0.1",
             "name": "enum-utils"
         },
         "@react-jsonschema-form-utils/parse-values": {
-            "version": "1.0.0",
+            "version": "1.0.1",
             "name": "parse-values"
         }
     },
@@ -19,7 +19,7 @@
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/creatable-react-select": {
-            "version": "1.0.0",
+            "version": "1.0.1",
             "type": "string",
             "isEnum": true,
             "name": "creatable-react-select",
