@@ -49,24 +49,44 @@ export const RawFieldSetObject = ({
     );
   }
 
-  const AdditionalProperties = () => (
-    <>
+  return (
+    <div className={classNames(classes.root, orientation)}>
       {
-          schema.additionalProperties && (
-            <Typography 
-                id={`${id}-additionalProperties`}
-                variant='body' 
-                style={{ 
-                  padding: 8,
-                  fontSize: '1rem',
-                  color: '#7a7a7a',
-                }}
-            >
-              {schema.additionalProperties.title}
-            </Typography>
-          )
-        }
-        {schema.additionalProperties && keys(data).filter((adp) => !keys(schema.properties).includes(adp))
+        Object.keys(schema).indexOf('additionalProperties') > Object.keys(schema).indexOf('properties') 
+        && keys(schema.properties).map((propId) => {
+          const newPath = path ? `${path}.${propId}` : propId;
+          return (
+          <FormField
+              key={propId}
+              objectData={data}
+              path={newPath}
+              required={schema.required}
+              schema={schema.properties[propId]}
+              data={data[propId]}
+              uiSchema={uiSchema[propId] || {}}
+              validation={validation[propId] || {}}
+              {...rest}
+          />
+          );
+        })
+      }
+      {
+        schema.additionalProperties && (
+          <Typography 
+              id={`${id}-additionalProperties`}
+              variant='body' 
+              style={{ 
+                padding: 8,
+                fontSize: '1rem',
+                color: '#7a7a7a',
+              }}
+          >
+            {schema.additionalProperties.title}
+          </Typography>
+        )
+      }
+      {
+        schema.additionalProperties && keys(data).filter((adp) => !keys(schema.properties).includes(adp))
           .map((propId, idx) => {
             const newPath = path ? `${path}.${propId}` : propId;
             return (
@@ -85,60 +105,41 @@ export const RawFieldSetObject = ({
                   canReorder={false}
               />
             );
-          })}
-          {
-            schema.additionalProperties && (
-              <div className={classes.addItemBtn}>
-                <IconButton onClick={
-                    rest.onAddNewProperty 
-                    && rest.onAddNewProperty(path, getDefaultValue(schema.additionalProperties))
-                  }
-                >
-                  <AddCircle /> 
-                    {' '}
-                </IconButton>
-              </div>
-            )
-          }
-      </>
-  );
-
-  const NormalProperties = () => (
-    <>
-      {keys(schema.properties).map((propId) => {
-        const newPath = path ? `${path}.${propId}` : propId;
-        return (
-          <FormField
-              key={propId}
-              objectData={data}
-              path={newPath}
-              required={schema.required}
-              schema={schema.properties[propId]}
-              data={data[propId]}
-              uiSchema={uiSchema[propId] || {}}
-              validation={validation[propId] || {}}
-              {...rest}
-          />
-        );
-      })}
-    </>
-  );
-
-  return (
-    <div className={classNames(classes.root, orientation)}>
-      {
-        Object.keys(schema).indexOf('additionalProperties') > Object.keys(schema).indexOf('properties') ? (
-          <>
-            <NormalProperties />
-            <AdditionalProperties />
-          </>
-        ) : (
-          <>
-            <AdditionalProperties />
-            <NormalProperties />
-          </>
-        )
-      }
+          })
+        }
+        {
+          schema.additionalProperties && (
+            <div className={classes.addItemBtn}>
+              <IconButton onClick={
+                  rest.onAddNewProperty 
+                  && rest.onAddNewProperty(path, getDefaultValue(schema.additionalProperties))
+                }
+              >
+                <AddCircle /> 
+                  {' '}
+              </IconButton>
+            </div>
+          )
+        }
+        {
+          Object.keys(schema).indexOf('additionalProperties') < Object.keys(schema).indexOf('properties') 
+          && keys(schema.properties).map((propId) => {
+            const newPath = path ? `${path}.${propId}` : propId;
+            return (
+            <FormField
+                key={propId}
+                objectData={data}
+                path={newPath}
+                required={schema.required}
+                schema={schema.properties[propId]}
+                data={data[propId]}
+                uiSchema={uiSchema[propId] || {}}
+                validation={validation[propId] || {}}
+                {...rest}
+            />
+            );
+          })
+        }
     </div>
   );
 };
