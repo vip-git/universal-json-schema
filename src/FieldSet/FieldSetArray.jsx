@@ -40,10 +40,21 @@ export const RawFieldSetArray = (props) => {
             />
           ))}
           <div className={classes.addItemBtn}>
-            <IconButton onClick={rest.onAddItem && rest.onAddItem(path, getDefaultValue(schema.items))}>
+            <IconButton
+              onClick={rest.onAddItem && rest.onAddItem(path, getDefaultValue(schema.items))}
+              style={uiSchema['ui:style'] ? {
+                ...uiSchema['ui:style'],
+              } : {}}
+            >
               <AddCircle /> 
-                {' '}
-                { schema.items.title }
+                <span 
+                  style={{ 
+                    position: 'relative',
+                    right: 5,
+                  }}
+                >
+                  { uiSchema['ui:options']?.buttonTitle }
+                </span>
             </IconButton>
           </div>
         </div>

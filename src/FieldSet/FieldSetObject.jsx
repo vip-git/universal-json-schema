@@ -103,6 +103,7 @@ export const RawFieldSetObject = ({
                   dynamicKeyField={propId}
                   onDeleteItem={rest.onRemoveProperty && rest.onRemoveProperty(newPath)}
                   canReorder={false}
+                  noTitle
               />
             );
           })
@@ -110,13 +111,24 @@ export const RawFieldSetObject = ({
         {
           schema.additionalProperties && (
             <div className={classes.addItemBtn}>
-              <IconButton onClick={
+              <IconButton 
+                onClick={
                   rest.onAddNewProperty 
                   && rest.onAddNewProperty(path, getDefaultValue(schema.additionalProperties))
                 }
+                style={uiSchema?.additionalProperties && uiSchema?.additionalProperties['ui:style'] ? {
+                  ...uiSchema?.additionalProperties['ui:style'],
+                } : {}}
               >
                 <AddCircle /> 
-                  {' '}
+                  <span 
+                  style={{ 
+                    position: 'relative',
+                    right: 5,
+                  }}
+                  >
+                  { uiSchema?.additionalProperties && uiSchema?.additionalProperties['ui:options']?.buttonTitle }
+                  </span>
               </IconButton>
             </div>
           )

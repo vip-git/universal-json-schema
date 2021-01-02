@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 /* eslint-disable radix */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
@@ -8,7 +9,8 @@ import has from 'lodash/has';
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 
 // Internal
 import fieldSetStyles from './field-set-styles';
@@ -42,20 +44,29 @@ export class RawFieldSet extends React.Component {
   shouldComponentUpdate = (nextProps) => !isEqual(this.props, nextProps)
 
   render() {
-    const { className, path, classes, schema = {}, hideTitle, idxKey, dynamicKeyField } = this.props;
+    const { className, path, classes, schema = {}, hideTitle, noTitle, idxKey, dynamicKeyField } = this.props;
     const LegendTitle = () => (!hideTitle && !(has(schema, 'items.enum')) && (
       schema.title 
-      && (Number.isNaN(parseInt(path.replace(/[^\d.]/g, ''), 0)) 
-      || parseInt(path.replace(/[^\d.]/g, ''), 0) === 0)
-        && (
-            <InputLabel> 
+      && (
+          <>
+            <Typography gutterBottom variant='h6'>
               {schema.title}
-            </InputLabel>
-        )
+            </Typography>
+            <Divider style={{ marginBottom: 6 }} />
+          </>  
+      )
     )) || <div />;
+
+    const LegendSubTitle = () => schema.description && (
+      <Typography color='textSecondary' variant='body2'>
+        {schema.description}
+      </Typography>
+    ) || <div />;
+    
     return (
       <fieldset className={classNames(className, classes.root, { [classes.listItem]: endsWith(path, ']') })}>
-        {dynamicKeyField !== 'value' && dynamicKeyField !== 'key' && (<LegendTitle />)}
+        {!noTitle && (<LegendTitle />)}
+        {!noTitle && (<LegendSubTitle />)}
         <FieldSetContent path={path} {...this.props} />
       </fieldset>
     );

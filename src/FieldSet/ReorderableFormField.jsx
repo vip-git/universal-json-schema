@@ -34,7 +34,6 @@ export const RawReorderableFormField = ({
       path={path}
       {...rest}
       schema={schema}
-      dynamicKeyField={'value'}
     />
     <ReorderControls
       first={first}
