@@ -7,7 +7,7 @@ import filter from 'lodash/filter';
 const validationStyles = {};
 
 const Validation = ({ validation }) => (
-  <div style={{ marginBottom: 20 }}>
+  <div style={{ marginTop: 20 }}>
     <Alert severity='error'>{validation.message}</Alert>
   </div>
 );

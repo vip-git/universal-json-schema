@@ -20,7 +20,6 @@ import updateFormData, {
   updateKeyFromSpec,
 } from './helpers/update-form-data';
 import getValidationResult from './helpers/validation';
-import ValidationMessages from './ValidationMessages';
 import FormButtons from './FormButtons';
 
 // Initial Contexts
@@ -145,7 +144,6 @@ const Form = ({
             : null
           
         }
-        <ValidationMessages validation={validation} />
         <EventContext.Provider value={onUpload}>
           <FormField
               path={''}

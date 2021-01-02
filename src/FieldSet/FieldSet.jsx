@@ -17,6 +17,7 @@ import fieldSetStyles from './field-set-styles';
 import FieldSetArray from './FieldSetArray';
 import FieldSetObject from './FieldSetObject';
 import FieldSetTabs from './FieldSetTabs';
+import ValidationMessages from '../ValidationMessages';
 
 const isPageLayoutTabs = (uiSchema) => {
   const pageSchema = uiSchema['ui:page'];
@@ -44,7 +45,13 @@ export class RawFieldSet extends React.Component {
   shouldComponentUpdate = (nextProps) => !isEqual(this.props, nextProps)
 
   render() {
-    const { className, path, classes, schema = {}, hideTitle, noTitle, idxKey, dynamicKeyField } = this.props;
+    const { 
+      className, 
+      path, classes, 
+      schema = {}, hideTitle, 
+      noTitle, validation, idxKey, 
+      dynamicKeyField,
+    } = this.props;
     const LegendTitle = () => (!hideTitle && !(has(schema, 'items.enum')) && (
       schema.title 
       && (
@@ -67,6 +74,7 @@ export class RawFieldSet extends React.Component {
       <fieldset className={classNames(className, classes.root, { [classes.listItem]: endsWith(path, ']') })}>
         {!noTitle && (<LegendTitle />)}
         {!noTitle && (<LegendSubTitle />)}
+        {path === '' && <ValidationMessages validation={validation} />}
         <FieldSetContent path={path} {...this.props} />
       </fieldset>
     );
