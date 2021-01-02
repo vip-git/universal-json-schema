@@ -35,8 +35,17 @@ const onChangeHandler = (
   if (value !== undefined) onChange(value);
 };
 
-export default ({ onChange, type, options = {}, uiSchema = {}, htmlid, schema = {} }) => ({
+export default ({
+  onChange,
+  onBlur,
+  type,
+  options = {},
+  uiSchema = {},
+  htmlid,
+  schema = {},
+}) => ({
   onChange: onChange && onChangeHandler(onChange, type, options),
+  onBlur: onBlur && onChangeHandler(onBlur, type, options),
   type: getInputType(type, uiSchema),
   label: schema.title || '',
   inputProps: {

@@ -30,6 +30,8 @@ export const RawFormField = React.memo(({
           onKeyDown={onKeyDown}
           onChange={onChange}
           hideTitle={shouldHideTitle(uiSchema, schema)}
+          onUpdateKeyProperty={onUpdateKeyProperty}
+          dynamicKeyField={dynamicKeyField}
           {...rest} 
         />
     );

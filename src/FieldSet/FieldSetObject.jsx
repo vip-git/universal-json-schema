@@ -21,6 +21,7 @@ export const RawFieldSetObject = ({
   schema = {},
   uiSchema = {},
   data = {}, 
+  id,
   idxKey,
   path,
   validation = {}, 
@@ -47,8 +48,63 @@ export const RawFieldSetObject = ({
       </div>
     );
   }
-  return (
-    <div className={classNames(classes.root, orientation)}>
+
+  const AdditionalProperties = () => (
+    <>
+      {
+          schema.additionalProperties && (
+            <Typography 
+                id={`${id}-additionalProperties`}
+                variant='body' 
+                style={{ 
+                  padding: 8,
+                  fontSize: '1rem',
+                  color: '#7a7a7a',
+                }}
+            >
+              {schema.additionalProperties.title}
+            </Typography>
+          )
+        }
+        {schema.additionalProperties && keys(data).filter((adp) => !keys(schema.properties).includes(adp))
+          .map((propId, idx) => {
+            const newPath = path ? `${path}.${propId}` : propId;
+            return (
+              <ReorderableFormField
+                  {...rest}
+                  key={propId}
+                  objectData={data}
+                  path={newPath}
+                  required={schema.required}
+                  schema={schema.additionalProperties}
+                  data={data[propId]}
+                  uiSchema={uiSchema[propId] || {}}
+                  validation={validation[propId] || {}}
+                  dynamicKeyField={propId}
+                  onDeleteItem={rest.onRemoveProperty && rest.onRemoveProperty(newPath)}
+                  canReorder={false}
+              />
+            );
+          })}
+          {
+            schema.additionalProperties && (
+              <div className={classes.addItemBtn}>
+                <IconButton onClick={
+                    rest.onAddNewProperty 
+                    && rest.onAddNewProperty(path, getDefaultValue(schema.additionalProperties))
+                  }
+                >
+                  <AddCircle /> 
+                    {' '}
+                </IconButton>
+              </div>
+            )
+          }
+      </>
+  );
+
+  const NormalProperties = () => (
+    <>
       {keys(schema.properties).map((propId) => {
         const newPath = path ? `${path}.${propId}` : propId;
         return (
@@ -65,47 +121,24 @@ export const RawFieldSetObject = ({
           />
         );
       })}
+    </>
+  );
+
+  return (
+    <div className={classNames(classes.root, orientation)}>
       {
-        schema.additionalProperties && (
-          <Typography variant='h6' style={{ padding: 8 }}>
-            {schema.additionalProperties.title}
-          </Typography>
+        Object.keys(schema).indexOf('additionalProperties') > Object.keys(schema).indexOf('properties') ? (
+          <>
+            <NormalProperties />
+            <AdditionalProperties />
+          </>
+        ) : (
+          <>
+            <AdditionalProperties />
+            <NormalProperties />
+          </>
         )
       }
-      {schema.additionalProperties && keys(data).filter((adp) => !keys(schema.properties).includes(adp))
-        .map((propId, idx) => {
-          const newPath = path ? `${path}.${propId}` : propId;
-          return (
-            <ReorderableFormField
-                {...rest}
-                key={propId}
-                objectData={data}
-                path={newPath}
-                required={schema.required}
-                schema={schema.additionalProperties}
-                data={data[propId]}
-                uiSchema={uiSchema[propId] || {}}
-                validation={validation[propId] || {}}
-                dynamicKeyField={propId}
-                onDeleteItem={rest.onRemoveProperty && rest.onRemoveProperty(newPath)}
-                canReorder={false}
-            />
-          );
-        })}
-        {
-          schema.additionalProperties && (
-            <div className={classes.addItemBtn}>
-              <IconButton onClick={
-                  rest.onAddNewProperty 
-                  && rest.onAddNewProperty(path, getDefaultValue(schema.additionalProperties))
-                }
-              >
-                <AddCircle /> 
-                  {' '}
-              </IconButton>
-            </div>
-          )
-        }
     </div>
   );
 };

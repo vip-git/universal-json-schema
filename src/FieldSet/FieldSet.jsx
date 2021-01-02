@@ -42,7 +42,7 @@ export class RawFieldSet extends React.Component {
   shouldComponentUpdate = (nextProps) => !isEqual(this.props, nextProps)
 
   render() {
-    const { className, path, classes, schema = {}, hideTitle, idxKey } = this.props;
+    const { className, path, classes, schema = {}, hideTitle, idxKey, dynamicKeyField } = this.props;
     const LegendTitle = () => (!hideTitle && !(has(schema, 'items.enum')) && (
       schema.title 
       && (Number.isNaN(parseInt(path.replace(/[^\d.]/g, ''), 0)) 
@@ -55,7 +55,7 @@ export class RawFieldSet extends React.Component {
     )) || <div />;
     return (
       <fieldset className={classNames(className, classes.root, { [classes.listItem]: endsWith(path, ']') })}>
-        <LegendTitle />
+        {dynamicKeyField !== 'value' && dynamicKeyField !== 'key' && (<LegendTitle />)}
         <FieldSetContent path={path} {...this.props} />
       </fieldset>
     );

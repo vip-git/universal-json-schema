@@ -29,12 +29,6 @@ export default {
       margin: theme.spacing(1),
       padding: theme.spacing(1),
     },
-    ...common(theme),
-    addItemBtn: {
-      ...common(theme).addItemBtn,
-      marginTop: 15,
-      marginBottom: 20,
-    },
   }),
   fieldSetObject: (theme) => ({
     root: {
@@ -46,7 +40,11 @@ export default {
     },
     row: {},
     listItem: {},
-    ...common(theme),
+    addItemBtn: {
+      ...common(theme).addItemBtn,
+      marginTop: 15,
+      marginBottom: 20,
+    },
   }),
   fieldSetArray: (theme) => ({
     root: {
@@ -54,13 +52,14 @@ export default {
       flexDirection: 'column',
     },
     listItem: {},
-    ...common(theme)
+    ...common(theme),
   }),
   reorderable: {
     root: {
       display: 'flex',
       alignItems: 'baseline',
       justifyContent: 'space-between',
+      placeItems: 'flex-start',
       '& >fieldset': {
         width: '100%',
       },

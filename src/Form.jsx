@@ -3,6 +3,7 @@ import React from 'react';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 import isEqual from 'lodash/isEqual';
+import isEmpty from 'lodash/isEmpty';
 import setWith from 'lodash/setWith';
 import { generate } from 'shortid';
 import Paper from '@material-ui/core/Paper';
@@ -16,6 +17,7 @@ import updateFormData, {
   removeListItem, 
   moveListItem,
   removeValueFromSpec,
+  updateKeyFromSpec,
 } from './helpers/update-form-data';
 import getValidationResult from './helpers/validation';
 import ValidationMessages from './ValidationMessages';
@@ -76,8 +78,9 @@ const Form = ({
   const onRemoveProperty = (path) => () => setData(removeValueFromSpec(data, path), onChange);
 
   const onUpdateKeyProperty = (path) => (givenValue) => {
-    setData(updateFormData(data, givenValue, data[path]), onChange);
-    setData(removeValueFromSpec(data, path), onChange);
+    if (!isEqual(path, givenValue) && !isEmpty(givenValue)) {
+      setData(updateKeyFromSpec(data, path, givenValue), onChange);
+    }
   };
 
   const onFormSubmit = (callback) => onSubmit({ formData: data }, () => callback && callback());

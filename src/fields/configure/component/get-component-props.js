@@ -14,6 +14,7 @@ export default ({
   htmlid,
   data,
   objectData,
+  dynamicKeyField,
 }) => {
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'] || uiSchema['ui:props'] || {};
@@ -35,6 +36,11 @@ export default ({
       EventContext,
       htmlid,
     };
+
+  if (dynamicKeyField === 'key') {
+    rv.onBlur = onChange;
+    delete rv.onChange;
+  }
 
   if (
     isCustomComponent

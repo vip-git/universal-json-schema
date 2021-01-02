@@ -12,10 +12,11 @@ export default ({
   options,
   onChange,
   htmlid,
+  onBlur,
 }) => (
     <Input 
         htmlid={htmlid} 
-        value={value} 
-        {...inputProps({ onChange, type, options, uiSchema })} 
+        defaultValue={value} 
+        {...inputProps({ onChange, onBlur, type, options, uiSchema })} 
     />
 );

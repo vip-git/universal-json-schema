@@ -44,6 +44,18 @@ export default (data, path, value) => {
   return update(data, spec);
 };
 
+export const updateKeyFromSpec = (data, oldPath, newPath) => update(data, (obj) => Object.keys(obj)
+  .reduce((acc, key) => {
+    if (key === oldPath) {
+      acc[newPath] = obj[oldPath];
+    }
+    else {
+      acc[key] = obj[key];
+    }
+    return acc;
+  }, {}),
+);
+
 export const removeValueFromSpec = (data, path) => update(data, { $unset: [path] });
 
 export const addListItem = (data, path, value) => {
