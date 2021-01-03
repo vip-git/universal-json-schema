@@ -51,9 +51,7 @@ export const RawConfiguredField = React.memo(({
 			LabelComponent && title && !isCustomComponent && (
 				<LabelComponent
 					id={`${htmlid}-labelControl`}
-					style={{
-					  left: 10,
-					}}
+					className={descriptionText ? classes.customLabel : classes.normalLabel}
 					{...labelComponentProps}
 				>
 					{title}

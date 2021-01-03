@@ -2,6 +2,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import keys from 'lodash/keys';
+import get from 'lodash/get';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircle from '@material-ui/icons/AddCircle';
 
@@ -32,6 +33,11 @@ export const RawFieldSetObject = ({
   const orientation = (uiSchema['ui:orientation'] === 'row' ? classes.row : null);
   if (isTabContent) {
     const newPath = path ? `${path}.${tabKey}` : tabKey;
+    const propSchema = schema.properties[tabKey].$ref ? {
+      ...schema.properties[tabKey],
+      ...get(schema.definitions, schema.properties[tabKey].$ref
+        .replace('#/definitions/', '').replace('/', '.')),
+    } : schema.properties[tabKey];
     return (
       <div className={classNames(classes.root, orientation)}>
         <FormField
@@ -39,7 +45,7 @@ export const RawFieldSetObject = ({
             objectData={data}
             path={newPath}
             required={schema.required}
-            schema={schema.properties[tabKey]}
+            schema={propSchema}
             data={data[tabKey]}
             uiSchema={uiSchema[tabKey] || {}}
             validation={validation[tabKey] || {}}
@@ -55,18 +61,23 @@ export const RawFieldSetObject = ({
         Object.keys(schema).indexOf('additionalProperties') > Object.keys(schema).indexOf('properties') 
         && keys(schema.properties).map((propId) => {
           const newPath = path ? `${path}.${propId}` : propId;
+          const propSchema = schema.properties[propId].$ref ? {
+            ...schema.properties[propId],
+            ...get(schema.definitions, schema.properties[propId].$ref
+              .replace('#/definitions/', '').replace('/', '.')),
+          } : schema.properties[propId];
           return (
-          <FormField
-              key={propId}
-              objectData={data}
-              path={newPath}
-              required={schema.required}
-              schema={schema.properties[propId]}
-              data={data[propId]}
-              uiSchema={uiSchema[propId] || {}}
-              validation={validation[propId] || {}}
-              {...rest}
-          />
+            <FormField
+                key={propId}
+                objectData={data}
+                path={newPath}
+                required={schema.required}
+                schema={propSchema}
+                data={data[propId]}
+                uiSchema={uiSchema[propId] || {}}
+                validation={validation[propId] || {}}
+                {...rest}
+            />
           );
         })
       }
@@ -137,13 +148,18 @@ export const RawFieldSetObject = ({
           Object.keys(schema).indexOf('additionalProperties') < Object.keys(schema).indexOf('properties') 
           && keys(schema.properties).map((propId) => {
             const newPath = path ? `${path}.${propId}` : propId;
+            const propSchema = schema.properties[propId].$ref ? {
+              ...schema.properties[propId],
+              ...get(schema.definitions, schema.properties[propId].$ref
+                .replace('#/definitions/', '').replace('/', '.')),
+            } : schema.properties[propId];
             return (
             <FormField
                 key={propId}
                 objectData={data}
                 path={newPath}
                 required={schema.required}
-                schema={schema.properties[propId]}
+                schema={propSchema}
                 data={data[propId]}
                 uiSchema={uiSchema[propId] || {}}
                 validation={validation[propId] || {}}
