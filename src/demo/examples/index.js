@@ -9,6 +9,7 @@ import budget from './budget';
 import multipleChoice from './multiple-choice';
 import radioChoice from './radio-choice';
 import additionalProps from './additional-props';
+import refrences from './refrences';
 
 export default {
   simple,
@@ -22,4 +23,5 @@ export default {
   multipleChoice,
   radioChoice,
   additionalProps,
+  refrences,
 };

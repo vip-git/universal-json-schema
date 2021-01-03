@@ -4,3 +4,4 @@
 - Additional Properties and Additional Items feature enabled
 - "ui:options" and "ui:style" enabled for prop passing and styling every field
 - On the fly module creation
+- Refrence Schema's via http and inline refrences

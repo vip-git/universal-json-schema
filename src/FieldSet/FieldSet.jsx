@@ -56,7 +56,14 @@ export class RawFieldSet extends React.Component {
       schema.title 
       && (
           <>
-            <Typography gutterBottom variant='h6'>
+            <Typography 
+              gutterBottom 
+              variant='h6' 
+                style={path !== '' ? {
+                  fontSize: '1.2em',
+                  marginTop: 15,
+                } : {}}
+            >
               {schema.title}
             </Typography>
             <Divider style={{ marginBottom: 6 }} />

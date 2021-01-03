@@ -6,19 +6,21 @@ import './main.scss'; // eslint-disable-line import/no-unresolved,import/no-extr
 import examples from './examples';
 
 const styles = ({});
-const selectedHash = window.location.hash.replace('#', '');
+const hash = window.location.hash.replace('#', '');
 
 class Demo extends React.Component {
   constructor(props) {
     super(props);
+    const selectedHash = hash in examples ? hash : 'simple';
     this.state = {
       selectedDemo: examples[selectedHash],
     };
   }
 
   onSelectMenuItem = (type, keyType) => () => {
+    const selectedHash = keyType in examples ? keyType : 'simple';
     window.location.hash = keyType;
-    this.setState({ selectedDemo: type });
+    this.setState({ selectedDemo: examples[selectedHash] });
   }
 
   render() {

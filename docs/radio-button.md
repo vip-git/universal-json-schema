@@ -33,7 +33,7 @@
  "numberEnumRadio": {
     "ui:widget": "radio",
     "ui:options": {
-      "inline": true
+      "row": true
     }
   }
 }

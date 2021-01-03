@@ -5,9 +5,11 @@ import MomentUtils from '@date-io/moment';
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
 import setWith from 'lodash/setWith';
+import get from 'lodash/get';
+import each from 'lodash/each';
+import unset from 'lodash/unset';
 import { generate } from 'shortid';
 import Paper from '@material-ui/core/Paper';
-import each from 'lodash/each';
 
 // Internal
 import formStyles from './form-styles';
@@ -32,9 +34,24 @@ const setData = (givenData, onChange) => {
   }
 };
 
+const transformRefSchema = (givenSchema) => {
+  const schema = { ...givenSchema };
+
+  each(schema.properties, (p, k) => {
+    const hashRef = p.$ref;
+    unset(p, '$ref');
+    schema.properties[k] = hashRef ? {
+      ...p,
+      ...get(schema.definitions, hashRef.replace('#/definitions/', '').replace('/', '.')),
+    } : p;
+  });
+
+  return schema;
+};
+
 const Form = ({
   formData,
-  schema,
+  schema: givenSchema,
   uiSchema,
   validations,
   prefixId,
@@ -54,6 +71,13 @@ const Form = ({
   submitVariant,
   ...rest 
 }) => {
+  const schema = {
+    ...givenSchema,
+    properties: {
+      ...givenSchema.properties,
+      ...transformRefSchema(givenSchema).properties,
+    },
+  };
   const classes = formStyles();
   const validation = getValidationResult(schema, uiSchema, formData, validations);
   const id = prefixId || generate();

@@ -74,7 +74,7 @@ export const RawFieldSetObject = ({
         schema.additionalProperties && (
           <Typography 
               id={`${id}-additionalProperties`}
-              variant='body' 
+              variant='body1' 
               style={{ 
                 padding: 8,
                 fontSize: '1rem',
