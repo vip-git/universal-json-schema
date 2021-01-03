@@ -13,7 +13,15 @@
     "name": "root",
     "children": [
       {
-        "name": "leaf"
+        "name": "recursive example"
+      }
+    ]
+  },
+  "noTree": {
+    "name": "root",
+    "children": [
+      {
+        "name": "non-recursive example"
       }
     ]
   }

@@ -19,12 +19,29 @@
       "type": "object",
       "properties": {
         "name": {
+          "title": "Recursive Child",
+          "description": "uiSchema allows you to enable this feature",
           "type": "string"
         },
         "children": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/node"
+          }
+        }
+      }
+    },
+    "treeNode": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Non Recursive Child",
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/treeNode"
           }
         }
       }
@@ -39,6 +56,10 @@
     "shipping_address": {
       "title": "Shipping address",
       "$ref": "#/definitions/address"
+    },
+    "noTree": {
+      "title": "Non-Recursive references",
+      "$ref": "#/definitions/treeNode"
     },
     "tree": {
       "title": "Recursive references",
