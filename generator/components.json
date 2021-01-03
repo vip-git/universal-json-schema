@@ -12,7 +12,7 @@
     },
 	"components": {
         "@react-jsonschema-form-components/material-radio-group": {
-            "version": "1.0.2",
+            "version": "1.0.3",
             "type": "string",
             "isEnum": true,
             "name": "material-radio-group",
@@ -36,7 +36,7 @@
             ]
         },
         "@react-jsonschema-form-components/material-select": {
-            "version": "1.0.2",
+            "version": "1.0.3",
             "type": "string",
             "isEnum": true,
             "name": "material-select",

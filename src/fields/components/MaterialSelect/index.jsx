@@ -12,6 +12,7 @@ export default ({
   disabled,
   onChange, 
   htmlid,
+  options={},
   ...rest 
 }) => {
   const { 
@@ -27,7 +28,7 @@ export default ({
   
   return (
     <Select
-      {...rest}
+      {...options}
       id={htmlid}
       value={String(value)}
       onChange={givenOnChange}
