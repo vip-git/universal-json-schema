@@ -19,7 +19,19 @@ export const RawFieldSetArray = (props) => {
     schema = {}, uiSchema = {}, definitions = {}, data, path, onMoveItemUp, onMoveItemDown, onDeleteItem, ...rest
   } = props;
   const canReorder = uiSchema && uiSchema['ui:options'] && uiSchema['ui:options'].canReorder;
+  const allowRecursive = uiSchema && uiSchema['ui:options'] && uiSchema['ui:options'].allowRecursive;
   const hasSelectWidget = uiSchema && uiSchema['ui:widget'];
+  const isRecursiveHole = () => {
+    const getRecursiveRef = path.replace(/\[(.*?)\]/g, '');
+    if (getRecursiveRef.includes('.')) {
+      const findRecursiveChild = getRecursiveRef.split('.');
+      return (findRecursiveChild.length > 2 
+              && findRecursiveChild[findRecursiveChild.length - 1] 
+              === findRecursiveChild[findRecursiveChild.length - 2]);
+    }
+
+    return false;
+  };
   schema.items = schema?.items?.$ref ? {
     ...schema.items,
     ...get(definitions, schema.items.$ref
@@ -50,24 +62,26 @@ export const RawFieldSetArray = (props) => {
               {...rest}
             />
           ))}
-          <div className={classes.addItemBtn}>
-            <IconButton
-              onClick={rest.onAddItem && rest.onAddItem(path, getDefaultValue(schema.items))}
-              style={uiSchema['ui:style'] ? {
-                ...uiSchema['ui:style'],
-              } : {}}
-            >
-              <AddCircle /> 
-                <span 
-                  style={{ 
-                    position: 'relative',
-                    right: 5,
-                  }}
-                >
-                  { uiSchema['ui:options']?.buttonTitle }
-                </span>
-            </IconButton>
-          </div>
+          {(!isRecursiveHole() || allowRecursive) && (
+            <div className={classes.addItemBtn}>
+              <IconButton
+                onClick={rest.onAddItem && rest.onAddItem(path, getDefaultValue(schema.items))}
+                style={uiSchema['ui:style'] ? {
+                  ...uiSchema['ui:style'],
+                } : {}}
+              >
+                <AddCircle /> 
+                  <span 
+                    style={{ 
+                      position: 'relative',
+                      right: 5,
+                    }}
+                  >
+                    { uiSchema['ui:options']?.buttonTitle }
+                  </span>
+              </IconButton>
+            </div>
+          )}
         </div>
       )}
       {isArray(schema.items) && (data || []).map((d, idx) => {

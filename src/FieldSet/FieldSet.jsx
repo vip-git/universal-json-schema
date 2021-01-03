@@ -30,10 +30,12 @@ export const RawFieldSetContent = (props) => {
   const { schema = {}, uiSchema = {} } = props;
   const { type } = schema;
   if (type === 'array') {
-    return <FieldSetArray {...props} />;
+    return <FieldSetArray uiSchema={uiSchema} schema={schema} {...props} />;
   }
   if (type === 'object') {
-    return isPageLayoutTabs(uiSchema) ? <FieldSetTabs {...props} /> : <FieldSetObject {...props} />;
+    return isPageLayoutTabs(uiSchema) 
+      ? <FieldSetTabs uiSchema={uiSchema} schema={schema} {...props} /> 
+      : <FieldSetObject uiSchema={uiSchema} schema={schema} {...props} />;
   }
   return null;
 };

@@ -158,18 +158,18 @@ export const RawFieldSetObject = ({
                 .replace('#/definitions/', '').replace('/', '.')),
             } : schema.properties[propId];
             return (
-            <FormField
-                key={propId}
-                objectData={data}
-                path={newPath}
-                required={schema.required}
-                schema={propSchema}
-                data={data[propId]}
-                uiSchema={uiSchema[propId] || {}}
-                validation={validation[propId] || {}}
-                definitions={definitions}
-                {...rest}
-            />
+              <FormField
+                  key={propId}
+                  objectData={data}
+                  path={newPath}
+                  required={schema.required}
+                  schema={propSchema}
+                  data={data[propId]}
+                  uiSchema={uiSchema[propId] || {}}
+                  validation={validation[propId] || {}}
+                  definitions={definitions}
+                  {...rest}
+              />
             );
           })
         }
