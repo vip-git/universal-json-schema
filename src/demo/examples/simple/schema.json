@@ -67,9 +67,12 @@
       "title": "Please upload your file"
     },
     "creatableSelectTest": {
-      "type": "string",
+      "type": "array",
       "title": "Example creatable select",
-      "enum": ["test", "teete", "etetet"]
+      "items": {
+        "type": "string",
+        "enum": ["test", "teete", "etetet"]
+      }
     },
     "selectTest": {
       "type": "array",

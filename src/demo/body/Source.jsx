@@ -1,6 +1,13 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable consistent-return */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-sequences */
+/* eslint-disable no-void */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-unused-expressions */
 import React from 'react';
 import classNames from 'classnames';
 import brace from 'brace';
@@ -11,6 +18,21 @@ import Valid from '@material-ui/icons/CheckCircle';
 import Invalid from '@material-ui/icons/HighlightOff';
 import { withStyles } from '@material-ui/core/styles';
 import sourceStyles from './editor-styles';
+
+const deepStringify = (givenVal) => {
+  // Note: cache should not be re-used by repeated calls to JSON.stringify.
+  const cache = [];
+  return JSON.stringify(givenVal, (key, value) => {
+    if (typeof value === 'object' && value !== null) {
+      // Duplicate reference found, discard key
+      if (cache.includes(value)) return;
+
+      // Store value in our collection
+      cache.push(value);
+    }
+    return value;
+  }, 2);
+};
 
 const isValid = (value) => {
   let obj;
@@ -26,7 +48,7 @@ const isValid = (value) => {
 class Source extends React.Component {
   constructor(props) {
     super(props);
-    const source = JSON.stringify(this.props.source, null, 2);
+    const source = deepStringify(this.props.source);
     this.state = {
       source,
       valid: isValid(source),
@@ -35,7 +57,7 @@ class Source extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps = (nextProps) => {
-    const source = JSON.stringify(nextProps.source, null, 2);
+    const source = deepStringify(nextProps.source);
     this.setState({
       source,
       valid: isValid(source),

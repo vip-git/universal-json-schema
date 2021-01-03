@@ -152,6 +152,7 @@ const Form = ({
               schemaVersion={schema.version}
               schema={schema}
               uiSchema={uiSchema}
+              definitions={schema.definitions}
               id={id}
               onChange={onFormValuesChange}
               onSubmit={onFormSubmit}

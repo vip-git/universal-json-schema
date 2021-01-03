@@ -2,6 +2,7 @@
 import React from 'react';
 import includes from 'lodash/includes';
 import slice from 'lodash/slice';
+import get from 'lodash/get';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircle from '@material-ui/icons/AddCircle';
 import isArray from 'lodash/isArray';
@@ -15,9 +16,18 @@ import ReorderableFormField from './ReorderableFormField';
 export const RawFieldSetArray = (props) => {
   const {
     startIdx = 0, className, classes,
-    schema = {}, uiSchema = {}, data, path, onMoveItemUp, onMoveItemDown, onDeleteItem, ...rest
+    schema = {}, uiSchema = {}, definitions = {}, data, path, onMoveItemUp, onMoveItemDown, onDeleteItem, ...rest
   } = props;
   const canReorder = uiSchema && uiSchema['ui:options'] && uiSchema['ui:options'].canReorder;
+  const hasSelectWidget = uiSchema && uiSchema['ui:widget'];
+  schema.items = schema?.items?.$ref ? {
+    ...schema.items,
+    ...get(definitions, schema.items.$ref
+      .replace('#/definitions/', '').replace('/', '.')),
+  } : schema.items;
+  if (hasSelectWidget) {
+    schema.uniqueItems = true;
+  }
   return (
     <div className={classes.root}>
       {!isArray(schema.items) && !schema.uniqueItems && (
@@ -36,6 +46,7 @@ export const RawFieldSetArray = (props) => {
               first={idx === 0}
               last={idx === data.length - 1}
               canReorder={canReorder}
+              definitions={definitions}
               {...rest}
             />
           ))}
@@ -69,6 +80,7 @@ export const RawFieldSetArray = (props) => {
                 schema={schema.items[idx]}
                 data={d}
                 uiSchema={(uiSchema.items || [])[idx]}
+                definitions={definitions}
                 {...rest}
             />
           );
@@ -84,6 +96,7 @@ export const RawFieldSetArray = (props) => {
             schema={{ ...schema.items, title: schema.title, parsedArray: true }}
             data={data}
             uiSchema={uiSchema}
+            definitions={definitions}
             {...rest}
           />
         )}
@@ -100,6 +113,7 @@ export const RawFieldSetArray = (props) => {
             onMoveItemUp={onMoveItemUp}
             onMoveItemDown={onMoveItemDown}
             onDeleteItem={onDeleteItem}
+            definitions={definitions}
             {...rest}
           />
         )}

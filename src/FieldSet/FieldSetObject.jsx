@@ -22,6 +22,7 @@ export const RawFieldSetObject = ({
   schema = {},
   uiSchema = {},
   data = {}, 
+  definitions = {},
   id,
   idxKey,
   path,
@@ -35,7 +36,7 @@ export const RawFieldSetObject = ({
     const newPath = path ? `${path}.${tabKey}` : tabKey;
     const propSchema = schema.properties[tabKey].$ref ? {
       ...schema.properties[tabKey],
-      ...get(schema.definitions, schema.properties[tabKey].$ref
+      ...get(definitions, schema.properties[tabKey].$ref
         .replace('#/definitions/', '').replace('/', '.')),
     } : schema.properties[tabKey];
     return (
@@ -49,6 +50,7 @@ export const RawFieldSetObject = ({
             data={data[tabKey]}
             uiSchema={uiSchema[tabKey] || {}}
             validation={validation[tabKey] || {}}
+            definitions={definitions}
             {...rest}
         />
       </div>
@@ -63,7 +65,7 @@ export const RawFieldSetObject = ({
           const newPath = path ? `${path}.${propId}` : propId;
           const propSchema = schema.properties[propId].$ref ? {
             ...schema.properties[propId],
-            ...get(schema.definitions, schema.properties[propId].$ref
+            ...get(definitions, schema.properties[propId].$ref
               .replace('#/definitions/', '').replace('/', '.')),
           } : schema.properties[propId];
           return (
@@ -76,6 +78,7 @@ export const RawFieldSetObject = ({
                 data={data[propId]}
                 uiSchema={uiSchema[propId] || {}}
                 validation={validation[propId] || {}}
+                definitions={definitions}
                 {...rest}
             />
           );
@@ -114,6 +117,7 @@ export const RawFieldSetObject = ({
                   dynamicKeyField={propId}
                   onDeleteItem={rest.onRemoveProperty && rest.onRemoveProperty(newPath)}
                   canReorder={false}
+                  definitions={definitions}
                   noTitle
               />
             );
@@ -150,7 +154,7 @@ export const RawFieldSetObject = ({
             const newPath = path ? `${path}.${propId}` : propId;
             const propSchema = schema.properties[propId].$ref ? {
               ...schema.properties[propId],
-              ...get(schema.definitions, schema.properties[propId].$ref
+              ...get(definitions, schema.properties[propId].$ref
                 .replace('#/definitions/', '').replace('/', '.')),
             } : schema.properties[propId];
             return (
@@ -163,6 +167,7 @@ export const RawFieldSetObject = ({
                 data={data[propId]}
                 uiSchema={uiSchema[propId] || {}}
                 validation={validation[propId] || {}}
+                definitions={definitions}
                 {...rest}
             />
             );
