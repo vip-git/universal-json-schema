@@ -20,12 +20,12 @@ export default ({
   const { choices } = radioGroupProps({ onChange, schema, options });
   return (
       <RadioGroup
-        {...options}
         id={htmlid}
         aria-label={path}
         name={path}
         value={String(value)} 
         {...radioGroupProps({ onChange, schema, options })}
+        {...options}
       >
         {
           choices 
