@@ -14,16 +14,15 @@ import Form from '../../Form';
 import CustomRating from './custom-components/rating.component';
 import CustomComponent from './custom-components/range-picker.component';
 
-const FormComponent = React.memo(
-  ({
-    givenSchema,
-    givenUISchema,
-    givenFormData,
-    onCancel,
-    onSubmit,
-    onUpload,
-    onFormChanged,
-  }) => (
+const FormComponent = ({
+  givenSchema,
+  givenUISchema,
+  givenFormData,
+  onCancel,
+  onSubmit,
+  onUpload,
+  onFormChanged,
+}) => (
 		<Form
 			schema={givenSchema}
 			uiSchema={givenUISchema}
@@ -49,7 +48,6 @@ const FormComponent = React.memo(
 			submitOnEnter
 			activityIndicatorEnabled
 		/>
-  ),
 );
 
 const SourceSchema = ({

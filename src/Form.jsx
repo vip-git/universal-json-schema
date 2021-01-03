@@ -27,7 +27,9 @@ export const EventContext = React.createContext('fieldEvent');
 let data = {};
 const setData = (givenData, onChange) => {
   data = givenData;
-  onChange({ formData: givenData });
+  if (typeof onChange === 'function') {
+    onChange({ formData: givenData });
+  }
 };
 
 const Form = ({
@@ -55,7 +57,7 @@ const Form = ({
   const classes = formStyles();
   const validation = getValidationResult(schema, uiSchema, formData, validations);
   const id = prefixId || generate();
-  setData(formData, onChange);
+  setData(formData);
 
   const onFormValuesChange = (field) => (givenValue) => {
     const newFormData = updateFormData(data, field, givenValue);
