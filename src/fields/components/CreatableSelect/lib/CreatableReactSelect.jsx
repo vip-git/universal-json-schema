@@ -11,11 +11,10 @@ const createOption = (label) => ({
   value: label,
 });
 
-const colourStyles = {
+const colourStyles = (props) => ({
   control: (styles) => ({
     ...styles,
     top: 0,
-    height: 10,
     overflow: 'auto',
     borderTop: 'none',
     boxShadow: 'none!important',
@@ -27,8 +26,9 @@ const colourStyles = {
     borderRadius: 0,
     marginTop: 10,
     marginBottom: 10,
+    ...props,
   }),
-};
+});
 
 export default class CreatableInputOnly extends Component {
   state = {
@@ -106,9 +106,10 @@ export default class CreatableInputOnly extends Component {
         onInputChange={this.handleInputChange}
         onKeyDown={this.handleKeyDown}
         options={this.props.options}
-        styles={colourStyles}
+        styles={colourStyles(this.props.uiSchema['ui:style'] || {})}
         placeholder={'Type something and press enter...'}
         value={value}
+        {...this.props.restProps}
       />
   ) : (
       <CreatableReactSelect
@@ -124,9 +125,10 @@ export default class CreatableInputOnly extends Component {
         onInputChange={this.handleInputChange}
         onKeyDown={this.handleKeyDown}
         options={this.props.options}
-        styles={colourStyles}
+        styles={colourStyles(this.props.uiSchema['ui:style'] || {})}
         placeholder={'Type something and press enter...'}
         value={value}
+        {...this.props.restProps}
       />
   ));
 

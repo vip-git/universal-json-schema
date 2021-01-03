@@ -11,7 +11,7 @@ export default ({
   uiSchema,
   schema,
   disabled,
-  options,
+  options = {},
   widget,
   onChange, 
   ...rest 
@@ -46,7 +46,9 @@ export default ({
       options={optionValues}
       isDisabled={disabled}
       optionsOnly={optionsOnly}
+      uiSchema={uiSchema}
       label={label}
+      restProps={options}
     />
   );
 };

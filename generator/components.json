@@ -19,7 +19,7 @@
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/creatable-react-select": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "type": "string",
             "isEnum": true,
             "name": "creatable-react-select",
