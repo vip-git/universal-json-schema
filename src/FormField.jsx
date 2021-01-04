@@ -17,6 +17,7 @@ export const RawFormField = React.memo(({
   path,
   ...rest 
 }) => {
+  console.log('path is', path);
   const classes = styles();
   const { type } = schema;
   // Todo: condition for array should change

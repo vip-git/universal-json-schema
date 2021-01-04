@@ -22,6 +22,10 @@ export const RawFieldSetArray = (props) => {
   const allowRecursive = uiSchema && uiSchema['ui:options'] && uiSchema['ui:options'].allowRecursive;
   const hasSelectWidget = uiSchema && uiSchema['ui:widget'];
   const isRecursiveHole = () => {
+    if (schema.infiniteRecursive) {
+      return false;
+    }
+
     const getRecursiveRef = path.replace(/\[(.*?)\]/g, '');
     if (getRecursiveRef.includes('.')) {
       const findRecursiveChild = getRecursiveRef.split('.');

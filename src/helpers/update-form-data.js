@@ -1,4 +1,5 @@
 import update from 'immutability-helper';
+import { has } from 'lodash';
 import size from 'lodash/size';
 
 const arrRegex = /^([^.]+)\[([0-9]+)\](\.(.*))?/;
@@ -38,7 +39,11 @@ const moveItemSpec = (idx, direction) => (value) => ({
   [idx + direction]: { $set: value[idx] },
 });
 
-export default (data, path, value) => {
+export default (givenData, path, value) => {
+  const data = { ...givenData };
+  if (path && path.includes('.') && data && !has(data, path.split('.')[0])) {
+    data[path.split('.')[0]] = {};
+  }
   const s = setValueSpec(value);
   const spec = applyAtPath(path, data, s);
   return update(data, spec);
@@ -58,7 +63,11 @@ export const updateKeyFromSpec = (data, oldPath, newPath) => update(data, (obj) 
 
 export const removeValueFromSpec = (data, path) => update(data, { $unset: [path] });
 
-export const addListItem = (data, path, value) => {
+export const addListItem = (givenData, path, value) => {
+  const data = { ...givenData };
+  if (path && path.includes('.') && data && !has(data, path.split('.')[0])) {
+    data[path.split('.')[0]] = {};
+  }
   const spec = applyAtPath(path, data, pushItemSpec(value));
   return update(data, spec);
 };

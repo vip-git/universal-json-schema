@@ -20,13 +20,28 @@
       "properties": {
         "name": {
           "title": "Recursive Child",
-          "description": "uiSchema allows you to enable this feature",
           "type": "string"
         },
         "children": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/node"
+          }
+        }
+      }
+    },
+    "infinite": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Infinite Recursive Child",
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "infiniteRecursive": true,
+          "items": {
+            "$ref": "#/definitions/infinite"
           }
         }
       }
@@ -63,7 +78,13 @@
     },
     "tree": {
       "title": "Recursive references",
+      "description": "uiSchema allows you to enable this feature",
       "$ref": "#/definitions/node"
+    },
+    "infinite": {
+      "title": "Infinite Recursive references",
+      "description": "infiniteRecursive: true - enables this when defined in JSONSchema",
+      "$ref": "#/definitions/infinite"
     }
   }
 }
