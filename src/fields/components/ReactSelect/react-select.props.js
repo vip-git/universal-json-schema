@@ -51,7 +51,10 @@ export default ({
   widget,
   options = {},
 }) => {
-  const multiSelect = widget === 'material-multiselect' || options.multiSelect || schema.anyOf;
+  const multiSelect = (widget === 'material-multiselect'
+    || options.multiSelect
+    || (schema.anyOf && schema.parsedArray))
+    && !schema.oneOf; 
   return {
     onChange:
       onChange

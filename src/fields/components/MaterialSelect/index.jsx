@@ -15,7 +15,7 @@ export default ({
   options = {},
   ...rest 
 }) => {
-  const isMultiple = options.multiple || schema.anyOf || false;
+  const isMultiple = (options.multiple || (schema.anyOf && schema.parsedArray)) && !schema.oneOf;
 
   const { 
     onChange: givenOnChange, 
