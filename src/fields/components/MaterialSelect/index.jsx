@@ -15,6 +15,8 @@ export default ({
   options = {},
   ...rest 
 }) => {
+  const isMultiple = options.multiple || schema.anyOf || false;
+
   const { 
     onChange: givenOnChange, 
     choices,
@@ -24,14 +26,18 @@ export default ({
     onChange,
     schema,
     type, 
+    isMultiple,
   });
-  
+
+  const parseMultiSelectValue = (givenValue) => (Array.isArray(givenValue) ? value : [givenValue]);
+
   return (
     <Select
       {...options}
       id={htmlid}
-      value={String(value)}
+      value={isMultiple ? parseMultiSelectValue(value) : String(value)}
       onChange={givenOnChange}
+      multiple={isMultiple}
     >
       {value === null && <MenuItem value={''}>{nullOption}</MenuItem>}
       {choices.map((o) => <MenuItem key={o.key} value={String(o.key)}>{String(o.value)}</MenuItem>)}

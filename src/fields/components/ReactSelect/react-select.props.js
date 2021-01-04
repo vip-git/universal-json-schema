@@ -49,20 +49,18 @@ export default ({
   type,
   schemaVersion,
   widget,
-}) => ({
-  onChange:
-    onChange
-    && onChangeHandler(
-      onChange,
-      type,
-      schemaVersion,
-      widget === 'material-multiselect',
-      schema,
-    ),
-  choices: valuesToOptions(isEnum(schema)),
-  multiSelect: widget === 'material-multiselect',
-  isClearable: uiSchema['ui:isClearable'] || false,
-  placeholder: uiSchema['ui:placeholder'] || '',
-  nullOption: 'Please select...',
-  label: schema.title || '',
-});
+  options = {},
+}) => {
+  const multiSelect = widget === 'material-multiselect' || options.multiSelect || schema.anyOf;
+  return {
+    onChange:
+      onChange
+      && onChangeHandler(onChange, type, schemaVersion, multiSelect, schema),
+    choices: valuesToOptions(isEnum(schema)),
+    multiSelect,
+    isClearable: uiSchema['ui:isClearable'] || false,
+    placeholder: uiSchema['ui:placeholder'] || '',
+    nullOption: 'Please select...',
+    label: schema.title || '',
+  };
+};

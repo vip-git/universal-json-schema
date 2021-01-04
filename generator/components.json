@@ -26,7 +26,7 @@
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/react-select": {
-            "version": "1.0.7",
+            "version": "1.0.8",
             "type": "string",
             "isEnum": true,
             "name": "react-select",
@@ -36,7 +36,7 @@
             ]
         },
         "@react-jsonschema-form-components/material-select": {
-            "version": "1.0.6",
+            "version": "1.0.7",
             "type": "string",
             "isEnum": true,
             "name": "material-select",

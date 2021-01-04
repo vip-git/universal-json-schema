@@ -10,13 +10,13 @@ const {
   },
 } = UTIL_CONFIG;
 
-const onChangeHandler = (onChange, type) => (e) => {
-  const value = coerceValue(type, e.target.value);
+const onChangeHandler = (onChange, type, isMultiple) => (e) => {
+  const value = isMultiple ? e.target.value : coerceValue(type, e.target.value);
   if (value !== undefined) onChange(value);
 };
 
-export default ({ onChange, schema = {}, type }) => ({
-  onChange: onChange && onChangeHandler(onChange, type),
+export default ({ onChange, schema = {}, type, isMultiple }) => ({
+  onChange: onChange && onChangeHandler(onChange, type, isMultiple),
   choices: valuesToOptions(isEnum(schema)),
   nullOption: 'Please select...',
   label: schema.title || '',

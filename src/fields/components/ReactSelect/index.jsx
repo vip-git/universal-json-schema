@@ -17,6 +17,7 @@ export default ({
   widget,
   onChange, 
   schemaVersion,
+  options = {},
   ...rest 
 }) => {
   const { 
@@ -34,6 +35,7 @@ export default ({
     type, 
     widget,
     schemaVersion,
+    options,
   });
   
   const suggestions = choices.map((suggestion) => ({
