@@ -3,7 +3,7 @@ import uiSchema from './ui-schema.json';
 import formData from './form-data.json';
 
 export default ({
-  title: 'Property Dependencies',
+  title: 'Refrences',
   schema,
   uiSchema,
   formData,
