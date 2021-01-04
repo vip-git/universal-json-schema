@@ -54,6 +54,7 @@ export const RawFieldSetArray = (props) => {
               onMoveItemUp={onMoveItemUp && onMoveItemUp(path, startIdx + idx)}
               onMoveItemDown={onMoveItemDown && onMoveItemDown(path, startIdx + idx)}
               onDeleteItem={onDeleteItem && onDeleteItem(path, startIdx + idx)}
+              recursiveDeleteItem={onDeleteItem}
               uiSchema={uiSchema.items}
               first={idx === 0}
               last={idx === data.length - 1}

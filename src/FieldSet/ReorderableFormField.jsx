@@ -17,6 +17,7 @@ export const RawReorderableFormField = ({
   onDeleteItem, 
   canReorder,
   dynamicKeyField,
+  recursiveDeleteItem,
   schema,
   ...rest
 }) => (
@@ -34,6 +35,7 @@ export const RawReorderableFormField = ({
       path={path}
       {...rest}
       schema={schema}
+      onDeleteItem={recursiveDeleteItem}
     />
     <ReorderControls
       first={first}
