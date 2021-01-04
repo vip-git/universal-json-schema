@@ -26,10 +26,15 @@ const shelljs = require('shelljs');
 const componentSettings = require('./components.json');
 
 const templateFile = require('./templates/app-config.template.js');
+const templateUtilFile = require('./templates/utils-config.template.js');
 
 const template = ejs.compile(templateFile, {});
-const finalString = template({ components: componentSettings.components });
+const finalString = template({ ...componentSettings });
 const shellFileString = new shelljs.ShellString(finalString);
+
+const templateUtil = ejs.compile(templateUtilFile, {});
+const finalUtilString = templateUtil({ ...componentSettings });
+const shellUtilFileString = new shelljs.ShellString(finalUtilString);
 
 // Folder Variables
 const generatedLocation = `${shelljs.pwd()}/src/generated`;
@@ -80,5 +85,7 @@ shelljs.cp(
   'node_modules/@react-jsonschema-form-utils/',
   `${generatedLocation}/utils`,
 );
+
+shellUtilFileString.to(`${generatedLocation}/utils/index.js`);
 
 console.log('Utils downloaded successfully');

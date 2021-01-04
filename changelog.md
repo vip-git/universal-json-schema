@@ -5,3 +5,4 @@
 - "ui:options" and "ui:style" enabled for prop passing and styling every field
 - On the fly module creation
 - Refrence Schema's via http and inline refrences
+- Support alternatives - oneOf, anyOf

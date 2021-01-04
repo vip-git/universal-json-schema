@@ -12,7 +12,7 @@ export default ({
   disabled,
   onChange, 
   htmlid,
-  options={},
+  options = {},
   ...rest 
 }) => {
   const { 

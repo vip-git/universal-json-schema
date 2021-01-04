@@ -19,6 +19,15 @@ const {
   COMMON_COMPONENTS,
 } = require('../../../generated/app.config');
 
+// Generated UTILS
+const {
+  UTIL_CONFIG: {
+    ENUM_UTILS: {
+      util: { valuesToOptions, isEnum },
+    },
+  },
+} = require('../../../generated/utils');
+
 export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
   // console.log('getComponent schema: %o, uiSchema: %o', schema, uiSchema);
   const widget = uiSchema['ui:widget'];
@@ -27,18 +36,15 @@ export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
   const { type, component: backwardsCompatibleComponent } = schema;
   const component = backwardsCompatibleComponent || newComponent;
   const dataType = V2_DEPRECATED_TYPES.includes(type) ? STRING : type;
-  const getDefaultComponent = (isEnum) => (isEnum ? 'DEFAULT_ENUM' : 'DEFAULT');
+  const getDefaultComponent = (isEnumVal) => (isEnumVal ? 'DEFAULT_ENUM' : 'DEFAULT');
   const transformVersion2FormWidgets = (givenSchema, givenType, widgetString) => {
-    if (
-      givenSchema.enum
-      && V2_DEPRECATED_ENUMS.includes(widgetString)
-    ) {
+    if (isEnum(givenSchema) && V2_DEPRECATED_ENUMS.includes(widgetString)) {
       return ENUM_COMPONENTS.REACT_SELECT.name;
     }
 
     if (
-      givenSchema.enum
-       && V2_DEPRECATED_CREATABLE_ENUMS.includes(widgetString)
+      isEnum(givenSchema)
+      && V2_DEPRECATED_CREATABLE_ENUMS.includes(widgetString)
     ) {
       return ENUM_COMPONENTS.CREATABLE_REACT_SELECT.name;
     }
@@ -61,18 +67,18 @@ export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
     
     return (
       (V2_DEPRECATED_OPTIONS.includes(options) && options)
-        || widgetString
-        || getDefaultComponent(givenSchema.enum)
+      || widgetString
+      || getDefaultComponent(isEnum(givenSchema))
     );
   };
 
   const formWidget = !schemaVersion || String(schemaVersion) === '2'
     ? transformVersion2FormWidgets(schema, type, widget)
-    : widget || getDefaultComponent(schema.enum);
+    : widget || getDefaultComponent(isEnum(schema));
 
   try {
     const selectedComponent = componentConfig.get(dataType).get(formWidget)
-      || componentConfig.get(dataType).get(getDefaultComponent(schema.enum));
+      || componentConfig.get(dataType).get(getDefaultComponent(isEnum(schema)));
       
     if (
       component

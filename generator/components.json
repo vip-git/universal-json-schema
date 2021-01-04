@@ -2,7 +2,7 @@
     "name": "JSON Schema Components",
     "utils": {
         "@react-jsonschema-form-utils/enum-utils": {
-            "version": "1.0.1",
+            "version": "1.0.4",
             "name": "enum-utils"
         },
         "@react-jsonschema-form-utils/parse-values": {
@@ -12,21 +12,21 @@
     },
 	"components": {
         "@react-jsonschema-form-components/material-radio-group": {
-            "version": "1.0.4",
+            "version": "1.0.7",
             "type": "string",
             "isEnum": true,
             "name": "material-radio-group",
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/creatable-react-select": {
-            "version": "1.0.3",
+            "version": "1.0.6",
             "type": "string",
             "isEnum": true,
             "name": "creatable-react-select",
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/react-select": {
-            "version": "1.0.4",
+            "version": "1.0.7",
             "type": "string",
             "isEnum": true,
             "name": "react-select",
@@ -36,7 +36,7 @@
             ]
         },
         "@react-jsonschema-form-components/material-select": {
-            "version": "1.0.3",
+            "version": "1.0.6",
             "type": "string",
             "isEnum": true,
             "name": "material-select",
@@ -46,7 +46,7 @@
             ]
         },
         "@react-jsonschema-form-components/material-checkbox": {
-            "version": "1.0.4",
+            "version": "1.0.7",
             "type": "string",
             "isEnum": true,
             "name": "material-checkbox",

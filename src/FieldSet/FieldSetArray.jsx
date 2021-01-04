@@ -10,8 +10,16 @@ import { withStyles } from '@material-ui/core/styles';
 import FormField from '../FormField';
 import fieldSetStyles from './field-set-styles';
 import getDefaultValue from '../helpers/get-default-value';
-import { valuesToOptions } from '../generated/utils/enum-utils';
 import ReorderableFormField from './ReorderableFormField';
+
+// Generated UTILS
+const {
+  UTIL_CONFIG: {
+    ENUM_UTILS: {
+      util: { isEnum },
+    },
+  },
+} = require('../generated/utils');
 
 export const RawFieldSetArray = (props) => {
   const {
@@ -106,7 +114,7 @@ export const RawFieldSetArray = (props) => {
         }
         return null;
       })}
-      {(!isArray(schema.items) && schema.uniqueItems && schema.items.enum) 
+      {(!isArray(schema.items) && schema.uniqueItems && isEnum(schema.items)) 
         && (
           <FormField
             key={path}

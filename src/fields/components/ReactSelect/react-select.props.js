@@ -2,8 +2,16 @@
 import { values, mapValues } from 'lodash';
 
 // Utils
-import { valuesToOptions } from '../../utils/enum-utils';
-import { coerceValue, deepStringify } from '../../utils/parse-values';
+import { UTIL_CONFIG } from '../../utils';
+
+const {
+  ENUM_UTILS: {
+    util: { valuesToOptions, isEnum },
+  },
+  PARSE_VALUES: {
+    util: { coerceValue, deepStringify },
+  },
+} = UTIL_CONFIG;
 
 const onChangeHandler = (
   onChange,
@@ -51,7 +59,7 @@ export default ({
       widget === 'material-multiselect',
       schema,
     ),
-  choices: valuesToOptions(schema.enum),
+  choices: valuesToOptions(isEnum(schema)),
   multiSelect: widget === 'material-multiselect',
   isClearable: uiSchema['ui:isClearable'] || false,
   placeholder: uiSchema['ui:placeholder'] || '',

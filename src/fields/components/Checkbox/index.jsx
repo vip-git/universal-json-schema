@@ -5,6 +5,9 @@ import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 
+// Uitls
+import { isEnum } from '../../utils/enum-utils';
+
 // Props
 import checkboxProps from './checkbox.props';
 
@@ -30,7 +33,7 @@ export default ({ value, type, onChange, schema = {}, ...rest }) => {
       </FormGroup>
     </FormControl>
   );
-  return schema.enum ? (
+  return isEnum(schema) ? (
     <GroupCheckbox />
   ) : (
     <>

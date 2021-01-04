@@ -6,17 +6,17 @@
       "anyOf": [
         {
           "type": "string",
-          "enum": ["#ff0000"],
+          "const": "#ff0000",
           "title": "Red"
         },
         {
           "type": "string",
-          "enum": ["#00ff00"],
+          "const": "#00ff00",
           "title": "Green"
         },
         {
           "type": "string",
-          "enum": ["#0000ff"],
+          "const": "#0000ff",
           "title": "Blue"
         }
       ]

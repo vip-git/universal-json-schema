@@ -3,6 +3,15 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 const InputLabel = require('@material-ui/core/InputLabel').default;
 
+// Generated UTILS
+const {
+  UTIL_CONFIG: {
+    ENUM_UTILS: {
+      util: { isEnum },
+    },
+  },
+} = require('../../../generated/utils');
+
 export default ({ schema, uiSchema = {} }) => {
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'];
@@ -24,7 +33,7 @@ export default ({ schema, uiSchema = {} }) => {
 
   const nonInputOptions = ['rich-text-editor'];
 
-  if (schema.enum && widget === 'radio') {
+  if (isEnum(schema) && widget === 'radio') {
     return FormLabel;
   }
   
