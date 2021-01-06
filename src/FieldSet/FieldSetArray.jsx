@@ -35,7 +35,7 @@ export const RawFieldSetArray = (props) => {
     startIdx = 0, className, classes,
     schema: givenSchema = {}, 
     uiSchema = {}, 
-    definitions: givenDefinitions = {}, 
+    definitions = {}, 
     data, 
     path, 
     onMoveItemUp, 
@@ -44,7 +44,6 @@ export const RawFieldSetArray = (props) => {
     ...rest
   } = props;
   const schema = { ...givenSchema };
-  const definitions = { ...givenDefinitions };
   const canReorder = uiSchema && uiSchema['ui:options'] && uiSchema['ui:options'].canReorder;
   const allowRecursive = uiSchema && uiSchema['ui:options'] && uiSchema['ui:options'].allowRecursive;
   const hasSelectWidget = uiSchema && uiSchema['ui:widget'];
@@ -93,7 +92,7 @@ export const RawFieldSetArray = (props) => {
                 first={idx === 0}
                 last={idx === data.length - 1}
                 canReorder={canReorder}
-                definitions={givenDefinitions}
+                definitions={definitions}
                 {...rest}
               />
             );
@@ -122,6 +121,11 @@ export const RawFieldSetArray = (props) => {
       )}
       {isArray(schema.items) && (data || []).map((d, idx) => {
         if (idx < schema.items.length) {
+          if (schema.items[idx].$ref) {
+            schema.items[idx] = { 
+              ...getDefinitionSchemaFromRef(definitions, schema.items[idx], d),
+            };
+          }
           return (
             <FormField
                 key={`${path + idx}`}
@@ -130,7 +134,7 @@ export const RawFieldSetArray = (props) => {
                 schema={schema.items[idx]}
                 data={d}
                 uiSchema={(uiSchema.items || [])[idx]}
-                definitions={givenDefinitions}
+                definitions={definitions}
                 {...rest}
             />
           );
@@ -146,7 +150,7 @@ export const RawFieldSetArray = (props) => {
             schema={{ ...schema.items, title: schema.title, parsedArray: true }}
             data={data}
             uiSchema={uiSchema}
-            definitions={givenDefinitions}
+            definitions={definitions}
             {...rest}
           />
         )}
@@ -155,7 +159,7 @@ export const RawFieldSetArray = (props) => {
           <RawFieldSetArray
             classes={classes}
             path={path}
-            startIdx={2}
+            startIdx={schema.items.length}
             required={schema.required}
             schema={{ type: 'array', items: schema.additionalItems }}
             data={slice(data, schema.items.length)}
@@ -163,7 +167,7 @@ export const RawFieldSetArray = (props) => {
             onMoveItemUp={onMoveItemUp}
             onMoveItemDown={onMoveItemDown}
             onDeleteItem={onDeleteItem}
-            definitions={givenDefinitions}
+            definitions={definitions}
             {...rest}
           />
         )}

@@ -1,6 +1,7 @@
 // Library
 import get from 'lodash/get';
 import find from 'lodash/find';
+import omit from 'lodash/omit';
 
 const getDefinitionSchemaFromRef = (
   givenDefinitions,
@@ -39,7 +40,8 @@ const getDefinitionSchemaFromRef = (
 
   return {
     ...schemaProperties,
-    ...definitionSchema,
+    title: schemaProperties.title || definitionSchema.title,
+    ...omit(definitionSchema, ['dependencies']),
   };
 };
 

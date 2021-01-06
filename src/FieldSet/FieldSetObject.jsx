@@ -29,7 +29,7 @@ export const RawFieldSetObject = ({
   schema: givenSchema = {},
   uiSchema = {},
   data = {}, 
-  definitions: givenDefinitions = {},
+  definitions = {},
   id,
   idxKey,
   path,
@@ -39,7 +39,6 @@ export const RawFieldSetObject = ({
   ...rest 
 }) => {
   const schema = { ...givenSchema };
-  const definitions = { ...givenDefinitions };
 
   const orientation = (uiSchema['ui:orientation'] === 'row' ? classes.row : null);
   if (isTabContent) {
@@ -84,7 +83,7 @@ export const RawFieldSetObject = ({
                 data={data[propId]}
                 uiSchema={uiSchema[propId] || {}}
                 validation={validation[propId] || {}}
-                definitions={givenDefinitions}
+                definitions={definitions}
                 {...rest}
             />
           );
@@ -123,7 +122,7 @@ export const RawFieldSetObject = ({
                   dynamicKeyField={propId}
                   onDeleteItem={rest.onRemoveProperty && rest.onRemoveProperty(newPath)}
                   canReorder={false}
-                  definitions={givenDefinitions}
+                  definitions={definitions}
                   noTitle
               />
             );
@@ -171,7 +170,7 @@ export const RawFieldSetObject = ({
                   data={data[propId]}
                   uiSchema={uiSchema[propId] || {}}
                   validation={validation[propId] || {}}
-                  definitions={givenDefinitions}
+                  definitions={definitions}
                   {...rest}
               />
             );

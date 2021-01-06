@@ -4,7 +4,6 @@ import size from 'lodash/size';
 
 const arrRegex = /^([^.]+)\[([0-9]+)\](\.(.*))?/;
 const dotRegex = /^([^[]+)\.(.*$)/;
-
 const applyAtPath = (path, data, spec) => {
   if (!path) return spec(data);
   const dotMatch = path.match(dotRegex);
@@ -41,8 +40,14 @@ const moveItemSpec = (idx, direction) => (value) => ({
 
 export default (givenData, path, value) => {
   const data = { ...givenData };
-  if (path && path.includes('.') && data && !has(data, path.split('.')[0])) {
-    data[path.split('.')[0]] = {};
+  const matchPath = path.replace(/\[(.*?)\]/g, '');
+  if (
+    matchPath
+    && matchPath.includes('.')
+    && data
+    && !has(data, matchPath.split('.')[0])
+  ) {
+    data[matchPath.split('.')[0]] = {};
   }
   const s = setValueSpec(value);
   const spec = applyAtPath(path, data, s);
@@ -65,8 +70,14 @@ export const removeValueFromSpec = (data, path) => update(data, { $unset: [path]
 
 export const addListItem = (givenData, path, value) => {
   const data = { ...givenData };
-  if (path && path.includes('.') && data && !has(data, path.split('.')[0])) {
-    data[path.split('.')[0]] = {};
+  const matchPath = path.replace(/\[(.*?)\]/g, '');
+  if (
+    matchPath
+    && matchPath.includes('.')
+    && data
+    && !has(data, matchPath.split('.')[0])
+  ) {
+    data[matchPath.split('.')[0]] = {};
   }
   const spec = applyAtPath(path, data, pushItemSpec(value));
   return update(data, spec);
