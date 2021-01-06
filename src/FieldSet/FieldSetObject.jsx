@@ -3,26 +3,33 @@ import React from 'react';
 import classNames from 'classnames';
 import keys from 'lodash/keys';
 import get from 'lodash/get';
+
+// Icons
 import IconButton from '@material-ui/core/IconButton';
 import AddCircle from '@material-ui/icons/AddCircle';
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
 
 // Internal
-import { Typography } from '@material-ui/core';
 import ReorderableFormField from './ReorderableFormField';
 import FormField from '../FormField';
+
+// Style
 import fieldSetStyles from './field-set-styles';
+
+// Helpers
 import getDefaultValue from '../helpers/get-default-value';
+import getDefinitionSchemaFromRef from '../helpers/get-definition-schema';
 
 export const RawFieldSetObject = ({ 
   className, 
   classes,
-  schema = {},
+  schema: givenSchema = {},
   uiSchema = {},
   data = {}, 
-  definitions = {},
+  definitions: givenDefinitions = {},
   id,
   idxKey,
   path,
@@ -31,14 +38,15 @@ export const RawFieldSetObject = ({
   tabKey,
   ...rest 
 }) => {
+  const schema = { ...givenSchema };
+  const definitions = { ...givenDefinitions };
+
   const orientation = (uiSchema['ui:orientation'] === 'row' ? classes.row : null);
   if (isTabContent) {
     const newPath = path ? `${path}.${tabKey}` : tabKey;
-    const propSchema = schema.properties[tabKey].$ref ? {
-      ...schema.properties[tabKey],
-      ...get(definitions, schema.properties[tabKey].$ref
-        .replace('#/definitions/', '').replace('/', '.')),
-    } : schema.properties[tabKey];
+    const propSchema = schema.properties[tabKey].$ref 
+      ? getDefinitionSchemaFromRef(definitions, schema.properties[tabKey], data[tabKey])
+      : schema.properties[tabKey];
     return (
       <div className={classNames(classes.root, orientation)}>
         <FormField
@@ -63,11 +71,9 @@ export const RawFieldSetObject = ({
         Object.keys(schema).indexOf('additionalProperties') > Object.keys(schema).indexOf('properties') 
         && keys(schema.properties).map((propId) => {
           const newPath = path ? `${path}.${propId}` : propId;
-          const propSchema = schema.properties[propId].$ref ? {
-            ...schema.properties[propId],
-            ...get(definitions, schema.properties[propId].$ref
-              .replace('#/definitions/', '').replace('/', '.')),
-          } : schema.properties[propId];
+          const propSchema = schema.properties[propId].$ref
+            ? getDefinitionSchemaFromRef(definitions, schema.properties[propId], data[propId])
+            : schema.properties[propId];
           return (
             <FormField
                 key={propId}
@@ -78,7 +84,7 @@ export const RawFieldSetObject = ({
                 data={data[propId]}
                 uiSchema={uiSchema[propId] || {}}
                 validation={validation[propId] || {}}
-                definitions={definitions}
+                definitions={givenDefinitions}
                 {...rest}
             />
           );
@@ -117,7 +123,7 @@ export const RawFieldSetObject = ({
                   dynamicKeyField={propId}
                   onDeleteItem={rest.onRemoveProperty && rest.onRemoveProperty(newPath)}
                   canReorder={false}
-                  definitions={definitions}
+                  definitions={givenDefinitions}
                   noTitle
               />
             );
@@ -152,11 +158,9 @@ export const RawFieldSetObject = ({
           Object.keys(schema).indexOf('additionalProperties') < Object.keys(schema).indexOf('properties') 
           && keys(schema.properties).map((propId) => {
             const newPath = path ? `${path}.${propId}` : propId;
-            const propSchema = schema.properties[propId].$ref ? {
-              ...schema.properties[propId],
-              ...get(definitions, schema.properties[propId].$ref
-                .replace('#/definitions/', '').replace('/', '.')),
-            } : schema.properties[propId];
+            const propSchema = schema.properties[propId].$ref
+              ? getDefinitionSchemaFromRef(definitions, schema.properties[propId], data[propId])
+              : schema.properties[propId];
             return (
               <FormField
                   key={propId}
@@ -167,7 +171,7 @@ export const RawFieldSetObject = ({
                   data={data[propId]}
                   uiSchema={uiSchema[propId] || {}}
                   validation={validation[propId] || {}}
-                  definitions={definitions}
+                  definitions={givenDefinitions}
                   {...rest}
               />
             );

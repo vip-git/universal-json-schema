@@ -3,29 +3,29 @@
     "name": "Randy"
   },
   "conditional": {
-    "Do you have any pets?": "No"
+    "doYouHavePets": "No"
   },
   "arrayOfConditionals": [
     {
-      "Do you have any pets?": "Yes: One",
-      "How old is your pet?": 6
+      "doYouHavePets": "Yes: One",
+      "howOldPet": 6
     },
     {
-      "Do you have any pets?": "Yes: More than one",
-      "Do you want to get rid of any?": false
+      "doYouHavePets": "Yes: More than one",
+      "getRidPet": false
     }
   ],
   "fixedArrayOfConditionals": [
     {
-      "Do you have any pets?": "No"
+      "doYouHavePets": "No"
     },
     {
-      "Do you have any pets?": "Yes: One",
-      "How old is your pet?": 6
+      "doYouHavePets": "Yes: One",
+      "howOldPet": 6
     },
     {
-      "Do you have any pets?": "Yes: More than one",
-      "Do you want to get rid of any?": true
+      "doYouHavePets": "Yes: More than one",
+      "getRidPet": true
     }
   ]
 }

@@ -58,44 +58,51 @@
       "title": "Person",
       "type": "object",
       "properties": {
-        "Do you have any pets?": {
+        "doYouHavePets": {
           "type": "string",
+          "title": "Do you have any pets?",
           "enum": ["No", "Yes: One", "Yes: More than one"],
           "default": "No"
         }
       },
-      "required": ["Do you have any pets?"],
+      "required": ["doYouHavePets"],
       "dependencies": {
-        "Do you have any pets?": {
+        "doYouHavePets": {
           "oneOf": [
             {
               "properties": {
-                "Do you have any pets?": {
-                  "enum": ["No"]
+                "doYouHavePets": {
+                  "const": "No"
                 }
               }
             },
             {
               "properties": {
-                "Do you have any pets?": {
-                  "enum": ["Yes: One"]
+                "doYouHavePets": {
+                  "const": "Yes: One"
                 },
-                "How old is your pet?": {
+                "howOldPet": {
+                  "title": "How old is your pet?",
                   "type": "number"
                 }
               },
-              "required": ["How old is your pet?"]
+              "required": ["howOldPet"]
             },
             {
               "properties": {
-                "Do you have any pets?": {
-                  "enum": ["Yes: More than one"]
+                "doYouHavePets": {
+                  "const": "Yes: More than one"
                 },
-                "Do you want to get rid of any?": {
+                "getRidPet": {
+                  "title": "Do you want to get rid of any?",
                   "type": "boolean"
+                },
+                "setRidPet": {
+                  "title": "Do you want to set rid of any?",
+                  "type": "string"
                 }
               },
-              "required": ["Do you want to get rid of any?"]
+              "required": ["getRidPet"]
             }
           ]
         }

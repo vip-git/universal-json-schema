@@ -11,6 +11,7 @@ import radioChoice from './radio-choice';
 import additionalProps from './additional-props';
 import refrences from './refrences';
 import alternatives from './alternatives';
+import schemaDeps from './schema-dependencies';
 
 export default {
   simple,
@@ -26,4 +27,5 @@ export default {
   additionalProps,
   refrences,
   alternatives,
+  schemaDeps,
 };
