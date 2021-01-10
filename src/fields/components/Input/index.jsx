@@ -13,16 +13,10 @@ export default ({
   onChange,
   htmlid,
   onBlur,
-}) => (onBlur ? (
-  <Input 
-        htmlid={htmlid} 
-        defaultValue={value} 
-        {...inputProps({ onChange, onBlur, type, options, uiSchema })}
-  />
-) : (
+}) => (
     <Input 
         htmlid={htmlid} 
-        value={value} 
+        value={value || ''} 
         {...inputProps({ onChange, onBlur, type, options, uiSchema })} 
     />
-));
+);

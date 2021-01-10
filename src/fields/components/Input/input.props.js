@@ -1,6 +1,5 @@
 // utils 
 import { UTIL_CONFIG } from '../../utils';
-import getCurrencyProps from './utils/get-currency-props';
 import getInputType from './utils/get-input-type';
 import getMuiProps from './utils/get-mui-props';
 import getTextAreaProps from './utils/get-text-area-props';
@@ -14,13 +13,13 @@ const {
   },
 } = UTIL_CONFIG;
 
-const onChangeHandler = (
-  onChange,
-  type,
-  options,
-) => (e) => {
-  const value = coerceValue(type, e.target.value, options);
-  if (value !== undefined) onChange(value);
+const onChangeHandler = (onChange, type, options) => (e) => {
+  const valueUI = coerceValue(type, e.target.value, options);
+  const valueForm = coerceValue(type, e.target.value, {
+    ...options,
+    isFormData: true,
+  });
+  if (valueForm !== undefined) onChange(valueForm, valueUI);
 };
 
 export default ({
@@ -39,7 +38,6 @@ export default ({
   inputProps: {
     id: htmlid,
   },
-  ...getCurrencyProps({ onChange, options }),
   ...getTextAreaProps(uiSchema['ui:widget']),
   ...getMuiProps(uiSchema),
 });

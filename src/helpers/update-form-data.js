@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import { has, get } from 'lodash';
+import { has, get, each, set } from 'lodash';
 import size from 'lodash/size';
 
 const arrRegex = /^([^.]+)\[([0-9]+)\](\.(.*))?/;
@@ -65,6 +65,18 @@ export const updateKeyFromSpec = (data, oldPath, newPath) => update(data, (obj) 
     return acc;
   }, {}),
 );
+
+export const setUISchemaData = (givenUIData, uiSchema, path) => {
+  each(givenUIData, (val, key) => {
+    if (typeof val === 'object') {
+      setUISchemaData(uiSchema, uiSchema, key);
+    }
+    else {
+      const getPath = path ? `${path}.${key}` : key;
+      set(uiSchema, `${getPath}.ui:data`, val);
+    }
+  });
+};
 
 export const removeValueFromSpec = (data, path) => update(data, { $unset: [path] });
 

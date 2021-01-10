@@ -18,25 +18,28 @@ const FormComponent = ({
   givenSchema,
   givenUISchema,
   givenFormData,
+  givenUIData,
   onCancel,
   onSubmit,
   onUpload,
   onFormChanged,
+  onError,
 }) => (
 		<Form
 			schema={givenSchema}
 			uiSchema={givenUISchema}
-			formData={givenFormData}
+      formData={givenFormData}
 			onCancel={onCancel}
 			onSubmit={onSubmit}
 			onUpload={onUpload}
-			onChange={onFormChanged}
+      onChange={onFormChanged}
+      onError={onError}
 			components={{
 			  customComponent: ({ onChange, ...rest }) => (
-					<CustomComponent onChange={onChange} formData={givenFormData} {...rest} />
+					<CustomComponent onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
 			  ),
 			  customRating: ({ onChange, ...rest }) => (
-					<CustomRating onChange={onChange} formData={givenFormData} {...rest} />
+					<CustomRating onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
 			  ),
 			}}
       validations={{
@@ -77,11 +80,12 @@ class Example extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps = (nextProps) => {
-    const { data: { schema, uiSchema, formData } } = nextProps;
+    const { data: { schema, uiSchema, formData, uiData } } = nextProps;
     this.setState({
       schema, 
       uiSchema, 
       formData,
+      uiData,
     });
   }
 
@@ -89,8 +93,8 @@ class Example extends React.Component {
     this.setState({ [type]: value });
   }
 
-  onFormChanged = ({ formData }) => {
-    this.setState({ formData });
+  onFormChanged = ({ formData, uiSchema, uiData }) => {
+    this.setState({ formData, uiSchema, uiData });
   }
 
   onSubmit = (value, callback) => {
@@ -102,6 +106,10 @@ class Example extends React.Component {
     console.log('onUpload:', value); // eslint-disable-line no-console
   }
 
+  onFormError = (error) => {
+    console.log('error is', error);
+  }
+
   onCancel = () => {
     const { data } = this.props;
     this.setState({
@@ -111,7 +119,7 @@ class Example extends React.Component {
 
   render() {
     const { data: { title }, classes } = this.props;
-    const { schema, uiSchema, formData } = this.state;
+    const { schema, uiSchema, formData, uiData } = this.state;
     return (
       <Paper className={classes.root}>
         <h3>{title}</h3>
@@ -128,10 +136,12 @@ class Example extends React.Component {
               givenSchema={schema}
               givenUISchema={uiSchema}
               givenFormData={formData}
+              givenUIData={uiData}
               onCancel={this.onCancel}
               onSubmit={this.onSubmit}
               onUpload={this.onUpload}
               onFormChanged={this.onFormChanged}
+              onError={this.onFormError}
             />
           </div>
         </div>
