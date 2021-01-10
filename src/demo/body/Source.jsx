@@ -14,10 +14,23 @@ import brace from 'brace';
 import AceEditor from 'react-ace';
 import 'brace/mode/json';
 import 'brace/theme/textmate';
+import Tooltip from '@material-ui/core/Tooltip';
+import Typography from '@material-ui/core/Typography';
 import Valid from '@material-ui/icons/CheckCircle';
 import Invalid from '@material-ui/icons/HighlightOff';
+import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
 import { withStyles } from '@material-ui/core/styles';
 import sourceStyles from './editor-styles';
+
+const HtmlTooltip = withStyles((theme) => ({
+  tooltip: {
+    backgroundColor: '#f5f5f9',
+    color: 'rgba(0, 0, 0, 0.87)',
+    maxWidth: '100%',
+    fontSize: theme.typography.pxToRem(12),
+    border: '1px solid #dadde9',
+  },
+}))(Tooltip);
 
 const deepStringify = (givenVal) => {
   // Note: cache should not be re-used by repeated calls to JSON.stringify.
@@ -83,8 +96,9 @@ class Source extends React.Component {
 
   render() {
     const { source, valid, isOpen } = this.state;
-    const { classes, title } = this.props;
-    const Icon = valid ? Valid : Invalid;
+    const { classes, title, hasSchemaError } = this.props;
+    const getInValidIcon = hasSchemaError ? WarningRoundedIcon : Invalid;
+    const Icon = valid && !hasSchemaError ? Valid : getInValidIcon;
     return (
       <div 
         className={classes.root} 
@@ -95,13 +109,41 @@ class Source extends React.Component {
           cursor: 'pointer',
         }} 
       >
-        <div className={classNames(classes.ctr, { [classes.invalid]: !valid })}>
+        <div className={classNames(classes.ctr, { 
+          [classes.invalid]: !valid, 
+          [classes.warning]: hasSchemaError && valid, 
+        })}
+        >
           <div
             onClick={() => this.setState({
               isOpen: !isOpen,
             })}
           >
-            <Icon fontSize={'default'} className={classes.icon} />
+            <HtmlTooltip
+              interactive
+              title={(
+                <>
+                  <div style={{ display: 'flex' }}>
+                    <Icon fontSize={'default'} className={classes.icon} style={{ marginRight: 15 }} />
+                    <Typography color='inherit' variant={'body1'}>
+                          Your 
+                          {' '}
+                          {title}
+                          {' is '}
+                          <b>{valid && !hasSchemaError ? 'Valid' : 'InValid'}</b>
+                    </Typography>
+                  </div>
+                  {hasSchemaError && (
+                    <pre style={{ padding: 10, fontSize: '1rem', color: 'darkred' }}>
+                      {JSON.stringify(hasSchemaError, null, 2)}
+                    </pre>
+                  )}
+                </>
+              )}
+            >
+              <Icon fontSize={'default'} className={classes.icon} />
+            </HtmlTooltip>
+            
             <div
               className={classes.title}
             >

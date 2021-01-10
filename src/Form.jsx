@@ -47,12 +47,37 @@ const setUIData = (givenUIData, uiSchemaKeys, uiSchema, schema, path) => {
   return givenUIData;
 };
 
-const setData = (givenData, givenUIData, uiSchema, onChange) => {
+const checkSchemaErrors = (givenSchema, givenData, onError) => {
+  try {
+    const transformedSchema = transformSchema(givenSchema);
+    const validate = validator(transformedSchema, { verbose: true });
+    validate(givenData);
+    if (validate.errors && onError && typeof onError === 'function') {
+      onError(validate.errors);
+      return validate.errors;
+    }
+    return false;
+  }
+  catch (err) {
+    // console.log('err', err);
+  }
+  return false;
+};
+
+const setData = (
+  givenData, 
+  givenUIData, 
+  uiSchema, 
+  schema,
+  onChange,
+  onError,
+) => {
   data = givenData;
   uiData = givenUIData;
   setUISchemaData(uiData, uiSchema);
   if (typeof onChange === 'function') {
-    onChange({ formData: givenData, uiData, uiSchema });
+    const schemaErrors = checkSchemaErrors(schema, givenData, onError);
+    onChange({ formData: givenData, uiData, uiSchema, schemaErrors });
   }
 };
 
@@ -92,32 +117,81 @@ const Form = ({
   const onFormValuesChange = (field) => (givenValue, givenUIValue) => {
     const newFormData = updateFormData(data, field, givenValue);
     const newUIData = givenUIValue && updateFormData(uiData, field, givenUIValue);
-    setData(newFormData, newUIData || uiData, uiSchema, onChange);
+    setData(
+      newFormData, newUIData || uiData, 
+      uiSchema, 
+      schema,
+      onChange,
+      onError,
+    );
   };
 
-  const onMoveItemUp = (path, idx) => () => setData(moveListItem(data, path, idx, -1), uiData, uiSchema, onChange);
+  const onMoveItemUp = (path, idx) => () => setData(
+    moveListItem(data, path, idx, -1), 
+    uiData, 
+    uiSchema, 
+    schema,
+    onChange,
+    onError,
+  );
 
-  const onMoveItemDown = (path, idx) => () => setData(moveListItem(data, path, idx, 1), uiData, uiSchema, onChange);
+  const onMoveItemDown = (path, idx) => () => setData(
+    moveListItem(data, path, idx, 1), 
+    uiData, 
+    uiSchema, 
+    schema,
+    onChange,
+    onError,
+  );
 
-  const onDeleteItem = (path, idx) => () => setData(removeListItem(data, path, idx), uiData, uiSchema, onChange);
+  const onDeleteItem = (path, idx) => () => setData(
+    removeListItem(data, path, idx), 
+    uiData, 
+    uiSchema, 
+    schema,
+    onChange,
+    onError,
+  );
 
   const onAddItem = (path, defaultValue) => () => setData(
-    addListItem(data, path, defaultValue || ''), uiData, uiSchema, onChange,
+    addListItem(data, path, defaultValue || ''), 
+    uiData, 
+    uiSchema, 
+    schema,
+    onChange,
+    onError,
   );
 
   const onAddNewProperty = (path, defaultValue) => () => setData(
     updateFormData(data, generate(), defaultValue || ''),
     uiData,
-    uiSchema,
-    onChange);
+    uiSchema, 
+    schema,
+    onChange,
+    onError,
+  );
 
-  const onRemoveProperty = (path) => () => setData(removeValueFromSpec(data, path), uiData, uiSchema, onChange);
+  const onRemoveProperty = (path) => () => setData(
+    removeValueFromSpec(data, path), 
+    uiData, 
+    uiSchema, 
+    schema,
+    onChange,
+    onError,
+  );
 
   const onUpdateKeyProperty = (path) => (givenValue, givenUIValue) => {
     if (!isEqual(path, givenValue) && !isEmpty(givenValue)) {
       const givenFormData = updateKeyFromSpec(data, path, givenValue);
       const givenUIData = givenUIValue && updateKeyFromSpec(uiData, path, givenUIValue);
-      setData(givenFormData, givenUIData || uiData, uiSchema, onChange);
+      setData(
+        givenFormData, 
+        givenUIData || uiData, 
+        uiSchema, 
+        schema,
+        onChange,
+        onError,
+      );
     }
   };
 
@@ -130,20 +204,9 @@ const Form = ({
     }
   };
 
-  if (get(uiSchema, 'ui:page.ui:props.ui:schemaErrors') 
-  || !has(uiSchema, 'ui:page.ui:props.ui:schemaErrors')) {
-    try {
-      const transformedSchema = transformSchema(schema);
-      const validate = validator(transformedSchema, { verbose: true });
-      validate(data);
-      formGlobalState.disabled = disabled || validate.errors;
-      if (validate.errors && onError && typeof onError === 'function') {
-        onError(validate.errors);
-      }
-    }
-    catch (err) {
-      // console.log('err', err);
-    }
+  if (get(uiSchema, 'ui:page.ui:props.ui:schemaErrorChecks') 
+  || !has(uiSchema, 'ui:page.ui:props.ui:schemaErrorChecks')) {
+    formGlobalState.disabled = disabled || checkSchemaErrors(schema, data);
   }
 
   return (

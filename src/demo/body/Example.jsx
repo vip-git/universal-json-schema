@@ -59,6 +59,7 @@ const SourceSchema = ({
   uiSchema,
   formData,
   onChange,
+  hasSchemaError,
 }) => (
     <div className={classes.sourceCtr}>
       <div>
@@ -66,7 +67,7 @@ const SourceSchema = ({
       </div>
       <div>
         <Source title={'uiSchema'} source={uiSchema} onChange={onChange('uiSchema')} />
-        <Source title={'formData'} source={formData} onChange={onChange('formData')} />
+        <Source title={'formData'} hasSchemaError={hasSchemaError} source={formData} onChange={onChange('formData')} />
       </div>
     </div>
 );
@@ -80,12 +81,13 @@ class Example extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps = (nextProps) => {
-    const { data: { schema, uiSchema, formData, uiData } } = nextProps;
+    const { data: { schema, uiSchema, formData, uiData, schemaErrors } } = nextProps;
     this.setState({
       schema, 
       uiSchema, 
       formData,
       uiData,
+      schemaErrors,
     });
   }
 
@@ -93,8 +95,8 @@ class Example extends React.Component {
     this.setState({ [type]: value });
   }
 
-  onFormChanged = ({ formData, uiSchema, uiData }) => {
-    this.setState({ formData, uiSchema, uiData });
+  onFormChanged = ({ formData, uiSchema, uiData, schemaErrors }) => {
+    this.setState({ formData, uiSchema, uiData, schemaErrors });
   }
 
   onSubmit = (value, callback) => {
@@ -106,7 +108,7 @@ class Example extends React.Component {
     console.log('onUpload:', value); // eslint-disable-line no-console
   }
 
-  onFormError = (error) => {
+  onFormError = (error = {}) => {
     console.log('error is', error);
   }
 
@@ -119,7 +121,7 @@ class Example extends React.Component {
 
   render() {
     const { data: { title }, classes } = this.props;
-    const { schema, uiSchema, formData, uiData } = this.state;
+    const { schema, uiSchema, formData, uiData, schemaErrors } = this.state;
     return (
       <Paper className={classes.root}>
         <h3>{title}</h3>
@@ -129,6 +131,7 @@ class Example extends React.Component {
             schema={schema}
             uiSchema={uiSchema}
             formData={formData}
+            hasSchemaError={schemaErrors}
             onChange={this.onChange}
           />
           <div className={classes.display}>
