@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import { has } from 'lodash';
+import { has, get } from 'lodash';
 import size from 'lodash/size';
 
 const arrRegex = /^([^.]+)\[([0-9]+)\](\.(.*))?/;
@@ -44,8 +44,8 @@ export default (givenData, path, value) => {
   if (
     matchPath
     && matchPath.includes('.')
-    && data
-    && !has(data, matchPath.split('.')[0])
+    && ((data && !has(data, matchPath.split('.')[0]))
+      || typeof get(data, matchPath.split('.')[0]) !== 'object')
   ) {
     data[matchPath.split('.')[0]] = {};
   }

@@ -6,13 +6,13 @@
             "name": "enum-utils"
         },
         "@react-jsonschema-form-utils/parse-values": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "name": "parse-values"
         }
     },
 	"components": {
         "@react-jsonschema-form-components/material-radio-group": {
-            "version": "1.0.7",
+            "version": "1.0.9",
             "type": "string",
             "isEnum": true,
             "name": "material-radio-group",
@@ -79,7 +79,7 @@
             "name": "rich-text-editor"
         },
         "@react-jsonschema-form-components/material-input": {
-            "version": "1.0.3",
+            "version": "1.0.4",
             "type": "string",
             "isEnum": false,
             "isDefault": true,

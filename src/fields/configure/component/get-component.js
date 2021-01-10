@@ -77,18 +77,18 @@ export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
     : widget || getDefaultComponent(isEnum(schema));
 
   try {
-    const selectedComponent = componentConfig.get(dataType).get(formWidget)
-      || componentConfig.get(dataType).get(getDefaultComponent(isEnum(schema)));
-      
     if (
       component
-        && components
-        && component in components
-        && typeof components[component] === 'function'
+      && components
+      && component in components
+      && typeof components[component] === 'function'
     ) {
       return React.memo(components[component]);
     }
 
+    const selectedComponent = componentConfig.get(dataType).get(formWidget)
+      || componentConfig.get(dataType).get(getDefaultComponent(isEnum(schema)));
+      
     if (selectedComponent) {
       return selectedComponent;
     }

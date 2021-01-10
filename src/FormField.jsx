@@ -18,9 +18,12 @@ export const RawFormField = React.memo(({
   ...rest 
 }) => {
   const classes = styles();
-  const { type } = schema;
+  const { type, component: backwardsCompatibleComponent } = schema;
+  const newComponent = uiSchema['ui:component'];
+  const component = backwardsCompatibleComponent || newComponent;
+
   // Todo: condition for array should change
-  if (type === 'object' || type === 'array') {
+  if ((type === 'object' || type === 'array') && !component) {
     return (
         <FieldSet
           path={path}

@@ -38,6 +38,7 @@
     "express": "4.17.1",
     "immutability-helper": "3.1.1",
     "is-hotkey": "0.1.6",
+    "is-my-json-valid": "^2.20.5",
     "lodash": "4.17.20",
     "materialui-daterange-picker": "1.1.92",
     "moment": "2.27.0",
@@ -47,7 +48,6 @@
     "react-dom": "16.13.1",
     "react-hot-loader": "4.12.21",
     "react-select": "3.1.0",
-    "schema-to-yup": "1.10.0",
     "shelljs": "0.8.4",
     "shortid": "2.2.15",
     "slate": "0.47.9",
@@ -56,8 +56,7 @@
     "slate-plain-serializer": "0.7.13",
     "slate-react": "0.22.9",
     "slate-soft-break": "0.9.0",
-    "typeface-roboto": "0.0.75",
-    "yup": "0.31.0"
+    "typeface-roboto": "0.0.75"
   },
   "description": "Material UI implementation of react-jsonschema-form",
   "devDependencies": {

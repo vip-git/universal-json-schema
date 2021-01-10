@@ -1,30 +1,18 @@
 // utils 
+import { UTIL_CONFIG } from '../../utils';
 import getCurrencyProps from './utils/get-currency-props';
 import getInputType from './utils/get-input-type';
 import getMuiProps from './utils/get-mui-props';
 import getTextAreaProps from './utils/get-text-area-props';
 
-const toNumber = (v, options = false) => {
-  if (v === '' || v === undefined) return v;
-  if (options && options.useLocaleString) return v.replace(/[^\d,.]/g, '');
-  const n = Number(v);
-  return !Number.isNaN(n) ? n : v;
-};
-
-const coerceValue = (type, value, options = false) => {
-  switch (type) {
-    case 'string':
-      return typeof value === 'string' ? value : String(value);
-    case 'number':
-    case 'integer':
-    case 'double':
-    case 'float':
-    case 'decimal':
-      return toNumber(value, options);
-    default:
-      return value;
-  }
-};
+const {
+  ENUM_UTILS: {
+    util: { valuesToOptions, isEnum },
+  },
+  PARSE_VALUES: {
+    util: { coerceValue, deepStringify },
+  },
+} = UTIL_CONFIG;
 
 const onChangeHandler = (
   onChange,

@@ -5,7 +5,9 @@ import MomentUtils from '@date-io/moment';
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
 import setWith from 'lodash/setWith';
+import each from 'lodash/each';
 import { generate } from 'shortid';
+import validator from 'is-my-json-valid';
 import Paper from '@material-ui/core/Paper';
 
 // Internal
@@ -18,6 +20,7 @@ import updateFormData, {
   removeValueFromSpec,
   updateKeyFromSpec,
 } from './helpers/update-form-data';
+import transformSchema from './helpers/transform-schema';
 import getValidationResult from './helpers/validation';
 import FormButtons from './FormButtons';
 
@@ -51,8 +54,12 @@ const Form = ({
   disabled, 
   cancelVariant,
   submitVariant,
+  onError,
   ...rest 
 }) => {
+  const formGlobalState = {
+    disabled,
+  };
   const classes = formStyles();
   const validation = getValidationResult(schema, uiSchema, formData, validations);
   const id = prefixId || generate();
@@ -92,36 +99,18 @@ const Form = ({
     }
   };
 
-  // try {
-  //   const transformedSchema = JSON.parse(JSON.stringify(schema));
-  //   const notAllowedTypes = ['upload', 'material-date'];
-  //   each(transformedSchema, (givenValue, key) => {
-  //     // console.log('value is', value);
-  //     // console.log('key us', key);
-  //     if (key === 'properties') {
-  //       each(value, (propVal, propKey) => {
-  //         if (notAllowedTypes.includes(propVal.type)) {
-  //           transformedSchema.properties[propKey].type = 'string';
-  //         }
-  //       });
-  //     }
-  //   });
-  //   // console.log('transformedSchema is', transformedSchema);
-  //   // eslint-disable-next-line global-require
-  //   const { buildYup } = require('schema-to-yup');
-  //   const yupSchema = buildYup(transformedSchema, {});
-  //   const isValid = async (givenSchema, givenData) => {
-  //     const valid = await givenSchema.isValid(givenData);
-  //     // console.log(schema);
-  //     // console.log('formData is', data);
-  //     // console.log('valid is', valid);
-  //     return valid;
-  //   };
-  //   const valid = isValid(yupSchema, formData);
-  // }
-  // catch (err) {
-  //   // console.log('err' , err);
-  // }
+  try {
+    const transformedSchema = transformSchema(schema);
+    const validate = validator(transformedSchema, { verbose: true });
+    validate(data);
+    formGlobalState.disabled = disabled || validate.errors;
+    if (validate.errors && onError && typeof onError === 'function') {
+      onError(validate.errors);
+    }
+  }
+  catch (err) {
+    // console.log('err', err);
+  }
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -133,7 +122,7 @@ const Form = ({
                   onSubmit={(callback) => onSubmit(callback)}
                   submitValue={submitValue} 
                   inProgressValue={inProgressValue}
-                  disabled={disabled} 
+                  disabled={formGlobalState.disabled} 
                   onCancel={onCancel}
                   cancelValue={cancelValue} 
                   cancelVariant={cancelVariant}
@@ -173,7 +162,7 @@ const Form = ({
             ? (
                 <FormButtons
                   onSubmit={(callback) => onSubmit(callback)}
-                  disabled={disabled}
+                  disabled={formGlobalState.disabled}
                   submitValue={submitValue}
                   cancelValue={cancelValue} 
                   onCancel={onCancel}

@@ -16,9 +16,19 @@
       "title": "Last name"
     },
     "customComponent": {
-      "type": "string",
+      "type": "object",
       "title": "Custom Component",
-      "component": "customComponent"
+      "component": "customComponent",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "title": "Start Date"
+        },
+        "endDate": {
+          "type": "string",
+          "title": "End Date"
+        }
+      }
     },
     "customRating": {
       "type": "integer",
