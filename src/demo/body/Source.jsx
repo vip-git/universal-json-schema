@@ -11,7 +11,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import brace from 'brace';
-import AceEditor from 'react-ace';
+// import AceEditor from 'react-ace';
+import * as monaco from 'monaco-editor';
 import 'brace/mode/json';
 import 'brace/theme/textmate';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -21,6 +22,27 @@ import Invalid from '@material-ui/icons/HighlightOff';
 import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
 import { withStyles } from '@material-ui/core/styles';
 import sourceStyles from './editor-styles';
+
+// Since packaging is done by you, you need
+// to instruct the editor how you named the
+// bundles that contain the web workers.
+self.MonacoEnvironment = {
+  getWorkerUrl: function (moduleId, label) {
+    if (label === 'json') {
+      return './json.worker.bundle.js';
+    }
+    if (label === 'css' || label === 'scss' || label === 'less') {
+      return './css.worker.bundle.js';
+    }
+    if (label === 'html' || label === 'handlebars' || label === 'razor') {
+      return './html.worker.bundle.js';
+    }
+    if (label === 'typescript' || label === 'javascript') {
+      return './ts.worker.bundle.js';
+    }
+    return './editor.worker.bundle.js';
+  }
+}
 
 const HtmlTooltip = withStyles((theme) => ({
   tooltip: {
@@ -67,6 +89,24 @@ class Source extends React.Component {
       valid: isValid(source),
       isOpen: true,
     };
+  }
+
+  componentDidMount() {
+    const jsonCode = [
+      JSON.stringify(this.props.source, null, 2),
+    ].join('\n');
+    const modelUri = monaco.Uri.parse(`a://b/${this.props.title}.json`); // a made up unique URI for our model
+    const model = monaco.editor.createModel(jsonCode, 'json', modelUri);
+
+    // configure the JSON language support with schemas and schema associations
+    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+      validate: true,
+      schemas: [this.props.schema],
+    });
+    // eslint-disable-next-line no-undef
+    monaco.editor.create(document.getElementById(this.props.title), {
+      model,
+    });
   }
 
   UNSAFE_componentWillReceiveProps = (nextProps) => {
@@ -161,7 +201,7 @@ class Source extends React.Component {
               display: isOpen ? 'block' : 'none',
             }}
           >
-            <AceEditor
+            {/* <AceEditor
               mode='json'
               theme='textmate'
               value={source}
@@ -179,7 +219,8 @@ class Source extends React.Component {
                 showLineNumbers: true,
                 tabSize: 2,
               }}
-            />
+            /> */}
+            <div id={title} style={{ height: '100vh' }} />
           </div>
         </div>
       </div>

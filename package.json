@@ -42,6 +42,7 @@
     "lodash": "4.17.20",
     "materialui-daterange-picker": "1.1.92",
     "moment": "2.27.0",
+    "monaco-editor": "^0.21.2",
     "prop-types": "^15.6.2",
     "react": "16.13.1",
     "react-ace": "7.0.5",

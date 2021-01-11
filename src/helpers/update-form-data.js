@@ -67,15 +67,17 @@ export const updateKeyFromSpec = (data, oldPath, newPath) => update(data, (obj) 
 );
 
 export const setUISchemaData = (givenUIData, uiSchema, path) => {
-  each(givenUIData, (val, key) => {
-    if (typeof val === 'object') {
-      setUISchemaData(uiSchema, uiSchema, key);
-    }
-    else {
-      const getPath = path ? `${path}.${key}` : key;
-      set(uiSchema, `${getPath}.ui:data`, val);
-    }
-  });
+  if (typeof givenUIData === 'object') {
+    each(givenUIData, (val, key) => {
+      if (typeof val === 'object') {
+        setUISchemaData(uiSchema, uiSchema, key);
+      }
+      else {
+        const getPath = path ? `${path}.${key}` : key;
+        set(uiSchema, `${getPath}.ui:data`, val);
+      }
+    });
+  }
 };
 
 export const removeValueFromSpec = (data, path) => update(data, { $unset: [path] });

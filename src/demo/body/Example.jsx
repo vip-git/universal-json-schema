@@ -55,6 +55,7 @@ const FormComponent = ({
 
 const SourceSchema = ({
   classes,
+  validSchema,
   schema,
   uiSchema,
   formData,
@@ -63,11 +64,11 @@ const SourceSchema = ({
 }) => (
     <div className={classes.sourceCtr}>
       <div>
-        <Source title={'JSONSchema'} source={schema} onChange={onChange('schema')} />
+        <Source title={'JSONSchema'} schema={validSchema} source={schema} onChange={onChange('schema')} />
       </div>
       <div>
-        <Source title={'uiSchema'} source={uiSchema} onChange={onChange('uiSchema')} />
-        <Source title={'formData'} hasSchemaError={hasSchemaError} source={formData} onChange={onChange('formData')} />
+        <Source title={'uiSchema'} schema={validSchema} source={uiSchema} onChange={onChange('uiSchema')} />
+        <Source title={'formData'} hasSchemaError={hasSchemaError} schema={validSchema} source={formData} onChange={onChange('formData')} />
       </div>
     </div>
 );
@@ -81,12 +82,13 @@ class Example extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps = (nextProps) => {
-    const { data: { schema, uiSchema, formData, uiData, schemaErrors } } = nextProps;
+    const { data: { schema, uiSchema, formData, uiData, schemaErrors, validSchema } } = nextProps;
     this.setState({
       schema, 
       uiSchema, 
       formData,
       uiData,
+      validSchema,
       schemaErrors,
     });
   }
@@ -95,8 +97,8 @@ class Example extends React.Component {
     this.setState({ [type]: value });
   }
 
-  onFormChanged = ({ formData, uiSchema, uiData, schemaErrors }) => {
-    this.setState({ formData, uiSchema, uiData, schemaErrors });
+  onFormChanged = ({ formData, uiSchema, uiData, schemaErrors, validSchema }) => {
+    this.setState({ formData, uiSchema, uiData, schemaErrors, validSchema });
   }
 
   onSubmit = (value, callback) => {
@@ -121,7 +123,7 @@ class Example extends React.Component {
 
   render() {
     const { data: { title }, classes } = this.props;
-    const { schema, uiSchema, formData, uiData, schemaErrors } = this.state;
+    const { schema, uiSchema, formData, uiData, schemaErrors, validSchema } = this.state;
     return (
       <Paper className={classes.root}>
         <h3>{title}</h3>
@@ -129,6 +131,7 @@ class Example extends React.Component {
           <SourceSchema 
             classes={classes}
             schema={schema}
+            validSchema={validSchema}
             uiSchema={uiSchema}
             formData={formData}
             hasSchemaError={schemaErrors}

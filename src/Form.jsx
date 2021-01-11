@@ -31,25 +31,29 @@ import FormButtons from './FormButtons';
 export const EventContext = React.createContext('fieldEvent');
 let data = {};
 let uiData = {};
+let validSchema = {};
 
 const setUIData = (givenUIData, uiSchemaKeys, uiSchema, schema, path) => {
-  each(uiSchemaKeys, (val) => {
-    const getPath = path ? `${path}.${val}` : val;
-    const givenSchema = get(schema, getPath);
-    const fieldUIData = get(uiSchema, `${getPath}.ui:data`);
-    if (fieldUIData) {
-      set(givenUIData, getPath, fieldUIData);
-    }
-    else if (givenSchema && givenSchema.type === 'object' && givenSchema.properties) {
-      setUIData(givenUIData, Object.keys(givenSchema.properties), uiSchema, schema, val);
-    }
-  });
+  if (uiSchemaKeys.length) {
+    each(uiSchemaKeys, (val) => {
+      const getPath = path ? `${path}.${val}` : val;
+      const givenSchema = get(schema, getPath);
+      const fieldUIData = get(uiSchema, `${getPath}.ui:data`);
+      if (fieldUIData) {
+        set(givenUIData, getPath, fieldUIData);
+      }
+      else if (givenSchema && givenSchema.type === 'object' && givenSchema.properties) {
+        setUIData(givenUIData, Object.keys(givenSchema.properties), uiSchema, schema, val);
+      }
+    });
+  }
   return givenUIData;
 };
 
 const checkSchemaErrors = (givenSchema, givenData, onError) => {
   try {
     const transformedSchema = transformSchema(givenSchema);
+    validSchema = transformedSchema;
     const validate = validator(transformedSchema, { verbose: true });
     validate(givenData);
     if (validate.errors && onError && typeof onError === 'function') {
@@ -77,13 +81,13 @@ const setData = (
   setUISchemaData(uiData, uiSchema);
   if (typeof onChange === 'function') {
     const schemaErrors = checkSchemaErrors(schema, givenData, onError);
-    onChange({ formData: givenData, uiData, uiSchema, schemaErrors });
+    onChange({ formData: givenData, uiData, uiSchema, schemaErrors, validSchema });
   }
 };
 
 const Form = ({
   formData,
-  schema,
+  schema = {},
   uiSchema,
   validations,
   prefixId,
@@ -107,7 +111,7 @@ const Form = ({
   const formGlobalState = {
     disabled,
   };
-  const iniUiData = setUIData({}, Object.keys(schema.properties), uiSchema, schema);
+  const iniUiData = setUIData({}, Object.keys(schema.properties || {}), uiSchema, schema);
   const classes = formStyles();
   const validation = getValidationResult(schema, uiSchema, formData, validations);
   const id = prefixId || generate();
