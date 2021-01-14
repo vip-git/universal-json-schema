@@ -64,11 +64,11 @@ const SourceSchema = ({
 }) => (
     <div className={classes.sourceCtr}>
       <div>
-        <Source title={'JSONSchema'} schema={validSchema} source={schema} onChange={onChange('schema')} />
+        <Source title={'JSONSchema.json'} source={schema} onChange={onChange('schema')} />
       </div>
       <div>
-        <Source title={'uiSchema'} schema={validSchema} source={uiSchema} onChange={onChange('uiSchema')} />
-        <Source title={'formData'} hasSchemaError={hasSchemaError} schema={validSchema} source={formData} onChange={onChange('formData')} />
+        <Source title={'uiSchema.json'} source={uiSchema} onChange={onChange('uiSchema')} />
+        <Source title={'formData.json'} hasSchemaError={hasSchemaError} schema={validSchema} source={formData} onChange={onChange('formData')} />
       </div>
     </div>
 );

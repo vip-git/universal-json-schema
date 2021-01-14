@@ -10,11 +10,7 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import classNames from 'classnames';
-import brace from 'brace';
-// import AceEditor from 'react-ace';
-import * as monaco from 'monaco-editor';
-import 'brace/mode/json';
-import 'brace/theme/textmate';
+import Editor, { monaco } from '@monaco-editor/react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import Valid from '@material-ui/icons/CheckCircle';
@@ -22,27 +18,6 @@ import Invalid from '@material-ui/icons/HighlightOff';
 import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
 import { withStyles } from '@material-ui/core/styles';
 import sourceStyles from './editor-styles';
-
-// Since packaging is done by you, you need
-// to instruct the editor how you named the
-// bundles that contain the web workers.
-self.MonacoEnvironment = {
-  getWorkerUrl: function (moduleId, label) {
-    if (label === 'json') {
-      return './json.worker.bundle.js';
-    }
-    if (label === 'css' || label === 'scss' || label === 'less') {
-      return './css.worker.bundle.js';
-    }
-    if (label === 'html' || label === 'handlebars' || label === 'razor') {
-      return './html.worker.bundle.js';
-    }
-    if (label === 'typescript' || label === 'javascript') {
-      return './ts.worker.bundle.js';
-    }
-    return './editor.worker.bundle.js';
-  }
-}
 
 const HtmlTooltip = withStyles((theme) => ({
   tooltip: {
@@ -89,23 +64,19 @@ class Source extends React.Component {
       valid: isValid(source),
       isOpen: true,
     };
+    this.editorRef = React.createRef();
+  } 
+
+  handleEditorDidMount = (_, editor) =>{
+    this.editorRef.current = editor;
+    // Now you can use the instance of monaco editor
+    // in this component whenever you want
+    this.listenEditorChanges();
   }
 
-  componentDidMount() {
-    const jsonCode = [
-      JSON.stringify(this.props.source, null, 2),
-    ].join('\n');
-    const modelUri = monaco.Uri.parse(`a://b/${this.props.title}.json`); // a made up unique URI for our model
-    const model = monaco.editor.createModel(jsonCode, 'json', modelUri);
-
-    // configure the JSON language support with schemas and schema associations
-    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-      validate: true,
-      schemas: [this.props.schema],
-    });
-    // eslint-disable-next-line no-undef
-    monaco.editor.create(document.getElementById(this.props.title), {
-      model,
+  listenEditorChanges = () => {
+    this.editorRef.current.onDidChangeModelContent(ev => {
+      this.onBeforeChange(this.editorRef.current.getValue());
     });
   }
 
@@ -115,19 +86,36 @@ class Source extends React.Component {
       source,
       valid: isValid(source),
     });
+
+    monaco.init()
+    .then((realMonaco) => {
+      realMonaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+        noSemanticValidation: true,
+        noSyntaxValidation: true,
+      });
+      realMonaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+        validate: true,
+        schemas: [{
+          uri: `http://myserver/${nextProps.title}`,
+          fileMatch: ['*'],
+          schema: nextProps.schema,
+        }],
+      });
+    })
+    .catch((error) => console.error('An error occurred during initialization of Monaco: ', error));
   }
 
   onChange = (newValue) => {
     this.setState({ source: newValue });
   }
 
-  onBeforeChange = (editor, data, value) => {
+  onBeforeChange = (data) => {
     const { onChange } = this.props;
-    const parsed = isValid(editor);
+    const parsed = isValid(data);
 
     this.setState({
       valid: parsed,
-      source: editor,
+      source: data,
     });
     if (parsed && onChange) {
       onChange(parsed);
@@ -136,7 +124,7 @@ class Source extends React.Component {
 
   render() {
     const { source, valid, isOpen } = this.state;
-    const { classes, title, hasSchemaError } = this.props;
+    const { classes, title, hasSchemaError, schema } = this.props;
     const getInValidIcon = hasSchemaError ? WarningRoundedIcon : Invalid;
     const Icon = valid && !hasSchemaError ? Valid : getInValidIcon;
     return (
@@ -200,27 +188,20 @@ class Source extends React.Component {
             style={{
               display: isOpen ? 'block' : 'none',
             }}
-          >
-            {/* <AceEditor
-              mode='json'
-              theme='textmate'
+          > 
+            <Editor
+              height={400}
+              language={title === 'uiSchema.json' ? 'typescript' : 'json'}
               value={source}
-              onChange={this.onBeforeChange}
-              name='ace_editor_1'
-              editorProps={{ $blockScrolling: true }}
-              showPrintMargin
-              showGutter
-              highlightActiveLine
-              width={'100%'}
-              setOptions={{
-                enableBasicAutocompletion: true,
-                enableLiveAutocompletion: true,
-                enableSnippets: true,
-                showLineNumbers: true,
-                tabSize: 2,
+              options={{
+                language: 'json',
+                readOnly: false,
+                minimap: {
+                  enabled: false,
+                },
               }}
-            /> */}
-            <div id={title} style={{ height: '100vh' }} />
+              editorDidMount={this.handleEditorDidMount}
+            />
           </div>
         </div>
       </div>
