@@ -7,7 +7,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const babelLoader = {
   test: /\.(ts|js|jsx|tsx)$/,
@@ -15,6 +14,7 @@ const babelLoader = {
   loader: 'babel-loader',
   options: {
     compact: true,
+    sourceType: 'unambiguous',
     presets: [
       [
         '@babel/preset-env',
@@ -84,11 +84,35 @@ var config = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'demo.js',
+    filename: '[name].js',
     publicPath: '/',
   },
   optimization: {
     minimize: true,
+    moduleIds: 'named',
+    chunkIds: 'named',
+    splitChunks: {
+      chunks: 'async',
+      minSize: 20000,
+      minRemainingSize: 0,
+      maxSize: 120000,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
   },
   devtool: 'inline-source-map',
   module: {
@@ -99,7 +123,7 @@ var config = {
           cssLoaderClient,
           {
             test: /\.(gif|png|jpe?g|svg|css)$/i,
-            loaders: [
+            use: [
               {
                 loader: 'url-loader',
                 options: {
@@ -126,16 +150,19 @@ var config = {
     extensions: ['.js', '.jsx'],
     alias,
     modules: ['node_modules'],
+    fallback: {
+      url: require.resolve('url-shim'),
+    },
   },
   mode: process.env.NODE_ENV,
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
+      'process.env.NODE_DEBUG': JSON.stringify('debug'),
     }),
     new HtmlWebpackPlugin({
       template: 'src/demo/index.html',
     }),
-    new webpack.NamedModulesPlugin(),
     new MiniCssExtractPlugin({
       filename: 'style.css',
       chunkFilename: 'main.css',

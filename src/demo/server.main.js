@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== 'production') {
   const webpackConfig = require('../../webpack.config.demo');
   const webpackCompiler = webpack(webpackConfig);
   const webpackDevOptions = {
-    noInfo: true, publicPath: webpackConfig.output.publicPath,
+    publicPath: webpackConfig.output.publicPath,
   };
   app.use(require('webpack-dev-middleware')(webpackCompiler, webpackDevOptions));
   app.use(require('webpack-hot-middleware')(webpackCompiler));

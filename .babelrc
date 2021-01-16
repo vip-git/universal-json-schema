@@ -14,7 +14,8 @@
         },
         "useBuiltIns": "usage",
         "modules": false,
-        "corejs" : "3"
+        "corejs" : "3",
+        "sourceType": "unambiguous",
     }],
     "@babel/preset-react"
   ],
