@@ -23,6 +23,7 @@ import updateFormData, {
   updateKeyFromSpec,
   setUISchemaData,
 } from './helpers/update-form-data';
+import isFormInValid from './helpers/validation/is-form-validated';
 import transformSchema from './helpers/transform-schema';
 import getValidationResult from './helpers/validation';
 import FormButtons from './FormButtons';
@@ -58,9 +59,8 @@ const checkSchemaErrors = (givenSchema, givenData, onError) => {
     validate(givenData);
     if (validate.errors && onError && typeof onError === 'function') {
       onError(validate.errors);
-      return validate.errors;
     }
-    return false;
+    return validate.errors;
   }
   catch (err) {
     // console.log('err', err);
@@ -108,6 +108,9 @@ const Form = ({
   onError,
   ...rest 
 }) => {
+  const formGlobalState = {
+    disabled,
+  };
   const iniUiData = setUIData({}, Object.keys(schema.properties || {}), uiSchema, schema);
   const classes = formStyles();
   const validation = getValidationResult(schema, uiSchema, formData, validations);
@@ -205,9 +208,18 @@ const Form = ({
     }
   };
 
-  if (get(uiSchema, 'ui:page.ui:props.ui:schemaErrorChecks') 
-  || !has(uiSchema, 'ui:page.ui:props.ui:schemaErrorChecks')) {
-    formGlobalState.disabled = disabled || checkSchemaErrors(schema, data);
+  if (get(uiSchema, 'ui:page.ui:props.ui:schemaErrors') 
+  || !has(uiSchema, 'ui:page.ui:props.ui:schemaErrors')) {
+    try {
+      const transformedSchema = transformSchema(schema);
+      const validate = validator(transformedSchema, { verbose: true });
+      validate(data);
+      const externalValidations = isFormInValid(validation);
+      formGlobalState.disabled = disabled || externalValidations || validate.errors;
+    }
+    catch (err) {
+      // console.log('err', err);
+    }
   }
 
   return (

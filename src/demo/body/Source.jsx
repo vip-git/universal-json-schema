@@ -67,6 +67,25 @@ class Source extends React.Component {
     this.editorRef = React.createRef();
   } 
 
+  componentDidMount = () => {
+    monaco.init()
+    .then((realMonaco) => {
+      realMonaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+        noSemanticValidation: true,
+        noSyntaxValidation: true,
+      });
+      realMonaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+        validate: true,
+        schemas: [{
+          uri: `http://myserver/${this.props.title}`,
+          fileMatch: ['*'],
+          schema: this.props.schema,
+        }],
+      });
+    })
+    .catch((error) => console.error('An error occurred during initialization of Monaco: ', error));
+  }
+
   handleEditorDidMount = (_, editor) =>{
     this.editorRef.current = editor;
     // Now you can use the instance of monaco editor
@@ -86,23 +105,6 @@ class Source extends React.Component {
       source,
       valid: isValid(source),
     });
-
-    monaco.init()
-    .then((realMonaco) => {
-      realMonaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
-        noSemanticValidation: true,
-        noSyntaxValidation: true,
-      });
-      realMonaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-        validate: true,
-        schemas: [{
-          uri: `http://myserver/${nextProps.title}`,
-          fileMatch: ['*'],
-          schema: nextProps.schema,
-        }],
-      });
-    })
-    .catch((error) => console.error('An error occurred during initialization of Monaco: ', error));
   }
 
   onChange = (newValue) => {
