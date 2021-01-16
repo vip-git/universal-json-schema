@@ -23,6 +23,7 @@ import updateFormData, {
   updateKeyFromSpec,
   setUISchemaData,
 } from './helpers/update-form-data';
+import removeEmptyObjects from './helpers/remove-empty-values';
 import isFormInValid from './helpers/validation/is-form-validated';
 import transformSchema from './helpers/transform-schema';
 import getValidationResult from './helpers/validation';
@@ -76,12 +77,14 @@ const setData = (
   onChange,
   onError,
 ) => {
-  data = givenData;
-  uiData = givenUIData;
-  setUISchemaData(uiData, uiSchema);
+  data = removeEmptyObjects(givenData);
+  if (uiSchema) {
+    uiData = givenUIData;
+    setUISchemaData(uiData, uiSchema);
+  }
   if (typeof onChange === 'function') {
-    const schemaErrors = checkSchemaErrors(schema, givenData, onError);
-    onChange({ formData: givenData, uiData, uiSchema, schemaErrors, validSchema });
+    const schemaErrors = checkSchemaErrors(schema, data, onError);
+    onChange({ formData: data, uiData, uiSchema, schemaErrors, validSchema });
   }
 };
 
@@ -120,9 +123,11 @@ const Form = ({
 
   const onFormValuesChange = (field) => (givenValue, givenUIValue) => {
     const newFormData = updateFormData(data, field, givenValue);
-    const newUIData = givenUIValue && updateFormData(uiData, field, givenUIValue);
+    const newUIData = isEmpty(givenUIValue) 
+      ? removeValueFromSpec(uiData, field) 
+      : updateFormData(uiData, field, givenUIValue);
     setData(
-      newFormData, newUIData || uiData, 
+      newFormData, !isEqual(givenValue, givenUIValue) || isEmpty(givenUIValue) ? newUIData : uiData, 
       uiSchema, 
       schema,
       onChange,
@@ -189,8 +194,8 @@ const Form = ({
       const givenFormData = updateKeyFromSpec(data, path, givenValue);
       const givenUIData = givenUIValue && updateKeyFromSpec(uiData, path, givenUIValue);
       setData(
-        givenFormData, 
-        givenUIData || uiData, 
+        givenFormData,
+        !isEqual(givenValue, givenUIValue) ? givenUIData : uiData, 
         uiSchema, 
         schema,
         onChange,

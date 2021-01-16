@@ -45,7 +45,7 @@ const validationResult = (schema = {}, uiSchema = {}, value, customValidations, 
 };
 
 const getFieldSpec = (schema = {}, uiSchema = {}, value, customValidations, formData) => {
-  if (value === null) {
+  if (!value) {
     return [];
   }
   if (typeof value === 'number' || typeof value === 'string') {
