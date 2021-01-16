@@ -127,7 +127,8 @@ const Form = ({
       ? removeValueFromSpec(uiData, field) 
       : updateFormData(uiData, field, givenUIValue);
     setData(
-      newFormData, !isEqual(givenValue, givenUIValue) || isEmpty(givenUIValue) ? newUIData : uiData, 
+      newFormData, 
+      !isEqual(givenValue, givenUIValue) || isEmpty(givenUIValue) ? newUIData : uiData, 
       uiSchema, 
       schema,
       onChange,
@@ -204,11 +205,14 @@ const Form = ({
     }
   };
 
-  const onFormSubmit = (callback) => onSubmit({ formData: data, uiData, uiSchema }, () => callback && callback());
+  const onFormSubmit = (callback) => onSubmit(
+    { formData, uiData, uiSchema, validation }, 
+    () => callback && callback(),
+  );
 
   const handleKeyEnter = (e) => {
     if (e.keyCode === 13 && submitOnEnter) {
-      onSubmit();
+      onFormSubmit();
       // put the login here
     }
   };
@@ -234,7 +238,7 @@ const Form = ({
           (actionButtonPos === 'top') 
             ? (
                 <FormButtons 
-                  onSubmit={(callback) => onSubmit(callback)}
+                  onSubmit={(callback) => onFormSubmit(callback)}
                   submitValue={submitValue} 
                   inProgressValue={inProgressValue}
                   disabled={formGlobalState.disabled} 
@@ -277,7 +281,7 @@ const Form = ({
           (!actionButtonPos) 
             ? (
                 <FormButtons
-                  onSubmit={(callback) => onSubmit(callback)}
+                  onSubmit={(callback) => onFormSubmit(callback)}
                   disabled={formGlobalState.disabled}
                   submitValue={submitValue}
                   cancelValue={cancelValue} 
