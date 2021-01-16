@@ -1,5 +1,29 @@
 // Library
+import { has } from 'lodash';
 import each from 'lodash/each';
+
+const transformEnums = (enums) => {
+  const enumVals = [];
+  const enumTitles = [];
+  each(
+    enums.filter((e) => !e.disabled),
+    (enumVal) => {
+      if (enumVal.key) {
+        enumVals.push(enumVal.key);
+        enumTitles.push(enumVal.key);
+      }
+      else {
+        enumVals.push(enumVal);
+        enumTitles.push(enumVal);
+      }
+    },
+  );
+
+  return {
+    enumVals,
+    enumTitles,
+  };
+};
 
 const transformSchema = (schema) => {
   const transformedSchema = JSON.parse(JSON.stringify(schema));
@@ -12,18 +36,14 @@ const transformSchema = (schema) => {
           transformedSchema.properties[propKey].type = 'string';
         }
         if (propVal.enum) {
-          transformedSchema.properties[propKey].enum = [];
-          transformedSchema.properties[propKey].enum_titles = [];
-          each(propVal.enum, (enumVal) => {
-            if (enumVal.key) {
-              transformedSchema.properties[propKey].enum.push(enumVal.key);
-              transformedSchema.properties[propKey].enum_titles.push(enumVal.key);
-            }
-            else {
-              transformedSchema.properties[propKey].enum.push(enumVal);
-              transformedSchema.properties[propKey].enum_titles.push(enumVal);
-            }
-          });
+          const { enumVals, enumTitles } = transformEnums(propVal.enum);
+          transformedSchema.properties[propKey].enum = enumVals;
+          transformedSchema.properties[propKey].enum_titles = enumTitles;
+        }
+        else if (has(propVal, 'items.enum')) {
+          const { enumVals, enumTitles } = transformEnums(propVal.items.enum);
+          transformedSchema.properties[propKey].items.enum = enumVals;
+          transformedSchema.properties[propKey].items.enum_titles = enumTitles;
         }
       });
     }
