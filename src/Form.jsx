@@ -108,9 +108,6 @@ const Form = ({
   onError,
   ...rest 
 }) => {
-  const formGlobalState = {
-    disabled,
-  };
   const iniUiData = setUIData({}, Object.keys(schema.properties || {}), uiSchema, schema);
   const classes = formStyles();
   const validation = getValidationResult(schema, uiSchema, formData, validations);
