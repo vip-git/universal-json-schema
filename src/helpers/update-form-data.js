@@ -2,8 +2,6 @@ import update from 'immutability-helper';
 import { has, get, each, set } from 'lodash';
 import size from 'lodash/size';
 
-import { isEmptyValues } from './remove-empty-values';
-
 const arrRegex = /^([^.]+)\[([0-9]+)\](\.(.*))?/;
 const dotRegex = /^([^[]+)\.(.*$)/;
 const applyAtPath = (path, data, spec) => {
@@ -42,10 +40,11 @@ const moveItemSpec = (idx, direction) => (value) => ({
 
 export default (givenData, path, value) => {
   const data = { ...givenData };
-  if (isEmptyValues(data)) {
-    return data;
-  } 
   const matchPath = path.replace(/\[(.*?)\]/g, '');
+  const arrMatch = path.match(arrRegex);
+  if (!has(data, matchPath) && arrMatch) {
+    return data;
+  }
   if (
     matchPath
     && matchPath.includes('.')

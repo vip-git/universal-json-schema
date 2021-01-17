@@ -23,7 +23,7 @@ import updateFormData, {
   updateKeyFromSpec,
   setUISchemaData,
 } from './helpers/update-form-data';
-import removeEmptyObjects from './helpers/remove-empty-values';
+import removeEmptyObjects, { isEmptyValues } from './helpers/remove-empty-values';
 import isFormInValid from './helpers/validation/is-form-validated';
 import transformSchema from './helpers/transform-schema';
 import getValidationResult from './helpers/validation';
@@ -123,12 +123,12 @@ const Form = ({
 
   const onFormValuesChange = (field) => (givenValue, givenUIValue, forceDeleteUIData = false) => {
     const newFormData = updateFormData(data, field, givenValue);
-    const newUIData = isEmpty(givenUIValue) || forceDeleteUIData
+    const newUIData = isEmptyValues(givenUIValue) || forceDeleteUIData
       ? removeValueFromSpec(uiData, field) 
       : updateFormData(uiData, field, givenUIValue);
     setData(
       newFormData, 
-      !isEqual(givenValue, givenUIValue) || isEmpty(givenUIValue) || forceDeleteUIData ? newUIData : uiData, 
+      !isEqual(givenValue, givenUIValue) || isEmptyValues(givenUIValue) || forceDeleteUIData ? newUIData : uiData, 
       uiSchema, 
       schema,
       onChange,
@@ -191,7 +191,7 @@ const Form = ({
   );
 
   const onUpdateKeyProperty = (path) => (givenValue, givenUIValue) => {
-    if (!isEqual(path, givenValue) && !isEmpty(givenValue)) {
+    if (!isEqual(path, givenValue) && !isEmptyValues(givenValue)) {
       const givenFormData = updateKeyFromSpec(data, path, givenValue);
       const givenUIData = givenUIValue && updateKeyFromSpec(uiData, path, givenUIValue);
       setData(

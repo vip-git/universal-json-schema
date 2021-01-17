@@ -34,6 +34,9 @@ const FormComponent = ({
 			onUpload={onUpload}
       onChange={onFormChanged}
       onError={onError}
+      interceptors={{
+        translateRatings: (givenData, uiData) => ({ givenData, uiData }),
+      }}
 			components={{
 			  customComponent: ({ onChange, ...rest }) => (
 					<CustomComponent onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
