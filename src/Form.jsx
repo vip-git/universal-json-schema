@@ -77,7 +77,7 @@ const setData = (
   onChange,
   onError,
 ) => {
-  data = removeEmptyObjects(givenData);
+  data = typeof givenData === 'string' ? givenData : removeEmptyObjects(givenData);
   if (uiSchema) {
     uiData = givenUIData;
     setUISchemaData(uiData, uiSchema);
