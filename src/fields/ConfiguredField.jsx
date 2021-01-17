@@ -90,6 +90,7 @@ export const RawConfiguredField = React.memo(({
   );
 }, (prevProps, nextProps) => isEqual(prevProps.data, nextProps.data) 
 							&& isEqual(prevProps.schema, nextProps.schema)
+							&& isEqual(prevProps.uiData, nextProps.uiData)
 							&& isEqual(prevProps.uiSchema, nextProps.uiSchema),
 );
 

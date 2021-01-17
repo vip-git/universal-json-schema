@@ -121,14 +121,14 @@ const Form = ({
 
   setData(formData, iniUiData);
 
-  const onFormValuesChange = (field) => (givenValue, givenUIValue) => {
+  const onFormValuesChange = (field) => (givenValue, givenUIValue, forceDeleteUIData = false) => {
     const newFormData = updateFormData(data, field, givenValue);
-    const newUIData = isEmpty(givenUIValue) 
+    const newUIData = isEmpty(givenUIValue) || forceDeleteUIData
       ? removeValueFromSpec(uiData, field) 
       : updateFormData(uiData, field, givenUIValue);
     setData(
       newFormData, 
-      !isEqual(givenValue, givenUIValue) || isEmpty(givenUIValue) ? newUIData : uiData, 
+      !isEqual(givenValue, givenUIValue) || isEmpty(givenUIValue) || forceDeleteUIData ? newUIData : uiData, 
       uiSchema, 
       schema,
       onChange,

@@ -61,7 +61,7 @@
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/material-picker": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "type": "string",
             "isEnum": false,
             "name": "material-picker"

@@ -78,7 +78,7 @@ export default ({ path, label, title, value, options = {}, htmlid, type, onChang
                 style={{ flexBasis: '100%' }}
                 placeholder={placeholder}
                 label={label}
-                value={(!value) ? null : value}
+                value={(value === undefined) ? null : value}
                 maxDate={'2200-01-01'}
                 animateYearScrolling={false}
                 {...pickerProps({ onChange })}

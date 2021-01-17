@@ -1,6 +1,11 @@
+/* eslint-disable no-underscore-dangle */
 const onChangeHandler = (onChange) => (val) => {
   const value = val && val.format && val.format();
-  if (value !== 'undefined') onChange(value === 'Invalid date' ? val : value);
+  onChange(
+    value === 'Invalid date' ? '' : value,
+    value === 'Invalid date' ? val._i : value,
+    value !== 'Invalid date',
+  );
 };
 
 export default ({ onChange }) => ({
