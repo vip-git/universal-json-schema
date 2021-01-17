@@ -14,7 +14,7 @@ import ActiveComp from '@material-ui/icons/FiberManualRecord';
 import fieldStyles from './field-styles';
 
 // for unit testing only
-export const RawConfiguredField = React.memo(({
+export const RawConfiguredField = ({
   data,
   type,
   descriptionText,
@@ -88,10 +88,5 @@ export const RawConfiguredField = React.memo(({
 		)}
 	</FormRoot>
   );
-}, (prevProps, nextProps) => isEqual(prevProps.data, nextProps.data) 
-							&& isEqual(prevProps.schema, nextProps.schema)
-							&& isEqual(prevProps.uiData, nextProps.uiData)
-							&& isEqual(prevProps.uiSchema, nextProps.uiSchema),
-);
-
+};
 export default RawConfiguredField;
