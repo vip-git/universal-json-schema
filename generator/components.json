@@ -12,7 +12,7 @@
     },
     "interceptors": {
         "@react-jsonschema-form-interceptors/translate-ratings": {
-            "version": "1.0.0",
+            "version": "1.0.1",
             "name": "translate-ratings"
         },
         "@react-jsonschema-form-interceptors/translate-currency": {

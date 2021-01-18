@@ -80,7 +80,7 @@ export default ({
         });
         return isCustomComponent({ onChange }).props.onChange(formData, uiData);
       }
-      return isCustomComponent({ onChange }).props.onChange(value);
+      return isCustomComponent({ onChange }).props.onChange(value, uiValue);
     };
   }
   else if (options.disabled) {
