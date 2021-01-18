@@ -11,7 +11,7 @@ const transformEnums = (enums) => {
   each(
     enums.filter((e) => !e.disabled),
     (enumVal) => {
-      if (enumVal.key) {
+      if (enumVal.key || typeof enumVal.key === 'boolean') {
         enumVals.push(enumVal.key);
         enumTitles.push(enumVal.key);
       }
