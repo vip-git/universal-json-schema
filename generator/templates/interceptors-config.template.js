@@ -1,9 +1,9 @@
 const interceptorConfigTemplate = `/* eslint-disable global-require */
 export const INTERCEPTOR_CONFIG = {
    <% Object.values(interceptors).forEach((interceptor) => { %>
-   <%= interceptor.name.toUpperCase().replace(/-/g, '_') %>: {
+   '<%= interceptor.name.toLowerCase() %>': {
      name: '<%= interceptor.name %>',
-     interceptor: require('./<%= interceptor.name %>'),
+     interceptor: require('./<%= interceptor.name %>').default,
    },
    <% }); %>
 };

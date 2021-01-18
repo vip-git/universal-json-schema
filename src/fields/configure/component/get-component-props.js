@@ -1,3 +1,6 @@
+// empty
+import isEmpty from 'lodash/isEmpty';
+
 // Context
 import { EventContext } from '../../../Form';
 
@@ -28,18 +31,21 @@ export default ({
       ...options,
     }
     : {
-      onChange: (event, value) => {
+      onChange: (value, uiValue) => {
         // Call Interceptor if it exists
-        if (typeof interceptors[interceptorFunc] === 'function') {
-          console.log('interceptors normal about to be called', interceptors);
+        if (
+          typeof interceptors[interceptorFunc] === 'function'
+          && !isEmpty(interceptorFunc)
+        ) {
           const { formData, uiData } = interceptors[interceptorFunc]({
             value,
+            uiValue,
             options,
           });
 
-          return onChange(event, formData, uiData);
+          return onChange(formData, uiData);
         } 
-        return onChange(event, value);
+        return onChange(value, uiValue);
       },
       onKeyDown,
       uiSchema,
@@ -62,10 +68,20 @@ export default ({
     && isCustomComponent({ onChange }).props
     && isCustomComponent({ onChange }).props.onChange
   ) {
-    rv.onChange = (event, value) => {
+    rv.onChange = (value, uiValue) => {
       // Call Interceptor if it exists
-      console.log('interceptors custom about to be called', interceptors);
-      return isCustomComponent({ onChange }).props.onChange(event, value);
+      if (
+        typeof interceptors[interceptorFunc] === 'function' &&
+        !isEmpty(interceptorFunc)
+      ) {
+        const { formData, uiData } = interceptors[interceptorFunc]({
+          value,
+          uiValue,
+          options,
+        });
+        return isCustomComponent({ onChange }).props.onChange(formData, uiData);
+      }
+      return isCustomComponent({ onChange }).props.onChange(value);
     };
   }
   else if (options.disabled) {

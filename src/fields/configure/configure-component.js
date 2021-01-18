@@ -3,6 +3,9 @@ import getLabelComponentProps from './label/get-label-component-props';
 import getLabelComponent from './label/get-label-component';
 import getComponent from './component/get-component';
 
+// Interceptors
+const { INTERCEPTOR_CONFIG } = require('../../generated/interceptors');
+
 const getClassName = ({ uiSchema = {} }) => {
   const widget = uiSchema['ui:widget'];
   return widget === 'textarea' ? 'textarea' : null;
@@ -27,6 +30,18 @@ export default (props) => {
     // eslint-disable-next-line no-param-reassign
     props.isCustomComponent = isCustomComponent;
   }
+
+  Object.keys(INTERCEPTOR_CONFIG).forEach((ic) => {
+    // eslint-disable-next-line no-param-reassign
+    props.interceptors = props.interceptors
+      ? {
+        [ic]: INTERCEPTOR_CONFIG[ic].interceptor,
+        ...props.interceptors,
+      }
+      : {
+        [ic]: INTERCEPTOR_CONFIG[ic].interceptor,
+      };
+  });
 
   const isValidTitle = typeof title === 'string';
 

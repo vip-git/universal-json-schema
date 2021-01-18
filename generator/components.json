@@ -6,7 +6,7 @@
             "name": "enum-utils"
         },
         "@react-jsonschema-form-utils/parse-values": {
-            "version": "1.0.3",
+            "version": "1.0.4",
             "name": "parse-values"
         }
     },
@@ -16,7 +16,7 @@
             "name": "translate-ratings"
         },
         "@react-jsonschema-form-interceptors/translate-currency": {
-            "version": "1.0.0",
+            "version": "1.0.1",
             "name": "translate-currency"
         }
     },

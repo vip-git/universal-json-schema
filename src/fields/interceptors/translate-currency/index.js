@@ -14,9 +14,9 @@ const translateCurrency = ({
   value,
   options,
 }) => {
-  const formData = Number(parseCurrencyValue(value, options.useLocaleString));
+  const formData = Number(value);
   const uiData = Number(
-    parseCurrencyValue(value, options.useLocaleString),
+    parseCurrencyValue(String(value), options.useLocaleString),
   ).toLocaleString(options.useLocaleString);
   return {
     formData,

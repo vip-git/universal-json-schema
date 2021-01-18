@@ -15,6 +15,7 @@
 		"ui:placeholder": "Example Placeholder"
 	},
 	"currency": {
+		"ui:interceptor": "translate-currency",
 		"ui:options": {
 			"useLocaleString": "nl"
 		}
@@ -65,6 +66,7 @@
 	},
 	"customRating": {
 		"ui:component": "customRating",
+		"ui:interceptor": "translate-ratings",
 		"ui:options": {
 			"color": "red"
 		}
