@@ -49,6 +49,8 @@ shelljs.rm('-rf', `${generatorLocation}/node_modules`);
 shelljs.rm('-rf', `${generatorLocation}/package-lock.json`);
 shelljs.rm('-rf', `${generatorLocation}/package.json`);
 
+shelljs.mkdir(generatedLocation);
+
 console.log('generating app config file');
 
 shellFileString.to(`${generatedLocation}/app.config.js`);

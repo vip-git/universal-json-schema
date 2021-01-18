@@ -1,4 +1,5 @@
 ### 3.0.0 [Breaking Changes]
+- Build system now upgraded to webpack 5
 - React select values are no stringify results but real values.
 - New Tabs UI
 - Additional Properties and Additional Items feature enabled
