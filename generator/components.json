@@ -10,6 +10,16 @@
             "name": "parse-values"
         }
     },
+    "interceptors": {
+        "@react-jsonschema-form-interceptors/translate-ratings": {
+            "version": "1.0.0",
+            "name": "translate-ratings"
+        },
+        "@react-jsonschema-form-interceptors/translate-currency": {
+            "version": "1.0.0",
+            "name": "translate-currency"
+        }
+    },
 	"components": {
         "@react-jsonschema-form-components/material-radio-group": {
             "version": "1.0.9",

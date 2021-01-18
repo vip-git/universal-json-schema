@@ -109,6 +109,7 @@ const Form = ({
   cancelVariant,
   submitVariant,
   onError,
+  interceptors,
   ...rest 
 }) => {
   const formGlobalState = {
@@ -262,6 +263,7 @@ const Form = ({
               schema={schema}
               uiSchema={uiSchema}
               definitions={schema.definitions}
+              interceptors={interceptors}
               id={id}
               onChange={onFormValuesChange}
               onSubmit={onFormSubmit}

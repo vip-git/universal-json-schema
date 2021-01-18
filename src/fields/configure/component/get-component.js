@@ -17,7 +17,7 @@ const {
   ENUM_COMPONENTS,
   V2_PICKER_COMPONENT,
   COMMON_COMPONENTS,
-} = require('../../../generated/app.config');
+} = require('../../../generated/components');
 
 // Generated UTILS
 const {

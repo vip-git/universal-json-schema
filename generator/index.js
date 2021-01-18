@@ -25,23 +25,26 @@ const shelljs = require('shelljs');
 
 const componentSettings = require('./components.json');
 
+// Config
+const CONFIG = require('./config');
+
+// Utils
+const moduleGenerator = require('./modules-generator');
+
+// Templates
 const templateFile = require('./templates/app-config.template.js');
-const templateUtilFile = require('./templates/utils-config.template.js');
 
 const template = ejs.compile(templateFile, {});
-const finalString = template({ ...componentSettings });
+const finalString = template({ ...CONFIG });
 const shellFileString = new shelljs.ShellString(finalString);
-
-const templateUtil = ejs.compile(templateUtilFile, {});
-const finalUtilString = templateUtil({ ...componentSettings });
-const shellUtilFileString = new shelljs.ShellString(finalUtilString);
 
 // Folder Variables
 const generatedLocation = `${shelljs.pwd()}/src/generated`;
 const generatorLocation = `${shelljs.pwd()}/generator`;
 
-shelljs.rm('-rf', `${generatedLocation}/components`);
-shelljs.rm('-rf', `${generatedLocation}/utils`);
+CONFIG.modules.forEach((md) => {
+  shelljs.rm('-rf', `${generatedLocation}/${md}`);
+});
 shelljs.rm('-rf', `${generatorLocation}/node_modules`);
 shelljs.rm('-rf', `${generatorLocation}/package-lock.json`);
 shelljs.rm('-rf', `${generatorLocation}/package.json`);
@@ -52,40 +55,16 @@ shellFileString.to(`${generatedLocation}/app.config.js`);
 
 console.log('app config file generated');
 
-console.log('Downloading component dependencies');
-
 shelljs.cd(generatorLocation);
 shelljs.exec('npm init --yes');
-Object.keys(componentSettings.components)
-  .filter((c) => !componentSettings.components[c].notAvailable)
-  .forEach((compName) => {
-    shelljs.exec(
-      `npm install ${compName}@${componentSettings.components[compName].version} --save-exact`,
-    );
-  });
-shelljs.cp(
-  '-R',
-  'node_modules/@react-jsonschema-form-components/',
-  `${generatedLocation}/components`,
-);
 
-console.log('Components downloaded successfully');
-
-console.log('Downloading utils dependencies');
-
-Object.keys(componentSettings.utils)
-  .filter((c) => !componentSettings.utils[c].notAvailable)
-  .forEach((utilName) => {
-    shelljs.exec(
-      `npm install ${utilName}@${componentSettings.utils[utilName].version} --save-exact`,
-    );
-  });
-shelljs.cp(
-  '-R',
-  'node_modules/@react-jsonschema-form-utils/',
-  `${generatedLocation}/utils`,
-);
-
-shellUtilFileString.to(`${generatedLocation}/utils/index.js`);
-
-console.log('Utils downloaded successfully');
+CONFIG.modules.forEach((md) => {
+  // Generate Module
+  moduleGenerator(
+    md,
+    componentSettings,
+    generatedLocation,
+    shelljs,
+    ejs,
+  );
+});
