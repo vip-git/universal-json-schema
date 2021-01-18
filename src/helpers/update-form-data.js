@@ -42,7 +42,7 @@ export default (givenData, path, value) => {
   const data = { ...givenData };
   const matchPath = path.replace(/\[(.*?)\]/g, '');
   const arrMatch = path.match(arrRegex);
-  if (!has(data, matchPath) && arrMatch) {
+  if (!has(data, path) && arrMatch) {
     return data;
   }
   if (
