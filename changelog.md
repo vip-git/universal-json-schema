@@ -10,3 +10,4 @@
 - new Prop onError to get errors available in form on every change
 - new Prop uiData to control ui only data to add seperation of concern with form data
 - Demo updated with vscode editor and live validation changes
+- New interceptors to transform form and uiData using uiSchema - `ui:interceptor`
