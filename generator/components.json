@@ -16,7 +16,7 @@
             "name": "translate-ratings"
         },
         "@react-jsonschema-form-interceptors/translate-currency": {
-            "version": "1.0.1",
+            "version": "1.0.3",
             "name": "translate-currency"
         }
     },
@@ -89,7 +89,7 @@
             "name": "rich-text-editor"
         },
         "@react-jsonschema-form-components/material-input": {
-            "version": "1.0.5",
+            "version": "1.0.7",
             "type": "string",
             "isEnum": false,
             "isDefault": true,

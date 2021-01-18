@@ -1,3 +1,8 @@
+// Library
+import isEmpty from 'lodash/isEmpty';
+
+const isEmptyValues = (value) => isEmpty(value) && typeof value !== 'number' && typeof value !== 'boolean';
+
 const parseCurrencyValue = (value, useLocaleString) => {
   let n = 1.1;
   n = n.toLocaleString(useLocaleString).substring(1, 2);
@@ -10,11 +15,16 @@ const parseCurrencyValue = (value, useLocaleString) => {
       .replace(/,/g, '.');
 };
 
-const translateCurrency = ({
-  value,
-  options,
-}) => {
-  const formData = Number(value);
+const translateCurrency = ({ value, options }) => {
+  if (isEmptyValues(value)) {
+    return {
+      formData: '',
+      uiData: '',
+    };
+  }
+  const formData = Number(
+    parseCurrencyValue(String(value), options.useLocaleString),
+  );
   const uiData = Number(
     parseCurrencyValue(String(value), options.useLocaleString),
   ).toLocaleString(options.useLocaleString);

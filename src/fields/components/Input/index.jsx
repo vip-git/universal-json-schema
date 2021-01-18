@@ -16,7 +16,7 @@ export default ({
 }) => (
     <Input 
         htmlid={htmlid} 
-        value={value || ''} 
+        value={value === null ? '' : value} 
         {...inputProps({ onChange, onBlur, type, options, uiSchema })} 
     />
 );

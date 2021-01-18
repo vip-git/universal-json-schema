@@ -42,7 +42,6 @@ export default ({
             uiValue,
             options,
           });
-
           return onChange(formData, uiData);
         } 
         return onChange(value, uiValue);
