@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-tabs */
 /* eslint-disable no-mixed-spaces-and-tabs */
@@ -64,6 +65,7 @@ const SourceSchema = ({
   formData,
   onChange,
   hasSchemaError,
+  showStuff,
 }) => (
     <div className={classes.sourceCtr}>
       <div>
@@ -71,7 +73,7 @@ const SourceSchema = ({
       </div>
       <div>
         <Source title={'uiSchema.json'} source={uiSchema} onChange={onChange('uiSchema')} />
-        <Source title={'formData.json'} hasSchemaError={hasSchemaError} schema={validSchema} source={formData} onChange={onChange('formData')} />
+        <Source title={'formData.json'} schema={validSchema} hasSchemaError={hasSchemaError} source={formData} onChange={onChange('formData')} />
       </div>
     </div>
 );
@@ -127,6 +129,20 @@ class Example extends React.Component {
   render() {
     const { data: { title }, classes } = this.props;
     const { schema, uiSchema, formData, uiData, schemaErrors, validSchema } = this.state;
+    const editorSchema = [{
+      uri: 'http://json-schema.org/draft-07/schema',
+      fileMatch: ['JSONSchema.json'],
+      schema: undefined,
+    },
+    {
+      uri: 'http://json-schema.org/draft-07/schema',
+      fileMatch: ['uiSchema.json'],
+      schema: undefined,
+    },{
+      uri: `${window.location.origin}/schema/simple/schema.json`,
+      fileMatch: ['formData.json'],
+      schema: validSchema,
+    }]
     return (
       <Paper className={classes.root}>
         <h3>{title}</h3>
@@ -134,7 +150,7 @@ class Example extends React.Component {
           <SourceSchema 
             classes={classes}
             schema={schema}
-            validSchema={validSchema}
+            validSchema={editorSchema}
             uiSchema={uiSchema}
             formData={formData}
             hasSchemaError={schemaErrors}

@@ -69,18 +69,16 @@ class Source extends React.Component {
 
   componentDidUpdate = () => {
     const nextProps = this.props;
-    loader.init()
-    .then((realMonaco) => {
-      realMonaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-        validate: true,
-        schemas: [{
-          uri: nextProps.title === 'JSONSchema.json' ? 'http://json-schema.org/draft-07/schema#' : `${window.location.origin}/schema/simple/schema.json`,
-          fileMatch: [nextProps.title],
-          schema: nextProps.schema || {},
-        }],
-      });
-    })
-    .catch((error) => console.error('An error occurred during initialization of Monaco: ', error));
+    if (nextProps.schema) {
+      loader.init()
+        .then((realMonaco) => {
+          realMonaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+            validate: true,
+            schemas: nextProps.schema,
+          });
+        })
+        .catch((error) => console.error('An error occurred during initialization of Monaco: ', error));
+    }
   }
 
   handleEditorDidMount = (editor) => {
@@ -91,7 +89,7 @@ class Source extends React.Component {
   }
 
   listenEditorChanges = () => {
-    this.editorRef.current.onDidChangeModelContent(ev => {
+    this.editorRef.current.onDidChangeModelContent((ev) => {
       this.onBeforeChange(this.editorRef.current.getValue());
     });
   }
