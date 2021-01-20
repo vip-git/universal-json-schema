@@ -10,7 +10,7 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import classNames from 'classnames';
-import Editor, { monaco } from '@monaco-editor/react';
+import Editor, { loader } from '@monaco-editor/react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import Valid from '@material-ui/icons/CheckCircle';
@@ -67,26 +67,23 @@ class Source extends React.Component {
     this.editorRef = React.createRef();
   } 
 
-  componentDidMount = () => {
-    monaco.init()
+  componentDidUpdate = () => {
+    const nextProps = this.props;
+    loader.init()
     .then((realMonaco) => {
-      realMonaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
-        noSemanticValidation: true,
-        noSyntaxValidation: true,
-      });
       realMonaco.languages.json.jsonDefaults.setDiagnosticsOptions({
         validate: true,
         schemas: [{
-          uri: `http://myserver/${this.props.title}`,
-          fileMatch: ['*'],
-          schema: this.props.schema,
+          uri: nextProps.title === 'JSONSchema.json' ? 'http://json-schema.org/draft-07/schema#' : `${window.location.origin}/schema/simple/schema.json`,
+          fileMatch: [nextProps.title],
+          schema: nextProps.schema || {},
         }],
       });
     })
     .catch((error) => console.error('An error occurred during initialization of Monaco: ', error));
   }
 
-  handleEditorDidMount = (_, editor) =>{
+  handleEditorDidMount = (editor) => {
     this.editorRef.current = editor;
     // Now you can use the instance of monaco editor
     // in this component whenever you want
@@ -193,7 +190,7 @@ class Source extends React.Component {
           > 
             <Editor
               height={400}
-              language={title === 'uiSchema.json' ? 'typescript' : 'json'}
+              language={'json'}
               value={source}
               options={{
                 language: 'json',
@@ -202,7 +199,8 @@ class Source extends React.Component {
                   enabled: false,
                 },
               }}
-              editorDidMount={this.handleEditorDidMount}
+              path={title}
+              onMount={this.handleEditorDidMount}
             />
           </div>
         </div>

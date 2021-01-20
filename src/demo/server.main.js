@@ -22,6 +22,8 @@ if (process.env.NODE_ENV !== 'production') {
 const publicPath = path.join(__dirname, '../../dist');
 app.use(express.static(publicPath));
 
+app.use('/schema', express.static(path.join(__dirname, 'examples')));
+
 // ping for load balancer checking health
 app.get('/ping', (req, res) => res.status(200).send());
 
