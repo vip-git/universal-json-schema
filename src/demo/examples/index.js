@@ -1,3 +1,4 @@
+// Current Version
 import simple from './simple';
 import nested from './nested';
 import single from './single';
@@ -13,19 +14,35 @@ import refrences from './refrences';
 import alternatives from './alternatives';
 import schemaDeps from './schema-dependencies';
 
+// Version 2
+import simpleV2 from './simple/version-2';
+
 export default {
-  simple,
-  single,
-  nested,
-  numbers,
-  arrays,
-  tabsUI,
-  validation,
-  budget,
-  multipleChoice,
-  radioChoice,
-  additionalProps,
-  refrences,
-  alternatives,
-  schemaDeps,
+  3: {
+    simple,
+    single,
+    nested,
+    numbers,
+    arrays,
+    tabsUI,
+    validation,
+    budget,
+    multipleChoice,
+    radioChoice,
+    additionalProps,
+    refrences,
+    alternatives,
+    schemaDeps,
+  },
+  2: {
+    simple: simpleV2,
+    single,
+    nested,
+    numbers,
+    arrays,
+    validation,
+    budget,
+    multipleChoice,
+    radioChoice,
+  },
 };

@@ -1,11 +1,9 @@
 {
-  "title": "A registration form",
+  "title": "A registration form v2",
   "description": "A simple form example.",
+  "version": "2",
   "type": "object",
-  "required": [
-    "firstName",
-    "lastName"
-  ],
+  "required": ["firstName", "lastName"],
   "properties": {
     "firstName": {
       "type": "string",
@@ -73,7 +71,7 @@
       "title": "Age"
     },
     "upload": {
-      "type": "string",
+      "type": "upload",
       "title": "Please upload your file"
     },
     "creatableSelectTest": {
@@ -95,7 +93,7 @@
             "style": {
               "borderBottom": "solid 1px black"
             },
-            "value": "Yes", 
+            "value": "Yes",
             "disabled": true
           },
           "No",
@@ -109,7 +107,7 @@
       "title": "Bio"
     },
     "date": {
-      "type": "string",
+      "type": "material-date",
       "title": "Date"
     },
     "password": {

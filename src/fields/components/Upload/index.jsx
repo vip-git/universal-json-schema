@@ -13,6 +13,6 @@ export default ({
    <MaterialUploadButton 
         htmlid={htmlid} 
         {...rest}
-        {...uploadProps({ onChange, schema, widget })}
+        {...uploadProps({ onChange, schema, widget, uiSchema })}
    />
 );

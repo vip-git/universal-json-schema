@@ -71,13 +71,13 @@
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/material-picker": {
-            "version": "1.0.2",
+            "version": "1.0.3",
             "type": "string",
             "isEnum": false,
             "name": "material-picker"
         },
         "@react-jsonschema-form-components/upload": {
-            "version": "1.0.3",
+            "version": "1.0.4",
             "type": "string",
             "isEnum": false,
             "name": "upload"

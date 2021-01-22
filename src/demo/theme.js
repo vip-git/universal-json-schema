@@ -7,6 +7,7 @@ const theme = {
   palette: {
     primary: {
       main: blue[600],
+      contrastText: '#ffff',
     },
     secondary: teal,
     error: red,
@@ -15,6 +16,11 @@ const theme = {
     MuiInput: {
       root: {
         fontSize: 'inherit',
+      },
+    },
+    MuiSelect: {
+      outlined: {
+        color: '#ffff',
       },
     },
   },

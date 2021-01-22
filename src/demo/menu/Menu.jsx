@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import LeftDrawer from './LeftDrawer';
 import menuStyles from './menu-styles';
+import VersionSelect from './versionSelect';
 
 class RawMenuAppBar extends React.Component {
   state = {
@@ -19,7 +20,7 @@ class RawMenuAppBar extends React.Component {
   };
 
   render() {
-    const { classes, onSelectMenuItem } = this.props;
+    const { classes, onSelectMenuItem, setVersion } = this.props;
     const { drawerOpen } = this.state;
     return (
       // eslint-disable-next-line react/jsx-fragments
@@ -39,6 +40,7 @@ class RawMenuAppBar extends React.Component {
             <div className={classes.flexCtr}>
               <Typography color='inherit'>React JSONSchema Form (Material UI)</Typography>
             </div>
+            <VersionSelect setVersion={setVersion} />
           </Toolbar>
         </AppBar>
         <LeftDrawer open={drawerOpen} toggleDrawer={this.toggleDrawer} onSelectMenuItem={onSelectMenuItem} />

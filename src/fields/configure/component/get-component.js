@@ -49,7 +49,10 @@ export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
       return ENUM_COMPONENTS.CREATABLE_REACT_SELECT.name;
     }
 
-    if (V2_DEPRECATED_PICKERS.includes(givenType)) {
+    if (
+      V2_DEPRECATED_PICKERS.includes(givenType)
+      || V2_DEPRECATED_PICKERS.includes(widgetString)
+    ) {
       return V2_PICKER_COMPONENT.MATERIAL_PICKER.name;
     }
 

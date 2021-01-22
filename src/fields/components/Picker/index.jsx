@@ -55,12 +55,18 @@ const renderPickerComp = (type) => {
         placeholder: '__-__-___ __:__ __',
       };
     default:
-      return DatePicker;
+      return {
+        PickerComp: KeyboardDatePicker,
+        maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+        format: 'DD-MM-YYYY',
+        placeholder: '__-__-____',
+      };
   }
 };
 
-export default ({ path, label, title, value, options = {}, htmlid, type, onChange, ...rest }) => {
-  const { PickerComp, maskInput, placeholder, format } = renderPickerComp(type);
+export default ({ path, label, title, value, options = {}, htmlid, type, uiSchema = {}, onChange, ...rest }) => {
+  const pickerType = uiSchema['ui:props']?.variant || uiSchema['ui:widget'] || type;
+  const { PickerComp, maskInput, placeholder, format } = renderPickerComp(pickerType);
   return (
         <div
           id={htmlid}

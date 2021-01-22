@@ -19,6 +19,7 @@ export default ({ schema, uiSchema = {} }) => {
   const nonInputTypes = [
     'boolean',
     'upload',
+    'material-picker',
     'material-date',
     'material-time',
     'material-datetime',
@@ -47,7 +48,10 @@ export default ({ schema, uiSchema = {} }) => {
   
   if (schema && schema.type) {
     const { type } = schema;
-    if (nonInputTypes.includes(type)) {
+    if (
+      nonInputTypes.includes(type) 
+      || nonInputTypes.includes(widget)
+    ) {
       return null;
     }
   }

@@ -53,6 +53,10 @@ export const RawConfiguredField = ({
 					id={`${htmlid}-labelControl`}
 					className={descriptionText ? classes.customLabel : classes.normalLabel}
 					{...labelComponentProps}
+					style={activeCompColor ? {    
+					  left: 41,
+					  top: -8,
+					} : {}}
 				>
 					{title}
 				</LabelComponent>

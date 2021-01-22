@@ -33,14 +33,11 @@
 		"mui:className": "money"
 	},
 	"upload": {
-		"ui:widget": "upload",
-		"ui:props": {
-			"variant": "outlined",
-			"accept": "image/*",
-			"isMulti": true,
-			"buttonTitle": "Upload",
-			"icon": "add_circle"
-		}
+		"ui:widget": "outlined",
+		"ui:accept": "image/*",
+		"ui:isMulti": true,
+		"ui:buttonTitle": "Upload",
+		"ui:icon": "add_circle"
 	},
 	"bio": {
 		"ui:widget": "textarea",
@@ -59,7 +56,7 @@
 	},
 	"date": {
 		"ui:activeCompColor": "red",
-		"ui:widget": "material-date"
+		"ui:widget": "alt-datetime"
 	},
 	"creatableSelectTest": {
 		"ui:widget": "creatable-select",
