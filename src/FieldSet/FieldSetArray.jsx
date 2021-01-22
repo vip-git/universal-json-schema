@@ -67,6 +67,12 @@ export const RawFieldSetArray = (props) => {
     schema.uniqueItems = true;
   }
 
+  if (schema.items.$ref) {
+    schema.items = { 
+      ...getDefinitionSchemaFromRef(definitions, schema.items, data),
+    };
+  }
+
   return (
     <div className={classes.root}>
       {!isArray(schema.items) && !schema.uniqueItems && (

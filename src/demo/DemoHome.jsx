@@ -14,7 +14,7 @@ const hash = window.location.hash.replace('#', '');
 class Demo extends React.Component {
   constructor(props) {
     super(props);
-    const selectedHash = hash in examples ? hash : 'simple';
+    const selectedHash = hash in examples[3] ? hash : 'simple';
     this.state = {
       currentVersion: 3,
       selectedDemo: examples[3][selectedHash],
