@@ -115,12 +115,23 @@ const Form = ({
   const formGlobalState = {
     disabled,
   };
+  const [prevData, setPrevData] = React.useState(null);
   const iniUiData = setUIData({}, Object.keys(schema.properties || {}), uiSchema, schema);
   const classes = formStyles();
   const validation = getValidationResult(schema, uiSchema, formData, validations);
   const id = prefixId || generate();
 
-  setData(formData, iniUiData);
+  if (!isEqual(prevData, { formData, schema, uiSchema })) {
+    setData(
+      formData, 
+      iniUiData,
+      uiSchema, 
+      schema,
+      onChange,
+      onError,
+    );
+    setPrevData({ formData, schema, uiSchema });
+  }
 
   const onFormValuesChange = (field) => (givenValue, givenUIValue, forceDeleteUIData = false) => {
     const newFormData = updateFormData(data, field, givenValue);

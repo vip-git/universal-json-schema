@@ -1,4 +1,6 @@
-export default (theme) => ({
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+
+export default makeStyles((theme) => createStyles({
   root: {
     'position': 'relative',
     'padding': theme.spacing(1),
@@ -40,4 +42,5 @@ export default (theme) => ({
   sourceCtr: {},
   display: {},
   ctr: {},
-});
+}),
+);

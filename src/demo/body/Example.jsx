@@ -4,10 +4,11 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable max-len */
 /* eslint-disable no-mixed-operators */
-import React, { useState } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React, { useState, useEffect } from 'react';
+import { isEqual } from 'lodash';
+import { useTheme } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
-import styles from './example-styles';
+import useStyles from './example-styles';
 import Source from './Source';
 import Form from '../../Form';
 
@@ -16,6 +17,7 @@ import CustomRating from './custom-components/rating.component';
 import CustomComponent from './custom-components/range-picker.component';
 
 const FormComponent = ({
+  locationHash,
   givenSchema,
   givenUISchema,
   givenFormData,
@@ -58,6 +60,7 @@ const FormComponent = ({
 );
 
 const SourceSchema = ({
+  locationHash,
   classes,
   validSchema,
   schema,
@@ -69,109 +72,118 @@ const SourceSchema = ({
 }) => (
     <div className={classes.sourceCtr}>
       <div>
-        <Source title={'JSONSchema.json'} source={schema} onChange={onChange('schema')} />
+        <Source key={`${locationHash}Schema`} title={'JSONSchema.json'} source={schema} onChange={onChange('schema')} />
       </div>
       <div>
-        <Source title={'uiSchema.json'} source={uiSchema} onChange={onChange('uiSchema')} />
-        <Source title={'formData.json'} schema={validSchema} hasSchemaError={hasSchemaError} source={formData} onChange={onChange('formData')} />
+        <Source key={`${locationHash}UISchema`}  title={'uiSchema.json'} source={uiSchema} onChange={onChange('uiSchema')} />
+        <Source key={`${locationHash}FormData`}  title={'formData.json'} schema={validSchema} hasSchemaError={hasSchemaError} source={formData} onChange={onChange('formData')} />
       </div>
     </div>
 );
 
-class Example extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ...props.data,
-    };
+const Example = ({
+  data
+}) => {
+  const theme = useTheme();
+  const classes = useStyles(theme);
+  const [oldHash, setOldHash] = useState(window.location.hash);
+  const [state, setState] = useState({ ...data });
+  const [schemaErrors, setSchemaErrors] = useState(null);
+  const [validSchema, setValidSchema] = useState(null);
+
+  if (!isEqual(oldHash, window.location.hash)) {
+    setState(data);
+    setValidSchema(null);
+    setSchemaErrors(null);
+    setOldHash(window.location.hash);
   }
 
-  UNSAFE_componentWillReceiveProps = (nextProps) => {
-    const { data: { schema, uiSchema, formData, uiData, schemaErrors, validSchema } } = nextProps;
-    this.setState({
-      schema, 
-      uiSchema, 
-      formData,
-      uiData,
-      validSchema,
-      schemaErrors,
-    });
+  const onChange = (type) => (value) => {
+    setState({ [type]: value });
   }
 
-  onChange = (type) => (value) => {
-    this.setState({ [type]: value });
+  const onFormChanged = ({ formData, uiSchema, uiData, schemaErrors, validSchema: givenValidSchema }) => {
+    setState({ formData, uiSchema, uiData, validSchema });
+    setSchemaErrors(schemaErrors);
+    setValidSchema(givenValidSchema);
   }
 
-  onFormChanged = ({ formData, uiSchema, uiData, schemaErrors, validSchema }) => {
-    this.setState({ formData, uiSchema, uiData, schemaErrors, validSchema });
-  }
-
-  onSubmit = (value, callback) => {
+  const onSubmit = (value, callback) => {
     console.log('onSubmit: %s', JSON.stringify(value)); // eslint-disable-line no-console
     setTimeout(() => callback && callback(), 2000);
   }
 
-  onUpload = (value) => {
+  const onUpload = (value) => {
     console.log('onUpload:', value); // eslint-disable-line no-console
   }
 
-  onFormError = (error = {}) => {
+  const onFormError = (error = {}) => {
     console.log('error is', error);
   }
 
-  onCancel = () => {
-    const { data } = this.props;
-    this.setState({
+  const onCancel = () => {
+    setState({
       ...data,
     });
-  }
+  };
 
-  render() {
-    const { data: { title }, classes } = this.props;
-    const { schema, uiSchema, formData, uiData, schemaErrors, validSchema } = this.state;
-    const editorSchema = [{
-      uri: 'http://json-schema.org/draft-07/schema',
-      fileMatch: ['JSONSchema.json'],
-      schema: undefined,
-    },
-    {
-      uri: 'http://json-schema.org/draft-07/schema',
-      fileMatch: ['uiSchema.json'],
-      schema: undefined,
-    },{
-      uri: `${window.location.origin}/schema/simple/schema.json`,
-      fileMatch: ['formData.json'],
-      schema: validSchema,
-    }]
+  const { formData, uiSchema, schema, title, uiData } = state;
+
+  const hash = window.location.hash.replace('#', '');
+  const oldHashs = oldHash.replace('#', '');
+
+  if(!isEqual(oldHashs, hash)) {
     return (
-      <Paper className={classes.root}>
-        <h3>{title}</h3>
-        <div className={classes.ctr}>
-          <SourceSchema 
-            classes={classes}
-            schema={schema}
-            validSchema={editorSchema}
-            uiSchema={uiSchema}
-            formData={formData}
-            hasSchemaError={schemaErrors}
-            onChange={this.onChange}
-          />
-          <div className={classes.display}>
-            <FormComponent
-              givenSchema={schema}
-              givenUISchema={uiSchema}
-              givenFormData={formData}
-              givenUIData={uiData}
-              onCancel={this.onCancel}
-              onSubmit={this.onSubmit}
-              onUpload={this.onUpload}
-              onFormChanged={this.onFormChanged}
-              onError={this.onFormError}
-            />
-          </div>
-        </div>
-      </Paper>
+        <div> Loading... </div>
     );
   }
+
+  const editorSchema = [{
+    uri: 'http://json-schema.org/draft-07/schema',
+    fileMatch: ['JSONSchema.json'],
+    schema: undefined,
+  },
+  {
+    uri: 'http://json-schema.org/draft-07/schema',
+    fileMatch: ['uiSchema.json'],
+    schema: undefined,
+  },{
+    uri: `${window.location.origin}/schema/${hash}/schema.json`,
+    fileMatch: ['formData.json'],
+    schema: validSchema || data.schema,
+  }];
+  
+  return (
+    <Paper className={classes.root}>
+      <h3>{title}</h3>
+      <div className={classes.ctr}>
+        <SourceSchema 
+          locationHash={hash}
+          classes={classes}
+          schema={schema || data.schema}
+          validSchema={editorSchema || data.schema}
+          uiSchema={uiSchema || data.uiSchema}
+          formData={formData || data.formData}
+          hasSchemaError={schemaErrors}
+          onChange={onChange}
+        />
+        <div className={classes.display}>
+          <FormComponent
+            locationHash={hash}
+            givenSchema={schema || data.schema}
+            givenUISchema={uiSchema || data.uiSchema}
+            givenFormData={formData || data.formData}
+            givenUIData={uiData}
+            onCancel={onCancel}
+            onSubmit={onSubmit}
+            onUpload={onUpload}
+            onFormChanged={onFormChanged}
+            onError={onFormError}
+          />
+        </div>
+      </div>
+    </Paper>
+  );
 }
-export default withStyles(styles)(Example);
+
+export default Example;
