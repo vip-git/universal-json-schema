@@ -67,10 +67,15 @@ export const RawFieldSetArray = (props) => {
     schema.uniqueItems = true;
   }
 
-  if (schema?.items?.$ref) {
-    schema.items = { 
-      ...getDefinitionSchemaFromRef(definitions, schema.items, data),
-    };
+  try {
+    if (schema?.items?.$ref) {
+      schema.items = { 
+        ...getDefinitionSchemaFromRef(definitions, schema.items, data),
+      };
+    }
+  } 
+  catch (err) {
+    // console.log('err')
   }
 
   return (
