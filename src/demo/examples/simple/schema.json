@@ -65,7 +65,7 @@
     },
     "react-select": {
       "type": "string",
-      "title": "Example select",
+      "title": "Example React select",
       "enum": ["Yes", "No"]
     },
     "age": {
@@ -75,6 +75,31 @@
     "upload": {
       "type": "string",
       "title": "Please upload your file"
+    },
+    "multiSelect": {
+      "type": "array",
+      "title": "Example Multi select",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "anyOf": [
+          {
+            "type": "string",
+            "const": "#ff0000",
+            "title": "Red"
+          },
+          {
+            "type": "string",
+            "const": "#00ff00",
+            "title": "Green"
+          },
+          {
+            "type": "string",
+            "const": "#0000ff",
+            "title": "Blue"
+          }
+        ]
+      }
     },
     "creatableSelectTest": {
       "type": "array",
@@ -86,7 +111,7 @@
     },
     "selectTest": {
       "type": "array",
-      "title": "Example Multi Select",
+      "title": "Example React Multi Select",
       "items": {
         "type": "string",
         "enum": [

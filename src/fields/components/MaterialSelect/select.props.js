@@ -3,7 +3,7 @@ import { UTIL_CONFIG } from '../../utils';
 
 const {
   ENUM_UTILS: {
-    util: { valuesToOptions, isEnum },
+    util: { valuesToOptions, isEnum, getEnumTitle },
   },
   PARSE_VALUES: {
     util: { coerceValue, deepStringify },
@@ -19,5 +19,5 @@ export default ({ onChange, schema = {}, type, isMultiple }) => ({
   onChange: onChange && onChangeHandler(onChange, type, isMultiple),
   choices: valuesToOptions(isEnum(schema)),
   nullOption: 'Please select...',
-  label: schema.title || '',
+  label: getEnumTitle(schema),
 });

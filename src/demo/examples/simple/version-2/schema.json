@@ -1,7 +1,6 @@
 {
-  "title": "A registration form v2",
+  "title": "A registration form",
   "description": "A simple form example.",
-  "version": "2",
   "type": "object",
   "required": ["firstName", "lastName"],
   "properties": {
@@ -14,19 +13,9 @@
       "title": "Last name"
     },
     "customComponent": {
-      "type": "object",
+      "type": "string",
       "title": "Custom Component",
-      "component": "customComponent",
-      "properties": {
-        "startDate": {
-          "type": "string",
-          "title": "Start Date"
-        },
-        "endDate": {
-          "type": "string",
-          "title": "End Date"
-        }
-      }
+      "component": "customComponent"
     },
     "customRating": {
       "type": "integer",
@@ -35,26 +24,6 @@
     "currency": {
       "type": "number",
       "title": "Currency"
-    },
-    "default": {
-      "type": "boolean",
-      "title": "checkbox (default)",
-      "description": "This is the checkbox-description"
-    },
-    "radio": {
-      "type": "boolean",
-      "title": "radio buttons",
-      "description": "This is the radio-description",
-      "enum": [
-        {
-          "key": true,
-          "value": "Yes"
-        },
-        {
-          "key": false,
-          "value": "No"
-        }
-      ]
     },
     "select": {
       "type": "string",
@@ -75,32 +44,25 @@
       "title": "Please upload your file"
     },
     "creatableSelectTest": {
-      "type": "array",
+      "type": "string",
       "title": "Example creatable select",
-      "items": {
-        "type": "string",
-        "enum": ["test", "teete", "etetet"]
-      }
+      "enum": ["test", "teete", "etetet"]
     },
     "selectTest": {
-      "type": "array",
+      "type": "string",
       "title": "Example Multi Select",
-      "items": {
-        "type": "string",
-        "enum": [
-          {
-            "key": "Yes",
-            "style": {
-              "borderBottom": "solid 1px black"
-            },
-            "value": "Yes",
-            "disabled": true
+      "enum": [
+        {
+          "key": "Yes",
+          "style": {
+            "borderBottom": "solid 1px black"
           },
-          "No",
-          "etetet"
-        ]
-      },
-      "uniqueItems": true
+          "value": "Yes",
+          "disabled": true
+        },
+        "No",
+        "etetet"
+      ]
     },
     "bio": {
       "type": "string",

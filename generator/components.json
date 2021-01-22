@@ -2,7 +2,7 @@
     "name": "JSON Schema Components",
     "utils": {
         "@react-jsonschema-form-utils/enum-utils": {
-            "version": "1.0.4",
+            "version": "1.0.6",
             "name": "enum-utils"
         },
         "@react-jsonschema-form-utils/parse-values": {
@@ -29,14 +29,14 @@
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/creatable-react-select": {
-            "version": "1.0.6",
+            "version": "1.0.7",
             "type": "string",
             "isEnum": true,
             "name": "creatable-react-select",
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/react-select": {
-            "version": "1.0.9",
+            "version": "1.0.10",
             "type": "string",
             "isEnum": true,
             "name": "react-select",
@@ -46,7 +46,7 @@
             ]
         },
         "@react-jsonschema-form-components/material-select": {
-            "version": "1.0.8",
+            "version": "1.0.9",
             "type": "string",
             "isEnum": true,
             "name": "material-select",

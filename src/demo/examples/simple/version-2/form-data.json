@@ -1,13 +1,13 @@
 {
-	"firstName": "Chuck",
-	"lastName": "Norris",
-	"age": 75,
-	"upload": "",
-	"bio": "<p><u>ads</u></p>",
-	"password": "noneed",
-	"creatableSelectTest": ["test"],
-	"selectTest": ["Yes", "No"],
-	"telephone": "",
-	"customComponent": "",
-	"customRating": 3
+  "firstName": "Chuck",
+  "lastName": "Norris",
+  "age": 75,
+  "upload": "",
+  "bio": "<p><u>ads</u></p>",
+  "password": "noneed",
+  "creatableSelectTest": "[{\"label\":\"hello\",\"value\":\"hello\"},{\"label\":\"yes\",\"value\":\"yes\"}]",
+  "selectTest": "[{\"value\":\"Yes\",\"label\":\"Yes\"},{\"value\":\"No\",\"label\":\"No\"}]",
+  "telephone": "",
+  "customComponent": "Custom Component",
+  "customRating": 3
 }

@@ -6,7 +6,7 @@ import { UTIL_CONFIG } from '../../utils';
 
 const {
   ENUM_UTILS: {
-    util: { valuesToOptions, isEnum },
+    util: { valuesToOptions, isEnum, getEnumTitle },
   },
   PARSE_VALUES: {
     util: { coerceValue, deepStringify },
@@ -64,6 +64,6 @@ export default ({
     isClearable: uiSchema['ui:isClearable'] || false,
     placeholder: uiSchema['ui:placeholder'] || '',
     nullOption: 'Please select...',
-    label: schema.title || '',
+    label: getEnumTitle(schema),
   };
 };

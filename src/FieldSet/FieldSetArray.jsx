@@ -67,7 +67,7 @@ export const RawFieldSetArray = (props) => {
     schema.uniqueItems = true;
   }
 
-  if (schema.items.$ref) {
+  if (schema?.items?.$ref) {
     schema.items = { 
       ...getDefinitionSchemaFromRef(definitions, schema.items, data),
     };
@@ -147,7 +147,7 @@ export const RawFieldSetArray = (props) => {
         }
         return null;
       })}
-      {(!isArray(schema.items) && schema.uniqueItems && isEnum(schema.items)) 
+      {(!isArray(schema.items) && schema.uniqueItems && schema.items && isEnum(schema.items)) 
         && (
           <FormField
             key={path}
