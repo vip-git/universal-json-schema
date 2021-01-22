@@ -122,14 +122,22 @@ const Form = ({
   const id = prefixId || generate();
 
   if (!isEqual(prevData, { formData, schema, uiSchema })) {
-    setData(
-      formData, 
-      iniUiData,
-      uiSchema, 
-      schema,
-      onChange,
-      onError,
-    );
+    if (prevData === null) {
+      setData(
+        formData, 
+        iniUiData,
+      );
+    }
+    else {
+      setData(
+        formData, 
+        iniUiData,
+        uiSchema, 
+        schema,
+        onChange,
+        onError,
+      );
+    }
     setPrevData({ formData, schema, uiSchema });
   }
 
