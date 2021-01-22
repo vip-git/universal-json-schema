@@ -54,7 +54,7 @@ export default ({
   const multiSelect = (widget === 'material-multiselect'
     || options.multiSelect
     || (schema.anyOf && schema.parsedArray))
-    && !schema.oneOf; 
+    && !schema.oneOf;   
   return {
     onChange:
       onChange

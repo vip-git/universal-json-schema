@@ -39,7 +39,6 @@ export default ({
       onChange={givenOnChange}
       multiple={isMultiple}
     >
-      {value === null && <MenuItem value={''}>{nullOption}</MenuItem>}
       {choices.map((o) => <MenuItem key={o.key} value={String(o.key)}>{String(o.value)}</MenuItem>)}
     </Select>
   );

@@ -153,7 +153,7 @@ export const RawFieldSetArray = (props) => {
             key={path}
             path={path}
             required={schema.required}
-            schema={{ ...schema.items, title: schema.title, parsedArray: true }}
+            schema={{ ...schema.items, title: schema.items?.title || schema.title, parsedArray: true }}
             data={data}
             uiSchema={uiSchema}
             definitions={definitions}

@@ -11,7 +11,9 @@ const {
 } = UTIL_CONFIG;
 
 const onChangeHandler = (onChange, type, isMultiple) => (e) => {
-  const value = isMultiple ? e.target.value : coerceValue(type, e.target.value);
+  const value = isMultiple
+    ? e.target?.value?.filter((item) => item)
+    : coerceValue(type, e.target.value);
   if (value !== undefined) onChange(value);
 };
 
