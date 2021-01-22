@@ -78,9 +78,9 @@
     },
     "multiSelect": {
       "type": "array",
-      "title": "Example Multi select",
       "uniqueItems": true,
       "items": {
+        "title": "Example Multi select",
         "type": "string",
         "anyOf": [
           {
