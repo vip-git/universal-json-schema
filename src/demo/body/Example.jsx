@@ -99,7 +99,7 @@ const Example = ({
   }
 
   const onChange = (type) => (value) => {
-    setState({ [type]: value });
+    setState({ ...state, [type]: value  });
   }
 
   const onFormChanged = ({ formData, uiSchema, uiData, schemaErrors, validSchema: givenValidSchema }) => {
@@ -152,7 +152,6 @@ const Example = ({
     fileMatch: ['formData.json'],
     schema: validSchema || data.schema,
   }];
-  
   return (
     <Paper className={classes.root}>
       <h3>{title}</h3>

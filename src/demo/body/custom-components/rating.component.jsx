@@ -18,7 +18,7 @@ const SimpleRating = ({
 		<Typography component='legend'>Custom Rating Component</Typography>
 		<Rating
 			name='simple-controlled'
-			value={value}
+			value={String(value)}
 			onChange={(event, newValue) => {
 			  setValue(newValue);
 			  persistData(newValue);
