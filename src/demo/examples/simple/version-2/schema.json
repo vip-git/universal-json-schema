@@ -1,5 +1,5 @@
 {
-  "title": "A registration form",
+  "title": "A registration form (v2 Deprecated)",
   "description": "A simple form example.",
   "type": "object",
   "required": ["firstName", "lastName"],
