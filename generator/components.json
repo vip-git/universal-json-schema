@@ -2,7 +2,7 @@
     "name": "JSON Schema Components",
     "utils": {
         "@react-jsonschema-form-utils/enum-utils": {
-            "version": "1.0.6",
+            "version": "1.0.7",
             "name": "enum-utils"
         },
         "@react-jsonschema-form-utils/parse-values": {
@@ -46,7 +46,7 @@
             ]
         },
         "@react-jsonschema-form-components/material-select": {
-            "version": "1.0.10",
+            "version": "1.0.11",
             "type": "string",
             "isEnum": true,
             "name": "material-select",
@@ -56,7 +56,7 @@
             ]
         },
         "@react-jsonschema-form-components/material-checkbox": {
-            "version": "1.0.7",
+            "version": "1.0.8",
             "type": "string",
             "isEnum": true,
             "name": "material-checkbox",

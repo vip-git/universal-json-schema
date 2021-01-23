@@ -14,6 +14,17 @@
         ]
       },
       "uniqueItems": true
+    },
+    "singleChoicesList": {
+      "type": "string",
+      "title": "A single choice list",
+      "enum": [
+          "foo",
+          "bar",
+          "fuzz",
+          "qux"
+      ],
+      "uniqueItems": true
     }
   }
 }

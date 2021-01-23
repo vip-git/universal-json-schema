@@ -29,7 +29,7 @@ export default ({
     isMultiple,
   });
 
-  const parseMultiSelectValue = (givenValue) => (Array.isArray(givenValue) ? value : [givenValue]);
+  const parseMultiSelectValue = (givenValue) => (Array.isArray(givenValue) ? givenValue : [givenValue]);
 
   return (
     <Select
