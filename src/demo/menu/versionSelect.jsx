@@ -61,9 +61,10 @@ export default function VersionSelect({
             value={version}
             onChange={handleChange}
             className={classes.select}
+            disabled
         >
-            <MenuItem value={3}> version 3 </MenuItem>
-            <MenuItem value={2}> version 2 </MenuItem>
+            <MenuItem value={3}> Version 3 </MenuItem>
+            <MenuItem value={2}> Version 2 </MenuItem>
         </Select>
     </FormControl>
   );
