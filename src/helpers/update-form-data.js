@@ -39,9 +39,10 @@ const moveItemSpec = (idx, direction) => (value) => ({
 });
 
 export default (givenData, path, value) => {
+  const arrayRegex = /\[(.*?)\]/g;
   const data = { ...givenData };
-  const matchPath = path.replace(/\[(.*?)\]/g, '');
-  const arrMatch = path.match(arrRegex);
+  const matchPath = path.replace(arrayRegex, '');
+  const arrMatch = path.match(arrayRegex);
   if (!has(data, path) && arrMatch) {
     return data;
   }
