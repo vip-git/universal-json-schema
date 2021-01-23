@@ -89,7 +89,7 @@
             "name": "rich-text-editor"
         },
         "@react-jsonschema-form-components/material-input": {
-            "version": "1.0.7",
+            "version": "1.0.8",
             "type": "string",
             "isEnum": false,
             "isDefault": true,

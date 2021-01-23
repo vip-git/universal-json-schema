@@ -11,12 +11,19 @@ export default ({
   uiSchema = {},
   options,
   onChange,
+  isKeyField,
   htmlid,
   onBlur,
-}) => (
+}) => (isKeyField ? (
     <Input 
         htmlid={htmlid} 
-        value={value === null ? '' : value} 
+        defaultValue={value === null ? '' : value} 
         {...inputProps({ onChange, onBlur, type, options, uiSchema })} 
     />
-);
+) : (
+  <Input 
+        htmlid={htmlid} 
+        value={value === null ? '' : value} 
+        {...inputProps({ onChange, onBlur, type, options, uiSchema })}
+  />
+));

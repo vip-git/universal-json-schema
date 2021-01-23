@@ -57,6 +57,7 @@ export default ({
     };
 
   if (dynamicKeyField === 'key') {
+    rv.isKeyField = true;
     rv.onBlur = onChange;
     delete rv.onChange;
   }
