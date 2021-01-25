@@ -1,8 +1,10 @@
-// import Input, { InputLabel } from '@material-ui/core/Input'; // eslint-disable-line import/no-named-default
-import getComponentProps from './get-component-props';
-import getLabelComponentProps from './get-label-component-props';
-import getLabelComponent from './get-label-component';
-import getComponent from './get-component';
+import getComponentProps from './component/get-component-props';
+import getLabelComponentProps from './label/get-label-component-props';
+import getLabelComponent from './label/get-label-component';
+import getComponent from './component/get-component';
+
+// Interceptors
+const { INTERCEPTOR_CONFIG } = require('../../generated/interceptors');
 
 const getClassName = ({ uiSchema = {} }) => {
   const widget = uiSchema['ui:widget'];
@@ -10,8 +12,11 @@ const getClassName = ({ uiSchema = {} }) => {
 };
 
 export default (props) => {
-  const { schema, uiSchema = {}, components } = props;
-  const title = uiSchema['ui:title'] || schema.title;
+  const { schema, uiSchema = {}, components, dynamicKeyField } = props;
+  const dynamicKeyFieldTitle = dynamicKeyField
+                               && uiSchema['ui:title']
+                               && uiSchema['ui:title'][dynamicKeyField];
+  const title = dynamicKeyFieldTitle || dynamicKeyField || uiSchema['ui:title'] || schema.title;
   const backwardsCompatibleComponent = (schema && 'component' in schema) && schema.component;
   const newComponent = uiSchema['ui:component'];
   const component = backwardsCompatibleComponent || newComponent;
@@ -26,12 +31,26 @@ export default (props) => {
     props.isCustomComponent = isCustomComponent;
   }
 
+  Object.keys(INTERCEPTOR_CONFIG).forEach((ic) => {
+    // eslint-disable-next-line no-param-reassign
+    props.interceptors = props.interceptors
+      ? {
+        [ic]: INTERCEPTOR_CONFIG[ic].interceptor,
+        ...props.interceptors,
+      }
+      : {
+        [ic]: INTERCEPTOR_CONFIG[ic].interceptor,
+      };
+  });
+
+  const isValidTitle = typeof title === 'string';
+
   return {
-    title,
+    title: isValidTitle ? title : '',
     className: getClassName(props),
     Component: getComponent(props),
     componentProps: getComponentProps(props),
-    LabelComponent: title && getLabelComponent(props),
+    LabelComponent: isValidTitle && title && getLabelComponent(props),
     labelComponentProps: getLabelComponentProps(props),
     isCustomComponent,
   };

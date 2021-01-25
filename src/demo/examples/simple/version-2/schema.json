@@ -1,0 +1,85 @@
+{
+  "title": "A registration form (v2 Deprecated)",
+  "description": "A simple form example.",
+  "type": "object",
+  "required": ["firstName", "lastName"],
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "title": "First name"
+    },
+    "lastName": {
+      "type": "string",
+      "title": "Last name"
+    },
+    "customComponent": {
+      "type": "string",
+      "title": "Custom Component",
+      "component": "customComponent"
+    },
+    "customRating": {
+      "type": "integer",
+      "title": "Custom Rating"
+    },
+    "currency": {
+      "type": "number",
+      "title": "Currency"
+    },
+    "select": {
+      "type": "string",
+      "title": "Example select",
+      "enum": ["Yes", "No"]
+    },
+    "react-select": {
+      "type": "string",
+      "title": "Example select",
+      "enum": ["Yes", "No"]
+    },
+    "age": {
+      "type": "integer",
+      "title": "Age"
+    },
+    "upload": {
+      "type": "upload",
+      "title": "Please upload your file"
+    },
+    "creatableSelectTest": {
+      "type": "string",
+      "title": "Example creatable select",
+      "enum": ["test", "teete", "etetet"]
+    },
+    "selectTest": {
+      "type": "string",
+      "title": "Example Multi Select",
+      "enum": [
+        {
+          "key": "Yes",
+          "style": {
+            "borderBottom": "solid 1px black"
+          },
+          "value": "Yes",
+          "disabled": true
+        },
+        "No",
+        "etetet"
+      ]
+    },
+    "bio": {
+      "type": "string",
+      "title": "Bio"
+    },
+    "date": {
+      "type": "material-date",
+      "title": "Date"
+    },
+    "password": {
+      "type": "string",
+      "title": "Password",
+      "minLength": 3
+    },
+    "telephone": {
+      "type": "string",
+      "title": "Telephone"
+    }
+  }
+}

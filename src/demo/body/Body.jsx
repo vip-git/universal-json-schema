@@ -5,6 +5,6 @@ import Example from './Example';
 
 export default withStyles(styles)(({ selectedDemo, classes }) => (
   <div className={classes.body}>
-    {<Example data={selectedDemo} />}
+    <Example data={selectedDemo} />
   </div>
 ));

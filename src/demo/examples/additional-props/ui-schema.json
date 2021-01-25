@@ -1,0 +1,12 @@
+{
+  "firstName": {
+    "ui:autofocus": true,
+    "ui:emptyValue": ""
+  },
+  "assKickCount": {
+    "ui:title": {
+      "key": "i was here (Key)",
+      "value": "i was here (Value)"
+    }
+  }
+}

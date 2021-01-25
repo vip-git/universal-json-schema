@@ -1,8 +1,8 @@
 /* eslint-disable global-require */
 const ruleVerifier = ({
   ruleName, 
-  schema, 
-  uiSchema, 
+  schema = {}, 
+  uiSchema = {}, 
   isRuleInValid, 
   errorMessage,
 }) => {

@@ -1,0 +1,14 @@
+{
+  "ui:order": ["shipping_address", "billing_address", "tree"],
+  "tree": {
+    "children": {
+      "items": {
+        "children": {
+          "ui:options": {
+            "allowRecursive": true
+          }
+        }
+      }
+    }
+  }
+}

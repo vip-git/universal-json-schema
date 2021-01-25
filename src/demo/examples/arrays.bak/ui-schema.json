@@ -1,4 +1,7 @@
 {
+  "ui:page": {
+    "ui:layout": "tabs"
+  },
   "Technical": {
     "firstName": {
       "ui:readonly": true,

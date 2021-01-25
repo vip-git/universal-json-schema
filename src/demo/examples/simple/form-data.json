@@ -5,9 +5,9 @@
 	"upload": "",
 	"bio": "<p><u>ads</u></p>",
 	"password": "noneed",
-	"creatableSelectTest": "[{\"label\":\"hello\",\"value\":\"hello\"},{\"label\":\"yes\",\"value\":\"yes\"}]",
-	"selectTest": "[{\"value\":\"Yes\",\"label\":\"Yes\"},{\"value\":\"No\",\"label\":\"No\"}]",
+	"creatableSelectTest": ["test"],
+	"selectTest": ["Yes", "No"],
 	"telephone": "",
-	"customComponent": "Custom Component",
+	"customComponent": "",
 	"customRating": 3
 }

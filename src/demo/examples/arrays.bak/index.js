@@ -3,9 +3,8 @@ import uiSchema from './ui-schema.json';
 import formData from './form-data.json';
 
 export default ({
-  title: 'Arrays',
+  title: 'Tabs UI',
   schema,
   uiSchema,
   formData,
 });
-

@@ -1,0 +1,31 @@
+{
+  "simple": {
+    "name": "Randy"
+  },
+  "conditional": {
+    "doYouHavePets": "No"
+  },
+  "arrayOfConditionals": [
+    {
+      "doYouHavePets": "Yes: One",
+      "howOldPet": 6
+    },
+    {
+      "doYouHavePets": "Yes: More than one",
+      "getRidPet": false
+    }
+  ],
+  "fixedArrayOfConditionals": [
+    {
+      "doYouHavePets": "No"
+    },
+    {
+      "doYouHavePets": "Yes: One",
+      "howOldPet": 6
+    },
+    {
+      "doYouHavePets": "Yes: More than one",
+      "getRidPet": true
+    }
+  ]
+}

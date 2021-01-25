@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== 'production') {
   const webpackConfig = require('../../webpack.config.demo');
   const webpackCompiler = webpack(webpackConfig);
   const webpackDevOptions = {
-    noInfo: true, publicPath: webpackConfig.output.publicPath,
+    publicPath: webpackConfig.output.publicPath,
   };
   app.use(require('webpack-dev-middleware')(webpackCompiler, webpackDevOptions));
   app.use(require('webpack-hot-middleware')(webpackCompiler));
@@ -21,6 +21,8 @@ if (process.env.NODE_ENV !== 'production') {
 // serve static files from webpack dist dir
 const publicPath = path.join(__dirname, '../../dist');
 app.use(express.static(publicPath));
+
+app.use('/schema', express.static(path.join(__dirname, 'examples')));
 
 // ping for load balancer checking health
 app.get('/ping', (req, res) => res.status(200).send());

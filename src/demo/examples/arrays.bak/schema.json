@@ -5,40 +5,118 @@
       "type": "object",
       "title": "Technical",
       "properties": {
-        "firstName": {
-          "type": "string",
-          "title": "Product Sn"
+        "listOfStrings": {
+          "type": "array",
+          "title": "A list of strings",
+          "items": {
+            "type": "string",
+            "default": "bazinga"
+          }
         },
-        "Indchangecontent": {
-          "type": "string",
-          "title": "Indchangecontent"
+        "multipleChoicesList": {
+          "type": "array",
+          "title": "A multiple choices list",
+          "items": {
+            "type": "string",
+            "enum": ["foo", "bar", "fuzz", "qux"]
+          },
+          "uniqueItems": true
         },
-        "Indchangepriceavail": {
-          "type": "string",
-          "title": "Indchangepriceavail"
+        "fixedItemsList": {
+          "type": "array",
+          "title": "A list of fixed items",
+          "items": [
+            {
+              "title": "A string value",
+              "type": "string",
+              "default": "lorem ipsum"
+            },
+            {
+              "title": "a boolean value",
+              "type": "boolean"
+            }
+          ],
+          "additionalItems": {
+            "title": "Additional item",
+            "type": "number"
+          }
         },
-        "Indchangesuppprop": {
-          "type": "string",
-          "title": "Indchangesuppprop"
+        "minItemsList": {
+          "type": "array",
+          "title": "A list with a minimal number of items",
+          "minItems": 3,
+          "items": {
+            "$ref": "#/definitions/Thing"
+          }
         },
-        "Indchangeproducttrack": {
-          "type": "string",
-          "title": "Indchangeproducttrack"
+        "defaultsAndMinItems": {
+          "type": "array",
+          "title": "List and item level defaults",
+          "minItems": 5,
+          "default": ["carp", "trout", "bream"],
+          "items": {
+            "type": "string",
+            "default": "unidentified"
+          }
         },
-        "Indchangerelation": {
-          "type": "string",
-          "title": "Indchangerelation"
+        "nestedList": {
+          "type": "array",
+          "title": "Nested list",
+          "items": {
+            "type": "array",
+            "title": "Inner list",
+            "items": {
+              "type": "string",
+              "default": "lorem ipsum"
+            }
+          }
         },
-        "Indproductfused": {
-          "type": "string",
-          "title": "Indproductfused"
+        "unorderable": {
+          "title": "Unorderable items",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "default": "lorem ipsum"
+          }
+        },
+        "unremovable": {
+          "title": "Unremovable items",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "default": "lorem ipsum"
+          }
+        },
+        "noToolbar": {
+          "title": "No add, remove and order buttons",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "default": "lorem ipsum"
+          }
+        },
+        "fixedNoToolbar": {
+          "title": "Fixed array without buttons",
+          "type": "array",
+          "items": [
+            {
+              "title": "A number",
+              "type": "number",
+              "default": 42
+            },
+            {
+              "title": "A boolean",
+              "type": "boolean",
+              "default": false
+            }
+          ],
+          "additionalItems": {
+            "title": "A string",
+            "type": "string",
+            "default": "lorem ipsum"
+          }
         }
-      },
-      "required": [
-        "Indproductfused",
-        "Indchangerelation",
-        "Indchangeproducttrack"
-      ]
+      }
     },
     "Changedata": {
       "title": "Change Data",
@@ -53,10 +131,7 @@
           "title": "Createdby"
         }
       },
-      "required": [
-        "Createdon",
-        "Createdby"
-      ]
+      "required": ["Createdon", "Createdby"]
     }
   }
 }

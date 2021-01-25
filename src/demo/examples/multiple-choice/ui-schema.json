@@ -1,5 +1,8 @@
 {
   "multipleChoicesList": {
     "ui:widget": "checkboxes"
+  },
+  "singleChoicesList": {
+    "ui:widget": "checkboxes"
   }
 }

@@ -15,8 +15,15 @@
 		"ui:placeholder": "Example Placeholder"
 	},
 	"currency": {
+		"ui:interceptor": "translate-currency",
 		"ui:options": {
 			"useLocaleString": "nl"
+		}
+	},
+	"radio": {
+		"ui:widget": "radio",
+		"ui:options": {
+			"row": true
 		}
 	},
 	"age": {
@@ -26,11 +33,14 @@
 		"mui:className": "money"
 	},
 	"upload": {
-		"ui:widget": "outlined",
-		"ui:accept": "image/*",
-		"ui:isMulti": true,
-		"ui:buttonTitle": "Upload",
-		"ui:icon": "add_circle"
+		"ui:widget": "upload",
+		"ui:props": {
+			"variant": "outlined",
+			"accept": "image/*",
+			"isMulti": true,
+			"buttonTitle": "Upload",
+			"icon": "add_circle"
+		}
 	},
 	"bio": {
 		"ui:widget": "textarea",
@@ -49,13 +59,17 @@
 	},
 	"date": {
 		"ui:activeCompColor": "red",
-		"ui:widget": "alt-datetime"
+		"ui:widget": "material-date"
 	},
 	"creatableSelectTest": {
-		"ui:widget": "creatable-select"
+		"ui:widget": "creatable-select",
+		"ui:options": {
+			"optionsOnly": true
+		}
 	},
 	"customRating": {
 		"ui:component": "customRating",
+		"ui:interceptor": "translate-ratings",
 		"ui:options": {
 			"color": "red"
 		}

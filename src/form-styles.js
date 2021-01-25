@@ -1,4 +1,6 @@
-export default theme => ({
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+// :Theme
+export default makeStyles((theme) => createStyles({
   root: {
     padding: theme.spacing(2),
   },
@@ -17,4 +19,5 @@ export default theme => ({
   button: {
     fontSize: '100%',
   },
-});
+}),
+);

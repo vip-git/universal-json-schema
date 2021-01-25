@@ -1,20 +1,30 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import isEqual from 'lodash/isEqual';
 import { withStyles } from '@material-ui/core/styles';
-import FieldSet from './FieldSet';
+import FieldSet, { shouldHideTitle } from './FieldSet';
 import Field from './fields';
 import styles from './form-field-styles';
 
 // exported for unit testing
-export class RawFormField extends React.Component {
-  shouldComponentUpdate = (nextProps) => !isEqual(this.props, nextProps)
-  
-  render() {
-    const { classes, schema, data, uiSchema = {}, onChange, onKeyDown, path, ...rest } = this.props;
-    const { type } = schema;
-    if (type === 'object' || type === 'array') {
-      return (
+export const RawFormField = React.memo(({
+  schema, 
+  data, 
+  uiSchema = {},
+  onChange, 
+  dynamicKeyField,
+  onUpdateKeyProperty,
+  onKeyDown,
+  path,
+  ...rest 
+}) => {
+  const classes = styles();
+  const { type, component: backwardsCompatibleComponent } = schema;
+  const newComponent = uiSchema['ui:component'];
+  const component = backwardsCompatibleComponent || newComponent;
+
+  // Todo: condition for array should change
+  if ((type === 'object' || type === 'array') && !component) {
+    return (
         <FieldSet
           path={path}
           schema={schema}
@@ -22,23 +32,31 @@ export class RawFormField extends React.Component {
           uiSchema={uiSchema}
           onKeyDown={onKeyDown}
           onChange={onChange}
+          hideTitle={shouldHideTitle(uiSchema, schema)}
+          onUpdateKeyProperty={onUpdateKeyProperty}
+          dynamicKeyField={dynamicKeyField}
           {...rest} 
         />
-      );
-    }
-    return (
+    );
+  }
+  const onGivenChange = dynamicKeyField === 'key' ? onUpdateKeyProperty : onChange;
+  return (
       <Field
         className={classes.field}
         path={path}
         schema={schema}
         data={data}
         uiSchema={uiSchema}
-        onChange={onChange && onChange(path)}
+        onChange={onGivenChange && onGivenChange(path)}
         onKeyDown={onKeyDown}
+        dynamicKeyField={dynamicKeyField}
         {...rest}
       />
-    );
-  }
-}
+  );
+}, (prevProps, nextProps) => isEqual(prevProps.data, nextProps.data) 
+                            && isEqual(prevProps.schema, nextProps.schema)
+                            && isEqual(prevProps.uiData, nextProps.uiData)
+                            && isEqual(prevProps.uiSchema, nextProps.uiSchema),
+);
 
-export default withStyles(styles)(RawFormField);
+export default RawFormField;

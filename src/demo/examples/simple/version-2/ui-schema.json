@@ -1,0 +1,75 @@
+{
+  "firstName": {
+    "ui:autofocus": true,
+    "ui:emptyValue": ""
+  },
+  "selectTest": {
+    "ui:widget": "material-multiselect",
+    "mui:inputProps": {
+      "className": "money"
+    }
+  },
+  "react-select": {
+    "ui:widget": "material-select",
+    "ui:isClearable": true,
+    "ui:placeholder": "Example Placeholder"
+  },
+  "currency": {
+    "ui:options": {
+      "useLocaleString": "nl"
+    }
+  },
+  "age": {
+    "ui:widget": "updown",
+    "ui:title": "Age of person",
+    "ui:description": "(earthian year)",
+    "mui:className": "money"
+  },
+  "upload": {
+    "ui:widget": "outlined",
+    "ui:accept": "image/*",
+    "ui:isMulti": true,
+    "ui:buttonTitle": "Upload",
+    "ui:icon": "add_circle"
+  },
+  "bio": {
+    "ui:widget": "textarea",
+    "ui:options": "rich-text-editor"
+  },
+  "password": {
+    "ui:widget": "password",
+    "ui:help": "Hint: Make it strong!",
+    "ui:validations": {
+      "minLength": {
+        "value": 3,
+        "message": "'Password' must be at least 3 characters",
+        "inline": true
+      }
+    }
+  },
+  "date": {
+    "ui:activeCompColor": "red",
+    "ui:widget": "alt-datetime"
+  },
+  "creatableSelectTest": {
+    "ui:widget": "creatable-select"
+  },
+  "customRating": {
+    "ui:component": "customRating",
+    "ui:options": {
+      "color": "red"
+    }
+  },
+  "telephone": {
+    "ui:options": {
+      "inputType": "tel"
+    },
+    "ui:validations": {
+      "minLength": {
+        "value": 10,
+        "message": "'Telephone' must be at least 10 digits",
+        "inline": true
+      }
+    }
+  }
+}

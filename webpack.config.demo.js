@@ -8,6 +8,47 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
 
+const babelLoader = {
+  test: /\.(ts|js|jsx|tsx)$/,
+  exclude: /node_modules/,
+  loader: 'babel-loader',
+  options: {
+    compact: true,
+    sourceType: 'unambiguous',
+    presets: [
+      [
+        '@babel/preset-env',
+        {
+          modules: false,
+          targets: {
+            browsers: ['last 2 versions', 'ie >= 9'],
+          },
+        },
+      ],
+      '@babel/typescript',
+      '@babel/preset-react',
+    ],
+    plugins: [
+      '@babel/plugin-transform-runtime',
+      '@babel/plugin-proposal-object-rest-spread',
+      '@babel/plugin-proposal-class-properties',
+      '@babel/plugin-proposal-optional-chaining',
+      '@babel/plugin-syntax-dynamic-import',
+    ],
+    env: {
+      test: {
+        plugins: [
+          '@babel/plugin-transform-modules-commonjs',
+          '@babel/plugin-proposal-object-rest-spread',
+          '@babel/plugin-proposal-class-properties',
+          '@babel/plugin-proposal-optional-chaining',
+          '@babel/plugin-syntax-dynamic-import',
+        ],
+      },
+    },
+  },
+};
+
 const cssLoaderClient = {
 	test: /\.(css|scss)$/,
 	exclude: /node_modules/,
@@ -38,73 +79,96 @@ if (process.env.NODE_ENV !== 'production' && process.env.NO_STUBS === undefined)
 };
 
 var config = {
-	entry: {
-		bundle: ['babel-polyfill', path.join(__dirname, 'src/demo/index.jsx')]
-	},
-	output: {
-		path: path.join(__dirname, 'dist'),
-		filename: 'demo.js',
-		publicPath: '/'
-	},
-	optimization: {
-		minimize: true
-	},
-	devtool: 'inline-source-map',
-	module: {
-		rules: [
-			{
-				oneOf: [
-					{
-						test: /\.jsx?$/,
-						use: ['babel-loader'],
-						exclude: babelExclude
-					},
-					cssLoaderClient,
-					{
-						test: /\.(gif|png|jpe?g|svg|css)$/i,
-						loaders: [
-							{
-								loader: 'url-loader',
-								options: {
-									limit: 50000
-								}
-							},
-							{
-								loader: 'image-webpack-loader'
-							}
-						]
-					},
-					{
-						exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
-						loader: 'file-loader',
-						options: {
-							name: 'static/media/[name].[hash:8].[ext]'
-						}
-					}
-				]
-			}
-		]
-	},
-	resolve: {
-		extensions: ['.js', '.jsx'],
-		alias,
-		modules: ['node_modules']
-	},
-	mode: process.env.NODE_ENV,
-	plugins: [
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify('development')
-		}),
-		new HtmlWebpackPlugin({
-			template: 'src/demo/index.html'
-		}),
-		new webpack.NamedModulesPlugin(),
-		new MiniCssExtractPlugin({
-			filename: 'style.css',
-			chunkFilename: 'main.css'
-		})
-	],
-	target: 'web'
+  entry: {
+    bundle: ['@babel/polyfill', path.join(__dirname, 'src/demo/index.jsx')],
+  },
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].js',
+    publicPath: '/',
+  },
+  optimization: {
+    minimize: true,
+    moduleIds: 'named',
+    chunkIds: 'named',
+    splitChunks: {
+      chunks: 'async',
+      minSize: 20000,
+      minRemainingSize: 0,
+      maxSize: 120000,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
+  devtool: 'inline-source-map',
+  module: {
+    rules: [
+      {
+        oneOf: [
+          babelLoader,
+          cssLoaderClient,
+          {
+            test: /\.(gif|png|jpe?g|svg|css)$/i,
+            use: [
+              {
+                loader: 'url-loader',
+                options: {
+                  limit: 50000,
+                },
+              },
+              {
+                loader: 'image-webpack-loader',
+              },
+            ],
+          },
+          {
+            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
+            loader: 'file-loader',
+            options: {
+              name: 'static/media/[name].[hash:8].[ext]',
+            },
+          },
+        ],
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    alias,
+    modules: ['node_modules'],
+    fallback: {
+      url: require.resolve('url-shim'),
+    },
+  },
+  mode: process.env.NODE_ENV,
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+      'process.env.NODE_DEBUG': JSON.stringify('debug'),
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/demo/index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'style.css',
+      chunkFilename: 'main.css',
+    }),
+  ],
+  target: 'web',
 };
 
 

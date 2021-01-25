@@ -1,9 +1,9 @@
 import update from 'immutability-helper';
+import { has, get, each, set } from 'lodash';
 import size from 'lodash/size';
 
 const arrRegex = /^([^.]+)\[([0-9]+)\](\.(.*))?/;
 const dotRegex = /^([^[]+)\.(.*$)/;
-
 const applyAtPath = (path, data, spec) => {
   if (!path) return spec(data);
   const dotMatch = path.match(dotRegex);
@@ -24,27 +24,82 @@ const applyAtPath = (path, data, spec) => {
   return {};
 };
 
-const setValueSpec = value => () => {
-  if (typeof value === 'object' && size(value) === 1) return value;
-  return ({ $set: value });
-};
-const pushItemSpec = value => (data) => {
+// if (typeof value === 'object' && size(value) === 1) return value;
+const setValueSpec = (value) => () => ({ $set: value });
+const pushItemSpec = (value) => (data) => {
   if (data) return ({ $push: [value] });
   return ({ $set: [value] });
 };
-const removeItemSpec = idx => () => ({ $splice: [[idx, 1]] });
-const moveItemSpec = (idx, direction) => value => ({
+
+const removeItemSpec = (idx) => () => ({ $splice: [[idx, 1]] });
+
+const moveItemSpec = (idx, direction) => (value) => ({
   [idx]: { $set: value[idx + direction] },
   [idx + direction]: { $set: value[idx] },
 });
 
-export default (data, path, value) => {
+export default (givenData, path, value) => {
+  const arrayRegex = /\[(.*?)\]/g;
+  const data = { ...givenData };
+  const matchPath = path.replace(arrayRegex, '');
+  const arrMatch = path.match(arrayRegex);
+  if (!has(data, path) && arrMatch) {
+    return data;
+  }
+  if (
+    matchPath
+    && matchPath.includes('.')
+    && ((data && !has(data, matchPath.split('.')[0]))
+      || typeof get(data, matchPath.split('.')[0]) !== 'object')
+  ) {
+    data[matchPath.split('.')[0]] = {};
+  }
   const s = setValueSpec(value);
   const spec = applyAtPath(path, data, s);
   return update(data, spec);
 };
 
-export const addListItem = (data, path, value) => {
+export const updateKeyFromSpec = (data, oldPath, newPath) => update(data, (obj) => Object.keys(obj)
+  .reduce((acc, key) => {
+    if (key === oldPath) {
+      acc[newPath] = obj[oldPath];
+    }
+    else {
+      acc[key] = obj[key];
+    }
+    return acc;
+  }, {}),
+);
+
+export const setUISchemaData = (givenUIData, uiSchema, path) => {
+  if (typeof givenUIData === 'object') {
+    each(uiSchema, (val, key) => {
+      if (has(val, 'ui:data') || has(givenUIData, key)) {
+        if (typeof givenUIData[key] === 'object') {
+          setUISchemaData(val, uiSchema, key);
+        }
+        else {
+          const getPath = path ? `${path}.${key}` : key;
+          set(uiSchema, `${getPath}.ui:data`, givenUIData[key]);
+        }
+      }
+    });
+  }
+};
+
+export const removeValueFromSpec = (data, path) => update(data, { $unset: [path] });
+
+export const addListItem = (givenData, path, value) => {
+  const data = { ...givenData };
+  const matchPath = path.replace(/\[(.*?)\]/g, '');
+  if (
+    matchPath
+    && matchPath.includes('.')
+    && data
+    && !has(data, matchPath.split('.')[0])
+  ) {
+    data[matchPath.split('.')[0]] = {};
+  }
   const spec = applyAtPath(path, data, pushItemSpec(value));
   return update(data, spec);
 };
