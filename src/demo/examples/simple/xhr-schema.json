@@ -1,0 +1,45 @@
+{
+  "xhr:datasource": {
+    "onload": {
+      "url": "https://react-json-schema-material-ui.free.beeceptor.com/api/1",
+      "method": "GET",
+      "headers": {},
+      "payload": {},
+      "dataMapper": {
+        "firstName": "${first_name}",
+        "lastName": "${last_name}",
+        "customComponent": "${custom_component}",
+        "customRating": "${custom_rating}",
+        "currency": "${currency}",
+        "default": "${default}",
+        "radio": "${radio}",
+        "select": "${select}",
+        "react-select": "${react_select}",
+        "age": "${age}",
+        "upload": "${upload}",
+        "multiSelect": "${multi_select}",
+        "creatableSelectTest": "${creatable_select}",
+        "selectTest": "${select_test}",
+        "bio": "${bio}",
+        "date": "${date}",
+        "password": "${password}",
+        "telephone": "${telephone}"
+      }
+    },
+    "onsubmit": {}
+  },
+  "selectTest": {
+    "onclick": {
+      "enum": {
+        "xhr:datasource": {
+          "url": "",
+          "method": "POST",
+          "headers": {},
+          "payload": {},
+          "apiSchemaSource": "",
+          "dataMapper": []
+        }
+      }
+    }
+  }
+}

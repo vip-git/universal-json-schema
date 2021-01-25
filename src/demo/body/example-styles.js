@@ -15,8 +15,20 @@ export default makeStyles((theme) => createStyles({
         'marginRight': theme.spacing(1),
         'flexDirection': 'column',
         '& >div:first-child': {
-          position: 'relative',
-          marginBottom: theme.spacing(1),
+          'position': 'relative',
+          'display': 'flex',
+          'justifyContent': 'space-between',
+          'marginBottom': theme.spacing(1),
+          '& >div:first-child': {
+            position: 'relative',
+            flex: 21,
+            marginRight: 5,
+          },
+          '& >div:nth-child(2)': {
+            position: 'relative',
+            flex: 21,
+            marginLeft: 5,
+          },
         },
         '& >div:nth-child(2)': {
           'position': 'relative',

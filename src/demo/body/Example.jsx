@@ -65,6 +65,7 @@ const SourceSchema = ({
   validSchema,
   schema,
   uiSchema,
+  xhrSchema,
   formData,
   onChange,
   hasSchemaError,
@@ -73,6 +74,11 @@ const SourceSchema = ({
     <div className={classes.sourceCtr}>
       <div>
         <Source key={`${locationHash}Schema`} title={'JSONSchema.json'} source={schema} onChange={onChange('schema')} />
+        {
+          Object.keys(xhrSchema).length && (
+            <Source key={`${locationHash}xhrSchema`} title={'xhrSchema.json (Optional)'} source={xhrSchema} onChange={onChange('xhrSchema')} />
+          ) || ''
+        }
       </div>
       <div>
         <Source key={`${locationHash}UISchema`}  title={'uiSchema.json'} source={uiSchema} onChange={onChange('uiSchema')} />
@@ -127,7 +133,7 @@ const Example = ({
     });
   };
 
-  const { formData, uiSchema, schema, title, uiData } = state;
+  const { formData, uiSchema, schema, title, uiData, xhrSchema } = state;
 
   const hash = window.location.hash.replace('#', '');
   const oldHashs = oldHash.replace('#', '');
@@ -164,6 +170,7 @@ const Example = ({
           validSchema={editorSchema || data.schema}
           uiSchema={uiSchema || data.uiSchema}
           formData={formData || data.formData}
+          xhrSchema={xhrSchema || data.xhrSchema || {}}
           hasSchemaError={schemaErrors}
           onChange={onChange}
         />
