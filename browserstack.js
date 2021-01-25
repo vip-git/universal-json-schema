@@ -47,7 +47,7 @@ describe('Testing forms', () => {
     const autocompleteResult = await driver.findElement(
       By.xpath('//button[2]'),
     );
-    autocompleteResult.click();
+    // autocompleteResult.click();
 
     // Or using sleep
     // Wait for 3 seconds
