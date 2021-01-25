@@ -47,16 +47,38 @@ const Example () => {
     
     return (
          <MaterialJsonSchemaForm
-              schema={schema}
-              uiSchema={uiSchema}
-              formData={formData}
-              onCancel={onCancel}
-              onSubmit={onSubmit}
-              onUpload={onUpload}
-              onChange={onFormChanged}
-              submitOnEnter
-              activityIndicatorEnabled
-         />
+         <Form
+			schema={givenSchema}
+			uiSchema={givenUISchema}
+            formData={givenFormData}
+			onCancel={onCancel}
+			onSubmit={onSubmit}
+			onUpload={onUpload}
+            onChange={onFormChanged}
+            onError={onError}
+            /* Optional Param for custom functions to be executed for transforming data */
+            interceptors={{
+                translateRatings: (givenData, uiData) => ({ givenData, uiData }),
+            }}
+            /* Optional Param for custom components */
+			components={{
+			  customComponent: ({ onChange, ...rest }) => (
+					<CustomComponent onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
+			  ),
+			  customRating: ({ onChange, ...rest }) => (
+					<CustomRating onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
+			  ),
+			}}
+            /* Optional Param for custom validation */
+            validations={{
+                confirmPassword: ({ schema, validations, formData, value }) => value !== formData.pass1 && ({
+                message: validations.confirmPassword.message,
+                inline: true,
+                }),
+            }}
+            /* Optional Param to auto submit form on press of enter */
+			submitOnEnter
+		/>
     );
 }
 
