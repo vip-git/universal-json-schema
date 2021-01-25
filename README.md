@@ -77,7 +77,7 @@ const Example () => {
                 }),
             }}
             /* Optional Param to auto submit form on press of enter */
-			submitOnEnter
+	    submitOnEnter
 	/>
     );
 }
