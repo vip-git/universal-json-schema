@@ -138,7 +138,7 @@
     "immutability-helper": "^2.6.5 || ^3.0.0",
     "shortid": "2.2.15"
   },
-  "version": "3.0.0",
+  "version": "3.0.0-alpha.0",
   "directories": {
     "doc": "docs"
   },
