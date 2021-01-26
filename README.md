@@ -47,7 +47,6 @@ const Example () => {
     
     return (
          <MaterialJsonSchemaForm
-         <Form
 	    schema={givenSchema}
 	    uiSchema={givenUISchema}
             formData={givenFormData}
