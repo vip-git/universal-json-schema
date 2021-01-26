@@ -101,50 +101,30 @@ export default Example;
 - Demo updated with monaco editor and live validation changes
 - New interceptors to transform form and uiData using uiSchema - `ui:interceptor`
 
-#### Previously version 2.x.x
-* New version 2.0 support for material ui 4
-* Webpack 4 integration
-* Material UI picker module updated
-* Support for File Upload and many more components
-* Performance efficient refactored library size \(233kb gzip and 914kb non-gzip\)
+> For me info you can follow our [changelog](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/changelog.md)
 
-## Support for Material UI &lt; 3.9
+## Contributing 
+> We welcome [all contributions](https://github.com/vip-git/react-jsonschema-form-material-ui/graphs/contributors), enhancements, and bug-fixes. Open an [issue on GitHub](https://github.com/vip-git/react-jsonschema-form-material-ui/issues) and submit a [pull request](https://github.com/vip-git/react-jsonschema-form-material-ui/pulls).
 
-* Please use [version 1.0.109](https://github.com/vip-git/react-jsonschema-form-material-ui/tree/v1.x) of React Material-ui-jsonschema-form.
-
-### New components integrated / Updates
-
-* Material UI Date / time picker    
-* Material UI Multi-selecbox    
-* Creatable multi selectbox    
-* Component active / inactive    
-* Rich Text Editor
-* Upload File
-* `submitOnEnter` prop - enables to submit form on key press 'Enter'
-* `activityIndicatorEnabled` prop - enables nice activity indicator besides your submit button allowing you to control the timing via a callback.
-
-### Contributing 
-We welcome [all contributions](https://github.com/vip-git/react-jsonschema-form-material-ui/graphs/contributors), enhancements, and bug-fixes. Open an [issue on GitHub](https://github.com/vip-git/react-jsonschema-form-material-ui/issues) and submit a [pull request](https://github.com/vip-git/react-jsonschema-form-material-ui/pulls).
-
-Building/Testing
+#### Building/Testing
 To build/test the project locally on your computer:
 
-Fork this repo and then clone
+> Fork this repo and then clone
 ```
 git clone https://github.com/vip-git/react-jsonschema-form-material-ui.git
 ```
 
-Install dependencies and module generator
+> Install dependencies and module generator
 ```
 npm install
 ```
 
-Run the demo to test your changes
+> Run the demo to test your changes
 ```
 npm run start:demo
 ```
 
-Run the tests once you are done with your changes
+> Run the tests once you are done with your changes
 ```
 npm test
 ```
