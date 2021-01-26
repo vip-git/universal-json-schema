@@ -85,8 +85,23 @@ const Example () => {
 export default Example;
 ```
 
-## Latest Version [![npm version](https://badge.fury.io/js/react-jsonschema-form-material-ui.svg)](https://react-jsonschema-form-material-ui.github56.now.sh) \(Material UI 4+\)
+## Latest Version [![npm version](https://badge.fury.io/js/react-jsonschema-form-material-ui.svg)](https://react-jsonschema-form-material-ui.github56.now.sh) \[JSONSchema-Draft-7 Support]
 
+- Build system now upgraded to webpack 5
+- React select values are no longer stringify results but array values.
+- New Tabs UI to divide sub sections to tabs
+- Additional Properties and Additional Items feature enabled
+- `"ui:options"` and `"ui:style"` enabled for prop passing and styling every field
+- On the fly module creation
+- Reference Schema's via http and inline references
+- Support alternatives - `oneOf`, `anyOf`, `allOf`
+- Support for dependencies - array of conditionals
+- new Prop `onError` to get errors available in form on every change
+- new Prop `uiData` to control ui only data to add separation of concern with form data
+- Demo updated with monaco editor and live validation changes
+- New interceptors to transform form and uiData using uiSchema - `ui:interceptor`
+
+#### Previously version 2.x.x
 * New version 2.0 support for material ui 4
 * Webpack 4 integration
 * Material UI picker module updated
