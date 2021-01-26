@@ -12,3 +12,26 @@
 - new Prop uiData to control ui only data to add seperation of concern with form data
 - Demo updated with vscode editor and live validation changes
 - New interceptors to transform form and uiData using uiSchema - `ui:interceptor`
+
+
+#### Previously version 2.x.x
+* New version 2.0 support for material ui 4
+* Webpack 4 integration
+* Material UI picker module updated
+* Support for File Upload and many more components
+* Performance efficient refactored library size \(233kb gzip and 914kb non-gzip\)
+
+## Support for Material UI &lt; 3.9
+
+* Please use [version 1.0.109](https://github.com/vip-git/react-jsonschema-form-material-ui/tree/v1.x) of React Material-ui-jsonschema-form.
+
+### New components integrated / Updates
+
+* Material UI Date / time picker    
+* Material UI Multi-selecbox    
+* Creatable multi selectbox    
+* Component active / inactive    
+* Rich Text Editor
+* Upload File
+* `submitOnEnter` prop - enables to submit form on key press 'Enter'
+* `activityIndicatorEnabled` prop - enables nice activity indicator besides your submit button allowing you to control the timing via a callback.
