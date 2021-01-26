@@ -123,3 +123,30 @@ export default Example;
 * `submitOnEnter` prop - enables to submit form on key press 'Enter'
 * `activityIndicatorEnabled` prop - enables nice activity indicator besides your submit button allowing you to control the timing via a callback.
 
+### Contributing 
+We welcome [all contributions](https://github.com/vip-git/react-jsonschema-form-material-ui/graphs/contributors), enhancements, and bug-fixes. Open an [issue on GitHub](https://github.com/vip-git/react-jsonschema-form-material-ui/issues) and submit a [pull request](https://github.com/vip-git/react-jsonschema-form-material-ui/pulls).
+
+Building/Testing
+To build/test the project locally on your computer:
+
+Fork this repo and then clone
+```
+git clone https://github.com/vip-git/react-jsonschema-form-material-ui.git
+```
+
+Install dependencies and module generator
+```
+npm install
+```
+
+Run the demo to test your changes
+```
+npm run start:demo
+```
+
+Run the tests once you are done with your changes
+```
+npm test
+```
+
+You can send a PR through and a release will be made following [Semantic Versioning](https://semver.org/) once your PR gets merged.
