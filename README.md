@@ -120,7 +120,7 @@ npm install
 
 > Run the demo to test your changes
 ```
-npm run start:demo
+npm run start:demo && open http://localhost:3005
 ```
 
 > Run the tests once you are done with your changes
