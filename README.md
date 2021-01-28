@@ -103,7 +103,8 @@ export default Example;
 > For me info you can follow our [changelog](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/changelog.md)
 
 ## Contributing 
-> We welcome [all contributions](https://github.com/vip-git/react-jsonschema-form-material-ui/graphs/contributors), enhancements, and bug-fixes. Open an [issue on GitHub](https://github.com/vip-git/react-jsonschema-form-material-ui/issues) and submit a [pull request](https://github.com/vip-git/react-jsonschema-form-material-ui/pulls).
+> We welcome [all contributions](https://github.com/vip-git/react-jsonschema-form-material-ui/graphs/contributors), enhancements, and bug-fixes. 
+> Open an [issue on GitHub](https://github.com/vip-git/react-jsonschema-form-material-ui/issues) and submit a [pull request](https://github.com/vip-git/react-jsonschema-form-material-ui/pulls).
 
 #### Building/Testing
 To build/test the project locally on your computer:
@@ -120,7 +121,7 @@ npm install
 
 > Run the demo to test your changes
 ```
-npm run start:demo && open http://localhost:3005
+npm run start:demo (open http://localhost:3005 once build is successful)
 ```
 
 > Run the tests once you are done with your changes
