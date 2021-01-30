@@ -1,9 +1,53 @@
 // Library
-import { has } from 'lodash';
+import { has, get } from 'lodash';
 import each from 'lodash/each';
 
 // Helpers
 import getDefinitionSchemaFromRef from './get-definition-schema';
+
+export const hashCode = (s) => {
+  let h = 0; const l = s.length; let 
+    i = 0;
+  // eslint-disable-next-line no-bitwise
+  if (l > 0) while (i < l) h = (h << 5) - h + s.charCodeAt(i++) | 0;
+  return h;
+};
+
+const translateTemplateString = (str, obj) => {
+  const parts = str.split(/\$\{(?!\d)[\wæøåÆØÅ]*\}/);
+  const args = str.match(/[^{}]+(?=})/g) || [];
+  const parameters = args.map(
+    (argument) => obj[argument] || (obj[argument] === undefined ? '' : obj[argument]),
+  );
+  return String.raw({ raw: parts }, ...parameters);
+};
+
+export const mapData = (
+  mappingInfo,
+  xhrData,
+  data,
+  iniUiData,
+  uiSchema,
+  schema,
+  onChange,
+  onError,
+  setData,
+) => {
+  const returnData = { ...data };
+  const returnUIData = { ...iniUiData };
+  const { formData, uiData } = mappingInfo;
+  Object.keys(formData).forEach((fd) => {
+    returnData[fd] = translateTemplateString(formData[fd], xhrData);
+  });
+  Object.keys(uiData).forEach((fd) => {
+    returnUIData[fd] = translateTemplateString(uiData[fd], xhrData);
+  });
+  setData(returnData, returnUIData, uiSchema, schema, onChange, onError);
+  return {
+    returnData,
+    returnUIData,
+  };
+};
 
 const transformEnums = (enums) => {
   const enumVals = [];

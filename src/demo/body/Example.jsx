@@ -10,7 +10,7 @@ import { useTheme } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import useStyles from './example-styles';
 import Source from './Source';
-import Form from '../../Form';
+import Form from '../../AsyncForm';
 
 // Custom Components
 import CustomRating from './custom-components/rating.component';
@@ -19,6 +19,7 @@ import CustomComponent from './custom-components/range-picker.component';
 const FormComponent = ({
   locationHash,
   givenSchema,
+  givenXhrSchema,
   givenUISchema,
   givenFormData,
   givenUIData,
@@ -29,7 +30,8 @@ const FormComponent = ({
   onError,
 }) => (
 		<Form
-			schema={givenSchema}
+      schema={givenSchema}
+      xhrSchema={givenXhrSchema || {}}
 			uiSchema={givenUISchema}
       formData={givenFormData}
 			onCancel={onCancel}
@@ -81,14 +83,14 @@ const SourceSchema = ({
         }
       </div>
       <div>
-        <Source key={`${locationHash}UISchema`}  title={'uiSchema.json'} source={uiSchema} onChange={onChange('uiSchema')} />
-        <Source key={`${locationHash}FormData`}  title={'formData.json'} schema={validSchema} hasSchemaError={hasSchemaError} source={formData} onChange={onChange('formData')} />
+        <Source key={`${locationHash}UISchema`} title={'uiSchema.json'} source={uiSchema} onChange={onChange('uiSchema')} />
+        <Source key={`${locationHash}FormData`} title={'formData.json'} schema={validSchema} hasSchemaError={hasSchemaError} source={formData} onChange={onChange('formData')} />
       </div>
     </div>
 );
 
 const Example = ({
-  data
+  data,
 }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
@@ -105,27 +107,27 @@ const Example = ({
   }
 
   const onChange = (type) => (value) => {
-    setState({ ...state, [type]: value  });
-  }
+    setState({ ...state, [type]: value });
+  };
 
-  const onFormChanged = ({ formData, uiSchema, uiData, schemaErrors, validSchema: givenValidSchema }) => {
+  const onFormChanged = ({ formData, uiSchema, uiData, schemaErrors: givenSchemaErrors, validSchema: givenValidSchema }) => {
     setState({ ...state, formData, uiSchema, uiData, validSchema });
-    setSchemaErrors(schemaErrors);
+    setSchemaErrors(givenSchemaErrors);
     setValidSchema(givenValidSchema);
-  }
+  };
 
   const onSubmit = (value, callback) => {
     console.log('onSubmit: %s', JSON.stringify(value)); // eslint-disable-line no-console
     setTimeout(() => callback && callback(), 2000);
-  }
+  };
 
   const onUpload = (value) => {
     console.log('onUpload:', value); // eslint-disable-line no-console
-  }
+  };
 
   const onFormError = (error = {}) => {
     console.log('error is', error);
-  }
+  };
 
   const onCancel = () => {
     setState({
@@ -138,7 +140,7 @@ const Example = ({
   const hash = window.location.hash.replace('#', '');
   const oldHashs = oldHash.replace('#', '');
 
-  if(!isEqual(oldHashs, hash)) {
+  if (!isEqual(oldHashs, hash)) {
     return (
         <div> Loading... </div>
     );
@@ -153,7 +155,7 @@ const Example = ({
     uri: 'http://json-schema.org/draft-07/schema',
     fileMatch: ['uiSchema.json'],
     schema: undefined,
-  },{
+  }, {
     uri: `${window.location.origin}/schema/${hash}/schema.json`,
     fileMatch: ['formData.json'],
     schema: validSchema || data.schema,
@@ -180,6 +182,7 @@ const Example = ({
             givenSchema={schema || data.schema}
             givenUISchema={uiSchema || data.uiSchema}
             givenFormData={formData || data.formData}
+            givenXhrSchema={xhrSchema || data.xhrSchema || {}}
             givenUIData={uiData}
             onCancel={onCancel}
             onSubmit={onSubmit}
@@ -191,6 +194,6 @@ const Example = ({
       </div>
     </Paper>
   );
-}
+};
 
 export default Example;

@@ -1,5 +1,6 @@
 // Library
 import React from 'react';
+import { useQuery } from 'react-query';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 import isEqual from 'lodash/isEqual';
@@ -25,7 +26,7 @@ import updateFormData, {
 } from './helpers/update-form-data';
 import removeEmptyObjects, { isEmptyValues } from './helpers/remove-empty-values';
 import isFormInValid from './helpers/validation/is-form-validated';
-import transformSchema from './helpers/transform-schema';
+import transformSchema, { hashCode, mapData } from './helpers/transform-schema';
 import getValidationResult from './helpers/validation';
 import FormButtons from './FormButtons';
 
@@ -35,6 +36,7 @@ let data = {};
 let uiData = {};
 let validSchema = {};
 
+/** Move this to side effects */
 const setUIData = (givenUIData, uiSchemaKeys, uiSchema, schema, path) => {
   if (uiSchemaKeys.length) {
     each(uiSchemaKeys, (val) => {
@@ -91,6 +93,7 @@ const setData = (
 const Form = ({
   formData,
   schema = {},
+  xhrSchema = {},
   uiSchema,
   validations,
   prefixId,
@@ -116,12 +119,17 @@ const Form = ({
     disabled,
   };
   const [prevData, setPrevData] = React.useState(null);
+  const [prevSkippedData, setPrevSkippedData] = React.useState(null);
   const iniUiData = setUIData({}, Object.keys(schema.properties || {}), uiSchema, schema);
   const classes = formStyles();
   const validation = getValidationResult(schema, uiSchema, formData, validations);
   const id = prefixId || generate();
+  const formId = hashCode(JSON.stringify(schema));
 
-  if (!isEqual(prevData, { formData, schema, uiSchema })) {
+  if (
+    !isEqual(prevData, { formData, schema, uiSchema }) 
+    && !isEqual(prevSkippedData, { formData: removeEmptyObjects(formData), schema, uiSchema }) 
+  ) {
     if (prevData === null) {
       setData(
         formData, 
@@ -139,7 +147,29 @@ const Form = ({
       );
     }
     setPrevData({ formData, schema, uiSchema });
+    setPrevSkippedData({ formData: removeEmptyObjects(formData), schema, uiSchema });
   }
+
+  // const { isLoading, error, data: fetchData, isFetching } = useQuery(`schema${formId}`, 
+  //   () => (xhrSchema 
+  //         && has(xhrSchema, 'ui:page.onload.xhr:datasource.url')
+  //         && has(xhrSchema, 'ui:page.onload.xhr:datasource.map')
+  //         // eslint-disable-next-line no-undef
+  //     ? fetch(
+  //       xhrSchema['ui:page'].onload['xhr:datasource'].url,
+  //     ).then((res) => res.json())
+  //       .then((xhrData) => mapData(
+  //         xhrSchema['ui:page'].onload['xhr:datasource'].map,
+  //         xhrData,
+  //         data, 
+  //         uiData,
+  //         uiSchema, 
+  //         schema,
+  //         onChange,
+  //         onError,
+  //         setData,
+  //       ))
+  //     : {}));
 
   const onFormValuesChange = (field) => (givenValue, givenUIValue, forceDeleteUIData = false) => {
     const newFormData = updateFormData(data, field, givenValue);
@@ -242,7 +272,8 @@ const Form = ({
       const validate = validator(transformedSchema, { verbose: true });
       validate(data);
       const externalValidations = isFormInValid(validation);
-      formGlobalState.disabled = disabled || externalValidations || validate.errors;
+      const isDisabled = disabled || externalValidations || validate.errors;
+      formGlobalState.disabled = typeof isDisabled === 'boolean' ? isDisabled : true;
     }
     catch (err) {
       // console.log('err', err);
@@ -250,72 +281,72 @@ const Form = ({
   }
 
   return (
-    <MuiPickersUtilsProvider utils={MomentUtils}>
-      <Paper className={classes.root}>
-        {
-          (actionButtonPos === 'top') 
-            ? (
-                <FormButtons 
-                  onSubmit={(callback) => onFormSubmit(callback)}
-                  submitValue={submitValue} 
-                  inProgressValue={inProgressValue}
-                  disabled={formGlobalState.disabled} 
-                  onCancel={onCancel}
-                  cancelValue={cancelValue} 
-                  cancelVariant={cancelVariant}
-                  submitVariant={submitVariant}
-                  classes={classes} 
-                  activityIndicatorEnabled={activityIndicatorEnabled}
-                />
-            )
-            : null
-          
-        }
-        <EventContext.Provider value={onUpload}>
-          <FormField
-              path={''}
-              data={data}
-              uiData={uiData}
-              schemaVersion={schema.version}
-              schema={schema}
-              uiSchema={uiSchema}
-              definitions={schema.definitions}
-              interceptors={interceptors}
-              id={id}
-              onChange={onFormValuesChange}
-              onSubmit={onFormSubmit}
-              validation={validation}
-              onKeyDown={handleKeyEnter}
-              onMoveItemUp={onMoveItemUp}
-              onMoveItemDown={onMoveItemDown}
-              onDeleteItem={onDeleteItem}
-              onAddItem={onAddItem}
-              onAddNewProperty={onAddNewProperty}
-              onRemoveProperty={onRemoveProperty}
-              onUpdateKeyProperty={onUpdateKeyProperty}
-              {...rest}
-          />
-        </EventContext.Provider>
-        {
-          (!actionButtonPos) 
-            ? (
-                <FormButtons
-                  onSubmit={(callback) => onFormSubmit(callback)}
-                  disabled={formGlobalState.disabled}
-                  submitValue={submitValue}
-                  cancelValue={cancelValue} 
-                  onCancel={onCancel}
-                  cancelVariant={cancelVariant}
-                  submitVariant={submitVariant}
-                  classes={classes} 
-                  activityIndicatorEnabled={activityIndicatorEnabled}
-                />
-            )
-            : null
-          
-        }
-      </Paper>
-    </MuiPickersUtilsProvider>
+      <MuiPickersUtilsProvider utils={MomentUtils}>
+        <Paper className={classes.root}>
+          {
+            (actionButtonPos === 'top') 
+              ? (
+                  <FormButtons 
+                    onSubmit={(callback) => onFormSubmit(callback)}
+                    submitValue={submitValue} 
+                    inProgressValue={inProgressValue}
+                    disabled={formGlobalState.disabled} 
+                    onCancel={onCancel}
+                    cancelValue={cancelValue} 
+                    cancelVariant={cancelVariant}
+                    submitVariant={submitVariant}
+                    classes={classes} 
+                    activityIndicatorEnabled={activityIndicatorEnabled}
+                  />
+              )
+              : null
+            
+          }
+          <EventContext.Provider value={onUpload}>
+            <FormField
+                path={''}
+                data={data}
+                uiData={uiData}
+                schemaVersion={schema.version}
+                schema={schema}
+                uiSchema={uiSchema}
+                definitions={schema.definitions}
+                interceptors={interceptors}
+                id={id}
+                onChange={onFormValuesChange}
+                onSubmit={onFormSubmit}
+                validation={validation}
+                onKeyDown={handleKeyEnter}
+                onMoveItemUp={onMoveItemUp}
+                onMoveItemDown={onMoveItemDown}
+                onDeleteItem={onDeleteItem}
+                onAddItem={onAddItem}
+                onAddNewProperty={onAddNewProperty}
+                onRemoveProperty={onRemoveProperty}
+                onUpdateKeyProperty={onUpdateKeyProperty}
+                {...rest}
+            />
+          </EventContext.Provider>
+          {
+            (!actionButtonPos) 
+              ? (
+                  <FormButtons
+                    onSubmit={(callback) => onFormSubmit(callback)}
+                    disabled={formGlobalState.disabled}
+                    submitValue={submitValue}
+                    cancelValue={cancelValue} 
+                    onCancel={onCancel}
+                    cancelVariant={cancelVariant}
+                    submitVariant={submitVariant}
+                    classes={classes} 
+                    activityIndicatorEnabled={activityIndicatorEnabled}
+                  />
+              )
+              : null
+            
+          }
+        </Paper>
+      </MuiPickersUtilsProvider>
   );
 };
 

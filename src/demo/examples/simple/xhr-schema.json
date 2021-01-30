@@ -1,29 +1,37 @@
 {
-  "xhr:datasource": {
+  "ui:page": {
     "onload": {
-      "url": "https://react-json-schema-material-ui.free.beeceptor.com/api/1",
-      "method": "GET",
-      "headers": {},
-      "payload": {},
-      "dataMapper": {
-        "firstName": "${first_name}",
-        "lastName": "${last_name}",
-        "customComponent": "${custom_component}",
-        "customRating": "${custom_rating}",
-        "currency": "${currency}",
-        "default": "${default}",
-        "radio": "${radio}",
-        "select": "${select}",
-        "react-select": "${react_select}",
-        "age": "${age}",
-        "upload": "${upload}",
-        "multiSelect": "${multi_select}",
-        "creatableSelectTest": "${creatable_select}",
-        "selectTest": "${select_test}",
-        "bio": "${bio}",
-        "date": "${date}",
-        "password": "${password}",
-        "telephone": "${telephone}"
+      "xhr:datasource": {
+        "url": "https://news123.free.beeceptor.com",
+        "method": "GET",
+        "headers": {},
+        "payload": {},
+        "map": {
+          "formData" : {
+            "firstName": "${first_name}",
+            "lastName": "${last_name}",
+            "customComponent": "${custom_component}",
+            "customRating": "${custom_rating}",
+            "currency": "${currency}",
+            "default": "${default}",
+            "radio": "${radio}",
+            "select": "${select}",
+            "react-select": "${react_select}",
+            "age": "${age}",
+            "upload": "${upload}",
+            "multiSelect": "${multi_select}",
+            "creatableSelectTest": "${creatable_select}",
+            "selectTest": "${select_test}",
+            "bio": "${bio}",
+            "date": "${date}",
+            "password": "${password}",
+            "telephone": "${telephone}"
+          },
+          "uiData": {
+            "customComponent": "${custom_component.start_date} - ${custom_component.end_date}",
+            "currency": "123123.123.123123.123"
+          }
+        }
       }
     },
     "onsubmit": {}
@@ -37,7 +45,7 @@
           "headers": {},
           "payload": {},
           "apiSchemaSource": "",
-          "dataMapper": []
+          "map": []
         }
       }
     }

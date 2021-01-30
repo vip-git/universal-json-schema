@@ -18,7 +18,7 @@ const SimpleRating = ({
 		<Typography component='legend'>Custom Rating Component</Typography>
 		<Rating
 			name='simple-controlled'
-			value={String(value)}
+			value={parseInt(value, 36)}
 			onChange={(event, newValue) => {
 			  setValue(newValue);
 			  persistData(newValue);
@@ -35,7 +35,7 @@ const CustomRating = ({ onChange, formData, ...rest }) => (
 	<SimpleRating
 		id='standard-basic'
 		label='Standard'
-		value={formData.customRating}
+		value={parseInt(formData.customRating, 36)}
         persistData={onChange}
         {...rest}
 	/>
