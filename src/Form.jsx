@@ -1,6 +1,5 @@
 // Library
 import React from 'react';
-import { useQuery } from 'react-query';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 import isEqual from 'lodash/isEqual';
@@ -124,7 +123,7 @@ const Form = ({
   const classes = formStyles();
   const validation = getValidationResult(schema, uiSchema, formData, validations);
   const id = prefixId || generate();
-  const formId = hashCode(JSON.stringify(schema));
+  const [formId, setFormId] = React.useState(null);
 
   if (
     !isEqual(prevData, { formData, schema, uiSchema }) 
@@ -150,26 +149,29 @@ const Form = ({
     setPrevSkippedData({ formData: removeEmptyObjects(formData), schema, uiSchema });
   }
 
-  // const { isLoading, error, data: fetchData, isFetching } = useQuery(`schema${formId}`, 
-  //   () => (xhrSchema 
-  //         && has(xhrSchema, 'ui:page.onload.xhr:datasource.url')
-  //         && has(xhrSchema, 'ui:page.onload.xhr:datasource.map')
-  //         // eslint-disable-next-line no-undef
-  //     ? fetch(
-  //       xhrSchema['ui:page'].onload['xhr:datasource'].url,
-  //     ).then((res) => res.json())
-  //       .then((xhrData) => mapData(
-  //         xhrSchema['ui:page'].onload['xhr:datasource'].map,
-  //         xhrData,
-  //         data, 
-  //         uiData,
-  //         uiSchema, 
-  //         schema,
-  //         onChange,
-  //         onError,
-  //         setData,
-  //       ))
-  //     : {}));
+  if (!isEqual(hashCode(JSON.stringify(schema)), formId)) {
+    if (xhrSchema 
+      && has(xhrSchema, 'ui:page.onload.xhr:datasource.url')
+      && has(xhrSchema, 'ui:page.onload.xhr:datasource.map')
+    ) {
+      // eslint-disable-next-line no-undef
+      fetch(
+        xhrSchema['ui:page'].onload['xhr:datasource'].url,
+      ).then((res) => res.json())
+        .then((xhrData) => mapData(
+          xhrSchema['ui:page'].onload['xhr:datasource'].map,
+          xhrData[0],
+          data, 
+          uiData,
+          uiSchema, 
+          schema,
+          onChange,
+          onError,
+          setData,
+        ));
+    }  
+    setFormId(hashCode(JSON.stringify(schema)));  
+  }
 
   const onFormValuesChange = (field) => (givenValue, givenUIValue, forceDeleteUIData = false) => {
     const newFormData = updateFormData(data, field, givenValue);
@@ -273,7 +275,7 @@ const Form = ({
       validate(data);
       const externalValidations = isFormInValid(validation);
       const isDisabled = disabled || externalValidations || validate.errors;
-      formGlobalState.disabled = typeof isDisabled === 'boolean' ? isDisabled : true;
+      formGlobalState.disabled = !!isDisabled;
     }
     catch (err) {
       // console.log('err', err);

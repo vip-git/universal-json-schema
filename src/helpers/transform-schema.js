@@ -1,5 +1,5 @@
 // Library
-import { has, get } from 'lodash';
+import { has, get, set } from 'lodash';
 import each from 'lodash/each';
 
 // Helpers
@@ -13,13 +13,65 @@ export const hashCode = (s) => {
   return h;
 };
 
-const translateTemplateString = (str, obj) => {
-  const parts = str.split(/\$\{(?!\d)[\wæøåÆØÅ]*\}/);
-  const args = str.match(/[^{}]+(?=})/g) || [];
-  const parameters = args.map(
-    (argument) => obj[argument] || (obj[argument] === undefined ? '' : obj[argument]),
-  );
-  return String.raw({ raw: parts }, ...parameters);
+const translateTemplateString = (str, obj, type) => {
+  if (obj) {
+    const parts = str.split(/\$\{(?!\d)[\wæøåÆØÅ.]*\}/);
+    const args = str.match(/[^{}]+(?=})/g) || [];
+    const parameters = args.map(
+      (argument) => get(obj, argument)
+        || (get(obj, argument) === undefined ? '' : get(obj, argument)),
+    );
+    switch (type) {
+      case 'array':
+        return parameters[0];
+      case 'integer':
+      case 'number':
+        return parseInt(parameters, 36);
+      case 'boolean':
+        return parameters[0] === 'true';
+      default:
+        return String.raw({ raw: parts }, ...parameters);
+    }
+  }
+  return obj;
+};
+
+const setNestedData = ({
+  formData,
+  parentData,
+  returnData,
+  schemaProps,
+  xhrData,
+  extraKey,
+  isUIData,
+}) => {
+  Object.keys(formData).forEach((fd) => {
+    const objectKey = extraKey ? `${extraKey}.${fd}` : fd;
+    const orignalData = parentData || formData;
+    const currentData = get(orignalData, objectKey);
+    const currentSchemaObj = get(schemaProps, fd);
+    if (typeof currentData === 'object') {
+      setNestedData({
+        formData: currentData,
+        parentData: orignalData,
+        schemaProps: currentSchemaObj.properties,
+        returnData,
+        xhrData,
+        extraKey: fd,
+      });
+    }
+    else if (currentData && currentSchemaObj) {
+      set(
+        returnData,
+        objectKey,
+        translateTemplateString(
+          currentData,
+          xhrData,
+          isUIData ? 'string' : currentSchemaObj.type,
+        ),
+      );
+    }
+  });
 };
 
 export const mapData = (
@@ -36,13 +88,30 @@ export const mapData = (
   const returnData = { ...data };
   const returnUIData = { ...iniUiData };
   const { formData, uiData } = mappingInfo;
-  Object.keys(formData).forEach((fd) => {
-    returnData[fd] = translateTemplateString(formData[fd], xhrData);
+  // Set Form Data
+  setNestedData({
+    formData,
+    xhrData,
+    returnData,
+    schemaProps: schema.properties,
   });
-  Object.keys(uiData).forEach((fd) => {
-    returnUIData[fd] = translateTemplateString(uiData[fd], xhrData);
+  // Set UI Data
+  setNestedData({
+    formData: uiData,
+    xhrData,
+    returnData: returnUIData,
+    schemaProps: schema.properties,
+    isUIData: true,
   });
-  setData(returnData, returnUIData, uiSchema, schema, onChange, onError);
+  // Set Global Form and UI Data
+  setData(
+    returnData, 
+    returnUIData, 
+    uiSchema, 
+    schema, 
+    onChange, 
+    onError,
+  );
   return {
     returnData,
     returnUIData,

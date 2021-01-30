@@ -2,7 +2,7 @@
   "ui:page": {
     "onload": {
       "xhr:datasource": {
-        "url": "https://news123.free.beeceptor.com",
+        "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api",
         "method": "GET",
         "headers": {},
         "payload": {},
@@ -10,7 +10,10 @@
           "formData" : {
             "firstName": "${first_name}",
             "lastName": "${last_name}",
-            "customComponent": "${custom_component}",
+            "customComponent": {
+              "startDate": "${custom_component.start_date}",
+              "endDate": "${custom_component.end_date}"
+            },
             "customRating": "${custom_rating}",
             "currency": "${currency}",
             "default": "${default}",
@@ -20,7 +23,7 @@
             "age": "${age}",
             "upload": "${upload}",
             "multiSelect": "${multi_select}",
-            "creatableSelectTest": "${creatable_select}",
+            "creatableSelectTest": "${creatable_select_test}",
             "selectTest": "${select_test}",
             "bio": "${bio}",
             "date": "${date}",
