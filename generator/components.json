@@ -18,6 +18,10 @@
         "@react-jsonschema-form-interceptors/translate-currency": {
             "version": "1.0.3",
             "name": "translate-currency"
+        },
+        "@react-jsonschema-form-interceptors/translate-range-date": {
+            "version": "1.0.1",
+            "name": "translate-range-date"
         }
     },
 	"components": {

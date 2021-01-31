@@ -16,6 +16,9 @@ import Form from '../../AsyncForm';
 import CustomRating from './custom-components/rating.component';
 import CustomComponent from './custom-components/range-picker.component';
 
+// Custom interceptors
+import translateRangeDate from '../../generated/interceptors/translate-range-date';
+
 const FormComponent = ({
   locationHash,
   givenSchema,
@@ -42,19 +45,17 @@ const FormComponent = ({
       interceptors={{
         translateRangeDate: ({ value: givenData, uiValue: givenUiData, options }) => {
           if (givenData.start_date && givenData.end_date) {
-            const startDate = new Date(givenData.start_date).toISOString();
-            const endDate = new Date(givenData.end_date).toISOString();
-            const uiData = `${new Date(givenData.start_date).toLocaleDateString()} - ${new Date(givenData.end_date).toLocaleDateString()}`;
-            const formData = {
-              startDate,
-              endDate,
-            };
+            const { formData, uiData } = translateRangeDate({
+              data: {
+                startDate: givenData.start_date,
+                endDate: givenData.end_date,
+              },
+            });
             return {
               formData,
               uiData,
             };
           }
-
           return {
             formData: givenData,
             uiData: givenUiData,
