@@ -40,7 +40,26 @@ const FormComponent = ({
       onChange={onFormChanged}
       onError={onError}
       interceptors={{
-        translateRatings: (givenData, uiData) => ({ givenData, uiData }),
+        translateRangeDate: ({ value: givenData, uiValue: givenUiData, options }) => {
+          if (givenData.start_date && givenData.end_date) {
+            const startDate = new Date(givenData.start_date).toISOString();
+            const endDate = new Date(givenData.end_date).toISOString();
+            const uiData = `${new Date(givenData.start_date).toLocaleDateString()} - ${new Date(givenData.end_date).toLocaleDateString()}`;
+            const formData = {
+              startDate,
+              endDate,
+            };
+            return {
+              formData,
+              uiData,
+            };
+          }
+
+          return {
+            formData: givenData,
+            uiData: givenUiData,
+          };
+        },
       }}
 			components={{
 			  customComponent: ({ onChange, ...rest }) => (

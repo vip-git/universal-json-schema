@@ -152,18 +152,19 @@ const Form = ({
   if (!isEqual(hashCode(JSON.stringify(schema)), formId)) {
     if (xhrSchema 
       && has(xhrSchema, 'ui:page.onload.xhr:datasource.url')
-      && has(xhrSchema, 'ui:page.onload.xhr:datasource.map')
+      && has(xhrSchema, 'ui:page.onload.xhr:datasource.map:results')
     ) {
       // eslint-disable-next-line no-undef
       fetch(
         xhrSchema['ui:page'].onload['xhr:datasource'].url,
       ).then((res) => res.json())
         .then((xhrData) => mapData(
-          xhrSchema['ui:page'].onload['xhr:datasource'].map,
-          xhrData[0],
-          data, 
+          xhrSchema['ui:page'].onload['xhr:datasource']['map:results'],
+          Array.isArray(xhrData) ? xhrData[0] : xhrData,
+          data,
           uiData,
-          uiSchema, 
+          uiSchema,
+          interceptors,
           schema,
           onChange,
           onError,

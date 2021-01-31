@@ -6,34 +6,25 @@
         "method": "GET",
         "headers": {},
         "payload": {},
-        "map": {
-          "formData" : {
-            "firstName": "${first_name}",
-            "lastName": "${last_name}",
-            "customComponent": {
-              "startDate": "${custom_component.start_date}",
-              "endDate": "${custom_component.end_date}"
-            },
-            "customRating": "${custom_rating}",
-            "currency": "${currency}",
-            "default": "${default}",
-            "radio": "${radio}",
-            "select": "${select}",
-            "react-select": "${react_select}",
-            "age": "${age}",
-            "upload": "${upload}",
-            "multiSelect": "${multi_select}",
-            "creatableSelectTest": "${creatable_select_test}",
-            "selectTest": "${select_test}",
-            "bio": "${bio}",
-            "date": "${date}",
-            "password": "${password}",
-            "telephone": "${telephone}"
-          },
-          "uiData": {
-            "customComponent": "${custom_component.start_date} - ${custom_component.end_date}",
-            "currency": "123123.123.123123.123"
-          }
+        "map:results": {
+          "firstName": "${first_name}",
+          "lastName": "${last_name}",
+          "customComponent": "${custom_component}",
+          "customRating": "${custom_rating}",
+          "currency": "${currency}",
+          "default": "${default}",
+          "radio": "${radio}",
+          "select": "${select}",
+          "react-select": "${react_select}",
+          "age": "${age}",
+          "upload": "${upload}",
+          "multiSelect": "${multi_select}",
+          "creatableSelectTest": "${creatable_select_test}",
+          "selectTest": "${select_test}",
+          "bio": "${bio}",
+          "date": "${date}",
+          "password": "${password}",
+          "telephone": "${telephone}"
         }
       }
     },
@@ -48,7 +39,7 @@
           "headers": {},
           "payload": {},
           "apiSchemaSource": "",
-          "map": []
+          "mapResults": []
         }
       }
     }

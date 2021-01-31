@@ -5,6 +5,9 @@ import each from 'lodash/each';
 // Helpers
 import getDefinitionSchemaFromRef from './get-definition-schema';
 
+// Interceptors
+const { INTERCEPTOR_CONFIG } = require('../generated/interceptors');
+
 export const hashCode = (s) => {
   let h = 0; const l = s.length; let 
     i = 0;
@@ -23,6 +26,7 @@ const translateTemplateString = (str, obj, type) => {
     );
     switch (type) {
       case 'array':
+      case 'object':
         return parameters[0];
       case 'integer':
       case 'number':
@@ -38,9 +42,12 @@ const translateTemplateString = (str, obj, type) => {
 
 const setNestedData = ({
   formData,
+  returnUIData,
   parentData,
   returnData,
   schemaProps,
+  uiSchema,
+  interceptors,
   xhrData,
   extraKey,
   isUIData,
@@ -56,30 +63,44 @@ const setNestedData = ({
         parentData: orignalData,
         schemaProps: currentSchemaObj.properties,
         returnData,
+        uiSchema,
         xhrData,
         extraKey: fd,
       });
     }
     else if (currentData && currentSchemaObj) {
-      set(
-        returnData,
-        objectKey,
-        translateTemplateString(
-          currentData,
-          xhrData,
-          isUIData ? 'string' : currentSchemaObj.type,
-        ),
+      const interceptorFunc = get(uiSchema, `${objectKey}.ui:interceptor`);
+      const options = get(uiSchema, `${objectKey}.ui:options`);
+      const value = translateTemplateString(
+        currentData,
+        xhrData,
+        currentSchemaObj.type,
       );
+      if (interceptorFunc) {
+        const uiValue = translateTemplateString(currentData, xhrData, 'string');
+        const getMethod = INTERCEPTOR_CONFIG[interceptorFunc]?.interceptor || interceptors[interceptorFunc];
+        const { formData: fData, uiData } = getMethod({
+          value,
+          uiValue,
+          options,
+        });
+        set(returnData, objectKey, fData);
+        set(returnUIData, objectKey, uiData);
+      } 
+      else {
+        set(returnData, objectKey, value);
+      }
     }
   });
 };
 
 export const mapData = (
-  mappingInfo,
+  mapResults,
   xhrData,
   data,
   iniUiData,
   uiSchema,
+  interceptors,
   schema,
   onChange,
   onError,
@@ -87,29 +108,23 @@ export const mapData = (
 ) => {
   const returnData = { ...data };
   const returnUIData = { ...iniUiData };
-  const { formData, uiData } = mappingInfo;
-  // Set Form Data
+  // Set Form and UI Data
   setNestedData({
-    formData,
+    formData: mapResults,
     xhrData,
     returnData,
+    returnUIData,
     schemaProps: schema.properties,
-  });
-  // Set UI Data
-  setNestedData({
-    formData: uiData,
-    xhrData,
-    returnData: returnUIData,
-    schemaProps: schema.properties,
-    isUIData: true,
+    interceptors,
+    uiSchema,
   });
   // Set Global Form and UI Data
   setData(
-    returnData, 
-    returnUIData, 
-    uiSchema, 
-    schema, 
-    onChange, 
+    returnData,
+    returnUIData,
+    uiSchema,
+    schema,
+    onChange,
     onError,
   );
   return {

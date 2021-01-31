@@ -71,8 +71,8 @@ export default ({
     rv.onChange = (value, uiValue) => {
       // Call Interceptor if it exists
       if (
-        typeof interceptors[interceptorFunc] === 'function' &&
-        !isEmpty(interceptorFunc)
+        typeof interceptors[interceptorFunc] === 'function'
+        && !isEmpty(interceptorFunc)
       ) {
         const { formData, uiData } = interceptors[interceptorFunc]({
           value,
