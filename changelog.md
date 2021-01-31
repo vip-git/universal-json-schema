@@ -12,6 +12,7 @@
 - new Prop uiData to control ui only data to add seperation of concern with form data
 - Demo updated with vscode editor and live validation changes
 - New interceptors to transform form and uiData using uiSchema - `ui:interceptor`
+- New `xhrSchema` feature enabled to make xhr calls onload, onsubmit and onclick to consume or post data
 
 
 #### Previously version 2.x.x
