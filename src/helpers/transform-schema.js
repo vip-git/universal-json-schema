@@ -18,7 +18,7 @@ export const hashCode = (s) => {
 
 const translateTemplateString = (str, obj, type) => {
   if (obj) {
-    const parts = str.split(/\$\{(?!\d)[\wæøåÆØÅ.]*\}/);
+    const parts = str.split(/\$\{(?!\d)[\wæøåÆØÅ\-_.]*\}/);
     const args = str.match(/[^{}]+(?=})/g) || [];
     const parameters = args.map(
       (argument) => get(obj, argument)
@@ -30,7 +30,7 @@ const translateTemplateString = (str, obj, type) => {
         return parameters[0];
       case 'integer':
       case 'number':
-        return parseInt(parameters, 36);
+        return Number(parameters);
       case 'boolean':
         return parameters[0] === 'true';
       default:
@@ -38,6 +38,48 @@ const translateTemplateString = (str, obj, type) => {
     }
   }
   return obj;
+};
+
+export const setNestedPayload = ({
+  payloadData,
+  formData,
+  schemaProps,
+  parentData,
+  previousPayload,
+  extraKey,
+}) => {
+  const payload = previousPayload || {};
+  Object.keys(payloadData).forEach((fd) => {
+    const parseColonKey = (givenKey) => (givenKey.includes(':') ? givenKey.split(':')[1] : givenKey);
+    const objectKey = extraKey ? `${extraKey}.${fd}` : fd;
+    const parsedObjectKey = extraKey ? `${parseColonKey(extraKey)}.${parseColonKey(fd)}` : fd;
+    const payloadKey = parsedObjectKey.includes(':') ? parsedObjectKey.split(':')[1] : parsedObjectKey;
+    const schemaKey = fd.includes(':') ? fd.split(':')[0] : fd;
+    const orignalData = parentData || payloadData;
+    const currentData = get(orignalData, objectKey);
+    const currentSchemaObj = get(schemaProps, schemaKey);
+    if (currentData && typeof currentData === 'object') {
+      setNestedPayload({
+        payloadData: currentData,
+        formData,
+        schemaProps: currentSchemaObj.properties,
+        parentData: orignalData,
+        extraKey: objectKey,
+        extraSchemaKey: schemaKey,
+        extraPayloadKey: payloadKey,
+        previousPayload: payload,
+      });
+    } 
+    else if (currentData && currentSchemaObj) {
+      const value = translateTemplateString(
+        currentData,
+        formData,
+        currentSchemaObj.type,
+      );
+      set(payload, payloadKey, value);
+    }
+  });
+  return payload;
 };
 
 const setNestedData = ({

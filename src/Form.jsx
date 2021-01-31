@@ -28,7 +28,7 @@ import updateFormData, {
 } from './helpers/update-form-data';
 import removeEmptyObjects, { isEmptyValues } from './helpers/remove-empty-values';
 import isFormInValid from './helpers/validation/is-form-validated';
-import transformSchema, { hashCode, mapData } from './helpers/transform-schema';
+import transformSchema, { hashCode, mapData, setNestedPayload } from './helpers/transform-schema';
 import getValidationResult from './helpers/validation';
 import executeXHRCall from './helpers/execute-xhr-call';
 
@@ -155,12 +155,13 @@ const Form = ({
   if (!isEqual(hashCode(JSON.stringify(schema)), formId)) {
     if (xhrSchema 
       && has(xhrSchema, 'ui:page.onload.xhr:datasource.url')
+      && has(xhrSchema, 'ui:page.onload.xhr:datasource.method')
       && has(xhrSchema, 'ui:page.onload.xhr:datasource.map:results')
     ) {
       executeXHRCall({
         type: 'onload',
         url: xhrSchema['ui:page'].onload['xhr:datasource'].url,
-        method: 'GET',
+        method: xhrSchema['ui:page'].onload['xhr:datasource'].method,
         mapData: (xhrData) => mapData(
           xhrSchema['ui:page'].onload['xhr:datasource']['map:results'],
           Array.isArray(xhrData) ? xhrData[0] : xhrData,
@@ -260,10 +261,51 @@ const Form = ({
     );
   };
 
-  const onFormSubmit = (callback) => onSubmit(
-    { formData, uiData, uiSchema, validation }, 
-    () => callback && callback(),
-  );
+  const onFormSubmit = (callback) => {
+    if (
+      xhrSchema 
+      && has(xhrSchema, 'ui:page.onsubmit.xhr:datasource.url')
+      && has(xhrSchema, 'ui:page.onsubmit.xhr:datasource.method')
+      && has(xhrSchema, 'ui:page.onsubmit.xhr:datasource.map:results')
+      && has(xhrSchema, 'ui:page.onsubmit.xhr:datasource.map:payload')
+    ) {
+      const { url, method } = xhrSchema['ui:page'].onsubmit['xhr:datasource'];
+      const payload = setNestedPayload({
+        payloadData: xhrSchema['ui:page'].onsubmit['xhr:datasource']['map:payload'],
+        formData: data,
+        schemaProps: schema.properties,
+      });
+      return executeXHRCall({
+        type: 'onsubmit',
+        url,
+        method,
+        payload,
+        mapData: (xhrData) => {
+          const xhrDt = Array.isArray(xhrData) ? xhrData[0] : xhrData;
+          mapData(
+            xhrSchema['ui:page'].onsubmit['xhr:datasource']['map:results'],
+            xhrDt,
+            data,
+            uiData,
+            uiSchema,
+            interceptors,
+            schema,
+            onChange,
+            onError,
+            setData,
+          );
+          return onSubmit(
+            { formData: xhrDt, uiData, uiSchema, validation }, 
+            () => callback && callback(),
+          );
+        },
+      });
+    }
+    return onSubmit(
+      { formData, uiData, uiSchema, validation }, 
+      () => callback && callback(),
+    );
+  };
 
   const handleKeyEnter = (e) => {
     if (e.keyCode === 13 && submitOnEnter) {

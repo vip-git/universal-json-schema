@@ -103,7 +103,7 @@ const SourceSchema = ({
         }
       </div>
       <div>
-        <Source key={`${locationHash}UISchema`} title={'uiSchema.json'} source={uiSchema} onChange={onChange('uiSchema')} />
+        <Source key={`${locationHash}UISchema`} title={'uiSchema.json (Optional)'} source={uiSchema} onChange={onChange('uiSchema')} />
         <Source key={`${locationHash}FormData`} title={'formData.json'} schema={validSchema} hasSchemaError={hasSchemaError} source={formData} onChange={onChange('formData')} />
       </div>
     </div>

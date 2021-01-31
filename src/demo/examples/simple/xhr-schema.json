@@ -2,7 +2,7 @@
   "ui:page": {
     "onload": {
       "xhr:datasource": {
-        "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api",
+        "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api/2",
         "method": "GET",
         "headers": {},
         "payload": {},
@@ -28,7 +28,56 @@
         }
       }
     },
-    "onsubmit": {}
+    "onsubmit": {
+      "xhr:datasource": {
+        "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api/2",
+        "method": "PUT",
+        "headers": {},
+        "map:payload": {
+          "firstName:first_name": "${firstName}",
+          "lastName:last_name": "${lastName}",
+          "customComponent:custom_component": {
+            "startDate:start_date": "${customComponent.startDate}",
+            "endDate:end_date": "${customComponent.endDate}"
+          },
+          "customRating:custom_rating": "${customRating}",
+          "currency": "${currency}",
+          "default": "${default}",
+          "radio": "${radio}",
+          "select": "${select}",
+          "react-select:react_select": "${react-select}",
+          "age": "${age}",
+          "upload": "${upload}",
+          "multiSelect": "${multiSelect}",
+          "creatableSelectTest:creatable_select_test": "${creatableSelectTest}",
+          "selectTest:select_test": "${selectTest}",
+          "bio": "${bio}",
+          "date": "${date}",
+          "password": "${password}",
+          "telephone": "${telephone}"
+        },
+        "map:results": {
+          "firstName": "${first_name}",
+          "lastName": "${last_name}",
+          "customComponent": "${custom_component}",
+          "customRating": "${custom_rating}",
+          "currency": "${currency}",
+          "default": "${default}",
+          "radio": "${radio}",
+          "select": "${select}",
+          "react-select": "${react_select}",
+          "age": "${age}",
+          "upload": "${upload}",
+          "multiSelect": "${multiSelect}",
+          "creatableSelectTest": "${creatable_select_test}",
+          "selectTest": "${select_test}",
+          "bio": "${bio}",
+          "date": "${date}",
+          "password": "${password}",
+          "telephone": "${telephone}"
+        }
+      }
+    }
   },
   "selectTest": {
     "onclick": {
