@@ -6,26 +6,7 @@
         "method": "GET",
         "headers": {},
         "payload": {},
-        "map:results": {
-          "firstName": "${first_name}",
-          "lastName": "${last_name}",
-          "customComponent": "${custom_component}",
-          "customRating": "${custom_rating}",
-          "currency": "${currency}",
-          "default": "${default}",
-          "radio": "${radio}",
-          "select": "${select}",
-          "react-select": "${react_select}",
-          "age": "${age}",
-          "upload": "${upload}",
-          "multiSelect": "${multiSelect}",
-          "creatableSelectTest": "${creatable_select_test}",
-          "selectTest": "${select_test}",
-          "bio": "${bio}",
-          "date": "${date}",
-          "password": "${password}",
-          "telephone": "${telephone}"
-        }
+        "map:results": "#/definitions/results"
       }
     },
     "onsubmit": {
@@ -56,41 +37,46 @@
           "password": "${password}",
           "telephone": "${telephone}"
         },
-        "map:results": {
-          "firstName": "${first_name}",
-          "lastName": "${last_name}",
-          "customComponent": "${custom_component}",
-          "customRating": "${custom_rating}",
-          "currency": "${currency}",
-          "default": "${default}",
-          "radio": "${radio}",
-          "select": "${select}",
-          "react-select": "${react_select}",
-          "age": "${age}",
-          "upload": "${upload}",
-          "multiSelect": "${multiSelect}",
-          "creatableSelectTest": "${creatable_select_test}",
-          "selectTest": "${select_test}",
-          "bio": "${bio}",
-          "date": "${date}",
-          "password": "${password}",
-          "telephone": "${telephone}"
+        "map:results": "#/definitions/results"
+      }
+    }
+  },
+  "properties": {
+    "selectTest": {
+      "onclick": {
+        "enum": {
+          "xhr:datasource": {
+            "url": "",
+            "method": "POST",
+            "headers": {},
+            "payload": {},
+            "apiSchemaSource": "",
+            "map:enum": []
+          }
         }
       }
     }
   },
-  "selectTest": {
-    "onclick": {
-      "enum": {
-        "xhr:datasource": {
-          "url": "",
-          "method": "POST",
-          "headers": {},
-          "payload": {},
-          "apiSchemaSource": "",
-          "mapResults": []
-        }
-      }
+  "definitions": {
+    "results": {
+      "firstName": "${first_name}",
+      "lastName": "${last_name}",
+      "customComponent": "${custom_component}",
+      "customRating": "${custom_rating}",
+      "currency": "${currency}",
+      "default": "${default}",
+      "radio": "${radio}",
+      "select": "${select}",
+      "react-select": "${react_select}",
+      "age": "${age}",
+      "upload": "${upload}",
+      "multiSelect": "${multiSelect}",
+      "creatableSelectTest": "${creatable_select_test}",
+      "selectTest": "${select_test}",
+      "bio": "${bio}",
+      "date": "${date}",
+      "password": "${password}",
+      "telephone": "${telephone}"
     }
   }
 }

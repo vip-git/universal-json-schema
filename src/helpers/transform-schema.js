@@ -82,6 +82,11 @@ export const setNestedPayload = ({
   return payload;
 };
 
+export const getDefinitionsValue = (schema, definitionsRef) => get(
+  schema, 
+  definitionsRef.replace('#/', '').replace('/', '.'),
+);
+
 const setNestedData = ({
   formData,
   returnUIData,

@@ -28,7 +28,7 @@ import updateFormData, {
 } from './helpers/update-form-data';
 import removeEmptyObjects, { isEmptyValues } from './helpers/remove-empty-values';
 import isFormInValid from './helpers/validation/is-form-validated';
-import transformSchema, { hashCode, mapData, setNestedPayload } from './helpers/transform-schema';
+import transformSchema, { hashCode, mapData, setNestedPayload, getDefinitionsValue } from './helpers/transform-schema';
 import getValidationResult from './helpers/validation';
 import executeXHRCall from './helpers/execute-xhr-call';
 
@@ -158,12 +158,16 @@ const Form = ({
       && has(xhrSchema, 'ui:page.onload.xhr:datasource.method')
       && has(xhrSchema, 'ui:page.onload.xhr:datasource.map:results')
     ) {
+      const mappedResults = xhrSchema['ui:page'].onload['xhr:datasource']['map:results'];
+      const resultsMappingInfo = mappedResults.includes('#/') 
+        ? getDefinitionsValue(xhrSchema, mappedResults)
+        : mappedResults;
       executeXHRCall({
         type: 'onload',
         url: xhrSchema['ui:page'].onload['xhr:datasource'].url,
         method: xhrSchema['ui:page'].onload['xhr:datasource'].method,
         mapData: (xhrData) => mapData(
-          xhrSchema['ui:page'].onload['xhr:datasource']['map:results'],
+          resultsMappingInfo,
           Array.isArray(xhrData) ? xhrData[0] : xhrData,
           data,
           uiData,
@@ -282,8 +286,12 @@ const Form = ({
         payload,
         mapData: (xhrData) => {
           const xhrDt = Array.isArray(xhrData) ? xhrData[0] : xhrData;
+          const mappedResults = xhrSchema['ui:page'].onsubmit['xhr:datasource']['map:results'];
+          const resultsMappingInfo = mappedResults.includes('#/') 
+            ? getDefinitionsValue(xhrSchema, mappedResults)
+            : mappedResults;
           mapData(
-            xhrSchema['ui:page'].onsubmit['xhr:datasource']['map:results'],
+            resultsMappingInfo,
             xhrDt,
             data,
             uiData,
