@@ -18,7 +18,7 @@
           "react-select": "${react_select}",
           "age": "${age}",
           "upload": "${upload}",
-          "multiSelect": "${multi_select}",
+          "multiSelect": "${multiSelect}",
           "creatableSelectTest": "${creatable_select_test}",
           "selectTest": "${select_test}",
           "bio": "${bio}",
