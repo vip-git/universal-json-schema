@@ -15,6 +15,9 @@ import Paper from '@material-ui/core/Paper';
 // Internal
 import formStyles from './form-styles';
 import FormField from './FormField';
+import FormButtons from './FormButtons';
+
+// Helpers
 import updateFormData, { 
   addListItem, 
   removeListItem, 
@@ -27,7 +30,7 @@ import removeEmptyObjects, { isEmptyValues } from './helpers/remove-empty-values
 import isFormInValid from './helpers/validation/is-form-validated';
 import transformSchema, { hashCode, mapData } from './helpers/transform-schema';
 import getValidationResult from './helpers/validation';
-import FormButtons from './FormButtons';
+import executeXHRCall from './helpers/execute-xhr-call';
 
 // Initial Contexts
 export const EventContext = React.createContext('fieldEvent');
@@ -154,11 +157,11 @@ const Form = ({
       && has(xhrSchema, 'ui:page.onload.xhr:datasource.url')
       && has(xhrSchema, 'ui:page.onload.xhr:datasource.map:results')
     ) {
-      // eslint-disable-next-line no-undef
-      fetch(
-        xhrSchema['ui:page'].onload['xhr:datasource'].url,
-      ).then((res) => res.json())
-        .then((xhrData) => mapData(
+      executeXHRCall({
+        type: 'onload',
+        url: xhrSchema['ui:page'].onload['xhr:datasource'].url,
+        method: 'GET',
+        mapData: (xhrData) => mapData(
           xhrSchema['ui:page'].onload['xhr:datasource']['map:results'],
           Array.isArray(xhrData) ? xhrData[0] : xhrData,
           data,
@@ -169,7 +172,8 @@ const Form = ({
           onChange,
           onError,
           setData,
-        ));
+        ),
+      });
     }  
     setFormId(hashCode(JSON.stringify(schema)));  
   }
