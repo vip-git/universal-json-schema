@@ -206,6 +206,8 @@ const Form = ({
 
   const onXHRSchemaEvent = (field) => (xhrDef, xhrEvent) => {
     const { url, method, payload } = xhrDef;
+    const mapDef = Object.keys(xhrDef).find((t) => t.includes('map:'));
+    const findMapDef = xhrDef[mapDef];
     set(xhrSchema, `properties.${field}.${xhrEvent}.xhrProgress`, true);
     setLoadingState({ ...loadingState, [field]: true });
     executeXHRCall({
@@ -213,10 +215,10 @@ const Form = ({
       method,
       payload,
       callback: (xhrData) => {
-        const enums = xhrData.map((xh) => xh.name);
+        const enums = xhrData.map((xh) => get(xh, findMapDef));
         set(
           schema, 
-          `properties.${field}.items.enum`,
+          `properties.${field}.${mapDef.replace('map:', '')}`,
           enums,
         );
         set(xhrSchema, `properties.${field}.${xhrEvent}.xhrComplete`, true);

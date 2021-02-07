@@ -49,8 +49,7 @@
             "method": "GET",
             "headers": {},
             "payload": {},
-            "apiSchemaSource": "",
-            "map:enum": []
+            "map:items.enum": "name"
         }
       }
     }
