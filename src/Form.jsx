@@ -33,7 +33,8 @@ import getValidationResult from './helpers/validation';
 import executeXHRCall from './helpers/execute-xhr-call';
 
 // Initial Contexts
-export const EventContext = React.createContext('fieldEvent');
+import { LoadingContext, EventContext } from './helpers/context';
+
 let data = {};
 let uiData = {};
 let validSchema = {};
@@ -120,6 +121,7 @@ const Form = ({
   const formGlobalState = {
     disabled,
   };
+  const [loadingState, setLoadingState] = React.useState(null);
   const [prevData, setPrevData] = React.useState(null);
   const [prevSkippedData, setPrevSkippedData] = React.useState(null);
   const iniUiData = setUIData({}, Object.keys(schema.properties || {}), uiSchema, schema);
@@ -157,6 +159,7 @@ const Form = ({
       && has(xhrSchema, 'ui:page.onload.xhr:datasource.url')
       && has(xhrSchema, 'ui:page.onload.xhr:datasource.method')
       && has(xhrSchema, 'ui:page.onload.xhr:datasource.map:results')
+      && !has(xhrSchema, 'ui:page.onload.xhrComplete')
     ) {
       const mappedResults = xhrSchema['ui:page'].onload['xhr:datasource']['map:results'];
       const resultsMappingInfo = mappedResults.includes('#/') 
@@ -166,18 +169,21 @@ const Form = ({
         type: 'onload',
         url: xhrSchema['ui:page'].onload['xhr:datasource'].url,
         method: xhrSchema['ui:page'].onload['xhr:datasource'].method,
-        mapData: (xhrData) => mapData(
-          resultsMappingInfo,
-          Array.isArray(xhrData) ? xhrData[0] : xhrData,
-          data,
-          uiData,
-          uiSchema,
-          interceptors,
-          schema,
-          onChange,
-          onError,
-          setData,
-        ),
+        callback: (xhrData) => {
+          set(xhrSchema, 'ui:page.onload.xhrComplete', true);
+          return mapData(
+            resultsMappingInfo,
+            Array.isArray(xhrData) ? xhrData[0] : xhrData,
+            data,
+            uiData,
+            uiSchema,
+            interceptors,
+            schema,
+            onChange,
+            onError,
+            setData,
+          );
+        },
       });
     }  
     setFormId(hashCode(JSON.stringify(schema)));  
@@ -196,6 +202,28 @@ const Form = ({
       onChange,
       onError,
     );
+  };
+
+  const onXHRSchemaEvent = (field) => (xhrDef, xhrEvent) => {
+    const { url, method, payload } = xhrDef;
+    set(xhrSchema, `properties.${field}.${xhrEvent}.xhrProgress`, true);
+    setLoadingState({ ...loadingState, [field]: true });
+    executeXHRCall({
+      url,
+      method,
+      payload,
+      callback: (xhrData) => {
+        const enums = xhrData.map((xh) => xh.name);
+        set(
+          schema, 
+          `properties.${field}.items.enum`,
+          enums,
+        );
+        set(xhrSchema, `properties.${field}.${xhrEvent}.xhrComplete`, true);
+        set(xhrSchema, `properties.${field}.${xhrEvent}.xhrProgress`, false);
+        setLoadingState({ ...loadingState, [field]: false });
+      },
+    });
   };
 
   const onMoveItemUp = (path, idx) => () => setData(
@@ -284,7 +312,7 @@ const Form = ({
         url,
         method,
         payload,
-        mapData: (xhrData) => {
+        callback: (xhrData) => {
           const xhrDt = Array.isArray(xhrData) ? xhrData[0] : xhrData;
           const mappedResults = xhrSchema['ui:page'].onsubmit['xhr:datasource']['map:results'];
           const resultsMappingInfo = mappedResults.includes('#/') 
@@ -359,31 +387,35 @@ const Form = ({
               : null
             
           }
-          <EventContext.Provider value={onUpload}>
-            <FormField
-                path={''}
-                data={data}
-                uiData={uiData}
-                schemaVersion={schema.version}
-                schema={schema}
-                uiSchema={uiSchema}
-                definitions={schema.definitions}
-                interceptors={interceptors}
-                id={id}
-                onChange={onFormValuesChange}
-                onSubmit={onFormSubmit}
-                validation={validation}
-                onKeyDown={handleKeyEnter}
-                onMoveItemUp={onMoveItemUp}
-                onMoveItemDown={onMoveItemDown}
-                onDeleteItem={onDeleteItem}
-                onAddItem={onAddItem}
-                onAddNewProperty={onAddNewProperty}
-                onRemoveProperty={onRemoveProperty}
-                onUpdateKeyProperty={onUpdateKeyProperty}
-                {...rest}
-            />
-          </EventContext.Provider>
+          <LoadingContext.Provider value={loadingState}>
+            <EventContext.Provider value={onUpload}>
+              <FormField
+                  path={''}
+                  data={data}
+                  uiData={uiData}
+                  schemaVersion={schema.version}
+                  schema={schema}
+                  uiSchema={uiSchema}
+                  xhrSchema={xhrSchema}
+                  definitions={schema.definitions}
+                  interceptors={interceptors}
+                  id={id}
+                  onChange={onFormValuesChange}
+                  onXHRSchemaEvent={onXHRSchemaEvent}
+                  onSubmit={onFormSubmit}
+                  validation={validation}
+                  onKeyDown={handleKeyEnter}
+                  onMoveItemUp={onMoveItemUp}
+                  onMoveItemDown={onMoveItemDown}
+                  onDeleteItem={onDeleteItem}
+                  onAddItem={onAddItem}
+                  onAddNewProperty={onAddNewProperty}
+                  onRemoveProperty={onRemoveProperty}
+                  onUpdateKeyProperty={onUpdateKeyProperty}
+                  {...rest}
+              />
+            </EventContext.Provider>
+          </LoadingContext.Provider>
           {
             (!actionButtonPos) 
               ? (

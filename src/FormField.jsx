@@ -10,7 +10,9 @@ export const RawFormField = React.memo(({
   schema, 
   data, 
   uiSchema = {},
-  onChange, 
+  xhrSchema = {},
+  onChange,
+  onXHRSchemaEvent,
   dynamicKeyField,
   onUpdateKeyProperty,
   onKeyDown,
@@ -30,8 +32,10 @@ export const RawFormField = React.memo(({
           schema={schema}
           data={data}
           uiSchema={uiSchema}
+          xhrSchema={xhrSchema}
           onKeyDown={onKeyDown}
           onChange={onChange}
+          onXHRSchemaEvent={onXHRSchemaEvent}
           hideTitle={shouldHideTitle(uiSchema, schema)}
           onUpdateKeyProperty={onUpdateKeyProperty}
           dynamicKeyField={dynamicKeyField}
@@ -47,7 +51,9 @@ export const RawFormField = React.memo(({
         schema={schema}
         data={data}
         uiSchema={uiSchema}
+        xhrSchema={xhrSchema}
         onChange={onGivenChange && onGivenChange(path)}
+        onXHRSchemaEvent={onXHRSchemaEvent(path)}
         onKeyDown={onKeyDown}
         dynamicKeyField={dynamicKeyField}
         {...rest}

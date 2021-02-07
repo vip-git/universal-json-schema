@@ -12,6 +12,7 @@ export default ({
   disabled,
   onChange, 
   htmlid,
+  xhrSchema,
   options = {},
   ...rest 
 }) => {
@@ -26,6 +27,7 @@ export default ({
     onChange,
     schema,
     type, 
+    xhrSchema,
     isMultiple,
   });
 

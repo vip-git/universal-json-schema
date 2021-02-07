@@ -48,13 +48,14 @@ export default ({
   uiSchema = {},
   type,
   schemaVersion,
+  xhrSchema,
   widget,
   options = {},
 }) => {
   const multiSelect = (widget === 'material-multiselect'
     || options.multiSelect
     || (schema.anyOf && schema.parsedArray))
-    && !schema.oneOf;   
+    && !schema.oneOf;     
   return {
     onChange:
       onChange

@@ -3,7 +3,7 @@ const executeXHRCall = ({
   url,
   method,
   payload,
-  mapData,
+  callback,
 }) => {
   const options = {
     method, // *GET, POST, PUT, DELETE, etc.
@@ -19,7 +19,9 @@ const executeXHRCall = ({
   };
   // eslint-disable-next-line no-undef
   const fetchData = (method === 'GET') ? fetch(url) : fetch(url, options);
-  return fetchData.then((res) => res.json()).then((xhrData) => mapData(xhrData));
+  return fetchData
+    .then((res) => res.json())
+    .then((xhrData) => callback(xhrData));
 };
 
 export default executeXHRCall;

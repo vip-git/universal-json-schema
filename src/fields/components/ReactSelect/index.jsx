@@ -13,6 +13,7 @@ export default ({
   value = '[]',
   uiSchema,
   schema,
+  xhrSchema,
   disabled,
   widget,
   onChange, 

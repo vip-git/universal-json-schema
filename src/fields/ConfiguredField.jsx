@@ -35,6 +35,16 @@ export const RawConfiguredField = ({
 }) => {
   const classes = fieldStyles();
   const FormRoot = isCustomComponent ? FormGroup : FormControl;
+  const isXHRNotImplemented = componentProps?.xhrSchema?.onload 
+							&& !componentProps?.xhrSchema?.onload?.xhrComplete 
+							&& !componentProps?.xhrSchema?.onload?.xhrProgress;
+
+  React.useEffect(() => {
+    if (isXHRNotImplemented) {
+	  componentProps.onXHRSchemaEvent(componentProps?.xhrSchema.onload['xhr:datasource'], 'onload');
+    }
+  }, [componentProps]);
+  
   return (
 	<FormRoot
 		id={`${htmlid}-formControl`}

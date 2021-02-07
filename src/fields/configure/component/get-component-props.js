@@ -2,14 +2,16 @@
 import isEmpty from 'lodash/isEmpty';
 
 // Context
-import { EventContext } from '../../../Form';
+import { EventContext, LoadingContext } from '../../../helpers/context';
 
 export default ({
   schema = {},
   uiSchema = {},
+  xhrSchema = {},
   isCustomComponent,
   inputValue,
   onChange,
+  onXHRSchemaEvent,
   onKeyDown,
   creatableSelectValue,
   onCreatableSelectChange,
@@ -35,7 +37,7 @@ export default ({
         // Call Interceptor if it exists
         if (
           typeof interceptors[interceptorFunc] === 'function'
-          && !isEmpty(interceptorFunc)
+            && !isEmpty(interceptorFunc)
         ) {
           const { formData, uiData } = interceptors[interceptorFunc]({
             value,
@@ -43,16 +45,19 @@ export default ({
             options,
           });
           return onChange(formData, uiData);
-        } 
+        }
         return onChange(value, uiValue);
       },
       onKeyDown,
       uiSchema,
       schema,
+      xhrSchema,
+      onXHRSchemaEvent,
       options,
       widget,
       type,
       EventContext,
+      LoadingContext,
       htmlid,
     };
 
