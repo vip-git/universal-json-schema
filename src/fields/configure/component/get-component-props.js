@@ -33,7 +33,7 @@ export default ({
       ...options,
     }
     : {
-      onChange: (value, uiValue) => {
+      onChange: (value, uiValue, forceDeleteUIData = false) => {
         // Call Interceptor if it exists
         if (
           typeof interceptors[interceptorFunc] === 'function'
@@ -44,9 +44,9 @@ export default ({
             uiValue,
             options,
           });
-          return onChange(formData, uiData);
+          return onChange(formData, uiData, forceDeleteUIData);
         }
-        return onChange(value, uiValue);
+        return onChange(value, uiValue, forceDeleteUIData);
       },
       onKeyDown,
       uiSchema,

@@ -194,9 +194,12 @@ const Form = ({
     const newUIData = isEmptyValues(givenUIValue) || forceDeleteUIData
       ? removeValueFromSpec(uiData, field) 
       : updateFormData(uiData, field, givenUIValue);
+    const finalUIData = !isEqual(givenValue, givenUIValue) 
+                        || isEmptyValues(givenUIValue) 
+                        || forceDeleteUIData ? newUIData : uiData;
     setData(
       newFormData, 
-      !isEqual(givenValue, givenUIValue) || isEmptyValues(givenUIValue) || forceDeleteUIData ? newUIData : uiData, 
+      finalUIData, 
       uiSchema, 
       schema,
       onChange,
