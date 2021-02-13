@@ -1,5 +1,6 @@
 import React from 'react';
 import isEqual from 'lodash/isEqual';
+import has from 'lodash/has';
 import { withStyles } from '@material-ui/core/styles';
 import FieldSet, { shouldHideTitle } from './FieldSet';
 import Field from './fields';
@@ -17,6 +18,7 @@ export const RawFormField = React.memo(({
   onUpdateKeyProperty,
   onKeyDown,
   path,
+  id,
   ...rest 
 }) => {
   const classes = styles();
@@ -39,6 +41,7 @@ export const RawFormField = React.memo(({
           hideTitle={shouldHideTitle(uiSchema, schema)}
           onUpdateKeyProperty={onUpdateKeyProperty}
           dynamicKeyField={dynamicKeyField}
+          prefixId={id}
           {...rest} 
         />
     );
@@ -56,13 +59,22 @@ export const RawFormField = React.memo(({
         onXHRSchemaEvent={onXHRSchemaEvent(path)}
         onKeyDown={onKeyDown}
         dynamicKeyField={dynamicKeyField}
+        prefixId={id}
         {...rest}
       />
   );
-}, (prevProps, nextProps) => isEqual(prevProps.data, nextProps.data) 
-                            && isEqual(prevProps.schema, nextProps.schema)
-                            && isEqual(prevProps.uiData, nextProps.uiData)
-                            && isEqual(prevProps.uiSchema, nextProps.uiSchema),
+}, (prevProps, nextProps) => (
+  isEqual(prevProps.data, nextProps.data) 
+  && isEqual(prevProps.schema, nextProps.schema)
+  && isEqual(prevProps.uiData, nextProps.uiData)
+  && isEqual(prevProps.uiSchema, nextProps.uiSchema)
+  && (
+    (
+      has(prevProps.schema, 'ui:component') 
+      || has(prevProps.schema, 'component')
+    ) ? prevProps.prefixId === nextProps.prefixId : true
+  )
+),
 );
 
 export default RawFormField;

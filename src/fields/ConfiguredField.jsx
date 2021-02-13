@@ -44,7 +44,6 @@ export const RawConfiguredField = ({
 	  componentProps.onXHRSchemaEvent(componentProps?.xhrSchema.onload['xhr:datasource'], 'onload');
     }
   }, [componentProps]);
-  
   return (
 	<FormRoot
 		id={`${htmlid}-formControl`}

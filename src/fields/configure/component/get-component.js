@@ -86,7 +86,7 @@ export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
       && component in components
       && typeof components[component] === 'function'
     ) {
-      return React.memo(components[component]);
+      return components[component];
     }
 
     const selectedComponent = componentConfig.get(dataType).get(formWidget)

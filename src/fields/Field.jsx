@@ -5,9 +5,9 @@ import configureComponent from './configure';
 import ConfiguredField from './ConfiguredField';
 
 export default (props) => {
-  const { path, id, schema, data, uiSchema, validation } = props;
+  const { path, prefixId, schema, data, uiSchema, validation } = props;
   const { type } = schema;
-  const htmlid = `${id}_${path}`;
+  const htmlid = `${prefixId}_${path}`;
   const {
     Component, 
     LabelComponent, 
@@ -25,7 +25,7 @@ export default (props) => {
   const isHidden = uiSchema && uiSchema['mui:type'] === 'hidden';
   return (
 		<ConfiguredField
-			id={id}
+			id={prefixId}
 			className={className}
 			data={data}
 			type={type}

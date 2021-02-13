@@ -128,6 +128,7 @@ const Form = ({
   const classes = formStyles();
   const validation = getValidationResult(schema, uiSchema, formData, validations);
   const id = prefixId || generate();
+  const autoId = generate();
   const [formId, setFormId] = React.useState(null);
 
   if (
@@ -159,7 +160,6 @@ const Form = ({
       && has(xhrSchema, 'ui:page.onload.xhr:datasource.url')
       && has(xhrSchema, 'ui:page.onload.xhr:datasource.method')
       && has(xhrSchema, 'ui:page.onload.xhr:datasource.map:results')
-      && !has(xhrSchema, 'ui:page.onload.xhrComplete')
     ) {
       const mappedResults = xhrSchema['ui:page'].onload['xhr:datasource']['map:results'];
       const resultsMappingInfo = mappedResults.includes('#/') 
@@ -169,23 +169,20 @@ const Form = ({
         type: 'onload',
         url: xhrSchema['ui:page'].onload['xhr:datasource'].url,
         method: xhrSchema['ui:page'].onload['xhr:datasource'].method,
-        callback: (xhrData) => {
-          set(xhrSchema, 'ui:page.onload.xhrComplete', true);
-          return mapData(
-            resultsMappingInfo,
-            Array.isArray(xhrData) ? xhrData[0] : xhrData,
-            data,
-            uiData,
-            uiSchema,
-            interceptors,
-            schema,
-            onChange,
-            onError,
-            setData,
-          );
-        },
+        callback: (xhrData) => mapData(
+          resultsMappingInfo,
+          Array.isArray(xhrData) ? xhrData[0] : xhrData,
+          data,
+          uiData,
+          uiSchema,
+          interceptors,
+          schema,
+          onChange,
+          onError,
+          setData,
+        ),
       });
-    }  
+    }
     setFormId(hashCode(JSON.stringify(schema)));  
   }
 

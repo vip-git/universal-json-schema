@@ -180,7 +180,6 @@ const Example = ({
     fileMatch: ['formData.json'],
     schema: validSchema || data.schema,
   }];
-  
   return (
     <Paper className={classes.root}>
       <h3>{title}</h3>

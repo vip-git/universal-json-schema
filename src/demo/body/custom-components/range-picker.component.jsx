@@ -44,7 +44,6 @@ const CustomDateRangePicker = ({ onChange, formData, uiData = {} }) => {
       />
     </Dialog>
   );
-
   return (
     <React.Fragment>
       <TextField
