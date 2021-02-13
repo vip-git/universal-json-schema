@@ -116,6 +116,7 @@ const Example = ({
   const classes = useStyles(theme);
   const [oldHash, setOldHash] = useState(window.location.hash);
   const [state, setState] = useState({ ...data });
+  const [formDataState, setFormData] = useState({ ...data.formData });
   const [schemaErrors, setSchemaErrors] = useState(null);
   const [validSchema, setValidSchema] = useState(null);
 
@@ -134,6 +135,7 @@ const Example = ({
     setState({ ...state, formData, uiSchema, uiData, validSchema });
     setSchemaErrors(givenSchemaErrors);
     setValidSchema(givenValidSchema);
+    setFormData(formData);
   };
 
   const onSubmit = (value, callback) => {
@@ -190,7 +192,7 @@ const Example = ({
           schema={schema || data.schema}
           validSchema={editorSchema || data.schema}
           uiSchema={uiSchema || data.uiSchema}
-          formData={formData || data.formData}
+          formData={formDataState || formData || data.formData}
           xhrSchema={xhrSchema || data.xhrSchema || {}}
           hasSchemaError={schemaErrors}
           onChange={onChange}

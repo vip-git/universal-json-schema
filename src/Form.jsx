@@ -340,7 +340,7 @@ const Form = ({
       });
     }
     return onSubmit(
-      { formData, uiData, uiSchema, validation }, 
+      { formData: data, uiData, uiSchema, validation }, 
       () => callback && callback(),
     );
   };

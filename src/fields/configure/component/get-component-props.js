@@ -100,7 +100,14 @@ export default ({
       rv.disabled = options.disabled.call(null, data, objectData);
     }
   }
-  else if (schema.default && !data) {
+  else if (
+    (schema.default && !data) 
+    || (
+      typeof schema.default === 'boolean' 
+      && typeof data !== 'boolean'
+      && schema.type === 'boolean'
+    )
+  ) {
     onChange(schema.default);
   }
   
