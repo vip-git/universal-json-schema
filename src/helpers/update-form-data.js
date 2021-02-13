@@ -17,9 +17,18 @@ const applyAtPath = (path, data, spec) => {
     return { [subPath]: applyAtPath(prop, data[subPath], spec) };
   }
   if (arrMatch) {
-    const subPath = arrMatch[1];
-    const index = Number(arrMatch[2]);
-    return { [subPath]: { [index]: applyAtPath(arrMatch[4], data[subPath][index], spec) } };
+    try {
+      const subPath = arrMatch[1];
+      const index = Number(arrMatch[2]);
+      return {
+        [subPath]: {
+          [index]: applyAtPath(arrMatch[4], data[subPath][index], spec),
+        },
+      };
+    } 
+    catch (err) {
+      return {};
+    }
   }
   return {};
 };
@@ -42,10 +51,6 @@ export default (givenData, path, value) => {
   const arrayRegex = /\[(.*?)\]/g;
   const data = { ...givenData };
   const matchPath = path.replace(arrayRegex, '');
-  const arrMatch = path.match(arrayRegex);
-  if (!has(data, path) && arrMatch) {
-    return data;
-  }
   if (
     matchPath
     && matchPath.includes('.')
