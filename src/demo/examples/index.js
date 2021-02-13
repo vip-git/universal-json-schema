@@ -4,7 +4,8 @@ import nested from './nested';
 import single from './single';
 import numbers from './numbers';
 import arrays from './arrays';
-import tabsUI from './arrays.bak';
+import tabsUI from './tabs';
+import stepsUI from './stepper';
 import validation from './validation';
 import budget from './budget';
 import multipleChoice from './multiple-choice';
@@ -25,6 +26,7 @@ export default {
     numbers,
     arrays,
     tabsUI,
+    stepsUI,
     validation,
     budget,
     multipleChoice,

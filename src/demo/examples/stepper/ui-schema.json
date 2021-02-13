@@ -1,0 +1,20 @@
+{
+  "ui:page": {
+    "ui:layout": "tabs"
+  },
+  "SelectComponents": {
+    "listOfComponents": {
+      "ui:widget": "checkboxes"
+    }
+  },
+  "PublishPackage" : {
+    "Createdon": {
+      "ui:readonly": true,
+      "ui:disabled": true
+    },
+    "Createdby": {
+      "ui:readonly": true,
+      "ui:disabled": true
+    }
+  }
+}

@@ -88,6 +88,9 @@ export default ({
       }
       return isCustomComponent({ onChange }).props.onChange(value, uiValue);
     };
+    if (schema.default && !data) {
+      isCustomComponent({ onChange }).props.onChange(schema.default);
+    }
   }
   else if (options.disabled) {
     if (typeof options.disabled === 'boolean') {
@@ -97,6 +100,9 @@ export default ({
       rv.disabled = options.disabled.call(null, data, objectData);
     }
   }
-
+  else if (schema.default && !data) {
+    onChange(schema.default);
+  }
+  
   return rv;
 };

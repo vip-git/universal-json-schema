@@ -32,7 +32,6 @@ export default ({
   });
 
   const parseMultiSelectValue = (givenValue) => (Array.isArray(givenValue) ? givenValue : [givenValue]);
-
   return (
     <Select
       {...options}

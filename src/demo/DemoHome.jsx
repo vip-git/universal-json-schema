@@ -24,7 +24,9 @@ class Demo extends React.Component {
   onSelectMenuItem = (type, keyType) => () => {
     const selectedHash = keyType in examples[this.state.currentVersion] ? keyType : 'simple';
     window.location.hash = keyType;
-    this.setState({ selectedDemo: examples[this.state.currentVersion][selectedHash] });
+    this.setState({ 
+      selectedDemo: examples[this.state.currentVersion][selectedHash],
+    });
   }
 
   render() {

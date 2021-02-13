@@ -1,0 +1,91 @@
+{
+  "type": "object",
+  "properties": {
+    "SelectComponents": {
+      "title": "Select Components",
+      "$ref": "#/definitions/componentsList"
+    },
+    "PublishPackage": {
+      "title": "Public your Package",
+      "type": "object",
+      "properties": {
+        "packageName": {
+          "type": "string",
+          "title": "Package Name"
+        },
+        "packageVersion": {
+          "type": "string",
+          "title": "Package Version"
+        }
+      }
+    },
+    "GettingStarted": {
+      "title": "Getting Started",
+      "type": "object",
+      "properties": {
+        "Createdon": {
+          "type": "string",
+          "title": "Createdon"
+        },
+        "Createdby": {
+          "type": "string",
+          "title": "Createdby"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "componentsList": {
+      "title": "Select Components",
+      "type": "object",
+      "properties": {
+        "selectTheme": {
+          "type": "string",
+          "title": "Which  Theme ?",
+          "enum": ["Material UI", "No Theme"],
+          "default": "Material UI"
+        }
+      },
+      "required": ["selectTheme"],
+      "dependencies": {
+        "selectTheme": {
+          "oneOf": [
+            {
+              "properties": {
+                "selectTheme": {
+                  "const": "No Theme"
+                }
+              }
+            },
+            {
+              "properties": {
+                "selectTheme": {
+                  "const": "Material UI"
+                },
+                "listOfComponents": {
+                  "type": "array",
+                  "title": "A list of components (Material Theme)",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "upload",
+                      "material-picker",
+                      "rich-text-editor",
+                      "creatable-react-select",
+                      "material-select",
+                      "react-select",
+                      "material-checkbox",
+                      "material-radio-group",
+                      "material-input"
+                    ]
+                  }
+                }
+              },
+              "required": ["selectTheme", "listOfComponents"]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
