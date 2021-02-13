@@ -116,12 +116,13 @@ const Example = ({
   const classes = useStyles(theme);
   const [oldHash, setOldHash] = useState(window.location.hash);
   const [state, setState] = useState({ ...data });
-  const [formDataState, setFormData] = useState({ ...data.formData });
+  const [formDataState, setFormData] = useState(null);
   const [schemaErrors, setSchemaErrors] = useState(null);
   const [validSchema, setValidSchema] = useState(null);
 
   if (!isEqual(oldHash, window.location.hash)) {
     setState(data);
+    setFormData(null);
     setValidSchema(null);
     setSchemaErrors(null);
     setOldHash(window.location.hash);
