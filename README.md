@@ -100,7 +100,7 @@ export default Example;
 - Demo updated with monaco editor and live validation changes
 - New interceptors to transform form and uiData using uiSchema - `ui:interceptor`
 
-> For me info you can follow our [changelog](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/changelog.md)
+> For more info you can follow our [changelog](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/changelog.md)
 
 ## Contributing 
 > We welcome [all contributions](https://github.com/vip-git/react-jsonschema-form-material-ui/graphs/contributors), enhancements, and bug-fixes. 
