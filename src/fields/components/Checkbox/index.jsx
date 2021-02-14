@@ -11,7 +11,7 @@ import { isEnum, isSingleSelect } from '../../utils/enum-utils';
 // Props
 import checkboxProps from './checkbox.props';
 
-export default ({ value, type, onChange, schema = {}, ...rest }) => {
+export default ({ value, type, onChange, schema = {}, options = {}, ...rest }) => {
   const { 
     onChange: givenOnChange, 
     onGroupChange, 
@@ -30,6 +30,7 @@ export default ({ value, type, onChange, schema = {}, ...rest }) => {
                 <Checkbox
                     checked={value?.includes(o.key)}
                     onChange={onGroupChange(String(o.key))}
+                    disabled={o.disabled || false}
                 />
               )}
               label={o.value}
@@ -54,6 +55,7 @@ export default ({ value, type, onChange, schema = {}, ...rest }) => {
               <Checkbox
                   checked={String(value) === String(ev.key)}
                   onChange={onEnumChange(ev.key)}
+                  disabled={ev.disabled || false}
               />
             )}
             label={ev.value}
@@ -72,6 +74,7 @@ export default ({ value, type, onChange, schema = {}, ...rest }) => {
             <Checkbox
                 checked={value || false}
                 onChange={givenOnChange}
+                disabled={options.disabled || false}
             />
           )}
           label={label}

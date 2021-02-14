@@ -4,13 +4,16 @@ export default (values) => {
   if (values instanceof Array) {
     const returnValueMapping = (value) => {
       if ('const' in value) {
-        return { key: value.const, value: value.title };
+        return {
+          key: value.const,
+          value: value.title,
+          disabled: value.disabled || false,
+        };
       }
       return { ...value };
     };
     return values.map((e) => {
-      const returnValue =
-        typeof e === 'object' ? returnValueMapping(e) : { key: e, value: e };
+      const returnValue = typeof e === 'object' ? returnValueMapping(e) : { key: e, value: e };
       return returnValue;
     });
   }
