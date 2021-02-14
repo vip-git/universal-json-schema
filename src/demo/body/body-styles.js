@@ -1,5 +1,4 @@
-
-export default theme => ({
+export default (theme) => ({
   body: {
     'padding': theme.spacing(2),
     [theme.breakpoints.up('lg')]: {

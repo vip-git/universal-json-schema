@@ -1,6 +1,6 @@
 {
   "ui:page": {
-    "ui:layout": "tabs"
+    "ui:layout": "steps"
   },
   "SelectComponents": {
     "listOfComponents": {

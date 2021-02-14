@@ -1,12 +1,10 @@
 {
   "Technical": {
-    "firstName": "123123",
-    "Indchangecontent": "123123",
-    "Indchangepriceavail": "123123",
-    "Indchangesuppprop": "123123",
-    "Indchangeproducttrack": "123123",
-    "Indchangerelation": "123123",
-    "Indproductfused": "123123"
+    "listOfStrings": ["bazinga"],
+    "fixedItemsList": ["lorem ipsum", "", ""],
+    "defaultsAndMinItems": ["unidentified"],
+    "nestedList": [["lorem ipsum"]],
+    "fixedNoToolbar": ["lorem ipsum"]
   },
   "Changedata": {
     "Createdon": "123123",

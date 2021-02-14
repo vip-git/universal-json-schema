@@ -130,6 +130,9 @@ const Form = ({
   const id = prefixId || generate();
   const autoId = generate();
   const [formId, setFormId] = React.useState(null);
+  const hasPageLayoutSteps = uiSchema['ui:page'] 
+                              && uiSchema['ui:page']['ui:layout'] 
+                              && uiSchema['ui:page']['ui:layout'] === 'steps';
 
   if (
     !isEqual(prevData, { formData, schema, uiSchema }) 
@@ -369,7 +372,7 @@ const Form = ({
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <Paper className={classes.root}>
           {
-            (actionButtonPos === 'top') 
+            (actionButtonPos === 'top' && !hasPageLayoutSteps) 
               ? (
                   <FormButtons 
                     onSubmit={(callback) => onFormSubmit(callback)}
@@ -417,7 +420,7 @@ const Form = ({
             </EventContext.Provider>
           </LoadingContext.Provider>
           {
-            (!actionButtonPos) 
+            (!actionButtonPos && !hasPageLayoutSteps) 
               ? (
                   <FormButtons
                     onSubmit={(callback) => onFormSubmit(callback)}

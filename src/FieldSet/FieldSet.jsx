@@ -17,25 +17,60 @@ import fieldSetStyles from './field-set-styles';
 import FieldSetArray from './FieldSetArray';
 import FieldSetObject from './FieldSetObject';
 import FieldSetTabs from './FieldSetTabs';
+import FieldSetSteps from './FieldSetStepper';
+
+// Validation Messages
 import ValidationMessages from '../ValidationMessages';
 
-const isPageLayoutTabs = (uiSchema) => {
+const isPageLayoutSet = (uiSchema) => {
   const pageSchema = uiSchema['ui:page'];
-  return (pageSchema && pageSchema['ui:layout'] && pageSchema['ui:layout'] === 'tabs') || false;
+  return pageSchema && pageSchema['ui:layout'] || false;
 };
 
-export const shouldHideTitle = (uiSchema, schema) => isPageLayoutTabs(uiSchema) || has(schema, 'items.enum');
+export const shouldHideTitle = (uiSchema, schema) => isPageLayoutSet(uiSchema) || has(schema, 'items.enum');
 
 export const RawFieldSetContent = (props) => {
   const { schema = {}, uiSchema = {} } = props;
   const { type } = schema;
   if (type === 'array') {
-    return <FieldSetArray uiSchema={uiSchema} schema={schema} {...props} />;
+    return (
+      <FieldSetArray 
+        uiSchema={uiSchema}
+        schema={schema}
+        {...props} 
+      />
+    );
   }
   if (type === 'object') {
-    return isPageLayoutTabs(uiSchema) 
-      ? <FieldSetTabs uiSchema={uiSchema} schema={schema} {...props} /> 
-      : <FieldSetObject uiSchema={uiSchema} schema={schema} {...props} />;
+    const pageLayout = isPageLayoutSet(uiSchema);
+    switch (pageLayout) {
+      case 'tabs':
+        return (
+          <FieldSetTabs 
+            uiSchema={uiSchema} 
+            schema={schema} 
+            {...props} 
+          />
+        );
+
+      case 'steps':
+        return (
+          <FieldSetSteps
+            uiSchema={uiSchema} 
+            schema={schema} 
+            {...props} 
+          />
+        );  
+    
+      default:
+        return (
+          <FieldSetObject 
+            uiSchema={uiSchema} 
+            schema={schema} 
+            {...props} 
+          />
+        );
+    }
   }
   return null;
 };

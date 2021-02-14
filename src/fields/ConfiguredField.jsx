@@ -29,10 +29,11 @@ export const RawConfiguredField = ({
   id,
   htmlid,
   isHidden,
-  isCustomComponent,
+  isCustomComponent: hasCustomComponent,
   hasError,
   hasInlineError,
 }) => {
+  const isCustomComponent = type === 'null' || hasCustomComponent;
   const classes = fieldStyles();
   const FormRoot = isCustomComponent ? FormGroup : FormControl;
   const isXHRNotImplemented = componentProps?.xhrSchema?.onload 

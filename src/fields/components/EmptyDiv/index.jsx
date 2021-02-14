@@ -4,6 +4,7 @@ import React from 'react';
 export default ({
   type,
   value,
+  schema = {},
   uiSchema = {},
   options = {},
   onChange,
@@ -12,6 +13,7 @@ export default ({
   onBlur,
 }) => (
     <div id={htmlid} {...options}>
+        {schema.title}
         {value}
     </div>
 );

@@ -34,14 +34,14 @@ function TabPanel(props) {
 
 function a11yProps(index) {
   return {
-    id: `scrollable-auto-tab-${index}`,
+    'id': `scrollable-auto-tab-${index}`,
     'aria-controls': `scrollable-auto-tabpanel-${index}`,
   };
 }
 
 const FieldSetTabs = (props) => {
   const { schema = {}, path } = props;
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(0); // Todo: add info to set tabs via ui:schema
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -61,7 +61,12 @@ const FieldSetTabs = (props) => {
         >
           {
             Object.keys(schema.properties).map((p, k) => (
-              <Tab style={{ textTransform: 'none' }} label={schema.properties[p].title} key={`auto-tab-head-${k}`} {...a11yProps(k)} />
+              <Tab 
+                style={{ textTransform: 'none' }} 
+                label={schema.properties[p].title} 
+                key={`auto-tab-head-${schema.properties[p].title} + k}`} 
+                {...a11yProps(k)} 
+              />
             ))
           }
         </Tabs>
@@ -70,8 +75,16 @@ const FieldSetTabs = (props) => {
         Object.keys(schema.properties).map((p, k) => {
           const newPath = path ? `${path}.${p}` : p;
           return (
-              <TabPanel key={`auto-tab-body-${k}`} value={value} index={k}>
-                <FieldSetObject {...props} tabKey={p} isTabContent />
+              <TabPanel 
+                key={`auto-tab-body-${newPath + k}`}
+                value={value}
+                index={k}
+              >
+                <FieldSetObject 
+                  {...props} 
+                  tabKey={p}
+                  isTabContent
+                />
               </TabPanel>
           );
         })
