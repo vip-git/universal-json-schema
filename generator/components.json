@@ -6,7 +6,7 @@
             "name": "enum-utils"
         },
         "@react-jsonschema-form-utils/parse-values": {
-            "version": "1.0.4",
+            "version": "1.0.5",
             "name": "parse-values"
         }
     },
