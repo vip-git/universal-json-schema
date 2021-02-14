@@ -348,7 +348,6 @@ const Form = ({
   const handleKeyEnter = (e) => {
     if (e.keyCode === 13 && submitOnEnter) {
       onFormSubmit();
-      // put the login here
     }
   };
 
@@ -366,7 +365,6 @@ const Form = ({
       // console.log('err', err);
     }
   }
-
   return (
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <Paper className={classes.root}>

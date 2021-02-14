@@ -1,10 +1,7 @@
 export default (type, uiSchema) => {
   const widget = uiSchema['ui:widget'];
-  if (type === 'number' || type === 'integer') {
-    if (widget === 'updown') {
-      return 'number';
-    }
-    return 'text';
+  if (type === 'number' || type === 'integer' || widget === 'updown') {
+    return 'number';
   }
   if (widget === 'password') {
     return 'password';

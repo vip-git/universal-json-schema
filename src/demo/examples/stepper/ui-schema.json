@@ -8,13 +8,9 @@
     }
   },
   "PublishPackage" : {
-    "Createdon": {
-      "ui:readonly": true,
-      "ui:disabled": true
+    "packageName": {
     },
-    "Createdby": {
-      "ui:readonly": true,
-      "ui:disabled": true
+    "packageVersion": {
     }
   }
 }

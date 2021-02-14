@@ -14,7 +14,7 @@
           "title": "Package Name"
         },
         "packageVersion": {
-          "type": "string",
+          "type": "number",
           "title": "Package Version"
         }
       }
