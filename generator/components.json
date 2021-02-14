@@ -99,6 +99,13 @@
             "isDefault": true,
             "name": "material-input"
         },
+        "@react-jsonschema-form-components/empty-div": {
+            "version": "1.0.0",
+            "type": "null",
+            "isEnum": false,
+            "isDefault": true,
+            "name": "empty-div"
+        },
         "@react-jsonschema-form-components/ratings": {
             "version": "1.0.0",
             "type": "string",

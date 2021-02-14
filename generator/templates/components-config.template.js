@@ -15,6 +15,13 @@ export const COMMON_COMPONENTS = {
   },
 };
 
+const NULL_COMPONENTS = {
+  EMPTY_DIV: {
+    name: 'empty-div',
+    component: require('./empty-div').default,
+  },
+};
+
 const COMMON_INT_COMPONENTS = {
   ...ENUM_COMPONENTS,
   ...COMMON_COMPONENTS,
@@ -39,6 +46,13 @@ const DEFAULT_BOOLEAN_COMPONENTS = {
   DEFAULT_ENUM: {
     ...ENUM_COMPONENTS.MATERIAL_SELECT,
     name: 'DEFAULT_ENUM',
+  },
+};
+
+const DEFAULT_NULL_COMPONENTS = {
+  DEFAULT: {
+    ...NULL_COMPONENTS.EMPTY_DIV,
+    name: 'DEFAULT',
   },
 };
 
@@ -119,7 +133,16 @@ export const APP_CONFIG = {
       },
       <% }); %>
     },
-    NULL: {},
+    NULL: {
+      ...DEFAULT_NULL_COMPONENTS,
+      <% Object.values(components)
+          .filter((c) => !c.isEnum && c.type === "null" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
+      <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
+        name: '<%= comp.name %>',
+        component: require('./<%= comp.name %>').default,
+      },
+      <% }); %>
+    },
   },
 };
 

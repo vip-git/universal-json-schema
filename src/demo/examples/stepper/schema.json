@@ -6,7 +6,7 @@
       "$ref": "#/definitions/componentsList"
     },
     "PublishPackage": {
-      "title": "Public your Package",
+      "title": "Publish your Package",
       "type": "object",
       "properties": {
         "packageName": {
@@ -14,7 +14,7 @@
           "title": "Package Name"
         },
         "packageVersion": {
-          "type": "number",
+          "type": "string",
           "title": "Package Version"
         }
       }
@@ -23,13 +23,9 @@
       "title": "Getting Started",
       "type": "object",
       "properties": {
-        "Createdon": {
-          "type": "string",
-          "title": "Createdon"
-        },
-        "Createdby": {
-          "type": "string",
-          "title": "Createdby"
+        "results": {
+          "type": "null",
+          "title": "Results"
         }
       }
     }
@@ -67,17 +63,7 @@
                   "title": "A list of components (Material Theme)",
                   "items": {
                     "type": "string",
-                    "enum": [
-                      "upload",
-                      "material-picker",
-                      "rich-text-editor",
-                      "creatable-react-select",
-                      "material-select",
-                      "react-select",
-                      "material-checkbox",
-                      "material-radio-group",
-                      "material-input"
-                    ]
+                    "enum": []
                   }
                 }
               },

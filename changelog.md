@@ -1,7 +1,7 @@
 ### 3.0.0 [Breaking Changes]
 - Build system now upgraded to webpack 5
 - React select values are no stringify results but real values.
-- New Tabs UI
+- New Tabs and Stepper UI using `ui:page` -> `"ui:layout": "tabs"`
 - Additional Properties and Additional Items feature enabled
 - "ui:options" and "ui:style" enabled for prop passing and styling every field
 - On the fly module creation
@@ -13,6 +13,7 @@
 - Demo updated with vscode editor and live validation changes
 - New interceptors to transform form and uiData using uiSchema - `ui:interceptor`
 - New `xhrSchema` feature enabled to make xhr calls onload, onsubmit and onclick to consume or post data
+- `type: null` support included for custom div support
 
 
 #### Previously version 2.x.x
