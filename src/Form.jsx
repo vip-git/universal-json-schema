@@ -367,7 +367,7 @@ const Form = ({
         schemaProps: schema.properties,
       });
       return executeXHRCall({
-        type: 'onnext',
+        type: 'onNext',
         url,
         method,
         payload,
