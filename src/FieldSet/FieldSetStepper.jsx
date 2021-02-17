@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function HorizontalNonLinearStepperWithError(props) {
   const classes = useStyles();
-  const { schema = {}, path } = props;
+  const { schema = {}, path, onNext, onBack, onSkip, onSubmit } = props;
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = Object.keys(schema.properties).map((sp) => schema.properties[sp].title || sp);
@@ -35,6 +35,7 @@ export default function HorizontalNonLinearStepperWithError(props) {
     const newPath = path ? `${path}.${p}` : p;
     return {
       stepKey: k,
+      stepPath: p,
       component: (compProps) => (
             <FieldSetObject
                 {...compProps} 
@@ -50,6 +51,8 @@ export default function HorizontalNonLinearStepperWithError(props) {
 
   const isStepSkipped = (step) => skipped.has(step);
 
+  const getStep = (givenStep) => stepContent.find((s) => s.stepKey === givenStep);
+
   const handleNext = () => {
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
@@ -59,10 +62,15 @@ export default function HorizontalNonLinearStepperWithError(props) {
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
+    if (activeStep === steps.length - 1) {
+      return onSubmit();
+    }
+    return onNext(getStep(activeStep).stepPath);
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    return onBack(getStep(activeStep).stepPath);
   };
 
   const handleSkip = () => {
@@ -78,6 +86,7 @@ export default function HorizontalNonLinearStepperWithError(props) {
       return newSkipped;
     });
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    return onSkip(getStep(activeStep).stepPath);
   };
 
   const handleReset = () => {
@@ -124,7 +133,7 @@ export default function HorizontalNonLinearStepperWithError(props) {
         ) : (
           <div>
             <div className={classes.instructions}>
-                {stepContent.find((s) => s.stepKey === activeStep).component(props)}
+                {getStep(activeStep).component(props)}
             </div>
             <div style={{
               display: 'flex',

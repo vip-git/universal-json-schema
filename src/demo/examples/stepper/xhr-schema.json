@@ -1,0 +1,28 @@
+{
+  "properties": {
+    "SelectComponents": {
+      "onsubmit": {
+        "xhr:datasource": {
+        "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api/2",
+        "method": "PUT",
+        "headers": {},
+        "map:payload": {
+          "SelectComponents": {
+            "listOfComponents": "${listOfComponents}",
+            "selectTheme": "${selectTheme}"
+          }
+        },
+        "map:results": "#/definitions/results"
+      }
+      }
+    }
+  },
+  "definitions": {
+    "results": {
+      "SelectComponents": {
+        "listOfComponents": "${listOfComponents}",
+        "selectTheme": "${selectTheme}"
+      }
+    }
+  }
+}

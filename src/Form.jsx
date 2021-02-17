@@ -103,7 +103,11 @@ const Form = ({
   submitOnEnter,
   onChange,
   onUpload,
-  onSubmit, 
+  onSubmit,
+  onStepNext,
+  onStepBack,
+  onStepSkip,
+  onStepReset,
   formButtons,
   actionButtonPos,
   onCancel, 
@@ -348,6 +352,80 @@ const Form = ({
     );
   };
 
+  const onFormNext = (path, callback) => {
+    if (
+      xhrSchema 
+      && has(xhrSchema, `properties.${path}.onsubmit.xhr:datasource.url`)
+      && has(xhrSchema, `properties.${path}.onsubmit.xhr:datasource.method`)
+      && has(xhrSchema, `properties.${path}.onsubmit.xhr:datasource.map:results`)
+      && has(xhrSchema, `properties.${path}.onsubmit.xhr:datasource.map:payload`)
+    ) {
+      const { url, method } = xhrSchema.properties[path].onsubmit['xhr:datasource'];
+      const payload = setNestedPayload({
+        payloadData: xhrSchema.properties[path].onsubmit['xhr:datasource']['map:payload'],
+        formData: data,
+        schemaProps: schema.properties,
+      });
+      return executeXHRCall({
+        type: 'onnext',
+        url,
+        method,
+        payload,
+        callback: (xhrData) => {
+          const xhrDt = Array.isArray(xhrData) ? xhrData[0] : xhrData;
+          const mappedResults = xhrSchema.properties[path].onsubmit['xhr:datasource']['map:results'];
+          const resultsMappingInfo = mappedResults.includes('#/') 
+            ? getDefinitionsValue(xhrSchema, mappedResults)
+            : mappedResults;
+          mapData(
+            resultsMappingInfo,
+            xhrDt,
+            data,
+            uiData,
+            uiSchema,
+            interceptors,
+            schema,
+            onChange,
+            onError,
+            setData,
+          );
+          return onSubmit(
+            { formData: xhrDt, uiData, uiSchema, validation }, 
+            () => callback && callback(),
+          );
+        },
+      });
+    }
+    return onStepNext && onStepNext(
+      { formData: data, uiData, uiSchema, validation },
+      () => callback && callback(),
+    );
+  };
+
+  const onFormBack = (path, callback) => {
+    console.log('path is', path);
+    return onStepBack && onStepBack(
+      { formData: data, uiData, uiSchema, validation },
+      () => callback && callback(),
+    );
+  };
+
+  const onFormSkip = (path, callback) => {
+    console.log('path is', path);
+    return onStepSkip && onStepSkip(
+      { formData: data, uiData, uiSchema, validation },
+      () => callback && callback(),
+    );
+  };
+
+  const onFormReset = (path, callback) => {
+    console.log('path is', path);
+    return onStepReset && onStepReset(
+      { formData: data, uiData, uiSchema, validation },
+      () => callback && callback(),
+    );
+  };
+
   const handleKeyEnter = (e) => {
     if (e.keyCode === 13 && submitOnEnter) {
       onFormSubmit();
@@ -415,6 +493,9 @@ const Form = ({
                   onAddNewProperty={onAddNewProperty}
                   onRemoveProperty={onRemoveProperty}
                   onUpdateKeyProperty={onUpdateKeyProperty}
+                  onNext={onFormNext}
+                  onBack={onFormBack}
+                  onSkip={onFormSkip}
                   {...rest}
               />
             </EventContext.Provider>
