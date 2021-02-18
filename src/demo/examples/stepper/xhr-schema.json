@@ -3,17 +3,23 @@
     "SelectComponents": {
       "onsubmit": {
         "xhr:datasource": {
-        "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api/2",
-        "method": "PUT",
-        "headers": {},
-        "map:payload": {
-          "SelectComponents": {
-            "listOfComponents": "${listOfComponents}",
-            "selectTheme": "${selectTheme}"
-          }
-        },
-        "map:results": "#/definitions/results"
+          "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api/2",
+          "method": "PUT",
+          "headers": {},
+          "map:payload": "${formData.SelectComponents}",
+          "map:results": "#/definitions/results"
+        }
       }
+    },
+    "PublishPackage": {
+      "onsubmit": {
+        "xhr:datasource": {
+          "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api/2",
+          "method": "PUT",
+          "headers": {},
+          "map:payload": "${formData.PublishPackage}",
+          "map:results": "#/definitions/results"
+        }
       }
     }
   },

@@ -361,11 +361,21 @@ const Form = ({
       && has(xhrSchema, `properties.${path}.onsubmit.xhr:datasource.map:payload`)
     ) {
       const { url, method } = xhrSchema.properties[path].onsubmit['xhr:datasource'];
-      const payload = setNestedPayload({
-        payloadData: xhrSchema.properties[path].onsubmit['xhr:datasource']['map:payload'],
-        formData: data,
-        schemaProps: schema.properties,
-      });
+      const payloadData = xhrSchema.properties[path].onsubmit['xhr:datasource']['map:payload'];
+      const schemaProps = schema.properties;
+      const schemaDefs = schema.definitions;
+      const getPayloadFromTemplateString = (givenData, pKey) => {
+        const payloadKey = pKey.replace('${formData.', '').replace('}', '');
+        return pKey.replace('${', '').replace('}', '') === 'formData' ? givenData : get(givenData, payloadKey);
+      };
+      const payload = payloadData.includes('${formData') 
+        ? getPayloadFromTemplateString(data, payloadData) 
+        : setNestedPayload({
+          payloadData,
+          formData: data,
+          schemaProps,
+          schemaDefs,
+        });
       return executeXHRCall({
         type: 'onNext',
         url,

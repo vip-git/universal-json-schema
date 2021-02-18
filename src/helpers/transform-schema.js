@@ -24,6 +24,10 @@ const translateTemplateString = (str, obj, type) => {
       (argument) => get(obj, argument)
         || (get(obj, argument) === undefined ? '' : get(obj, argument)),
     );
+    /**
+     * Case array is not working needs to be done properly
+     * to get data from form data and then map it with array
+     */
     switch (type) {
       case 'array':
       case 'object':
@@ -44,6 +48,7 @@ export const setNestedPayload = ({
   payloadData,
   formData,
   schemaProps,
+  schemaDefs,
   parentData,
   previousPayload,
   extraKey,
@@ -57,6 +62,17 @@ export const setNestedPayload = ({
     const schemaKey = fd.includes(':') ? fd.split(':')[0] : fd;
     const orignalData = parentData || payloadData;
     const currentData = get(orignalData, objectKey);
+    if (has(get(schemaProps, schemaKey), '$ref')) {
+      set(
+        schemaProps,
+        schemaKey,
+        getDefinitionSchemaFromRef(
+          schemaDefs,
+          get(schemaProps, schemaKey),
+          currentData,
+        ),
+      );
+    }
     const currentSchemaObj = get(schemaProps, schemaKey);
     if (currentData && typeof currentData === 'object') {
       setNestedPayload({

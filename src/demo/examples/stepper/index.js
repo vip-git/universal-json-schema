@@ -6,6 +6,42 @@ import config from '../../../../generator/components.json';
 
 formData.SelectComponents = {};
 formData.SelectComponents.listOfComponents = [];
+formData.SelectComponents.listOfInterceptors = [];
+formData.SelectComponents.listOfUtils = [];
+
+Object.keys(config.interceptors).forEach((interceptor) => {
+  schema
+    .definitions
+    .componentsList
+    .dependencies
+    .selectTheme.oneOf[1]
+    .properties
+    .listOfInterceptors
+    .items
+    .enum.push(
+      {
+        key: config.interceptors[interceptor].name,
+        value: config.interceptors[interceptor].name,
+      },
+    );
+});
+
+Object.keys(config.utils).forEach((util) => {
+  schema
+    .definitions
+    .componentsList
+    .dependencies
+    .selectTheme.oneOf[1]
+    .properties
+    .listOfUtils
+    .items
+    .enum.push(
+      {
+        key: config.utils[util].name,
+        value: config.utils[util].name,
+      },
+    );
+});
   
 Object.keys(config.components).forEach((comp) => {
   schema

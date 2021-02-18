@@ -16,7 +16,6 @@ const getDefinitionSchemaFromRef = (
         schemaProperties.$ref.replace('#/definitions/', '').replace('/', '.'),
       ),
     };
-
     if (definitionSchema.dependencies) {
       Object.keys(definitionSchema.properties).forEach((propId) => {
         const propIdValue = formData && formData[propId];
