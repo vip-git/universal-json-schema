@@ -18,11 +18,12 @@ export default (props) => {
     isCustomComponent,
   } = configureComponent({ ...props, htmlid });
 
+  const options = uiSchema['ui:options'] || uiSchema['ui:props'];
   const descriptionText = uiSchema && uiSchema['ui:description'];
   const activeCompColor = uiSchema && uiSchema['ui:activeCompColor'];
   const hasInlineError = validation && validation.length && validation.find((vd) => vd.inline === true);
   const helpText = hasInlineError ? hasInlineError.message : uiSchema && uiSchema['ui:help'];
-  const isHidden = uiSchema && uiSchema['mui:type'] === 'hidden';
+  const isHidden = (uiSchema && uiSchema['mui:type'] === 'hidden') || (options?.type === 'hidden');
   return (
 		<ConfiguredField
 			id={prefixId}

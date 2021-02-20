@@ -369,8 +369,8 @@ const Form = ({
         return pKey.replace('${', '').replace('}', '') === 'formData' ? givenData : get(givenData, payloadKey);
       };
       const payload = payloadData.includes('${formData') 
-        ? getPayloadFromTemplateString(data, payloadData) 
-        : setNestedPayload({
+        ? getPayloadFromTemplateString(data, payloadData) // Todo: add map results functionality as optional
+        : setNestedPayload({ // Todo: make map resulsts functionality optional
           payloadData,
           formData: data,
           schemaProps,

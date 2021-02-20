@@ -14,7 +14,7 @@ const {
 
 export default ({ schema, uiSchema = {} }) => {
   const widget = uiSchema['ui:widget'];
-  const options = uiSchema['ui:options'];
+  const options = uiSchema['ui:options'] || uiSchema['ui:props'];
   
   const nonInputTypes = [
     'boolean',
@@ -38,7 +38,7 @@ export default ({ schema, uiSchema = {} }) => {
     return FormLabel;
   }
   
-  if (options && nonInputOptions.includes(options)) {
+  if ((options && nonInputOptions.includes(options)) || options?.type === 'hidden') {
     return null;
   }
   

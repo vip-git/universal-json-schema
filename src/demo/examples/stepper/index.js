@@ -1,10 +1,21 @@
+// Library
+import { generate } from 'shortid';
+
+// JSON
 import schema from './schema.json';
 import uiSchema from './ui-schema.json';
 import xhrSchema from './xhr-schema.json';
 import formData from './form-data.json';
 import config from '../../../../generator/components.json';
 
-formData.SelectComponents = {};
+const sessionId = generate();
+
+formData.SelectComponents = {
+  sessionId,
+};
+formData.PublishPackage = {
+  sessionId,
+};
 formData.SelectComponents.listOfComponents = [];
 formData.SelectComponents.listOfInterceptors = [];
 formData.SelectComponents.listOfUtils = [];

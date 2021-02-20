@@ -1,10 +1,19 @@
 {
   "properties": {
     "SelectComponents": {
+      "onload": {
+        "xhr:datasource": {
+          "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api/3",
+          "method": "GET",
+          "headers": {},
+          "payload": {},
+          "map:results": "#/definitions/results"
+        }
+      },
       "onsubmit": {
         "xhr:datasource": {
-          "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api/2",
-          "method": "PUT",
+          "url": "/create_components",
+          "method": "POST",
           "headers": {},
           "map:payload": "${formData.SelectComponents}",
           "map:results": "#/definitions/results"
@@ -12,10 +21,19 @@
       }
     },
     "PublishPackage": {
+      "onload": {
+        "xhr:datasource": {
+          "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api/3",
+          "method": "GET",
+          "headers": {},
+          "payload": {},
+          "map:results": "#/definitions/results"
+        }
+      },
       "onsubmit": {
         "xhr:datasource": {
-          "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api/2",
-          "method": "PUT",
+          "url": "/publish_package",
+          "method": "POST",
           "headers": {},
           "map:payload": "${formData.PublishPackage}",
           "map:results": "#/definitions/results"

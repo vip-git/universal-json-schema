@@ -23,7 +23,11 @@
 const ejs = require('ejs');
 const shelljs = require('shelljs');
 
-const componentSettings = require('./components.json');
+const myArgs = process.argv.slice(2);
+
+const componentSettings = myArgs.length 
+  ? require(`./${myArgs[0]}/components.json`) 
+  : require('./components.json');
 
 // Config
 const CONFIG = require('./config');

@@ -37,6 +37,7 @@ export default ({
   label: schema.title || '',
   inputProps: {
     id: htmlid,
+    ...options,
   },
   ...getTextAreaProps(uiSchema['ui:widget']),
   ...getMuiProps(uiSchema),
