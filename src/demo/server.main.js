@@ -76,6 +76,9 @@ app.post('/publish_package', (req, res) => {
      * - add new generated folder by hash for webpack bundle hash
      * - add npm publish after newly generated code
      */
+    shelljs.exec(
+      `cross-env GENERATED_SESSION_ID=${req.body.sessionId} node webpack`,
+    );
     return res.status(200).send(req.body);
   }
   return res.status(500).send({ error: 'Invalid Session' });

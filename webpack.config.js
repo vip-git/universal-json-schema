@@ -75,6 +75,9 @@ var config = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.env.GENERATED_SESSION_ID': process.NODE_ENV?.GENERATED_SESSION_ID
+        ? process.NODE_ENV?.GENERATED_SESSION_ID
+        : null,
     }),
     // new BundleAnalyzerPlugin()
     new CompressionPlugin(),
