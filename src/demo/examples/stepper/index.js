@@ -21,41 +21,40 @@ formData.SelectComponents.listOfInterceptors = [];
 formData.SelectComponents.listOfUtils = [];
 
 Object.keys(config.interceptors).forEach((interceptor) => {
-  schema
-    .definitions
-    .componentsList
-    .dependencies
-    .selectTheme.oneOf[1]
-    .properties
-    .listOfInterceptors
-    .items
-    .enum.push(
-      {
-        key: config.interceptors[interceptor].name,
-        value: config.interceptors[interceptor].name,
-      },
+  schema.definitions.componentsList.dependencies.selectTheme.oneOf[1].properties.listOfInterceptors.items.enum.push(
+    {
+      key: config.interceptors[interceptor].name,
+      value: config.interceptors[interceptor].name,
+      disabled: config.interceptors[interceptor].isRequired,
+    },
+  );
+
+  if (config.interceptors[interceptor].isRequired) {
+    formData.SelectComponents.listOfInterceptors.push(
+      config.interceptors[interceptor].name,
     );
+  }
 });
 
 Object.keys(config.utils).forEach((util) => {
-  schema
-    .definitions
-    .componentsList
-    .dependencies
-    .selectTheme.oneOf[1]
-    .properties
-    .listOfUtils
-    .items
-    .enum.push(
-      {
-        key: config.utils[util].name,
-        value: config.utils[util].name,
-      },
-    );
+  /**
+   * Todo: add support for component utils to be selected automatically and disabled
+   */
+  schema.definitions.componentsList.dependencies.selectTheme.oneOf[1].properties.listOfUtils.items.enum.push(
+    {
+      key: config.utils[util].name,
+      value: config.utils[util].name,
+      disabled: config.utils[util].isRequired,
+    },
+  );
+  
+  if (config.utils[util].isRequired) {
+    formData.SelectComponents.listOfUtils.push(config.utils[util].name);
+  }
 });
   
 Object.keys(config.components).forEach((comp) => {
-  schema
+  const compEnums = schema
     .definitions
     .componentsList
     .dependencies
@@ -63,13 +62,29 @@ Object.keys(config.components).forEach((comp) => {
     .properties
     .listOfComponents
     .items
-    .enum.push(
-      {
-        key: config.components[comp].name,
-        value: config.components[comp].name,
-        disabled: config.components[comp].isDefault,
+    .enum;
+
+  const compEnumVal = {
+    key: config.components[comp].name,
+    value: config.components[comp].name,
+    disabled: config.components[comp].isDefault,
+  };
+
+  if (config.components[comp]?.utils) {
+    // Todo: Covert this to rules.json
+    compEnumVal.onData = {
+      equals: config.components[comp].name,
+      adds: {
+        listOfUtils: [],
       },
-    );
+    };
+    config.components[comp].utils.forEach((cu) => {
+      const cUtils = config.utils[cu];
+      compEnumVal.onData.adds.listOfUtils.push(cUtils.name);
+    });
+  }
+
+  compEnums.push(compEnumVal);
 
   if (config.components[comp].isDefault) {
     formData.SelectComponents.listOfComponents.push(

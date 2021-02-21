@@ -3,11 +3,13 @@
     "utils": {
         "@react-jsonschema-form-utils/enum-utils": {
             "version": "1.0.8",
-            "name": "enum-utils"
+            "name": "enum-utils",
+            "isRequired": true
         },
         "@react-jsonschema-form-utils/parse-values": {
             "version": "1.0.5",
-            "name": "parse-values"
+            "name": "parse-values",
+            "isRequired": true
         }
     },
     "interceptors": {
@@ -17,7 +19,8 @@
         },
         "@react-jsonschema-form-interceptors/translate-currency": {
             "version": "1.0.3",
-            "name": "translate-currency"
+            "name": "translate-currency",
+            "isRequired": true
         },
         "@react-jsonschema-form-interceptors/translate-range-date": {
             "version": "1.0.1",
@@ -97,7 +100,11 @@
             "type": "string",
             "isEnum": false,
             "isDefault": true,
-            "name": "material-input"
+            "name": "material-input",
+            "utils": [
+              "@react-jsonschema-form-utils/enum-utils",
+              "@react-jsonschema-form-utils/parse-values"
+            ]
         },
         "@react-jsonschema-form-components/empty-div": {
             "version": "1.0.1",

@@ -29,7 +29,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }) =
               control={(
                 <Checkbox
                     checked={value?.includes(o.key)}
-                    onChange={onGroupChange(String(o.key))}
+                    onChange={onGroupChange(String(o.key), o.adds)}
                     disabled={o.disabled || false}
                 />
               )}
@@ -54,7 +54,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }) =
             control={(
               <Checkbox
                   checked={String(value) === String(ev.key)}
-                  onChange={onEnumChange(ev.key)}
+                  onChange={onEnumChange(ev.key, ev.adds)}
                   disabled={ev.disabled || false}
               />
             )}

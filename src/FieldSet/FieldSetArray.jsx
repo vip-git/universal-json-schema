@@ -23,12 +23,16 @@ import getDefinitionSchemaFromRef from '../helpers/get-definition-schema';
 
 // Generated UTILS
 const {
-  UTIL_CONFIG: {
-    ENUM_UTILS: {
-      util: { isEnum },
+  APP_CONFIG: {
+    UTILS: {
+      UTIL_CONFIG: {
+        ENUM_UTILS: {
+          util: { isEnum },
+        },
+      },
     },
   },
-} = require('../generated/utils');
+} = require('../generated/app.config');
 
 export const RawFieldSetArray = (props) => {
   const {

@@ -5,12 +5,16 @@ const InputLabel = require('@material-ui/core/InputLabel').default;
 
 // Generated UTILS
 const {
-  UTIL_CONFIG: {
-    ENUM_UTILS: {
-      util: { isEnum },
+  APP_CONFIG: {
+    UTILS: {
+      UTIL_CONFIG: {
+        ENUM_UTILS: {
+          util: { isEnum },
+        },
+      },
     },
   },
-} = require('../../../generated/utils');
+} = require('../../../generated/app.config');
 
 export default ({ schema, uiSchema = {} }) => {
   const widget = uiSchema['ui:widget'];

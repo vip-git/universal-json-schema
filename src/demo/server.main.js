@@ -66,9 +66,19 @@ app.post('/create_components', (req, res) => {
   return res.status(500).send({ 'error': 'Invalid Session' });
 });
 app.post('/publish_package', (req, res) => {
-  /** Run your code gen here and npm publish */
-  console.log(req.body);
-  return res.status(200).send(req.body);
+  if (req.body && req.body.sessionId) {
+    const shelljs = require('shelljs');
+    shelljs.exec(`node generator/index.js ${req.body.sessionId}`);
+    /**
+     * Todo: add npm publish and webpack bundle code
+     * Points:
+     * - change generated folder for webpack.demo
+     * - add new generated folder by hash for webpack bundle hash
+     * - add npm publish after newly generated code
+     */
+    return res.status(200).send(req.body);
+  }
+  return res.status(500).send({ error: 'Invalid Session' });
 });
 
 app.listen(port, () => {

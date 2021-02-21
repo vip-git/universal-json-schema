@@ -194,6 +194,12 @@ const Form = ({
   }
 
   const onFormValuesChange = (field) => (givenValue, givenUIValue, forceDeleteUIData = false) => {
+    /**
+     * Todo: if adds includes data then add that data to form data based on its path and disable add data
+     *       - On uncheck remove the adds data
+     *       - It should be computed at the end and not on click
+     */
+    console.log('givenValue is', givenValue, 'field is', field);
     const newFormData = updateFormData(data, field, givenValue);
     const newUIData = isEmptyValues(givenUIValue) || forceDeleteUIData
       ? removeValueFromSpec(uiData, field) 

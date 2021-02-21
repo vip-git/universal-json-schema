@@ -26,6 +26,7 @@ const shelljs = require('shelljs');
 const myArgs = process.argv.slice(2);
 
 const componentSettings = myArgs.length 
+  // eslint-disable-next-line import/no-dynamic-require
   ? require(`./${myArgs[0]}/components.json`) 
   : require('./components.json');
 
@@ -43,7 +44,9 @@ const finalString = template({ ...CONFIG });
 const shellFileString = new shelljs.ShellString(finalString);
 
 // Folder Variables
-const generatedLocation = `${shelljs.pwd()}/src/generated`;
+const generatedLocation = myArgs.length
+  ? `${shelljs.pwd()}/src/generated/${myArgs[0]}`
+  : `${shelljs.pwd()}/src/generated`;
 const generatorLocation = `${shelljs.pwd()}/generator`;
 
 CONFIG.modules.forEach((md) => {

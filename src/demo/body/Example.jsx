@@ -10,7 +10,7 @@ import { useTheme } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import useStyles from './example-styles';
 import Source from './Source';
-import Form from '../../AsyncForm';
+import Form from '../../Form';
 
 // Custom Components
 import CustomRating from './custom-components/rating.component';

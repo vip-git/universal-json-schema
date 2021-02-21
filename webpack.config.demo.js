@@ -159,9 +159,23 @@ var config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
       'process.env.NODE_DEBUG': JSON.stringify('debug'),
+      'process.env.GENERATED_SESSION_ID':
+        process.NODE_ENV?.GENERATED_SESSION_ID ? process.NODE_ENV?.GENERATED_SESSION_ID : null,
     }),
     new HtmlWebpackPlugin({
       template: 'src/demo/index.html',
+      templateParameters(compilation, assets, options) {
+        return {
+          compilation: compilation,
+          webpack: compilation.getStats().toJson(),
+          webpackConfig: compilation.options,
+          htmlWebpackPlugin: {
+            files: assets,
+            options: options,
+          },
+          process,
+        };
+      },
     }),
     new MiniCssExtractPlugin({
       filename: 'style.css',

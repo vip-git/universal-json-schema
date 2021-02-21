@@ -6,7 +6,13 @@ import each from 'lodash/each';
 import getDefinitionSchemaFromRef from './get-definition-schema';
 
 // Interceptors
-const { INTERCEPTOR_CONFIG } = require('../generated/interceptors');
+const {
+  APP_CONFIG: { 
+    INTERCEPTORS: {
+      INTERCEPTOR_CONFIG,
+    }, 
+  },
+} = require('../generated/app.config');
 
 export const hashCode = (s) => {
   let h = 0; const l = s.length; let 

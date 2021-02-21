@@ -63,7 +63,7 @@ export const V2_PICKER_COMPONENT = {
   },
 };
 
-export const APP_CONFIG = {
+export const COMP_CONFIG = {
   SUPPORTED_TYPES: {
     STRING: 'string',
     BOOLEAN: 'boolean',
@@ -146,7 +146,7 @@ export const APP_CONFIG = {
   },
 };
 
-export default APP_CONFIG;
+export default COMP_CONFIG;
 `;
 
 module.exports = appConfigTemplate;

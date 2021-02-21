@@ -1,8 +1,12 @@
 /* eslint-disable no-tabs */
 // Config
 const {
-  APP_CONFIG: { SUPPORTED_TYPES, COMPONENT_MAPPING },
-} = require('../../generated/components');
+  APP_CONFIG: {
+    COMPONENTS: {
+      COMP_CONFIG: { SUPPORTED_TYPES, COMPONENT_MAPPING },
+    },
+  },
+} = require('../../generated/app.config');
 
 const componentConfig = new Map();
 
