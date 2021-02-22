@@ -118,6 +118,8 @@ COPY webpack.config.js /opt/react-json-schema/webpack.config.js
 
 RUN npm install
 RUN npm link webpack && \\ 
+    npm link ejs && \\
+    npm link shelljs && \\
     npm link webpack-cli && \\
     npm link compression-webpack-plugin && \\
     npm link babel-loader && \\
