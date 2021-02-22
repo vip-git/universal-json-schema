@@ -56,12 +56,14 @@ const DEFAULT_NULL_COMPONENTS = {
   },
 };
 
+<% if(Object.keys(components).includes('@react-jsonschema-form-components/material-picker')) { %>
 export const V2_PICKER_COMPONENT = {
   MATERIAL_PICKER: {
     name: 'material-picker',
     component: require('./material-picker').default,
   },
 };
+<% } %>
 
 export const COMP_CONFIG = {
   SUPPORTED_TYPES: {

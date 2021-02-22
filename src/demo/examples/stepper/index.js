@@ -67,7 +67,8 @@ Object.keys(config.components).forEach((comp) => {
   const compEnumVal = {
     key: config.components[comp].name,
     value: config.components[comp].name,
-    disabled: config.components[comp].isDefault,
+    disabled:
+      config.components[comp].isDefault || config.components[comp].isRequired,
   };
 
   if (config.components[comp]?.utils) {
@@ -86,7 +87,7 @@ Object.keys(config.components).forEach((comp) => {
 
   compEnums.push(compEnumVal);
 
-  if (config.components[comp].isDefault) {
+  if (config.components[comp].isDefault || config.components[comp].isRequired) {
     formData.SelectComponents.listOfComponents.push(
       config.components[comp].name,
     );

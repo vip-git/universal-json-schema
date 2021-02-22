@@ -67,17 +67,98 @@ app.post('/create_components', (req, res) => {
 });
 app.post('/publish_package', (req, res) => {
   if (req.body && req.body.sessionId) {
+    const rmdir = (dir) => {
+      const list = fs.readdirSync(dir);
+      for (let i = 0; i < list.length; i++) {
+        const filename = path.join(dir, list[i]);
+        const stat = fs.statSync(filename);
+
+        if (filename === '.' || filename === '..') {
+          // pass these files
+        }
+        else if (stat.isDirectory()) {
+          // rmdir recursively
+          rmdir(filename);
+        }
+        else {
+          // rm fiilename
+          fs.unlinkSync(filename);
+        }
+      }
+      fs.rmdirSync(dir);
+    };
+    const packageJSON = require('../../package.json');
+    packageJSON.name = req.body.packageName;
+    packageJSON.version = req.body.packageVersion;
+    fs.writeFileSync(
+      `generator/${req.body.sessionId}/package.json`,
+      JSON.stringify(packageJSON, null, 2),
+    );
+    const dockerFileTemplate = `
+# Use an official node image
+FROM node:lts-alpine
+
+RUN set -xe \\
+    && apk add --no-cache bash git openssh \\
+    && git --version && bash --version && ssh -V && npm -v && node -v
+
+# Environment Variables
+ENV NODE_ENV production
+
+RUN mkdir -p /opt/react-json-schema
+
+WORKDIR /opt/react-json-schema
+COPY src/ /opt/react-json-schema/src
+COPY .babelrc /opt/react-json-schema/.babelrc
+COPY generator/ /opt/react-json-schema/generator
+COPY generator/${req.body.sessionId}/components.json /opt/react-json-schema/generator/components.json
+COPY generator/${req.body.sessionId}/package.json /opt/react-json-schema/package.json
+COPY index.js /opt/react-json-schema/index.js
+COPY webpack.config.js /opt/react-json-schema/webpack.config.js
+
+RUN npm install
+RUN npm link webpack && \\ 
+    npm link webpack-cli && \\
+    npm link compression-webpack-plugin && \\
+    npm link babel-loader && \\
+    npm link @babel/core && \\
+    npm link @babel/plugin-transform-runtime && \\
+    npm link @babel/plugin-proposal-class-properties && \\
+    npm link @babel/plugin-proposal-object-rest-spread && \\
+    npm link @babel/plugin-proposal-optional-chaining && \\
+    npm link @babel/plugin-syntax-dynamic-import && \\
+    npm link @babel/plugin-transform-modules-commonjs && \\
+    npm link @babel/plugin-transform-runtime && \\
+    npm link @babel/polyfill && \\
+    npm link @babel/preset-env && \\
+    npm link @babel/preset-react && \\
+    npm link @babel/preset-typescript && \\
+    npm link @babel/register && \\
+    npm link @babel/runtime
+RUN node generator/index.js
+RUN npx webpack
+# RUN npm login --username --password 
+# RUN npm publish --access public 
+
+CMD ["node", "index.js"]
+    `;
+    fs.writeFile(
+      `Dockerfile${req.body.sessionId.toLowerCase()}`,
+      dockerFileTemplate,
+      () => {},
+    );
     const shelljs = require('shelljs');
-    shelljs.exec(`node generator/index.js ${req.body.sessionId}`);
-    /**
-     * Todo: add npm publish and webpack bundle code
-     * Points:
-     * - change generated folder for webpack.demo
-     * - add new generated folder by hash for webpack bundle hash
-     * - add npm publish after newly generated code
-     */
     shelljs.exec(
-      `cross-env GENERATED_SESSION_ID=${req.body.sessionId} node webpack`,
+      `docker build -t ${req.body.sessionId.toLowerCase()} -f Dockerfile${req.body.sessionId.toLowerCase()} .`,
+      () => {
+        try {
+          fs.unlinkSync(`Dockerfile${req.body.sessionId.toLowerCase()}`);
+          rmdir(`generator/${req.body.sessionId}/`);
+        }
+        catch (err) {
+          // console.error(err);
+        }
+      },
     );
     return res.status(200).send(req.body);
   }
