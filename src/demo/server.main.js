@@ -62,6 +62,7 @@ app.post('/create_components', (req, res) => {
 
   return res.status(500).send({ 'error': 'Invalid Session' });
 });
+// Todo: Modularize this step with mini-functions
 app.post('/publish_package', (req, res) => {
   if (req.body && req.body.sessionId) {
     const rmdir = (dir) => {
