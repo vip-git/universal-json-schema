@@ -1,20 +1,13 @@
 /* eslint-disable max-len */
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-
-// Modal
-import DateRangePicker from '@material-ui/lab/MobileDateRangePicker';
-import TimePicker from '@material-ui/lab/MobileTimePicker';
-import DateTimePicker from '@material-ui/lab/MobileDateTimePicker';
-import DatePicker from '@material-ui/lab/MobileDatePicker';
-
-// Keyboard
-import KeyboardDateRangePicker from '@material-ui/lab/DateRangePicker';
-import KeyboardTimePicker from '@material-ui/lab/TimePicker';
-import KeyboardDateTimePicker from '@material-ui/lab/DateTimePicker';
-import KeyboardDatePicker from '@material-ui/lab/DatePicker';
-
-// Internal
+import { 
+  KeyboardDatePicker,
+  KeyboardDateTimePicker,
+  KeyboardTimePicker, 
+  DatePicker, 
+  TimePicker, 
+  DateTimePicker, 
+} from 'next-pickers-material-ui';
 import pickerProps from './picker.props';
 
 const renderPickerComp = (type) => {
@@ -22,20 +15,6 @@ const renderPickerComp = (type) => {
     case 'material-date':
       return {
         PickerComp: KeyboardDatePicker,
-        maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
-        format: 'DD-MM-YYYY',
-        placeholder: '__-__-____',
-      };
-    case 'material-date-range-keyboard':
-      return {
-        PickerComp: KeyboardDateRangePicker,
-        maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
-        format: 'DD-MM-YYYY',
-        placeholder: '__-__-____',
-      };  
-    case 'material-date-range':
-      return {
-        PickerComp: DateRangePicker,
         maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
         format: 'DD-MM-YYYY',
         placeholder: '__-__-____',
@@ -108,7 +87,6 @@ export default ({ path, label, title, value, options = {}, htmlid, type, uiSchem
                 value={(value === undefined) ? null : value}
                 maxDate={'2200-01-01'}
                 animateYearScrolling={false}
-                renderInput={(params) => <TextField {...params} />}
                 {...pickerProps({ onChange })}
                 {...options}
             />

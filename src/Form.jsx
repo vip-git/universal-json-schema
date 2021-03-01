@@ -1,5 +1,6 @@
 // Library
 import React from 'react';
+import { MuiPickersUtilsProvider } from 'next-pickers-material-ui';
 import MomentUtils from '@date-io/moment';
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
@@ -9,10 +10,6 @@ import has from 'lodash/has';
 import each from 'lodash/each';
 import { generate } from 'shortid';
 import validator from 'is-my-json-valid';
-
-// Material UI
-import AdapterMoment from '@material-ui/lab/AdapterMoment';
-import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
 import Paper from '@material-ui/core/Paper';
 
 // Internal
@@ -466,7 +463,7 @@ const Form = ({
     }
   }
   return (
-      <LocalizationProvider dateAdapter={AdapterMoment}>
+      <MuiPickersUtilsProvider utils={MomentUtils}>
         <Paper className={classes.root}>
           {
             (actionButtonPos === 'top' && !hasPageLayoutSteps) 
@@ -538,7 +535,7 @@ const Form = ({
             
           }
         </Paper>
-      </LocalizationProvider>
+      </MuiPickersUtilsProvider>
   );
 };
 

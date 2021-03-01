@@ -34,7 +34,7 @@ export default theme => ({
   toolbar: {
     [theme.breakpoints.up('lg')]: {
       width: 'calc(100% - 250px)',
-      paddingLeft: 250,
+      marginLeft: 250,
     },
     '& h2': {
       marginLeft: theme.spacing(3),

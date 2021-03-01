@@ -54,7 +54,6 @@ export const RawConfiguredField = ({
 		style={{ 
 		  display: isHidden ? 'none' : 'flex',
 		  flexDirection: activeCompColor ? 'row' : 'column',
-		  flexBasis: '100%',
 		}}
 	>
 		{
