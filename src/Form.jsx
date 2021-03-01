@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { MuiPickersUtilsProvider } from 'next-pickers-material-ui';
+import { MuiPickersUtilsProvider } from 'next-pickers-material-ui'; // Has to be made optional
 import MomentUtils from '@date-io/moment';
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';

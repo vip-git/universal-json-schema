@@ -1,4 +1,4 @@
-// utils 
+// utils
 import { UTIL_CONFIG } from '../../utils';
 import getInputType from './utils/get-input-type';
 import getMuiProps from './utils/get-mui-props';
@@ -30,15 +30,20 @@ export default ({
   uiSchema = {},
   htmlid,
   schema = {},
-}) => ({
-  onChange: onChange && onChangeHandler(onChange, type, options),
-  onBlur: onBlur && onChangeHandler(onBlur, type, options),
-  type: getInputType(type, uiSchema),
-  label: schema.title || '',
-  inputProps: {
-    id: htmlid,
+}) => {
+  const props = {
+    onChange: onChange && onChangeHandler(onChange, type, options),
+    onBlur: onBlur && onChangeHandler(onBlur, type, options),
+    label: schema.title || '',
+    inputProps: {
+      id: htmlid,
+    },
+    ...getTextAreaProps(uiSchema['ui:widget']),
+    ...getMuiProps(uiSchema),
     ...options,
-  },
-  ...getTextAreaProps(uiSchema['ui:widget']),
-  ...getMuiProps(uiSchema),
-});
+  };
+  if (!options.useLocaleString) {
+    props.type = getInputType(type, uiSchema);
+  }
+  return props;
+};

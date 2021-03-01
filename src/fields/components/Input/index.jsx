@@ -14,16 +14,19 @@ export default ({
   isKeyField,
   htmlid,
   onBlur,
-}) => (isKeyField ? (
+}) => {
+  const inProps = inputProps({ onChange, onBlur, type, options, uiSchema });
+  return (isKeyField ? (
     <Input 
         htmlid={htmlid} 
         defaultValue={value === null ? '' : value} 
-        {...inputProps({ onChange, onBlur, type, options, uiSchema })} 
+        {...inProps} 
     />
-) : (
-  <Input 
-        htmlid={htmlid} 
-        value={value === null ? '' : value} 
-        {...inputProps({ onChange, onBlur, type, options, uiSchema })}
-  />
-));
+  ) : (
+    <Input 
+          htmlid={htmlid} 
+          value={value === null ? '' : value} 
+          {...inProps}
+    />
+  ));
+};
