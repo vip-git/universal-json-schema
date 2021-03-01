@@ -50,28 +50,29 @@ const babelLoader = {
 };
 
 const cssLoaderClient = {
-	test: /\.(css|scss)$/,
-	exclude: /node_modules/,
-	use: [
-		'css-hot-loader',
-		MiniCssExtractPlugin.loader,
-		{
-			loader: 'css-loader',
-			options: {
-				camelCase: true,
-				modules: true,
-				importLoaders: 1,
-				sourceMap: true,
-				localIdentName: '[name]__[local]--[hash:base64:5]'
-			}
-		},
-		{
-			loader: 'postcss-loader',
-			options: {
-				sourceMap: true
-			}
-		}
-	]
+  test: /\.(css|scss)$/,
+  exclude: /node_modules/,
+  use: [
+    'css-hot-loader',
+    MiniCssExtractPlugin.loader,
+    {
+      loader: 'css-loader',
+      options: {
+        importLoaders: 1,
+        sourceMap: true,
+        modules: {
+          localIdentName: '[name]__[local]___[hash:base64:5]',
+          exportLocalsConvention: 'camelCase',
+        },
+      },
+    },
+    {
+      loader: 'postcss-loader',
+      options: {
+        sourceMap: true,
+      },
+    },
+  ],
 };
 
 const alias = {}

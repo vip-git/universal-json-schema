@@ -1,5 +1,8 @@
 module.exports = {
-  extends: 'airbnb',
+  extends: [
+    'airbnb',
+    'plugin:react-hooks/recommended',
+  ],
   rules: {
     'import/no-extraneous-dependencies': 'off',
     'no-trailing-spaces': 'off',

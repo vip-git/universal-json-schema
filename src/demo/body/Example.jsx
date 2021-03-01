@@ -8,9 +8,9 @@ import React, { useState, useEffect } from 'react';
 import { isEqual } from 'lodash';
 import { useTheme } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
+import Form from '../../Form';
 import useStyles from './example-styles';
 import Source from './Source';
-import Form from '../../Form';
 
 // Custom Components
 import CustomRating from './custom-components/rating.component';

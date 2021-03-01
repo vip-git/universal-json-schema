@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     minWidth: 120,
     color: 'white',
-    marginLeft: 'auto',
     bottom: 3,
+    marginLeft: 'auto!important',
   },
   label: {
     color: 'white',

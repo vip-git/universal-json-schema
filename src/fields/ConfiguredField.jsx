@@ -44,7 +44,7 @@ export const RawConfiguredField = ({
     if (isXHRNotImplemented) {
 	  componentProps.onXHRSchemaEvent(componentProps?.xhrSchema.onload['xhr:datasource'], 'onload');
     }
-  }, [componentProps]);
+  }, [componentProps, isXHRNotImplemented]);
   return (
 	<FormRoot
 		id={`${htmlid}-formControl`}

@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-fragments */
 // Library
 import React from 'react';
-import { DateRangePicker } from 'materialui-daterange-picker';
+import { DateRangePicker } from 'react-material-ui-5-date-range-picker';
 
 // Material UI
 import Dialog from '@material-ui/core/Dialog';

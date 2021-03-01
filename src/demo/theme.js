@@ -12,6 +12,14 @@ const theme = {
     secondary: teal,
     error: red,
   },
+  components: {
+    // Name of the component
+    MuiTextField: {
+      defaultProps: {
+        variant: 'standard',
+      },
+    },
+  },
   overrides: {
     MuiInput: {
       root: {
