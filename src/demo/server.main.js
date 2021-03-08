@@ -192,10 +192,9 @@ export default Example;
       () => {},
     );
 
-    /** Todo: replace this with environment variable */
     const npmrcTemplate = `
-      //registry.npmjs.org/:_authToken=87a33854-e723-4936-bdf9-4b9409d2de66
-      registry=https://registry.npmjs.org/
+      //registry.npmjs.org/:_authToken=${process.env.NPM_AUTH_TOKEN}
+      registry=${process.env.NPM_REGISTRY}
       always-auth=true
     `;
 

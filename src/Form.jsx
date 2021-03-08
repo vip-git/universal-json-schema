@@ -94,10 +94,10 @@ const setData = (
 };
 
 const Form = ({
-  formData,
+  formData = {},
   schema = {},
   xhrSchema = {},
-  uiSchema,
+  uiSchema = {},
   validations,
   prefixId,
   submitOnEnter,
