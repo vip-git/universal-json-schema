@@ -24,7 +24,6 @@ export default (props) => {
   const hasInlineError = validation && validation.length && validation.find((vd) => vd.inline === true);
   const helpText = hasInlineError ? hasInlineError.message : uiSchema && uiSchema['ui:help'];
   const isHidden = (uiSchema && uiSchema['mui:type'] === 'hidden') || (options?.type === 'hidden');
-  console.log('dependencies is', dependencies);
   return (
 		<ConfiguredField
 			id={prefixId}

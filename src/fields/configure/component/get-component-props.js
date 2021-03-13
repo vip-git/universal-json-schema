@@ -33,7 +33,11 @@ export default ({
       ...options,
     }
     : {
-      onChange: (value, uiValue, forceDeleteUIData = false) => {
+      onChange: (givenValue, uiValue, forceDeleteUIData = false) => {
+        let value = givenValue;
+        if (value === '' || value === null) {
+          value = undefined;
+        }
         // Call Interceptor if it exists
         if (
           typeof interceptors[interceptorFunc] === 'function'
@@ -73,7 +77,11 @@ export default ({
     && isCustomComponent({ onChange }).props
     && isCustomComponent({ onChange }).props.onChange
   ) {
-    rv.onChange = (value, uiValue) => {
+    rv.onChange = (givenValue, uiValue) => {
+      let value = givenValue;
+      if (value === '' || value === null) {
+        value = undefined;
+      }
       // Call Interceptor if it exists
       if (
         typeof interceptors[interceptorFunc] === 'function'

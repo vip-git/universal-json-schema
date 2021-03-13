@@ -234,6 +234,12 @@ const transformSchema = (schema, data) => {
   each(transformedSchema, (givenValue, key) => {
     if (key === 'properties') {
       each(givenValue, (propVal, propKey) => {
+        if (has(transformedSchema.properties[propKey], 'properties')) {
+          transformedSchema.properties[propKey] = transformSchema(
+            transformedSchema.properties[propKey],
+          );
+        }
+
         if (notAllowedTypes.includes(propVal.type)) {
           transformedSchema.properties[propKey].type = 'string';
         }

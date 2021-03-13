@@ -7,10 +7,10 @@ import { DateRangePicker } from 'react-material-ui-5-date-range-picker';
 import Dialog from '@material-ui/core/Dialog';
 import { TextField } from '@material-ui/core';
 
-const CustomDateRangePicker = ({ onChange, formData, uiData = {} }) => {
+const CustomDateRangePicker = ({ onChange, formData, uiData = { object: { } } }) => {
   const [open, setOpen] = React.useState(false);
   const [dateRange, setDateRange] = React.useState({});
-  const [data, setData] = React.useState(uiData.customComponent || formData.customComponent || '');
+  const [data, setData] = React.useState(uiData.object?.customComponent || formData.object?.customComponent || '');
     
   const toggle = () => setOpen(!open);
 

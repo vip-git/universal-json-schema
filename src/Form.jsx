@@ -83,7 +83,7 @@ const setData = (
   onError,
 ) => {
   data = typeof givenData === 'string' ? givenData : removeEmptyObjects(givenData);
-  if (uiSchema) {
+  if (uiSchema && JSON.stringify(givenUIData) !== '{}') {
     uiData = givenUIData;
     setUISchemaData(uiData, uiSchema);
   }
@@ -199,7 +199,7 @@ const Form = ({
      *       - On uncheck remove the adds data
      *       - It should be computed at the end and not on click
      */
-    console.log('givenValue is', givenValue, 'field is', field);
+    console.log('givenValue is', givenValue, givenUIValue, 'field is', field);
     const newFormData = updateFormData(data, field, givenValue);
     const newUIData = isEmptyValues(givenUIValue) || forceDeleteUIData
       ? removeValueFromSpec(uiData, field) 

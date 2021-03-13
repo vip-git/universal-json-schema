@@ -17,7 +17,8 @@ import CustomRating from './custom-components/rating.component';
 import CustomComponent from './custom-components/range-picker.component';
 
 // Custom interceptors
-import translateRangeDate from '../../generated/interceptors/translate-range-date';
+import translateRangeDate from '../../fields/interceptors/translate-range-date';
+import translateRatings from '../../fields/interceptors/translate-ratings';
 
 const FormComponent = ({
   locationHash,
@@ -43,6 +44,7 @@ const FormComponent = ({
       onChange={onFormChanged}
       onError={onError}
       interceptors={{
+        translateRatings,
         translateRangeDate: ({ value: givenData, uiValue: givenUiData, options }) => {
           if (givenData.start_date && givenData.end_date) {
             const { formData, uiData } = translateRangeDate({

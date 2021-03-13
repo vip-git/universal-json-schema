@@ -2,14 +2,14 @@
   "title": "A registration form",
   "description": "A simple form example with various types per tab.",
   "type": "object",
-  "required": [
-    "firstName",
-    "lastName"
-  ],
   "properties": {
     "string": {
       "type": "object",
       "title": "String",
+      "required": [
+        "firstName",
+        "lastName"
+      ],
       "properties": {
         "firstName": {
           "type": "string",
