@@ -2,10 +2,7 @@
   "ui:page": {
     "ui:layout": "tabs",
     "ui:tabs": {
-      "props": {
-        "variant": "scrollable",
-        "scrollButtons": "auto"
-      },
+      "props": {},
       "style": {
         "width": "29vw",
         "marginTop": 10

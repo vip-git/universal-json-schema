@@ -1,10 +1,14 @@
 import React from 'react';
 import isEqual from 'lodash/isEqual';
+import forEach from 'lodash/forEach';
 import has from 'lodash/has';
+import set from 'lodash/set';
+import get from 'lodash/get';
 import { withStyles } from '@material-ui/core/styles';
 import FieldSet, { shouldHideTitle } from './FieldSet';
 import Field from './fields';
 import styles from './form-field-styles';
+import { isEmptyValues } from './helpers/remove-empty-values';
 
 // exported for unit testing
 export const RawFormField = React.memo(({
@@ -28,10 +32,21 @@ export const RawFormField = React.memo(({
 
   // Todo: condition for array should change
   if ((type === 'object' || type === 'array') && !component) {
+    const newSchema = JSON.parse(JSON.stringify(schema));
+    // Inject dependencies
+    if (newSchema.dependencies) {
+      forEach(newSchema.dependencies, (scd, scdk) => {
+        if (has(data, scdk) && !isEmptyValues(get(data, scdk))) {
+          set(newSchema, 'properties', { ...newSchema.properties, ...newSchema.dependencies[scdk].properties });
+          set(newSchema, 'required', [...newSchema?.required, ...newSchema.dependencies[scdk]?.required]);
+        }
+      });
+    }
+    
     return (
         <FieldSet
           path={path}
-          schema={schema}
+          schema={newSchema}
           data={data}
           uiSchema={uiSchema}
           xhrSchema={xhrSchema}

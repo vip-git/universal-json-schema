@@ -5,16 +5,16 @@ import configureComponent from './configure';
 import ConfiguredField from './ConfiguredField';
 
 export default (props) => {
-  const { path, prefixId, schema, data, uiSchema, validation } = props;
+  const { path, prefixId, schema, data, uiSchema, validation, dependencies } = props;
   const { type } = schema;
   const htmlid = `${prefixId}_${path}`;
   const {
-    Component, 
-    LabelComponent, 
-    componentProps, 
-    labelComponentProps, 
-    className, 
-    title, 
+    Component,
+    LabelComponent,
+    componentProps,
+    labelComponentProps,
+    className,
+    title,
     isCustomComponent,
   } = configureComponent({ ...props, htmlid });
 
@@ -24,6 +24,7 @@ export default (props) => {
   const hasInlineError = validation && validation.length && validation.find((vd) => vd.inline === true);
   const helpText = hasInlineError ? hasInlineError.message : uiSchema && uiSchema['ui:help'];
   const isHidden = (uiSchema && uiSchema['mui:type'] === 'hidden') || (options?.type === 'hidden');
+  console.log('dependencies is', dependencies);
   return (
 		<ConfiguredField
 			id={prefixId}
