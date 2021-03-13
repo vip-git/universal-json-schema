@@ -1,13 +1,25 @@
 {
-	"firstName": "Chuck",
-	"lastName": "Norris",
-	"age": 75,
-	"upload": "",
-	"bio": "<p><u>ads</u></p>",
-	"password": "noneed",
-	"creatableSelectTest": ["test"],
-	"selectTest": ["Yes", "No"],
-	"telephone": "",
-	"customComponent": "",
-	"customRating": 3
+	"string": {
+		"firstName": "Chuck",
+		"lastName": "Norris",
+		"upload": "",
+		"bio": "<p><u>ads</u></p>",
+		"password": "noneed",
+		"telephone": ""
+	},
+	"integer": {
+		"age": 75,
+		"customRating": 3
+	},
+	"number": {
+	},
+	"boolean": {
+	},
+	"array": {
+		"creatableSelectTest": ["test"],
+		"selectTest": ["Yes", "No"]
+	},
+	"object": {
+		"customComponent": ""
+	}
 }

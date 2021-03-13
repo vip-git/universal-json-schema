@@ -31,6 +31,11 @@ const theme = {
         color: '#ffff',
       },
     },
+    MuiTab: {
+      wrapper: {
+        minWidth: 120,
+      },
+    },
   },
 };
 

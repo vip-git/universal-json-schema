@@ -40,15 +40,26 @@ function a11yProps(index) {
 }
 
 const FieldSetTabs = (props) => {
-  const { schema = {}, path } = props;
+  const { schema = {}, path, uiSchema = { 'ui:page': { 'ui:tabs': {} } } } = props;
+  const tabsProps = uiSchema['ui:page']['ui:tabs']?.props || {};
+  const tabsStyle = uiSchema['ui:page']['ui:tabs']?.style || {};
+  const tabStyle = uiSchema['ui:page']['ui:tabs']?.tab?.style || {};
+  const tabProps = uiSchema['ui:page']['ui:tabs']?.tab?.props || {};
+  const tabPanelStyle = uiSchema['ui:page']['ui:tabs']?.tabPanel?.style || {};
+  const tabPanelProps = uiSchema['ui:page']['ui:tabs']?.props || {};
   const [value, setValue] = React.useState(0); // Todo: add info to set tabs via ui:schema
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  
   return (
-    <>
+    <div 
+      style={{
+        width: '100%',
+        ...tabsStyle,
+      }}
+    >
       <AppBar position='static' color='default'>
         <Tabs
           value={value}
@@ -58,14 +69,16 @@ const FieldSetTabs = (props) => {
           variant='scrollable'
           scrollButtons='auto'
           aria-label='form-tabs'
+          {...tabsProps}
         >
           {
             Object.keys(schema.properties).map((p, k) => (
               <Tab 
-                style={{ textTransform: 'none' }} 
+                style={{ textTransform: 'none', ...tabStyle }} 
                 label={schema.properties[p].title} 
                 key={`auto-tab-head-${schema.properties[p].title} + k}`} 
                 {...a11yProps(k)} 
+                {...tabProps}
               />
             ))
           }
@@ -79,6 +92,8 @@ const FieldSetTabs = (props) => {
                 key={`auto-tab-body-${newPath + k}`}
                 value={value}
                 index={k}
+                style={{ ...tabPanelStyle }}
+                {...tabPanelProps}
               >
                 <FieldSetObject 
                   {...props} 
@@ -89,7 +104,7 @@ const FieldSetTabs = (props) => {
           );
         })
       }
-    </>
+    </div>
   );
 };
 

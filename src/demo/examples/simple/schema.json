@@ -1,150 +1,186 @@
 {
   "title": "A registration form",
-  "description": "A simple form example.",
+  "description": "A simple form example with various types per tab.",
   "type": "object",
   "required": [
     "firstName",
     "lastName"
   ],
   "properties": {
-    "firstName": {
-      "type": "string",
-      "title": "First name"
-    },
-    "lastName": {
-      "type": "string",
-      "title": "Last name"
-    },
-    "customComponent": {
+    "string": {
       "type": "object",
-      "title": "Custom Component",
-      "component": "customComponent",
+      "title": "String",
       "properties": {
-        "startDate": {
+        "firstName": {
           "type": "string",
-          "title": "Start Date"
+          "title": "First name"
         },
-        "endDate": {
+        "lastName": {
           "type": "string",
-          "title": "End Date"
+          "title": "Last name"
+        },
+        "select": {
+          "type": "string",
+          "title": "Example select",
+          "enum": ["Yes", "No"]
+        },
+        "react-select": {
+          "type": "string",
+          "title": "Example React select",
+          "enum": ["Yes", "No"]
+        },
+        "password": {
+          "type": "string",
+          "title": "Password",
+          "minLength": 3
+        },
+        "upload": {
+          "type": "string",
+          "title": "Please upload your file"
+        },
+        "bio": {
+          "type": "string",
+          "title": "Bio"
+        },
+        "date": {
+          "type": "string",
+          "title": "Date"
+        },
+        "telephone": {
+          "type": "string",
+          "title": "Telephone"
         }
       }
     },
-    "customRating": {
-      "type": "integer",
-      "title": "Custom Rating"
-    },
-    "currency": {
-      "type": "number",
-      "title": "Currency"
-    },
-    "default": {
-      "type": "boolean",
-      "title": "checkbox (default)",
-      "description": "This is the checkbox-description"
-    },
-    "radio": {
-      "type": "boolean",
-      "title": "radio buttons",
-      "description": "This is the radio-description",
-      "enum": [
-        {
-          "key": true,
-          "value": "Yes"
+    "integer": {
+      "type": "object",
+      "title": "Integer",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "title": "Age"
         },
-        {
-          "key": false,
-          "value": "No"
+        "customRating": {
+          "type": "integer",
+          "title": "Rating (Custom Component)"
         }
-      ]
-    },
-    "select": {
-      "type": "string",
-      "title": "Example select",
-      "enum": ["Yes", "No"]
-    },
-    "react-select": {
-      "type": "string",
-      "title": "Example React select",
-      "enum": ["Yes", "No"]
-    },
-    "age": {
-      "type": "integer",
-      "title": "Age"
-    },
-    "upload": {
-      "type": "string",
-      "title": "Please upload your file"
-    },
-    "multiSelect": {
-      "type": "array",
-      "uniqueItems": true,
-      "items": {
-        "title": "Example Multi select",
-        "type": "string",
-        "anyOf": [
-          {
-            "type": "string",
-            "const": "#ff0000",
-            "title": "Red"
-          },
-          {
-            "type": "string",
-            "const": "#00ff00",
-            "title": "Green"
-          },
-          {
-            "type": "string",
-            "const": "#0000ff",
-            "title": "Blue"
-          }
-        ]
       }
     },
-    "creatableSelectTest": {
-      "type": "array",
-      "title": "Example creatable select",
-      "items": {
-        "type": "string",
-        "enum": ["test", "teete", "etetet"]
+    "number": {
+      "type": "object",
+      "title": "Number",
+      "properties": {
+        "currency": {
+          "type": "number",
+          "title": "Currency"
+        }
       }
     },
-    "selectTest": {
-      "type": "array",
-      "title": "Example React Multi Select",
-      "items": {
-        "type": "string",
-        "enum": [
-          {
-            "key": "Yes",
-            "style": {
-              "borderBottom": "solid 1px black"
+    "boolean": {
+      "type": "object",
+      "title": "Boolean",
+      "properties": {
+        "default": {
+          "type": "boolean",
+          "title": "checkbox (default)",
+          "description": "This is the checkbox-description"
+        },
+        "radio": {
+          "type": "boolean",
+          "title": "radio buttons",
+          "description": "This is the radio-description",
+          "enum": [
+            {
+              "key": true,
+              "value": "Yes"
             },
-            "value": "Yes", 
-            "disabled": true
+            {
+              "key": false,
+              "value": "No"
+            }
+          ]
+        }
+      }
+    },
+    "array": {
+      "type": "object",
+      "title": "Array",
+      "properties": {
+        "multiSelect": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "title": "Example Multi select",
+            "type": "string",
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "#ff0000",
+                "title": "Red"
+              },
+              {
+                "type": "string",
+                "const": "#00ff00",
+                "title": "Green"
+              },
+              {
+                "type": "string",
+                "const": "#0000ff",
+                "title": "Blue"
+              }
+            ]
+          }
+        },
+        "creatableSelectTest": {
+          "type": "array",
+          "title": "Example creatable select",
+          "items": {
+            "type": "string",
+            "enum": ["test", "teete", "etetet"]
+          }
+        },
+        "selectTest": {
+          "type": "array",
+          "title": "Example React Multi Select",
+          "items": {
+            "type": "string",
+            "enum": [
+              {
+                "key": "Yes",
+                "style": {
+                  "borderBottom": "solid 1px black"
+                },
+                "value": "Yes", 
+                "disabled": true
+              },
+              "No",
+              "etetet"
+            ]
           },
-          "No",
-          "etetet"
-        ]
-      },
-      "uniqueItems": true
+          "uniqueItems": true
+        }
+      }
     },
-    "bio": {
-      "type": "string",
-      "title": "Bio"
-    },
-    "date": {
-      "type": "string",
-      "title": "Date"
-    },
-    "password": {
-      "type": "string",
-      "title": "Password",
-      "minLength": 3
-    },
-    "telephone": {
-      "type": "string",
-      "title": "Telephone"
+    "object": {
+      "type": "object",
+      "title": "Object",
+      "properties": {
+        "customComponent": {
+          "type": "object",
+          "title": "Custom Component",
+          "component": "customComponent",
+          "properties": {
+            "startDate": {
+              "type": "string",
+              "title": "Start Date"
+            },
+            "endDate": {
+              "type": "string",
+              "title": "End Date"
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "title": "Tabs UI Example",
   "properties": {
     "Technical": {
       "type": "object",

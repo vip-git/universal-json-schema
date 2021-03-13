@@ -116,7 +116,7 @@ const setNestedData = ({
   returnData,
   schemaProps,
   uiSchema,
-  interceptors,
+  interceptors = {},
   xhrData,
   extraKey,
   isUIData,
@@ -148,13 +148,15 @@ const setNestedData = ({
       if (interceptorFunc) {
         const uiValue = translateTemplateString(currentData, xhrData, 'string');
         const getMethod = INTERCEPTOR_CONFIG[interceptorFunc]?.interceptor || interceptors[interceptorFunc];
-        const { formData: fData, uiData } = getMethod({
-          value,
-          uiValue,
-          options,
-        });
-        set(returnData, objectKey, fData);
-        set(returnUIData, objectKey, uiData);
+        if (typeof getMethod === 'function') {
+          const { formData: fData, uiData } = getMethod({
+            value,
+            uiValue,
+            options,
+          });
+          set(returnData, objectKey, fData);
+          set(returnUIData, objectKey, uiData);
+        }
       } 
       else {
         set(returnData, objectKey, value);

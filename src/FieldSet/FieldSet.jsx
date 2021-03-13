@@ -27,7 +27,7 @@ const isPageLayoutSet = (uiSchema) => {
   return pageSchema && pageSchema['ui:layout'] || false;
 };
 
-export const shouldHideTitle = (uiSchema, schema) => isPageLayoutSet(uiSchema) || has(schema, 'items.enum');
+export const shouldHideTitle = (uiSchema, schema, path) => isPageLayoutSet(uiSchema, path) || has(schema, 'items.enum');
 
 export const RawFieldSetContent = (props) => {
   const { schema = {}, uiSchema = {} } = props;
@@ -89,9 +89,11 @@ export class RawFieldSet extends React.Component {
       noTitle, validation, idxKey, 
       dynamicKeyField,
     } = this.props;
-    const LegendTitle = () => (!hideTitle && !(has(schema, 'items.enum')) && (
-      schema.title 
-      && (
+    const LegendTitle = () => (
+      !hideTitle 
+      || path === '' 
+      || path?.includes('.')
+    ) && !has(schema, 'items.enum') && schema.title && (
           <>
             <Typography 
               gutterBottom 
@@ -104,9 +106,8 @@ export class RawFieldSet extends React.Component {
               {schema.title}
             </Typography>
             <Divider style={{ marginBottom: 6 }} />
-          </>  
-      )
-    )) || <div />;
+          </>
+    ) || <div />;
 
     const LegendSubTitle = () => schema.description && (
       <Typography color='textSecondary' variant='body2'>

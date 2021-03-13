@@ -15,65 +15,91 @@
         "method": "PUT",
         "headers": {},
         "map:payload": {
-          "firstName:first_name": "${firstName}",
-          "lastName:last_name": "${lastName}",
-          "customComponent:custom_component": {
-            "startDate:start_date": "${customComponent.startDate}",
-            "endDate:end_date": "${customComponent.endDate}"
+          "string": {
+            "firstName:first_name": "${firstName}",
+            "lastName:last_name": "${lastName}",
+            "select": "${select}",
+            "react-select:react_select": "${react-select}",
+            "upload": "${upload}",
+            "bio": "${bio}",
+            "date": "${date}",
+            "password": "${password}",
+            "telephone": "${telephone}"
           },
-          "customRating:custom_rating": "${customRating}",
-          "currency": "${currency}",
-          "default": "${default}",
-          "radio": "${radio}",
-          "select": "${select}",
-          "react-select:react_select": "${react-select}",
-          "age": "${age}",
-          "upload": "${upload}",
-          "multiSelect": "${multiSelect}",
-          "creatableSelectTest:creatable_select_test": "${creatableSelectTest}",
-          "selectTest:select_test": "${selectTest}",
-          "bio": "${bio}",
-          "date": "${date}",
-          "password": "${password}",
-          "telephone": "${telephone}"
+          "integer": {
+            "customRating:custom_rating": "${customRating}",
+            "age": "${age}"
+          },
+          "number": {
+            "currency": "${currency}"
+          },
+          "boolean": {
+            "default": "${default}",
+            "radio": "${radio}"
+          },
+          "array": {
+            "multiSelect": "${multiSelect}",
+            "creatableSelectTest:creatable_select_test": "${creatableSelectTest}",
+            "selectTest:select_test": "${selectTest}"
+          },
+          "object": {
+            "customComponent:custom_component": {
+              "startDate:start_date": "${customComponent.startDate}",
+              "endDate:end_date": "${customComponent.endDate}"
+            }
+          }
         },
         "map:results": "#/definitions/results"
       }
     }
   },
   "properties": {
-    "selectTest": {
-      "onload": {
-        "xhr:datasource": {
-            "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api",
-            "method": "GET",
-            "headers": {},
-            "payload": {},
-            "map:items.enum": "name"
+    "array": {
+      "selectTest": {
+        "onload": {
+          "xhr:datasource": {
+              "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api",
+              "method": "GET",
+              "headers": {},
+              "payload": {},
+              "map:items.enum": "name"
+          }
         }
       }
     }
   },
   "definitions": {
     "results": {
-      "firstName": "${first_name}",
-      "lastName": "${last_name}",
-      "customComponent": "${custom_component}",
-      "customRating": "${custom_rating}",
-      "currency": "${currency}",
-      "default": "${default}",
-      "radio": "${radio}",
-      "select": "${select}",
-      "react-select": "${react_select}",
-      "age": "${age}",
-      "upload": "${upload}",
-      "multiSelect": "${multiSelect}",
-      "creatableSelectTest": "${creatable_select_test}",
-      "selectTest": "${select_test}",
-      "bio": "${bio}",
-      "date": "${date}",
-      "password": "${password}",
-      "telephone": "${telephone}"
+      "string": {
+        "firstName": "${first_name}",
+        "lastName": "${last_name}",
+        "select": "${select}",
+        "react-select": "${react_select}",
+        "upload": "${upload}",
+        "bio": "${bio}",
+        "date": "${date}",
+        "password": "${password}",
+        "telephone": "${telephone}"
+      },
+      "integer": {
+        "customRating": "${custom_rating}",
+        "age": "${age}"
+      },
+      "number": {
+        "currency": "${currency}"
+      },
+      "boolean": {
+        "default": "${default}",
+        "radio": "${radio}"
+      },
+      "array": {
+        "multiSelect": "${multiSelect}",
+        "creatableSelectTest": "${creatable_select_test}",
+        "selectTest": "${select_test}"
+      },
+      "object": {
+        "customComponent": "${custom_component}"
+      }
     }
   }
 }

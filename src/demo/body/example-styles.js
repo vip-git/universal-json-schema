@@ -48,6 +48,7 @@ export default makeStyles((theme) => createStyles({
       '& $display': {
         position: 'relative',
         flex: 13,
+        maxWidth: '40vw',
       },
     },
   },
