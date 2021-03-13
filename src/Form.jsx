@@ -83,7 +83,7 @@ const setData = (
   onError,
 ) => {
   data = typeof givenData === 'string' ? givenData : removeEmptyObjects(givenData);
-  if (uiSchema && JSON.stringify(givenUIData) !== '{}') {
+  if (uiSchema) {
     uiData = givenUIData;
     setUISchemaData(uiData, uiSchema);
   }

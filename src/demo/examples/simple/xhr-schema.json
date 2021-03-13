@@ -95,10 +95,10 @@
       "array": {
         "multiSelect": "${multiSelect}",
         "creatableSelectTest": "${creatable_select_test}",
-        "selectTest": "${select_test}"
+        "selectTest": "${selectTest}"
       },
       "object": {
-        "customComponent": "${custom_component}"
+        "customComponent": "${customComponent}"
       }
     }
   }

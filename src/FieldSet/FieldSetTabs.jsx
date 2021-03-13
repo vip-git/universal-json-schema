@@ -47,7 +47,7 @@ const FieldSetTabs = (props) => {
   const tabProps = uiSchema['ui:page']['ui:tabs']?.tab?.props || {};
   const tabPanelStyle = uiSchema['ui:page']['ui:tabs']?.tabPanel?.style || {};
   const tabPanelProps = uiSchema['ui:page']['ui:tabs']?.props || {};
-  const [value, setValue] = React.useState(0); // Todo: add info to set tabs via ui:schema
+  const [value, setValue] = React.useState(tabsProps?.tabIndex - 1 || 0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

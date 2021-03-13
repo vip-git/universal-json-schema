@@ -2,7 +2,9 @@
   "ui:page": {
     "ui:layout": "tabs",
     "ui:tabs": {
-      "props": {},
+      "props": {
+        "tabIndex": 1
+      },
       "style": {
         "width": "29vw",
         "marginTop": 10

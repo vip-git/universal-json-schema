@@ -133,6 +133,8 @@ const setNestedData = ({
         schemaProps: currentSchemaObj.properties,
         returnData,
         uiSchema,
+        interceptors,
+        returnUIData,
         xhrData,
         extraKey: fd,
       });
