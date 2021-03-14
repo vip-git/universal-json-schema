@@ -3,7 +3,8 @@ const executeXHRCall = ({
   url,
   method,
   payload,
-  callback,
+  onSuccess,
+  onFailure,
 }) => {
   const options = {
     method, // *GET, POST, PUT, DELETE, etc.
@@ -21,7 +22,8 @@ const executeXHRCall = ({
   const fetchData = (method === 'GET') ? fetch(url) : fetch(url, options);
   return fetchData
     .then((res) => res.json())
-    .then((xhrData) => callback(xhrData));
+    .then((xhrData) => typeof onSuccess === 'function' && onSuccess(xhrData))
+    .catch(() => typeof onFailure === 'function' && onFailure());
 };
 
 export default executeXHRCall;

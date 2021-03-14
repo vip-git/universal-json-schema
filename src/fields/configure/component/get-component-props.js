@@ -4,6 +4,13 @@ import isEmpty from 'lodash/isEmpty';
 // Context
 import { EventContext, LoadingContext } from '../../../helpers/context';
 
+// Interceptors
+const {
+  APP_CONFIG: {
+    INTERCEPTORS: { INTERCEPTOR_CONFIG },
+  },
+} = require('../../../generated/app.config');
+
 export default ({
   schema = {},
   uiSchema = {},
@@ -25,6 +32,7 @@ export default ({
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'] || uiSchema['ui:props'] || {};
   const interceptorFunc = uiSchema['ui:interceptor'] || options.onBeforeChange;
+  const getMethod = INTERCEPTOR_CONFIG[interceptorFunc]?.interceptor || interceptors[interceptorFunc];
   const { type } = schema;
   const rv = isCustomComponent
     ? {
@@ -39,11 +47,8 @@ export default ({
           value = undefined;
         }
         // Call Interceptor if it exists
-        if (
-          typeof interceptors[interceptorFunc] === 'function'
-            && !isEmpty(interceptorFunc)
-        ) {
-          const { formData, uiData } = interceptors[interceptorFunc]({
+        if (typeof getMethod === 'function' && !isEmpty(interceptorFunc)) {
+          const { formData, uiData } = getMethod({
             value,
             uiValue,
             options,
@@ -83,11 +88,8 @@ export default ({
         value = undefined;
       }
       // Call Interceptor if it exists
-      if (
-        typeof interceptors[interceptorFunc] === 'function'
-        && !isEmpty(interceptorFunc)
-      ) {
-        const { formData, uiData } = interceptors[interceptorFunc]({
+      if (typeof getMethod === 'function' && !isEmpty(interceptorFunc)) {
+        const { formData, uiData } = getMethod({
           value,
           uiValue,
           options,

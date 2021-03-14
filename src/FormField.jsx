@@ -83,6 +83,7 @@ export const RawFormField = React.memo(({
   && isEqual(prevProps.schema, nextProps.schema)
   && isEqual(prevProps.uiData, nextProps.uiData)
   && isEqual(prevProps.uiSchema, nextProps.uiSchema)
+  && isEqual(prevProps.xhrSchema, nextProps.xhrSchema)
   && (
     (
       has(prevProps.schema, 'ui:component') 

@@ -11,6 +11,7 @@ import each from 'lodash/each';
 import { generate } from 'shortid';
 import validator from 'is-my-json-valid';
 import Paper from '@material-ui/core/Paper';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Internal
 import formStyles from './form-styles';
@@ -96,7 +97,7 @@ const setData = (
 const Form = ({
   formData = {},
   schema = {},
-  xhrSchema = {},
+  xhrSchema = { 'ui:page': { onload: { xhrProgress: false } } },
   uiSchema = {},
   validations,
   prefixId,
@@ -125,6 +126,10 @@ const Form = ({
   const formGlobalState = {
     disabled,
   };
+  const xhrProgress = xhrSchema 
+                        && xhrSchema['ui:page'] 
+                        && xhrSchema['ui:page'].onload 
+                        && xhrSchema['ui:page'].onload.xhrProgress;
   const [loadingState, setLoadingState] = React.useState(null);
   const [prevData, setPrevData] = React.useState(null);
   const [prevSkippedData, setPrevSkippedData] = React.useState(null);
@@ -134,6 +139,9 @@ const Form = ({
   const id = prefixId || generate();
   const autoId = generate();
   const [formId, setFormId] = React.useState(null);
+  const hasPageLayoutTabs = uiSchema['ui:page'] 
+                              && uiSchema['ui:page']['ui:layout'] 
+                              && uiSchema['ui:page']['ui:layout'] === 'tabs';
   const hasPageLayoutSteps = uiSchema['ui:page'] 
                               && uiSchema['ui:page']['ui:layout'] 
                               && uiSchema['ui:page']['ui:layout'] === 'steps';
@@ -149,9 +157,10 @@ const Form = ({
       );
     }
     else {
+      const currentUIData = Object.keys(uiData).length ? uiData : iniUiData;
       setData(
         formData, 
-        iniUiData,
+        currentUIData,
         uiSchema, 
         schema,
         onChange,
@@ -172,22 +181,27 @@ const Form = ({
       const resultsMappingInfo = mappedResults.includes('#/') 
         ? getDefinitionsValue(xhrSchema, mappedResults)
         : mappedResults;
+      set(xhrSchema, 'ui:page.onload.xhrProgress', true);
       executeXHRCall({
         type: 'onload',
         url: xhrSchema['ui:page'].onload['xhr:datasource'].url,
         method: xhrSchema['ui:page'].onload['xhr:datasource'].method,
-        callback: (xhrData) => mapData(
-          resultsMappingInfo,
-          Array.isArray(xhrData) ? xhrData[0] : xhrData,
-          data,
-          uiData,
-          uiSchema,
-          interceptors,
-          schema,
-          onChange,
-          onError,
-          setData,
-        ),
+        onFailure: () => set(xhrSchema, 'ui:page.onload.xhrProgress', undefined),
+        onSuccess: (xhrData) => {
+          set(xhrSchema, 'ui:page.onload.xhrProgress', undefined);
+          mapData(
+            resultsMappingInfo,
+            Array.isArray(xhrData) ? xhrData[0] : xhrData,
+            data,
+            uiData,
+            uiSchema,
+            interceptors,
+            schema,
+            onChange,
+            onError,
+            setData,
+          );
+        },
       });
     }
     setFormId(hashCode(JSON.stringify(schema)));  
@@ -227,7 +241,7 @@ const Form = ({
       url,
       method,
       payload,
-      callback: (xhrData) => {
+      onSuccess: (xhrData) => {
         const enums = xhrData.map((xh) => get(xh, findMapDef));
         set(
           schema, 
@@ -327,7 +341,7 @@ const Form = ({
         url,
         method,
         payload,
-        callback: (xhrData) => {
+        onSuccess: (xhrData) => {
           const xhrDt = Array.isArray(xhrData) ? xhrData[0] : xhrData;
           const mappedResults = xhrSchema['ui:page'].onsubmit['xhr:datasource']['map:results'];
           const resultsMappingInfo = mappedResults.includes('#/') 
@@ -387,7 +401,7 @@ const Form = ({
         url,
         method,
         payload,
-        callback: (xhrData) => {
+        onSuccess: (xhrData) => {
           const xhrDt = Array.isArray(xhrData) ? xhrData[0] : xhrData;
           const mappedResults = xhrSchema.properties[path].onsubmit['xhr:datasource']['map:results'];
           const resultsMappingInfo = mappedResults.includes('#/') 
@@ -486,34 +500,43 @@ const Form = ({
           }
           <LoadingContext.Provider value={loadingState}>
             <EventContext.Provider value={onUpload}>
-              <FormField
-                  path={''}
-                  data={data}
-                  uiData={uiData}
-                  schemaVersion={schema.version}
-                  schema={schema}
-                  uiSchema={uiSchema}
-                  xhrSchema={xhrSchema}
-                  definitions={schema.definitions}
-                  interceptors={interceptors}
-                  id={id}
-                  onChange={onFormValuesChange}
-                  onXHRSchemaEvent={onXHRSchemaEvent}
-                  onSubmit={onFormSubmit}
-                  validation={validation}
-                  onKeyDown={handleKeyEnter}
-                  onMoveItemUp={onMoveItemUp}
-                  onMoveItemDown={onMoveItemDown}
-                  onDeleteItem={onDeleteItem}
-                  onAddItem={onAddItem}
-                  onAddNewProperty={onAddNewProperty}
-                  onRemoveProperty={onRemoveProperty}
-                  onUpdateKeyProperty={onUpdateKeyProperty}
-                  onNext={onFormNext}
-                  onBack={onFormBack}
-                  onSkip={onFormSkip}
-                  {...rest}
-              />
+              {
+                xhrProgress && !hasPageLayoutTabs ? (
+                    <div> 
+                      <CircularProgress disableShrink />
+                    </div>
+                ) : (
+                    <FormField
+                          path={''}
+                          data={data}
+                          uiData={uiData}
+                          schemaVersion={schema.version}
+                          schema={schema}
+                          uiSchema={uiSchema}
+                          xhrSchema={xhrSchema}
+                          definitions={schema.definitions}
+                          interceptors={interceptors}
+                          id={id}
+                          onChange={onFormValuesChange}
+                          onXHRSchemaEvent={onXHRSchemaEvent}
+                          onSubmit={onFormSubmit}
+                          validation={validation}
+                          onKeyDown={handleKeyEnter}
+                          onMoveItemUp={onMoveItemUp}
+                          onMoveItemDown={onMoveItemDown}
+                          onDeleteItem={onDeleteItem}
+                          onAddItem={onAddItem}
+                          onAddNewProperty={onAddNewProperty}
+                          onRemoveProperty={onRemoveProperty}
+                          onUpdateKeyProperty={onUpdateKeyProperty}
+                          onNext={onFormNext}
+                          onBack={onFormBack}
+                          onSkip={onFormSkip}
+                          {...rest}
+                    />
+                )
+              }
+              
             </EventContext.Provider>
           </LoadingContext.Provider>
           {

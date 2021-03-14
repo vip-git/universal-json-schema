@@ -8,6 +8,7 @@ import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Internal
 import FieldSetObject from './FieldSetObject';
@@ -40,7 +41,16 @@ function a11yProps(index) {
 }
 
 const FieldSetTabs = (props) => {
-  const { schema = {}, path, uiSchema = { 'ui:page': { 'ui:tabs': {} } } } = props;
+  const { 
+    schema = {},
+    path,
+    xhrSchema = {}, 
+    uiSchema = { 'ui:page': { 'ui:tabs': {} } },
+  } = props;
+  const xhrProgress = xhrSchema 
+                        && xhrSchema['ui:page'] 
+                        && xhrSchema['ui:page'].onload 
+                        && xhrSchema['ui:page'].onload.xhrProgress;
   const tabsProps = uiSchema['ui:page']['ui:tabs']?.props || {};
   const tabsStyle = uiSchema['ui:page']['ui:tabs']?.style || {};
   const tabStyle = uiSchema['ui:page']['ui:tabs']?.tab?.style || {};
@@ -52,7 +62,6 @@ const FieldSetTabs = (props) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  
   return (
     <div 
       style={{
@@ -95,11 +104,26 @@ const FieldSetTabs = (props) => {
                 style={{ ...tabPanelStyle }}
                 {...tabPanelProps}
               >
-                <FieldSetObject 
-                  {...props} 
-                  tabKey={p}
-                  isTabContent
-                />
+                {
+                  xhrProgress ? (
+                    <div 
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        margin: 50,
+                      }}
+                    > 
+                      <CircularProgress disableShrink />
+                    </div>
+                  ) : (
+                    <FieldSetObject 
+                        {...props} 
+                        tabKey={p}
+                        isTabContent
+                    />
+                  )
+                }
               </TabPanel>
           );
         })
