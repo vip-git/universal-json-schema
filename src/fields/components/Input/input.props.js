@@ -31,16 +31,34 @@ export default ({
   htmlid,
   schema = {},
 }) => {
+  const defaultOptions = ['useLocaleString'];
+  const materialProps = {
+    inputProps:
+      typeof options.inputProps === 'object'
+        ? {
+          ...options.inputProps,
+        }
+        : {},
+    ...Object.keys(options)
+      .filter((key) => !defaultOptions.includes(key))
+      .reduce(
+        (obj, key) => ({
+          ...obj,
+        }),
+        {},
+      ),
+  };
   const props = {
     onChange: onChange && onChangeHandler(onChange, type, options),
     onBlur: onBlur && onChangeHandler(onBlur, type, options),
     label: schema.title || '',
     inputProps: {
       id: htmlid,
+      ...materialProps.inputProps,
     },
     ...getTextAreaProps(uiSchema['ui:widget']),
     ...getMuiProps(uiSchema),
-    ...options,
+    ...materialProps,
   };
   if (!options.useLocaleString) {
     props.type = getInputType(type, uiSchema);

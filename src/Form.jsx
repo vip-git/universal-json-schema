@@ -213,7 +213,7 @@ const Form = ({
      *       - On uncheck remove the adds data
      *       - It should be computed at the end and not on click
      */
-    console.log('givenValue is', givenValue, givenUIValue, 'field is', field);
+    // console.log('givenValue is', givenValue, givenUIValue, 'field is', field);
     const newFormData = updateFormData(data, field, givenValue);
     const newUIData = isEmptyValues(givenUIValue) || forceDeleteUIData
       ? removeValueFromSpec(uiData, field) 

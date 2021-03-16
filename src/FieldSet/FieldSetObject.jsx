@@ -50,6 +50,7 @@ export const RawFieldSetObject = ({
     const propSchema = schema.properties[tabKey].$ref 
       ? getDefinitionSchemaFromRef(definitions, schema.properties[tabKey], data[tabKey])
       : schema.properties[tabKey];
+    const finalData = { ...data[tabKey] };  
     return (isLoading && isLoading[tabKey]) ? 'Loading...' : (
       <div className={classNames(classes.root, orientation)}>
         <FormField
@@ -58,7 +59,7 @@ export const RawFieldSetObject = ({
             path={newPath}
             required={schema.required}
             schema={propSchema}
-            data={uiData[tabKey] && Object.assign(data[tabKey], uiData[tabKey]) || data[tabKey]}
+            data={uiData[tabKey] && Object.assign(finalData, uiData[tabKey]) || finalData}
             uiSchema={uiSchema[tabKey] || {}}
             xhrSchema={xhrSchema?.properties && xhrSchema?.properties[tabKey] || {}}
             validation={validation[tabKey] || {}}
@@ -68,7 +69,7 @@ export const RawFieldSetObject = ({
       </div>
     );
   }
-
+  
   return (
     <div className={classNames(classes.root, orientation)}>
       {
@@ -85,7 +86,7 @@ export const RawFieldSetObject = ({
                 path={newPath}
                 required={schema.required}
                 schema={propSchema}
-                data={uiData[propId] && Object.assign(data[propId], uiData[propId]) || data[propId]}
+                data={uiData[propId] || data[propId]}
                 uiSchema={uiSchema[propId] || {}}
                 xhrSchema={xhrSchema?.properties && xhrSchema?.properties[propId] || {}}
                 validation={validation[propId] || {}}
@@ -122,7 +123,7 @@ export const RawFieldSetObject = ({
                   path={newPath}
                   required={schema.required}
                   schema={schema.additionalProperties}
-                  data={uiData[propId] && Object.assign(data[propId], uiData[propId]) || data[propId]}
+                  data={uiData[propId] || data[propId]}
                   uiSchema={uiSchema[propId] || {}}
                   xhrSchema={xhrSchema?.properties && xhrSchema?.properties[propId] || {}}
                   validation={validation[propId] || {}}
@@ -174,7 +175,7 @@ export const RawFieldSetObject = ({
                   path={newPath}
                   required={schema.required}
                   schema={propSchema}
-                  data={uiData[propId] && Object.assign(data[propId], uiData[propId]) || data[propId]}
+                  data={typeof uiData[propId] === 'string' && uiData[propId] || data[propId]}
                   uiSchema={uiSchema[propId] || {}}
                   xhrSchema={xhrSchema?.properties && xhrSchema?.properties[propId] || {}}
                   validation={validation[propId] || {}}

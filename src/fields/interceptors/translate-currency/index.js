@@ -3,33 +3,49 @@ import isEmpty from 'lodash/isEmpty';
 
 const isEmptyValues = (value) => isEmpty(value) && typeof value !== 'number' && typeof value !== 'boolean';
 
+const getDecimalSeparator = (locale) => {
+  const numberWithDecimalSeparator = 1.1;
+  return Intl.NumberFormat(locale)
+    .formatToParts(numberWithDecimalSeparator)
+    .find((part) => part.type === 'decimal').value;
+};
+
+const isScientificNotation = (numberString) => String(numberString).toUpperCase().includes('E');
+
 const parseCurrencyValue = (value, useLocaleString) => {
-  let n = 1.1;
-  n = n.toLocaleString(useLocaleString).substring(1, 2);
-  const whatDecimalSeparatorRegex = n === '.' ? /[^\d]/g : /[^\d,.]/g;
-  return n === '.'
-    ? value.replace(whatDecimalSeparatorRegex, '')
-    : value
+  if (getDecimalSeparator(useLocaleString) === ',') {
+    const whatDecimalSeparatorRegex = /[^\d,]/g;
+    return value
       .replace(whatDecimalSeparatorRegex, '')
       .replace(/\./g, '')
       .replace(/,/g, '.');
+  }
+
+  const whatDecimalSeparatorRegex = /[^\d.]/g;
+  return value.replace(whatDecimalSeparatorRegex, '');
 };
 
 const translateCurrency = ({ value, options }) => {
+  // eslint-disable-next-line no-undef
+  const locale = options.useLocaleString || window?.navigator?.language;
   if (isEmptyValues(value)) {
     return {
       formData: '',
       uiData: '',
     };
   }
-  const formData = Number(
-    parseCurrencyValue(String(value), options.useLocaleString),
-  );
-  const uiData = Number(
-    parseCurrencyValue(String(value), options.useLocaleString),
-  ).toLocaleString(options.useLocaleString);
+  const formData = Number(parseCurrencyValue(String(value), locale));
+  const lastChar = String(value).charAt(String(value).length - 1);
+  const uiData = lastChar === getDecimalSeparator(locale)
+    ? String(value)
+    : Number(parseCurrencyValue(String(value), locale)).toLocaleString(
+      locale,
+    );
+
   return {
-    formData,
+    formData: isScientificNotation(formData)
+      ? formData.toLocaleString('fullwide', { useGrouping: false })
+      : formData,
     uiData,
   };
 };
