@@ -118,7 +118,7 @@ const Example = ({
   const classes = useStyles(theme);
   const [oldHash, setOldHash] = useState(window.location.hash);
   const [state, setState] = useState({ ...data });
-  const [formDataState, setFormData] = useState({ ...data.formData });
+  const [formDataState, setFormData] = useState(typeof data.formData === 'string' ? data.formData : { ...data.formData });
   const [schemaErrors, setSchemaErrors] = useState(null);
   const [validSchema, setValidSchema] = useState(null);
 
@@ -135,6 +135,7 @@ const Example = ({
   };
 
   const onFormChanged = ({ formData, uiSchema, uiData, schemaErrors: givenSchemaErrors, validSchema: givenValidSchema }) => {
+    // console.log('formData is', formData);
     setState({ ...state, formData, uiSchema, uiData, validSchema });
     setSchemaErrors(givenSchemaErrors);
     setValidSchema(givenValidSchema);
