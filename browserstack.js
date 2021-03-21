@@ -2,6 +2,7 @@
 /* eslint-disable no-undef */
 const assert = require('assert');
 const { Builder, By, until } = require('selenium-webdriver');
+const { Given, Then, When } = require('@cucumber/cucumber');
 
 // Input capabilities
 const capabilities = {

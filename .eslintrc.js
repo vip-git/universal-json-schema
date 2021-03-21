@@ -1,9 +1,9 @@
 module.exports = {
-  extends: [
+  'extends': [
     'airbnb',
     'plugin:react-hooks/recommended',
   ],
-  rules: {
+  'rules': {
     'import/no-extraneous-dependencies': 'off',
     'no-trailing-spaces': 'off',
     'react/jsx-indent': 'off',
@@ -29,5 +29,8 @@ module.exports = {
     'no-plusplus': 'off',
     'object-curly-newline': 'off',
   },
-  parser: 'babel-eslint',
+  'parser': 'babel-eslint',
+  'env': {
+    'jest/globals': true,
+  },
 };
