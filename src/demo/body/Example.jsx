@@ -134,9 +134,8 @@ const Example = ({
     setState({ ...state, [type]: value || '' });
   };
 
-  const onFormChanged = ({ formData: givenFormData, uiSchema, uiData, schemaErrors: givenSchemaErrors, validSchema: givenValidSchema }) => {
+  const onFormChanged = ({ formData, uiSchema, uiData, schemaErrors: givenSchemaErrors, validSchema: givenValidSchema }) => {
     // console.log('formData is', formData);
-    const formData = schema.type === 'string' ? givenFormData || '' : givenFormData;
     setState({ ...state, formData, uiSchema, uiData, validSchema });
     setSchemaErrors(givenSchemaErrors);
     setValidSchema(givenValidSchema);

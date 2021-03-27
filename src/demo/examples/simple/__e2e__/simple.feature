@@ -4,7 +4,7 @@ Feature: Simple Feature
 
         When I test the field based on following attributes
             | fieldName           | fieldType | fieldFormValue | fieldUIValue  | fieldRef   |
-            | A single-field form | string    | initial value  | initial value | firstField |
+            | First name          | string    | initial value  | initial value | firstField |
 
         Then I expect the field to have following values
             | fieldResultOnChange | fieldUIResultOnChange | fieldRef   |
