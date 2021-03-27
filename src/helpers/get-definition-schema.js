@@ -1,7 +1,7 @@
 // Library
-import get from 'lodash/get';
-import find from 'lodash/find';
-import omit from 'lodash/omit';
+const get = require('lodash/get');
+const find = require('lodash/find');
+const omit = require('lodash/omit');
 
 const getDefinitionSchemaFromRef = (
   givenDefinitions,
@@ -55,4 +55,4 @@ const getDefinitionSchemaFromRef = (
   }
 };
 
-export default getDefinitionSchemaFromRef;
+module.exports = getDefinitionSchemaFromRef;

@@ -26,10 +26,11 @@ const shelljs = require('shelljs');
 const componentSettings = require('./components.json');
 
 // Config
-const CONFIG = require('./config');
+const { CONFIG, folderHashMapping } = require('./config');
 
 // Utils
 const moduleGenerator = require('./modules-generator');
+const e2eTestsGenerator = require('./e2e-tests-generator');
 
 // Templates
 const templateFile = require('./templates/app-config.template.js');
@@ -41,32 +42,54 @@ const shellFileString = new shelljs.ShellString(finalString);
 // Folder Variables
 const generatedLocation = `${shelljs.pwd()}/src/generated`;
 const generatorLocation = `${shelljs.pwd()}/generator`;
+const demoFolder = `${shelljs.pwd()}/src/demo/examples`;
 
-CONFIG.modules.forEach((md) => {
-  shelljs.rm('-rf', `${generatedLocation}/${md}`);
-});
-shelljs.rm('-rf', `${generatorLocation}/node_modules`);
-shelljs.rm('-rf', `${generatorLocation}/package-lock.json`);
-shelljs.rm('-rf', `${generatorLocation}/package.json`);
+const myArgs = process.argv.slice(2);
 
-shelljs.mkdir(generatedLocation);
+const generateE2ETests = () => {
+  Object.keys(folderHashMapping).forEach(function (file) {
+    if (!file.includes('.js')) {
+      const generatedE2ELocation = `${demoFolder}/${file}/__e2e__`;
+      shelljs.rm('-rf', generatedE2ELocation);
+      shelljs.mkdir(generatedE2ELocation);
+      e2eTestsGenerator(
+        file,
+        folderHashMapping[file],
+        shelljs,
+        ejs,
+        generatedE2ELocation
+      );
+    }
+  });
+};
 
-console.log('generating app config file');
+if (myArgs[0] && myArgs[0] === '--testsOnly') {
+  generateE2ETests();
+} else {
+  CONFIG.modules.forEach((md) => {
+    shelljs.rm('-rf', `${generatedLocation}/${md}`);
+  });
+  shelljs.rm('-rf', `${generatorLocation}/node_modules`);
+  shelljs.rm('-rf', `${generatorLocation}/package-lock.json`);
+  shelljs.rm('-rf', `${generatorLocation}/package.json`);
 
-shellFileString.to(`${generatedLocation}/app.config.js`);
+  shelljs.mkdir(generatedLocation);
 
-console.log('app config file generated');
+  console.log('generating app config file');
 
-shelljs.cd(generatorLocation);
-shelljs.exec('npm init --yes');
+  shellFileString.to(`${generatedLocation}/app.config.js`);
 
-CONFIG.modules.forEach((md) => {
-  // Generate Module
-  moduleGenerator(
-    md,
-    componentSettings,
-    generatedLocation,
-    shelljs,
-    ejs,
-  );
-});
+  console.log('app config file generated');
+
+  shelljs.cd(generatorLocation);
+  shelljs.exec('npm init --yes');
+
+  CONFIG.modules.forEach((md) => {
+    // Generate Module
+    moduleGenerator(md, componentSettings, generatedLocation, shelljs, ejs);
+  });
+
+  generateE2ETests();
+}
+
+
