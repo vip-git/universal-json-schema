@@ -1,21 +1,25 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 
-const LoginPage = require('../pageobjects/login.page');
-const SecurePage = require('../pageobjects/secure.page');
+const FormPage = require('../pageobjects/form.page');
 
 const pages = {
-  login: LoginPage,
+  form: FormPage,
 };
 
-Given(/^I am on the (\w+) page$/, (page) => {
-  pages[page].open();
-});
+Given(
+  /^I have a (\w+) for page (\w+) with following (.*)$/,
+  (page, formPage, fieldRef) => {
+    pages[page].open(fieldRef, formPage);
+  }
+);
 
-When(/^I login with (\w+) and (.+)$/, (username, password) => {
-  LoginPage.login(username, password);
-});
+When(
+  /^I test the field based on following attributes$/,
+  (table) => {
+    FormPage.testField(table);
+  }
+);
 
-Then(/^I should see a flash message saying (.*)$/, (message) => {
-  expect(SecurePage.flashAlert).toBeExisting();
-  expect(SecurePage.flashAlert).toHaveTextContaining(message);
+Then(/^I expect the field to have following values$/, (table) => {
+  FormPage.changeFieldValueAndSubmit(table);
 });

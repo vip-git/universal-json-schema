@@ -1,15 +1,15 @@
 Feature: Simple Feature
     Scenario Outline: Simple Form scenario
-        Given I have a form with following <fieldName>
+        Given I have a form for page single with following <fieldRef>
 
         When I test the field based on following attributes
-            | fieldType | fieldFormValue | fieldUIValue  | fieldRef   |
-            | string    | initial value  | initial value | firstField |
+            | fieldName           | fieldType | fieldFormValue | fieldUIValue  | fieldRef   |
+            | A single-field form | string    | initial value  | initial value | firstField |
 
         Then I expect the field to have following values
             | fieldResultOnChange | fieldUIResultOnChange | fieldRef   |
             | new value           | new value             | firstField |
 
         Examples:
-            | fieldName           | tabName     | stepName | fieldRef   |
-            | A single-field form | String      |   false  | firstField |
+            | fieldRef   | tabName | stepName |
+            | firstField | false   | false    |

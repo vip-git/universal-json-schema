@@ -83,7 +83,7 @@ const setData = (
   onChange,
   onError,
 ) => {
-  data = typeof givenData === 'string' ? givenData : removeEmptyObjects(givenData);
+  data = removeEmptyObjects(givenData, schema);
   if (uiSchema) {
     uiData = givenUIData;
     setUISchemaData(uiData, uiSchema);
@@ -95,7 +95,7 @@ const setData = (
 };
 
 const Form = ({
-  formData = {},
+  formData,
   schema = {},
   xhrSchema = { 'ui:page': { onload: { xhrProgress: false } } },
   uiSchema = {},
@@ -148,7 +148,7 @@ const Form = ({
 
   if (
     !isEqual(prevData, { formData, schema, uiSchema }) 
-    && !isEqual(prevSkippedData, { formData: removeEmptyObjects(formData), schema, uiSchema }) 
+    && !isEqual(prevSkippedData, { formData: removeEmptyObjects(formData, schema), schema, uiSchema }) 
   ) {
     if (prevData === null) {
       setData(
@@ -168,7 +168,7 @@ const Form = ({
       );
     }
     setPrevData({ formData, schema, uiSchema });
-    setPrevSkippedData({ formData: removeEmptyObjects(formData), schema, uiSchema });
+    setPrevSkippedData({ formData: removeEmptyObjects(formData, schema), schema, uiSchema });
   }
 
   if (!isEqual(hashCode(JSON.stringify(schema)), formId)) {
@@ -220,7 +220,7 @@ const Form = ({
       : updateFormData(uiData, field, givenUIValue);
     const finalUIData = !isEqual(givenValue, givenUIValue) 
                         || isEmptyValues(givenUIValue) 
-                        || forceDeleteUIData ? newUIData : uiData;
+                        || forceDeleteUIData ? newUIData : uiData;          
     setData(
       newFormData, 
       finalUIData, 

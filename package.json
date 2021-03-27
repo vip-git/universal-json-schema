@@ -12,7 +12,7 @@
     "postinstall": "node generator/index.js",
     "build": "webpack",
     "build:demo": "cross-env NODE_ENV=production webpack --config webpack.config.demo.js",
-    "test": "echo 'Hello'",
+    "test": "npx wdio run wdio.conf.js",
     "test-disabled": "npm run test:ci",
     "test:watch": "npm run test:ci -- --watch",
     "heroku-postbuild": "npm run build:demo",

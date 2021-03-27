@@ -131,11 +131,12 @@ const Example = ({
   }
 
   const onChange = (type) => (value) => {
-    setState({ ...state, [type]: value });
+    setState({ ...state, [type]: value || '' });
   };
 
-  const onFormChanged = ({ formData, uiSchema, uiData, schemaErrors: givenSchemaErrors, validSchema: givenValidSchema }) => {
+  const onFormChanged = ({ formData: givenFormData, uiSchema, uiData, schemaErrors: givenSchemaErrors, validSchema: givenValidSchema }) => {
     // console.log('formData is', formData);
+    const formData = schema.type === 'string' ? givenFormData || '' : givenFormData;
     setState({ ...state, formData, uiSchema, uiData, validSchema });
     setSchemaErrors(givenSchemaErrors);
     setValidSchema(givenValidSchema);
@@ -196,7 +197,7 @@ const Example = ({
           schema={schema || data.schema}
           validSchema={editorSchema || data.schema}
           uiSchema={uiSchema || data.uiSchema}
-          formData={formDataState || formData || data.formData}
+          formData={formData}
           xhrSchema={xhrSchema || data.xhrSchema || {}}
           hasSchemaError={schemaErrors}
           onChange={onChange}
@@ -206,7 +207,7 @@ const Example = ({
             locationHash={hash}
             givenSchema={schema || data.schema}
             givenUISchema={uiSchema || data.uiSchema}
-            givenFormData={formData || data.formData}
+            givenFormData={formData}
             givenXhrSchema={xhrSchema || data.xhrSchema || {}}
             givenUIData={uiData}
             onCancel={onCancel}
