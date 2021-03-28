@@ -1,6 +1,6 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 
-const FormPage = require('../pageobjects/form.page');
+const FormPage = require('../page-objects/form.page');
 
 const pages = {
   form: FormPage,

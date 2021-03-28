@@ -4,7 +4,7 @@ node_modules
 mochawesome-report-unit
 todo
 generated
-__e2e__
+src/demo/**/__e2e__
 _results_
 
 generator/package-lock.json
