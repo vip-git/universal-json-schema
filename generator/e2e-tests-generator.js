@@ -39,20 +39,33 @@ const generateUISchemaType = ({
    * maximum
    */
   Object.keys(schema.properties).forEach((schemaProp) => {
-    if (uiSchema && uiSchema[schemaProp] && uiSchema[schemaProp]['ui:widget']) {
-      schema.properties[schemaProp]['widget'] =
-        uiSchema[schemaProp]['ui:widget'];
-    } else {
-      schema.properties[schemaProp]['widget'] = schema.properties[schemaProp]
-        .enum
-        ? 'material-select'
-        : 'material-input';
-    }
-
-    schema.properties[schemaProp].data = namor.generate({
+    let data = namor.generate({
       words: 3,
       saltLength: 0,
     });
+
+    if (uiSchema && uiSchema[schemaProp] && uiSchema[schemaProp]['ui:widget']) {
+      schema.properties[schemaProp]['widget'] =
+        (
+          uiSchema[schemaProp] &&
+          uiSchema[schemaProp]['ui:options'] &&
+          uiSchema[schemaProp]['ui:options'] === 'rich-text-editor'
+        ) ? 'rich-text-editor'
+          : uiSchema[schemaProp]['ui:widget'];
+
+        if (uiSchema[schemaProp]['ui:widget'] === 'material-date') {
+          data = '31-01-2021';
+        }
+    } else {
+      schema.properties[schemaProp]['widget'] = schema.properties[schemaProp]
+        .enum
+        ? 'material-native-select'
+        : 'material-input';
+    }
+
+    schema.properties[schemaProp].data = schema.properties[schemaProp].enum
+      ? schema.properties[schemaProp].enum[0]
+      : data;
   });
   return schema;
 }
