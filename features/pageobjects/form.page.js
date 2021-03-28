@@ -13,6 +13,7 @@ class FormPage extends Page {
     this.testRef = '';
     this.fieldName = '';
     this.fieldType = '';
+    this.fieldUIType = '';
   }
 
   /**
@@ -29,12 +30,19 @@ class FormPage extends Page {
   testField(table) {
     table.rawTable.forEach((tbl, tbli) => {
       if (tbl.includes(this.testRef) && tbli >= 1) {
+        /** Todo: get index based on name - dont hardcode */
         const fieldName = tbl[0];
         const fieldType = tbl[1];
-        const fieldFormValue = tbl[2];
-        const fieldUIValue = tbl[3];
-        const fieldRef = tbl[4];
-        if (fieldType === 'string') {
+        const fieldUIType = tbl[2];
+        const fieldFormValue = tbl[3];
+        const fieldUIValue = tbl[4];
+        const fieldRef = tbl[5];
+        const shouldSkip = tbl[6];
+        if (
+          fieldType === 'string' &&
+          shouldSkip === 'false' &&
+          fieldUIType === 'material-input'
+        ) {
           StringField.compareCurrentValue(
             `//div/label[contains(text(),"${fieldName}")]/following-sibling::div/input`,
             fieldUIValue
@@ -43,6 +51,7 @@ class FormPage extends Page {
 
         this.fieldName = fieldName;
         this.fieldType = fieldType;
+        this.fieldUIType = fieldUIType;
       }
     });
   }
@@ -50,15 +59,16 @@ class FormPage extends Page {
   changeFieldValueAndSubmit(table) {
     table.rawTable.forEach((tbl, tbli) => {
       if (tbl.includes(this.testRef) && tbli >= 1) {
-        const { fieldName, fieldType } = this;
+        const { fieldName, fieldType, fieldUIType } = this;
         const fieldResultOnChange = tbl[0];
         const fieldUIResultOnChange = tbl[1];
         const fieldRef = tbl[2];
-        if (fieldType === 'string') {
+        if (fieldType === 'string' && fieldUIType === 'material-input') {
           StringField.updateAndCompareNewValue(
             `//div/label[contains(text(),"${fieldName}")]/following-sibling::div/input`,
             fieldUIResultOnChange
           );
+          this.btnSubmit.waitForClickable({ timeout: 4000 });
           this.btnSubmit.click();
         }
       }
@@ -68,9 +78,9 @@ class FormPage extends Page {
   /**
    * overwrite specifc options to adapt it to page object
    */
-  open(testRef, formPage) {
+  open(testRef, formPage, shouldReload) {
     this.testRef = testRef;
-    return super.open(formPage);
+    return shouldReload === 'true' ? super.open(formPage) : {};
   }
 }
 

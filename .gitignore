@@ -5,6 +5,7 @@ mochawesome-report-unit
 todo
 generated
 __e2e__
+_results_
 
 generator/package-lock.json
 generator/package.json

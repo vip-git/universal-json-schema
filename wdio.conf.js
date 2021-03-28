@@ -46,7 +46,7 @@ exports.config = {
   // NPM script (see https://docs.npmjs.com/cli/run-script) then the current working
   // directory is where your package.json resides, so `wdio` will be called from there.
   //
-  specs: ['./src/demo/examples/**/*.feature'],
+  specs: ['./src/demo/examples/**/simple-string.feature'],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -172,7 +172,7 @@ exports.config = {
     dryRun: false,
     // <boolean> abort the run on first failure
     failFast: false,
-    // <string[]> (type[:path]) specify the output format, 
+    // <string[]> (type[:path]) specify the output format,
     // optionally supply PATH to redirect formatter output (repeatable)
     format: ['pretty'],
     // <boolean> hide step definition snippets for pending steps
