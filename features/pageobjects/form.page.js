@@ -38,15 +38,22 @@ class FormPage extends Page {
         const fieldUIValue = tbl[4];
         const fieldRef = tbl[5];
         const shouldSkip = tbl[6];
-        if (
-          fieldType === 'string' &&
-          shouldSkip === 'false' &&
-          fieldUIType === 'material-input'
-        ) {
-          StringField.compareCurrentValue(
-            `//div/label[contains(text(),"${fieldName}")]/following-sibling::div/input`,
-            fieldUIValue
-          );
+
+        if (shouldSkip === 'false') {
+          switch (fieldType) {
+            case 'string':
+              return StringField.compareCurrentValue(
+                fieldName,
+                fieldUIValue,
+                fieldUIType
+              );
+            default:
+              return StringField.compareCurrentValue(
+                fieldName,
+                fieldUIValue,
+                fieldUIType
+              );
+          }
         }
 
         this.fieldName = fieldName;
@@ -63,14 +70,22 @@ class FormPage extends Page {
         const fieldResultOnChange = tbl[0];
         const fieldUIResultOnChange = tbl[1];
         const fieldRef = tbl[2];
-        if (fieldType === 'string' && fieldUIType === 'material-input') {
-          StringField.updateAndCompareNewValue(
-            `//div/label[contains(text(),"${fieldName}")]/following-sibling::div/input`,
-            fieldUIResultOnChange
-          );
-          this.btnSubmit.waitForClickable({ timeout: 4000 });
-          this.btnSubmit.click();
+        switch (fieldType) {
+          case 'string':
+            return StringField.updateAndCompareNewValue(
+              fieldName,
+              fieldUIResultOnChange,
+              fieldUIType
+            );
+          default:
+            return StringField.updateAndCompareNewValue(
+              fieldName,
+              fieldUIResultOnChange,
+              fieldUIType
+            );
         }
+        this.btnSubmit.waitForClickable({ timeout: 4000 });
+        this.btnSubmit.click();
       }
     });
   }
