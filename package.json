@@ -12,6 +12,7 @@
     "postinstall": "node generator/index.js",
     "build": "webpack",
     "build:demo": "cross-env NODE_ENV=production webpack --config webpack.config.demo.js",
+    "generate:tests": "node generator/index.js --testsOnly",
     "test": "npx wdio run wdio.conf.js",
     "test-disabled": "npm run test:ci",
     "test:watch": "npm run test:ci -- --watch",

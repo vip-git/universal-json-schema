@@ -10,12 +10,16 @@ const generateTestFile = ({
   generatedLocation,
   formData,
   hasOnLoadData,
+  tabName,
+  stepName
 }) => {
   const finalString = template({
     schema,
     pageName: hashName,
     formData,
     hasOnLoadData,
+    tabName,
+    stepName,
   });
   const shellFileString = new shelljs.ShellString(finalString);
 
@@ -55,6 +59,10 @@ const generateUISchemaType = ({
 
         if (uiSchema[schemaProp]['ui:widget'] === 'material-date') {
           data = '31-01-2021';
+        }
+
+        if (uiSchema[schemaProp]['ui:widget'] === 'upload') {
+          data = 'checkbox.md';
         }
     } else {
       schema.properties[schemaProp]['widget'] = schema.properties[schemaProp]
@@ -117,7 +125,7 @@ const e2eTestsGenerator = (pageName, hashName, shelljs, ejs, generatedLocation) 
         schema: finalSchema,
         uiSchema: uiSchema[schemaProp],
       });
-
+      const uiLayout = _.get(uiSchema, 'ui:page.ui:layout');
       generateTestFile({
         schema: newSchema,
         hashName,
@@ -128,6 +136,8 @@ const e2eTestsGenerator = (pageName, hashName, shelljs, ejs, generatedLocation) 
         formData: formData[schemaProp],
         xhrSchema: xhrSchema[schemaProp],
         hasOnLoadData: _.has(xhrSchema, 'ui:page.onload'),
+        tabName: (uiLayout === 'tabs' && newSchema.title) || false,
+        stepName: (uiLayout === 'steps' && newSchema.title) || false,
       });
     });
   } else {

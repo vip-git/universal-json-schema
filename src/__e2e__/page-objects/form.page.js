@@ -92,9 +92,18 @@ class FormPage extends Page {
   /**
    * overwrite specifc options to adapt it to page object
    */
-  open(testRef, formPage, shouldReload) {
+  open(testRef, formPage, shouldReload, tabName) {
     this.testRef = testRef;
-    return shouldReload === 'true' ? super.open(formPage) : {};
+    if (shouldReload === 'true') {
+      if (tabName !== 'false') {
+        super.open(formPage);
+        return $(
+          `//button[@role="tab"][span[contains(text(), "${tabName}")]]`
+        ).click();
+      }
+      return super.open(formPage);
+    }
+    return {};
   }
 }
 
