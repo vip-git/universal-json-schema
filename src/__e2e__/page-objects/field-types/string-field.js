@@ -3,9 +3,14 @@ const { getComponentSelector } = require('../component-types');
 
 const compareCurrentValue = (fieldName, fieldUIValue, fieldUIType) => {
   const { path } = getComponentSelector(fieldName, fieldUIType, fieldUIValue);
-  const fieldValue = $(path).getValue();
+  const fieldValue = $(path).getValue() || $(path).getText();
   switch (fieldUIType) {
     case 'material-input':
+    case 'password':
+    case 'textarea':
+    case 'material-date':
+    case 'rich-text-editor':
+    case 'upload':
       expect(fieldValue).toStrictEqual(fieldUIValue);
       return fieldValue;
 
@@ -14,7 +19,7 @@ const compareCurrentValue = (fieldName, fieldUIValue, fieldUIType) => {
   }
 };
 
-const updateAndCompareNewValue = (fieldName, newValue, fieldUIType) => {
+const updateNewValue = (fieldName, newValue, fieldUIType) => {
   const { path, enumSelector } = getComponentSelector(
     fieldName,
     fieldUIType,
@@ -40,7 +45,9 @@ const updateAndCompareNewValue = (fieldName, newValue, fieldUIType) => {
       $(path).click();
       FieldUtils.clearValues(path);
       $(path).click();
-      browser.keys(newValue.split(''));
+      browser.execute((richTextVal) => {
+        document.querySelector('div[role="textbox"]').innerText = richTextVal;
+      }, newValue);
       return newValue;
     case 'upload':
       FieldUtils.uploadFile(
@@ -51,7 +58,6 @@ const updateAndCompareNewValue = (fieldName, newValue, fieldUIType) => {
     default:
       return newValue;
   }
-  compareCurrentValue(fieldName, newValue, fieldUIType);
 };
 
 /**
@@ -59,5 +65,5 @@ const updateAndCompareNewValue = (fieldName, newValue, fieldUIType) => {
  */
 module.exports = {
   compareCurrentValue,
-  updateAndCompareNewValue,
+  updateNewValue,
 };

@@ -29,6 +29,12 @@ module.exports = {
           path: '//div/input[@placeholder="__-__-____"]',
           enumSelector: '',
         };
+      
+      case 'upload':
+        return {
+          path: '//label/div/following-sibling::span',
+          enumSelector: '',
+        };  
 
       case 'material-select':
         return {

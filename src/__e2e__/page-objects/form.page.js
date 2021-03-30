@@ -72,13 +72,12 @@ class FormPage extends Page {
         const fieldRef = tbl[2];
         switch (fieldType) {
           case 'string':
-            return StringField.updateAndCompareNewValue(
+            StringField.updateNewValue(
               fieldName,
               fieldUIResultOnChange,
               fieldUIType
             );
-          default:
-            return StringField.updateAndCompareNewValue(
+            StringField.compareCurrentValue(
               fieldName,
               fieldUIResultOnChange,
               fieldUIType
