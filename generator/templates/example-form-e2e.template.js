@@ -11,7 +11,7 @@ const exampleFormE2ETemplate = `Feature: <%= pageName %> Feature
         Then I expect the field to have following values
             | fieldResultOnChange | fieldUIResultOnChange | fieldRef          |
             <% Object.keys(schema.properties).forEach((schemaProp) => { %>
-            | <%= schema.properties[schemaProp].data %>           | <%= schema.properties[schemaProp].data %>              | <%= schemaProp %> |
+            | <%= schema.properties[schemaProp].data %>           | <%= schema.properties[schemaProp].uiData || schema.properties[schemaProp].data %>              | <%= schemaProp %> |
             <% }); %>
         Examples:
             | fieldRef   | tabName | stepName | shouldReload |

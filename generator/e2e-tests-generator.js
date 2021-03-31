@@ -43,10 +43,18 @@ const generateUISchemaType = ({
    * maximum
    */
   Object.keys(schema.properties).forEach((schemaProp) => {
-    let data = namor.generate({
-      words: 3,
-      saltLength: 0,
-    });
+    let data =
+      schema.properties[schemaProp].type === 'number' ||
+      schema.properties[schemaProp].type === 'integer'
+        ? namor.generate({
+            words: 0,
+            numbers: 5,
+            saltLength: 0,
+          })
+        : namor.generate({
+            words: 3,
+            saltLength: 0,
+          });
 
     if (
       schema.properties[schemaProp] &&
@@ -75,12 +83,27 @@ const generateUISchemaType = ({
           data = 'checkbox.md';
         }
     } else {
-      const isBoolean = schema.properties[schemaProp].type === 'boolean' ? 'material-checkbox' : 'material-input'
+      const isBoolean =
+        schema.properties[schemaProp].type === 'boolean'
+          ? 'material-checkbox'
+          : 'material-input';
       schema.properties[schemaProp]['widget'] = schema.properties[schemaProp]
         .enum
         ? 'material-native-select'
         : isBoolean;
     }
+
+    if (
+      uiSchema &&
+      uiSchema[schemaProp] &&
+      uiSchema[schemaProp]['ui:options'] &&
+      uiSchema[schemaProp]['ui:options']['useLocaleString']
+    ) {
+      schema.properties[schemaProp].uiData = Number(data).toLocaleString(
+        uiSchema[schemaProp]['ui:options']['useLocaleString']
+      );
+    }
+
     const getEnumValue = () =>
       typeof schema.properties[schemaProp].enum[0] === 'object'
         ? schema.properties[schemaProp].enum[0].value

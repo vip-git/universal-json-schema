@@ -43,6 +43,8 @@ class FormPage extends Page {
         if (shouldSkip === 'false') {
           switch (fieldType) {
             case 'string':
+            case 'number':
+            case 'integer':
               return StringField.compareCurrentValue(
                 fieldName,
                 fieldUIValue,
@@ -73,6 +75,8 @@ class FormPage extends Page {
         const fieldRef = tbl[2];
         switch (fieldType) {
           case 'string':
+          case 'number':
+          case 'integer':
             StringField.updateNewValue(
               fieldName,
               fieldUIResultOnChange,

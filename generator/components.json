@@ -7,7 +7,7 @@
             "isRequired": true
         },
         "@react-jsonschema-form-utils/parse-values": {
-            "version": "1.0.5",
+            "version": "1.0.6",
             "name": "parse-values",
             "isRequired": true
         }
@@ -18,7 +18,7 @@
             "name": "translate-ratings"
         },
         "@react-jsonschema-form-interceptors/translate-currency": {
-            "version": "1.0.3",
+            "version": "1.0.4",
             "name": "translate-currency",
             "isRequired": true
         },

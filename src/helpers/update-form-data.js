@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import { has, get, each, set } from 'lodash';
+import { has, get, each, set, omit } from 'lodash';
 import size from 'lodash/size';
 
 const arrRegex = /^([^.]+)\[([0-9]+)\](\.(.*))?/;
@@ -93,7 +93,7 @@ export const setUISchemaData = (givenUIData, uiSchema, path, nestedSchema) => {
   }
 };
 
-export const removeValueFromSpec = (data, path) => update(data, { $unset: [path] });
+export const removeValueFromSpec = (uiData, path) => omit(uiData, path);
 
 export const addListItem = (givenData, path, value) => {
   const data = { ...givenData };
