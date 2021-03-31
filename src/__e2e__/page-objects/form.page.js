@@ -3,6 +3,7 @@ const Page = require('./page');
 
 // Fields
 const StringField = require('./field-types/string-field');
+const BooleanField = require('./field-types/boolean-field');
 
 /**
  * sub page containing specific selectors and methods for a specific page
@@ -47,8 +48,8 @@ class FormPage extends Page {
                 fieldUIValue,
                 fieldUIType
               );
-            default:
-              return StringField.compareCurrentValue(
+            case 'boolean':
+              return BooleanField.compareCurrentValue(
                 fieldName,
                 fieldUIValue,
                 fieldUIType
@@ -78,6 +79,17 @@ class FormPage extends Page {
               fieldUIType
             );
             StringField.compareCurrentValue(
+              fieldName,
+              fieldUIResultOnChange,
+              fieldUIType
+            );
+          case 'boolean':
+            BooleanField.updateNewValue(
+              fieldName,
+              fieldUIResultOnChange,
+              fieldUIType
+            );
+            BooleanField.compareCurrentValue(
               fieldName,
               fieldUIResultOnChange,
               fieldUIType

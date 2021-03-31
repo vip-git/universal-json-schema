@@ -23,6 +23,18 @@ module.exports = {
           path: '//div[@role="textbox"]',
           enumSelector: '',
         };
+      
+      case 'material-checkbox':
+        return {
+          path: `//label[span[contains(text(), "${fieldName}")]]/span/span/input`,
+          enumSelector: '',
+        };  
+       
+      case 'radio':
+        return {
+          path: `//label[contains(text(), "${fieldName}")]/following-sibling::div/label[span[contains(text(), "${newValue}")]]/span/span/input`,
+          enumSelector: '',
+        }; 
 
       case 'material-date':
         return {

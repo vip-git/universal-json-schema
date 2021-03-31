@@ -48,6 +48,16 @@ const generateUISchemaType = ({
       saltLength: 0,
     });
 
+    if (
+      schema.properties[schemaProp] &&
+      !schema.properties[schemaProp].title &&
+      schema.properties[schemaProp].items &&
+      schema.properties[schemaProp].items.title
+    ) {
+      schema.properties[schemaProp].title =
+        schema.properties[schemaProp].items.title;
+    }
+
     if (uiSchema && uiSchema[schemaProp] && uiSchema[schemaProp]['ui:widget']) {
       schema.properties[schemaProp]['widget'] =
         (
@@ -65,14 +75,18 @@ const generateUISchemaType = ({
           data = 'checkbox.md';
         }
     } else {
+      const isBoolean = schema.properties[schemaProp].type === 'boolean' ? 'material-checkbox' : 'material-input'
       schema.properties[schemaProp]['widget'] = schema.properties[schemaProp]
         .enum
         ? 'material-native-select'
-        : 'material-input';
+        : isBoolean;
     }
-
+    const getEnumValue = () =>
+      typeof schema.properties[schemaProp].enum[0] === 'object'
+        ? schema.properties[schemaProp].enum[0].value
+        : schema.properties[schemaProp].enum[0]; 
     schema.properties[schemaProp].data = schema.properties[schemaProp].enum
-      ? schema.properties[schemaProp].enum[0]
+      ? getEnumValue()
       : data;
   });
   return schema;
