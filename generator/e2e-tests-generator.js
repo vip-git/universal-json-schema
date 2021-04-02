@@ -32,7 +32,8 @@ const generateTestFile = ({
 
 const generateUISchemaType = ({
   schema,
-  uiSchema
+  uiSchema,
+  formData
 }) => {
   /**
    * Todo: do something with uiSchema validations here
@@ -83,10 +84,14 @@ const generateUISchemaType = ({
           data = 'checkbox.md';
         }
     } else {
+      const isArray =
+        schema.properties[schemaProp].type === 'array'
+          ? 'material-multiselect-native'
+          : 'material-input';
       const isBoolean =
         schema.properties[schemaProp].type === 'boolean'
           ? 'material-checkbox'
-          : 'material-input';
+          : isArray;
       schema.properties[schemaProp]['widget'] = schema.properties[schemaProp]
         .enum
         ? 'material-native-select'
@@ -104,12 +109,26 @@ const generateUISchemaType = ({
       );
     }
 
-    const getEnumValue = () =>
-      typeof schema.properties[schemaProp].enum[0] === 'object'
-        ? schema.properties[schemaProp].enum[0].value
-        : schema.properties[schemaProp].enum[0]; 
-    schema.properties[schemaProp].data = schema.properties[schemaProp].enum
-      ? getEnumValue()
+    const getEnumValue = (givenEnumData, formData) => {
+      const enumData = givenEnumData.filter((d) => !d.disabled);
+      const enumVal = typeof enumData[0] === 'object'
+        ? enumData[0].value || enumData[0].title
+        : enumData[0];
+        return formData && formData.includes(enumVal)
+          ? typeof enumData[1] === 'object'
+            ? enumData[1].value || enumData[1].title
+            : enumData[1]
+          : enumVal; 
+    }
+      
+    const isEnumData =
+      schema.properties[schemaProp].enum ||
+      schema.properties[schemaProp].anyOf ||
+      (schema.properties[schemaProp].items &&
+        (schema.properties[schemaProp].items.enum ||
+          schema.properties[schemaProp].items.anyOf));
+    schema.properties[schemaProp].data = isEnumData
+      ? getEnumValue(isEnumData, formData && formData[schemaProp])
       : data;
   });
   return schema;
@@ -161,6 +180,7 @@ const e2eTestsGenerator = (pageName, hashName, shelljs, ejs, generatedLocation) 
       const newSchema = generateUISchemaType({
         schema: finalSchema,
         uiSchema: uiSchema[schemaProp],
+        formData: formData[schemaProp],
       });
       const uiLayout = _.get(uiSchema, 'ui:page.ui:layout');
       generateTestFile({
