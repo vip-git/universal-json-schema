@@ -49,11 +49,9 @@ const updateNewValue = (fieldName, newValue, fieldUIType) => {
       return newValue;
     case 'rich-text-editor':
       $(path).click();
-      FieldUtils.clearValues(path);
-      $(path).click();
-      browser.execute((richTextVal) => {
-        document.querySelector('div[role="textbox"]').innerText = richTextVal;
-      }, newValue);
+      browser.keys(['Meta', 'a']);
+      expect($(path)).toBeFocused();
+      browser.keys(newValue.split(''));
       return newValue;
     case 'upload':
       FieldUtils.uploadFile(
