@@ -1,3 +1,5 @@
+const video = require('wdio-video-reporter');
+
 exports.config = {
   //
   // ====================
@@ -46,7 +48,7 @@ exports.config = {
   // NPM script (see https://docs.npmjs.com/cli/run-script) then the current working
   // directory is where your package.json resides, so `wdio` will be called from there.
   //
-  specs: ['./src/demo/examples/**/simple-array.feature'],
+  specs: ['./src/demo/examples/**/simple-string.feature'],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -157,7 +159,25 @@ exports.config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ['spec'],
+  reporters: [
+    'spec',
+    [
+      video,
+      {
+        saveAllVideos: false, // If true, also saves videos for successful test cases
+        videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
+      },
+    ],
+    [
+      'allure',
+      {
+        outputDir: './_results_/allure-raw',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+        useCucumberStepReporter: true,
+      },
+    ],
+  ],
 
   //
   // If you are using Cucumber you need to specify the location of your step definitions.

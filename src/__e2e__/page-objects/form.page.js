@@ -76,18 +76,20 @@ class FormPage extends Page {
   }
 
   changeFieldValueAndSubmit(table) {
-    const callbackBeforeCompare = () => {
+    const callbackBeforeCompare = (fieldUIType) => {
+      if(fieldUIType !== 'upload') {
         this.btnSubmit.waitForClickable({ timeout: 4000 });
         this.btnSubmit.click();
         this.btnSubmit.waitForClickable({ timeout: 4000 });
         browser.refresh();
-        this.btnSubmit.waitForClickable({ timeout: 4000 });
-        if (this.currentTab) {
-          $(
-            `//button[@role="tab"][span[contains(text(), "${this.currentTab}")]]`
-          ).click();
-        }
-        return this.btnSubmit.waitForClickable({ timeout: 4000 });
+      }
+      this.btnSubmit.waitForClickable({ timeout: 4000 });
+      if (this.currentTab) {
+        $(
+          `//button[@role="tab"][span[contains(text(), "${this.currentTab}")]]`
+        ).click();
+      }
+      return this.btnSubmit.waitForClickable({ timeout: 4000 });
     }
     table.rawTable.forEach((tbl, tbli) => {
       if (tbl.includes(this.testRef) && tbli >= 1) {

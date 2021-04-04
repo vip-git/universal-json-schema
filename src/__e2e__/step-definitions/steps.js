@@ -14,12 +14,15 @@ Given(
 );
 
 When(
-  /^I test the field based on following attributes$/,
-  (table) => {
+  /^I test the field "(.*)" based on following attributes$/,
+  (fieldRef, table) => {
     FormPage.testField(table);
   }
 );
 
-Then(/^I expect the field to have following values$/, (table) => {
-  FormPage.changeFieldValueAndSubmit(table);
-});
+Then(
+  /^I expect the field "(.*)" to have following values$/,
+  (fieldRef, table) => {
+    FormPage.changeFieldValueAndSubmit(table);
+  }
+);

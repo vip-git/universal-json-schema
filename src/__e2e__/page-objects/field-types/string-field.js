@@ -7,7 +7,7 @@ const compareCurrentValue = (
   fieldUIType,
   callbackBeforeCompare
 ) => {
-  callbackBeforeCompare();
+  callbackBeforeCompare(fieldUIType);
   const { path } = getComponentSelector(fieldName, fieldUIType, fieldUIValue);
   const fieldValue = $(path).getValue() || $(path).getText();
   switch (fieldUIType) {
