@@ -46,11 +46,13 @@ const FormComponent = ({
       interceptors={{
         translateRatings,
         translateRangeDate: ({ value: givenData, uiValue: givenUiData, options }) => {
-          if (givenData.startDate && givenData.endDate) {
+          const startDate = givenData.startDate || givenData.start_date;
+          const endDate = givenData.endDate || givenData.end_date;
+          if (startDate && endDate) {
             const { formData, uiData } = translateRangeDate({
               data: {
-                startDate: givenData.startDate,
-                endDate: givenData.endDate,
+                startDate,
+                endDate,
               },
             });
             return {

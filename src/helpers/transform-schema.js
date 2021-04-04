@@ -52,7 +52,7 @@ const translateTemplateString = (str, obj, type) => {
 
 export const setNestedPayload = ({
   payloadData,
-  formData,
+  formData: givenFormData,
   schemaProps,
   schemaDefs,
   parentData,
@@ -60,11 +60,23 @@ export const setNestedPayload = ({
   extraKey,
 }) => {
   const payload = previousPayload || {};
+  const formData = Object.assign({}, givenFormData);
   Object.keys(payloadData).forEach((fd) => {
-    const parseColonKey = (givenKey) => (givenKey.includes(':') ? givenKey.split(':')[1] : givenKey);
+    const parseColonKey = (givenKey) => {
+      // Colon includes a object refrence then use this logic
+      // needs to be improved for nested object refrence if support is needed in future.
+      const objectKeyFromPayload = givenKey.includes(':') && givenKey.split(':')[0].includes('.') && givenKey.split(':')[0].split('.')[0];
+      const newKey = givenKey.includes(':') && objectKeyFromPayload && `${objectKeyFromPayload}.${givenKey.split(':')[1]}`;
+
+      return givenKey.includes(':') ? newKey || givenKey.split(':')[1] : givenKey;
+    }
     const objectKey = extraKey ? `${extraKey}.${fd}` : fd;
-    const parsedObjectKey = extraKey ? `${parseColonKey(extraKey)}.${parseColonKey(fd)}` : fd;
-    const payloadKey = parsedObjectKey.includes(':') ? parsedObjectKey.split(':')[1] : parsedObjectKey;
+    const parsedObjectKey = extraKey
+      ? `${parseColonKey(extraKey)}.${parseColonKey(fd)}`
+      : fd;
+    const payloadKey = parsedObjectKey.includes(':')
+      ? parsedObjectKey.split(':')[1]
+      : parsedObjectKey;
     const schemaKey = fd.includes(':') ? fd.split(':')[0] : fd;
     const orignalData = parentData || payloadData;
     const currentData = get(orignalData, objectKey);
@@ -75,8 +87,8 @@ export const setNestedPayload = ({
         getDefinitionSchemaFromRef(
           schemaDefs,
           get(schemaProps, schemaKey),
-          currentData,
-        ),
+          currentData
+        )
       );
     }
     const currentSchemaObj = get(schemaProps, schemaKey);
@@ -91,12 +103,11 @@ export const setNestedPayload = ({
         extraPayloadKey: payloadKey,
         previousPayload: payload,
       });
-    } 
-    else if (currentData && currentSchemaObj) {
+    } else if (currentData && currentSchemaObj) {
       const value = translateTemplateString(
         currentData,
         formData,
-        currentSchemaObj.type,
+        currentSchemaObj.type
       );
       set(payload, payloadKey, value);
     }

@@ -16,36 +16,36 @@
         "headers": {},
         "map:payload": {
           "string": {
-            "firstName:first_name": "${firstName}",
-            "lastName:last_name": "${lastName}",
-            "select": "${select}",
-            "react-select:react_select": "${react-select}",
-            "upload": "${upload}",
-            "bio": "${bio}",
-            "date": "${date}",
-            "password": "${password}",
-            "telephone": "${telephone}"
+            "firstName:first_name": "${string.firstName}",
+            "lastName:last_name": "${string.lastName}",
+            "select": "${string.select}",
+            "react-select:react_select": "${string.react-select}",
+            "upload": "${string.upload}",
+            "bio": "${string.bio}",
+            "date": "${string.date}",
+            "password": "${string.password}",
+            "telephone": "${string.telephone}"
           },
           "integer": {
-            "customRating:custom_rating": "${customRating}",
-            "age": "${age}"
+            "customRating:custom_rating": "${integer.customRating}",
+            "age": "${integer.age}"
           },
           "number": {
-            "currency": "${currency}"
+            "currency": "${number.currency}"
           },
           "boolean": {
-            "default": "${default}",
-            "radio": "${radio}"
+            "default": "${boolean.default}",
+            "radio": "${boolean.radio}"
           },
           "array": {
-            "multiSelect": "${multiSelect}",
-            "creatableSelectTest:creatable_select_test": "${creatableSelectTest}",
-            "selectTest:select_test": "${selectTest}"
+            "multiSelect": "${array.multiSelect}",
+            "creatableSelectTest:creatable_select_test": "${array.creatableSelectTest}",
+            "selectTest:select_test": "${array.selectTest}"
           },
           "object": {
             "customComponent:custom_component": {
-              "startDate:start_date": "${customComponent.startDate}",
-              "endDate:end_date": "${customComponent.endDate}"
+              "startDate:start_date": "${object.customComponent.startDate}",
+              "endDate:end_date": "${object.customComponent.endDate}"
             }
           }
         },
@@ -71,34 +71,34 @@
   "definitions": {
     "results": {
       "string": {
-        "firstName": "${first_name}",
-        "lastName": "${last_name}",
-        "select": "${select}",
-        "react-select": "${react_select}",
-        "upload": "${upload}",
-        "bio": "${bio}",
-        "date": "${date}",
-        "password": "${password}",
-        "telephone": "${telephone}"
+        "firstName": "${string.first_name}",
+        "lastName": "${string.last_name}",
+        "select": "${string.select}",
+        "react-select": "${string.react_select}",
+        "upload": "${string.upload}",
+        "bio": "${string.bio}",
+        "date": "${string.date}",
+        "password": "${string.password}",
+        "telephone": "${string.telephone}"
       },
       "integer": {
-        "customRating": "${custom_rating}",
-        "age": "${age}"
+        "customRating": "${integer.custom_rating}",
+        "age": "${integer.age}"
       },
       "number": {
-        "currency": "${currency}"
+        "currency": "${number.currency}"
       },
       "boolean": {
-        "default": "${default}",
-        "radio": "${radio}"
+        "default": "${boolean.default}",
+        "radio": "${boolean.radio}"
       },
       "array": {
-        "multiSelect": "${multiSelect}",
-        "creatableSelectTest": "${creatable_select_test}",
-        "selectTest": "${selectTest}"
+        "multiSelect": "${array.multiSelect}",
+        "creatableSelectTest": "${array.creatable_select_test}",
+        "selectTest": "${array.select_test}"
       },
       "object": {
-        "customComponent": "${customComponent}"
+        "customComponent": "${object.custom_component}"
       }
     }
   }
