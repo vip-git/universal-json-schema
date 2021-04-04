@@ -10,6 +10,7 @@ const generateTestFile = ({
   generatedLocation,
   formData,
   hasOnLoadData,
+  hasOnSubmitData,
   tabName,
   stepName
 }) => {
@@ -18,6 +19,7 @@ const generateTestFile = ({
     pageName: hashName,
     formData,
     hasOnLoadData,
+    hasOnSubmitData,
     tabName,
     stepName,
   });
@@ -194,6 +196,7 @@ const e2eTestsGenerator = (pageName, hashName, shelljs, ejs, generatedLocation) 
         xhrSchema: xhrSchema[schemaProp],
         hasOnLoadData: _.has(xhrSchema, 'ui:page.onload'),
         tabName: (uiLayout === 'tabs' && newSchema.title) || false,
+        hasOnSubmitData: _.has(xhrSchema, 'ui:page.onsubmit'),
         stepName: (uiLayout === 'steps' && newSchema.title) || false,
       });
     });
@@ -209,6 +212,7 @@ const e2eTestsGenerator = (pageName, hashName, shelljs, ejs, generatedLocation) 
       formData,
       xhrSchema,
       hasOnLoadData: _.has(xhrSchema, 'ui:page.onload'),
+      hasOnSubmitData: _.has(xhrSchema, 'ui:page.onsubmit'),
     });
   }
   

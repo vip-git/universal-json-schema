@@ -7,6 +7,9 @@ export default makeStyles((theme) => createStyles({
       marginTop: 10,
     },
     'flexBasis': '100%',
+    '&:focus': {
+        outline: 'none',
+    }
   },
   textarea: {
     '& textarea': {

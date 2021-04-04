@@ -1,7 +1,13 @@
 const FieldUtils = require('../field-utils');
 const { getComponentSelector } = require('../component-types');
 
-const compareCurrentValue = (fieldName, fieldUIValue, fieldUIType) => {
+const compareCurrentValue = (
+  fieldName,
+  fieldUIValue,
+  fieldUIType,
+  callbackBeforeCompare
+) => {
+  callbackBeforeCompare();
   const { path } = getComponentSelector(fieldName, fieldUIType, fieldUIValue);
   const fieldValue = $(path);
   switch (fieldUIType) {

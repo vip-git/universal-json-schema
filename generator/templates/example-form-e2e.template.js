@@ -1,6 +1,6 @@
 const exampleFormE2ETemplate = `Feature: <%= pageName %> Feature
     Scenario Outline: <%= pageName %> Form scenario
-        Given I have a form for page <%= pageName %> with following "<fieldRef>" "<shouldReload>" "<tabName>" "<stepName>"
+        Given I have a form for page <%= pageName %> with following "<fieldRef>" "<shouldReload>" "<tabName>" "<stepName>" "<hasXHRSchema>"
 
         When I test the field based on following attributes
             | fieldName           | fieldType | uiSchemaType      | fieldFormValue | fieldUIValue  | fieldRef   | shouldSkip |
@@ -14,9 +14,9 @@ const exampleFormE2ETemplate = `Feature: <%= pageName %> Feature
             | <%= schema.properties[schemaProp].data %>           | <%= schema.properties[schemaProp].uiData || schema.properties[schemaProp].data %>              | <%= schemaProp %> |
             <% }); %>
         Examples:
-            | fieldRef   | tabName | stepName | shouldReload |
+            | fieldRef   | tabName | stepName | shouldReload | hasXHRSchema |
             <% Object.keys(schema.properties).forEach((schemaProp, schemaIn) => { %>
-            | <%= schemaProp %> | <%= tabName %>   | <%= stepName %>     | <%= schemaIn === 0 %> |
+            | <%= schemaProp %> | <%= tabName %>   | <%= stepName %>     | <%= schemaIn === 0 %> | <%= hasOnSubmitData %> |
             <% }); %>
 
 `;

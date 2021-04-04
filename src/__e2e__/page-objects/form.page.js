@@ -16,6 +16,8 @@ class FormPage extends Page {
     this.fieldName = '';
     this.fieldType = '';
     this.fieldUIType = '';
+    this.hasXHRData = false;
+    this.currentTab = false;
   }
 
   /**
@@ -74,6 +76,19 @@ class FormPage extends Page {
   }
 
   changeFieldValueAndSubmit(table) {
+    const callbackBeforeCompare = () => {
+        this.btnSubmit.waitForClickable({ timeout: 4000 });
+        this.btnSubmit.click();
+        this.btnSubmit.waitForClickable({ timeout: 4000 });
+        browser.refresh();
+        this.btnSubmit.waitForClickable({ timeout: 4000 });
+        if (this.currentTab) {
+          $(
+            `//button[@role="tab"][span[contains(text(), "${this.currentTab}")]]`
+          ).click();
+        }
+        return this.btnSubmit.waitForClickable({ timeout: 4000 });
+    }
     table.rawTable.forEach((tbl, tbli) => {
       if (tbl.includes(this.testRef) && tbli >= 1) {
         const { fieldName, fieldType, fieldUIType } = this;
@@ -92,7 +107,8 @@ class FormPage extends Page {
             StringField.compareCurrentValue(
               fieldName,
               fieldUIResultOnChange,
-              fieldUIType
+              fieldUIType,
+              callbackBeforeCompare
             );
           case 'boolean':
             BooleanField.updateNewValue(
@@ -103,7 +119,8 @@ class FormPage extends Page {
             BooleanField.compareCurrentValue(
               fieldName,
               fieldUIResultOnChange,
-              fieldUIType
+              fieldUIType,
+              callbackBeforeCompare
             );
           case 'array':
             ArrayField.updateNewValue(
@@ -114,11 +131,10 @@ class FormPage extends Page {
             ArrayField.compareCurrentValue(
               fieldName,
               fieldUIResultOnChange,
-              fieldUIType
+              fieldUIType,
+              callbackBeforeCompare
             );
         }
-        this.btnSubmit.waitForClickable({ timeout: 4000 });
-        this.btnSubmit.click();
       }
     });
   }
@@ -126,11 +142,13 @@ class FormPage extends Page {
   /**
    * overwrite specifc options to adapt it to page object
    */
-  open(testRef, formPage, shouldReload, tabName) {
+  open(testRef, formPage, shouldReload, tabName, hasXHRData) {
     this.testRef = testRef;
+    this.hasXHRData = hasXHRData;
     if (shouldReload === 'true') {
       if (tabName !== 'false') {
         super.open(formPage);
+        this.currentTab = tabName;
         return $(
           `//button[@role="tab"][span[contains(text(), "${tabName}")]]`
         ).click();

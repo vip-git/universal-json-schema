@@ -10,6 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+// Style
+import fieldSetStyles from './field-set-styles';
+
 // Internal
 import FieldSetObject from './FieldSetObject';
 
@@ -47,6 +50,7 @@ const FieldSetTabs = (props) => {
     xhrSchema = {}, 
     uiSchema = { 'ui:page': { 'ui:tabs': {} } },
   } = props;
+  const classes = fieldSetStyles.fieldSetTabs();
   const xhrProgress = xhrSchema 
                         && xhrSchema['ui:page'] 
                         && xhrSchema['ui:page'].onload 
@@ -69,8 +73,9 @@ const FieldSetTabs = (props) => {
         ...tabsStyle,
       }}
     >
-      <AppBar position='static' color='default'>
-        <Tabs
+      <AppBar position='static' color='default' className={classes.root}>
+        <Tabs 
+          className={classes.root}
           value={value}
           onChange={handleChange}
           indicatorColor='primary'
@@ -83,6 +88,7 @@ const FieldSetTabs = (props) => {
           {
             Object.keys(schema.properties).map((p, k) => (
               <Tab 
+                className={classes.root}
                 style={{ textTransform: 'none', ...tabStyle }} 
                 label={schema.properties[p].title} 
                 key={`auto-tab-head-${schema.properties[p].title} + k}`} 
@@ -101,6 +107,7 @@ const FieldSetTabs = (props) => {
                 key={`auto-tab-body-${newPath + k}`}
                 value={value}
                 index={k}
+                className={classes.root}
                 style={{ ...tabPanelStyle }}
                 {...tabPanelProps}
               >
