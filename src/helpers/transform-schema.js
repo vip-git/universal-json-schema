@@ -35,14 +35,17 @@ const translateTemplateString = (str, obj, type) => {
      * to get data from form data and then map it with array
      */
     switch (type) {
-      case 'array':
       case 'object':
         return parameters[0];
+      case 'array':
+        return Array.isArray(parameters[0]) ? parameters[0] : [];
       case 'integer':
       case 'number':
         return Number(parameters);
       case 'boolean':
-        return parameters[0] === 'true';
+        return typeof parameters[0] === 'boolean'
+          ? parameters[0]
+          : parameters[0] === 'true';
       default:
         return String.raw({ raw: parts }, ...parameters);
     }
@@ -164,7 +167,7 @@ const setNestedData = ({
         if (typeof getMethod === 'function') {
           const { formData: fData, uiData } = getMethod({
             value,
-            uiValue,
+            uiValue: uiValue === '[object Object]' ? value : uiValue,
             options,
           });
           set(returnData, objectKey, fData);

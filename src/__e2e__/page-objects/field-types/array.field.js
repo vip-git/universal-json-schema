@@ -26,16 +26,27 @@ const updateNewValue = (fieldName, newValue, fieldUIType) => {
     fieldUIType,
     newValue
   );
+  const fieldValue = $(path).getValue() || $(path).getText();
   switch (fieldUIType) {
     case 'material-multiselect-native':
+      if (fieldValue.includes(newValue)){
+          $(path).click();
+          $(enumSelector).click();
+          browser.keys(['Escape']);
+      } 
       $(path).click();
       $(enumSelector).click();
       browser.keys(['Escape']);
       return newValue;
     case 'creatable-select':
     case 'material-multiselect':
-      $(path).click();
-      $(enumSelector).click();
+       if (fieldValue.includes(newValue)) {
+         $(path).click();
+         browser.keys(['Backspace', 'Backspace', newValue, 'Enter']);
+       } else {
+        $(path).click();
+        $(enumSelector).click();
+       }
       return newValue;
     default:
       return newValue;

@@ -62,7 +62,7 @@ const FormComponent = ({
           }
           return {
             formData: givenData,
-            uiData: givenUiData,
+            uiData: typeof givenUiData === 'string' ? givenUiData : ' ',
           };
         },
       }}
