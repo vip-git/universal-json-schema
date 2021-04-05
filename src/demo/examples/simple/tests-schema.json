@@ -1,42 +1,39 @@
 {
   "integer": {
     "customRating": {
+      "ui:selectors": {
+        "checked": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@checked]",
+        "3rdStar": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@value=3]/preceding-sibling::label[contains(., '3')]",
+        "4thCheckedLabel": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@checked]/preceding-sibling::label[contains(., '4')]",
+        "4thStar": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@value=4]/preceding-sibling::label[contains(., '4')]"
+      },
       "ui:test": [
-        {
-          "selectors": {
-            "checked": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@checked]",
-            "checkedLabel": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@checked]/preceding-sibling::label[contains(., '4')]",
-            "4thStar": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@value=4]/preceding-sibling::label[contains(., '4')]"
-          },
-          "steps": [
-            {
-              "selector": "selectors.4thStar",
-              "action": "click",
-              "verify": {
-                "value": "4",
+          {
+            "steps": [
+              {
+                "selector": "4thStar",
                 "action": "click",
-                "selector": "selectors.checkedLabel"
+                "verify": {
+                  "value": "4",
+                  "action": "click",
+                  "selector": "4thCheckedLabel"
+                }
+              },
+              {
+                "selector": "checked",
+                "action": "compare",
+                "value": "4"
               }
-            },
-            {
-              "selector": "selectors.checked",
-              "action": "compare",
-              "value": "4"
-            }
-          ]
+            ]
         },
         {
-          "selectors": {
-            "checked": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@checked]",
-            "3rdStar": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@value=3]/preceding-sibling::label[contains(., '3')]"
-          },
           "steps": [
             {
-              "selector": "selectors.3rdStar",
+              "selector": "3rdStar",
               "action": "click"
             },
             {
-              "selector": "selectors.checked",
+              "selector": "checked",
               "action": "compare",
               "value": "3"
             }
@@ -46,27 +43,73 @@
     }
   },
   "object": {
-    "ui:test": {
-      "selectors": {
-        "default": "//div/label[contains(text(), 'Range Picker')]/following-sibling::div/input"
+    "customComponent": {
+      "ui:selectors": {
+        "default": "//div/label[contains(text(), 'Range Picker')]/following-sibling::div/input",
+        "selectStartMonthDropDown": "(//div[@tabIndex=0])[6]",
+        "selectStartMonth": "//ul/li[contains(., 'Apr')]",
+        "selectStartYearDropDown": "(//div[@tabIndex=0])[7]",
+        "selectStartYear": "//ul/li[contains(., '2021')]",
+        "selectEndMonthDropDown": "(//div[@tabIndex=0])[8]",
+        "selectEndMonth": "//ul/li[contains(., 'May')]",
+        "selectEndYearDropDown": "(//div[@tabIndex=0])[9]",
+        "selectEndYear": "//ul/li[contains(., '2021')]",
+        "startDate": "(//button[not(@disabled)]/span[contains(., '5')])[1]",
+        "endDate": "(//button[not(@disabled)]/span[contains(., '15')])[1]"
       },
-      "steps": [
+      "ui:test": [
         {
-          "selector": "selectors.default",
-          "action": "click"
-        },
-        {
-          "selector": "selectors.startDate",
-          "action": "click"
-        },
-        {
-          "selector": "selectors.endDate",
-          "action": "click"
-        },
-        {
-          "selector": "selectors.default",
-          "action": "compare",
-          "value": "14/04/2021 - 22/04/2021"
+          "steps": [
+            {
+              "selector": "default",
+              "action": "click"
+            },
+            {
+              "selector": "selectStartMonthDropDown",
+              "action": "click"
+            },
+            {
+              "selector": "selectStartMonth",
+              "action": "click"
+            },
+            {
+              "selector": "selectStartYearDropDown",
+              "action": "click"
+            },
+            {
+              "selector": "selectStartYear",
+              "action": "click"
+            },
+            {
+              "selector": "selectEndMonthDropDown",
+              "action": "click"
+            },
+            {
+              "selector": "selectEndMonth",
+              "action": "click"
+            },
+            {
+              "selector": "selectEndYearDropDown",
+              "action": "click"
+            },
+            {
+              "selector": "selectEndYear",
+              "action": "click"
+            },
+            {
+              "selector": "startDate",
+              "action": "click"
+            },
+            {
+              "selector": "endDate",
+              "action": "click"
+            },
+            {
+              "selector": "default",
+              "action": "compare",
+              "value": "05/04/2021 - 15/04/2021"
+            }
+          ]
         }
       ]
     }

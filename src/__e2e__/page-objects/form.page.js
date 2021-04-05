@@ -110,6 +110,10 @@ class FormPage extends Page {
           fieldRef === refrencePointer
             ? refrencePointer
             : `${refrencePointer}.${fieldRef}.ui:test`;
+        const getRefrencePointerSelectors =
+          fieldRef === refrencePointer
+            ? refrencePointer
+            : `${refrencePointer}.${fieldRef}.ui:selectors`;
         if (
           hasTestsSchema &&
           refrencePointer &&
@@ -118,6 +122,7 @@ class FormPage extends Page {
           CustomField.execute({
             hasTestsSchema,
             getRefrencePointer,
+            getRefrencePointerSelectors,
             callbackBeforeCompare: this.callbackBeforeCompare,
             fieldUIType,
           });
