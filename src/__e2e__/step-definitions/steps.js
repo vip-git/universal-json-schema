@@ -7,9 +7,27 @@ const pages = {
 };
 
 Given(
-  /^I have a (\w+) for page (\w+) with following "(.*)" "(.*)" "(.*)" "(.*)" "(.*)"$/,
-  (page, formPage, fieldRef, shouldReload, tabName, stepName, hasXHRData) => {
-    pages[page].open(fieldRef, formPage, shouldReload, tabName, (hasXHRData === 'true'));
+  /^I have a (\w+) for page (\w+) with following "(.*)" "(.*)" "(.*)" "(.*)" "(.*)" "(.*)" "(.*)"$/,
+  (
+    page,
+    formPage,
+    fieldRef,
+    shouldReload,
+    tabName,
+    stepName,
+    hasXHRData,
+    folderName,
+    refrencePointer
+  ) => {
+    pages[page].open(
+      fieldRef,
+      formPage,
+      shouldReload,
+      tabName,
+      hasXHRData === 'true',
+      folderName,
+      refrencePointer
+    );
   }
 );
 

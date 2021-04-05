@@ -7,6 +7,7 @@ module.exports = {
       case 'material-input':
       case 'password':
       case 'textarea':
+      case 'updown':
         return {
           path: `//div/label[contains(text(),"${fieldName}")]/following-sibling::div/input`,
           enumSelector: '',

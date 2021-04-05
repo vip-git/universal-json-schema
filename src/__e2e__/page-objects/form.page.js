@@ -1,10 +1,11 @@
 /* eslint-disable no-undef */
 const Page = require('./page');
-
+const _ = require('lodash');
 // Fields
 const StringField = require('./field-types/string-field');
 const BooleanField = require('./field-types/boolean-field');
-const ArrayField = require('./field-types/array.field');
+const ArrayField = require('./field-types/array-field');
+const CustomField = require('./field-types/custom-field');
 
 /**
  * sub page containing specific selectors and methods for a specific page
@@ -18,6 +19,8 @@ class FormPage extends Page {
     this.fieldUIType = '';
     this.hasXHRData = false;
     this.currentTab = false;
+    this.hasTestsSchema = false;
+    this.refrencePointer = false;
   }
 
   /**
@@ -26,6 +29,21 @@ class FormPage extends Page {
   get btnSubmit() {
     return $('//button[span[contains(text(), "Submit")]]');
   }
+
+  callbackBeforeCompare = (fieldUIType) => {
+    const $btnSubmit = $('//button[span[contains(text(), "Submit")]]');
+    if (fieldUIType !== 'upload') {
+      this.btnSubmit.click();
+      this.btnSubmit.waitForClickable({ timeout: 10000 });
+      browser.refresh();
+    }
+    this.btnSubmit.waitForClickable({ timeout: 10000 });
+    if (this.currentTab) {
+      $(
+        `//button[@role="tab"][span[contains(text(), "${this.currentTab}")]]`
+      ).click();
+    }
+  };
 
   /**
    * a method to encapsule automation code to interact with the page
@@ -76,27 +94,36 @@ class FormPage extends Page {
   }
 
   changeFieldValueAndSubmit(table) {
-    const callbackBeforeCompare = (fieldUIType) => {
-      if(fieldUIType !== 'upload') {
-        this.btnSubmit.waitForClickable({ timeout: 10000 });
-        this.btnSubmit.click();
-        this.btnSubmit.waitForClickable({ timeout: 10000 });
-        browser.refresh();
-      }
-      this.btnSubmit.waitForClickable({ timeout: 10000 });
-      if (this.currentTab) {
-        $(
-          `//button[@role="tab"][span[contains(text(), "${this.currentTab}")]]`
-        ).click();
-      }
-      return this.btnSubmit.waitForClickable({ timeout: 10000 });
-    }
     table.rawTable.forEach((tbl, tbli) => {
       if (tbl.includes(this.testRef) && tbli >= 1) {
-        const { fieldName, fieldType, fieldUIType } = this;
+        const {
+          fieldName,
+          fieldType,
+          fieldUIType,
+          hasTestsSchema,
+          refrencePointer,
+        } = this;
         const fieldResultOnChange = tbl[0];
         const fieldUIResultOnChange = tbl[1];
         const fieldRef = tbl[2];
+        const getRefrencePointer =
+          fieldRef === refrencePointer
+            ? refrencePointer
+            : `${refrencePointer}.${fieldRef}.ui:test`;
+        if (
+          hasTestsSchema &&
+          refrencePointer &&
+          _.get(hasTestsSchema, getRefrencePointer)
+        ) {
+          CustomField.execute({
+            hasTestsSchema,
+            getRefrencePointer,
+            callbackBeforeCompare: this.callbackBeforeCompare,
+            fieldUIType,
+          });
+          return;
+        }
+
         switch (fieldType) {
           case 'string':
           case 'number':
@@ -110,8 +137,9 @@ class FormPage extends Page {
               fieldName,
               fieldUIResultOnChange,
               fieldUIType,
-              callbackBeforeCompare
+              this.callbackBeforeCompare
             );
+            return;
           case 'boolean':
             BooleanField.updateNewValue(
               fieldName,
@@ -122,8 +150,9 @@ class FormPage extends Page {
               fieldName,
               fieldUIResultOnChange,
               fieldUIType,
-              callbackBeforeCompare
+              this.callbackBeforeCompare
             );
+            return;
           case 'array':
             ArrayField.updateNewValue(
               fieldName,
@@ -134,8 +163,9 @@ class FormPage extends Page {
               fieldName,
               fieldUIResultOnChange,
               fieldUIType,
-              callbackBeforeCompare
+              this.callbackBeforeCompare
             );
+            return;
         }
       }
     });
@@ -144,9 +174,21 @@ class FormPage extends Page {
   /**
    * overwrite specifc options to adapt it to page object
    */
-  open(testRef, formPage, shouldReload, tabName, hasXHRData) {
+  open(
+    testRef,
+    formPage,
+    shouldReload,
+    tabName,
+    hasXHRData,
+    folderName,
+    refrencePointer
+  ) {
     this.testRef = testRef;
     this.hasXHRData = hasXHRData;
+    try {
+      this.hasTestsSchema = require(`./generated/${folderName}/tests-schema.json`);
+      this.refrencePointer = refrencePointer;
+    } catch (er) {}
     if (shouldReload === 'true') {
       if (tabName !== 'false') {
         super.open(formPage);

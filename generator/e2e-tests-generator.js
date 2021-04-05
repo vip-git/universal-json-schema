@@ -12,7 +12,9 @@ const generateTestFile = ({
   hasOnLoadData,
   hasOnSubmitData,
   tabName,
-  stepName
+  stepName,
+  folderName,
+  refrencePointer,
 }) => {
   const finalString = template({
     schema,
@@ -20,6 +22,8 @@ const generateTestFile = ({
     formData,
     hasOnLoadData,
     hasOnSubmitData,
+    folderName,
+    refrencePointer,
     tabName,
     stepName,
   });
@@ -85,6 +89,12 @@ const generateUISchemaType = ({
         if (uiSchema[schemaProp]['ui:widget'] === 'upload') {
           data = 'checkbox.md';
         }
+    } else if (
+      uiSchema &&
+      uiSchema[schemaProp] &&
+      uiSchema[schemaProp]['ui:component']
+    ) {
+      schema.properties[schemaProp]['widget'] = uiSchema[schemaProp]['ui:component'];
     } else {
       const isArray =
         schema.properties[schemaProp].type === 'array'
@@ -136,7 +146,14 @@ const generateUISchemaType = ({
   return schema;
 }
 
-const e2eTestsGenerator = (pageName, hashName, shelljs, ejs, generatedLocation) => {
+const e2eTestsGenerator = (
+  pageName,
+  hashName,
+  shelljs,
+  ejs,
+  generatedLocation,
+  testsGeneratedFolder
+) => {
   const templateFile = require('./templates/example-form-e2e.template.js');
   const template = ejs.compile(templateFile, {});
   let xhrSchema = {};
@@ -148,10 +165,19 @@ const e2eTestsGenerator = (pageName, hashName, shelljs, ejs, generatedLocation) 
   } catch (err) {}
   try {
     xhrSchema = require(`../src/demo/examples/${pageName}/xhr-schema.json`);
-  } catch(err) {
-
-  }
+  } catch (err) {}
   const formData = require(`../src/demo/examples/${pageName}/form-data.json`);
+  try {
+    const testSchema = require(`../src/demo/examples/${pageName}/tests-schema.json`);
+    const subTestsFolder = `${testsGeneratedFolder}/${pageName}`;
+    shelljs.rm('-rf', subTestsFolder);
+    shelljs.mkdir(subTestsFolder);
+    const shellTestFileString = new shelljs.ShellString(
+      JSON.stringify(testSchema, null, 2)
+    );
+    shellTestFileString.to(`${subTestsFolder}/tests-schema.json`);
+    console.log(`${pageName} custom schema tests generated successfully`);
+  } catch (err) {}
   const kebabize = (str) => {
     return str
       .split('')
@@ -162,13 +188,14 @@ const e2eTestsGenerator = (pageName, hashName, shelljs, ejs, generatedLocation) 
       })
       .join('');
   };
-  
+
   if (!schema.properties) {
     schema.properties = {
       single: schema,
     };
   }
 
+  // This logic should be refactored to include nested field support
   if (_.has(uiSchema, 'ui:page.ui:layout')) {
     Object.keys(schema.properties).forEach((schemaProp) => {
       const finalSchema = schema.properties[schemaProp].$ref
@@ -178,7 +205,7 @@ const e2eTestsGenerator = (pageName, hashName, shelljs, ejs, generatedLocation) 
             formData[schemaProp]
           )
         : schema.properties[schemaProp];
-      
+
       const newSchema = generateUISchemaType({
         schema: finalSchema,
         uiSchema: uiSchema[schemaProp],
@@ -192,6 +219,8 @@ const e2eTestsGenerator = (pageName, hashName, shelljs, ejs, generatedLocation) 
         template,
         shelljs,
         generatedLocation,
+        folderName: pageName,
+        refrencePointer: schemaProp,
         formData: formData[schemaProp],
         xhrSchema: xhrSchema[schemaProp],
         hasOnLoadData: _.has(xhrSchema, 'ui:page.onload'),
@@ -206,6 +235,8 @@ const e2eTestsGenerator = (pageName, hashName, shelljs, ejs, generatedLocation) 
       schema: finalSchema,
       hashName,
       pageName,
+      folderName: pageName,
+      refrencePointer: pageName,
       template,
       shelljs,
       generatedLocation,
@@ -215,7 +246,6 @@ const e2eTestsGenerator = (pageName, hashName, shelljs, ejs, generatedLocation) 
       hasOnSubmitData: _.has(xhrSchema, 'ui:page.onsubmit'),
     });
   }
-  
 };
 
 module.exports = e2eTestsGenerator;

@@ -12,6 +12,7 @@ const compareCurrentValue = (
   const fieldValue = $(path).getValue() || $(path).getText();
   switch (fieldUIType) {
     case 'material-input':
+    case 'updown':
     case 'password':
     case 'textarea':
     case 'material-date':
@@ -36,6 +37,7 @@ const updateNewValue = (fieldName, newValue, fieldUIType) => {
     case 'password':
     case 'textarea':
     case 'material-date':
+    case 'updown':
       FieldUtils.clearValues(path);
       $(path).setValue(newValue);
       return newValue;

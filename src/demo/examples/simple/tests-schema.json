@@ -1,0 +1,49 @@
+{
+  "integer": {
+    "customRating": {
+      "ui:test": {
+        "selectors": {
+          "checked": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@checked]",
+          "4thStar": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@value=4]/preceding-sibling::label[contains(., '4')]"
+        },
+        "steps": [
+          {
+            "selector": "selectors.4thStar",
+            "action": "click"
+          },
+          {
+            "selector": "selectors.checked",
+            "action": "compare",
+            "value": "4"
+          }
+        ]
+      }
+    }
+  },
+  "object": {
+    "ui:test": {
+      "selectors": {
+        "default": "//div/label[contains(text(), 'Range Picker')]/following-sibling::div/input"
+      },
+      "steps": [
+        {
+          "selector": "selectors.default",
+          "action": "click"
+        },
+        {
+          "selector": "selectors.startDate",
+          "action": "click"
+        },
+        {
+          "selector": "selectors.endDate",
+          "action": "click"
+        },
+        {
+          "selector": "selectors.default",
+          "action": "compare",
+          "value": "14/04/2021 - 22/04/2021"
+        }
+      ]
+    }
+  }
+}

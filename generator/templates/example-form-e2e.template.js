@@ -1,6 +1,6 @@
 const exampleFormE2ETemplate = `Feature: <%= pageName %> Feature
     Scenario Outline: <%= pageName %> Form scenario
-        Given I have a form for page <%= pageName %> with following "<fieldRef>" "<shouldReload>" "<tabName>" "<stepName>" "<hasXHRSchema>"
+        Given I have a form for page <%= pageName %> with following "<fieldRef>" "<shouldReload>" "<tabName>" "<stepName>" "<hasXHRSchema>" "<folderName>" "<refrencePointer>"
 
         When I test the field "<fieldRef>" based on following attributes
             | fieldName           | fieldType | uiSchemaType      | fieldFormValue | fieldUIValue  | fieldRef   | shouldSkip |
@@ -14,9 +14,9 @@ const exampleFormE2ETemplate = `Feature: <%= pageName %> Feature
             | <%= schema.properties[schemaProp].data %>           | <%= schema.properties[schemaProp].uiData || schema.properties[schemaProp].data %>              | <%= schemaProp %> |
             <% }); %>
         Examples:
-            | fieldRef   | tabName | stepName | shouldReload | hasXHRSchema |
+            | fieldRef   | tabName | stepName | shouldReload | hasXHRSchema | folderName | refrencePointer |
             <% Object.keys(schema.properties).forEach((schemaProp, schemaIn) => { %>
-            | <%= schemaProp %> | <%= tabName %>   | <%= stepName %>     | <%= schemaIn === 0 %> | <%= hasOnSubmitData %> |
+            | <%= schemaProp %> | <%= tabName %>   | <%= stepName %>     | <%= schemaIn === 0 %> | <%= hasOnSubmitData %> | <%= folderName %> | <%= refrencePointer %> |
             <% }); %>
 
 `;

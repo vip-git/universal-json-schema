@@ -43,10 +43,13 @@ const shellFileString = new shelljs.ShellString(finalString);
 const generatedLocation = `${shelljs.pwd()}/src/generated`;
 const generatorLocation = `${shelljs.pwd()}/generator`;
 const demoFolder = `${shelljs.pwd()}/src/demo/examples`;
+const testsGeneratedFolder = `${shelljs.pwd()}/src/__e2e__/page-objects/generated`;
 
 const myArgs = process.argv.slice(2);
 
 const generateE2ETests = () => {
+  shelljs.rm('-rf', testsGeneratedFolder);
+  shelljs.mkdir(testsGeneratedFolder);
   Object.keys(folderHashMapping).forEach(function (file) {
     if (!file.includes('.js')) {
       const generatedE2ELocation = `${demoFolder}/${file}/__e2e__`;
@@ -57,7 +60,8 @@ const generateE2ETests = () => {
         folderHashMapping[file],
         shelljs,
         ejs,
-        generatedE2ELocation
+        generatedE2ELocation,
+        testsGeneratedFolder
       );
     }
   });
