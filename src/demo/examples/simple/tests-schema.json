@@ -1,23 +1,48 @@
 {
   "integer": {
     "customRating": {
-      "ui:test": {
-        "selectors": {
-          "checked": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@checked]",
-          "4thStar": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@value=4]/preceding-sibling::label[contains(., '4')]"
-        },
-        "steps": [
-          {
-            "selector": "selectors.4thStar",
-            "action": "click"
+      "ui:test": [
+        {
+          "selectors": {
+            "checked": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@checked]",
+            "checkedLabel": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@checked]/preceding-sibling::label[contains(., '4')]",
+            "4thStar": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@value=4]/preceding-sibling::label[contains(., '4')]"
           },
-          {
-            "selector": "selectors.checked",
-            "action": "compare",
-            "value": "4"
-          }
-        ]
-      }
+          "steps": [
+            {
+              "selector": "selectors.4thStar",
+              "action": "click",
+              "verify": {
+                "value": "4",
+                "action": "click",
+                "selector": "selectors.checkedLabel"
+              }
+            },
+            {
+              "selector": "selectors.checked",
+              "action": "compare",
+              "value": "4"
+            }
+          ]
+        },
+        {
+          "selectors": {
+            "checked": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@checked]",
+            "3rdStar": "//div/legend[contains(text(), 'Custom Rating Component')]/following-sibling::span/input[@value=3]/preceding-sibling::label[contains(., '3')]"
+          },
+          "steps": [
+            {
+              "selector": "selectors.3rdStar",
+              "action": "click"
+            },
+            {
+              "selector": "selectors.checked",
+              "action": "compare",
+              "value": "3"
+            }
+          ]
+        }
+      ]
     }
   },
   "object": {
