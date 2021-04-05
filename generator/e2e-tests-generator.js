@@ -239,6 +239,8 @@ const e2eTestsGenerator = (
       refrencePointer: pageName,
       template,
       shelljs,
+      tabName: false,
+      stepName: false,
       generatedLocation,
       formData,
       xhrSchema,

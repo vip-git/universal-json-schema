@@ -33,12 +33,15 @@ class FormPage extends Page {
   callbackBeforeCompare = (fieldUIType) => {
     const $btnSubmit = $('//button[span[contains(text(), "Submit")]]');
     if (fieldUIType !== 'upload') {
+      this.btnSubmit.waitForClickable({ timeout: 10000 });
       this.btnSubmit.click();
       this.btnSubmit.waitForClickable({ timeout: 10000 });
-      browser.refresh();
+      if (this.hasXHRData){
+        browser.refresh();
+      }
     }
-    this.btnSubmit.waitForClickable({ timeout: 10000 });
     if (this.currentTab) {
+      this.btnSubmit.waitForClickable({ timeout: 10000 });
       $(
         `//button[@role="tab"][span[contains(text(), "${this.currentTab}")]]`
       ).click();
@@ -61,6 +64,10 @@ class FormPage extends Page {
         const fieldRef = tbl[5];
         const shouldSkip = tbl[6];
 
+        this.fieldName = fieldName;
+        this.fieldType = fieldType;
+        this.fieldUIType = fieldUIType;
+
         if (shouldSkip === 'false') {
           switch (fieldType) {
             case 'string':
@@ -69,26 +76,25 @@ class FormPage extends Page {
               return StringField.compareCurrentValue(
                 fieldName,
                 fieldUIValue,
-                fieldUIType
+                fieldUIType,
+                this.callbackBeforeCompare
               );
             case 'boolean':
               return BooleanField.compareCurrentValue(
                 fieldName,
                 fieldUIValue,
-                fieldUIType
+                fieldUIType,
+                this.callbackBeforeCompare
               );
             case 'array':
               return ArrayField.compareCurrentValue(
                 fieldName,
                 fieldUIValue,
-                fieldUIType
+                fieldUIType,
+                this.callbackBeforeCompare
               );
           }
         }
-
-        this.fieldName = fieldName;
-        this.fieldType = fieldType;
-        this.fieldUIType = fieldUIType;
       }
     });
   }
