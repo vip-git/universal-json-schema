@@ -10,57 +10,59 @@ module.exports = {
       case 'updown':
         return {
           path: `//div/label[contains(text(),"${fieldName}")]/following-sibling::div/input`,
-          enumSelector: '',
+          secondarySelector: '',
         };
 
       case 'material-native-select':
       case 'material-multiselect-native':
         return {
           path: `//div/label[contains(text(),"${fieldName}")]/following-sibling::div`,
-          enumSelector: `//div/ul/li[contains(text(),"${newValue}")]`,
+          secondarySelector: `//div/ul/li[contains(text(),"${newValue}")]`,
         };
 
       case 'rich-text-editor':
         return {
           path: '//div[@role="textbox"]',
-          enumSelector: '',
+          secondarySelector: '',
         };
 
       case 'material-checkbox':
         return {
           path: `//label[span[contains(text(), "${fieldName}")]]/span/span/input`,
-          enumSelector: '',
+          secondarySelector: '',
         };
 
       case 'radio':
         return {
           path: `//label[contains(text(), "${fieldName}")]/following-sibling::div/label[span[contains(text(), "${newValue}")]]/span/span/input`,
-          enumSelector: '',
+          secondarySelector: '',
         };
 
       case 'material-date':
         return {
           path: '//div/input[@placeholder="__-__-____"]',
-          enumSelector: '',
+          secondarySelector: '//div/input[@placeholder="__-__-____"]/following-sibling::div/button',
+          thirdSelector: '(//button[not(@disabled)]/span[contains(., "15")])[1]',
+          fourthSelector: '(//button[contains(., "OK")])[1]'
         };
 
       case 'upload':
         return {
           path: '//label/div/following-sibling::span',
-          enumSelector: '',
+          secondarySelector: '',
         };
 
       case 'creatable-select':
         return {
           path: `//div/span[contains(text(),"${fieldName}")]/following-sibling::div`,
-          enumSelector: `//div[span[contains(text(),"${fieldName}")]]/div/div/div/div[contains(text(),"${newValue}")]`,
+          secondarySelector: `//div[span[contains(text(),"${fieldName}")]]/div/div/div/div[contains(text(),"${newValue}")]`,
         };
 
       case 'material-select':
       case 'material-multiselect':
         return {
           path: `//div/label[contains(text(),"${fieldName}")]/following-sibling::div`,
-          enumSelector: `//div[label[contains(text(),"${fieldName}")]]/following-sibling::div/div/div[contains(text(),"${newValue}")]`,
+          secondarySelector: `//div[label[contains(text(),"${fieldName}")]]/following-sibling::div/div/div[contains(text(),"${newValue}")]`,
         };
 
       default:

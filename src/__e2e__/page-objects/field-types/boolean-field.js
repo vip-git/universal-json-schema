@@ -22,7 +22,7 @@ const compareCurrentValue = (
 };
 
 const updateNewValue = (fieldName, newValue, fieldUIType) => {
-  const { path, enumSelector } = getComponentSelector(
+  const { path, secondarySelector } = getComponentSelector(
     fieldName,
     fieldUIType,
     newValue

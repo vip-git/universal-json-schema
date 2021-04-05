@@ -21,7 +21,7 @@ const compareCurrentValue = (fieldName, fieldUIValue, fieldUIType, callbackBefor
 };
 
 const updateNewValue = (fieldName, newValue, fieldUIType) => {
-  const { path, enumSelector } = getComponentSelector(
+  const { path, secondarySelector } = getComponentSelector(
     fieldName,
     fieldUIType,
     newValue
@@ -31,11 +31,11 @@ const updateNewValue = (fieldName, newValue, fieldUIType) => {
     case 'material-multiselect-native':
       if (fieldValue.includes(newValue)){
           $(path).click();
-          $(enumSelector).click();
+          $(secondarySelector).click();
           browser.keys(['Escape']);
       } 
       $(path).click();
-      $(enumSelector).click();
+      $(secondarySelector).click();
       browser.keys(['Escape']);
       return newValue;
     case 'creatable-select':
@@ -45,7 +45,7 @@ const updateNewValue = (fieldName, newValue, fieldUIType) => {
          browser.keys(['Backspace', 'Backspace', newValue, 'Enter']);
        } else {
         $(path).click();
-        $(enumSelector).click();
+        $(secondarySelector).click();
        }
       return newValue;
     default:
