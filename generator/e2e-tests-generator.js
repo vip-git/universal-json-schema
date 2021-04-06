@@ -126,16 +126,22 @@ const generateUISchemaType = ({
     }
 
     const getEnumValue = (givenEnumData, formData) => {
-      const enumData = givenEnumData.filter((d) => !d.disabled);
-      const enumVal = typeof enumData[0] === 'object'
-        ? enumData[0].value || enumData[0].title
-        : enumData[0];
-        return formData && formData.includes(enumVal)
-          ? typeof enumData[1] === 'object'
-            ? enumData[1].value || enumData[1].title
-            : enumData[1]
-          : enumVal; 
-    }
+      const enumData = Array.isArray(formData)
+        ? givenEnumData.filter((el) => {
+            return formData.indexOf(el) < 0;
+          })
+        : givenEnumData.filter((d) => !d.disabled);
+      const enumVal =
+        typeof enumData[0] === 'object'
+          ? enumData[0].value || enumData[0].title
+          : enumData[0];
+      return typeof formData === 'string' ||
+        (Array.isArray(formData) && formData.includes(enumVal))
+        ? typeof enumData[1] === 'object'
+          ? enumData[1].value || enumData[1].title
+          : enumData[1]
+        : enumVal;
+    };
       
     const isEnumData =
       schema.properties[schemaProp].enum ||
@@ -234,7 +240,11 @@ const e2eTestsGenerator = (
       });
     });
   } else {
-    const finalSchema = generateUISchemaType({ schema, uiSchema });
+    const finalSchema = generateUISchemaType({
+      schema,
+      uiSchema,
+      formData,
+    });
     generateTestFile({
       schema: finalSchema,
       hashName,

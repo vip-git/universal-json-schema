@@ -27,6 +27,13 @@ module.exports = {
           secondarySelector: '',
         };
 
+      case 'checkboxes':
+        return {
+          singleSelector: `//div[legend[contains(text(), "${fieldName}")]]/label[contains(., "${newValue}")]/span/span/input`,
+          path: `//fieldset[legend[contains(text(), "${fieldName}")]]/div/label/span/span/input`,
+          secondarySelector: `//fieldset[legend[contains(text(), "${fieldName}")]]/div/label[contains(., "${newValue}")]/span/span/input`,
+        };
+
       case 'material-checkbox':
         return {
           path: `//label[span[contains(text(), "${fieldName}")]]/span/span/input`,
@@ -42,9 +49,11 @@ module.exports = {
       case 'material-date':
         return {
           path: '//div/input[@placeholder="__-__-____"]',
-          secondarySelector: '//div/input[@placeholder="__-__-____"]/following-sibling::div/button',
-          thirdSelector: '(//button[not(@disabled)]/span[contains(., "15")])[1]',
-          fourthSelector: '(//button[contains(., "OK")])[1]'
+          secondarySelector:
+            '//div/input[@placeholder="__-__-____"]/following-sibling::div/button',
+          thirdSelector:
+            '(//button[not(@disabled)]/span[contains(., "15")])[1]',
+          fourthSelector: '(//button[contains(., "OK")])[1]',
         };
 
       case 'upload':

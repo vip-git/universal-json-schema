@@ -19,7 +19,7 @@ const compareCurrentValue = (
         return fieldValue;
       case 'material-checkbox':
       case 'radio':
-        expect(fieldValue).toBeChecked();
+        expect($(path)).toBeChecked();
         return fieldValue;
       case 'material-native-select':
         expect(fieldValue).toContain(fieldUIValue);

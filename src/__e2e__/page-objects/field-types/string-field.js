@@ -7,23 +7,34 @@ const compareCurrentValue = (
   fieldUIType,
   callbackBeforeCompare
 ) => {
-  callbackBeforeCompare(fieldUIType);
-  const { path } = getComponentSelector(fieldName, fieldUIType, fieldUIValue);
-  const fieldValue = $(path).getValue() || $(path).getText();
-  switch (fieldUIType) {
-    case 'material-input':
-    case 'updown':
-    case 'password':
-    case 'textarea':
-    case 'material-date':
-    case 'rich-text-editor':
-    case 'upload':
-      expect(fieldValue).toStrictEqual(fieldUIValue);
-      return fieldValue;
+  if (fieldUIValue !== 'false') {
+    callbackBeforeCompare(fieldUIType);
+    const { path } = getComponentSelector(fieldName, fieldUIType, fieldUIValue);
+    const fieldValue = fieldUIType !== 'checkboxes' ? $(path).getValue() || $(path).getText() : '';
+    switch (fieldUIType) {
+      case 'material-input':
+      case 'updown':
+      case 'password':
+      case 'textarea':
+      case 'material-date':
+      case 'rich-text-editor':
+      case 'upload':
+        expect(fieldValue).toStrictEqual(fieldUIValue);
+        return fieldValue;
 
-    case 'material-native-select':
-      expect(fieldValue).toContain(fieldUIValue);
-      return fieldValue;
+      case 'checkboxes':
+        const { singleSelector } = getComponentSelector(
+          fieldName,
+          fieldUIType,
+          fieldUIValue
+        );
+        expect($(singleSelector)).toBeChecked();
+        return fieldValue;
+
+      case 'material-native-select':
+        expect(fieldValue).toContain(fieldUIValue);
+        return fieldValue;
+    }
   }
 };
 
@@ -43,11 +54,11 @@ const updateNewValue = (fieldName, newValue, fieldUIType) => {
       return newValue;
 
     case 'material-date':
-       const { thirdSelector, fourthSelector } = getComponentSelector(
-         fieldName,
-         fieldUIType,
-         newValue
-       );
+      const { thirdSelector, fourthSelector } = getComponentSelector(
+        fieldName,
+        fieldUIType,
+        newValue
+      );
       $(secondarySelector).click();
       $(thirdSelector).click();
       $(fourthSelector).click();
@@ -77,6 +88,15 @@ const updateNewValue = (fieldName, newValue, fieldUIType) => {
         '/Users/vipinwork/htdocs/react-jsonschema-form-material-ui/docs/checkbox.md',
         '//input[@id="button-file"]'
       );
+      return newValue;
+
+    case 'checkboxes':
+       const { singleSelector } = getComponentSelector(
+         fieldName,
+         fieldUIType,
+         newValue
+       );
+      $(singleSelector).click();
       return newValue;
     default:
       return newValue;

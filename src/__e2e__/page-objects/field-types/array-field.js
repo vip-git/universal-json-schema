@@ -10,6 +10,17 @@ const compareCurrentValue = (fieldName, fieldUIValue, fieldUIType, callbackBefor
       expect(fieldValue).toContain(fieldUIValue);
       return fieldValue;
 
+    case 'checkboxes':
+      for (const uiValue of fieldUIValue.split(',')) {
+        const { secondarySelector } = getComponentSelector(
+          fieldName,
+          fieldUIType,
+          uiValue
+        );
+        expect($(secondarySelector)).toBeChecked();
+      }
+      return fieldValue;
+
     case 'creatable-select':
     case 'material-multiselect':
       expect(fieldValue).toContain(fieldUIValue);
@@ -28,6 +39,9 @@ const updateNewValue = (fieldName, newValue, fieldUIType) => {
   );
   const fieldValue = $(path).getValue() || $(path).getText();
   switch (fieldUIType) {
+    case 'checkboxes':
+      $(secondarySelector).click();
+      return newValue;
     case 'material-multiselect-native':
       if (fieldValue.includes(newValue)){
           $(path).click();
