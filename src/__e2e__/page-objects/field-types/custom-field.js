@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const FieldUtils = require('../field-utils');
 
 const validateTest = ({
   uiTestDef,
@@ -18,26 +19,34 @@ const validateTest = ({
       switch (stepDef.action) {
         case 'click':
           try {
-              if (stepDef.verify) {
-                const {
-                  action,
-                  value: newValue,
-                  selector: verifySelector,
-                } = stepDef.verify;
-                const selector =
-                  getPathBySelector(verifySelector) ||
-                  _.get(uiTestDef, verifySelector);
-                const verifyFieldValue =
-                  $(selector).getValue() || $(selector).getText();
-                if (newValue && verifyFieldValue.includes(newValue) && action) {
-                  $(selector).click();
-                }
+            if (stepDef.verify) {
+              const {
+                action,
+                value: newValue,
+                selector: verifySelector,
+              } = stepDef.verify;
+              const selector =
+                getPathBySelector(verifySelector) ||
+                _.get(uiTestDef, verifySelector);
+              const verifyFieldValue =
+                $(selector).getValue() || $(selector).getText();
+              if (newValue && verifyFieldValue.includes(newValue) && action) {
+                $(selector).click();
               }
-          } catch(err) {}
+            }
+          } catch (err) {}
           $(path).click();
+          return;
+        case 'update':
+          FieldUtils.clearValues(path);
+          $(path).setValue(stepDef.value);
           return;
         case 'compare':
           callbackBeforeCompare(fieldUIType);
+          expect(stepDef.value).toContain(fieldValue);
+          return;
+        case 'compareNegative':
+          callbackBeforeCompare(fieldUIType, true);
           expect(stepDef.value).toContain(fieldValue);
           return;
       }

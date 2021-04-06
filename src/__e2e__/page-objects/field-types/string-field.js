@@ -21,7 +21,8 @@ const compareCurrentValue = (
       expect(fieldValue).toStrictEqual(fieldUIValue);
       return fieldValue;
 
-    default:
+    case 'material-native-select':
+      expect(fieldValue).toContain(fieldUIValue);
       return fieldValue;
   }
 };

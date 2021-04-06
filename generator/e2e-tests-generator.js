@@ -63,6 +63,10 @@ const generateUISchemaType = ({
             saltLength: 0,
           });
 
+    if (schema.properties[schemaProp].maximum) {
+      data = schema.properties[schemaProp].maximum;
+    }      
+
     if (
       schema.properties[schemaProp] &&
       !schema.properties[schemaProp].title &&

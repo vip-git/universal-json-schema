@@ -8,8 +8,9 @@ module.exports = {
       case 'password':
       case 'textarea':
       case 'updown':
+      case 'range':
         return {
-          path: `//div/label[contains(text(),"${fieldName}")]/following-sibling::div/input`,
+          path: `(//div/label[contains(text(),"Integer")]/following-sibling::div/input)[1]`,
           secondarySelector: '',
         };
 

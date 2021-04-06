@@ -3,6 +3,7 @@ const Page = require('./page');
 const _ = require('lodash');
 // Fields
 const StringField = require('./field-types/string-field');
+const NumberField = require('./field-types/number-field');
 const BooleanField = require('./field-types/boolean-field');
 const ArrayField = require('./field-types/array-field');
 const CustomField = require('./field-types/custom-field');
@@ -21,6 +22,7 @@ class FormPage extends Page {
     this.currentTab = false;
     this.hasTestsSchema = false;
     this.refrencePointer = false;
+    this.folderName = false;
   }
 
   /**
@@ -30,16 +32,22 @@ class FormPage extends Page {
     return $('//button[span[contains(text(), "Submit")]]');
   }
 
-  callbackBeforeCompare = (fieldUIType) => {
+  callbackBeforeCompare = (fieldUIType, reverse) => {
     const $btnSubmit = $('//button[span[contains(text(), "Submit")]]');
-    if (fieldUIType !== 'upload') {
+    if (fieldUIType !== 'upload' && !reverse) {
       this.btnSubmit.waitForClickable({ timeout: 10000 });
       this.btnSubmit.click();
       this.btnSubmit.waitForClickable({ timeout: 10000 });
-      if (this.hasXHRData){
+      if (this.hasXHRData) {
         browser.refresh();
       }
     }
+
+    if (reverse) {
+      this.btnSubmit.waitForClickable({ timeout: 10000, reverse });
+      expect(this.btnSubmit).toBeDisabled();
+    }
+
     if (this.currentTab) {
       this.btnSubmit.waitForClickable({ timeout: 10000 });
       $(
@@ -55,6 +63,11 @@ class FormPage extends Page {
   testField(table) {
     table.rawTable.forEach((tbl, tbli) => {
       if (tbl.includes(this.testRef) && tbli >= 1) {
+         const {
+          hasTestsSchema,
+          refrencePointer,
+          folderName,
+        } = this;
         /** Todo: get index based on name - dont hardcode */
         const fieldName = tbl[0];
         const fieldType = tbl[1];
@@ -68,12 +81,27 @@ class FormPage extends Page {
         this.fieldType = fieldType;
         this.fieldUIType = fieldUIType;
 
-        if (shouldSkip === 'false') {
+        const getRefrencePointer =
+          refrencePointer === folderName
+            ? `${fieldRef}.ui:test`
+            : `${refrencePointer}.${fieldRef}.ui:test`;
+        const getRefrencePointerSelectors =
+          refrencePointer === folderName
+            ? `${fieldRef}.ui:selectors`
+            : `${refrencePointer}.${fieldRef}.ui:selectors`;
+        
+        if (shouldSkip === 'false' && !_.has(hasTestsSchema, getRefrencePointer)) {
           switch (fieldType) {
             case 'string':
+              return StringField.compareCurrentValue(
+                fieldName,
+                fieldUIValue,
+                fieldUIType,
+                this.callbackBeforeCompare
+              );
             case 'number':
             case 'integer':
-              return StringField.compareCurrentValue(
+              return NumberField.compareCurrentValue(
                 fieldName,
                 fieldUIValue,
                 fieldUIType,
@@ -108,17 +136,18 @@ class FormPage extends Page {
           fieldUIType,
           hasTestsSchema,
           refrencePointer,
+          folderName,
         } = this;
         const fieldResultOnChange = tbl[0];
         const fieldUIResultOnChange = tbl[1];
         const fieldRef = tbl[2];
         const getRefrencePointer =
-          fieldRef === refrencePointer
-            ? refrencePointer
+          refrencePointer === folderName
+            ? `${fieldRef}.ui:test`
             : `${refrencePointer}.${fieldRef}.ui:test`;
         const getRefrencePointerSelectors =
-          fieldRef === refrencePointer
-            ? refrencePointer
+          refrencePointer === folderName
+            ? `${fieldRef}.ui:selectors`
             : `${refrencePointer}.${fieldRef}.ui:selectors`;
         if (
           hasTestsSchema &&
@@ -137,8 +166,6 @@ class FormPage extends Page {
 
         switch (fieldType) {
           case 'string':
-          case 'number':
-          case 'integer':
             StringField.updateNewValue(
               fieldName,
               fieldUIResultOnChange,
@@ -151,6 +178,22 @@ class FormPage extends Page {
               this.callbackBeforeCompare
             );
             return;
+
+          case 'number':
+          case 'integer':
+            NumberField.updateNewValue(
+              fieldName,
+              fieldUIResultOnChange,
+              fieldUIType
+            );
+            NumberField.compareCurrentValue(
+              fieldName,
+              fieldUIResultOnChange,
+              fieldUIType,
+              this.callbackBeforeCompare
+            );
+            return;
+
           case 'boolean':
             BooleanField.updateNewValue(
               fieldName,
@@ -199,6 +242,7 @@ class FormPage extends Page {
     try {
       this.hasTestsSchema = require(`./generated/${folderName}/tests-schema.json`);
       this.refrencePointer = refrencePointer;
+      this.folderName = folderName;
     } catch (er) {}
     if (shouldReload === 'true') {
       if (tabName !== 'false') {
