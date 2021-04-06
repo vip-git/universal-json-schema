@@ -10,7 +10,7 @@ module.exports = {
       case 'updown':
       case 'range':
         return {
-          path: `(//div/label[contains(text(),"Integer")]/following-sibling::div/input)[1]`,
+          path: `(//div/label[contains(text(), "${fieldName}")]/following-sibling::div/input)[1]`,
           secondarySelector: '',
         };
 
