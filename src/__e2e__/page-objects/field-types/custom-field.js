@@ -49,6 +49,9 @@ const validateTest = ({
           callbackBeforeCompare(fieldUIType, true);
           expect(stepDef.value).toContain(fieldValue);
           return;
+        case 'isChecked':
+          expect($(path)).toBeChecked();
+          return;
       }
     });
   } else {

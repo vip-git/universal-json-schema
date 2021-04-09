@@ -1,0 +1,40 @@
+{
+    "fixedItemsList": {
+        "ui:selectors": {
+            "input": "//div/label[contains(text(), 'Relations')]/following-sibling::div/input",
+            "textarea": "//div/label[contains(text(), 'A string value')]/following-sibling::div/textarea",
+            "checkbox": "//label[contains(., 'a boolean value')]/span/span/input",
+            "newInput": "(//div/label[contains(text(), 'Relations')]/following-sibling::div/input)[2]",
+            "addButton": "(//button[@tabindex=0])[3]"
+        },
+        "ui:test": [
+          {
+            "steps": [
+              {
+                "selector": "textarea",
+                "action": "compare",
+                "value": "Some text"
+              }, 
+              {
+                "selector": "checkbox",
+                "action": "isChecked"
+              },
+              {
+                "selector": "input",
+                "action": "compare",
+                "value": "one"
+              },
+              {
+                  "selector": "addButton",
+                  "action": "click"
+              },
+              {
+                "selector": "newInput",
+                "action": "update",
+                "value": "new one"
+              }
+            ]
+         }
+        ]
+    }
+}
