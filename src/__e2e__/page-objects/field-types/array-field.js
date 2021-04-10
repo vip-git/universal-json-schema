@@ -1,9 +1,20 @@
 const FieldUtils = require('../field-utils');
 const { getComponentSelector } = require('../component-types');
 
-const compareCurrentValue = (fieldName, fieldUIValue, fieldUIType, callbackBeforeCompare) => {
+const compareCurrentValue = (
+  fieldName,
+  fieldUIValue,
+  fieldUIType,
+  callbackBeforeCompare,
+  fieldOrder
+) => {
   callbackBeforeCompare(fieldUIType);
-  const { path } = getComponentSelector(fieldName, fieldUIType, fieldUIValue);
+  const { path } = getComponentSelector(
+    fieldName,
+    fieldUIType,
+    fieldUIValue,
+    fieldOrder
+  );
   const fieldValue = $(path).getValue() || $(path).getText();
   switch (fieldUIType) {
     case 'material-multiselect-native':
@@ -15,7 +26,8 @@ const compareCurrentValue = (fieldName, fieldUIValue, fieldUIType, callbackBefor
         const { secondarySelector } = getComponentSelector(
           fieldName,
           fieldUIType,
-          uiValue
+          uiValue,
+          fieldOrder
         );
         expect($(secondarySelector)).toBeChecked();
       }
@@ -31,11 +43,12 @@ const compareCurrentValue = (fieldName, fieldUIValue, fieldUIType, callbackBefor
   }
 };
 
-const updateNewValue = (fieldName, newValue, fieldUIType) => {
+const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
   const { path, secondarySelector } = getComponentSelector(
     fieldName,
     fieldUIType,
-    newValue
+    newValue,
+    fieldOrder
   );
   const fieldValue = $(path).getValue() || $(path).getText();
   switch (fieldUIType) {
@@ -43,24 +56,24 @@ const updateNewValue = (fieldName, newValue, fieldUIType) => {
       $(secondarySelector).click();
       return newValue;
     case 'material-multiselect-native':
-      if (fieldValue.includes(newValue)){
-          $(path).click();
-          $(secondarySelector).click();
-          browser.keys(['Escape']);
-      } 
+      if (fieldValue.includes(newValue)) {
+        $(path).click();
+        $(secondarySelector).click();
+        browser.keys(['Escape']);
+      }
       $(path).click();
       $(secondarySelector).click();
       browser.keys(['Escape']);
       return newValue;
     case 'creatable-select':
     case 'material-multiselect':
-       if (fieldValue.includes(newValue)) {
-         $(path).click();
-         browser.keys(['Backspace', 'Backspace', newValue, 'Enter']);
-       } else {
+      if (fieldValue.includes(newValue)) {
+        $(path).click();
+        browser.keys(['Backspace', 'Backspace', newValue, 'Enter']);
+      } else {
         $(path).click();
         $(secondarySelector).click();
-       }
+      }
       return newValue;
     default:
       return newValue;

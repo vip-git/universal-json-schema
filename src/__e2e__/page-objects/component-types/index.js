@@ -2,7 +2,7 @@
  *  Component Types
  */
 module.exports = {
-  getComponentSelector: (fieldName, fieldUIType, newValue) => {
+  getComponentSelector: (fieldName, fieldUIType, newValue, fieldOrder) => {
     switch (fieldUIType) {
       case 'material-input':
       case 'password':
@@ -17,7 +17,7 @@ module.exports = {
       case 'material-native-select':
       case 'material-multiselect-native':
         return {
-          path: `//div/label[contains(text(),"${fieldName}")]/following-sibling::div`,
+          path: `(//div/label[contains(text(),"${fieldName}")]/following-sibling::div)[${fieldOrder}]`,
           secondarySelector: `//div/ul/li[contains(text(),"${newValue}")]`,
         };
 
@@ -71,7 +71,7 @@ module.exports = {
       case 'material-select':
       case 'material-multiselect':
         return {
-          path: `//div/label[contains(text(),"${fieldName}")]/following-sibling::div`,
+          path: `(//div/label[contains(text(),"${fieldName}")]/following-sibling::div)[${fieldOrder}]`,
           secondarySelector: `//div[label[contains(text(),"${fieldName}")]]/following-sibling::div/div/div[contains(text(),"${newValue}")]`,
         };
 

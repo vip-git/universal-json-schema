@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const namor = require('namor');
+const getDefinitionSchemaFromRef = require('../src/helpers/get-definition-schema');
 
 const generateTestFile = ({
   schema,
@@ -69,7 +70,28 @@ const generateUISchemaType = ({
 
     if (
       schema.properties[schemaProp] &&
-      !schema.properties[schemaProp].title &&
+      schema.properties[schemaProp].$ref
+    ) {
+      schema.properties[schemaProp] = getDefinitionSchemaFromRef(
+        schema.definitions,
+        schema.properties[schemaProp],
+        formData[schemaProp]
+      );
+    }
+
+    if (
+      schema.properties[schemaProp] &&
+      schema.properties[schemaProp].items &&
+      schema.properties[schemaProp].items.$ref
+    ) {
+      schema.properties[schemaProp].items = getDefinitionSchemaFromRef(
+        schema.definitions,
+        schema.properties[schemaProp].items,
+        formData[schemaProp]
+      );
+    }
+
+    if (
       schema.properties[schemaProp].items &&
       schema.properties[schemaProp].items.title
     ) {
@@ -108,10 +130,11 @@ const generateUISchemaType = ({
         schema.properties[schemaProp].type === 'boolean'
           ? 'material-checkbox'
           : isArray;
-      schema.properties[schemaProp]['widget'] = schema.properties[schemaProp]
-        .enum
-        ? 'material-native-select'
-        : isBoolean;
+      const schemaFD = schema.properties[schemaProp];
+      schema.properties[schemaProp]['widget'] =
+        (schemaFD.anyOf || schemaFD.oneOf || schemaFD.enum)
+          ? 'material-native-select'
+          : isBoolean;
     }
 
     if (
@@ -156,6 +179,26 @@ const generateUISchemaType = ({
   return schema;
 }
 
+const mapFormDataWithValues = (givenFormData, givenSchema) => {
+  const schema = givenSchema.properties;
+  const formData = {};
+  if (givenFormData) {
+    Object.keys(givenFormData).forEach((fd) => {
+      const schemaFD = (schema[fd] && schema[fd].items) || schema[fd];
+      if (schemaFD && (schemaFD.anyOf || schemaFD.oneOf || schemaFD.enum)) {
+        const values = schemaFD.anyOf || schemaFD.oneOf || schemaFD.enum;
+        const value = values.find(
+          (d) => d.key == givenFormData[fd] || d.const == givenFormData[fd]
+        );
+        formData[fd] = value ? value.value || value.title : values;
+      } else {
+        formData[fd] = givenFormData[fd];
+      }
+    });
+  }
+  return formData;
+}
+
 const e2eTestsGenerator = (
   pageName,
   hashName,
@@ -168,7 +211,6 @@ const e2eTestsGenerator = (
   const template = ejs.compile(templateFile, {});
   let xhrSchema = {};
   let uiSchema = {};
-  const getDefinitionSchemaFromRef = require('../src/helpers/get-definition-schema');
   const schema = require(`../src/demo/examples/${pageName}/schema.json`);
   try {
     uiSchema = require(`../src/demo/examples/${pageName}/ui-schema.json`);
@@ -226,6 +268,7 @@ const e2eTestsGenerator = (
         uiSchema: uiSchema[schemaProp],
         formData: formData[schemaProp],
       });
+      const finalFormData = mapFormDataWithValues(formData[schemaProp], finalSchema);
       const uiLayout = _.get(uiSchema, 'ui:page.ui:layout');
       generateTestFile({
         schema: newSchema,
@@ -236,7 +279,7 @@ const e2eTestsGenerator = (
         generatedLocation,
         folderName: pageName,
         refrencePointer: schemaProp,
-        formData: formData[schemaProp],
+        formData: finalFormData,
         xhrSchema: xhrSchema[schemaProp],
         hasOnLoadData: _.has(xhrSchema, 'ui:page.onload'),
         tabName: (uiLayout === 'tabs' && newSchema.title) || false,
@@ -250,6 +293,10 @@ const e2eTestsGenerator = (
       uiSchema,
       formData,
     });
+    const finalFormData = mapFormDataWithValues(
+      formData,
+      finalSchema
+    );
     generateTestFile({
       schema: finalSchema,
       hashName,
@@ -261,7 +308,7 @@ const e2eTestsGenerator = (
       tabName: false,
       stepName: false,
       generatedLocation,
-      formData,
+      formData: finalFormData,
       xhrSchema,
       hasOnLoadData: _.has(xhrSchema, 'ui:page.onload'),
       hasOnSubmitData: _.has(xhrSchema, 'ui:page.onsubmit'),

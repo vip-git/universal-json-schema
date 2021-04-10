@@ -8,6 +8,9 @@ const BooleanField = require('./field-types/boolean-field');
 const ArrayField = require('./field-types/array-field');
 const CustomField = require('./field-types/custom-field');
 
+const fieldOrder = {};
+const previousFields = [];
+
 /**
  * sub page containing specific selectors and methods for a specific page
  */
@@ -23,6 +26,7 @@ class FormPage extends Page {
     this.hasTestsSchema = false;
     this.refrencePointer = false;
     this.folderName = false;
+    this.fieldOrder = {};
   }
 
   /**
@@ -61,6 +65,9 @@ class FormPage extends Page {
    * e.g. to login using username and password
    */
   testField(table) {
+    table.rawTable.forEach((rt) => {
+      fieldOrder[rt[0]] = fieldOrder[rt[0]] ? fieldOrder[rt[0]] : 1;
+    });
     table.rawTable.forEach((tbl, tbli) => {
       if (tbl.includes(this.testRef) && tbli >= 1) {
          const {
@@ -77,9 +84,16 @@ class FormPage extends Page {
         const fieldRef = tbl[5];
         const shouldSkip = tbl[6];
 
+        if (previousFields.includes(fieldName)) {
+          fieldOrder[fieldName]++;
+        }
+
         this.fieldName = fieldName;
         this.fieldType = fieldType;
         this.fieldUIType = fieldUIType;
+        this.fieldOrder = fieldOrder;
+
+        previousFields.push(fieldName);
 
         const getRefrencePointer =
           refrencePointer === folderName
@@ -97,7 +111,8 @@ class FormPage extends Page {
                 fieldName,
                 fieldUIValue,
                 fieldUIType,
-                this.callbackBeforeCompare
+                this.callbackBeforeCompare,
+                fieldOrder[fieldName]
               );
             case 'number':
             case 'integer':
@@ -105,21 +120,24 @@ class FormPage extends Page {
                 fieldName,
                 fieldUIValue,
                 fieldUIType,
-                this.callbackBeforeCompare
+                this.callbackBeforeCompare,
+                fieldOrder[fieldName]
               );
             case 'boolean':
               return BooleanField.compareCurrentValue(
                 fieldName,
                 fieldUIValue,
                 fieldUIType,
-                this.callbackBeforeCompare
+                this.callbackBeforeCompare,
+                fieldOrder[fieldName]
               );
             case 'array':
               return ArrayField.compareCurrentValue(
                 fieldName,
                 fieldUIValue,
                 fieldUIType,
-                this.callbackBeforeCompare
+                this.callbackBeforeCompare,
+                fieldOrder[fieldName]
               );
           }
         }
@@ -137,6 +155,7 @@ class FormPage extends Page {
           hasTestsSchema,
           refrencePointer,
           folderName,
+          fieldOrder,
         } = this;
         const fieldResultOnChange = tbl[0];
         const fieldUIResultOnChange = tbl[1];
@@ -169,13 +188,15 @@ class FormPage extends Page {
             StringField.updateNewValue(
               fieldName,
               fieldUIResultOnChange,
-              fieldUIType
+              fieldUIType,
+              fieldOrder[fieldName]
             );
             StringField.compareCurrentValue(
               fieldName,
               fieldUIResultOnChange,
               fieldUIType,
-              this.callbackBeforeCompare
+              this.callbackBeforeCompare,
+              fieldOrder[fieldName]
             );
             return;
 
@@ -184,13 +205,15 @@ class FormPage extends Page {
             NumberField.updateNewValue(
               fieldName,
               fieldUIResultOnChange,
-              fieldUIType
+              fieldUIType,
+              fieldOrder[fieldName]
             );
             NumberField.compareCurrentValue(
               fieldName,
               fieldUIResultOnChange,
               fieldUIType,
-              this.callbackBeforeCompare
+              this.callbackBeforeCompare,
+              fieldOrder[fieldName]
             );
             return;
 
@@ -198,26 +221,30 @@ class FormPage extends Page {
             BooleanField.updateNewValue(
               fieldName,
               fieldUIResultOnChange,
-              fieldUIType
+              fieldUIType,
+              fieldOrder[fieldName]
             );
             BooleanField.compareCurrentValue(
               fieldName,
               fieldUIResultOnChange,
               fieldUIType,
-              this.callbackBeforeCompare
+              this.callbackBeforeCompare,
+              fieldOrder[fieldName]
             );
             return;
           case 'array':
             ArrayField.updateNewValue(
               fieldName,
               fieldUIResultOnChange,
-              fieldUIType
+              fieldUIType,
+              fieldOrder[fieldName]
             );
             ArrayField.compareCurrentValue(
               fieldName,
               fieldUIResultOnChange,
               fieldUIType,
-              this.callbackBeforeCompare
+              this.callbackBeforeCompare,
+              fieldOrder[fieldName]
             );
             return;
         }

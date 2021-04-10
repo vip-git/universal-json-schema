@@ -5,10 +5,16 @@ const compareCurrentValue = (
   fieldName,
   fieldUIValue,
   fieldUIType,
-  callbackBeforeCompare
+  callbackBeforeCompare,
+  fieldOrder
 ) => {
   callbackBeforeCompare(fieldUIType);
-  const { path } = getComponentSelector(fieldName, fieldUIType, fieldUIValue);
+  const { path } = getComponentSelector(
+    fieldName,
+    fieldUIType,
+    fieldUIValue,
+    fieldOrder
+  );
   const fieldValue = $(path);
   switch (fieldUIType) {
     case 'material-checkbox':
@@ -21,11 +27,12 @@ const compareCurrentValue = (
   }
 };
 
-const updateNewValue = (fieldName, newValue, fieldUIType) => {
+const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
   const { path, secondarySelector } = getComponentSelector(
     fieldName,
     fieldUIType,
-    newValue
+    newValue,
+    fieldOrder
   );
   switch (fieldUIType) {
     case 'material-checkbox':

@@ -1,0 +1,22 @@
+{
+    "toggleMask": {
+        "ui:selectors": {
+            "enableRadio": "(//div/label[contains(text(),'Toggle')]/following-sibling::div/label/span/span/input)[1]"
+        },
+        "ui:test": [
+          {
+            "steps": [
+              {
+                "selector": "enableRadio",
+                "action": "click"
+              }, 
+              {
+                "selector": "enableRadio",
+                "action": "compare",
+                "value": "true"
+              }
+            ]
+          }
+        ]
+    }
+}

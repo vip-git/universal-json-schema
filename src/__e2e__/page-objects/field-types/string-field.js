@@ -5,11 +5,17 @@ const compareCurrentValue = (
   fieldName,
   fieldUIValue,
   fieldUIType,
-  callbackBeforeCompare
+  callbackBeforeCompare,
+  fieldOrder
 ) => {
   if (fieldUIValue !== 'false') {
     callbackBeforeCompare(fieldUIType);
-    const { path } = getComponentSelector(fieldName, fieldUIType, fieldUIValue);
+    const { path } = getComponentSelector(
+      fieldName,
+      fieldUIType,
+      fieldUIValue,
+      fieldOrder
+    );
     const fieldValue = fieldUIType !== 'checkboxes' ? $(path).getValue() || $(path).getText() : '';
     switch (fieldUIType) {
       case 'material-input':
@@ -26,7 +32,8 @@ const compareCurrentValue = (
         const { singleSelector } = getComponentSelector(
           fieldName,
           fieldUIType,
-          fieldUIValue
+          fieldUIValue,
+          fieldOrder
         );
         expect($(singleSelector)).toBeChecked();
         return fieldValue;
@@ -38,11 +45,12 @@ const compareCurrentValue = (
   }
 };
 
-const updateNewValue = (fieldName, newValue, fieldUIType) => {
+const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
   const { path, secondarySelector } = getComponentSelector(
     fieldName,
     fieldUIType,
-    newValue
+    newValue,
+    fieldOrder
   );
   switch (fieldUIType) {
     case 'material-input':
@@ -57,7 +65,8 @@ const updateNewValue = (fieldName, newValue, fieldUIType) => {
       const { thirdSelector, fourthSelector } = getComponentSelector(
         fieldName,
         fieldUIType,
-        newValue
+        newValue,
+        fieldOrder
       );
       $(secondarySelector).click();
       $(thirdSelector).click();
@@ -91,11 +100,12 @@ const updateNewValue = (fieldName, newValue, fieldUIType) => {
       return newValue;
 
     case 'checkboxes':
-       const { singleSelector } = getComponentSelector(
-         fieldName,
-         fieldUIType,
-         newValue
-       );
+      const { singleSelector } = getComponentSelector(
+        fieldName,
+        fieldUIType,
+        newValue,
+        fieldOrder
+      );
       $(singleSelector).click();
       return newValue;
     default:
