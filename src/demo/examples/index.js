@@ -11,7 +11,7 @@ import budget from './budget';
 import multipleChoice from './multiple-choice';
 import radioChoice from './radio-choice';
 import additionalProps from './additional-props';
-import refrences from './refrences';
+import references from './references';
 import alternatives from './alternatives';
 import schemaDeps from './schema-dependencies';
 
@@ -32,7 +32,7 @@ export default {
     multipleChoice,
     radioChoice,
     additionalProps,
-    refrences,
+    references,
     alternatives,
     schemaDeps,
   },

@@ -66,8 +66,8 @@ export const setNestedPayload = ({
   const formData = Object.assign({}, givenFormData);
   Object.keys(payloadData).forEach((fd) => {
     const parseColonKey = (givenKey) => {
-      // Colon includes a object refrence then use this logic
-      // needs to be improved for nested object refrence if support is needed in future.
+      // Colon includes a object reference then use this logic
+      // needs to be improved for nested object reference if support is needed in future.
       const objectKeyFromPayload = givenKey.includes(':') && givenKey.split(':')[0].includes('.') && givenKey.split(':')[0].split('.')[0];
       const newKey = givenKey.includes(':') && objectKeyFromPayload && `${objectKeyFromPayload}.${givenKey.split(':')[1]}`;
 

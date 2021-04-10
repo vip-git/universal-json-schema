@@ -15,7 +15,7 @@ const folderHashMapping = {
   'multiple-choice': 'multipleChoice',
   'radio-choice': 'radioChoice',
   'additional-props': 'additionalProps',
-  refrences: 'refrences',
+  references: 'references',
   alternatives: 'alternatives',
   'schema-dependencies': 'schemaDeps',
 };

@@ -5,7 +5,7 @@
 - Additional Properties and Additional Items feature enabled
 - "ui:options" and "ui:style" enabled for prop passing and styling every field
 - On the fly module creation
-- Refrence Schema's via http and inline refrences
+- Reference Schema's via http and inline references
 - Support alternatives - oneOf, anyOf
 - Support for dependencies - array of conditionals
 - new Prop onError to get errors available in form on every change
