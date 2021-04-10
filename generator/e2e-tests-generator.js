@@ -177,6 +177,11 @@ const e2eTestsGenerator = (
     xhrSchema = require(`../src/demo/examples/${pageName}/xhr-schema.json`);
   } catch (err) {}
   const formData = require(`../src/demo/examples/${pageName}/form-data.json`);
+
+  if (schema.additionalProperties) {
+    schema.properties.additionalProperties = schema.additionalProperties;
+  }
+
   try {
     const testSchema = require(`../src/demo/examples/${pageName}/tests-schema.json`);
     const subTestsFolder = `${testsGeneratedFolder}/${pageName}`;

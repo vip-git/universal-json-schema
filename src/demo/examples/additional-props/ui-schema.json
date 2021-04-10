@@ -1,5 +1,5 @@
 {
-  "firstName": {
+  "title": {
     "ui:autofocus": true,
     "ui:emptyValue": ""
   },

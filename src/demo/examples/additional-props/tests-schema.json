@@ -1,0 +1,81 @@
+{
+    "additionalProperties": {
+        "ui:selectors": {
+            "closeIcon": "(//button[span/*[@data-testid='CloseIcon']])[1]",
+            "addIcon": "(//button[span/*[@data-testid='AddCircleIcon']])[1]",
+            "firstNameInput": "(//label[contains(., 'First name')]/following-sibling::div/input)[1]",
+            "lastNameInput": "(//label[contains(., 'Last name')]/following-sibling::div/input)[1]",
+            "keyInput": "(//label[contains(., 'i was here (Key)')]/following-sibling::div/input)[1]"
+        },
+        "ui:test": [
+          {
+            "scenarioName": "Compare Form Data is Correct",
+            "steps": [
+                {
+                    "selector": "firstNameInput",
+                    "action": "compare",
+                    "value": "Chuckit"
+                },
+                {
+                    "selector": "lastNameInput",
+                    "action": "compare",
+                    "value": "Norra"
+                },
+                {
+                    "selector": "keyInput",
+                    "action": "compare",
+                    "value": "assKickCount"
+                }
+            ]
+          },
+          {
+            "scenarioName": "Can update current fields",
+            "steps": [
+              {
+                "selector": "firstNameInput",
+                "action": "update",
+                "value": "Chuckao"
+              },
+              {
+                "selector": "lastNameInput",
+                "action": "update",
+                "value": "Norrando"
+              },
+              {
+                "selector": "keyInput",
+                "action": "update",
+                "value": "kacko"
+              }
+            ]
+          },
+          {
+            "scenarioName": "Can remove and add new fields",
+            "steps": [
+              {
+                "selector": "firstNameInput",
+                "action": "compare",
+                "value": "Chuckao"
+              },
+              {
+                "selector": "lastNameInput",
+                "action": "compare",
+                "value": "Norrando"
+              },
+              {
+                "selector": "keyInput",
+                "action": "compare",
+                "value": "kacko"
+              },
+              {
+                "selector": "closeIcon",
+                "action": "click"
+              },
+              {
+                "selector": "addIcon",
+                "action": "click"
+              }
+            ]
+          }
+        ]
+    }
+}
