@@ -1,0 +1,24 @@
+{
+    "Technical": {
+        "ui:selectors": {
+        },
+        "ui:test": [
+            {
+                "steps": [
+                {}
+                ]
+            }
+        ]
+    },
+    "Changedata": {
+        "ui:selectors": {
+        },
+        "ui:test": [
+            {
+                "steps": [
+                {}
+                ]
+            }
+        ]
+    }
+}

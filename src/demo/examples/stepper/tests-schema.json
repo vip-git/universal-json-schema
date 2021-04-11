@@ -1,0 +1,35 @@
+{
+    "SelectComponents": {
+       "ui:selectors": {
+        },
+        "ui:test": [
+            {
+                "steps": [
+                {}
+                ]
+            }
+        ]
+    },
+    "PublishPackage": {
+       "ui:selectors": {
+        },
+        "ui:test": [
+            {
+                "steps": [
+                {}
+                ]
+            }
+        ]
+    },
+    "GettingStarted": {
+       "ui:selectors": {
+        },
+        "ui:test": [
+            {
+                "steps": [
+                {}
+                ]
+            }
+        ]
+    }
+}

@@ -55,7 +55,7 @@ const validateTest = ({
       }
     });
   } else {
-    expect('No Tests defined for custom components').toBe(getRefrencePointer);
+    expect('No Tests defined for custom components').toBe(uiTestDef);
   }
 };
 

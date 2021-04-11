@@ -20,7 +20,8 @@
         "credit_card": {
           "properties": {
             "billing_address": {
-              "type": "string"
+              "type": "string",
+              "title": "Billing Address"
             }
           },
           "required": ["billing_address"]

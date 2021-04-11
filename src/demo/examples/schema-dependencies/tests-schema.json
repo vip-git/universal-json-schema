@@ -1,0 +1,187 @@
+{
+  "simple": {
+    "ui:selectors": {
+        "inputName": "(//fieldset[h6[contains(., 'Simple')]]/div/div/div/input)[1]",
+        "inputCreditCard": "(//fieldset[h6[contains(., 'Simple')]]/div/div/div/input)[2]",
+        "inputBilling": "(//fieldset[h6[contains(., 'Simple')]]/div/div/div/input)[3]"
+    },
+    "ui:test": [
+        {
+            "scenarioName": "Check values",
+            "steps": [
+              {
+                "selector": "inputName",
+                "action": "compare",
+                "value": "Randy"
+              }
+            ]
+        },
+        {
+          "scenarioName": "Update name values",
+          "steps": [
+            {
+              "selector": "inputName",
+              "action": "update",
+              "value": "Looks good"
+            },
+            {
+              "selector": "inputCreditCard",
+              "action": "update",
+              "value": "12390192091"
+            },
+            {
+              "selector": "inputBilling",
+              "action": "update",
+              "value": "Some Nice address"
+            }
+          ]
+        },
+        {
+          "scenarioName": "Compare new name values",
+          "steps": [
+            {
+              "selector": "inputName",
+              "action": "compare",
+              "value": "Looks good"
+            },
+            {
+              "selector": "inputCreditCard",
+              "action": "compare",
+              "value": "12390192091"
+            },
+            {
+              "selector": "inputBilling",
+              "action": "compare",
+              "value": "Some Nice address"
+            }
+          ]
+        }
+    ]
+  },
+  "conditional": {
+    "ui:selectors": {
+        "inputSelect": "(//div/label[contains(text(), 'Do you have any pets?')]/following-sibling::div)[1]",
+        "select3": "//ul/li[contains(., 'Yes: One')]",
+        "select4": "//ul/li[contains(., 'Yes: More than one')]",
+        "petField": "(//div/label[contains(text(), 'How old is your pet?')]/following-sibling::div/input)[1]",
+        "checkbox": "(//label[contains(., 'Do you want to get rid of any?')]/span/span/input)[1]",
+        "extraField": "(//div/label[contains(text(), 'Do you want to set rid of any?')]/following-sibling::div/input)[1]"
+    },
+    "ui:test": [
+        {
+            "scenarioName": "can select values and enter age",
+            "steps": [
+              {
+                "selector": "inputSelect",
+                "action": "click"
+              },
+              {
+                "selector": "select3",
+                "action": "click"
+              },
+              {
+                  "selector": "petField",
+                  "action": "update",
+                  "value": "23"
+              }
+            ]
+        },
+        {
+          "scenarioName": "can select values and enter extra",
+          "steps": [
+            {
+                "selector": "petField",
+                "action": "compare",
+                "value": "23"
+            },
+            {
+              "selector": "inputSelect",
+              "action": "click"
+            },
+            {
+              "selector": "select4",
+              "action": "click"
+            },
+            {
+              "selector": "checkbox",
+              "action": "click"
+            },
+            {
+                "selector": "extraField",
+                "action": "update",
+                "value": "231"
+            }
+          ]
+        },
+        {
+            "scenarioName": "check if new values are updated correctly",
+            "steps": [
+                {
+                  "selector": "checkbox",
+                  "action": "isChecked"
+                },
+                {
+                  "selector": "extraField",
+                  "action": "compare",
+                  "value": "231"
+                }
+            ]
+        }
+    ]
+  },
+  "arrayOfConditionals": {
+    "ui:selectors": {
+        "inputSelect": "(//div/label[contains(text(), 'Do you have any pets?')]/following-sibling::div)[3]",
+        "select3": "//ul/li[contains(., 'Yes: One')]",
+        "select4": "//ul/li[contains(., 'Yes: More than one')]",
+        "petField": "(//div/label[contains(text(), 'How old is your pet?')]/following-sibling::div)[1]",
+        "checkbox": "(//label[contains(., 'Do you want to get rid of any?')]/span/span/input)[1]",
+        "extraField": "(//div/label[contains(text(), 'Do you want to set rid of any?')]/following-sibling::div)[2]",
+        "closeIcon": "(//button[span/*[@data-testid='CloseIcon']])[1]",
+        "addIcon": "(//button[span/*[@data-testid='AddCircleIcon']])[1]"
+    },
+    "ui:test": [
+         {
+           "steps": [
+             {
+               "selector": "closeIcon",
+               "action": "click"
+             },
+             {
+               "selector": "closeIcon",
+               "action": "click"
+             },
+             {
+               "selector": "addIcon",
+               "action": "click"
+             }
+           ]
+         }
+    ]
+  },
+  "fixedArrayOfConditionals": {
+    "ui:selectors": {
+        "inputSelect": "(//div/label[contains(text(), 'Do you have any pets?')]/following-sibling::div)[4]",
+        "closeIcon": "(//button[span/*[@data-testid='CloseIcon']])[2]",
+        "addIcon": "(//button[span/*[@data-testid='AddCircleIcon']])[2]"
+    },
+    "ui:test": [
+        {
+            "steps": [
+               {
+                    "selector": "closeIcon",
+                    "action": "click"
+                },
+                {
+                    "selector": "closeIcon",
+                    "action": "click"
+                },
+                {
+                    "selector": "addIcon",
+                    "action": "click"
+                }
+            ]
+        }
+    ]
+  }
+}
