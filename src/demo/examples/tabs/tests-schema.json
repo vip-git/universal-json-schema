@@ -1,24 +1,144 @@
 {
     "Technical": {
-        "ui:selectors": {
+        "listOfStrings": {
+            "ui:selectors": {
+                "input": "(//input)[5]"
+            },
+            "ui:test": [
+                {
+                    "steps": [
+                        {
+                            "selector": "input",
+                            "action": "compare",
+                            "value": "bazinga"
+                        }
+                    ]
+                }
+            ]
         },
-        "ui:test": [
-            {
-                "steps": [
-                {}
-                ]
-            }
-        ]
-    },
-    "Changedata": {
-        "ui:selectors": {
+        "fixedItemsList": {
+            "ui:selectors": {
+                "input": "(//div/label[contains(text(),'A string value')]/following-sibling::div/input)[1]"
+            },
+            "ui:test": [
+                {
+                    "steps": [
+                        {
+                            "selector": "input",
+                            "action": "compare",
+                            "value": "lorem ipsum"
+                        }
+                    ]
+                }
+            ]
         },
-        "ui:test": [
+        "minItemsList": {
+            "ui:selectors": {
+                "button": "(//fieldset[h6[contains(., 'A list with a minimal number of items')]]/div/div/div/button)[1]"
+            },
+            "ui:test": [
+                {
+                    "steps": [
+                        {
+                            "selector": "button",
+                            "action": "click"
+                        }
+                    ]
+                }
+            ]
+        },
+        "defaultsAndMinItems": {
+            "ui:selectors": {
+                "input": "(//fieldset[h6[contains(., 'List and item level defaults')]]/div/div/div/div/div/input)[1]"
+            },
+            "ui:test": [
+                {
+                    "steps": [
+                      {
+                        "selector": "input",
+                        "action": "compare",
+                        "value": "unidentified"
+                      }
+                    ]
+                }
+            ]
+        },
+        "nestedList": {
+            "ui:selectors": {
+                "input": "(//fieldset[h6[contains(., 'Inner list')]]/div/div/div/div/div/input)[1]"
+            },
+            "ui:test": [
+                {
+                    "steps": [
+                     {
+                       "selector": "input",
+                       "action": "compare",
+                       "value": "lorem ipsum"
+                     }
+                    ]
+                }
+            ]
+        },
+        "unorderable": {
+          "ui:selectors": {
+            "button": "(//fieldset[h6[contains(., 'Unorderable items')]]/div/div/div/button)[1]"
+          },
+          "ui:test": [
             {
-                "steps": [
-                {}
-                ]
+              "steps": [
+                {
+                  "selector": "button",
+                  "action": "click"
+                }
+              ]
             }
-        ]
+          ]
+        },
+        "unremovable": {
+          "ui:selectors": {
+            "button": "(//fieldset[h6[contains(., 'Unremovable items')]]/div/div/div/button)[1]"
+          },
+          "ui:test": [
+            {
+              "steps": [
+                {
+                  "selector": "button",
+                  "action": "click"
+                }
+              ]
+            }
+          ]
+        },
+        "noToolbar": {
+          "ui:selectors": {
+            "button": "(//fieldset[h6[contains(., 'No add, remove and order buttons')]]/div/div/div/button)[1]"
+          },
+          "ui:test": [
+            {
+              "steps": [
+                {
+                  "selector": "button",
+                  "action": "click"
+                }
+              ]
+            }
+          ]
+        },
+        "fixedNoToolbar": {
+          "ui:selectors": {
+            "input": "(//div/label[contains(text(),'A number')]/following-sibling::div/input)[1]"
+          },
+          "ui:test": [
+            {
+              "steps": [
+                {
+                  "selector": "input",
+                  "action": "compare",
+                  "value": "lorem ipsum"
+                }
+              ]
+            }
+          ]
+        }
     }
 }
