@@ -1,33 +1,45 @@
 {
     "SelectComponents": {
        "ui:selectors": {
+           "button": "(//button[@tabindex=0])[2]"
         },
         "ui:test": [
             {
                 "steps": [
-                {}
+                    {
+                        "selector": "button",
+                        "action": "click"
+                    }
                 ]
             }
         ]
     },
     "PublishPackage": {
        "ui:selectors": {
+           "button": "(//button[@tabindex=0])[4]"
         },
         "ui:test": [
             {
                 "steps": [
-                {}
+                    {
+                      "selector": "button",
+                      "action": "click"
+                    }
                 ]
             }
         ]
     },
     "GettingStarted": {
        "ui:selectors": {
+           "button": "(//button[@tabindex=0])[3]"
         },
         "ui:test": [
             {
                 "steps": [
-                {}
+                    {
+                    "selector": "button",
+                    "action": "click"
+                    }
                 ]
             }
         ]

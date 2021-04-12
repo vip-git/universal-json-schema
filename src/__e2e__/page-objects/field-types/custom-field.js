@@ -35,6 +35,8 @@ const validateTest = ({
               }
             }
           } catch (err) {}
+          $(path).scrollIntoView();
+          $(path).waitForClickable({ timeout: 10000 });
           $(path).click();
           return;
         case 'update':

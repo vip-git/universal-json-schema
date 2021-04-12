@@ -253,7 +253,10 @@ const e2eTestsGenerator = (
   }
 
   // This logic should be refactored to include nested field support
-  if (_.has(uiSchema, 'ui:page.ui:layout')) {
+  if (
+    _.has(uiSchema, 'ui:page.ui:layout') &&
+    _.get(uiSchema, 'ui:page.ui:layout') === 'tabs'
+  ) {
     Object.keys(schema.properties).forEach((schemaProp) => {
       const finalSchema = schema.properties[schemaProp].$ref
         ? getDefinitionSchemaFromRef(
@@ -268,7 +271,10 @@ const e2eTestsGenerator = (
         uiSchema: uiSchema[schemaProp],
         formData: formData[schemaProp],
       });
-      const finalFormData = mapFormDataWithValues(formData[schemaProp], finalSchema);
+      const finalFormData = mapFormDataWithValues(
+        formData[schemaProp],
+        finalSchema
+      );
       const uiLayout = _.get(uiSchema, 'ui:page.ui:layout');
       generateTestFile({
         schema: newSchema,
@@ -293,10 +299,7 @@ const e2eTestsGenerator = (
       uiSchema,
       formData,
     });
-    const finalFormData = mapFormDataWithValues(
-      formData,
-      finalSchema
-    );
+    const finalFormData = mapFormDataWithValues(formData, finalSchema);
     generateTestFile({
       schema: finalSchema,
       hashName,
