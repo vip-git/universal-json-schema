@@ -16,11 +16,23 @@
     },
     "PublishPackage": {
        "ui:selectors": {
-           "button": "(//button[@tabindex=0])[4]"
+           "packageName": "//div/label[contains(text(), 'Package Name')]/following-sibling::div/input",
+           "packageVersion": "//div/label[contains(text(), 'Package Version')]/following-sibling::div/input",
+           "button": "(//button[@tabindex=0])[3]"
         },
         "ui:test": [
             {
                 "steps": [
+                    {
+                      "selector": "packageName",
+                      "action": "update",
+                      "value": "react-new-schema"
+                    },
+                    {
+                      "selector": "packageVersion",
+                      "action": "update",
+                      "value": "0.0.1"
+                    },
                     {
                       "selector": "button",
                       "action": "click"

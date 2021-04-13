@@ -15,7 +15,7 @@ const validateTest = ({
     uiTestDef.steps.forEach((stepDef) => {
       const getPathBySelector = (selectorDef) => _.get(uiSelectors, selectorDef);
       const path = getPathBySelector(stepDef.selector) || _.get(uiTestDef, stepDef.selector);
-      const fieldValue = $(path).getValue() || $(path).getText();
+      const fieldValue = stepDef.action !== 'click' ? $(path).getValue() || $(path).getText() : '';
       switch (stepDef.action) {
         case 'click':
           try {
