@@ -1,6 +1,10 @@
 {
   "ui:page": {
-    "ui:layout": "steps"
+    "ui:layout": "steps",
+    "props": {
+      "includeSkipButton": false,
+      "ui:schemaErrors": true
+    }
   },
   "SelectComponents": {
     "listOfComponents": {

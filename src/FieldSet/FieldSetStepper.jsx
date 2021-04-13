@@ -9,6 +9,9 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+// Context
+import { StepperContext } from '../helpers/context';
+
 // Internal
 import FieldSetObject from './FieldSetObject';
 
@@ -27,8 +30,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function HorizontalNonLinearStepperWithError(props) {
   const classes = useStyles();
-  const { schema = {}, path, onNext, onBack, onSkip, onSubmit } = props;
-  const [activeStep, setActiveStep] = React.useState(0);
+  const { 
+    schema = {}, 
+    uiSchema, 
+    path, 
+    onNext, 
+    onBack, 
+    onSkip, 
+    onSubmit
+  } = props;
+  const [activeStep, setActiveStep, buttonDisabled] = React.useContext(StepperContext);
+  const { props: { includeSkipButton } = { includeSkipButton: true } } = uiSchema['ui:page'];
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = Object.keys(schema.properties).map((sp) => schema.properties[sp].title || sp);
   const stepContent = Object.keys(schema.properties).map((p, k) => {
@@ -144,7 +156,7 @@ export default function HorizontalNonLinearStepperWithError(props) {
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
               </Button>
-              {isStepOptional(activeStep) && (
+              {includeSkipButton && isStepOptional(activeStep) && (
                 <Button
                   variant='contained'
                   color='primary'
@@ -160,6 +172,7 @@ export default function HorizontalNonLinearStepperWithError(props) {
                 color='primary'
                 onClick={handleNext}
                 className={classes.button}
+                disabled={buttonDisabled}
               >
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>

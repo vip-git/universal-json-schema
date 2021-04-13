@@ -40,6 +40,7 @@ const FormComponent = ({
       formData={givenFormData}
 			onCancel={onCancel}
 			onSubmit={onSubmit}
+      onStepNext={onSubmit}
 			onUpload={onUpload}
       onChange={onFormChanged}
       onError={onError}

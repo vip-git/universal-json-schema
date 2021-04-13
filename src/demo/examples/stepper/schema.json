@@ -8,6 +8,7 @@
     "PublishPackage": {
       "title": "Publish your Package",
       "type": "object",
+      "required": ["packageName", "packageVersion"],
       "properties": {
         "packageName": {
           "type": "string",

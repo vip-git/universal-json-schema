@@ -1,18 +1,17 @@
 {
   "ui:page": {
     "ui:layout": "tabs",
-    "ui:tabs": {
-      "props": {
-        "tabIndex": 1
-      },
+    "props": {
+      "tabIndex": 1,
+      "ui:schemaErrors": true
+    },
+    "style": {
+      "width": "29vw",
+      "marginTop": 10
+    },
+    "tab": {
       "style": {
-        "width": "29vw",
-        "marginTop": 10
-      },
-      "tab": {
-        "style": {
-          "minWidth": 81
-        }
+        "minWidth": 81
       }
     }
   },

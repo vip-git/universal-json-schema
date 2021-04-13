@@ -268,7 +268,7 @@ const transformSchema = (schema, data) => {
           transformedSchema.properties[propKey] = getDefinitionSchemaFromRef(
             transformedSchema.definitions,
             schema.properties[propKey],
-            data[propKey],
+            data && data[propKey],
           );
         }
         else if (has(propVal, 'items')) {
@@ -277,7 +277,7 @@ const transformSchema = (schema, data) => {
               ...getDefinitionSchemaFromRef(
                 transformedSchema.definitions,
                 transformedSchema.properties[propKey].items,
-                data[propKey],
+                data && data[propKey],
               ),
             };
           }

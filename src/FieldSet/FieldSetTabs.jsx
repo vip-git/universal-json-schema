@@ -55,12 +55,20 @@ const FieldSetTabs = (props) => {
                         && xhrSchema['ui:page'] 
                         && xhrSchema['ui:page'].onload 
                         && xhrSchema['ui:page'].onload.xhrProgress;
-  const tabsProps = uiSchema['ui:page']['ui:tabs']?.props || {};
-  const tabsStyle = uiSchema['ui:page']['ui:tabs']?.style || {};
-  const tabStyle = uiSchema['ui:page']['ui:tabs']?.tab?.style || {};
-  const tabProps = uiSchema['ui:page']['ui:tabs']?.tab?.props || {};
-  const tabPanelStyle = uiSchema['ui:page']['ui:tabs']?.tabPanel?.style || {};
-  const tabPanelProps = uiSchema['ui:page']['ui:tabs']?.props || {};
+  const { 
+    props: tabsProps = {},
+    style: tabsStyle = {},
+    tab = {
+      style: {},
+      props: {}
+    },
+    tabPanel = {
+      style: {},
+      props: {}
+    }
+  } = uiSchema['ui:page'];
+  const { style: tabStyle, props: tabProps } = tab;
+  const { style: tabPanelStyle, props: tabPanelProps } = tabPanel;
   const [value, setValue] = React.useState(tabsProps?.tabIndex - 1 || 0);
 
   const handleChange = (event, newValue) => {

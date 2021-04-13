@@ -34,7 +34,7 @@ import getValidationResult from './helpers/validation';
 import executeXHRCall from './helpers/execute-xhr-call';
 
 // Initial Contexts
-import { LoadingContext, EventContext } from './helpers/context';
+import { LoadingContext, EventContext, StepperContext } from './helpers/context';
 
 let data = {};
 let uiData = {};
@@ -139,6 +139,8 @@ const Form = ({
   const id = prefixId || generate();
   const autoId = generate();
   const [formId, setFormId] = React.useState(null);
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const hasPageLayoutTabs = uiSchema['ui:page'] 
                               && uiSchema['ui:page']['ui:layout'] 
                               && uiSchema['ui:page']['ui:layout'] === 'tabs';
@@ -462,15 +464,31 @@ const Form = ({
     }
   };
 
-  if (get(uiSchema, 'ui:page.ui:props.ui:schemaErrors') 
-  || !has(uiSchema, 'ui:page.ui:props.ui:schemaErrors')) {
+  if (get(uiSchema, 'ui:page.props.ui:schemaErrors') 
+  || !has(uiSchema, 'ui:page.props.ui:schemaErrors')) {
     try {
-      const transformedSchema = transformSchema(schema);
+      const givenSchema = get(uiSchema, 'ui:page.ui:layout') === 'steps' 
+      ? JSON.parse(JSON.stringify(schema))
+      : schema;
+      if (get(uiSchema, 'ui:page.ui:layout') === 'steps') {
+        Object.keys(givenSchema.properties).forEach((propName) => {
+          givenSchema.properties[propName] = propName === Object.keys(givenSchema.properties)[activeStep] ? {
+            ...givenSchema.properties[propName]
+          } : {
+            ...givenSchema.properties[propName],
+            required: []
+          }
+        });
+      }
+      const transformedSchema = transformSchema(givenSchema);
       const validate = validator(transformedSchema, { verbose: true });
       validate(data);
       const externalValidations = isFormInValid(validation);
       const isDisabled = disabled || externalValidations || validate.errors;
       formGlobalState.disabled = !!isDisabled;
+      if (formGlobalState.disabled !== buttonDisabled) {
+        setButtonDisabled(formGlobalState.disabled);
+      }
     }
     catch (err) {
       // console.log('err', err);
@@ -499,45 +517,47 @@ const Form = ({
             
           }
           <LoadingContext.Provider value={loadingState}>
-            <EventContext.Provider value={onUpload}>
-              {
-                xhrProgress && !hasPageLayoutTabs ? (
-                    <div> 
-                      <CircularProgress disableShrink />
-                    </div>
-                ) : (
-                    <FormField
-                          path={''}
-                          data={data}
-                          uiData={uiData}
-                          schemaVersion={schema.version}
-                          schema={schema}
-                          uiSchema={uiSchema}
-                          xhrSchema={xhrSchema}
-                          definitions={schema.definitions}
-                          interceptors={interceptors}
-                          id={id}
-                          onChange={onFormValuesChange}
-                          onXHRSchemaEvent={onXHRSchemaEvent}
-                          onSubmit={onFormSubmit}
-                          validation={validation}
-                          onKeyDown={handleKeyEnter}
-                          onMoveItemUp={onMoveItemUp}
-                          onMoveItemDown={onMoveItemDown}
-                          onDeleteItem={onDeleteItem}
-                          onAddItem={onAddItem}
-                          onAddNewProperty={onAddNewProperty}
-                          onRemoveProperty={onRemoveProperty}
-                          onUpdateKeyProperty={onUpdateKeyProperty}
-                          onNext={onFormNext}
-                          onBack={onFormBack}
-                          onSkip={onFormSkip}
-                          {...rest}
-                    />
-                )
-              }
-              
-            </EventContext.Provider>
+            <StepperContext.Provider value={[activeStep, setActiveStep, buttonDisabled]}>
+              <EventContext.Provider value={onUpload}>
+                {
+                  xhrProgress && !hasPageLayoutTabs ? (
+                      <div> 
+                        <CircularProgress disableShrink />
+                      </div>
+                  ) : (
+                      <FormField
+                            path={''}
+                            data={data}
+                            uiData={uiData}
+                            schemaVersion={schema.version}
+                            schema={schema}
+                            uiSchema={uiSchema}
+                            xhrSchema={xhrSchema}
+                            definitions={schema.definitions}
+                            interceptors={interceptors}
+                            id={id}
+                            onChange={onFormValuesChange}
+                            onXHRSchemaEvent={onXHRSchemaEvent}
+                            onSubmit={onFormSubmit}
+                            validation={validation}
+                            onKeyDown={handleKeyEnter}
+                            onMoveItemUp={onMoveItemUp}
+                            onMoveItemDown={onMoveItemDown}
+                            onDeleteItem={onDeleteItem}
+                            onAddItem={onAddItem}
+                            onAddNewProperty={onAddNewProperty}
+                            onRemoveProperty={onRemoveProperty}
+                            onUpdateKeyProperty={onUpdateKeyProperty}
+                            onNext={onFormNext}
+                            onBack={onFormBack}
+                            onSkip={onFormSkip}
+                            isSubmitDisabled={formGlobalState.disabled}
+                            {...rest}
+                      />
+                  )
+                }
+              </EventContext.Provider>
+            </StepperContext.Provider>
           </LoadingContext.Provider>
           {
             (!actionButtonPos && !hasPageLayoutSteps) 
