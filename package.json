@@ -72,7 +72,7 @@
     "util": "0.12.3",
     "wdio-video-reporter": "^3.1.1"
   },
-  "description": "Material UI implementation of react-jsonschema-form",
+  "description": "Material UI implementation of react-jsonschema-form with UI and XHR Schema",
   "devDependencies": {
     "@babel/core": "7.12.10",
     "@babel/plugin-proposal-class-properties": "7.12.1",
