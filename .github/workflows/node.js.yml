@@ -30,7 +30,7 @@ jobs:
     - run: sleep 180
     - run: |
         GIT_SHA=$(git log -1 --pretty=%B | grep ^Merge | cut -d " " -f 2)
-        VERCEL_URL=$(curl -H 'Accept: application/json' -H "Authorization: Bearer ${VERCEL_TOKEN}" ${VERCEL_API}${GIT_SHA} | jq '.deployments[0].url')
+        VERCEL_URL=$(curl -H 'Accept: application/json' -H "${VERCEL_TOKEN}" ${VERCEL_API}${GIT_SHA} | jq '.deployments[0].url')
         echo ${VERCEL_URL} for ${GITHUB_SHA} with ${GIT_SHA} - ${GITHUB_REF} - ${GITHUB_HEAD_REF} - ${VERCEL_API}
     - run: npm install
     - run: npm test
