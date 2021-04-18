@@ -29,6 +29,23 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm test
+    - name: "Check if deployment is done"
+      env:
+        VERCEL_TOKEN: ${{secrets.VERCEL_TOKEN}}
+        VERCEL_API: ${{secrets.VERCEL_API}}
+      run : |
+        isReadyState()
+        {
+            GIT_SHA=$(git log -1 --pretty=%B | grep ^Merge | cut -d " " -f 2)
+            VERCEL_STATE=$(curl -H "$VERCEL_TOKEN" "$VERCEL_API$GIT_SHA" | jq -r '.deployments[0].state')
+            if [ $VERCEL_STATE = "READY" ]; then
+                echo Valid state $VERCEL_STATE
+            else
+                echo invalid state found - $VERCEL_STATE
+                isReadyState
+            fi
+        }
+        isReadyState
     - run: |
         GIT_SHA=$(git log -1 --pretty=%B | grep ^Merge | cut -d " " -f 2)
         VERCEL_URI=$(curl -H "$VERCEL_TOKEN" "$VERCEL_API$GIT_SHA" | jq -r '.deployments[0].url')
