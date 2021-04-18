@@ -30,7 +30,7 @@ jobs:
     - run: sleep 180
     - run: |
         VERCEL_URL=$(curl -H 'Accept: application/json' -H "Authorization: Bearer ${VERCEL_TOKEN}" https://api.vercel.com/v5/now/deployments/\?meta-githubCommitSha\=${GIT_HASH} | jq '.deployments[0].url')
-        echo ${VERCEL_URL} for ${GIT_HASH}
+        echo ${VERCEL_URL} for ${GIT_HASH} $(git log -1 | grep ^commit | cut -d " " -f 2)
     - run: npm install
     - run: npm test
     - run: npm run test:e2e:ci
