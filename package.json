@@ -13,7 +13,7 @@
     "build": "webpack",
     "build:demo": "cross-env NODE_ENV=production webpack --config webpack.config.demo.js",
     "generate:tests": "node generator/index.js --testsOnly",
-    "test": "npx wdio run wdio.conf.js",
+    "test": "echo 'Work in Progress'",
     "test-disabled": "npm run test:ci",
     "test:watch": "npm run test:ci -- --watch",
     "heroku-postbuild": "npm run build:demo",
@@ -22,7 +22,7 @@
     "start:demo": "npm run build:demo && npm start",
     "deploy:alpha": "npm run build && npm version prerelease --preid=alpha && npm publish",
     "deploy": "npm run build && npm version patch && npm publish",
-    "test:e2e": "mocha browserstack.js  --timeout 30000",
+    "test:e2e": "npx wdio run wdio.conf.js",
     "test:ci": "mocha-webpack --glob \"*.spec.js*\" --reporter mochawesome --require mocha.setup.js --reporter-options reportDir=mochawesome-report-unit --recursive src"
   },
   "dependencies": {
