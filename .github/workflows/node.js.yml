@@ -5,9 +5,12 @@ name: Build and Test CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, closed]
   pull_request_target:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
