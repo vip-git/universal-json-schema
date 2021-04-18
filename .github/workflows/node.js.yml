@@ -29,8 +29,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: sleep 180
     - run: |
-        VERCEL_URL=$(curl -H 'Accept: application/json' -H "Authorization: Bearer ${VERCEL_TOKEN}" https://api.vercel.com/v5/now/deployments/\?meta-githubCommitSha\=${GITHUB_SHA} | jq '.deployments[0].url')
-        echo ${VERCEL_URL} for ${GITHUB_SHA}
+        VERCEL_URL=$(curl -H 'Accept: application/json' -H "Authorization: Bearer ${VERCEL_TOKEN}" https://api.vercel.com/v5/now/deployments/\?meta-githubCommitSha\=${GIT_HASH} | jq '.deployments[0].url')
+        echo ${VERCEL_URL} for ${GIT_HASH}
     - run: npm install
     - run: npm test
     - run: npm run test:e2e:ci
@@ -38,3 +38,4 @@ jobs:
         BROWSERSTACK_USER: ${{secrets.BROWSERSTACK_USER}}
         BROWSERSTACK_ACCESSKEY: ${{secrets.BROWSERSTACK_ACCESSKEY}}
         VERCEL_TOKEN: ${{secrets.VERCEL_TOKEN}}
+        GIT_HASH: ${{ github.event.pull_request.head.sha }}
