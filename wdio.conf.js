@@ -1,5 +1,3 @@
-const video = require('wdio-video-reporter');
-
 exports.config = {
   //
   // ====================
@@ -20,9 +18,9 @@ exports.config = {
   // according to your user and key information. However, if you are using a private Selenium
   // backend you should define the host address, port, and path here.
   //
-  hostname: 'https://hub-cloud.browserstack.com/wd/hub',
-  port: 80,
-  path: '/',
+  hostname: 'hub-cloud.browserstack.com',
+  port: 443,
+  path: '/wd/hub',
   //
   // =================
   // Service Providers
@@ -31,8 +29,8 @@ exports.config = {
   // should work too though). These services define specific user and key (or access key)
   // values you need to put in here in order to connect to these services.
   //
-  user: process.env.BROWSERSTACK_USER,
-  key: process.env.BROWSERSTACK_ACCESSKEY,
+  user: 'bsuser10422', // process.env.BROWSERSTACK_USER,
+  key: 'cmffipt5pwL4c5QyRwji', // process.env.BROWSERSTACK_ACCESSKEY,
   //
   // If you run your tests on Sauce Labs you can specify the region you want to run your tests
   // in via the `region` property. Available short handles for regions are `us` (default) and `eu`.
@@ -76,18 +74,27 @@ exports.config = {
   // https://docs.saucelabs.com/reference/platforms-configurator
   //
   capabilities: [
+    // {
+    //   // maxInstances can get overwritten per capability. So if you have an in-house Selenium
+    //   // grid with only 5 firefox instances available you can make sure that not more than
+    //   // 5 instances get started at a time.
+    //   maxInstances: 5,
+    //   //
+    //   browserName: 'chrome',
+    //   acceptInsecureCerts: true,
+    //   // If outputDir is provided WebdriverIO can capture driver session logs
+    //   // it is possible to configure which logTypes to include/exclude.
+    //   // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
+    //   // excludeDriverLogs: ['bugreport', 'server'],
+    // },
     {
-      // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-      // grid with only 5 firefox instances available you can make sure that not more than
-      // 5 instances get started at a time.
-      maxInstances: 5,
-      //
-      browserName: 'chrome',
-      acceptInsecureCerts: true,
-      // If outputDir is provided WebdriverIO can capture driver session logs
-      // it is possible to configure which logTypes to include/exclude.
-      // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
-      // excludeDriverLogs: ['bugreport', 'server'],
+      browserName: 'Chrome', 
+      'bstack:options' : {
+        os : "Windows",
+        osVersion : "10",
+        sessionName: 'React JSON Schema Form - Material UI',
+        buildName: 'cucumber-browserstack'
+      },
     },
   ],
   //
@@ -121,7 +128,7 @@ exports.config = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: 'https://react-jsonschema-form-material-ui-jspnpnavp-github56.vercel.app',
+  baseUrl: '',
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 10000,
