@@ -27,9 +27,14 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: sleep 180
+    - run: |
+        VERCEL_URL=$(curl -H 'Accept: application/json' -H "Authorization: Bearer ${process.env.VERCEL_TOKEN}" https://api.vercel.com/v5/now/deployments/\?meta-githubCommitSha\=${process.env.GITHUB_SHA} | jq '.deployments[0].url')
+        echo ${VERCEL_URL}
     - run: npm install
     - run: npm test
     - run: npm run test:e2e:ci
       env:
         BROWSERSTACK_USER: ${{secrets.BROWSERSTACK_USER}}
         BROWSERSTACK_ACCESSKEY: ${{secrets.BROWSERSTACK_ACCESSKEY}}
+        VERCEL_TOKEN: ${{secrets.VERCEL_TOKEN}
