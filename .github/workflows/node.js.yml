@@ -30,3 +30,6 @@ jobs:
     - run: npm install
     - run: npm test
     - run: npm run test:e2e
+      env:
+        BROWSERSTACK_USER: ${{secrets.BROWSERSTACK_USER}}
+        BROWSERSTACK_ACCESSKEY: ${{secrets.BROWSERSTACK_ACCESSKEY}}

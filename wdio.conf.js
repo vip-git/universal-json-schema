@@ -31,8 +31,8 @@ exports.config = {
   // should work too though). These services define specific user and key (or access key)
   // values you need to put in here in order to connect to these services.
   //
-  user: 'bsuser10422', // process.env.bsuser10422,
-  key: 'cmffipt5pwL4c5QyRwji', // process.env.BROWSERSTACK_ACCESSKEY,
+  user: process.env.BROWSERSTACK_USER,
+  key: process.env.BROWSERSTACK_ACCESSKEY,
   //
   // If you run your tests on Sauce Labs you can specify the region you want to run your tests
   // in via the `region` property. Available short handles for regions are `us` (default) and `eu`.
@@ -121,7 +121,7 @@ exports.config = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: 'http://localhost:3005',
+  baseUrl: 'https://react-jsonschema-form-material-ui-jspnpnavp-github56.vercel.app',
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 10000,
@@ -137,7 +137,9 @@ exports.config = {
   // Services take over a specific job you don't want to take care of. They enhance
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
-  services: ['chromedriver'],
+  services: ['browserstack', {
+      browserstackLocal: true
+  }],
 
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
