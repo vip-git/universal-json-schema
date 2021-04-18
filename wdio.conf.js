@@ -22,7 +22,7 @@ exports.config = {
   //
   hostname: 'https://hub-cloud.browserstack.com/wd/hub',
   port: 80,
-  path: '',
+  path: '/',
   //
   // =================
   // Service Providers
