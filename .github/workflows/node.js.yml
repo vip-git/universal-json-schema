@@ -29,7 +29,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm test
-    - run: npm run test:e2e
+    - run: npm run test:e2e:ci
       env:
         BROWSERSTACK_USER: ${{secrets.BROWSERSTACK_USER}}
         BROWSERSTACK_ACCESSKEY: ${{secrets.BROWSERSTACK_ACCESSKEY}}
