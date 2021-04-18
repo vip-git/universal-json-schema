@@ -27,6 +27,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+        ref: ${{ github.event.pull_request.head.sha }}
     - run: sleep 180
     - run: |
         VERCEL_URL=$(curl -H 'Accept: application/json' -H "Authorization: Bearer ${VERCEL_TOKEN}" https://api.vercel.com/v5/now/deployments/\?meta-githubCommitSha\=${GIT_HASH} | jq '.deployments[0].url')
