@@ -1,0 +1,58 @@
+{
+    "pass1": {
+        "ui:selectors": {
+            "pass1": "(//label[contains(., 'Password')]/following-sibling::div/input)[1]"
+        },
+        "ui:test": [
+          {
+            "scenarioName": "Compare Form Data is Correct",
+            "steps": [
+                {
+                    "selector": "pass1",
+                    "action": "update",
+                    "value": "Chuckit"
+                }
+            ]
+          }
+        ]
+    },
+    "pass2": {
+        "ui:selectors": {
+            "pass2": "(//label[contains(., 'Repeat password')]/following-sibling::div/input)[1]"
+        },
+        "ui:test": [
+          {
+            "scenarioName": "Compare Form Data is Correct",
+            "steps": [
+                {
+                    "selector": "pass2",
+                    "action": "update",
+                    "value": "Chuckit"
+                }
+            ]
+          }
+        ]
+    },
+    "age": {
+        "ui:selectors": {
+            "age": "(//label[contains(., 'Age')]/following-sibling::div/input)[1]"
+        },
+        "ui:test": [
+          {
+            "scenarioName": "Compare Form Data is Correct",
+            "steps": [
+                {
+                    "selector": "age",
+                    "action": "update",
+                    "value": "23"
+                },
+                {
+                    "selector": "age",
+                    "action": "compare",
+                    "value": "23"
+                }
+            ]
+          }
+        ]
+    }
+}
