@@ -188,9 +188,9 @@ const mapFormDataWithValues = (givenFormData, givenSchema) => {
       if (schemaFD && (schemaFD.anyOf || schemaFD.oneOf || schemaFD.enum)) {
         const values = schemaFD.anyOf || schemaFD.oneOf || schemaFD.enum;
         const value = values.find(
-          (d) => d.key == givenFormData[fd] || d.const == givenFormData[fd]
+          (d) => d.key == givenFormData[fd] || d.const == givenFormData[fd] || d === givenFormData[fd]
         );
-        formData[fd] = value ? value.value || value.title : values;
+        formData[fd] = value ? value.value || value.title || value : values;
       } else {
         formData[fd] = givenFormData[fd];
       }
