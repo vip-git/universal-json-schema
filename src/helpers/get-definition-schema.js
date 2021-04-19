@@ -7,6 +7,7 @@ const getDefinitionSchemaFromRef = (
   givenDefinitions,
   schemaProperties,
   formData,
+  transformSchema,
 ) => {
   try {
     const definitions = { ...givenDefinitions };

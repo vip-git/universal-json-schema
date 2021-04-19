@@ -95,69 +95,69 @@ exports.config = {
         sessionName: 'React JSON Schema Form - Material UI',
         buildName: `Chrome (Windows) - ${process.env.VERCEL_URL}`
       },
-    },
-    {
-      browserName: 'Edge', 
-      'bstack:options' : {
-        os : "Windows",
-        osVersion : "10",
-        sessionName: 'React JSON Schema Form - Material UI',
-        buildName: `Edge (Windows) - ${process.env.VERCEL_URL}`
-      },
-    },
-    {
-      browserName: 'IE', 
-      'bstack:options' : {
-        os : "Windows",
-        osVersion : "10",
-        sessionName: 'React JSON Schema Form - Material UI',
-        buildName: `IE (Windows) - ${process.env.VERCEL_URL}`
-      },
-    },
-    {
-      browserName: 'Firefox', 
-      'bstack:options' : {
-        os : "Windows",
-        osVersion : "10",
-        sessionName: 'React JSON Schema Form - Material UI',
-        buildName: `Firefox (Windows) - ${process.env.VERCEL_URL}`
-      },
-    },
-    {
-      browserName: 'Chrome', 
-      'bstack:options' : {
-        os : "OS X",
-        osVersion : "Big Sur",
-        sessionName: 'React JSON Schema Form - Material UI',
-        buildName: `Chrome (Mac) - ${process.env.VERCEL_URL}`
-      },
-    },
-    {
-      browserName: 'Safari', 
-      'bstack:options' : {
-        os : "OS X",
-        osVersion : "Big Sur",
-        sessionName: 'React JSON Schema Form - Material UI',
-        buildName: `Safari (Mac) - ${process.env.VERCEL_URL}`
-      },
-    },
-    {
-      browserName: 'Edge', 
-      'bstack:options' : {
-        os : "OS X",
-        osVersion : "Big Sur",
-        sessionName: 'React JSON Schema Form - Material UI',
-        buildName: `Edge (Mac) - ${process.env.VERCEL_URL}`
-      },
-    },
-    {
-      browserName: 'Firefox',
-      'bstack:options' : {
-        os : "OS X",
-        osVersion : "Big Sur",
-        sessionName: 'React JSON Schema Form - Material UI',
-        buildName: `Firefox (Mac) - ${process.env.VERCEL_URL}`
-      },
+    }
+    // {
+    //   browserName: 'Edge', 
+    //   'bstack:options' : {
+    //     os : "Windows",
+    //     osVersion : "10",
+    //     sessionName: 'React JSON Schema Form - Material UI',
+    //     buildName: `Edge (Windows) - ${process.env.VERCEL_URL}`
+    //   },
+    // },
+    // {
+    //   browserName: 'IE', 
+    //   'bstack:options' : {
+    //     os : "Windows",
+    //     osVersion : "10",
+    //     sessionName: 'React JSON Schema Form - Material UI',
+    //     buildName: `IE (Windows) - ${process.env.VERCEL_URL}`
+    //   },
+    // },
+    // {
+    //   browserName: 'Firefox', 
+    //   'bstack:options' : {
+    //     os : "Windows",
+    //     osVersion : "10",
+    //     sessionName: 'React JSON Schema Form - Material UI',
+    //     buildName: `Firefox (Windows) - ${process.env.VERCEL_URL}`
+    //   },
+    // },
+    // {
+    //   browserName: 'Chrome', 
+    //   'bstack:options' : {
+    //     os : "OS X",
+    //     osVersion : "Big Sur",
+    //     sessionName: 'React JSON Schema Form - Material UI',
+    //     buildName: `Chrome (Mac) - ${process.env.VERCEL_URL}`
+    //   },
+    // },
+    // {
+    //   browserName: 'Safari', 
+    //   'bstack:options' : {
+    //     os : "OS X",
+    //     osVersion : "Big Sur",
+    //     sessionName: 'React JSON Schema Form - Material UI',
+    //     buildName: `Safari (Mac) - ${process.env.VERCEL_URL}`
+    //   },
+    // },
+    // {
+    //   browserName: 'Edge', 
+    //   'bstack:options' : {
+    //     os : "OS X",
+    //     osVersion : "Big Sur",
+    //     sessionName: 'React JSON Schema Form - Material UI',
+    //     buildName: `Edge (Mac) - ${process.env.VERCEL_URL}`
+    //   },
+    // },
+    // {
+    //   browserName: 'Firefox',
+    //   'bstack:options' : {
+    //     os : "OS X",
+    //     osVersion : "Big Sur",
+    //     sessionName: 'React JSON Schema Form - Material UI',
+    //     buildName: `Firefox (Mac) - ${process.env.VERCEL_URL}`
+    //   },
     },
   ],
   //

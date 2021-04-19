@@ -5,6 +5,8 @@ const getDefaultValue = (schema = {}) => {
   switch (schema.type) {
     case 'object':
       return mapValues(schema.properties, getDefaultValue);
+    case 'array':
+      return [];
     case 'string':
     case 'number':
     default:

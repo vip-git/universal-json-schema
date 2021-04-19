@@ -1,6 +1,17 @@
 {
   "type": "object",
   "title": "Tabs UI Example",
+  "definitions": {
+    "Thing": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "default": "Default name"
+        }
+      }
+    }
+  },
   "properties": {
     "Technical": {
       "type": "object",
@@ -54,7 +65,7 @@
           "type": "array",
           "title": "List and item level defaults",
           "minItems": 5,
-          "default": ["carp", "trout", "bream"],
+          "default": ["carp", "trout", "bream", "dream", "cream"],
           "items": {
             "type": "string",
             "default": "unidentified"

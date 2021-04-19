@@ -6,11 +6,16 @@ module.exports = {
     switch (fieldUIType) {
       case 'material-input':
       case 'password':
-      case 'textarea':
       case 'updown':
       case 'range':
         return {
           path: `(//div/label[contains(text(), "${fieldName}")]/following-sibling::div/input)[1]`,
+          secondarySelector: '',
+        };
+
+      case 'textarea':
+        return {
+          path: `(//div/label[contains(text(), "${fieldName}")]/following-sibling::div/textarea)[1]`,
           secondarySelector: '',
         };
 

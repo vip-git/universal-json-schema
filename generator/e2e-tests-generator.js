@@ -122,10 +122,11 @@ const generateUISchemaType = ({
     ) {
       schema.properties[schemaProp]['widget'] = uiSchema[schemaProp]['ui:component'];
     } else {
+      const isTextArea = uiSchema['mui:multiline'] ? 'textarea' : 'material-input';
       const isArray =
         schema.properties[schemaProp].type === 'array'
           ? 'material-multiselect-native'
-          : 'material-input';
+          : isTextArea;
       const isBoolean =
         schema.properties[schemaProp].type === 'boolean'
           ? 'material-checkbox'

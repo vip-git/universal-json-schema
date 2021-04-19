@@ -220,11 +220,11 @@ export const mapData = (
   };
 };
 
-const transformEnums = (enums) => {
+const transformEnums = (enums, includeDisabled) => {
   const enumVals = [];
   const enumTitles = [];
   each(
-    enums.filter((e) => !e.disabled),
+    enums.filter((e) => !e.disabled || includeDisabled),
     (enumVal) => {
       if (enumVal.key || typeof enumVal.key === 'boolean') {
         enumVals.push(enumVal.key);
@@ -243,7 +243,7 @@ const transformEnums = (enums) => {
   };
 };
 
-const transformSchema = (schema, data) => {
+const transformSchema = (schema, data, includeDisabled) => {
   const transformedSchema = JSON.parse(JSON.stringify(schema));
 
   const notAllowedTypes = ['upload', 'material-date'];
@@ -283,7 +283,7 @@ const transformSchema = (schema, data) => {
           }
 
           if (has(propVal, 'items.enum')) {
-            const { enumVals, enumTitles } = transformEnums(propVal.items.enum);
+            const { enumVals, enumTitles } = transformEnums(propVal.items.enum, includeDisabled);
             transformedSchema.properties[propKey].items.enum = enumVals;
             transformedSchema.properties[
               propKey
@@ -292,6 +292,17 @@ const transformSchema = (schema, data) => {
         }
       });
     }
+  });
+  each(transformedSchema.definitions, (propVal, propKey) => {
+    each(propVal.dependencies, (depVal, depKey) => {
+      depVal['oneOf'].forEach((sd, sk) => {
+        transformedSchema.definitions[propKey]['dependencies'][depKey]['oneOf'][sk] = transformSchema(
+          transformedSchema.definitions[propKey]['dependencies'][depKey]['oneOf'][sk],
+          {},
+          true
+        );
+      })
+    })
   });
   return transformedSchema;
 };

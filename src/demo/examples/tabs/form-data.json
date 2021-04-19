@@ -1,10 +1,10 @@
 {
   "Technical": {
     "listOfStrings": ["bazinga"],
-    "fixedItemsList": ["lorem ipsum", "", ""],
-    "defaultsAndMinItems": ["unidentified"],
+    "fixedItemsList": ["lorem ipsum", false, 2],
+    "defaultsAndMinItems": ["carp", "trout", "bream", "dream", "cream"],
     "nestedList": [["lorem ipsum"]],
-    "fixedNoToolbar": ["lorem ipsum"]
+    "fixedNoToolbar": [98]
   },
   "Changedata": {
     "Createdon": "123123",

@@ -3,13 +3,12 @@ import React from 'react';
 import { MuiPickersUtilsProvider } from 'next-pickers-material-ui'; // Has to be made optional
 import MomentUtils from '@date-io/moment';
 import isEqual from 'lodash/isEqual';
-import isEmpty from 'lodash/isEmpty';
 import set from 'lodash/set';
 import get from 'lodash/get';
 import has from 'lodash/has';
 import each from 'lodash/each';
 import { generate } from 'shortid';
-import validator from 'is-my-json-valid';
+import Ajv from 'ajv';
 import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -62,7 +61,8 @@ const checkSchemaErrors = (givenSchema, givenData, onError) => {
   try {
     const transformedSchema = transformSchema(givenSchema);
     validSchema = transformedSchema;
-    const validate = validator(transformedSchema, { verbose: true });
+    const ajv = new Ajv();
+    const validate = ajv.compile(validSchema);
     validate(givenData);
     if (validate.errors && onError && typeof onError === 'function') {
       onError(validate.errors);
@@ -481,7 +481,8 @@ const Form = ({
         });
       }
       const transformedSchema = transformSchema(givenSchema);
-      const validate = validator(transformedSchema, { verbose: true });
+      const ajv = new Ajv();
+      const validate = ajv.compile(transformedSchema);
       validate(data);
       const externalValidations = isFormInValid(validation);
       const isDisabled = disabled || externalValidations || validate.errors;
@@ -491,7 +492,7 @@ const Form = ({
       }
     }
     catch (err) {
-      // console.log('err', err);
+      console.log('err', err);
     }
   }
   return (
