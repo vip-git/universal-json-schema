@@ -87,7 +87,11 @@ const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
 
     case 'rich-text-editor':
       $(path).click();
-      browser.keys(['Meta', 'a']);
+      if (browser.capabilities.platformName === 'mac os x') {
+        browser.keys(['Meta', 'a']);
+      } else {
+        browser.keys(['Control', 'a']);
+      }
       expect($(path)).toBeFocused();
       browser.keys(newValue.split(''));
       return newValue;

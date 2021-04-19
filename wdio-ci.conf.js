@@ -96,6 +96,69 @@ exports.config = {
         buildName: 'cucumber-browserstack'
       },
     },
+    {
+      browserName: 'Edge', 
+      'bstack:options' : {
+        os : "Windows",
+        osVersion : "10",
+        sessionName: 'React JSON Schema Form - Material UI',
+        buildName: 'cucumber-browserstack'
+      },
+    },
+    {
+      browserName: 'IE', 
+      'bstack:options' : {
+        os : "Windows",
+        osVersion : "10",
+        sessionName: 'React JSON Schema Form - Material UI',
+        buildName: 'cucumber-browserstack'
+      },
+    },
+    {
+      browserName: 'Firefox', 
+      'bstack:options' : {
+        os : "Windows",
+        osVersion : "10",
+        sessionName: 'React JSON Schema Form - Material UI',
+        buildName: 'cucumber-browserstack'
+      },
+    },
+    {
+      browserName: 'Chrome', 
+      'bstack:options' : {
+        os : "OS X",
+        osVersion : "Big Sur",
+        sessionName: 'React JSON Schema Form - Material UI',
+        buildName: 'cucumber-browserstack'
+      },
+    },
+    {
+      browserName: 'Safari', 
+      'bstack:options' : {
+        os : "OS X",
+        osVersion : "Big Sur",
+        sessionName: 'React JSON Schema Form - Material UI',
+        buildName: 'cucumber-browserstack'
+      },
+    },
+    {
+      browserName: 'Edge', 
+      'bstack:options' : {
+        os : "OS X",
+        osVersion : "Big Sur",
+        sessionName: 'React JSON Schema Form - Material UI',
+        buildName: 'cucumber-browserstack'
+      },
+    },
+    {
+      browserName: 'Firefox', 
+      'bstack:options' : {
+        os : "OS X",
+        osVersion : "Big Sur",
+        sessionName: 'React JSON Schema Form - Material UI',
+        buildName: 'cucumber-browserstack'
+      },
+    },
   ],
   //
   // ===================

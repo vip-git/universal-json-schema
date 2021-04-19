@@ -9,6 +9,6 @@ module.exports = class Page {
     * @param path path of the sub page (e.g. /path/to/page.html)
     */
   open(path) {
-    return browser.url(`${process.env.VERCEL_URL || 'https://localhost:3005'}/#${path}`);
+    return browser.url(`${process.env.VERCEL_URL || 'http://localhost:3005'}/#${path}`);
   }
 };

@@ -1,7 +1,11 @@
 module.exports = {
   clearValues: (path) => {
     $(path).setValue(' ');
-    browser.keys(['Meta', 'a']);
+    if (browser.capabilities.platformName === 'mac os x') {
+      browser.keys(['Meta', 'a']);
+    } else {
+      browser.keys(['Control', 'a']);
+    }
     browser.keys(['Backspace']);
   },
   uploadFile: (filePath, path) => {
