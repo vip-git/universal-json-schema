@@ -93,7 +93,7 @@ exports.config = {
         os : "Windows",
         osVersion : "10",
         sessionName: 'React JSON Schema Form - Material UI',
-        buildName: 'cucumber-browserstack'
+        buildName: `Chrome (Windows) - ${process.env.VERCEL_URL}`
       },
     },
     {
@@ -102,7 +102,7 @@ exports.config = {
         os : "Windows",
         osVersion : "10",
         sessionName: 'React JSON Schema Form - Material UI',
-        buildName: 'cucumber-browserstack'
+        buildName: `Edge (Windows) - ${process.env.VERCEL_URL}`
       },
     },
     {
@@ -111,7 +111,7 @@ exports.config = {
         os : "Windows",
         osVersion : "10",
         sessionName: 'React JSON Schema Form - Material UI',
-        buildName: 'cucumber-browserstack'
+        buildName: `IE (Windows) - ${process.env.VERCEL_URL}`
       },
     },
     {
@@ -120,7 +120,7 @@ exports.config = {
         os : "Windows",
         osVersion : "10",
         sessionName: 'React JSON Schema Form - Material UI',
-        buildName: 'cucumber-browserstack'
+        buildName: `Firefox (Windows) - ${process.env.VERCEL_URL}`
       },
     },
     {
@@ -129,7 +129,7 @@ exports.config = {
         os : "OS X",
         osVersion : "Big Sur",
         sessionName: 'React JSON Schema Form - Material UI',
-        buildName: 'cucumber-browserstack'
+        buildName: `Chrome (Mac) - ${process.env.VERCEL_URL}`
       },
     },
     {
@@ -138,7 +138,7 @@ exports.config = {
         os : "OS X",
         osVersion : "Big Sur",
         sessionName: 'React JSON Schema Form - Material UI',
-        buildName: 'cucumber-browserstack'
+        buildName: `Safari (Mac) - ${process.env.VERCEL_URL}`
       },
     },
     {
@@ -147,16 +147,16 @@ exports.config = {
         os : "OS X",
         osVersion : "Big Sur",
         sessionName: 'React JSON Schema Form - Material UI',
-        buildName: 'cucumber-browserstack'
+        buildName: `Edge (Mac) - ${process.env.VERCEL_URL}`
       },
     },
     {
-      browserName: 'Firefox', 
+      browserName: 'Firefox',
       'bstack:options' : {
         os : "OS X",
         osVersion : "Big Sur",
         sessionName: 'React JSON Schema Form - Material UI',
-        buildName: 'cucumber-browserstack'
+        buildName: `Firefox (Mac) - ${process.env.VERCEL_URL}`
       },
     },
   ],
