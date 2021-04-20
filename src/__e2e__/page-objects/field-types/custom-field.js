@@ -40,7 +40,7 @@ const validateTest = ({
           return;
         case 'update':
           FieldUtils.clearValues(path);
-          $(path).setValue(stepDef.value);
+          browser.keys(stepDef.value.split(''));
           return;
         case 'compare':
           callbackBeforeCompare(fieldUIType);
