@@ -94,8 +94,17 @@ exports.config = {
         osVersion : "10",
         sessionName: 'React JSON Schema Form - Material UI',
         buildName: `Chrome (Windows) - ${process.env.VERCEL_URL}`
+      }
+    },
+    {
+      browserName: 'Chrome', 
+      'bstack:options' : {
+        os : "OS X",
+        osVersion : "Big Sur",
+        sessionName: 'React JSON Schema Form - Material UI',
+        buildName: `Chrome (Mac) - ${process.env.VERCEL_URL}`
       },
-    }
+    },
     // {
     //   browserName: 'Edge', 
     //   'bstack:options' : {
