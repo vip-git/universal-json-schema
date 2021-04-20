@@ -93,16 +93,18 @@ exports.config = {
         os : "Windows",
         osVersion : "10",
         sessionName: 'React JSON Schema Form - Material UI',
-        buildName: `Chrome (Windows) - ${process.env.VERCEL_URL}`
+        buildName: `Chrome (Windows) - ${process.env.VERCEL_URL}`,
+        sendKeys: true,
       }
     },
     {
-      browserName: 'Chrome', 
+      browserName: 'Safari', 
       'bstack:options' : {
         os : "OS X",
         osVersion : "Big Sur",
         sessionName: 'React JSON Schema Form - Material UI',
-        buildName: `Chrome (Mac) - ${process.env.VERCEL_URL}`
+        buildName: `Safari (Mac) - ${process.env.VERCEL_URL}`,
+        sendKeys: true,
       },
     },
     // {
