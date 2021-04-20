@@ -5,7 +5,8 @@
             "addIcon": "(//button[span/*[@data-testid='AddCircleIcon']])[1]",
             "firstNameInput": "(//label[contains(., 'First name')]/following-sibling::div/input)[1]",
             "lastNameInput": "(//label[contains(., 'Last name')]/following-sibling::div/input)[1]",
-            "keyInput": "(//label[contains(., 'i was here (Key)')]/following-sibling::div/input)[1]"
+            "keyInput": "(//label[contains(., 'i was here (Key)')]/following-sibling::div/input)[1]",
+            "keyVerifyInput": "(//label[contains(., 'key')]/following-sibling::div/input)[1]"
         },
         "ui:test": [
           {
@@ -62,7 +63,7 @@
                 "value": "Norrando"
               },
               {
-                "selector": "keyInput",
+                "selector": "keyVerifyInput",
                 "action": "compare",
                 "value": "kacko"
               },
