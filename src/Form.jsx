@@ -312,16 +312,18 @@ const Form = ({
   );
 
   const onUpdateKeyProperty = (path) => (givenValue, givenUIValue, forceDeleteUIData = false) => {
-    const givenFormData = updateKeyFromSpec(data, path, givenValue);
-    const givenUIData = givenUIValue && updateKeyFromSpec(uiData, path, givenUIValue);
-    setData(
-      givenFormData,
-      !isEqual(givenValue, givenUIValue) || isEmptyValues(givenUIValue) || forceDeleteUIData ? givenUIData : uiData, 
-      uiSchema, 
-      schema,
-      onChange,
-      onError,
-    );
+    if (!isEmptyValues(givenUIValue) && !isEmptyValues(givenValue)) {
+      const givenFormData = updateKeyFromSpec(data, path, givenValue);
+      const givenUIData = givenUIValue && updateKeyFromSpec(uiData, path, givenUIValue);
+      setData(
+        givenFormData,
+        !isEqual(givenValue, givenUIValue) || isEmptyValues(givenUIValue) || forceDeleteUIData ? givenUIData : uiData, 
+        uiSchema, 
+        schema,
+        onChange,
+        onError,
+      );
+    }
   };
 
   const onFormSubmit = (callback) => {
@@ -492,7 +494,7 @@ const Form = ({
       }
     }
     catch (err) {
-      console.log('err', err);
+      // console.log('err', err);
     }
   }
   return (

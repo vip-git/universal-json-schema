@@ -42,7 +42,15 @@
                         {
                             "selector": "button",
                             "action": "click"
-                        }
+                        },
+                        {
+                          "selector": "button",
+                          "action": "click"
+                        },
+                        {
+                          "selector": "button",
+                          "action": "click"
+                       }
                     ]
                 }
             ]
@@ -57,7 +65,7 @@
                       {
                         "selector": "input",
                         "action": "compare",
-                        "value": "unidentified"
+                        "value": "carp"
                       }
                     ]
                 }
@@ -134,7 +142,7 @@
                 {
                   "selector": "input",
                   "action": "compare",
-                  "value": "lorem ipsum"
+                  "value": "98"
                 }
               ]
             }

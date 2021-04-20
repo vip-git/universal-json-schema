@@ -7,29 +7,10 @@
       "ui:readonly": true,
       "ui:disabled": true
     },
-    "Indchangecontent": {
-      "ui:readonly": true,
-      "ui:disabled": true
-    },
-    "Indchangepriceavail": {
-      "ui:readonly": true,
-      "ui:disabled": true
-    },
-    "Indchangesuppprop": {
-      "ui:readonly": true,
-      "ui:disabled": true
-    },
-    "Indchangeproducttrack": {
-      "ui:readonly": true,
-      "ui:disabled": true
-    },
-    "Indchangerelation": {
-      "ui:readonly": true,
-      "ui:disabled": true
-    },
-    "Indproductfused": {
-      "ui:readonly": true,
-      "ui:disabled": true
+    "multipleChoicesList": {
+      "ui:props": {
+        "multiple": true
+      }
     }
   },
   "Changedata" : {
