@@ -19,6 +19,11 @@ const theme = {
         variant: 'standard',
       },
     },
+    MuiSelect: {
+      defaultProps: {
+        variant: 'standard',
+      },
+    }
   },
   overrides: {
     MuiInput: {
