@@ -39,21 +39,21 @@ class FormPage extends Page {
   callbackBeforeCompare = (fieldUIType, reverse) => {
     const $btnSubmit = $('//button[span[contains(text(), "Submit")]]');
     if (fieldUIType !== 'upload' && !reverse) {
-      this.btnSubmit.waitForClickable({ timeout: 10000 });
+      //this.btnSubmit.waitForClickable({ timeout: 10000 });
       this.btnSubmit.click();
-      this.btnSubmit.waitForClickable({ timeout: 10000 });
+      //this.btnSubmit.waitForClickable({ timeout: 10000 });
       if (this.hasXHRData) {
         browser.refresh();
       }
     }
 
     if (reverse) {
-      this.btnSubmit.waitForClickable({ timeout: 10000, reverse });
+      //this.btnSubmit.waitForClickable({ timeout: 10000, reverse });
       expect(this.btnSubmit).toBeDisabled();
     }
 
     if (this.currentTab) {
-      this.btnSubmit.waitForClickable({ timeout: 10000 });
+      //this.btnSubmit.waitForClickable({ timeout: 10000 });
       $(
         `//button[@role="tab"][span[contains(text(), "${this.currentTab}")]]`
       ).click();
