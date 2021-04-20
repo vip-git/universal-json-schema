@@ -88,7 +88,7 @@ const FieldSetTabs = (props) => {
           onChange={handleChange}
           indicatorColor='primary'
           textColor='primary'
-          variant='scrollable'
+          variant='fullWidth'
           scrollButtons='auto'
           aria-label='form-tabs'
           {...tabsProps}
