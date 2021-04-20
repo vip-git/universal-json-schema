@@ -23,6 +23,11 @@ const theme = {
       defaultProps: {
         variant: 'standard',
       },
+    },
+    MuiInputLabel: {
+      defaultProps: {
+        variant: 'standard',
+      },
     }
   },
   overrides: {
