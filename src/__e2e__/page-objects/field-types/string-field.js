@@ -58,7 +58,7 @@ const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
     case 'textarea':
     case 'updown':
       FieldUtils.clearValues(path);
-      browser.keys(newValue.split(''));
+      $(path).setValue(newValue);
       return newValue;
 
     case 'material-date':
@@ -72,7 +72,7 @@ const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
       $(thirdSelector).click();
       $(fourthSelector).click();
       FieldUtils.clearValues(path);
-      browser.keys(newValue.split(''));
+      $(path).setValue(newValue);
       return newValue;
 
     case 'material-native-select':

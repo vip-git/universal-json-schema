@@ -46,7 +46,7 @@ const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
     case 'updown':
     case 'range':
       FieldUtils.clearValues(path);
-      browser.keys(newValue.split(''));
+      $(path).setValue(newValue);
       return newValue;
     case 'radio':
       $(path).click();

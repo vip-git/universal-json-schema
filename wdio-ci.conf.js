@@ -88,20 +88,26 @@ exports.config = {
     //   // excludeDriverLogs: ['bugreport', 'server'],
     // },
     {
-      browserName: 'Chrome', 
+      "browserName" : "Chrome",
+      "browserVersion" : "latest",
       'bstack:options' : {
-        os : "Windows",
-        osVersion : "10",
+        "os" : "Windows",
+        "osVersion" : "10",
+        "local" : "false",
+        "seleniumVersion" : "4.0.0-beta-2",
         sessionName: 'React JSON Schema Form - Material UI',
         buildName: `Chrome (Windows) - ${process.env.VERCEL_URL}`,
         sendKeys: true,
       }
     },
     {
-      browserName: 'Safari', 
+      "browserName" : "Safari",
+      "browserVersion" : "14.0",
       'bstack:options' : {
-        os : "OS X",
-        osVersion : "Big Sur",
+        "os" : "OS X",
+        "osVersion" : "Big Sur",
+        "local" : "false",
+        "seleniumVersion" : "4.0.0-beta-2",
         sessionName: 'React JSON Schema Form - Material UI',
         buildName: `Safari (Mac) - ${process.env.VERCEL_URL}`,
         sendKeys: true,
