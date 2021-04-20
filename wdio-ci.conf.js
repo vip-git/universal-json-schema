@@ -96,8 +96,7 @@ exports.config = {
         "local" : "false",
         "seleniumVersion" : "4.0.0-beta-2",
         sessionName: 'React JSON Schema Form - Material UI',
-        buildName: `Chrome (Windows) - ${process.env.VERCEL_URL}`,
-        sendKeys: true,
+        buildName: `Chrome (Windows) - ${process.env.VERCEL_URL}`
       }
     },
     {
@@ -109,8 +108,7 @@ exports.config = {
         "local" : "false",
         "seleniumVersion" : "4.0.0-beta-2",
         sessionName: 'React JSON Schema Form - Material UI',
-        buildName: `Safari (Mac) - ${process.env.VERCEL_URL}`,
-        sendKeys: true,
+        buildName: `Safari (Mac) - ${process.env.VERCEL_URL}`
       },
     },
     // {
