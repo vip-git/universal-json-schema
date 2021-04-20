@@ -158,7 +158,7 @@ exports.config = {
     //     sessionName: 'React JSON Schema Form - Material UI',
     //     buildName: `Firefox (Mac) - ${process.env.VERCEL_URL}`
     //   },
-    },
+    //}
   ],
   //
   // ===================
