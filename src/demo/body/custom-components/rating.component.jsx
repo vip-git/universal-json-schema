@@ -2,9 +2,8 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
 import React from 'react';
-import Rating from '@material-ui/core/Rating';
+import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 
 const SimpleRating = ({
   value: givenValue,

@@ -40,6 +40,9 @@ jobs:
             VERCEL_STATE=$(curl -H "$VERCEL_TOKEN" "$VERCEL_API$GIT_SHA" | jq -r '.deployments[0].state')
             if [ $VERCEL_STATE = "READY" ]; then
                 echo Valid state $VERCEL_STATE
+            elif [ $VERCEL_STATE = "ERROR" ]; then
+               echo InValid state $VERCEL_STATE  1>&2
+               exit 64
             else
                 echo invalid state found - $VERCEL_STATE
                 isReadyState
