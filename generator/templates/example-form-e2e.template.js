@@ -5,7 +5,7 @@ const exampleFormE2ETemplate = `Feature: <%= pageName %> Feature
         When I test the field "<fieldRef>" based on following attributes
             | fieldName           | fieldType | uiSchemaType      | fieldFormValue | fieldUIValue  | fieldRef   | shouldSkip |
             <% Object.keys(schema.properties).forEach((schemaProp) => { %>
-            | <%= schema.properties[schemaProp].title %>          | <%= schema.properties[schemaProp].type %>    | <%= schema.properties[schemaProp].widget %> | <%= formData && formData[schemaProp] || typeof formData !== 'object' && formData %>  | <%= formData && formData[schemaProp] || typeof formData !== 'object' && formData %> | <%= schemaProp %> | <%= hasOnLoadData || !(formData && formData[schemaProp]) %> |
+            | <%= schema.properties[schemaProp].title %>          | <%= schema.properties[schemaProp].type %>    | <%= schema.properties[schemaProp].widget %> | <%= formData && formData[schemaProp] || typeof formData !== 'object' && formData %>  | <%= formData && formData[schemaProp] || typeof formData !== 'object' && formData %> | <%= schemaProp %> | <%= hasOnLoadData || !(formData && formData[schemaProp] && (typeof formData[schemaProp] === 'string')) %> |
             <% }); %>
 
         Then I expect the field "<fieldRef>" to have following values

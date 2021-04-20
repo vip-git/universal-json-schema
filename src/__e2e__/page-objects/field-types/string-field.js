@@ -98,7 +98,7 @@ const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
 
     case 'upload':
       FieldUtils.uploadFile(
-        '/Users/vipinwork/htdocs/react-jsonschema-form-material-ui/docs/checkbox.md',
+        `${process.cwd()}/docs/checkbox.md`,
         '//input[@id="button-file"]'
       );
       return newValue;

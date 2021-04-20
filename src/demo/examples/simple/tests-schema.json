@@ -46,13 +46,13 @@
     "customComponent": {
       "ui:selectors": {
         "default": "//div/label[contains(text(), 'Range Picker')]/following-sibling::div/input",
-        "selectStartMonthDropDown": "(//div[@tabIndex=0])[6]",
+        "selectStartMonthDropDown": "(//input[@class='MuiSelect-nativeInput']/preceding-sibling::div)[2]",
         "selectStartMonth": "//ul/li[contains(., 'Apr')]",
-        "selectStartYearDropDown": "(//div[@tabIndex=0])[7]",
+        "selectStartYearDropDown": "(//div[@tabIndex=0][contains(text(), '2021')])[1]",
         "selectStartYear": "//ul/li[contains(., '2021')]",
-        "selectEndMonthDropDown": "(//div[@tabIndex=0])[8]",
+        "selectEndMonthDropDown": "(//input[@class='MuiSelect-nativeInput']/preceding-sibling::div)[4]",
         "selectEndMonth": "//ul/li[contains(., 'May')]",
-        "selectEndYearDropDown": "(//div[@tabIndex=0])[9]",
+        "selectEndYearDropDown": "(//div[@tabIndex=0][contains(text(), '2021')])[2]",
         "selectEndYear": "//ul/li[contains(., '2021')]",
         "startDate": "(//button[not(@disabled)]/span[contains(., '5')])[1]",
         "endDate": "(//button[not(@disabled)]/span[contains(., '15')])[1]"
