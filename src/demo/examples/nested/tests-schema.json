@@ -5,7 +5,7 @@
             "secondInput": "(//label[contains(., 'Title')]/following-sibling::div/input)[2]",
             "firstTextArea": "(//label[contains(., 'Task details')]/following-sibling::div/textarea)[1]",
             "secondTextArea": "(//label[contains(., 'Task details')]/following-sibling::div/textarea)[2]",
-            "closeIcon": "(//button[span/*[@data-testid='CloseIcon']])[1]",
+            "closeIcon": "(//button[span/*[@class='MuiSvgIcon-root']])[1]",
             "scrollUp": "(//button[span/*[@data-testid='ArrowUpwardIcon']])[2]",
             "scrollDown": "(//button[span/*[@data-testid='ArrowDownwardIcon']])[1]",
             "addIcon": "(//button[span/*[@data-testid='AddCircleIcon']])[1]",

@@ -1,8 +1,8 @@
 {
     "additionalProperties": {
         "ui:selectors": {
-            "closeIcon": "(//button[span/*[@data-testid='CloseIcon']])[1]",
-            "addIcon": "(//button[span/*[@data-testid='AddCircleIcon']])[1]",
+            "closeIcon": "(//button[span/*[@class='MuiSvgIcon-root']])[1]",
+            "addIcon": "(//button[span/*[@class='MuiSvgIcon-root']])[2]",
             "firstNameInput": "(//label[contains(., 'First name')]/following-sibling::div/input)[1]",
             "lastNameInput": "(//label[contains(., 'Last name')]/following-sibling::div/input)[1]",
             "keyInput": "(//label[contains(., 'i was here (Key)')]/following-sibling::div/input)[1]",

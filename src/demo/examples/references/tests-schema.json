@@ -139,7 +139,7 @@
   },
   "noTree": {
     "ui:selectors": {
-      "closeIcon": "(//button[span/*[@data-testid='CloseIcon']])[1]",
+      "closeIcon": "(//button[span/*[@class='MuiSvgIcon-root']])[1]",
       "addIcon": "(//button[span/*[@data-testid='AddCircleIcon']])[1]",
       "nRecursiveInput1": "(//label[contains(., 'Non Recursive Child')]/following-sibling::div/input)[1]",
       "nRecursiveSubInput": "(//label[contains(., 'Non Recursive Child')]/following-sibling::div/input)[2]"
@@ -217,7 +217,7 @@
   },
   "tree": {
     "ui:selectors": {
-      "closeIcon": "(//button[span/*[@data-testid='CloseIcon']])[2]",
+      "closeIcon": "(//button[span/*[@class='MuiSvgIcon-root']])[2]",
       "addSubIcon": "(//button[span/*[@data-testid='AddCircleIcon']])[2]",
       "addIcon": "(//button[span/*[@data-testid='AddCircleIcon']])[3]",
       "firstInput": "(//label[contains(., 'Recursive Child')]/following-sibling::div/input)[3]",
@@ -294,7 +294,7 @@
   },
   "infinite": {
     "ui:selectors": {
-      "closeIcon": "(//button[span/*[@data-testid='CloseIcon']])[2]",
+      "closeIcon": "(//button[span/*[@class='MuiSvgIcon-root']])[2]",
       "closeSubIcon": "//fieldset[h6[contains(., 'Infinite Recursive references')]]/div/fieldset/div/div/div/div/button",
       "addSubIcon": "//fieldset[h6[contains(., 'Infinite Recursive references')]]/div/fieldset/div/div/div/fieldset/div/fieldset/div/div/div/button",
       "addIcon": "//fieldset[h6[contains(., 'Infinite Recursive references')]]/div/fieldset/div/div/div/button",

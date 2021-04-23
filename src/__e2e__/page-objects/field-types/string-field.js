@@ -17,6 +17,9 @@ const compareCurrentValue = (
       fieldOrder
     );
     const fieldValue = fieldUIType !== 'checkboxes' ? $(path).getValue() || $(path).getText() : '';
+    try {
+      $(path).scrollIntoView();
+    } catch(err) {}
     switch (fieldUIType) {
       case 'material-input':
       case 'updown':
@@ -52,6 +55,9 @@ const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
     newValue,
     fieldOrder
   );
+  try {
+    $(path).scrollIntoView();
+  } catch(err) {}
   switch (fieldUIType) {
     case 'material-input':
     case 'password':

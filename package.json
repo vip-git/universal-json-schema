@@ -56,7 +56,7 @@
     "react": "^16 || ^17.0.1",
     "react-dom": "^16 || ^17.0.1",
     "react-hot-loader": "4.13.0",
-    "react-material-ui-5-date-range-picker": "1.0.11",
+    "react-material-ui-5-date-range-picker": "1.0.12",
     "react-number-format": "4.5.0",
     "react-select": "4.1.0",
     "shelljs": "0.8.4",

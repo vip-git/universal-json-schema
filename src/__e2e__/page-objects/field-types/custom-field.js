@@ -16,6 +16,9 @@ const validateTest = ({
       const getPathBySelector = (selectorDef) => _.get(uiSelectors, selectorDef);
       const path = getPathBySelector(stepDef.selector) || _.get(uiTestDef, stepDef.selector);
       const fieldValue = stepDef.action !== 'click' ? $(path).getValue() || $(path).getText() : '';
+      try {
+        $(path).scrollIntoView();
+      } catch(err) {}
       switch (stepDef.action) {
         case 'click':
           try {
@@ -35,7 +38,6 @@ const validateTest = ({
               }
             }
           } catch (err) {}
-          $(path).scrollIntoView();
           $(path).click();
           return;
         case 'update':
