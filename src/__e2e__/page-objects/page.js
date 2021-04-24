@@ -10,7 +10,6 @@ module.exports = class Page {
     */
   open(path) {
     browser.url(`${process.env.VERCEL_URL || 'http://localhost:3005'}/#${path}`);
-    $('//button[span[contains(text(), "Submit")]]').waitForClickable({ timeout: 10000 });
     return $('//button[@aria-label="full-screen-code"]').click();
   }
 };
