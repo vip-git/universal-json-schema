@@ -68,6 +68,9 @@ class FormPage extends Page {
    * e.g. to login using username and password
    */
   testField(table) {
+    if (this.hasXHRData && browser.capabilities.browserName.toLowerCase() !== 'chrome') {
+      return;
+    }
     table.rawTable.forEach((rt) => {
       fieldOrder[rt[0]] = fieldOrder[rt[0]] ? fieldOrder[rt[0]] : 1;
     });
@@ -149,6 +152,9 @@ class FormPage extends Page {
   }
 
   changeFieldValueAndSubmit(table) {
+    if (this.hasXHRData && browser.capabilities.browserName.toLowerCase() !== 'chrome') {
+      return;
+    }
     table.rawTable.forEach((tbl, tbli) => {
       if (tbl.includes(this.testRef) && tbli >= 1) {
         const {

@@ -24,7 +24,7 @@ exports.config = {
   // NPM script (see https://docs.npmjs.com/cli/run-script) then the current working
   // directory is where your package.json resides, so `wdio` will be called from there.
   //
-  specs: ['./src/demo/examples/**/*.feature'],
+  specs: ['./src/demo/examples/**/simple-array.feature'],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -58,8 +58,8 @@ exports.config = {
       // 5 instances get started at a time.
       maxInstances: 5,
       //
-      browserName: 'chrome',
-      acceptInsecureCerts: true,
+      browserName: 'Safari',
+      // acceptInsecureCerts: true,
       // If outputDir is provided WebdriverIO can capture driver session logs
       // it is possible to configure which logTypes to include/exclude.
       // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
