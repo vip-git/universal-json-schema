@@ -200,7 +200,7 @@ const Example = ({
         <IconButton
             className={classes.fullScreenButton}
             color='inherit'
-            aria-label='full-screen-code'
+            aria-label='full-screen-exit-code'
             onClick={() => {
               setFullScreenMode(false);
               uiSchema['ui:page'].tabs.style.width = '29vw';

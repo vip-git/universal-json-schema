@@ -35,7 +35,6 @@ export default (theme) => ({
       },
     },
   },
-
   icon: {
     position: 'relative',
     marginLeft: theme.spacing(2),

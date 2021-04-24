@@ -19,6 +19,7 @@ Given(
     folderName,
     refrencePointer
   ) => {
+    $('//button[@aria-label="full-screen-code"]').click();
     pages[page].open(
       fieldRef,
       formPage,
