@@ -284,7 +284,7 @@ class FormPage extends Page {
       if (tabName !== 'false') {
         super.open(formPage);
         this.currentTab = tabName;
-        return  $(
+        return $(
           `//button[@role="tab"][span[contains(text(), "${tabName}")]]`
         ).click();
       }
