@@ -1,10 +1,10 @@
 {
     "roles": {
         "ui:selectors": {
-            "closeSubIcon": "(//button[span/*[@class='MuiSvgIcon-root']])[1]",
-            "closeIcon": "(//button[span/*[@class='MuiSvgIcon-root']])[2]",
-            "addSubIcon": "(//button[span/*[@class='MuiSvgIcon-root']])[3]",
-            "addIcon": "(//button[span/*[@class='MuiSvgIcon-root']])[4]",
+            "closeSubIcon": "(//button[@data-testid='closeButton'])[1]",
+            "closeIcon": "(//button[@data-testid='closeButton'])[2]",
+            "addSubIcon": "(//button[@data-testid='addButton'])[1]",
+            "addIcon": "(//button[@data-testid='addButton'])[1]",
             "locationInput": "(//label[contains(., 'Location')]/following-sibling::div/input)[1]",
             "resourceInput": "(//label[contains(., 'Resource')]/following-sibling::div/input)[1]",
             "rateInput": "(//label[contains(., 'Rate')]/following-sibling::div/input)[1]",

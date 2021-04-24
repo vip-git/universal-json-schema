@@ -6,8 +6,13 @@
       "ui:schemaErrors": true
     },
     "style": {
-      "width": "29vw",
-      "marginTop": 10
+      "boxShadow": "none"
+    },
+    "tabs": {
+      "style": {
+        "width": "29vw",
+        "marginTop": 10
+      }
     },
     "tab": {
       "style": {

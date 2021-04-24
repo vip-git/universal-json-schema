@@ -3,7 +3,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import keys from 'lodash/keys';
-import get from 'lodash/get';
 
 // Icons
 import IconButton from '@material-ui/core/IconButton';
@@ -140,6 +139,7 @@ export const RawFieldSetObject = ({
           schema.additionalProperties && (
             <div className={classes.addItemBtn}>
               <IconButton 
+                data-testid="addButton"
                 onClick={
                   rest.onAddNewProperty 
                   && rest.onAddNewProperty(path, getDefaultValue(schema.additionalProperties))

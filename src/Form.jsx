@@ -173,7 +173,10 @@ const Form = ({
     setPrevSkippedData({ formData: removeEmptyObjects(formData, schema), schema, uiSchema });
   }
 
-  if (!isEqual(hashCode(JSON.stringify(schema)), formId)) {
+  if (
+    !isEqual(hashCode(JSON.stringify(schema)), formId) 
+    && get(xhrSchema, 'ui:page.onload.xhrProgress') === undefined
+  ) {
     if (xhrSchema 
       && has(xhrSchema, 'ui:page.onload.xhr:datasource.url')
       && has(xhrSchema, 'ui:page.onload.xhr:datasource.method')
@@ -499,7 +502,7 @@ const Form = ({
   }
   return (
       <MuiPickersUtilsProvider utils={MomentUtils}>
-        <Paper className={classes.root}>
+        <Paper className={classes.root} style={uiSchema && uiSchema['ui:page'] && uiSchema['ui:page'].style || {}}>
           {
             (actionButtonPos === 'top' && !hasPageLayoutSteps) 
               ? (

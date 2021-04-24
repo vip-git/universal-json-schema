@@ -4,9 +4,12 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable max-len */
 /* eslint-disable no-mixed-operators */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { isEqual } from 'lodash';
 import { useTheme } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import FullscreenIcon from '@material-ui/icons/Fullscreen';
+import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import Paper from '@material-ui/core/Paper';
 import Form from '../../Form';
 import useStyles from './example-styles';
@@ -119,6 +122,7 @@ const Example = ({
 }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
+  const [fullscreenMode, setFullScreenMode] = useState(false);
   const [oldHash, setOldHash] = useState(window.location.hash);
   const [state, setState] = useState({ ...data });
   const [formDataState, setFormData] = useState(typeof data.formData === 'string' ? data.formData : { ...data.formData });
@@ -189,7 +193,39 @@ const Example = ({
     fileMatch: ['formData.json'],
     schema: validSchema || data.schema,
   }];
-  return (
+  return fullscreenMode ? (
+    <Paper className={classes.fullScreenRoot}>
+      <h3>{title}</h3>
+      <div className={classes.ctr}>
+        <IconButton
+            className={classes.fullScreenButton}
+            color='inherit'
+            aria-label='full-screen-code'
+            onClick={() => {
+              setFullScreenMode(false);
+              uiSchema['ui:page'].tabs.style.width = '29vw';
+              xhrSchema['ui:page'].onload.xhrProgress = false;
+              setState({ ...state, formData, uiSchema, xhrSchema, uiData, validSchema });
+            }}
+          >
+            <FullscreenExitIcon />
+        </IconButton>
+        <FormComponent
+          locationHash={hash}
+          givenSchema={schema || data.schema}
+          givenUISchema={uiSchema || data.uiSchema}
+          givenFormData={formData}
+          givenXhrSchema={xhrSchema || data.xhrSchema || {}}
+          givenUIData={uiData}
+          onCancel={onCancel}
+          onSubmit={onSubmit}
+          onUpload={onUpload}
+          onFormChanged={onFormChanged}
+          onError={onFormError}
+        />
+      </div>
+    </Paper>
+  ) : (
     <Paper className={classes.root}>
       <h3>{title}</h3>
       <div className={classes.ctr}>
@@ -205,6 +241,19 @@ const Example = ({
           onChange={onChange}
         />
         <div className={classes.display}>
+          <IconButton
+            className={classes.fullScreenButton}
+            color='inherit'
+            aria-label='full-screen-code'
+            onClick={() => {
+              setFullScreenMode(true);
+              uiSchema['ui:page'].tabs.style.width  = '81vw';
+              xhrSchema['ui:page'].onload.xhrProgress = false;
+              setState({ ...state, formData, xhrSchema, uiSchema, uiData, validSchema });
+            }}
+          >
+              <FullscreenIcon />
+          </IconButton>
           <FormComponent
             locationHash={hash}
             givenSchema={schema || data.schema}

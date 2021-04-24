@@ -5,7 +5,6 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -48,7 +47,7 @@ const FieldSetTabs = (props) => {
     schema = {},
     path,
     xhrSchema = {}, 
-    uiSchema = { 'ui:page': { 'ui:tabs': {} } },
+    uiSchema = { 'ui:page': { 'tabs': {} } },
   } = props;
   const classes = fieldSetStyles.fieldSetTabs();
   const xhrProgress = xhrSchema 
@@ -56,8 +55,10 @@ const FieldSetTabs = (props) => {
                         && xhrSchema['ui:page'].onload 
                         && xhrSchema['ui:page'].onload.xhrProgress;
   const { 
-    props: tabsProps = {},
-    style: tabsStyle = {},
+    tabs = {
+      props: {},
+      style: {},
+    },
     tab = {
       style: {},
       props: {}
@@ -67,6 +68,7 @@ const FieldSetTabs = (props) => {
       props: {}
     }
   } = uiSchema['ui:page'];
+  const { style: tabsStyle, props: tabsProps } = tabs;
   const { style: tabStyle, props: tabProps } = tab;
   const { style: tabPanelStyle, props: tabPanelProps } = tabPanel;
   const [value, setValue] = React.useState(tabsProps?.tabIndex - 1 || 0);

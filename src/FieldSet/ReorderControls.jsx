@@ -21,15 +21,16 @@ export const RawReorderControls = (
   <div className={classes.root}>
     {canReorder && (
       <div>
-        <IconButton className={classes.up} onClick={onMoveItemUp} disabled={first}>
+        <IconButton data-testid="upButton" className={classes.up} onClick={onMoveItemUp} disabled={first}>
           <ArrowUpward />
         </IconButton>
-        <IconButton className={classes.down} onClick={onMoveItemDown} disabled={last}>
+        <IconButton data-testid="downButton" className={classes.down} onClick={onMoveItemDown} disabled={last}>
           <ArrowDownward />
         </IconButton>
       </div>
     )}
     <IconButton
+      data-testid="closeButton"
       className={
         canReorder ? [classes.remove, classes.removeCanReorder].join(' ') : classes.remove
       }
