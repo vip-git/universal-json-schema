@@ -2,14 +2,23 @@
 import isEmpty from 'lodash/isEmpty';
 
 // Context
-import { EventContext } from '../../../Form';
+import { EventContext, LoadingContext } from '../../../helpers/context';
+
+// Interceptors
+const {
+  APP_CONFIG: {
+    INTERCEPTORS: { INTERCEPTOR_CONFIG },
+  },
+} = require('../../../generated/app.config');
 
 export default ({
   schema = {},
   uiSchema = {},
+  xhrSchema = {},
   isCustomComponent,
   inputValue,
   onChange,
+  onXHRSchemaEvent,
   onKeyDown,
   creatableSelectValue,
   onCreatableSelectChange,
@@ -23,6 +32,7 @@ export default ({
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'] || uiSchema['ui:props'] || {};
   const interceptorFunc = uiSchema['ui:interceptor'] || options.onBeforeChange;
+  const getMethod = INTERCEPTOR_CONFIG[interceptorFunc]?.interceptor || interceptors[interceptorFunc];
   const { type } = schema;
   const rv = isCustomComponent
     ? {
@@ -31,28 +41,32 @@ export default ({
       ...options,
     }
     : {
-      onChange: (value, uiValue) => {
+      onChange: (givenValue, uiValue, forceDeleteUIData = false) => {
+        let value = givenValue;
+        if (value === '' || value === null) {
+          value = undefined;
+        }
         // Call Interceptor if it exists
-        if (
-          typeof interceptors[interceptorFunc] === 'function'
-          && !isEmpty(interceptorFunc)
-        ) {
-          const { formData, uiData } = interceptors[interceptorFunc]({
+        if (typeof getMethod === 'function' && !isEmpty(interceptorFunc)) {
+          const { formData, uiData } = getMethod({
             value,
             uiValue,
             options,
           });
-          return onChange(formData, uiData);
-        } 
-        return onChange(value, uiValue);
+          return onChange(formData, uiData, forceDeleteUIData);
+        }
+        return onChange(value, uiValue, forceDeleteUIData);
       },
       onKeyDown,
       uiSchema,
       schema,
+      xhrSchema,
+      onXHRSchemaEvent,
       options,
       widget,
       type,
       EventContext,
+      LoadingContext,
       htmlid,
     };
 
@@ -68,13 +82,14 @@ export default ({
     && isCustomComponent({ onChange }).props
     && isCustomComponent({ onChange }).props.onChange
   ) {
-    rv.onChange = (value, uiValue) => {
+    rv.onChange = (givenValue, uiValue) => {
+      let value = givenValue;
+      if (value === '' || value === null) {
+        value = undefined;
+      }
       // Call Interceptor if it exists
-      if (
-        typeof interceptors[interceptorFunc] === 'function' &&
-        !isEmpty(interceptorFunc)
-      ) {
-        const { formData, uiData } = interceptors[interceptorFunc]({
+      if (typeof getMethod === 'function' && !isEmpty(interceptorFunc)) {
+        const { formData, uiData } = getMethod({
           value,
           uiValue,
           options,
@@ -83,6 +98,9 @@ export default ({
       }
       return isCustomComponent({ onChange }).props.onChange(value, uiValue);
     };
+    if (schema.default && !data) {
+      isCustomComponent({ onChange }).props.onChange(schema.default);
+    }
   }
   else if (options.disabled) {
     if (typeof options.disabled === 'boolean') {
@@ -92,6 +110,16 @@ export default ({
       rv.disabled = options.disabled.call(null, data, objectData);
     }
   }
-
+  else if (
+    (schema.default && !data) 
+    || (
+      typeof schema.default === 'boolean' 
+      && typeof data !== 'boolean'
+      && schema.type === 'boolean'
+    )
+  ) {
+    onChange(schema.default);
+  }
+  
   return rv;
 };

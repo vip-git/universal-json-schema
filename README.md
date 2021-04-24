@@ -103,7 +103,7 @@ export default Example;
 > For more info you can follow our [changelog](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/changelog.md)
 
 ## Contributing 
-> We welcome [all contributions](https://github.com/vip-git/react-jsonschema-form-material-ui/graphs/contributors), enhancements, and bug-fixes. 
+> We welcome [all contributions](/contributing.md), enhancements, and bug-fixes. 
 > Open an [issue on GitHub](https://github.com/vip-git/react-jsonschema-form-material-ui/issues) and submit a [pull request](https://github.com/vip-git/react-jsonschema-form-material-ui/pulls).
 
 #### Building/Testing

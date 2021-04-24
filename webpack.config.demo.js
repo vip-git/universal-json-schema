@@ -50,28 +50,29 @@ const babelLoader = {
 };
 
 const cssLoaderClient = {
-	test: /\.(css|scss)$/,
-	exclude: /node_modules/,
-	use: [
-		'css-hot-loader',
-		MiniCssExtractPlugin.loader,
-		{
-			loader: 'css-loader',
-			options: {
-				camelCase: true,
-				modules: true,
-				importLoaders: 1,
-				sourceMap: true,
-				localIdentName: '[name]__[local]--[hash:base64:5]'
-			}
-		},
-		{
-			loader: 'postcss-loader',
-			options: {
-				sourceMap: true
-			}
-		}
-	]
+  test: /\.(css|scss)$/,
+  exclude: /node_modules/,
+  use: [
+    'css-hot-loader',
+    MiniCssExtractPlugin.loader,
+    {
+      loader: 'css-loader',
+      options: {
+        importLoaders: 1,
+        sourceMap: true,
+        modules: {
+          localIdentName: '[name]__[local]___[hash:base64:5]',
+          exportLocalsConvention: 'camelCase',
+        },
+      },
+    },
+    {
+      loader: 'postcss-loader',
+      options: {
+        sourceMap: true,
+      },
+    },
+  ],
 };
 
 const alias = {}
@@ -159,9 +160,22 @@ var config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
       'process.env.NODE_DEBUG': JSON.stringify('debug'),
+      'process.env.GENERATED_SESSION_ID': process.env.GENERATED_SESSION_ID,
     }),
     new HtmlWebpackPlugin({
       template: 'src/demo/index.html',
+      templateParameters(compilation, assets, options) {
+        return {
+          compilation: compilation,
+          webpack: compilation.getStats().toJson(),
+          webpackConfig: compilation.options,
+          htmlWebpackPlugin: {
+            files: assets,
+            options: options,
+          },
+          process,
+        };
+      },
     }),
     new MiniCssExtractPlugin({
       filename: 'style.css',

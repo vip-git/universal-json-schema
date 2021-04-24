@@ -24,3 +24,4 @@ SUMMARY.md
 LICENSE
 .eslintrc.js
 browserstack.js
+generator/

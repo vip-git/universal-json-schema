@@ -1,20 +1,23 @@
+import { makeStyles } from '@material-ui/core/styles';
+
 const common = (theme) => ({
-addItemBtn: {
-	display: 'flex',
-	justifyContent: 'flex-end',
-	'&>button': {
-		background: theme.palette.primary.main,
-		width: '3.75em',
-		color: theme.palette.common.white,
-		height: '1.25em',
-		borderRadius: 5,
-		'&> span': {
-			position: 'absolute',
-			fontSize: 'small',
-			textIndent: 12,
-		},
-	},
-}});
+  addItemBtn: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    '&>button': {
+      background: theme.palette.primary.main,
+      width: '3.75em',
+      color: theme.palette.common.white,
+      height: '1.25em',
+      borderRadius: 5,
+      '&> span': {
+        position: 'absolute',
+        fontSize: 'small',
+        textIndent: 12,
+      },
+    },
+  },
+});
 export default {
   fieldSet: (theme) => ({
     root: {
@@ -54,6 +57,13 @@ export default {
     listItem: {},
     ...common(theme),
   }),
+  fieldSetTabs: makeStyles({
+      root: {
+        '&:focus': {
+          outline: 'none',
+        },
+      },
+    }),
   reorderable: {
     root: {
       display: 'flex',

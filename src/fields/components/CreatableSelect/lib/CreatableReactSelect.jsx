@@ -102,12 +102,10 @@ export default class CreatableInputOnly extends Component {
         isMulti
         isDisabled={this.props.isDisabled}
         onChange={this.handleChange}
-        onBlur={this.saveValuesToObject}
         onInputChange={this.handleInputChange}
-        onKeyDown={this.handleKeyDown}
         options={this.props.options}
         styles={colourStyles(this.props.uiSchema['ui:style'] || {})}
-        placeholder={'Type something and press enter...'}
+        placeholder={this.props.placeholder || 'Type something and press enter...'}
         value={value}
         {...this.props.restProps}
       />
@@ -126,7 +124,7 @@ export default class CreatableInputOnly extends Component {
         onKeyDown={this.handleKeyDown}
         options={this.props.options}
         styles={colourStyles(this.props.uiSchema['ui:style'] || {})}
-        placeholder={'Type something and press enter...'}
+        placeholder={this.props.placeholder || 'Type something and press enter...'}
         value={value}
         {...this.props.restProps}
       />

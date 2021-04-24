@@ -1,16 +1,15 @@
 /* eslint-disable react/jsx-fragments */
 // Library
 import React from 'react';
-import { DateRangePicker } from 'materialui-daterange-picker';
+import { DateRangePicker } from 'react-material-ui-5-date-range-picker';
 
 // Material UI
 import Dialog from '@material-ui/core/Dialog';
 import { TextField } from '@material-ui/core';
 
-const CustomDateRangePicker = ({ onChange, formData, uiData = {} }) => {
+const CustomDateRangePicker = ({ onChange, formData, uiData = { object: { } } }) => {
   const [open, setOpen] = React.useState(false);
-  const [dateRange, setDateRange] = React.useState({});
-  const [data, setData] = React.useState(uiData.customComponent || formData.customComponent || '');
+  const [data] = React.useState(uiData.object?.customComponent || formData.object?.customComponent || '');
     
   const toggle = () => setOpen(!open);
 
@@ -33,7 +32,7 @@ const CustomDateRangePicker = ({ onChange, formData, uiData = {} }) => {
         onChange={(range) => {
           const startDate = range.startDate.toISOString();
           const endDate = range.endDate.toISOString();
-          const newUIData = `${range.startDate.toLocaleDateString()} - ${range.endDate.toLocaleDateString()}`;
+          const newUIData = `${range.startDate.toLocaleDateString('us')} - ${range.endDate.toLocaleDateString('us')}`;
           const newData = {
             startDate,
             endDate,
@@ -44,7 +43,6 @@ const CustomDateRangePicker = ({ onChange, formData, uiData = {} }) => {
       />
     </Dialog>
   );
-
   return (
     <React.Fragment>
       <TextField

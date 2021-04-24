@@ -120,8 +120,9 @@ class Source extends React.Component {
   }
 
   render() {
-    const { source, valid, isOpen } = this.state;
+    const { source, valid: validVal, isOpen } = this.state;
     const { classes, title, hasSchemaError, schema } = this.props;
+    const valid = typeof validVal !== 'boolean';
     const getInValidIcon = hasSchemaError ? WarningRoundedIcon : Invalid;
     const Icon = valid && !hasSchemaError ? Valid : getInValidIcon;
     return (
@@ -145,11 +146,10 @@ class Source extends React.Component {
             })}
           >
             <HtmlTooltip
-              interactive
               title={(
                 <>
                   <div style={{ display: 'flex' }}>
-                    <Icon fontSize={'default'} className={classes.icon} style={{ marginRight: 15 }} />
+                    <Icon fontSize={'small'} className={classes.icon} style={{ marginRight: 15 }} />
                     <Typography color='inherit' variant={'body1'}>
                           Your 
                           {' '}
@@ -166,7 +166,7 @@ class Source extends React.Component {
                 </>
               )}
             >
-              <Icon fontSize={'default'} className={classes.icon} />
+              <Icon fontSize={'small'} className={classes.icon} />
             </HtmlTooltip>
             
             <div

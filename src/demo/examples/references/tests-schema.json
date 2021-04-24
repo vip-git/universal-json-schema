@@ -1,0 +1,358 @@
+{
+  "billing_address": {
+    "ui:selectors": {
+      "billing1Input": "(//div/div/input)[2]",
+      "billing2Input": "(//div/div/input)[3]",
+      "billing3Input": "(//div/div/input)[4]"
+    },
+    "ui:test": [
+      {
+        "scenarioName": "Compare Form Data is Correct",
+        "steps": [
+          {
+            "selector": "billing1Input",
+            "action": "compare",
+            "value": "21, Jump Street"
+          },
+          {
+            "selector": "billing2Input",
+            "action": "compare",
+            "value": "Babel"
+          },
+          {
+            "selector": "billing3Input",
+            "action": "compare",
+            "value": "Neverland"
+          }
+        ]
+      },
+      {
+        "scenarioName": "Update Form Data is Correct",
+        "steps": [
+          {
+            "selector": "billing1Input",
+            "action": "update",
+            "value": "Somewhere in the world"
+          },
+          {
+            "selector": "billing2Input",
+            "action": "update",
+            "value": "Nice Street"
+          },
+          {
+            "selector": "billing3Input",
+            "action": "update",
+            "value": "I exists"
+          }
+        ]
+      },
+      {
+        "scenarioName": "Compare new Form Data is Correct",
+        "steps": [
+          {
+            "selector": "billing1Input",
+            "action": "compare",
+            "value": "Somewhere in the world"
+          },
+          {
+            "selector": "billing2Input",
+            "action": "compare",
+            "value": "Nice Street"
+          },
+          {
+            "selector": "billing3Input",
+            "action": "compare",
+            "value": "I exists"
+          }
+        ]
+      }
+    ]
+  },
+  "shipping_address": {
+    "ui:selectors": {
+      "shipping1Input": "(//div/div/input)[5]",
+      "shipping2Input": "(//div/div/input)[6]",
+      "shipping3Input": "(//div/div/input)[7]"
+    },
+    "ui:test": [
+      {
+        "scenarioName": "Compare Form Data is Correct",
+        "steps": [
+          {
+            "selector": "shipping1Input",
+            "action": "compare",
+            "value": "221B, Baker Street"
+          },
+          {
+            "selector": "shipping2Input",
+            "action": "compare",
+            "value": "London"
+          },
+          {
+            "selector": "shipping3Input",
+            "action": "compare",
+            "value": "N/A"
+          }
+        ]
+      },
+      {
+        "scenarioName": "Update Form Data is Correct",
+        "steps": [
+          {
+            "selector": "shipping1Input",
+            "action": "update",
+            "value": "Checking i am here"
+          },
+          {
+            "selector": "shipping2Input",
+            "action": "update",
+            "value": "Now or never"
+          },
+          {
+            "selector": "shipping3Input",
+            "action": "update",
+            "value": "Do Something"
+          }
+        ]
+      },
+      {
+        "scenarioName": "Compare new Form Data is Correct",
+        "steps": [
+          {
+            "selector": "shipping1Input",
+            "action": "compare",
+            "value": "Checking i am here"
+          },
+          {
+            "selector": "shipping2Input",
+            "action": "compare",
+            "value": "Now or never"
+          },
+          {
+            "selector": "shipping3Input",
+            "action": "compare",
+            "value": "Do Something"
+          }
+        ]
+      }
+    ]
+  },
+  "noTree": {
+    "ui:selectors": {
+      "closeIcon": "(//button[@data-testid='closeButton'])[1]",
+      "addIcon": "(//button[@data-testid='addButton'])[1]",
+      "nRecursiveInput1": "(//label[contains(., 'Non Recursive Child')]/following-sibling::div/input)[1]",
+      "nRecursiveSubInput": "(//label[contains(., 'Non Recursive Child')]/following-sibling::div/input)[2]"
+    },
+    "ui:test": [
+      {
+        "scenarioName": "Compare Form Data is Correct",
+        "steps": [
+          {
+            "selector": "nRecursiveInput1",
+            "action": "compare",
+            "value": "root"
+          },
+          {
+            "selector": "nRecursiveSubInput",
+            "action": "compare",
+            "value": "non-recursive example"
+          }
+        ]
+      },
+      {
+        "scenarioName": "Update Form Data is Correct",
+        "steps": [
+          {
+            "selector": "nRecursiveInput1",
+            "action": "update",
+            "value": "I will do as i like"
+          },
+          {
+            "selector": "nRecursiveSubInput",
+            "action": "update",
+            "value": "catch me if you can"
+          }
+        ]
+      },
+      {
+        "scenarioName": "Compare new Form Data is Correct",
+        "steps": [
+          {
+            "selector": "nRecursiveInput1",
+            "action": "compare",
+            "value": "I will do as i like"
+          },
+          {
+            "selector": "nRecursiveSubInput",
+            "action": "compare",
+            "value": "catch me if you can"
+          }
+        ]
+      },
+      {
+        "scenarioName": "Close and additions are working",
+        "steps": [
+          {
+            "selector": "closeIcon",
+            "action": "click"
+          },
+          {
+            "selector": "addIcon",
+            "action": "click"
+          },
+          {
+            "selector": "nRecursiveSubInput",
+            "action": "update",
+            "value": "Allright it works"
+          },
+          {
+            "selector": "nRecursiveSubInput",
+            "action": "compare",
+            "value": "Allright it works"
+          }
+        ]
+      }
+    ]
+  },
+  "tree": {
+    "ui:selectors": {
+      "closeIcon": "(//button[@data-testid='closeButton'])[2]",
+      "addSubIcon": "(//button[@data-testid='addButton'])[2]",
+      "addIcon": "(//button[@data-testid='addButton'])[3]",
+      "firstInput": "(//label[contains(., 'Recursive Child')]/following-sibling::div/input)[3]",
+      "firstSubInput": "(//label[contains(., 'Recursive Child')]/following-sibling::div/input)[4]"
+    },
+    "ui:test": [
+      {
+        "scenarioName": "Compare Form Data is Correct",
+        "steps": [
+          {
+            "selector": "firstInput",
+            "action": "compare",
+            "value": "root"
+          },
+          {
+            "selector": "firstSubInput",
+            "action": "compare",
+            "value": "recursive example"
+          }
+        ]
+      },
+      {
+        "scenarioName": "Update Form Data is Correct",
+        "steps": [
+          {
+            "selector": "firstInput",
+            "action": "update",
+            "value": "try one more time"
+          },
+          {
+            "selector": "firstSubInput",
+            "action": "update",
+            "value": "try the recursive way"
+          }
+        ]
+      },
+      {
+        "scenarioName": "Update Form Data is Correct",
+        "steps": [
+          {
+            "selector": "firstInput",
+            "action": "compare",
+            "value": "try one more time"
+          },
+          {
+            "selector": "firstSubInput",
+            "action": "compare",
+            "value": "try the recursive way"
+          }
+        ]
+      },
+      {
+        "scenarioName": "Closing and adding recursive child works",
+        "steps": [
+          {
+            "selector": "addSubIcon",
+            "action": "click"
+          },
+          {
+            "selector": "addSubIcon",
+            "action": "click"
+          },
+          {
+            "selector": "addSubIcon",
+            "action": "click"
+          },
+          {
+            "selector": "closeIcon",
+            "action": "click"
+          }
+        ]
+      }
+    ]
+  },
+  "infinite": {
+    "ui:selectors": {
+      "closeIcon": "(//button[@data-testid='closeButton'])[2]",
+      "closeSubIcon": "//fieldset[h6[contains(., 'Infinite Recursive references')]]/div/fieldset/div/div/div/div/button",
+      "addSubIcon": "//fieldset[h6[contains(., 'Infinite Recursive references')]]/div/fieldset/div/div/div/fieldset/div/fieldset/div/div/div/button",
+      "addIcon": "//fieldset[h6[contains(., 'Infinite Recursive references')]]/div/fieldset/div/div/div/button",
+      "firstInput": "(//label[contains(., 'Infinite Recursive Child')]/following-sibling::div/input)[1]",
+      "firstSubInput": "(//label[contains(., 'Recursive Child')]/following-sibling::div/input)[4]"
+    },
+    "ui:test": [
+      {
+        "scenarioName": "Compare Form Data is Correct",
+        "steps": [
+          {
+            "selector": "firstInput",
+            "action": "compare",
+            "value": ""
+          }
+        ]
+      },
+      {
+        "scenarioName": "Update Form Data works",
+        "steps": [
+          {
+            "selector": "firstInput",
+            "action": "update",
+            "value": "infinite recursive way"
+          }
+        ]
+      },
+      {
+        "scenarioName": "Update Form Data is Correct",
+        "steps": [
+          {
+            "selector": "firstInput",
+            "action": "compare",
+            "value": "tinfinite recursive way"
+          }
+        ]
+      },
+      {
+        "scenarioName": "Closing and adding recursive child works",
+        "steps": [
+          {
+            "selector": "addIcon",
+            "action": "click"
+          },
+          {
+            "selector": "addIcon",
+            "action": "click"
+          },
+          {
+            "selector": "addSubIcon",
+            "action": "click"
+          },
+          {
+            "selector": "closeIcon",
+            "action": "click"
+          }
+        ]
+      }
+    ]
+  }
+}

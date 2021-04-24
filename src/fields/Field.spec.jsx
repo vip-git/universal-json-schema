@@ -12,7 +12,7 @@ import Input from '@material-ui/core/Input';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import { RadioGroup } from './components';
+import RadioGroup from './components/RadioGroup';
 import ConfiguredField from './ConfiguredField';
 
 const classes = {

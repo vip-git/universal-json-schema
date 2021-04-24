@@ -5,9 +5,12 @@ name: Build and Test CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, closed]
   pull_request_target:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -16,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x]
+        node-version: [14.x] # Add support for 12.x, 15.x later just build and unit tests
 
     steps:
     - uses: actions/checkout@v2
@@ -26,4 +29,33 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm test
-    - run: npm run test:e2e
+    - name: "Check if deployment is done"
+      env:
+        VERCEL_TOKEN: ${{secrets.VERCEL_TOKEN}}
+        VERCEL_API: ${{secrets.VERCEL_API}}
+      run : |
+        isReadyState()
+        {
+            GIT_SHA=$(git log -1 --pretty=%B | grep ^Merge | cut -d " " -f 2)
+            VERCEL_STATE=$(curl -H "$VERCEL_TOKEN" "$VERCEL_API$GIT_SHA" | jq -r '.deployments[0].state')
+            if [ $VERCEL_STATE = "READY" ]; then
+                echo Valid state $VERCEL_STATE
+            elif [ $VERCEL_STATE = "ERROR" ]; then
+               echo InValid state $VERCEL_STATE  1>&2
+               exit 64
+            else
+                echo invalid state found - $VERCEL_STATE
+                isReadyState
+            fi
+        }
+        isReadyState
+    - run: |
+        GIT_SHA=$(git log -1 --pretty=%B | grep ^Merge | cut -d " " -f 2)
+        VERCEL_URI=$(curl -H "$VERCEL_TOKEN" "$VERCEL_API$GIT_SHA" | jq -r '.deployments[0].url')
+        echo ${VERCEL_URI} for ${GITHUB_SHA} with ${GIT_SHA} - ${GITHUB_REF} - ${GITHUB_HEAD_REF} - ${VERCEL_API}
+        VERCEL_URL="https://${VERCEL_URI}" npm run test:e2e:ci
+      env:
+        BROWSERSTACK_USER: ${{secrets.BROWSERSTACK_USER}}
+        BROWSERSTACK_ACCESSKEY: ${{secrets.BROWSERSTACK_ACCESSKEY}}
+        VERCEL_TOKEN: ${{secrets.VERCEL_TOKEN}}
+        VERCEL_API: ${{secrets.VERCEL_API}}

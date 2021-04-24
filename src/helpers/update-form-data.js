@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import { has, get, each, set } from 'lodash';
+import { has, get, each, set, omit } from 'lodash';
 import size from 'lodash/size';
 
 const arrRegex = /^([^.]+)\[([0-9]+)\](\.(.*))?/;
@@ -17,9 +17,18 @@ const applyAtPath = (path, data, spec) => {
     return { [subPath]: applyAtPath(prop, data[subPath], spec) };
   }
   if (arrMatch) {
-    const subPath = arrMatch[1];
-    const index = Number(arrMatch[2]);
-    return { [subPath]: { [index]: applyAtPath(arrMatch[4], data[subPath][index], spec) } };
+    try {
+      const subPath = arrMatch[1];
+      const index = Number(arrMatch[2]);
+      return {
+        [subPath]: {
+          [index]: applyAtPath(arrMatch[4], data[subPath][index], spec),
+        },
+      };
+    } 
+    catch (err) {
+      return {};
+    }
   }
   return {};
 };
@@ -42,10 +51,6 @@ export default (givenData, path, value) => {
   const arrayRegex = /\[(.*?)\]/g;
   const data = { ...givenData };
   const matchPath = path.replace(arrayRegex, '');
-  const arrMatch = path.match(arrayRegex);
-  if (!has(data, path) && arrMatch) {
-    return data;
-  }
   if (
     matchPath
     && matchPath.includes('.')
@@ -71,23 +76,24 @@ export const updateKeyFromSpec = (data, oldPath, newPath) => update(data, (obj) 
   }, {}),
 );
 
-export const setUISchemaData = (givenUIData, uiSchema, path) => {
+export const setUISchemaData = (givenUIData, uiSchema, path, nestedSchema) => {
+  const iterateSchema = nestedSchema || uiSchema; 
   if (typeof givenUIData === 'object') {
-    each(uiSchema, (val, key) => {
-      if (has(val, 'ui:data') || has(givenUIData, key)) {
-        if (typeof givenUIData[key] === 'object') {
-          setUISchemaData(val, uiSchema, key);
+    each(iterateSchema, (val, key) => {
+      const getPath = path ? `${path}.${key}` : key;
+      if (has(val, 'ui:data') || has(givenUIData, getPath)) {
+        if (typeof get(givenUIData, getPath) === 'object') {
+          setUISchemaData(givenUIData, uiSchema, getPath, uiSchema[getPath]);
         }
         else {
-          const getPath = path ? `${path}.${key}` : key;
-          set(uiSchema, `${getPath}.ui:data`, givenUIData[key]);
+          set(uiSchema, `${getPath}.ui:data`, get(givenUIData, getPath));
         }
       }
     });
   }
 };
 
-export const removeValueFromSpec = (data, path) => update(data, { $unset: [path] });
+export const removeValueFromSpec = (uiData, path) => omit(uiData, path);
 
 export const addListItem = (givenData, path, value) => {
   const data = { ...givenData };

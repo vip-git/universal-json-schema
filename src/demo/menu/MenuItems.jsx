@@ -1,3 +1,5 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-undef */
 import React from 'react';
 import keys from 'lodash/keys';
 import { withStyles } from '@material-ui/core/styles';
@@ -14,6 +16,7 @@ import menuStyles from './menu-styles';
 
 export default withStyles(menuStyles)(({ toggleDrawer, classes, onSelectMenuItem }) => { 
   const version = React.useContext(VersionContext);
+  // onSelectMenuItem(examples[version][e], e) for bundler
   return (
     <div
       tabIndex={0}
@@ -22,6 +25,14 @@ export default withStyles(menuStyles)(({ toggleDrawer, classes, onSelectMenuItem
       onKeyDown={toggleDrawer(false)}
       className={classes.drawerList}
     >
+      <List subheader={<ListSubheader component='div'>Bundler</ListSubheader>}>
+        <ListItem key={'bundler'} button>
+            <ListItemText 
+              primary={'UI-Bundler'} 
+              onClick={onSelectMenuItem(examples[version].simple, 'ui-bundler')} 
+            />
+        </ListItem>
+      </List>
       <List subheader={<ListSubheader component='div'>Showcase</ListSubheader>}>
         {keys(examples[version]).map((e) => (
           <ListItem key={e} button>

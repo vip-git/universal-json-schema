@@ -1,0 +1,107 @@
+{
+    "roles": {
+        "ui:selectors": {
+            "closeSubIcon": "(//button[@data-testid='closeButton'])[1]",
+            "closeIcon": "(//button[@data-testid='closeButton'])[2]",
+            "addSubIcon": "(//button[@data-testid='addButton'])[1]",
+            "addIcon": "(//button[@data-testid='addButton'])[1]",
+            "locationInput": "(//label[contains(., 'Location')]/following-sibling::div/input)[1]",
+            "resourceInput": "(//label[contains(., 'Resource')]/following-sibling::div/input)[1]",
+            "rateInput": "(//label[contains(., 'Rate')]/following-sibling::div/input)[1]",
+            "subLocationInput": "(//label[contains(., 'Location')]/following-sibling::div/input)[2]"
+        },
+        "ui:test": [
+          {
+            "scenarioName": "Compare Form Data is Correct",
+            "steps": [
+                {
+                    "selector": "locationInput",
+                    "action": "compare",
+                    "value": "uk"
+                },
+                {
+                    "selector": "resourceInput",
+                    "action": "compare",
+                    "value": "jim"
+                },
+                {
+                    "selector": "rateInput",
+                    "action": "compare",
+                    "value": "pm"
+                },
+                {
+                    "selector": "subLocationInput",
+                    "action": "compare",
+                    "value": "in"
+                }
+            ]
+          },
+          {
+            "scenarioName": "Can update current fields",
+            "steps": [
+                {
+                    "selector": "locationInput",
+                    "action": "update",
+                    "value": "ukato"
+                },
+                {
+                    "selector": "resourceInput",
+                    "action": "update",
+                    "value": "jimato"
+                },
+                {
+                    "selector": "rateInput",
+                    "action": "update",
+                    "value": "pmato"
+                },
+                {
+                    "selector": "subLocationInput",
+                    "action": "update",
+                    "value": "inato"
+                }
+            ]
+          },
+          {
+            "scenarioName": "Can remove and add new fields",
+            "steps": [
+                {
+                    "selector": "locationInput",
+                    "action": "compare",
+                    "value": "ukato"
+                },
+                {
+                    "selector": "resourceInput",
+                    "action": "compare",
+                    "value": "jimato"
+                },
+                {
+                    "selector": "rateInput",
+                    "action": "compare",
+                    "value": "pmato"
+                },
+                {
+                    "selector": "subLocationInput",
+                    "action": "compare",
+                    "value": "inato"
+                },
+                {
+                    "selector": "closeSubIcon",
+                    "action": "click"
+                },
+                {
+                    "selector": "closeSubIcon",
+                    "action": "click"
+                },
+                {
+                    "selector": "addIcon",
+                    "action": "click"
+                },
+                {
+                    "selector": "addIcon",
+                    "action": "click"
+                }
+            ]
+          }
+        ]
+    }
+}

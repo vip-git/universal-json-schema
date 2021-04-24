@@ -7,7 +7,7 @@ import {
   DatePicker, 
   TimePicker, 
   DateTimePicker, 
-} from '@material-ui/pickers';
+} from 'next-pickers-material-ui';
 import pickerProps from './picker.props';
 
 const renderPickerComp = (type) => {

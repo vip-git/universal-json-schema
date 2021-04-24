@@ -4,13 +4,14 @@ import nested from './nested';
 import single from './single';
 import numbers from './numbers';
 import arrays from './arrays';
-import tabsUI from './arrays.bak';
+import tabsUI from './tabs';
+import stepsUI from './stepper';
 import validation from './validation';
 import budget from './budget';
 import multipleChoice from './multiple-choice';
 import radioChoice from './radio-choice';
 import additionalProps from './additional-props';
-import refrences from './refrences';
+import references from './references';
 import alternatives from './alternatives';
 import schemaDeps from './schema-dependencies';
 
@@ -25,12 +26,13 @@ export default {
     numbers,
     arrays,
     tabsUI,
+    stepsUI,
     validation,
     budget,
     multipleChoice,
     radioChoice,
     additionalProps,
-    refrences,
+    references,
     alternatives,
     schemaDeps,
   },

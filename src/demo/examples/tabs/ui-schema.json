@@ -1,0 +1,26 @@
+{
+  "ui:page": {
+    "ui:layout": "tabs"
+  },
+  "Technical": {
+    "firstName": {
+      "ui:readonly": true,
+      "ui:disabled": true
+    },
+    "multipleChoicesList": {
+      "ui:props": {
+        "multiple": true
+      }
+    }
+  },
+  "Changedata" : {
+    "Createdon": {
+      "ui:readonly": true,
+      "ui:disabled": true
+    },
+    "Createdby": {
+      "ui:readonly": true,
+      "ui:disabled": true
+    }
+  }
+}

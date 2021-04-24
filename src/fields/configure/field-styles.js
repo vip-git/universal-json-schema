@@ -1,3 +1,7 @@
 export default theme => ({
-  root: {},
+  root: {
+    '&:focus': {
+        outline: 'none',
+    }
+  },
 });

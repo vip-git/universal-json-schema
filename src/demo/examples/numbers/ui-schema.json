@@ -13,5 +13,12 @@
   },
   "integerRangeSteps": {
     "ui:widget": "range"
+  },
+  "currency": {
+    "ui:interceptor": "translate-currency",
+    "mui:startAdornment": "$",
+    "ui:options": {
+      "useLocaleString": "us"
+    }
   }
 }

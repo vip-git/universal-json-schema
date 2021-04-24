@@ -12,6 +12,24 @@ const theme = {
     secondary: teal,
     error: red,
   },
+  components: {
+    // Name of the component
+    MuiTextField: {
+      defaultProps: {
+        variant: 'standard',
+      },
+    },
+    MuiSelect: {
+      defaultProps: {
+        variant: 'standard',
+      },
+    },
+    MuiInputLabel: {
+      defaultProps: {
+        variant: 'standard',
+      },
+    }
+  },
   overrides: {
     MuiInput: {
       root: {
@@ -21,6 +39,11 @@ const theme = {
     MuiSelect: {
       outlined: {
         color: '#ffff',
+      },
+    },
+    MuiTab: {
+      wrapper: {
+        minWidth: 120,
       },
     },
   },

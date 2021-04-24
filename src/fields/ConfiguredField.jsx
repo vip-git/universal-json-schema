@@ -29,12 +29,22 @@ export const RawConfiguredField = ({
   id,
   htmlid,
   isHidden,
-  isCustomComponent,
+  isCustomComponent: hasCustomComponent,
   hasError,
   hasInlineError,
 }) => {
+  const isCustomComponent = type === 'null' || hasCustomComponent;
   const classes = fieldStyles();
   const FormRoot = isCustomComponent ? FormGroup : FormControl;
+  const isXHRNotImplemented = componentProps?.xhrSchema?.onload 
+							&& !componentProps?.xhrSchema?.onload?.xhrComplete 
+							&& !componentProps?.xhrSchema?.onload?.xhrProgress;
+
+  React.useEffect(() => {
+    if (isXHRNotImplemented) {
+	  componentProps.onXHRSchemaEvent(componentProps?.xhrSchema.onload['xhr:datasource'], 'onload');
+    }
+  }, [componentProps, isXHRNotImplemented]);
   return (
 	<FormRoot
 		id={`${htmlid}-formControl`}
@@ -44,7 +54,6 @@ export const RawConfiguredField = ({
 		style={{ 
 		  display: isHidden ? 'none' : 'flex',
 		  flexDirection: activeCompColor ? 'row' : 'column',
-		  flexBasis: '100%',
 		}}
 	>
 		{

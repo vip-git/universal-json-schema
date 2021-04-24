@@ -4,7 +4,6 @@
 import React from 'react';
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 
 const SimpleRating = ({
   value: givenValue,
@@ -18,7 +17,7 @@ const SimpleRating = ({
 		<Typography component='legend'>Custom Rating Component</Typography>
 		<Rating
 			name='simple-controlled'
-			value={String(value)}
+			value={Number(value)}
 			onChange={(event, newValue) => {
 			  setValue(newValue);
 			  persistData(newValue);
@@ -35,7 +34,7 @@ const CustomRating = ({ onChange, formData, ...rest }) => (
 	<SimpleRating
 		id='standard-basic'
 		label='Standard'
-		value={formData.customRating}
+		value={Number(formData.customRating)}
         persistData={onChange}
         {...rest}
 	/>

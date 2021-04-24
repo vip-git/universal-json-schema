@@ -5,16 +5,20 @@ const InputLabel = require('@material-ui/core/InputLabel').default;
 
 // Generated UTILS
 const {
-  UTIL_CONFIG: {
-    ENUM_UTILS: {
-      util: { isEnum },
+  APP_CONFIG: {
+    UTILS: {
+      UTIL_CONFIG: {
+        ENUM_UTILS: {
+          util: { isEnum },
+        },
+      },
     },
   },
-} = require('../../../generated/utils');
+} = require('../../../generated/app.config');
 
 export default ({ schema, uiSchema = {} }) => {
   const widget = uiSchema['ui:widget'];
-  const options = uiSchema['ui:options'];
+  const options = uiSchema['ui:options'] || uiSchema['ui:props'];
   
   const nonInputTypes = [
     'boolean',
@@ -38,7 +42,7 @@ export default ({ schema, uiSchema = {} }) => {
     return FormLabel;
   }
   
-  if (options && nonInputOptions.includes(options)) {
+  if ((options && nonInputOptions.includes(options)) || options?.type === 'hidden') {
     return null;
   }
   

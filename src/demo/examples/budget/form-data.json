@@ -5,7 +5,7 @@
       "allocations": [
         {
           "name": "jim",
-          "role": "pm",
+          "rate": "pm",
           "location": "in"
         }
       ]

@@ -1,0 +1,117 @@
+{
+    "tasks": {
+        "ui:selectors": {
+            "firstInput": "(//label[contains(., 'Title')]/following-sibling::div/input)[1]",
+            "secondInput": "(//label[contains(., 'Title')]/following-sibling::div/input)[2]",
+            "firstTextArea": "(//label[contains(., 'Task details')]/following-sibling::div/textarea)[1]",
+            "secondTextArea": "(//label[contains(., 'Task details')]/following-sibling::div/textarea)[2]",
+            "closeIcon": "(//button[@data-testid='closeButton'])[1]",
+            "scrollUp": "(//button[@data-testid='upButton'])[2]",
+            "scrollDown": "(//button[@data-testid='downButton'])[1]",
+            "addIcon": "(//button[@data-testid='addButton'])[1]",
+            "fCheckbox": "(//input[@type='checkbox'])[1]",
+            "checkbox": "(//input[@type='checkbox'])[2]"
+        },
+        "ui:test": [
+            {
+                "steps": [
+                    {
+                        "selector": "firstInput",
+                        "action": "compare",
+                        "value": "My first task"
+                    },
+                    {
+                      "selector": "scrollDown",
+                      "action": "click"
+                    },
+                    {
+                      "selector": "secondInput",
+                      "action": "compare",
+                      "value": "My first task"
+                    },
+                    {
+                        "selector": "checkbox",
+                        "action": "isChecked"
+                    },
+                    {
+                      "selector": "scrollUp",
+                      "action": "click"
+                    },
+                    {
+                      "selector": "firstInput",
+                      "action": "update",
+                      "value": "New Task"
+                    },
+                    {
+                      "selector": "firstTextArea",
+                      "action": "compare",
+                      "value": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    },
+                    {
+                      "selector": "secondTextArea",
+                      "action": "compare",
+                      "value": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"
+                    },
+                    {
+                      "selector": "closeIcon",
+                      "action": "click"
+                    },
+                    {
+                      "selector": "addIcon",
+                      "action": "click"
+                    },
+                    {
+                        "selector": "secondInput",
+                        "action": "compare",
+                        "value": "My second task"
+                    },
+                    {
+                      "selector": "secondInput",
+                      "action": "update",
+                      "value": "New Second Task"
+                    },
+                    {
+                      "selector": "firstTextArea",
+                      "action": "update",
+                      "value": "tried updating this"
+                    },
+                    {
+                      "selector": "secondTextArea",
+                      "action": "update",
+                      "value": "tried updating second one"
+                    },
+                    {
+                      "selector": "closeIcon",
+                      "action": "click"
+                    },
+                    {
+                      "selector": "closeIcon",
+                      "action": "click"
+                    },
+                    {
+                      "selector": "addIcon",
+                      "action": "click"
+                    },
+                    {
+                      "selector": "firstTextArea",
+                      "action": "update",
+                      "value": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    },
+                    {
+                      "selector": "firstInput",
+                      "action": "update",
+                      "value": "New Task"
+                    },
+                    {
+                      "selector": "fCheckbox",
+                      "action": "click"
+                    },
+                    {
+                        "selector": "fCheckbox",
+                        "action": "isChecked"
+                    }
+                ]
+            }
+        ]
+    }
+}

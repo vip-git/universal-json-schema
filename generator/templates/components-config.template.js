@@ -15,6 +15,13 @@ export const COMMON_COMPONENTS = {
   },
 };
 
+const NULL_COMPONENTS = {
+  EMPTY_DIV: {
+    name: 'empty-div',
+    component: require('./empty-div').default,
+  },
+};
+
 const COMMON_INT_COMPONENTS = {
   ...ENUM_COMPONENTS,
   ...COMMON_COMPONENTS,
@@ -42,14 +49,23 @@ const DEFAULT_BOOLEAN_COMPONENTS = {
   },
 };
 
+const DEFAULT_NULL_COMPONENTS = {
+  DEFAULT: {
+    ...NULL_COMPONENTS.EMPTY_DIV,
+    name: 'DEFAULT',
+  },
+};
+
+<% if(Object.keys(components).includes('@react-jsonschema-form-components/material-picker')) { %>
 export const V2_PICKER_COMPONENT = {
   MATERIAL_PICKER: {
     name: 'material-picker',
     component: require('./material-picker').default,
   },
 };
+<% } %>
 
-export const APP_CONFIG = {
+export const COMP_CONFIG = {
   SUPPORTED_TYPES: {
     STRING: 'string',
     BOOLEAN: 'boolean',
@@ -119,11 +135,20 @@ export const APP_CONFIG = {
       },
       <% }); %>
     },
-    NULL: {},
+    NULL: {
+      ...DEFAULT_NULL_COMPONENTS,
+      <% Object.values(components)
+          .filter((c) => !c.isEnum && c.type === "null" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
+      <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
+        name: '<%= comp.name %>',
+        component: require('./<%= comp.name %>').default,
+      },
+      <% }); %>
+    },
   },
 };
 
-export default APP_CONFIG;
+export default COMP_CONFIG;
 `;
 
 module.exports = appConfigTemplate;

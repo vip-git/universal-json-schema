@@ -4,29 +4,31 @@ import React from 'react';
 const componentConfig = require('../component.config').default;
 const {
   APP_CONFIG: {
-    V2_DEPRECATED_TYPES,
-    V2_DEPRECATED_OPTIONS,
-    V2_DEPRECATED_ENUMS,
-    V2_DEPRECATED_CREATABLE_ENUMS,
-    V2_DEPRECATED_PICKERS,
-    V2_DEPRECATED_WIDGET_RADIO,
-    V2_DEPRECATED_WIDGET_RANGE,
-    V2_DEPRECATED_WIDGET_CHECKBOXES,
-    SUPPORTED_TYPES: { STRING },
-  },
-  ENUM_COMPONENTS,
-  V2_PICKER_COMPONENT,
-  COMMON_COMPONENTS,
-} = require('../../../generated/components');
-
-// Generated UTILS
-const {
-  UTIL_CONFIG: {
-    ENUM_UTILS: {
-      util: { valuesToOptions, isEnum },
+    COMPONENTS: {
+      COMP_CONFIG: {
+        V2_DEPRECATED_TYPES,
+        V2_DEPRECATED_OPTIONS,
+        V2_DEPRECATED_ENUMS,
+        V2_DEPRECATED_CREATABLE_ENUMS,
+        V2_DEPRECATED_PICKERS,
+        V2_DEPRECATED_WIDGET_RADIO,
+        V2_DEPRECATED_WIDGET_RANGE,
+        V2_DEPRECATED_WIDGET_CHECKBOXES,
+        SUPPORTED_TYPES: { STRING },
+      },
+      ENUM_COMPONENTS,
+      V2_PICKER_COMPONENT,
+      COMMON_COMPONENTS,
+    },
+    UTILS: {
+      UTIL_CONFIG: {
+        ENUM_UTILS: {
+          util: { valuesToOptions, isEnum },
+        },
+      },
     },
   },
-} = require('../../../generated/utils');
+} = require('../../../generated/app.config');
 
 export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
   // console.log('getComponent schema: %o, uiSchema: %o', schema, uiSchema);
@@ -86,7 +88,7 @@ export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
       && component in components
       && typeof components[component] === 'function'
     ) {
-      return React.memo(components[component]);
+      return components[component];
     }
 
     const selectedComponent = componentConfig.get(dataType).get(formWidget)

@@ -1,8 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import includes from 'lodash/includes';
 import slice from 'lodash/slice';
-import get from 'lodash/get';
 import isArray from 'lodash/isArray';
 
 // Material UI
@@ -23,12 +21,16 @@ import getDefinitionSchemaFromRef from '../helpers/get-definition-schema';
 
 // Generated UTILS
 const {
-  UTIL_CONFIG: {
-    ENUM_UTILS: {
-      util: { isEnum },
+  APP_CONFIG: {
+    UTILS: {
+      UTIL_CONFIG: {
+        ENUM_UTILS: {
+          util: { isEnum },
+        },
+      },
     },
   },
-} = require('../generated/utils');
+} = require('../generated/app.config');
 
 export const RawFieldSetArray = (props) => {
   const {
@@ -112,6 +114,7 @@ export const RawFieldSetArray = (props) => {
             <div className={classes.addItemBtn}>
               <IconButton
                 onClick={rest.onAddItem && rest.onAddItem(path, getDefaultValue(schema.items))}
+                data-testid="addButton"
                 style={uiSchema['ui:style'] ? {
                   ...uiSchema['ui:style'],
                 } : {}}

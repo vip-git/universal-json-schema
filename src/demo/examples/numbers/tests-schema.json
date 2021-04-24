@@ -1,0 +1,205 @@
+{
+  "number": {
+    "ui:selectors": {
+        "default": "(//div/label[contains(text(),'Number')]/following-sibling::div/input)[1]"
+    },
+    "ui:test": [
+        {
+          "steps": [
+            {
+              "selector": "default",
+              "action": "compare",
+              "value": "3.14"
+            },
+            {
+                "selector": "default",
+                "action": "update",
+                "value": "5.14"
+            },
+            {
+              "selector": "default",
+              "action": "compare",
+              "value": "5.14"
+            }
+          ]
+        }
+    ]
+  },
+  "integer": {
+    "ui:selectors": {
+        "default": "(//div/label[contains(text(),'Integer')]/following-sibling::div/input)[1]"
+    },
+    "ui:test": [
+        {
+          "steps": [
+            {
+              "selector": "default",
+              "action": "compare",
+              "value": "42"
+            },
+            {
+              "selector": "default",
+              "action": "update",
+              "value": "52"
+            },
+            {
+              "selector": "default",
+              "action": "compare",
+              "value": "52"
+            }
+          ]
+        }
+    ]
+  },
+  "currency": {
+    "ui:selectors": {
+        "default": "(//div/label[contains(text(),'Currency')]/following-sibling::div/input)[1]"
+    },
+    "ui:test": [
+        {
+          "steps": [
+            {
+              "selector": "default",
+              "action": "update",
+              "value": "212312"
+            },
+            {
+              "selector": "default",
+              "action": "update",
+              "value": "212,312"
+            }
+          ]
+        }
+    ]
+  },
+  "numberEnum": {
+    "ui:selectors": {
+        "default": "(//div/label[contains(text(),'Number enum')]/following-sibling::div)[1]",
+        "select3": "//ul/li[contains(., '3')]",
+        "confirm3": "(//label[contains(text(), 'Number enum')]/following-sibling::div/label[span[contains(text(), '3')]]/span/span/input)[1]"
+    },
+    "ui:test": [
+        {
+          "steps": [
+            {
+              "selector": "default",
+              "action": "compare",
+              "value": "2"
+            },
+            {
+              "selector": "default",
+              "action": "click"
+            },
+            {
+              "selector": "select3",
+              "action": "click"
+            },
+            {
+              "selector": "confirm3",
+              "action": "compare",
+              "value": "3"
+            }
+          ]
+        }
+    ]
+  },
+  "numberEnumRadio": {
+    "ui:selectors": {
+        "default": "(//label[contains(text(), 'Number enum')]/following-sibling::div/label[span[contains(text(), '2')]]/span/span/input[@checked])[1]",
+        "select3": "(//label[contains(text(), 'Number enum')]/following-sibling::div/label[span[contains(text(), '3')]]/span/span/input)[1]",
+        "confirm3": "(//label[contains(text(), 'Number enum')]/following-sibling::div/label/span/span/input[following-sibling::div[contains(@class, 'checked')]])[1]"
+    },
+    "ui:test": [
+         {
+           "steps": [
+             {
+               "selector": "default",
+               "action": "compare",
+               "value": "2"
+             },
+             {
+               "selector": "select3",
+               "action": "click"
+             },
+             {
+               "selector": "confirm3",
+               "action": "compare",
+               "value": "3"
+             }
+           ]
+         }
+    ]
+  },
+  "integerRange": {
+    "ui:selectors": {
+        "default": "(//div/label[contains(text(),'Integer range')]/following-sibling::div/input)[1]"
+    },
+    "ui:test": [
+        {
+          "steps": [
+            {
+              "selector": "default",
+              "action": "compare",
+              "value": "42"
+            },
+            {
+              "selector": "default",
+              "action": "update",
+              "value": "442"
+            },
+            {
+              "selector": "default",
+              "action": "compareNegative",
+              "value": "442"
+            },
+            {
+              "selector": "default",
+              "action": "update",
+              "value": "44"
+            },
+            {
+              "selector": "default",
+              "action": "compare",
+              "value": "44"
+            }
+          ]
+        }
+    ]
+  },
+  "integerRangeSteps": {
+    "ui:selectors": {
+        "default": "(//div/label[contains(text(),'Integer range (by 10)')]/following-sibling::div/input)[1]"
+    },
+    "ui:test": [
+        {
+          "steps": [
+            {
+              "selector": "default",
+              "action": "compare",
+              "value": "80"
+            },
+            {
+              "selector": "default",
+              "action": "update",
+              "value": "44"
+            },
+            {
+              "selector": "default",
+              "action": "compareNegative",
+              "value": "44"
+            },
+            {
+              "selector": "default",
+              "action": "update",
+              "value": "90"
+            },
+            {
+              "selector": "default",
+              "action": "compare",
+              "value": "90"
+            }
+          ]
+        }
+    ]
+  }
+}

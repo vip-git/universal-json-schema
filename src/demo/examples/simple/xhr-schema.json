@@ -1,0 +1,105 @@
+{
+  "ui:page": {
+    "onload": {
+      "xhr:datasource": {
+        "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api/2",
+        "method": "GET",
+        "headers": {},
+        "payload": {},
+        "map:results": "#/definitions/results"
+      }
+    },
+    "onsubmit": {
+      "xhr:datasource": {
+        "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api/2",
+        "method": "PUT",
+        "headers": {},
+        "map:payload": {
+          "string": {
+            "firstName:first_name": "${string.firstName}",
+            "lastName:last_name": "${string.lastName}",
+            "select": "${string.select}",
+            "react-select:react_select": "${string.react-select}",
+            "upload": "${string.upload}",
+            "bio": "${string.bio}",
+            "date": "${string.date}",
+            "password": "${string.password}",
+            "telephone": "${string.telephone}"
+          },
+          "integer": {
+            "customRating:custom_rating": "${integer.customRating}",
+            "age": "${integer.age}"
+          },
+          "number": {
+            "currency": "${number.currency}"
+          },
+          "boolean": {
+            "default": "${boolean.default}",
+            "radio": "${boolean.radio}"
+          },
+          "array": {
+            "multiSelect": "${array.multiSelect}",
+            "creatableSelectTest:creatable_select_test": "${array.creatableSelectTest}",
+            "selectTest:select_test": "${array.selectTest}"
+          },
+          "object": {
+            "customComponent:custom_component": {
+              "startDate:start_date": "${object.customComponent.startDate}",
+              "endDate:end_date": "${object.customComponent.endDate}"
+            }
+          }
+        },
+        "map:results": "#/definitions/results"
+      }
+    }
+  },
+  "properties": {
+    "array": {
+      "selectTest": {
+        "onload": {
+          "xhr:datasource": {
+              "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api",
+              "method": "GET",
+              "headers": {},
+              "payload": {},
+              "map:items.enum": "name"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "results": {
+      "string": {
+        "firstName": "${string.first_name}",
+        "lastName": "${string.last_name}",
+        "select": "${string.select}",
+        "react-select": "${string.react_select}",
+        "upload": "${string.upload}",
+        "bio": "${string.bio}",
+        "date": "${string.date}",
+        "password": "${string.password}",
+        "telephone": "${string.telephone}"
+      },
+      "integer": {
+        "customRating": "${integer.custom_rating}",
+        "age": "${integer.age}"
+      },
+      "number": {
+        "currency": "${number.currency}"
+      },
+      "boolean": {
+        "default": "${boolean.default}",
+        "radio": "${boolean.radio}"
+      },
+      "array": {
+        "multiSelect": "${array.multiSelect}",
+        "creatableSelectTest": "${array.creatable_select_test}",
+        "selectTest": "${array.select_test}"
+      },
+      "object": {
+        "customComponent": "${object.custom_component}"
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@
   "title": "A customizable registration form",
   "description": "A simple form with additional properties example.",
   "type": "object",
-  "required": ["firstName", "lastName"],
+  "required": ["title", "subTitle"],
   "additionalProperties": {
     "title": "",
     "type": "object",
@@ -18,13 +18,13 @@
     }
   },
   "properties": {
-    "firstName": {
+    "title": {
       "type": "string",
-      "title": "First name"
+      "title": "Title"
     },
-    "lastName": {
+    "subTitle": {
       "type": "string",
-      "title": "Last name"
+      "title": "Subtitle"
     }
   }
 }
