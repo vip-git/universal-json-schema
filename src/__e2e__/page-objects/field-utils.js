@@ -1,7 +1,7 @@
 module.exports = {
   clearValues: (path) => {
     $(path).setValue(' ');
-    if (browser.capabilities.platformName === 'mac os x') {
+    if (browser.capabilities.platformName.includes('mac')) {
       browser.keys(['Meta', 'a']);
     } else {
       browser.keys(['Control', 'a']);
