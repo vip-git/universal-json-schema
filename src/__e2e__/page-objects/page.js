@@ -9,6 +9,7 @@ module.exports = class Page {
     * @param path path of the sub page (e.g. /path/to/page.html)
     */
   open(path) {
-    return browser.url(`${process.env.VERCEL_URL || 'http://localhost:3005'}/#${path}`);
+    browser.url(`${process.env.VERCEL_URL || 'http://localhost:3005'}/#${path}`);
+    return $('//button[@aria-label="full-screen-code"]').click();
   }
 };

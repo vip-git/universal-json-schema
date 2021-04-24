@@ -58,11 +58,11 @@ const generateUISchemaType = ({
             words: 0,
             numbers: 5,
             saltLength: 0,
-          })
+          }).replace(0, '')
         : namor.generate({
             words: 3,
             saltLength: 0,
-          });
+          })
 
     if (schema.properties[schemaProp].maximum) {
       data = schema.properties[schemaProp].maximum;

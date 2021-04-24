@@ -1,9 +1,9 @@
 {
   "billing_address": {
     "ui:selectors": {
-      "billing1Input": "(//div/div/input)[5]",
-      "billing2Input": "(//div/div/input)[6]",
-      "billing3Input": "(//div/div/input)[7]"
+      "billing1Input": "(//div/div/input)[2]",
+      "billing2Input": "(//div/div/input)[3]",
+      "billing3Input": "(//div/div/input)[4]"
     },
     "ui:test": [
       {
@@ -70,9 +70,9 @@
   },
   "shipping_address": {
     "ui:selectors": {
-      "shipping1Input": "(//div/div/input)[8]",
-      "shipping2Input": "(//div/div/input)[9]",
-      "shipping3Input": "(//div/div/input)[10]"
+      "shipping1Input": "(//div/div/input)[5]",
+      "shipping2Input": "(//div/div/input)[6]",
+      "shipping3Input": "(//div/div/input)[7]"
     },
     "ui:test": [
       {

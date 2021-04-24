@@ -4,8 +4,8 @@
             "input": "//div/label[contains(text(), 'Relations')]/following-sibling::div/input",
             "textarea": "//div/label[contains(text(), 'A string value')]/following-sibling::div/textarea",
             "checkbox": "//label[contains(., 'a boolean value')]/span/span/input",
-            "newInput": "(//div/label[contains(text(), 'Relations')]/following-sibling::div/input)[2]",
-            "addButton": "(//button[@tabindex=0])[3]"
+            "newInput": "(//div/label[contains(text(), 'Relations')]/following-sibling::div/input)[1]",
+            "addButton": "(//button[@data-testid='addButton'])[1]"
         },
         "ui:test": [
           {

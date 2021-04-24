@@ -6,6 +6,7 @@ const rootStyle = (theme, type) => ({
   '& $fullScreenButton': {
     top: 7,
     position: 'absolute',
+    zIndex: 999,
     right: 10,
   },
   '& $ctr': {

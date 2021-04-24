@@ -1,4 +1,46 @@
 {
+  "boolean": {
+    "default": {
+      "ui:selectors": {
+        "checkbox": "//label[span[contains(text(),'checkbox (default)')]]/span/span/input",
+        "checkboxChecked": "//label[span[contains(text(),'checkbox (default)')]]/span/span/input[@checked]"
+      },
+      "ui:test": [
+          {
+            "name": "Check if checkbox is clickable",
+            "steps": [
+              {
+                "selector": "checkbox",
+                "action": "click"
+              },
+              {
+                "selector": "checkbox",
+                "action": "compare",
+                "value": ""
+              },
+              {
+                "selector": "checkboxChecked",
+                "action": "isChecked"
+              }
+            ]
+          },
+          {
+            "name": "Reset value for next test",
+            "steps": [
+              {
+                "selector": "checkbox",
+                "action": "click"
+              },
+              {
+                "selector": "checkbox",
+                "action": "compare",
+                "value": ""
+              }
+            ]
+          }
+        ]
+    }
+  },
   "integer": {
     "customRating": {
       "ui:selectors": {

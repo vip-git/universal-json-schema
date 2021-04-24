@@ -1,7 +1,7 @@
 {
     "SelectComponents": {
        "ui:selectors": {
-           "button": "(//button[@tabindex=0])[2]"
+           "button": "//button[contains(., 'Next')]"
         },
         "ui:test": [
             {
@@ -18,7 +18,7 @@
        "ui:selectors": {
            "packageName": "//div/label[contains(text(), 'Package Name')]/following-sibling::div/input",
            "packageVersion": "//div/label[contains(text(), 'Package Version')]/following-sibling::div/input",
-           "button": "(//button[@tabindex=0])[3]"
+           "button": "//button[contains(., 'Next')]"
         },
         "ui:test": [
             {
@@ -43,7 +43,7 @@
     },
     "GettingStarted": {
        "ui:selectors": {
-           "button": "(//button[@tabindex=0])[3]"
+           "button": "//button[contains(., 'Finish')]"
         },
         "ui:test": [
             {

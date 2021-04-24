@@ -54,6 +54,9 @@ class FormPage extends Page {
 
     if (this.currentTab) {
       this.btnSubmit.waitForClickable({ timeout: 10000 });
+      try {
+        $('//button[@aria-label="full-screen-code"]').click();
+      } catch(err) {}
       $(
         `//button[@role="tab"][span[contains(text(), "${this.currentTab}")]]`
       ).click();
@@ -275,7 +278,7 @@ class FormPage extends Page {
       if (tabName !== 'false') {
         super.open(formPage);
         this.currentTab = tabName;
-        return $(
+        return  $(
           `//button[@role="tab"][span[contains(text(), "${tabName}")]]`
         ).click();
       }
