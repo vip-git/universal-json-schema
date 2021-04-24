@@ -23,7 +23,7 @@
             "isRequired": true
         },
         "@react-jsonschema-form-interceptors/translate-range-date": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "name": "translate-range-date"
         }
     },

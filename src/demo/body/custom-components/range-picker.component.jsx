@@ -9,8 +9,7 @@ import { TextField } from '@material-ui/core';
 
 const CustomDateRangePicker = ({ onChange, formData, uiData = { object: { } } }) => {
   const [open, setOpen] = React.useState(false);
-  const [dateRange, setDateRange] = React.useState({});
-  const [data, setData] = React.useState(uiData.object?.customComponent || formData.object?.customComponent || '');
+  const [data] = React.useState(uiData.object?.customComponent || formData.object?.customComponent || '');
     
   const toggle = () => setOpen(!open);
 
@@ -33,7 +32,7 @@ const CustomDateRangePicker = ({ onChange, formData, uiData = { object: { } } })
         onChange={(range) => {
           const startDate = range.startDate.toISOString();
           const endDate = range.endDate.toISOString();
-          const newUIData = `${range.startDate.toLocaleDateString()} - ${range.endDate.toLocaleDateString()}`;
+          const newUIData = `${range.startDate.toLocaleDateString('us')} - ${range.endDate.toLocaleDateString('us')}`;
           const newData = {
             startDate,
             endDate,
