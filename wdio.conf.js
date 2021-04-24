@@ -24,7 +24,7 @@ exports.config = {
   // NPM script (see https://docs.npmjs.com/cli/run-script) then the current working
   // directory is where your package.json resides, so `wdio` will be called from there.
   //
-  specs: ['./src/demo/examples/**/simple-array.feature'],
+  specs: ['./src/demo/examples/**/budget.feature'],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -58,8 +58,8 @@ exports.config = {
       // 5 instances get started at a time.
       maxInstances: 5,
       //
-      browserName: 'Safari',
-      // acceptInsecureCerts: true,
+      browserName: 'chrome',
+      acceptInsecureCerts: true,
       // If outputDir is provided WebdriverIO can capture driver session logs
       // it is possible to configure which logTypes to include/exclude.
       // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
@@ -109,7 +109,7 @@ exports.config = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: 'https://react-jsonschema-form-material-ui-gk7oou93c-github56.vercel.app',
+  baseUrl: 'http://localhost:3005',
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 10000,
