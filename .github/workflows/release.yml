@@ -30,6 +30,8 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm install
       - run: npm run build
+      - run: npm install -g json
+      - run: json -I -f package.json -e 'this.scripts.postinstall="echo done"'
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
