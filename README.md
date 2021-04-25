@@ -50,32 +50,33 @@ const Example () => {
 	    schema={givenSchema}
 	    uiSchema={givenUISchema}
             formData={givenFormData}
-            onCancel={onCancel}
+            onChange={onFormChanged} 
 	    onSubmit={onSubmit}
-	    onUpload={onUpload}
-            onChange={onFormChanged}
-            onError={onError}
-            /* Optional Param for custom functions to be executed for transforming data */
+	    // Every Prop below is optional - every prop above this line is required
+            onCancel={onCancel} /* optional */
+	    onUpload={onUpload} /* optional */
+            onError={onError} /* optional */
+            /* Optional Prop for custom functions to be executed for transforming data */
             interceptors={{
                 translateRatings: (givenData, uiData) => ({ givenData, uiData }),
             }}
-            /* Optional Param for custom components */
+            /* Optional Prop for custom components */
 	    components={{
 		  customComponent: ({ onChange, ...rest }) => (
-				<CustomComponent onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
+			<CustomComponent onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
 		  ),
 		  customRating: ({ onChange, ...rest }) => (
-				<CustomRating onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
+			CustomRating onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
 		  ),
 	    }}
-            /* Optional Param for custom validation */
+            /* Optional Prop for custom validation */
             validations={{
                 confirmPassword: ({ schema, validations, formData, value }) => value !== formData.pass1 && ({
-                message: validations.confirmPassword.message,
-                inline: true,
+			message: validations.confirmPassword.message,
+			inline: true,
                 }),
             }}
-            /* Optional Param to auto submit form on press of enter */
+            /* Optional Prop to auto submit form on press of enter */
 	    submitOnEnter
 	/>
     );
