@@ -12,9 +12,9 @@
 - Reference Schema's via http and inline references
 - Support alternatives - oneOf, anyOf
 - Support for dependencies - array of conditionals
-- new Prop [onError](./src/demo/body/Example.jsx#L49) to get errors available in form on every change
-- New [interceptors](./src/demo/body/Example.jsx#L50-L72) prop to transform form and uiData using uiSchema - [ui:interceptor]./src/demo/examples/simple/ui-schema.json#L84)
-- new concept called [uiData](./src/demo/body/Example.jsx#L69) to control ui only data to add seperation of concern with form data needs use of [interceptors](./src/demo/body/Example.jsx#L50-L72)
+- new Prop [onError](./src/demo/body/Example.jsx#L48) to get errors available in form on every change
+- New [interceptors](./src/demo/body/Example.jsx#L49-L71) prop to transform form and uiData using uiSchema - [ui:interceptor]./src/demo/examples/simple/ui-schema.json#L84)
+- new concept called [uiData](./src/demo/body/Example.jsx#L68) to control ui only data to add seperation of concern with form data needs use of [interceptors](./src/demo/body/Example.jsx#L49-L71)
 - Demo updated with vscode editor and live validation changes
 - New `xhrSchema` feature enabled to make xhr calls [onload](./src/demo/examples/simple/xhr-schema.json#L3), [onsubmit](./src/demo/examples/simple/xhr-schema.json#L12) and [onclick](./src/demo/examples/simple/xhr-schema.json#L59) to consume or post data
 - `type: null` support included for custom div support
