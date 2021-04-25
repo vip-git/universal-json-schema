@@ -61,10 +61,12 @@ const Example () => {
             onCancel={onCancel} /* optional */
 	    onUpload={onUpload} /* optional */
             onError={onError} /* optional */
+	    
             /* Optional Prop for custom functions to be executed for transforming data */
             interceptors={{
                 translateRatings: (givenData, uiData) => ({ givenData, uiData }),
             }}
+	    
             /* Optional Prop for custom components */
 	    components={{
 		  customComponent: ({ onChange, ...rest }) => (
@@ -74,6 +76,7 @@ const Example () => {
 			<CustomRating onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
 		  ),
 	    }}
+	    
             /* Optional Prop for custom validation */
             validations={{
                 confirmPassword: ({ schema, validations, formData, value }) => value !== formData.pass1 && ({
@@ -81,6 +84,7 @@ const Example () => {
 		      inline: true,
                 }),
             }}
+	    
             /* Optional Prop to auto submit form on press of enter */
 	    submitOnEnter
 	/>
