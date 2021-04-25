@@ -1,5 +1,9 @@
-### 3.0.0 [Breaking Changes]
-- Build system now upgraded to webpack 5
+### [WIP] 3.0.0 
+##### [Follow Releases to get detailed overview](https://github.com/vip-git/react-jsonschema-form-material-ui/releases)
+- Strict support for JSONSchema-Draft-7 including validations using [Ajv](https://github.com/ajv-validator/ajv#ajv-json-schema-validator)
+- Build system now upgraded to `Webpack 5`
+- Support for `Material UI 5`
+- Support for `React 17` and `NextJS 10`
 - React select values are no stringify results but real values.
 - New Tabs and Stepper UI using `ui:page` -> `"ui:layout": "tabs"`
 - Additional Properties and Additional Items feature enabled
@@ -8,11 +12,11 @@
 - Reference Schema's via http and inline references
 - Support alternatives - oneOf, anyOf
 - Support for dependencies - array of conditionals
-- new Prop onError to get errors available in form on every change
-- new Prop uiData to control ui only data to add seperation of concern with form data
+- new Prop [onError](./src/demo/body/Example.jsx#L48) to get errors available in form on every change
+- New [interceptors](./src/demo/body/Example.jsx#L49-L71) prop to transform form and uiData using uiSchema - [ui:interceptor]./src/demo/examples/simple/ui-schema.json#L84)
+- new concept called [uiData](./src/demo/body/Example.jsx#L68) to control ui only data to add seperation of concern with form data needs use of [interceptors](./src/demo/body/Example.jsx#L49-L71)
 - Demo updated with vscode editor and live validation changes
-- New interceptors to transform form and uiData using uiSchema - `ui:interceptor`
-- New `xhrSchema` feature enabled to make xhr calls onload, onsubmit and onclick to consume or post data
+- New `xhrSchema` feature enabled to make xhr calls [onload](./src/demo/examples/simple/xhr-schema.json#L3), [onsubmit](./src/demo/examples/simple/xhr-schema.json#L12) and [onclick](./src/demo/examples/simple/xhr-schema.json#L59) to consume or post data
 - `type: null` support included for custom div support
 
 
