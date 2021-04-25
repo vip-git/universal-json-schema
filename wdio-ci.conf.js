@@ -90,6 +90,8 @@ exports.config = {
     {
       "browserName" : "Chrome",
       "browserVersion" : "latest",
+      "maxInstances": 1,
+      "maxInstancesPerCapability": 1,
       'bstack:options' : {
         "os" : "Windows",
         "osVersion" : "10",
