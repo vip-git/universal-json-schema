@@ -23,11 +23,14 @@ import React from 'react';
 import MaterialJsonSchemaForm from 'react-jsonschema-form-material-ui';
 
 // Internals
-const schema = require('./path-to your-schema.json');
-const uiSchema = require('./path-to your-ui-schema.json');
-const formData = require('./path-to your-ui-formData.json');
+const givenSchema = require('./path-to your-schema.json');
+const givenUISchema = require('./path-to your-ui-schema.json');
+const givenFormData = require('./path-to your-ui-formData.json');
 
 const Example () => {
+    
+    const [formData, setFormData] = React.useState(givenFormData);
+    
     const onSubmit = (value, callback) => {
         console.log('onSubmit: %s', JSON.stringify(value)); // eslint-disable-line no-console
         setTimeout(() => callback && callback(), 2000); // just an example in real world can be your XHR call
@@ -37,9 +40,7 @@ const Example () => {
         console.log('on reset being called');
     }
     
-    const onFormChanged = ({ formData }) => {
-        console.log('onFormChanged: ',formData); // eslint-disable-line no-console
-    }
+    const onFormChanged = ({ formData }) => setFormData(formData);
     
     const onUpload = (value) => {
         console.log('onUpload: ', value); // eslint-disable-line no-console
@@ -47,11 +48,15 @@ const Example () => {
     
     return (
          <MaterialJsonSchemaForm
+	    // Define Schema
 	    schema={givenSchema}
 	    uiSchema={givenUISchema}
-            formData={givenFormData}
+            formData={formData}
+	    
+	    // Define Event handlers
             onChange={onFormChanged} 
 	    onSubmit={onSubmit}
+	    
 	    // Every Prop below is optional - every prop above this line is required
             onCancel={onCancel} /* optional */
 	    onUpload={onUpload} /* optional */
