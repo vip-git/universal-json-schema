@@ -38,12 +38,12 @@ const FormComponent = ({
     <Form
       schema={givenSchema}
       xhrSchema={givenXhrSchema || {}}
-			uiSchema={givenUISchema}
+      uiSchema={givenUISchema}
       formData={givenFormData}
-			onCancel={onCancel}
-			onSubmit={onSubmit}
+      onCancel={onCancel}
+      onSubmit={onSubmit}
       onStepNext={onSubmit}
-			onUpload={onUpload}
+      onUpload={onUpload}
       onChange={onFormChanged}
       onError={onError}
       interceptors={{
@@ -71,10 +71,10 @@ const FormComponent = ({
       }}
       components={{
 	  customComponent: ({ onChange, ...rest }) => (
-			<CustomComponent onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
+		<CustomComponent onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
 	  ),
 	  customRating: ({ onChange, ...rest }) => (
-			<CustomRating onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
+		<CustomRating onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
 	  ),
       }}
       validations={{
