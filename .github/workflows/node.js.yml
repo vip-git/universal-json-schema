@@ -41,6 +41,9 @@ jobs:
             elif [ $VERCEL_STATE = "ERROR" ]; then
                echo InValid state $VERCEL_STATE  1>&2
                exit 64
+            elif [ $VERCEL_STATE = "null" ]; then
+               echo InValid state $VERCEL_STATE  1>&2
+               exit 64
             else
                 echo invalid state found - $VERCEL_STATE
                 isReadyState
