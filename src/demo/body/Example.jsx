@@ -1,16 +1,15 @@
-/* eslint-disable no-undef */
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-tabs */
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable max-len */
-/* eslint-disable no-mixed-operators */
+// Library
 import React, { useState } from 'react';
 import { isEqual } from 'lodash';
+
+// Material UI
 import { useTheme } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import Paper from '@material-ui/core/Paper';
+
+// Internal
 import Form from '../../Form';
 import useStyles from './example-styles';
 import Source from './Source';
@@ -36,7 +35,7 @@ const FormComponent = ({
   onFormChanged,
   onError,
 }) => (
-		<Form
+    <Form
       schema={givenSchema}
       xhrSchema={givenXhrSchema || {}}
 			uiSchema={givenUISchema}
@@ -70,23 +69,23 @@ const FormComponent = ({
           };
         },
       }}
-			components={{
-			  customComponent: ({ onChange, ...rest }) => (
-					<CustomComponent onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
-			  ),
-			  customRating: ({ onChange, ...rest }) => (
-					<CustomRating onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
-			  ),
-			}}
+      components={{
+	  customComponent: ({ onChange, ...rest }) => (
+			<CustomComponent onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
+	  ),
+	  customRating: ({ onChange, ...rest }) => (
+			<CustomRating onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
+	  ),
+      }}
       validations={{
         confirmPassword: ({ schema, validations, formData, value }) => value !== formData.pass1 && ({
           message: validations.confirmPassword.message,
           inline: true,
         }),
       }}
-			submitOnEnter
-			activityIndicatorEnabled
-		/>
+      submitOnEnter
+      activityIndicatorEnabled
+   />
 );
 
 const SourceSchema = ({
