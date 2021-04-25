@@ -236,12 +236,13 @@ const Form = ({
     );
   };
 
-  const onXHRSchemaEvent = (field) => (xhrDef, xhrEvent) => {
+  const onXHRSchemaEvent = (givenField) => (xhrDef, xhrEvent) => {
     const { url, method, payload } = xhrDef;
     const mapDef = Object.keys(xhrDef).find((t) => t.includes('map:'));
     const findMapDef = xhrDef[mapDef];
-    set(xhrSchema, `properties.${field}.${xhrEvent}.xhrProgress`, true);
-    setLoadingState({ ...loadingState, [field]: true });
+    const field = givenField.split('.').map((gs, gsi) => gsi > 0 ? `properties.${gs}` : gs).join('.');
+    set(xhrSchema, `properties.${givenField}.${xhrEvent}.xhrProgress`, true);
+    setLoadingState({ ...loadingState, [givenField]: true });
     executeXHRCall({
       url,
       method,
@@ -253,9 +254,9 @@ const Form = ({
           `properties.${field}.${mapDef.replace('map:', '')}`,
           enums,
         );
-        set(xhrSchema, `properties.${field}.${xhrEvent}.xhrComplete`, true);
-        set(xhrSchema, `properties.${field}.${xhrEvent}.xhrProgress`, false);
-        setLoadingState({ ...loadingState, [field]: false });
+        set(xhrSchema, `properties.${givenField}.${xhrEvent}.xhrComplete`, true);
+        set(xhrSchema, `properties.${givenField}.${xhrEvent}.xhrProgress`, false);
+        setLoadingState({ ...loadingState, [givenField]: false });
       },
     });
   };

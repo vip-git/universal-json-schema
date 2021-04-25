@@ -110,6 +110,9 @@
         "className": "money"
       }
     },
+    "xhrSelectTest": {
+      "ui:widget": "material-multiselect"
+    },
     "creatableSelectTest": {
       "ui:widget": "creatable-select",
       "ui:options": {

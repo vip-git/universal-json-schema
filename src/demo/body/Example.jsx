@@ -1,9 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-tabs */
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable max-len */
-/* eslint-disable no-mixed-operators */
 import React, { useState } from 'react';
 import { isEqual } from 'lodash';
 import { useTheme } from '@material-ui/core';

@@ -55,7 +55,7 @@
   },
   "properties": {
     "array": {
-      "selectTest": {
+      "xhrSelectTest": {
         "onload": {
           "xhr:datasource": {
               "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api",

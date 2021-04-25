@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-operators */
 // Library
 import React from 'react';
+import { get } from 'lodash';
 import classNames from 'classnames';
 import keys from 'lodash/keys';
 
@@ -50,7 +51,7 @@ export const RawFieldSetObject = ({
       ? getDefinitionSchemaFromRef(definitions, schema.properties[tabKey], data[tabKey])
       : schema.properties[tabKey];
     const finalData = { ...data[tabKey] };  
-    return (isLoading && isLoading[tabKey]) ? 'Loading...' : (
+    return (isLoading && isLoading[newPath]) ? 'Loading...' : (
       <div className={classNames(classes.root, orientation)}>
         <FormField
             key={tabKey}
@@ -60,7 +61,7 @@ export const RawFieldSetObject = ({
             schema={propSchema}
             data={uiData[tabKey] && Object.assign(finalData, uiData[tabKey]) || finalData}
             uiSchema={uiSchema[tabKey] || {}}
-            xhrSchema={xhrSchema?.properties && xhrSchema?.properties[tabKey] || {}}
+            xhrSchema={xhrSchema || {}}
             validation={validation[tabKey] || {}}
             definitions={definitions}
             {...rest}
@@ -78,7 +79,7 @@ export const RawFieldSetObject = ({
           const propSchema = schema.properties[propId].$ref
             ? getDefinitionSchemaFromRef(definitions, schema.properties[propId], data[propId])
             : schema.properties[propId];
-          return (isLoading && isLoading[propId]) ? 'Loading...' : (
+          return (isLoading && isLoading[newPath]) ? 'Loading...' : (
             <FormField
                 key={propId}
                 objectData={data}
@@ -87,7 +88,7 @@ export const RawFieldSetObject = ({
                 schema={propSchema}
                 data={uiData[propId] || data[propId]}
                 uiSchema={uiSchema[propId] || {}}
-                xhrSchema={xhrSchema?.properties && xhrSchema?.properties[propId] || {}}
+                xhrSchema={get(xhrSchema.properties, newPath) || {}}
                 validation={validation[propId] || {}}
                 definitions={definitions}
                 {...rest}
@@ -124,7 +125,7 @@ export const RawFieldSetObject = ({
                   schema={schema.additionalProperties}
                   data={uiData[propId] || data[propId]}
                   uiSchema={uiSchema[propId] || {}}
-                  xhrSchema={xhrSchema?.properties && xhrSchema?.properties[propId] || {}}
+                  xhrSchema={get(xhrSchema.properties, newPath) || {}}
                   validation={validation[propId] || {}}
                   dynamicKeyField={propId}
                   onDeleteItem={rest.onRemoveProperty && rest.onRemoveProperty(newPath)}
@@ -168,7 +169,7 @@ export const RawFieldSetObject = ({
             const propSchema = schema.properties[propId].$ref
               ? getDefinitionSchemaFromRef(definitions, schema.properties[propId], data[propId])
               : schema.properties[propId];
-            return (isLoading && isLoading[propId]) ? 'Loading...' : (
+            return (isLoading && isLoading[newPath]) ? 'Loading...' : (
               <FormField
                   key={propId}
                   objectData={data}
@@ -177,7 +178,7 @@ export const RawFieldSetObject = ({
                   schema={propSchema}
                   data={typeof uiData[propId] === 'string' && uiData[propId] || data[propId]}
                   uiSchema={uiSchema[propId] || {}}
-                  xhrSchema={xhrSchema?.properties && xhrSchema?.properties[propId] || {}}
+                  xhrSchema={get(xhrSchema.properties, newPath) || {}}
                   validation={validation[propId] || {}}
                   definitions={definitions}
                   {...rest}

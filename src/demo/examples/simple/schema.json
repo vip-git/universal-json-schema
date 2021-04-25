@@ -158,6 +158,15 @@
             ]
           },
           "uniqueItems": true
+        },
+        "xhrSelectTest": {
+          "type": "array",
+          "title": "Example XHR React Multi Select",
+          "items": {
+            "type": "string",
+            "enum": []
+          },
+          "uniqueItems": true
         }
       }
     },

@@ -35,7 +35,7 @@ const {
 export const RawFieldSetArray = (props) => {
   const {
     startIdx = 0, className, classes,
-    schema: givenSchema = {}, 
+    schema = {}, 
     uiSchema = {}, 
     definitions = {}, 
     data, 
@@ -45,7 +45,7 @@ export const RawFieldSetArray = (props) => {
     onDeleteItem, 
     ...rest
   } = props;
-  const schema = { ...givenSchema };
+  // const schema = { ...givenSchema };
   const canReorder = uiSchema && uiSchema['ui:options'] && uiSchema['ui:options'].canReorder;
   const allowRecursive = uiSchema && uiSchema['ui:options'] && uiSchema['ui:options'].allowRecursive;
   const hasSelectWidget = uiSchema && uiSchema['ui:widget'];

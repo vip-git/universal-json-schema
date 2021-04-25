@@ -30,13 +30,14 @@ const isPageLayoutSet = (uiSchema) => {
 export const shouldHideTitle = (uiSchema, schema, path) => isPageLayoutSet(uiSchema, path) || has(schema, 'items.enum');
 
 export const RawFieldSetContent = (props) => {
-  const { schema = {}, uiSchema = {} } = props;
+  const { schema = {}, uiSchema = {}, xhrSchema = {}, } = props;
   const { type } = schema;
   if (type === 'array') {
     return (
       <FieldSetArray 
         uiSchema={uiSchema}
         schema={schema}
+        xhrSchema={xhrSchema}
         {...props} 
       />
     );
@@ -49,6 +50,7 @@ export const RawFieldSetContent = (props) => {
           <FieldSetTabs 
             uiSchema={uiSchema} 
             schema={schema} 
+            xhrSchema={xhrSchema}
             {...props} 
           />
         );
@@ -58,6 +60,7 @@ export const RawFieldSetContent = (props) => {
           <FieldSetSteps
             uiSchema={uiSchema} 
             schema={schema} 
+            xhrSchema={xhrSchema}
             {...props} 
           />
         );  
@@ -67,6 +70,7 @@ export const RawFieldSetContent = (props) => {
           <FieldSetObject 
             uiSchema={uiSchema} 
             schema={schema} 
+            xhrSchema={xhrSchema}
             {...props} 
           />
         );
