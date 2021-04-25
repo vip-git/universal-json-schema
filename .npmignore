@@ -25,3 +25,9 @@ LICENSE
 .eslintrc.js
 browserstack.js
 generator/
+wdio-ci.conf.js
+wdio.conf.js
+.dockerignore
+changelog.md
+contributing.md
+Dockerfile
