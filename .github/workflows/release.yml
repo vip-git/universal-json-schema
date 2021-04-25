@@ -47,6 +47,7 @@ jobs:
       - run: npm run build
       - run: npm install -g json
       - run: json -I -f package.json -e 'this.name="@vip-git/react-jsonschema-form-material-ui"'
+      - run: json -I -f package.json -e 'this.scripts.postinstall="echo done"'
       - run: npm publish --registry=https://npm.pkg.github.com --scope=public
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
