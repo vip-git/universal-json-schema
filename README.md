@@ -66,14 +66,14 @@ const Example () => {
 			<CustomComponent onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
 		  ),
 		  customRating: ({ onChange, ...rest }) => (
-			CustomRating onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
+			<CustomRating onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
 		  ),
 	    }}
             /* Optional Prop for custom validation */
             validations={{
                 confirmPassword: ({ schema, validations, formData, value }) => value !== formData.pass1 && ({
-			message: validations.confirmPassword.message,
-			inline: true,
+		      message: validations.confirmPassword.message,
+		      inline: true,
                 }),
             }}
             /* Optional Prop to auto submit form on press of enter */
