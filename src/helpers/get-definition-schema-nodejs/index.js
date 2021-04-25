@@ -7,7 +7,7 @@ const getDefinitionSchemaFromRef = (
   givenDefinitions,
   schemaProperties,
   formData,
-  transformSchema,
+  // transformSchema,
 ) => {
   try {
     const definitions = { ...givenDefinitions };
@@ -56,4 +56,4 @@ const getDefinitionSchemaFromRef = (
   }
 };
 
-export default getDefinitionSchemaFromRef;
+module.exports = getDefinitionSchemaFromRef;

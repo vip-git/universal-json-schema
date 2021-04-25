@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const namor = require('namor');
-const getDefinitionSchemaFromRef = require('../src/helpers/get-definition-schema');
+const getDefinitionSchemaFromRef = require('../src/helpers/get-definition-schema-nodejs');
 
 const generateTestFile = ({
   schema,
