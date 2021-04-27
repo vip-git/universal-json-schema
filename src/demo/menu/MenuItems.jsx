@@ -25,14 +25,16 @@ export default withStyles(menuStyles)(({ toggleDrawer, classes, onSelectMenuItem
       onKeyDown={toggleDrawer(false)}
       className={classes.drawerList}
     >
-      <List subheader={<ListSubheader component='div'>Bundler</ListSubheader>}>
-        <ListItem key={'bundler'} button>
-            <ListItemText 
-              primary={'UI-Bundler'} 
-              onClick={onSelectMenuItem(examples[version].simple, 'ui-bundler')} 
-            />
-        </ListItem>
-      </List>
+      /* UI-Bundler disabled for now should be enabled after testing and release note / documentation on usage.
+        <List subheader={<ListSubheader component='div'>Bundler</ListSubheader>}>
+          <ListItem key={'bundler'} button>
+              <ListItemText 
+                primary={'UI-Bundler'} 
+                onClick={onSelectMenuItem(examples[version].simple, 'ui-bundler')} 
+              />
+          </ListItem>
+        </List> 
+      */
       <List subheader={<ListSubheader component='div'>Showcase</ListSubheader>}>
         {keys(examples[version]).map((e) => (
           <ListItem key={e} button>
