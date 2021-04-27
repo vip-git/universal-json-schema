@@ -47,7 +47,7 @@
     "emotion": "10.0.27",
     "express": "4.17.1",
     "immutability-helper": "^2.6.5 || ^3.0.0",
-    "is-hotkey": "0.1.6",
+    "is-hotkey": "0.2.0",
     "lodash": "4.17.21",
     "moment": "2.27.0",
     "next-pickers-material-ui": "5.0.0",
