@@ -5,10 +5,11 @@ name: Create New Release
 
 on:
   release:
-    types: [released]
+    types: [created]
 
 jobs:
   build:
+    if: "!github.event.release.prerelease"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,6 +21,7 @@ jobs:
       - run: npm test
 
   publish-npm:
+    if: "!github.event.release.prerelease"
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -37,6 +39,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
   publish-gpr:
+    if: "!github.event.release.prerelease"
     needs: build
     runs-on: ubuntu-latest
     steps:
