@@ -13,7 +13,30 @@ A [**live playground**](https://react-jsonschema-form-material-ui.github56.now.s
 npm install --save react-jsonschema-form-material-ui
 ```
 
-## Example Usage
+## Basic Example Usage
+```jsx
+// Library
+import React from 'react';
+import MaterialJsonSchemaForm from 'react-jsonschema-form-material-ui';
+
+// Internals
+import schema from '../simple/schema.json';
+import uiSchema from '../simple/ui-schema.json';
+import givenFormData from '../simple/form-data.json';
+
+export default () => {
+  const [formData, setFormData] = React.useState(givenFormData);
+  return <MaterialJsonSchemaForm 
+            schema={schema} 
+            uiSchema={uiSchema} 
+            formData={formData} 
+            onChange={({ formData }) => setFormData(formData)}
+            onSubmit={(submittedData) => console.log('form submitted', submittedData)}
+          />;
+};
+```
+
+## Advanced Example Usage
 
 > More detailed example can be seen [here](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/src/demo/body/Example.jsx)
 
@@ -131,7 +154,7 @@ npm install
 
 > Run the demo to test your changes
 ```
-npm run start:demo (open http://localhost:3005 once build is successful)
+npm start (open http://localhost:3005 once build is successful)
 ```
 
 > Run the tests once you are done with your changes
