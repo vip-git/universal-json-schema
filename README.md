@@ -154,7 +154,7 @@ npm install
 
 > Run the demo to test your changes
 ```
-npm run start:demo (open http://localhost:3005 once build is successful)
+npm start (open http://localhost:3005 once build is successful)
 ```
 
 > Run the tests once you are done with your changes
