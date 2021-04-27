@@ -51,7 +51,7 @@
     "lodash": "4.17.21",
     "moment": "2.27.0",
     "next-pickers-material-ui": "5.0.0",
-    "postcss": "8.2.10",
+    "postcss": "8.2.13",
     "prop-types": "15.7.2",
     "react": "^16 || ^17.0.1",
     "react-dom": "^16 || ^17.0.1",
