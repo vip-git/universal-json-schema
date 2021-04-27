@@ -15,9 +15,11 @@ npm install --save react-jsonschema-form-material-ui
 
 ## Basic Example Usage
 ```jsx
+// Library
 import React from 'react';
 import MaterialJsonSchemaForm from 'react-jsonschema-form-material-ui';
 
+// Internals
 import schema from '../simple/schema.json';
 import uiSchema from '../simple/ui-schema.json';
 import givenFormData from '../simple/form-data.json';
