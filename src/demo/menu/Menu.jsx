@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -41,6 +42,9 @@ class RawMenuAppBar extends React.Component {
               <Typography color='inherit'>React JSONSchema Form (Material UI)</Typography>
             </div>
             <VersionSelect setVersion={setVersion} />
+            <IconButton aria-label="github" onClick={() => { window.location.href = 'https://github.com/vip-git/react-jsonschema-form-material-ui'}}>
+              <GitHubIcon fontSize="large" />
+            </IconButton>
           </Toolbar>
         </AppBar>
         <LeftDrawer open={drawerOpen} toggleDrawer={this.toggleDrawer} onSelectMenuItem={onSelectMenuItem} />
