@@ -1,7 +1,7 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
 
-name: Create New Release
+name: Create New Pre Release
 
 on:
   release:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    if: "!github.event.release.prerelease"
+    if: "github.event.release.prerelease"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,7 +21,7 @@ jobs:
       - run: npm test
 
   publish-npm:
-    if: "!github.event.release.prerelease"
+    if: "github.event.release.prerelease"
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -34,12 +34,12 @@ jobs:
       - run: npm run build
       - run: npm install -g json
       - run: json -I -f package.json -e 'this.scripts.postinstall="echo done"'
-      - run: npm publish
+      - run: npm publish --tag next
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
   publish-gpr:
-    if: "!github.event.release.prerelease"
+    if: "github.event.release.prerelease"
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -53,6 +53,6 @@ jobs:
       - run: npm install -g json
       - run: json -I -f package.json -e 'this.name="@vip-git/react-jsonschema-form-material-ui"'
       - run: json -I -f package.json -e 'this.scripts.postinstall="echo done"'
-      - run: npm publish --registry=https://npm.pkg.github.com --scope=public
+      - run: npm publish --registry=https://npm.pkg.github.com --scope=public --tag next
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
