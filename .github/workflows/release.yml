@@ -5,7 +5,7 @@ name: Create New Release
 
 on:
   release:
-    types: [created]
+    types: [released]
 
 jobs:
   build:
