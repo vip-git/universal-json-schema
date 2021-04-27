@@ -4,10 +4,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
-
-// Context
-import VersionContext from '../context/version.context';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -19,7 +15,8 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     minWidth: 120,
     color: 'white',
-    bottom: 3
+    bottom: 3,
+    marginLeft: 'auto!important',
   },
   label: {
     color: 'white',
@@ -30,14 +27,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function VersionSelect({
-  setVersion,
+    version
 }) {
   const classes = useStyles();
-  const version = useContext(VersionContext);
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
-    setVersion(event.target.value);
+    if (event.target.value === 5) {
+        window.location.href = 'https://react-jsonschema-form-material-ui-git-next-github56.vercel.app';
+    }
   };
 
   const handleClose = () => {
@@ -50,7 +48,7 @@ export default function VersionSelect({
 
   return (
     <FormControl className={classes.formControl}>
-        <InputLabel className={classes.label}>Schema</InputLabel>
+        <InputLabel className={classes.label}>Material UI</InputLabel>
         <Select
             labelId='demo-controlled-open-select-label'
             id='demo-controlled-open-select'
@@ -60,10 +58,9 @@ export default function VersionSelect({
             value={version}
             onChange={handleChange}
             className={classes.select}
-            disabled
         >
-            <MenuItem value={3}> Version 3 </MenuItem>
-            <MenuItem value={2}> Version 2 </MenuItem>
+            <MenuItem value={5}> Version 5 </MenuItem>
+            <MenuItem value={4}> Version 4 </MenuItem>
         </Select>
     </FormControl>
   );
