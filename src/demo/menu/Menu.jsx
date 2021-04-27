@@ -10,6 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import LeftDrawer from './LeftDrawer';
 import menuStyles from './menu-styles';
 import VersionSelect from './versionSelect';
+import MaterialVersionSelect from './material-version-select';
 
 class RawMenuAppBar extends React.Component {
   state = {
@@ -41,6 +42,7 @@ class RawMenuAppBar extends React.Component {
             <div className={classes.flexCtr}>
               <Typography color='inherit'>React JSONSchema Form (Material UI)</Typography>
             </div>
+            <MaterialVersionSelect version={5} />
             <VersionSelect setVersion={setVersion} />
             <IconButton aria-label="github" onClick={() => { window.location.href = 'https://github.com/vip-git/react-jsonschema-form-material-ui'}}>
               <GitHubIcon fontSize="large" />
