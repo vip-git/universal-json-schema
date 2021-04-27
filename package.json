@@ -34,7 +34,7 @@
     "@material-ui/icons": "^4 || next",
     "@material-ui/lab": "^4.0.0-alpha.57 || next",
     "@material-ui/styled-engine": "^5.0.0-alpha.11 || next",
-    "@monaco-editor/react": "4.0.6",
+    "@monaco-editor/react": "4.1.1",
     "@types/jest": "26.0.21",
     "@wdio/cli": "7.4.6",
     "ajv": "6.12.6",
