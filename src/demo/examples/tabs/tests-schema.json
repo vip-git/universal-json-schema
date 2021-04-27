@@ -2,7 +2,7 @@
     "Technical": {
         "listOfStrings": {
             "ui:selectors": {
-                "input": "(//input)[5]"
+                "input": "//h6[contains(., 'A list of strings')]/following-sibling::hr/following-sibling::div/following-sibling::div/div/div/div/div/input"
             },
             "ui:test": [
                 {

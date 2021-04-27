@@ -1,9 +1,9 @@
 {
   "billing_address": {
     "ui:selectors": {
-      "billing1Input": "(//div/div/input)[2]",
-      "billing2Input": "(//div/div/input)[3]",
-      "billing3Input": "(//div/div/input)[4]"
+      "billing1Input": "(//h6[contains(., 'Billing address')]/following-sibling::hr/following-sibling::div/following-sibling::div/div/div/input)[1]",
+      "billing2Input": "(//h6[contains(., 'Billing address')]/following-sibling::hr/following-sibling::div/following-sibling::div/div/div/input)[2]",
+      "billing3Input": "(//h6[contains(., 'Billing address')]/following-sibling::hr/following-sibling::div/following-sibling::div/div/div/input)[3]"
     },
     "ui:test": [
       {
@@ -70,9 +70,9 @@
   },
   "shipping_address": {
     "ui:selectors": {
-      "shipping1Input": "(//div/div/input)[5]",
-      "shipping2Input": "(//div/div/input)[6]",
-      "shipping3Input": "(//div/div/input)[7]"
+      "shipping1Input": "(//h6[contains(., 'Shipping address')]/following-sibling::hr/following-sibling::div/following-sibling::div/div/div/input)[1]",
+      "shipping2Input": "(//h6[contains(., 'Shipping address')]/following-sibling::hr/following-sibling::div/following-sibling::div/div/div/input)[2]",
+      "shipping3Input": "(//h6[contains(., 'Shipping address')]/following-sibling::hr/following-sibling::div/following-sibling::div/div/div/input)[3]"
     },
     "ui:test": [
       {

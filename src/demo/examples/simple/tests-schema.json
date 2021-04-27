@@ -88,13 +88,13 @@
     "customComponent": {
       "ui:selectors": {
         "default": "//div/label[contains(text(), 'Range Picker')]/following-sibling::div/input",
-        "selectStartMonthDropDown": "(//input[@class='MuiSelect-nativeInput']/preceding-sibling::div)[2]",
+        "selectStartMonthDropDown": "(//div[@role='dialog']//input[@class='MuiSelect-nativeInput']/preceding-sibling::div)[1]",
         "selectStartMonth": "//ul/li[contains(., 'Apr')]",
-        "selectStartYearDropDown": "(//div[@tabIndex=0][contains(text(), '2021')])[1]",
+        "selectStartYearDropDown": "(//div[@role='dialog']//div[@tabIndex=0][contains(text(), '2021')])[1]",
         "selectStartYear": "//ul/li[contains(., '2021')]",
-        "selectEndMonthDropDown": "(//input[@class='MuiSelect-nativeInput']/preceding-sibling::div)[4]",
+        "selectEndMonthDropDown": "(//div[@role='dialog']//input[@class='MuiSelect-nativeInput']/preceding-sibling::div)[3]",
         "selectEndMonth": "//ul/li[contains(., 'May')]",
-        "selectEndYearDropDown": "(//div[@tabIndex=0][contains(text(), '2021')])[2]",
+        "selectEndYearDropDown": "(//div[@role='dialog']//div[@tabIndex=0][contains(text(), '2021')])[2]",
         "selectEndYear": "//ul/li[contains(., '2021')]",
         "startDate": "(//button[not(@disabled)]/span[contains(., '5')])[1]",
         "endDate": "(//button[not(@disabled)]/span[contains(., '15')])[1]"
