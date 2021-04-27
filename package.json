@@ -153,7 +153,7 @@
     "immutability-helper": "^2.6.5 || ^3.0.0",
     "shortid": "2.2.15"
   },
-  "version": "4.0.0-alpha.0",
+  "version": "3.0.0-alpha.5-mui-5",
   "directories": {
     "doc": "docs"
   },

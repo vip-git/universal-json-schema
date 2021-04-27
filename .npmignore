@@ -31,3 +31,13 @@ wdio.conf.js
 changelog.md
 contributing.md
 Dockerfile
+_results_
+test*.js
+node_modules
+mochawesome-report-unit
+todo
+generated
+_results_
+.DS_Store
+generator/
+
