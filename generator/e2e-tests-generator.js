@@ -42,6 +42,7 @@ const generateUISchemaType = ({
   uiSchema,
   formData
 }) => {
+  const isTelephone = (propName) => _.has(uiSchema, `${propName}.ui:options.inputType`);
   /**
    * Todo: do something with uiSchema validations here
    * maxLength
@@ -51,6 +52,10 @@ const generateUISchemaType = ({
    * maximum
    */
   Object.keys(schema.properties).forEach((schemaProp) => {
+    const isTelephoneNumber = isTelephone(schemaProp) ? '+3119121345' : namor.generate({
+            words: 3,
+            saltLength: 0,
+          });
     let data =
       schema.properties[schemaProp].type === 'number' ||
       schema.properties[schemaProp].type === 'integer'
@@ -59,10 +64,7 @@ const generateUISchemaType = ({
             numbers: 5,
             saltLength: 0,
           }).replace(0, '')
-        : namor.generate({
-            words: 3,
-            saltLength: 0,
-          })
+        : isTelephoneNumber
 
     if (schema.properties[schemaProp].maximum) {
       data = schema.properties[schemaProp].maximum;
