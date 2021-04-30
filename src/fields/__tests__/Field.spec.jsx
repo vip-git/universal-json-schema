@@ -2,18 +2,12 @@
 /* globals describe,it */
 /* eslint-disable no-unused-expressions */
 import React from 'react';
-import chai, { expect } from 'chai';
-import Enzyme, { shallow } from 'enzyme';
-import chaiEnzyme from 'chai-enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
 import Input from '@material-ui/core/Input';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import RadioGroup from './components/RadioGroup';
-import ConfiguredField from './ConfiguredField';
+import RadioGroup from '../components/RadioGroup';
+import ConfiguredField from '../ConfiguredField';
 
 const classes = {
   description: 'description',
@@ -21,10 +15,6 @@ const classes = {
   myComp: 'myCompClassName',
   withLabel: 'withLabelClass',
 };
-
-chai.use(chaiEnzyme());
-chai.use(sinonChai);
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('Field', () => {
   it('mounts with standard attributes (control)', () => {

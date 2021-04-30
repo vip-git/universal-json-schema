@@ -4,7 +4,7 @@ import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import getComponentProps from './get-component-props';
+import getComponentProps from '../get-component-props';
 
 chai.use(sinonChai);
 
@@ -24,7 +24,7 @@ describe('getComponentProps', () => {
     };
     const componentProps = getComponentProps({ schema, uiSchema, required, path, htmlid, onChange });
     expect(componentProps).to.haveOwnProperty('inputProps');
-    expect(componentProps.inputProps).to.deep.equal(expectedInputProps);
+    expect(componentProps.inputProps).toStrictEqual(expectedInputProps);
     expect(componentProps.type).to.equal('string');
   });
   it('creates options property from enum', () => {
@@ -40,7 +40,7 @@ describe('getComponentProps', () => {
     ];
     const componentProps = getComponentProps({ schema, uiSchema });
     expect(componentProps).to.haveOwnProperty('options');
-    expect(componentProps.options).to.deep.equal(expectedOptions);
+    expect(componentProps.options).toStrictEqual(expectedOptions);
   });
   describe('ui:options.disabled', () => {
     it('as boolean adds disabled property', () => {
@@ -95,7 +95,7 @@ describe('getComponentProps', () => {
       ];
       const componentProps = getComponentProps({ schema, uiSchema });
       expect(componentProps).to.haveOwnProperty('options');
-      expect(componentProps.options).to.deep.equal(expectedOptions);
+      expect(componentProps.options).toStrictEqual(expectedOptions);
     });
   });
   describe('sets type', () => {

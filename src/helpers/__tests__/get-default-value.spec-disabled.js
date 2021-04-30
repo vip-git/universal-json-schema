@@ -1,6 +1,4 @@
-/* globals describe,it */
-import { expect } from 'chai';
-import getDefaultValue from './get-default-value';
+import getDefaultValue from '../get-default-value';
 
 describe('getDefaultValue', () => {
   it('works for string', () => {
@@ -41,7 +39,7 @@ describe('getDefaultValue', () => {
     const actual = getDefaultValue(data);
 
     // assert
-    expect(actual).to.deep.equal(expected);
+    expect(actual).toStrictEqual(expected);
   });
   it('works for object with properties', () => {
     // assemble
@@ -59,7 +57,7 @@ describe('getDefaultValue', () => {
     const actual = getDefaultValue(data);
 
     // assert
-    expect(actual).to.deep.equal(expected);
+    expect(actual).toStrictEqual(expected);
   });
   it('works for object with properties with default values', () => {
     // assemble
@@ -78,7 +76,7 @@ describe('getDefaultValue', () => {
     const actual = getDefaultValue(data);
 
     // assert
-    expect(actual).to.deep.equal(expected);
+    expect(actual).toStrictEqual(expected);
   });
   it('works for nested object', () => {
     // assemble
@@ -101,6 +99,6 @@ describe('getDefaultValue', () => {
     const actual = getDefaultValue(data);
 
     // assert
-    expect(actual).to.deep.equal(expected);
+    expect(actual).toStrictEqual(expected);
   });
 });

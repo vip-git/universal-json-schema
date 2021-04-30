@@ -1,7 +1,4 @@
-/* globals describe,it */
-import { expect } from 'chai';
-
-import getLabelComponentProps from './get-label-component-props';
+import getLabelComponentProps from '../get-label-component-props';
 
 describe('getLabelComponentProps', () => {
   it('configures props for simple field', () => {
@@ -17,6 +14,6 @@ describe('getLabelComponentProps', () => {
       required: false,
     };
     const labelComponentProps = getLabelComponentProps({ schema, required, htmlid });
-    expect(labelComponentProps).to.deep.equal(expectedLabelProps);
+    expect(labelComponentProps).toStrictEqual(expectedLabelProps);
   });
 });

@@ -1,23 +1,13 @@
 /* globals describe,it */
 /* eslint-disable no-unused-expressions */
 import React from 'react';
-import chai, { expect } from 'chai';
-import Enzyme, { shallow } from 'enzyme';
-import chaiEnzyme from 'chai-enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-import { RawFormField as FormField } from './FormField';
-import Field from './fields';
-import FieldSet from './FieldSet';
+import { RawFormField as FormField } from '../FormField';
+import Field from '../fields';
+import FieldSet from '../FieldSet';
 
 const classes = {
   field: 'fieldClassName',
 };
-
-chai.use(chaiEnzyme());
-chai.use(sinonChai);
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('FormField', () => {
   it('mounts with single field (control)', () => {

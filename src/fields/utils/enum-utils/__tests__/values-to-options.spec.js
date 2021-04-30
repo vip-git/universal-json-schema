@@ -1,6 +1,4 @@
-/* globals describe,it */
-import { expect } from 'chai';
-import valuesToOptions from './values-to-options';
+import valuesToOptions from '../values-to-options';
 
 describe('valuesToOptions', () => {
   it('returns key = value form array', () => {
@@ -20,7 +18,7 @@ describe('valuesToOptions', () => {
       },
     ];
     const actual = valuesToOptions(values);
-    expect(actual).to.deep.equal(expected);
+    expect(actual).toStrictEqual(expected);
   });
   it('handles object', () => {
     const values = {
@@ -43,6 +41,6 @@ describe('valuesToOptions', () => {
       },
     ];
     const actual = valuesToOptions(values);
-    expect(actual).to.deep.equal(expected);
+    expect(actual).toStrictEqual(expected);
   });
 });

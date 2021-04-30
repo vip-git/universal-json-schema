@@ -1,20 +1,10 @@
 /* globals describe,it */
 /* eslint-disable no-unused-expressions */
 import React from 'react';
-import chai, { expect } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-import chaiEnzyme from 'chai-enzyme';
 import Enzyme, { mount, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { default as CheckboxComp } from '.'; // eslint-disable-line import/no-named-default
-
-chai.use(sinonChai);
-
-chai.use(chaiEnzyme());
-Enzyme.configure({ adapter: new Adapter() });
+import { default as CheckboxComp } from '..'; // eslint-disable-line import/no-named-default
 
 describe('Checkbox', () => {
   it('mounts with standard attributes (control)', () => {

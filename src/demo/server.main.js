@@ -32,7 +32,7 @@ app.use('/schema', express.static(path.join(__dirname, 'examples')));
 app.get('/ping', (req, res) => res.status(200).send());
 
 app.post('/create_components', (req, res) => {
-  const componentsJSON = require('../../generator/components.json');
+  const componentsJSON = require('../../scripts/generator/components.json');
   const filter = (obj, predicate) => Object.keys(obj)
     .filter((key) => predicate(obj[key]))
     .reduce(
@@ -86,11 +86,11 @@ app.post('/publish_package', (req, res) => {
       fs.rmdirSync(dir);
     };
     const componentsInfo = tempStorage[req.body.sessionId];
-    if (!fs.existsSync(`generator/${req.body.sessionId}`)) {
-      fs.mkdirSync(`generator/${req.body.sessionId}`);
+    if (!fs.existsSync(`scripts/generator/${req.body.sessionId}`)) {
+      fs.mkdirSync(`scripts/generator/${req.body.sessionId}`);
     }
     fs.writeFileSync(
-      `generator/${req.body.sessionId}/components.json`,
+      `scripts/generator/${req.body.sessionId}/components.json`,
       JSON.stringify(componentsInfo, null, 2),
     );
     const packageInfo = require('../../package.json');
@@ -100,7 +100,7 @@ app.post('/publish_package', (req, res) => {
     packageInfo.version = req.body.packageVersion;
     delete packageInfo.scripts.postinstall;
     fs.writeFileSync(
-      `generator/${req.body.sessionId}/package.json`,
+      `scripts/generator/${req.body.sessionId}/package.json`,
       JSON.stringify(packageInfo, null, 2),
     );
 
@@ -187,7 +187,7 @@ export default Example;
 \`\`\`
     `;
     fs.writeFile(
-      `generator/${req.body.sessionId}/README.md`,
+      `scripts/generator/${req.body.sessionId}/README.md`,
       readMeTemplate,
       () => {},
     );
@@ -199,7 +199,7 @@ export default Example;
     `;
 
     fs.writeFile(
-      `generator/${req.body.sessionId}/.npmrc`,
+      `scripts/generator/${req.body.sessionId}/.npmrc`,
       npmrcTemplate,
       () => {},
     );
@@ -221,11 +221,11 @@ WORKDIR /opt/react-json-schema
 COPY src/ /opt/react-json-schema/src
 COPY .babelrc /opt/react-json-schema/.babelrc
 COPY .npmignore /opt/react-json-schema/.npmignore
-COPY generator/ /opt/react-json-schema/generator
-COPY generator/${req.body.sessionId}/components.json /opt/react-json-schema/generator/components.json
-COPY generator/${req.body.sessionId}/package.json /opt/react-json-schema/package.json
-COPY generator/${req.body.sessionId}/README.md /opt/react-json-schema/README.md
-COPY generator/${req.body.sessionId}/.npmrc /opt/react-json-schema/.npmrc
+COPY scripts/generator/ /opt/react-json-schema/scripts/generator
+COPY scripts/generator/${req.body.sessionId}/components.json /opt/react-json-schema/scripts/generator/components.json
+COPY scripts/generator/${req.body.sessionId}/package.json /opt/react-json-schema/package.json
+COPY scripts/generator/${req.body.sessionId}/README.md /opt/react-json-schema/README.md
+COPY scripts/generator/${req.body.sessionId}/.npmrc /opt/react-json-schema/.npmrc
 COPY index.js /opt/react-json-schema/index.js
 COPY webpack.config.js /opt/react-json-schema/webpack.config.js
 
@@ -250,7 +250,7 @@ RUN npm link webpack && \\
     npm link @babel/preset-typescript && \\
     npm link @babel/register && \\
     npm link @babel/runtime
-RUN node generator/index.js
+RUN node scripts/generator/index.js
 RUN npx webpack
 RUN npm version
 RUN npm publish --access public 
@@ -268,7 +268,7 @@ CMD ["node", "index.js"]
       () => {
         try {
           fs.unlinkSync(`Dockerfile${req.body.sessionId.toLowerCase()}`);
-          rmdir(`generator/${req.body.sessionId}/`);
+          rmdir(`scripts/generator/${req.body.sessionId}/`);
         }
         catch (err) {
           // console.error(err);

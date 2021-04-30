@@ -1,7 +1,5 @@
-/* globals describe,it */
 import without from 'lodash/without';
-import { expect } from 'chai';
-import updateFormData, { addListItem, removeListItem, moveListItem } from './update-form-data';
+import updateFormData, { addListItem, removeListItem, moveListItem } from '../update-form-data';
 
 describe('updateFormData', () => {
   it('updates simple field', () => {
@@ -11,7 +9,7 @@ describe('updateFormData', () => {
     const expected = {
       name: 'Harry',
     };
-    expect(updateFormData(initial, 'name', 'Harry')).to.deep.equal(expected);
+    expect(updateFormData(initial, 'name', 'Harry')).toStrictEqual(expected);
   });
   it('updates nested field', () => {
     const initial = {
@@ -24,7 +22,7 @@ describe('updateFormData', () => {
         firstName: 'Harry',
       },
     };
-    expect(updateFormData(initial, 'name.firstName', 'Harry')).to.deep.equal(expected);
+    expect(updateFormData(initial, 'name.firstName', 'Harry')).toStrictEqual(expected);
   });
   it('updates index field (object)', () => {
     const initial = {
@@ -37,7 +35,7 @@ describe('updateFormData', () => {
         name: 'Harry',
       }],
     };
-    expect(updateFormData(initial, 'list[0].name', 'Harry')).to.deep.equal(expected);
+    expect(updateFormData(initial, 'list[0].name', 'Harry')).toStrictEqual(expected);
   });
   it('updates index field (simple)', () => {
     const initial = {
@@ -46,13 +44,13 @@ describe('updateFormData', () => {
     const expected = {
       list: ['Harry'],
     };
-    expect(updateFormData(initial, 'list[0]', 'Harry')).to.deep.equal(expected);
+    expect(updateFormData(initial, 'list[0]', 'Harry')).toStrictEqual(expected);
   });
   it('updates single field', () => {
     const initial = 'initialValue';
     const expected = 'updatedValue';
 
-    expect(updateFormData(initial, '', 'updatedValue')).to.deep.equal(expected);
+    expect(updateFormData(initial, '', 'updatedValue')).toStrictEqual(expected);
   });
   it('removes array item', () => {
     const initial = [
@@ -62,7 +60,7 @@ describe('updateFormData', () => {
     ];
     const expected = ['one', 'three'];
 
-    expect(updateFormData(initial, '', { $apply: arr => without(arr, 'two') })).to.deep.equal(expected);
+    expect(updateFormData(initial, '', { $apply: arr => without(arr, 'two') })).toStrictEqual(expected);
   });
   it('adds array item', () => {
     const initial = [
@@ -71,7 +69,7 @@ describe('updateFormData', () => {
     ];
     const expected = ['one', 'two', 'three'];
 
-    expect(updateFormData(initial, '', { $push: ['three'] })).to.deep.equal(expected);
+    expect(updateFormData(initial, '', { $push: ['three'] })).toStrictEqual(expected);
   });
   describe('addListItem', () => {
     it('adds list item', () => {
@@ -89,7 +87,7 @@ describe('updateFormData', () => {
         ],
       };
 
-      expect(addListItem(initial, 'listItems', '3')).to.deep.equal(expected);
+      expect(addListItem(initial, 'listItems', '3')).toStrictEqual(expected);
     });
     it('adds list item to null list', () => {
       const initial = {
@@ -101,7 +99,7 @@ describe('updateFormData', () => {
         ],
       };
 
-      expect(addListItem(initial, 'listItems', '1')).to.deep.equal(expected);
+      expect(addListItem(initial, 'listItems', '1')).toStrictEqual(expected);
     });
     it('adds list item - deep', () => {
       const initial = {
@@ -122,7 +120,7 @@ describe('updateFormData', () => {
         },
       };
 
-      expect(addListItem(initial, 'myprop.listItems', '3')).to.deep.equal(expected);
+      expect(addListItem(initial, 'myprop.listItems', '3')).toStrictEqual(expected);
     });
   });
   describe('removeListItem', () => {
@@ -141,7 +139,7 @@ describe('updateFormData', () => {
         ],
       };
 
-      expect(removeListItem(initial, 'listItems', 1)).to.deep.equal(expected);
+      expect(removeListItem(initial, 'listItems', 1)).toStrictEqual(expected);
     });
     it('remove list item - deep', () => {
       const initial = {
@@ -162,7 +160,7 @@ describe('updateFormData', () => {
         },
       };
 
-      expect(removeListItem(initial, 'myprop.listItems', 1)).to.deep.equal(expected);
+      expect(removeListItem(initial, 'myprop.listItems', 1)).toStrictEqual(expected);
     });
   });
   describe('moveListItem', () => {
@@ -182,7 +180,7 @@ describe('updateFormData', () => {
         ],
       };
 
-      expect(moveListItem(initial, 'listItems', 1, -1)).to.deep.equal(expected);
+      expect(moveListItem(initial, 'listItems', 1, -1)).toStrictEqual(expected);
     });
     it('moves list item down', () => {
       const initial = {
@@ -200,7 +198,7 @@ describe('updateFormData', () => {
         ],
       };
 
-      expect(moveListItem(initial, 'listItems', 0, 1)).to.deep.equal(expected);
+      expect(moveListItem(initial, 'listItems', 0, 1)).toStrictEqual(expected);
     });
   });
 });

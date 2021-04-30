@@ -1,17 +1,6 @@
 /* globals describe,it */
 /* eslint-disable no-unused-expressions */
 import React from 'react';
-import chai, { expect } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import chaiEnzyme from 'chai-enzyme';
-
-chai.use(sinonChai);
-
-chai.use(chaiEnzyme());
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('dom events', () => {
   it('test click button', () => {

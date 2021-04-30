@@ -41,7 +41,7 @@ const shellFileString = new shelljs.ShellString(finalString);
 
 // Folder Variables
 const generatedLocation = `${shelljs.pwd()}/src/generated`;
-const generatorLocation = `${shelljs.pwd()}/generator`;
+const generatorLocation = `${shelljs.pwd()}/scripts/generator`;
 const demoFolder = `${shelljs.pwd()}/src/demo/examples`;
 const testsGeneratedFolder = `${shelljs.pwd()}/src/__e2e__/page-objects/generated`;
 

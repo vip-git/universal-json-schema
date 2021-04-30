@@ -2,31 +2,21 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import forEach from 'lodash/forEach';
-import chai, { expect } from 'chai';
-import Enzyme, { shallow } from 'enzyme';
-import chaiEnzyme from 'chai-enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
 import IconButton from '@material-ui/core/IconButton';
 import {
   RawFieldSet,
   FieldSetContent,
-} from './FieldSet';
-import FieldSetArray, { RawFieldSetArray } from './FieldSetArray';
-import { RawFieldSetObject } from './FieldSetObject';
-import ReorderableFormField, { RawReorderableFormField } from './ReorderableFormField';
-import ReorderControls, { RawReorderControls } from './ReorderControls';
-import FormField from '../FormField';
+} from '../FieldSet';
+import FieldSetArray, { RawFieldSetArray } from '../FieldSetArray';
+import { RawFieldSetObject } from '../FieldSetObject';
+import ReorderableFormField, { RawReorderableFormField } from '../ReorderableFormField';
+import ReorderControls, { RawReorderControls } from '../ReorderControls';
+import FormField from '../../FormField';
 
 const classes = {
   root: 'rootClassName',
   row: 'rowClassName',
 };
-
-chai.use(chaiEnzyme());
-chai.use(sinonChai);
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('FieldSet', () => {
   describe('FieldSet - control', () => {

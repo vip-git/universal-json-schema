@@ -1,6 +1,4 @@
-/* globals describe,it */
-import { expect } from 'chai';
-import getValidationResult from './get-validation-result';
+import getValidationResult from '../get-validation-result';
 
 describe('getValidations', () => {
   it('max len - fail', () => {
@@ -16,8 +14,8 @@ describe('getValidations', () => {
       firstName: 'Maxamillian',
     };
     const result = getValidationResult(schema, {}, data);
-    expect(result.firstName).to.have.length(1);
-    expect(result.firstName[0].rule).to.equal('maxLength');
+    expect(result.firstName).toHaveLength(1);
+    expect(result.firstName[0].rule).toBe('maxLength');
   });
   it('max-len - pass', () => {
     const schema = {
@@ -32,7 +30,7 @@ describe('getValidations', () => {
       firstName: 'Max',
     };
     const result = getValidationResult(schema, {}, data);
-    expect(result.firstName).to.have.length(0);
+    expect(result.firstName).toHaveLength(0);
   });
   it('min-len - fail', () => {
     const schema = {
@@ -47,8 +45,8 @@ describe('getValidations', () => {
       firstName: 'Mi',
     };
     const result = getValidationResult(schema, {}, data);
-    expect(result.firstName).to.have.length(1);
-    expect(result.firstName[0].rule).to.equal('minLength');
+    expect(result.firstName).toHaveLength(1);
+    expect(result.firstName[0].rule).toBe('minLength');
   });
   it('pattern - fail', () => {
     const schema = {
@@ -63,9 +61,9 @@ describe('getValidations', () => {
       email: 'geoffs-fridges-at-gmail-dot-com',
     };
     const result = getValidationResult(schema, {}, data);
-    expect(result).to.haveOwnProperty('email');
-    expect(result.email).to.have.length(1);
-    expect(result.email[0].rule).to.equal('pattern');
+    expect(result).toHaveProperty('email');
+    expect(result.email).toHaveLength(1);
+    expect(result.email[0].rule).toBe('pattern');
   });
   it('pattern - pass', () => {
     const schema = {
@@ -80,8 +78,8 @@ describe('getValidations', () => {
       email: 'geoffs-fridges@geoff.com',
     };
     const result = getValidationResult(schema, {}, data);
-    expect(result).to.haveOwnProperty('email');
-    expect(result.email).to.have.length(0);
+    expect(result).toHaveProperty('email');
+    expect(result.email).toHaveLength(0);
   });
   it('minimum - fail', () => {
     const schema = {
@@ -96,8 +94,8 @@ describe('getValidations', () => {
       age: 9,
     };
     const result = getValidationResult(schema, {}, data);
-    expect(result.age).to.have.length(1);
-    expect(result.age[0].rule).to.equal('minimum');
+    expect(result.age).toHaveLength(1);
+    expect(result.age[0].rule).toBe('minimum');
   });
   it('minimum - pass', () => {
     const schema = {
@@ -112,7 +110,7 @@ describe('getValidations', () => {
       age: 10,
     };
     const result = getValidationResult(schema, {}, data);
-    expect(result.age).to.have.length(0);
+    expect(result.age).toHaveLength(0);
   });
   it('maximum - fail', () => {
     const schema = {
@@ -127,8 +125,8 @@ describe('getValidations', () => {
       age: 19,
     };
     const result = getValidationResult(schema, {}, data);
-    expect(result.age).to.have.length(1);
-    expect(result.age[0].rule).to.equal('maximum');
+    expect(result.age).toHaveLength(1);
+    expect(result.age[0].rule).toBe('maximum');
   });
   it('maximum - pass', () => {
     const schema = {
@@ -143,7 +141,7 @@ describe('getValidations', () => {
       age: 18,
     };
     const result = getValidationResult(schema, {}, data);
-    expect(result.age).to.have.length(0);
+    expect(result.age).toHaveLength(0);
   });
   it('no validations', () => {
     const schema = {
@@ -157,7 +155,7 @@ describe('getValidations', () => {
       name: 'Bob',
     };
     const result = getValidationResult(schema, {}, data);
-    expect(result.name).to.have.length(0);
+    expect(result.name).toHaveLength(0);
   });
   it('no validations, no value', () => {
     const schema = {
@@ -171,6 +169,6 @@ describe('getValidations', () => {
       name: null,
     };
     const result = getValidationResult(schema, {}, data);
-    expect(result.name).to.have.length(0);
+    expect(result.name).toHaveLength(0);
   });
 });
