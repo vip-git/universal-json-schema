@@ -31,3 +31,4 @@ wdio.conf.js
 changelog.md
 contributing.md
 Dockerfile
+__tests__

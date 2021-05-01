@@ -5,13 +5,10 @@ import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 
-// Uitls
-import { isEnum, isSingleSelect } from '../../utils/enum-utils';
-
 // Props
-import checkboxProps from './checkbox.props';
+import checkboxProps, { CheckBoxProps } from './checkbox.props';
 
-export default ({ value, type, onChange, schema = {}, options = {}, ...rest }) => {
+export default ({ value, type, onChange, schema = {}, options = {}, ...rest }: CheckBoxProps) => {
   const { 
     onChange: givenOnChange, 
     onGroupChange, 
@@ -19,6 +16,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }) =
     label, 
     choices,
   } = checkboxProps({ onChange, schema, value });
+  
   const GroupCheckbox = () => (
     <FormControl component='fieldset'>
       <FormLabel component='legend'>{label}</FormLabel>
@@ -28,7 +26,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }) =
             <FormControlLabel
               control={(
                 <Checkbox
-                    checked={value?.includes(o.key)}
+                    checked={typeof value === 'string' || Array.isArray(value) ? value?.includes(o.key) : value}
                     onChange={onGroupChange(String(o.key), o.adds)}
                     disabled={o.disabled || false}
                 />
@@ -66,13 +64,14 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }) =
   );
 
   if (schema.type === 'boolean') {
+    const stringToBoolean = value ? true : false;
     return (
       <>
         {schema.description && (<FormLabel component='legend'>{schema.description}</FormLabel>)}
         <FormControlLabel
           control={(
             <Checkbox
-                checked={value || false}
+                checked={typeof value === 'boolean' && value || stringToBoolean}
                 onChange={givenOnChange}
                 disabled={options.disabled || false}
             />

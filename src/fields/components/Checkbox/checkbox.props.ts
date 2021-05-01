@@ -4,6 +4,15 @@ import without from 'lodash/without';
 // Utils
 import { UTIL_CONFIG } from '../../utils';
 
+export type CheckBoxProps = {
+  value?: boolean | string | Array<string>;
+  type?: string;
+  onChange?: Function;
+  schema?: any;
+  options?: any;
+  [key: string]: any;
+};
+
 const {
   ENUM_UTILS: {
     util: { valuesToOptions, isEnum },
@@ -38,7 +47,7 @@ const onEnumChangeHandler = (givenOnChange, value, adds) => (
   }
 };
 
-export default ({ onChange, schema = {}, value }) => ({
+export default ({ onChange, schema = {}, value }: { onChange: Function, schema: any; value: boolean | string | Array<string>}) => ({
   onChange: doOnChange(onChange),
   onEnumChange: (givenValue, adds) => onChange && onEnumChangeHandler(onChange, givenValue, adds),
   onGroupChange: (givenValue, adds) => onChange && onCheckboxChangeHandler(onChange, givenValue, schema, value, adds),
