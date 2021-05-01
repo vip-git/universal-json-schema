@@ -1,8 +1,11 @@
-// empty
+// Library
 import isEmpty from 'lodash/isEmpty';
 
 // Context
 import { EventContext, LoadingContext } from '../../../helpers/context';
+
+// Types
+import { GetComponentProps } from '@core-types/configure/GetComponentProps.type';
 
 // Interceptors
 const {
@@ -16,19 +19,15 @@ export default ({
   uiSchema = {},
   xhrSchema = {},
   isCustomComponent,
-  inputValue,
   onChange,
   onXHRSchemaEvent,
   onKeyDown,
-  creatableSelectValue,
-  onCreatableSelectChange,
-  onInputChange,
   htmlid,
   data,
   objectData,
   dynamicKeyField,
-  interceptors,
-}) => {
+  interceptors = {},
+}: GetComponentProps) => {
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'] || uiSchema['ui:props'] || {};
   const interceptorFunc = uiSchema['ui:interceptor'] || options.onBeforeChange;

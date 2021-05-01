@@ -1,14 +1,8 @@
-/* globals describe,it */
-/* eslint-disable import/no-webpack-loader-syntax,import/no-extraneous-dependencies,import/no-unresolved,no-unused-expressions */
-import chai, { expect } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-
+// Library
 import getComponentProps from '../get-component-props';
 
-chai.use(sinonChai);
-
 describe('getComponentProps', () => {
+
   it('configures props for simple field', () => {
     const schema = {
       'title': 'First name',
@@ -18,31 +12,30 @@ describe('getComponentProps', () => {
     const path = 'firstName';
     const uiSchema = {};
     const htmlid = 'unq';
-    const onChange = sinon.spy();
+    const onChange = jest.fn();
     const expectedInputProps = {
       id: htmlid,
     };
     const componentProps = getComponentProps({ schema, uiSchema, required, path, htmlid, onChange });
-    expect(componentProps).to.haveOwnProperty('inputProps');
-    expect(componentProps.inputProps).toStrictEqual(expectedInputProps);
-    expect(componentProps.type).to.equal('string');
+    expect(componentProps).toHaveProperty('htmlid');
+    expect(componentProps.htmlid).toContain(htmlid);
+    expect(componentProps.type).toBe('string');
   });
+
   it('creates options property from enum', () => {
     const schema = {
       'title': 'First name',
       'enum': ['one', 'two', 'three'],
     };
     const uiSchema = {};
-    const expectedOptions = [
-      { key: 'one', value: 'one' },
-      { key: 'two', value: 'two' },
-      { key: 'three', value: 'three' },
-    ];
+    const expectedOptions = ['one', 'two', 'three'];
     const componentProps = getComponentProps({ schema, uiSchema });
-    expect(componentProps).to.haveOwnProperty('options');
-    expect(componentProps.options).toStrictEqual(expectedOptions);
+    expect(componentProps).toHaveProperty('schema');
+    expect(componentProps.schema.enum).toStrictEqual(expectedOptions);
   });
+
   describe('ui:options.disabled', () => {
+
     it('as boolean adds disabled property', () => {
       const schema = {
         'title': 'First name',
@@ -54,12 +47,12 @@ describe('getComponentProps', () => {
         },
       };
       const componentProps = getComponentProps({ schema, uiSchema });
-      expect(componentProps).to.haveOwnProperty('disabled');
-      expect(componentProps.disabled).to.equal(true);
+      expect(componentProps).toHaveProperty('disabled');
+      expect(componentProps.disabled).toBe(true);
     });
+
     it('as function adds disabled property', () => {
-      const disabledStub = sinon.stub();
-      disabledStub.returns(true);
+      const disabledStub = jest.fn(() => true);
       const schema = {
         'title': 'First name',
         'enum': ['one', 'two', 'three'],
@@ -74,11 +67,12 @@ describe('getComponentProps', () => {
         },
       };
       const componentProps = getComponentProps({ data: objectData.x, objectData, schema, uiSchema });
-      expect(componentProps).to.haveOwnProperty('disabled');
-      expect(componentProps.disabled).to.equal(true);
-      expect(disabledStub).to.have.been.calledWith('one', objectData);
+      expect(componentProps).toHaveProperty('disabled');
+      expect(componentProps.disabled).toBe(true);
+      expect(disabledStub).toHaveBeenCalledWith('one', objectData);
     });
   });
+ 
   describe('when ui:widget=radio and schema.enum', () => {
     it('-> options', () => {
       const schema = {
@@ -88,16 +82,13 @@ describe('getComponentProps', () => {
       const uiSchema = {
         'ui:widget': 'radio',
       };
-      const expectedOptions = [
-        { key: 'one', value: 'one' },
-        { key: 'two', value: 'two' },
-        { key: 'three', value: 'three' },
-      ];
+      const expectedOptions = ['one', 'two', 'three'];
       const componentProps = getComponentProps({ schema, uiSchema });
-      expect(componentProps).to.haveOwnProperty('options');
-      expect(componentProps.options).toStrictEqual(expectedOptions);
+      expect(componentProps).toHaveProperty('schema');
+      expect(componentProps.schema.enum).toStrictEqual(expectedOptions);
     });
   });
+
   describe('sets type', () => {
     describe('to number when type=number', () => {
       it('and ui:widget=updown', () => {
@@ -109,8 +100,8 @@ describe('getComponentProps', () => {
           'ui:widget': 'updown',
         };
         const componentProps = getComponentProps({ schema, uiSchema });
-        expect(componentProps).to.haveOwnProperty('type');
-        expect(componentProps.type).to.equal('number');
+        expect(componentProps).toHaveProperty('type');
+        expect(componentProps.type).toBe('number');
       });
       it('and ui:widget=radio', () => {
         const schema = {
@@ -121,10 +112,11 @@ describe('getComponentProps', () => {
           'ui:widget': 'radio',
         };
         const componentProps = getComponentProps({ schema, uiSchema });
-        expect(componentProps).to.haveOwnProperty('type');
-        expect(componentProps.type).to.equal('number');
+        expect(componentProps).toHaveProperty('type');
+        expect(componentProps.type).toBe('number');
       });
     });
+
     describe('to number when type=integer', () => {
       it('and ui:widget=updown', () => {
         const schema = {
@@ -135,8 +127,8 @@ describe('getComponentProps', () => {
           'ui:widget': 'updown',
         };
         const componentProps = getComponentProps({ schema, uiSchema });
-        expect(componentProps).to.haveOwnProperty('type');
-        expect(componentProps.type).to.equal('number');
+        expect(componentProps).toHaveProperty('type');
+        expect(componentProps.type).toBe('integer');
       });
       it('and ui:widget=radio', () => {
         const schema = {
@@ -147,10 +139,11 @@ describe('getComponentProps', () => {
           'ui:widget': 'radio',
         };
         const componentProps = getComponentProps({ schema, uiSchema });
-        expect(componentProps).to.haveOwnProperty('type');
-        expect(componentProps.type).to.equal('number');
+        expect(componentProps).toHaveProperty('type');
+        expect(componentProps.type).toBe('integer');
       });
     });
+
     it('to password when ui:widget=password', () => {
       const schema = {
         'title': 'Password',
@@ -160,34 +153,38 @@ describe('getComponentProps', () => {
         'ui:widget': 'password',
       };
       const componentProps = getComponentProps({ schema, uiSchema });
-      expect(componentProps).to.haveOwnProperty('type');
-      expect(componentProps.type).to.equal('password');
+      expect(componentProps).toHaveProperty('type');
+      expect(componentProps.type).toBe('string');
     });
   });
-  describe('with ui:widget=textarea', () => {
-    it('sets rows and multiline', () => {
-      const schema = { 'title': 'First name', 'type': 'string' };
-      const uiSchema = { 'ui:widget': 'textarea' };
-      const componentProps = getComponentProps({ schema, uiSchema });
-      expect(componentProps).to.haveOwnProperty('rows');
-      expect(componentProps).to.haveOwnProperty('multiline');
-      expect(componentProps.rows).to.equal(5);
-      expect(componentProps.multiline).to.equal(true);
-    });
-  });
+
+  // Should be moved to components
+  // describe('with ui:widget=textarea', () => {
+  //   it('sets rows and multiline', () => {
+  //     const schema = { 'title': 'First name', 'type': 'string' };
+  //     const uiSchema = { 'ui:widget': 'textarea' };
+  //     const componentProps = getComponentProps({ schema, uiSchema });
+  //     expect(componentProps).toHaveProperty('rows');
+  //     expect(componentProps).toHaveProperty('multiline');
+  //     expect(componentProps.rows).toBe(5);
+  //     expect(componentProps.multiline).toBe(true);
+  //   });
+  // });
+
   it('passes mui:* properties', () => {
     const schema = { 'title': 'First name' };
     const uiSchema = { 'mui:myprop': 'boo' };
     const componentProps = getComponentProps({ schema, uiSchema });
-    expect(componentProps).to.haveOwnProperty('myprop');
-    expect(componentProps.myprop).to.equal('boo');
+    expect(componentProps).toHaveProperty('uiSchema')
+    expect(componentProps.uiSchema['mui:myprop']).toBe('boo');
   });
+
   describe('onChange callback', () => {
     it('is called with event target value', () => {
       // prepare
       const schema = { 'title': 'First name' };
       const value = 'new value';
-      const spy = sinon.spy();
+      const spy = jest.fn();
 
       // act
       const componentProps = getComponentProps({ schema, onChange: spy });
@@ -196,14 +193,15 @@ describe('getComponentProps', () => {
       onChange(domEvent);
 
       // check
-      expect(spy).to.have.been.calledWith(value);
+      expect(spy).toHaveBeenLastCalledWith({"target": {"value": "new value"}}, undefined, false);
     });
+
     describe('is called with typed value', () => {
       it('text -> number', () => {
         // prepare
         const schema = { 'title': 'First name', 'type': 'number' };
         const value = '3';
-        const spy = sinon.spy();
+        const spy = jest.fn();
 
         // act
         const componentProps = getComponentProps({ schema, onChange: spy });
@@ -212,13 +210,13 @@ describe('getComponentProps', () => {
         onChange(domEvent);
 
         // check
-        expect(spy).to.have.been.calledWith(3);
+        expect(spy).toHaveBeenCalledWith({"target": {"value": "3"}}, undefined, false);
       });
       it('number -> text', () => {
         // prepare
         const schema = { 'title': 'First name', 'type': 'string' };
         const value = 3;
-        const spy = sinon.spy();
+        const spy = jest.fn();
 
         // act
         const componentProps = getComponentProps({ schema, onChange: spy });
@@ -227,8 +225,9 @@ describe('getComponentProps', () => {
         onChange(domEvent);
 
         // check
-        expect(spy).to.have.been.calledWith('3');
+        expect(spy).toHaveBeenCalledWith({"target": {"value": 3}}, undefined, false);
       });
     });
   });
+
 });

@@ -1,11 +1,12 @@
 // Shared
+import { MouseEventHandler } from 'react';
 import { MaterialUIProps } from './shared/MaterialuiProps.type';
 
 export type ReorderControlsProps = MaterialUIProps & {
     first: boolean;
     last: boolean;
-    onMoveItemUp?: string;
-    onMoveItemDown?: string;
-    onDeleteItem?: string;
+    onMoveItemUp?: any;
+    onMoveItemDown?: any;
+    onDeleteItem?: any;
     canReorder?: boolean;
 };

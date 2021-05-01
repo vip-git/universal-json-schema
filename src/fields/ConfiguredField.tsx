@@ -1,15 +1,20 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable no-tabs */
-/* eslint-disable max-len */
+// Library
 import React from 'react';
 import isEmpty from 'lodash/isEmpty';
 import classNames from 'classnames';
+
+// Material UI
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Input from '@material-ui/core/Input';
 import ActiveComp from '@material-ui/icons/FiberManualRecord';
+
+// Styles
 import fieldStyles from './field-styles';
+
+// Types
+import { ConfiguredFieldProps } from '../types/ConfiguredField.type';
 
 // for unit testing only
 export const RawConfiguredField = ({
@@ -30,7 +35,7 @@ export const RawConfiguredField = ({
   isCustomComponent: hasCustomComponent,
   hasError,
   hasInlineError,
-}) => {
+}: ConfiguredFieldProps) => {
   const isCustomComponent = type === 'null' || hasCustomComponent;
   const classes = fieldStyles();
   const FormRoot = isCustomComponent ? FormGroup : FormControl;

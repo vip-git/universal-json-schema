@@ -12,7 +12,7 @@ import { withStyles } from '@material-ui/core/styles';
 import fieldSetStyles from './field-set-styles';
 
 // Types
-import { ReorderControlsProps } from 'ReorderControls.type';
+import { ReorderControlsProps } from '@core-types/ReorderControls.type';
 
 export const RawReorderControls = (
   { 

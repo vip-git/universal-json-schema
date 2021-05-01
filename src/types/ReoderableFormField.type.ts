@@ -1,6 +1,6 @@
 // Shared
 import { SchemaProps } from './shared/SchemaProps.type';
-import { ReorderControlsProps } from './ReorderControls.type';
+import { ReorderControlsProps } from '@core-types/ReorderControls.type';
 
 export type OrderFunction = (path: string, index: number) => string;
 

@@ -1,6 +1,6 @@
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 // :Theme
-export default makeStyles((theme) => createStyles({
+export default makeStyles((theme: Theme) => createStyles({
   root: {
     'padding': theme.spacing(1),
     '&$withLabel': {

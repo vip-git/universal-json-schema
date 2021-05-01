@@ -1,11 +1,13 @@
-/* eslint-disable no-tabs */
-/* eslint-disable no-mixed-spaces-and-tabs */
+// Library
 import React from 'react';
 import configureComponent from './configure';
 import ConfiguredField from './ConfiguredField';
 
-export default (props) => {
-  const { path, prefixId, schema, data, uiSchema, validation, dependencies } = props;
+// Types
+import { FieldProps } from 'Field.type';
+
+export default (props: FieldProps) => {
+  const { path, prefixId, schema, data, uiSchema, validation } = props;
   const { type } = schema;
   const htmlid = `${prefixId}_${path}`;
   const {

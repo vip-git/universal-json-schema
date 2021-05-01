@@ -1,4 +1,3 @@
-/* eslint-disable no-tabs */
 // Config
 const {
   APP_CONFIG: {
