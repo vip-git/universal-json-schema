@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-operators */
 // Library
 import React from 'react';
 import { get } from 'lodash';
@@ -25,6 +24,9 @@ import getDefaultValue from '../helpers/get-default-value';
 import getDefinitionSchemaFromRef from '../helpers/get-definition-schema';
 import { LoadingContext } from '../helpers/context';
 
+// types
+import { FieldSetObjectProps } from '../types/FieldSetObject.type'
+
 export const RawFieldSetObject = ({ 
   className, 
   classes,
@@ -41,7 +43,7 @@ export const RawFieldSetObject = ({
   isTabContent = false,
   tabKey,
   ...rest 
-}) => {
+}: FieldSetObjectProps) => {
   const schema = { ...givenSchema };
   const isLoading = React.useContext(LoadingContext);
   const orientation = (uiSchema['ui:orientation'] === 'row' ? classes.row : null);
@@ -51,7 +53,7 @@ export const RawFieldSetObject = ({
       ? getDefinitionSchemaFromRef(definitions, schema.properties[tabKey], data[tabKey])
       : schema.properties[tabKey];
     const finalData = { ...data[tabKey] };  
-    return (isLoading && isLoading[newPath]) ? 'Loading...' : (
+    return (isLoading && isLoading[newPath]) ? <div> Loading... </div> : (
       <div className={classNames(classes.root, orientation)}>
         <FormField
             key={tabKey}

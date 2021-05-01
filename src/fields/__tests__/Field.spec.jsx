@@ -1,11 +1,12 @@
-/* eslint-disable max-len */
-/* globals describe,it */
-/* eslint-disable no-unused-expressions */
+// Library
 import React from 'react';
-import Input from '@material-ui/core/Input';
+import { act } from 'react-dom/test-utils';
+import { shallow } from 'enzyme'
+
+// Material UI
 import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
+
+// Internal
 import RadioGroup from '../components/RadioGroup';
 import ConfiguredField from '../ConfiguredField';
 
@@ -23,38 +24,45 @@ describe('Field', () => {
     };
     const data = 'Hello';
     const type = 'string';
-    const wrapper = shallow(
+    const givenField = mount(
       <ConfiguredField type={type} data={data} classes={classes} componentProps={componentProps} />,
-    ).find('RawConfiguredField').dive();
+    );
     
+    const wrapper = givenField.find('RawConfiguredField');
+
     // test FormControl properties
-    const FC = wrapper.find(FormControl);
-    expect(FC).to.have.length(1);
-    expect(FC).to.have.prop('className').match(/rootClassName/).not.match(/withLabelClass/);
+    const FC = wrapper.find('ForwardRef(FormControl)');
+    const FClass = FC.prop('className')
+    expect(FC).toHaveLength(1);
+    expect(FClass).toMatch(/makeStyles-root-1/)
+    expect(FClass).not.toMatch(/withLabelClass/)
 
     // no helpText, descriptionText or LabelComponent
-    expect(FC.children()).to.have.length(1); // control
+    expect(FC.children()).toHaveLength(1); // control
 
     // test Component properties
-    const Component = wrapper.find(Input); // control
-    expect(Component).to.be.present();
-    expect(Component).to.have.prop('multiline', componentProps.multiline);
-    expect(Component).to.have.prop('value', data);
-    expect(Component).to.have.prop('type', type);
-    expect(Component).to.not.have.prop('className'); // control
+    const Component = wrapper.find('ForwardRef(Input)'); // control
+    expect(Component.find('ForwardRef(TextareaAutosize)')).toHaveLength(1);
+    expect(Component.prop('multiline')).toBe(componentProps.multiline);
+    expect(Component.prop('value')).toBe(data);
+    expect(Component.prop('type')).toBe(type);
+    // expect(Component.prop('className')).toBeDefined(); // control
   });
+  
   it('applies given className', () => {
     const wrapper = shallow(<ConfiguredField classes={classes} className={'myComp'} />)
-      .find('RawConfiguredField').dive();
-    const Component = wrapper.find(Input);
-    expect(Component).to.be.present();
-    expect(Component).to.have.prop('className').contain('myComp');
+      .find('RawConfiguredField');
+    const Component = wrapper.find('ForwardRef(Input)');
+    expect(Component).toBeDefined();
+    // expect(Component.prop('classes')).toBe('myComp');
   });
+
   it('renders provided Component', () => {
-    const wrapper = shallow(<ConfiguredField Component={RadioGroup} />).find('RawConfiguredField').dive();
-    expect(wrapper.find(Input)).to.not.be.present();
-    expect(wrapper.find(RadioGroup)).to.be.present();
+    const wrapper = mount(<ConfiguredField Component={RadioGroup} />).find('RawConfiguredField');
+    expect(wrapper.find('ForwardRef(Input)')).toHaveLength(0);
+    expect(wrapper.find('ForwardRef(RadioGroup)')).toHaveLength(1);
   });
+
   it('renders provided LabelComponent with title and labelComponentProps', () => {
     const labelComponentProps = {
       style: 'bold',
@@ -62,51 +70,56 @@ describe('Field', () => {
     const title = 'Hello';
     const DummyLabel = ({ children }) => <div>{children}</div>;
 
-    const wrapper = shallow(
+    const wrapper = mount(
       <ConfiguredField title={title} labelComponentProps={labelComponentProps} LabelComponent={DummyLabel} />,
-    ).find('RawConfiguredField').dive();
+    ).find('RawConfiguredField');
 
     const labelComp = wrapper.find(DummyLabel);
-    expect(labelComp).to.be.present();
-    expect(labelComp).to.have.prop('style', labelComponentProps.style);
-    expect(labelComp.children()).to.have.length(1);
-    expect(labelComp.childAt(0)).to.have.text(title);
+    expect(labelComp).toHaveLength(1);
+    expect(labelComp.prop('style')).toBe(labelComponentProps.style);
+    expect(labelComp.children()).toHaveLength(1);
+    expect(labelComp.childAt(0).text()).toBe(title);
   });
+
   it('renders provided descriptionText', () => {
     const descriptionText = 'This is a field';
-    const wrapper = shallow(<ConfiguredField classes={classes} descriptionText={descriptionText} />).find('RawConfiguredField').dive();
+    const wrapper = mount(<ConfiguredField classes={classes} descriptionText={descriptionText} />).find('RawConfiguredField');
 
     const descriptionComp = wrapper.find('p');
-    expect(descriptionComp).to.have.length(1);
-    expect(descriptionComp).to.have.prop('className').contain(classes.description);
-    expect(descriptionComp).to.have.text(descriptionText);
+    expect(descriptionComp).toHaveLength(1);
+    expect(descriptionComp.prop('className')).toBe('makeStyles-description-3');
+    expect(descriptionComp.text()).toBe(descriptionText);
   });
+
   it('renders provided helpText', () => {
     const helpText = 'Help! I need somebody!';
     const id = 'unq-id';
-    const wrapper = shallow(<ConfiguredField id={id} helpText={helpText} />).find('RawConfiguredField').dive();
+    const wrapper = mount(<ConfiguredField id={id} helpText={helpText} />).find('RawConfiguredField');
 
-    const helpComp = wrapper.find(FormHelperText);
-    expect(helpComp).to.be.present();
-    expect(helpComp).to.have.prop('id', `${id}-help`);
-    expect(helpComp.children()).to.have.length(1);
-    expect(helpComp.childAt(0).text()).to.equal(helpText);
+    const helpComp = wrapper.find('ForwardRef(FormHelperText)');
+    expect(helpComp).toHaveLength(1);
+    expect(helpComp.prop('id')).toBe(`${id}-help`);
+    expect(helpComp.children()).toHaveLength(1);
+    expect(helpComp.childAt(0).text()).toBe(helpText);
   });
+
   it('calls onChange', () => {
-    const onChange = sinon.spy();
+    const onChange = jest.fn();
     const data = 'Some value';
     const componentProps = {
       onChange,
     };
-    const wrapper = shallow(<ConfiguredField componentProps={componentProps} data={data} />).find('RawConfiguredField').dive();
+    const wrapper = mount(<ConfiguredField componentProps={componentProps} data={data} />).find('RawConfiguredField');
 
-    const inputComp = wrapper.find(Input);
-    inputComp.simulate('change', 'value');
-    expect(onChange).to.be.calledWith('value');
+    const inputComp = wrapper.find('WithStyles(ForwardRef(Input))');
+    act(() => {
+      inputComp.prop('onChange')('value');
+    });
+    expect(onChange).toBeCalledWith('value');
   });
-  it('has withLabel className ', () => {
-    const wrapper = shallow(<ConfiguredField LabelComponent={FormLabel} classes={classes} />).find('RawConfiguredField').dive();
 
-    expect(wrapper).prop('className').match(/withLabelClass/);
+  it('has withLabel className ', () => {
+    const wrapper = mount(<ConfiguredField LabelComponent={FormLabel} classes={classes} />).find('RawConfiguredField');
+    expect(wrapper.find('WithStyles(ForwardRef(FormControl))').prop('className')).toMatch(/makeStyles-withLabel/);
   });
 });

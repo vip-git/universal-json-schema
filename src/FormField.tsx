@@ -1,14 +1,19 @@
+// Library
 import React from 'react';
 import isEqual from 'lodash/isEqual';
 import forEach from 'lodash/forEach';
 import has from 'lodash/has';
 import set from 'lodash/set';
 import get from 'lodash/get';
-import { withStyles } from '@material-ui/core/styles';
+
+// Internal
 import FieldSet, { shouldHideTitle } from './FieldSet';
 import Field from './fields';
 import styles from './form-field-styles';
 import { isEmptyValues } from './helpers/remove-empty-values';
+
+// Types
+import { FormFieldProps } from './types/FormField.type';
 
 // exported for unit testing
 export const RawFormField = React.memo(({
@@ -24,8 +29,8 @@ export const RawFormField = React.memo(({
   path,
   id,
   ...rest 
-}) => {
-  const classes = styles();
+}: FormFieldProps) => {
+  const classes: any = styles();
   const { type, component: backwardsCompatibleComponent } = schema;
   const newComponent = uiSchema['ui:component'];
   const component = backwardsCompatibleComponent || newComponent;
@@ -53,7 +58,7 @@ export const RawFormField = React.memo(({
           onKeyDown={onKeyDown}
           onChange={onChange}
           onXHRSchemaEvent={onXHRSchemaEvent}
-          hideTitle={shouldHideTitle(uiSchema, schema, path)}
+          hideTitle={shouldHideTitle(uiSchema, schema)}
           onUpdateKeyProperty={onUpdateKeyProperty}
           dynamicKeyField={dynamicKeyField}
           prefixId={id}

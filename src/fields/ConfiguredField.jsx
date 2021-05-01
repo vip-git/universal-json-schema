@@ -2,10 +2,8 @@
 /* eslint-disable no-tabs */
 /* eslint-disable max-len */
 import React from 'react';
-import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -61,11 +59,11 @@ export const RawConfiguredField = ({
 				<LabelComponent
 					id={`${htmlid}-labelControl`}
 					className={descriptionText ? classes.customLabel : classes.normalLabel}
-					{...labelComponentProps}
 					style={activeCompColor ? {    
 					  left: 41,
 					  top: -8,
 					} : {}}
+					{...labelComponentProps}
 				>
 					{title}
 				</LabelComponent>

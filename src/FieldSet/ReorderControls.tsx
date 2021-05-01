@@ -1,11 +1,18 @@
+// Library
 import React from 'react';
+
+// Material UI
 import IconButton from '@material-ui/core/IconButton';
-import Icon from '@material-ui/core/Icon';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import RemoveCircle from '@material-ui/icons/Close';
 import { withStyles } from '@material-ui/core/styles';
+
+// Styles
 import fieldSetStyles from './field-set-styles';
+
+// Types
+import { ReorderControlsProps } from 'ReorderControls.type';
 
 export const RawReorderControls = (
   { 
@@ -16,7 +23,7 @@ export const RawReorderControls = (
     onMoveItemDown,
     onDeleteItem,
     canReorder,
-  },
+  }: ReorderControlsProps,
 ) => (
   <div className={classes.root}>
     {canReorder && (

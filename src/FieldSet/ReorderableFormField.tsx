@@ -6,6 +6,9 @@ import FormField from '../FormField';
 import fieldSetStyles from './field-set-styles';
 import ReorderControls from './ReorderControls';
 
+// Type
+import { ReorderableFormFieldProps } from '../types/ReoderableFormField.type';
+
 export const RawReorderableFormField = ({
   first, 
   last, 
@@ -20,7 +23,7 @@ export const RawReorderableFormField = ({
   recursiveDeleteItem,
   schema,
   ...rest
-}) => (
+}: ReorderableFormFieldProps) => (
   <div className={classNames(className, classes.root)}>
     {dynamicKeyField && (
       <FormField

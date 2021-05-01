@@ -9,3 +9,4 @@ _results_
 .DS_Store
 generator/package-lock.json
 generator/package.json
+coverage

@@ -1,5 +1,4 @@
 const paths = require('./scripts/config/paths');
-
 module.exports = {
 	verbose: true,
 	collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx,mjs}'],
@@ -12,7 +11,7 @@ module.exports = {
 	testMatch: [
 		'<rootDir>/src/**/?(*.)(spec|test).{js,jsx,ts,tsx,mjs}',
 	],
-	coverageDirectory: '<rootDir>/frontend-coverage',
+	coverageDirectory: '<rootDir>/coverage',
 	coveragePathIgnorePatterns: [
 		// All type definitions to be excluded
 		'!*.d.ts',
@@ -27,8 +26,8 @@ module.exports = {
 	testEnvironment: 'jsdom',
 	testURL: 'http://localhost',
 	transform: {
-		'^.+\\.(js|jsx|mjs)$': '<rootDir>/node_modules/babel-jest',
-		// '\\.(ts|tsx)$': 'ts-jest',
+		'^.+\\.(js|jsx|mjs)$': ['babel-jest', { configFile: paths.babelConfig }],
+		'\\.(ts|tsx)$': 'ts-jest',
 		'^.+\\.css$': '<rootDir>/scripts/config/jest/cssTransform.js',
 		'^(?!.*\\.(js|jsx|mjs|css|json)$)':
 			'<rootDir>/scripts/config/jest/fileTransform.js'

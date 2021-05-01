@@ -13,9 +13,8 @@
     "build": "webpack",
     "build:demo": "cross-env NODE_ENV=production webpack --config webpack.config.demo.js",
     "generate:tests": "node scripts/generator/index.js --testsOnly",
-    "test": "cross-env NODE_ENV=test node scripts/test.js --env=jsdom --config=jest.config.js",
-    "test-disabled": "npm run test:ci",
-    "test:watch": "npm run test:ci -- --watch",
+    "test": "node scripts/test.js --env=jsdom --config=jest.config.js --coverage",
+    "test:watch": "node scripts/test.js --env=jsdom --config=jest.config.js",
     "heroku-postbuild": "npm run build:demo",
     "now-build": "npm run build:demo",
     "start": "cross-env NODE_ENV=development node src/demo/server.js",
@@ -23,8 +22,7 @@
     "deploy:alpha": "npm run build && npm version prerelease --preid=alpha && npm publish",
     "deploy": "npm run build && npm version patch && npm publish",
     "test:e2e": "npx wdio run wdio.conf.js",
-    "test:e2e:ci": "npx wdio run wdio-ci.conf.js",
-    "test:ci": "mocha-webpack --glob \"*.spec.js*\" --reporter mochawesome --require mocha.setup.js --reporter-options reportDir=mochawesome-report-unit --recursive src"
+    "test:e2e:ci": "npx wdio run wdio-ci.conf.js"
   },
   "dependencies": {
     "@babel/plugin-syntax-jsx": "^7.12.13",
@@ -69,6 +67,7 @@
     "slate-plain-serializer": "0.7.13",
     "slate-react": "0.22.9",
     "slate-soft-break": "0.9.0",
+    "ts-jest": "26.5.5",
     "typeface-roboto": "0.0.75",
     "url-shim": "1.0.1",
     "util": "0.12.3"
@@ -83,7 +82,7 @@
     "@babel/plugin-transform-modules-commonjs": "7.14.0",
     "@babel/plugin-transform-runtime": "7.13.15",
     "@babel/polyfill": "7.12.1",
-    "@babel/preset-env": "7.12.11",
+    "@babel/preset-env": "7.14.0",
     "@babel/preset-react": "7.13.13",
     "@babel/preset-typescript": "7.13.0",
     "@babel/register": "7.13.16",

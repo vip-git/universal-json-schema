@@ -1,6 +1,4 @@
-/* eslint-disable no-mixed-operators */
-/* eslint-disable radix */
-/* eslint-disable react/jsx-props-no-spreading */
+// Library
 import React from 'react';
 import classNames from 'classnames';
 import endsWith from 'lodash/endsWith';
@@ -12,8 +10,10 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
-// Internal
+// Styles
 import fieldSetStyles from './field-set-styles';
+
+// Internal
 import FieldSetArray from './FieldSetArray';
 import FieldSetObject from './FieldSetObject';
 import FieldSetTabs from './FieldSetTabs';
@@ -22,12 +22,15 @@ import FieldSetSteps from './FieldSetStepper';
 // Validation Messages
 import ValidationMessages from '../ValidationMessages';
 
+// Types
+import { FieldSetProps } from '../types/FieldSet.type';
+
 const isPageLayoutSet = (uiSchema) => {
   const pageSchema = uiSchema['ui:page'];
   return pageSchema && pageSchema['ui:layout'] || false;
 };
 
-export const shouldHideTitle = (uiSchema, schema, path) => isPageLayoutSet(uiSchema, path) || has(schema, 'items.enum');
+export const shouldHideTitle = (uiSchema, schema) => isPageLayoutSet(uiSchema) || has(schema, 'items.enum');
 
 export const RawFieldSetContent = (props) => {
   const { schema = {}, uiSchema = {}, xhrSchema = {}, } = props;
@@ -82,16 +85,18 @@ export const RawFieldSetContent = (props) => {
 export const FieldSetContent = withStyles(fieldSetStyles.fieldSetContent)(RawFieldSetContent);
 
 // for unit testing
-export class RawFieldSet extends React.Component {
+class RawFieldSet extends React.Component<FieldSetProps, {}> {
   shouldComponentUpdate = (nextProps) => !isEqual(this.props, nextProps)
 
   render() {
-    const { 
-      className, 
-      path, classes, 
-      schema = {}, hideTitle, 
-      noTitle, validation, idxKey, 
-      dynamicKeyField,
+    const {
+      className,
+      path,
+      classes,
+      schema = {},
+      hideTitle, 
+      noTitle, 
+      validation
     } = this.props;
     const LegendTitle = () => (
       !hideTitle 

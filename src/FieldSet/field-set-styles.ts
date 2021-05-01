@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
-const common = (theme) => ({
+const common = (theme: Theme) => ({
   addItemBtn: {
     display: 'flex',
     justifyContent: 'flex-end',
@@ -18,8 +18,9 @@ const common = (theme) => ({
     },
   },
 });
+
 export default {
-  fieldSet: (theme) => ({
+  fieldSet: (theme: Theme) => createStyles({
     root: {
       display: 'flex',
       flexDirection: 'column',
@@ -33,7 +34,8 @@ export default {
       padding: theme.spacing(1),
     },
   }),
-  fieldSetObject: (theme) => ({
+
+  fieldSetObject: (theme: Theme) => createStyles({
     root: {
       display: 'flex',
       flexDirection: 'column',
@@ -49,7 +51,8 @@ export default {
       marginBottom: 20,
     },
   }),
-  fieldSetArray: (theme) => ({
+
+  fieldSetArray: (theme: Theme) => createStyles({
     root: {
       display: 'flex',
       flexDirection: 'column',
@@ -57,6 +60,7 @@ export default {
     listItem: {},
     ...common(theme),
   }),
+
   fieldSetTabs: makeStyles({
       root: {
         '&:focus': {
@@ -64,6 +68,7 @@ export default {
         },
       },
     }),
+
   reorderable: {
     root: {
       display: 'flex',
@@ -76,7 +81,8 @@ export default {
     },
     listItem: {},
   },
-  reorderControls: (theme) => ({
+
+  reorderControls: (theme: Theme) => createStyles({
     root: {
       display: 'flex',
       border: `1px solid ${theme.palette.grey[400]}`,
@@ -84,7 +90,6 @@ export default {
       borderRadius: 5,
       alignSelf: 'flex-start',
       marginTop: 7,
-      borderRadius: 5,
       '& >button': {
         borderRadius: 0,
         width: '1.25em',
@@ -105,6 +110,7 @@ export default {
       marginRight: 10,
     },
   }),
+  
   fieldSetContent: {
     root: {
       marginTop: 20,

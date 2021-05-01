@@ -5,10 +5,9 @@ const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 
 const paths = {
-    clientBuild: resolveApp('docker/frontend/prod/build/client'),
-    serverBuild: resolveApp('docker/frontend/prod/build/server'),
     dotenv: resolveApp('.env'),
     src: resolveApp('src'),
+    babelConfig: resolveApp('scripts/config/jest/babel.config.js'),
     publicPath: '/static/',
 };
 
