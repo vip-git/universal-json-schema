@@ -7,4 +7,5 @@ export interface SchemaProps extends FormEvents {
     uiSchema?: any;
     xhrSchema?: any;
     definitions?: any;
+    required?: Array<string>;
 }

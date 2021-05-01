@@ -39,7 +39,7 @@ export default function HorizontalNonLinearStepperWithError(props) {
     onSkip, 
     onSubmit
   } = props;
-  const [activeStep, setActiveStep, buttonDisabled] = React.useContext(StepperContext);
+  const [activeStep, setActiveStep, buttonDisabled] = React.useContext(StepperContext) as any;
   const { props: { includeSkipButton, includeResetButton } = { includeSkipButton: false, includeResetButton: false } } = uiSchema['ui:page'];
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = Object.keys(schema.properties).map((sp) => schema.properties[sp].title || sp);
@@ -110,7 +110,7 @@ export default function HorizontalNonLinearStepperWithError(props) {
     <div className={classes.root}>
       <Stepper alternativeLabel nonLinear activeStep={activeStep}>
         {steps.map((label, index) => {
-          const stepProps = {};
+          const stepProps: any = {};
           const labelProps = {};
           // if (isStepOptional(index)) {
           //   labelProps.optional = (

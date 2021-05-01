@@ -19,6 +19,9 @@ import fieldSetStyles from './field-set-styles';
 import getDefaultValue from '../helpers/get-default-value';
 import getDefinitionSchemaFromRef from '../helpers/get-definition-schema';
 
+// Types
+import { FieldSetArrayProps } from '../types/FieldSetArray.type';
+
 // Generated UTILS
 const {
   APP_CONFIG: {
@@ -32,17 +35,19 @@ const {
   },
 } = require('../generated/app.config');
 
-export const RawFieldSetArray = (props) => {
+export const RawFieldSetArray = (props: FieldSetArrayProps) => {
   const {
-    startIdx = 0, className, classes,
-    schema = {}, 
-    uiSchema = {}, 
-    definitions = {}, 
-    data, 
-    path, 
-    onMoveItemUp, 
-    onMoveItemDown, 
-    onDeleteItem, 
+    startIdx = 0,
+    className,
+    classes,
+    schema = {},
+    uiSchema = {},
+    definitions = {},
+    data,
+    path,
+    onMoveItemUp,
+    onMoveItemDown,
+    onDeleteItem,
     ...rest
   } = props;
   // const schema = { ...givenSchema };

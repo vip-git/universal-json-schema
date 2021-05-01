@@ -259,9 +259,9 @@ describe('FieldSet', () => {
 
     it('handles simple, fixed list of strings with additional items', () => {
       const path = 'names';
-      const onMoveItemUp = 'onMoveItemUp';
-      const onMoveItemDown = 'onMoveItemDown';
-      const onDeleteItem = 'onDeleteItem';
+      const onMoveItemUp = jest.fn(() => 'onMoveItemUp');
+      const onMoveItemDown = jest.fn(() => 'onMoveItemDown');
+      const onDeleteItem = jest.fn(() => 'onDeleteItem');
 
       const schema = {
         type: 'array',
@@ -394,8 +394,8 @@ describe('FieldSet', () => {
   describe('ReorderableFormField', () => {
     it('ReorderableFormField - control', () => {
       const path = 'path';
-      const first = 'first';
-      const last = 'last';
+      const first = true;
+      const last = false;
       // act
       const wrapper = shallow(
         <RawReorderableFormField

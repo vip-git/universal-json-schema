@@ -1,10 +1,15 @@
 // Shared
-import { MouseEventHandler } from 'react';
+import { SchemaProps } from './shared/SchemaProps.type';
 import { ReorderControlsProps } from './ReorderControls.type';
 
-export type ReorderableFormFieldProps = ReorderControlsProps & {
+export type OrderFunction = (path: string, index: number) => string;
+
+export type ReorderableFormFieldProps = ReorderControlsProps & SchemaProps & {
     dynamicKeyField?: string;
-    recursiveDeleteItem?: MouseEventHandler<HTMLButtonElement>;
-    schema?: any;
+    recursiveDeleteItem?: OrderFunction;
+    required?: Array<string>;
+    objectData?: any;
     path: string;
+    validation?: any;
+    noTitle?: boolean;
 };

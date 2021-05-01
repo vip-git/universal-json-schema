@@ -133,6 +133,8 @@ export const RawFieldSetObject = ({
                   onDeleteItem={rest.onRemoveProperty && rest.onRemoveProperty(newPath)}
                   canReorder={false}
                   definitions={definitions}
+                  first={idx === 0}
+                  last={idx === data.length - 1}
                   noTitle
               />
             );
