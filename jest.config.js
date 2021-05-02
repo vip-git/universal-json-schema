@@ -15,6 +15,7 @@ module.exports = {
 	coveragePathIgnorePatterns: [
 		// All type definitions to be excluded
 		'!*.d.ts',
+		'!*.type.ts',
 		// All Ignore files should be covered by E2E Tests to get maximum coverage.
 		'<rootDir>/node_modules',
         // Ignore Demo folder

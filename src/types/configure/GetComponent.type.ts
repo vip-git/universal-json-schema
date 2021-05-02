@@ -4,4 +4,7 @@ export type GetComponent = {
     components?: Array<any>;
     schemaVersion?: string;
     required?: Array<string>; 
+    path?: string;
+    htmlid?: string;
+    onChange?: Function;
 }
