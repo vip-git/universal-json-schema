@@ -1,4 +1,4 @@
-import { FormEvents } from "./FormEvents.type";
+import { FormEvents } from './FormEvents.type';
 
 export interface SchemaProps extends FormEvents {
     schema?: any;

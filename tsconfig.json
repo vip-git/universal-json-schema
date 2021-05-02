@@ -2,9 +2,8 @@
     "compilerOptions": {
       "allowSyntheticDefaultImports": true,
       "module": "commonjs",
-      "baseUrl": "./src/",
       "paths": {
-        "@core-types/*": ["types/*"],
+        "@core-types/*": ["./src/types/*"],
         "@utils/*": ["./src/fields/utils/*"],
       },
       "declaration": true,

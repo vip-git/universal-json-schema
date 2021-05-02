@@ -109,7 +109,7 @@ export const RawFieldSetArray = (props: FieldSetArrayProps) => {
             <div className={classes.addItemBtn}>
               <IconButton
                 onClick={rest.onAddItem && rest.onAddItem(path, getDefaultValue(schema.items))}
-                data-testid="addButton"
+                data-testid='addButton'
                 style={uiSchema['ui:style'] ? {
                   ...uiSchema['ui:style'],
                 } : {}}

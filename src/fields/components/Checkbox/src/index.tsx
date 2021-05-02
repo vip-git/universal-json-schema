@@ -67,14 +67,14 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }: C
   );
 
   if (schema.type === 'boolean') {
-    const stringToBoolean = value ? true : false;
+    const stringToBoolean = !!value;
     return (
       <>
         {schema.description && (<FormLabel component='legend'>{schema.description}</FormLabel>)}
         <FormControlLabel
           control={(
             <Checkbox
-                checked={typeof value === 'boolean' && value || stringToBoolean}
+                checked={typeof value === 'boolean' ? value : stringToBoolean}
                 onChange={givenOnChange}
                 disabled={options.disabled || false}
             />

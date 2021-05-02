@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 // Library
 import { has, get, set } from 'lodash';
 import each from 'lodash/each';
@@ -66,16 +69,20 @@ export const setNestedPayload = ({
   extraKey,
 }: SetNestedPayloadProps) => {
   const payload = previousPayload || {};
-  const formData = Object.assign({}, givenFormData);
+  const formData = { ...givenFormData };
   Object.keys(payloadData).forEach((fd) => {
     const parseColonKey = (givenKey) => {
       // Colon includes a object reference then use this logic
       // needs to be improved for nested object reference if support is needed in future.
-      const objectKeyFromPayload = givenKey.includes(':') && givenKey.split(':')[0].includes('.') && givenKey.split(':')[0].split('.')[0];
-      const newKey = givenKey.includes(':') && objectKeyFromPayload && `${objectKeyFromPayload}.${givenKey.split(':')[1]}`;
+      const objectKeyFromPayload = givenKey.includes(':') 
+      && givenKey.split(':')[0].includes('.') 
+      && givenKey.split(':')[0].split('.')[0];
+      const newKey = givenKey.includes(':') 
+      && objectKeyFromPayload 
+      && `${objectKeyFromPayload}.${givenKey.split(':')[1]}`;
 
       return givenKey.includes(':') ? newKey || givenKey.split(':')[1] : givenKey;
-    }
+    };
     const objectKey = extraKey ? `${extraKey}.${fd}` : fd;
     const parsedObjectKey = extraKey
       ? `${parseColonKey(extraKey)}.${parseColonKey(fd)}`
@@ -93,8 +100,8 @@ export const setNestedPayload = ({
         getDefinitionSchemaFromRef(
           schemaDefs,
           get(schemaProps, schemaKey),
-          currentData
-        )
+          currentData,
+        ),
       );
     }
     const currentSchemaObj = get(schemaProps, schemaKey);
@@ -107,11 +114,12 @@ export const setNestedPayload = ({
         extraKey: objectKey,
         previousPayload: payload,
       });
-    } else if (currentData && currentSchemaObj) {
+    }
+    else if (currentData && currentSchemaObj) {
       const value = translateTemplateString(
         currentData,
         formData,
-        currentSchemaObj.type
+        currentSchemaObj.type,
       );
       set(payload, payloadKey, value);
     }
@@ -133,7 +141,7 @@ const setNestedData = ({
   uiSchema,
   interceptors = {},
   xhrData,
-  extraKey
+  extraKey,
 }: SetNestedDataProps) => {
   Object.keys(formData).forEach((fd) => {
     const objectKey = extraKey ? `${extraKey}.${fd}` : fd;
@@ -295,14 +303,14 @@ const transformSchema = (schema, data?: any, includeDisabled?: any) => {
   });
   each(transformedSchema.definitions, (propVal, propKey) => {
     each(propVal.dependencies, (depVal, depKey) => {
-      depVal['oneOf'].forEach((sd, sk) => {
-        transformedSchema.definitions[propKey]['dependencies'][depKey]['oneOf'][sk] = transformSchema(
-          transformedSchema.definitions[propKey]['dependencies'][depKey]['oneOf'][sk],
+      depVal.oneOf.forEach((sd, sk) => {
+        transformedSchema.definitions[propKey].dependencies[depKey].oneOf[sk] = transformSchema(
+          transformedSchema.definitions[propKey].dependencies[depKey].oneOf[sk],
           {},
-          true
+          true,
         );
-      })
-    })
+      });
+    });
   });
   return transformedSchema;
 };

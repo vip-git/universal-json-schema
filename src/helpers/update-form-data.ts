@@ -43,7 +43,9 @@ const pushItemSpec = (value) => (data) => {
 const removeItemSpec = (idx) => () => ({ $splice: [[idx, 1]] });
 
 const moveItemSpec = (idx, direction) => (value) => ({
+  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
   [idx]: { $set: value[idx + direction] },
+  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
   [idx + direction]: { $set: value[idx] },
 });
 

@@ -9,11 +9,13 @@ const {
 
 const componentConfig = new Map();
 
-componentConfig.set('custom', (component, components) => component
-		&& components
-		&& component in components
-		&& typeof components[component] === 'function'
-		&& components[component]);
+componentConfig.set('custom', 
+  (component, components) => component
+    && components
+    && component in components
+    && typeof components[component] === 'function'
+    && components[component],
+);
 
 Object.keys(COMPONENT_MAPPING).forEach((dataType) => {
   const dataTypeValue = new Map();

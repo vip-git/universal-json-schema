@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable max-len */
 /* eslint-disable global-require,import/no-extraneous-dependencies */
 const express = require('express');
@@ -201,6 +202,7 @@ export default Example;
     fs.writeFile(
       `scripts/generator/${req.body.sessionId}/.npmrc`,
       npmrcTemplate,
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       () => {},
     );
 

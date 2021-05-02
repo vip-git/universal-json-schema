@@ -37,10 +37,14 @@ export default function HorizontalNonLinearStepperWithError(props) {
     onNext, 
     onBack, 
     onSkip, 
-    onSubmit
+    onSubmit,
   } = props;
   const [activeStep, setActiveStep, buttonDisabled] = React.useContext(StepperContext) as any;
-  const { props: { includeSkipButton, includeResetButton } = { includeSkipButton: false, includeResetButton: false } } = uiSchema['ui:page'];
+  const { 
+    props: 
+    { includeSkipButton, includeResetButton } = 
+    { includeSkipButton: false, includeResetButton: false },
+  } = uiSchema['ui:page'];
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = Object.keys(schema.properties).map((sp) => schema.properties[sp].title || sp);
   const stepContent = Object.keys(schema.properties).map((p, k) => {
@@ -59,7 +63,7 @@ export default function HorizontalNonLinearStepperWithError(props) {
   });
   const isStepOptional = (step) => step === 1;
 
-  const isStepFailed = (step) => step === 1;
+  // const isStepFailed = (step) => step === 1;
 
   const isStepSkipped = (step) => skipped.has(step);
 
@@ -72,6 +76,7 @@ export default function HorizontalNonLinearStepperWithError(props) {
       newSkipped.delete(activeStep);
     }
 
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
     if (activeStep === steps.length - 1) {
@@ -97,6 +102,7 @@ export default function HorizontalNonLinearStepperWithError(props) {
       newSkipped.add(activeStep);
       return newSkipped;
     });
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     return onSkip(getStep(activeStep).stepPath);
   };
@@ -138,8 +144,8 @@ export default function HorizontalNonLinearStepperWithError(props) {
             <Typography className={classes.instructions}>
               All steps completed - you&apos;re finished
             </Typography>
-            {includeResetButton && 
-            (
+            {includeResetButton 
+            && (
               <Button onClick={handleReset} className={classes.button}>
                 Reset
               </Button>

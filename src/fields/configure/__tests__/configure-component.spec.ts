@@ -7,7 +7,6 @@ jest.mock('../label/get-label-component-props');
 jest.mock('../label/get-label-component');
 
 describe('configureComponent', () => {
-
   it('delegates to helper functions - control', async () => {
     // Function Mocks
     const getComponentProps = require('../component/get-component-props').default;

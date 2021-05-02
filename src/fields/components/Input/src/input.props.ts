@@ -1,4 +1,3 @@
-
 // Internal
 import { coerceValue } from '@react-jsonschema-form-utils/parse-values';
 

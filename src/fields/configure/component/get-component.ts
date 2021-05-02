@@ -28,7 +28,7 @@ export default ({
   schema, 
   uiSchema = {}, 
   components, 
-  schemaVersion 
+  schemaVersion, 
 }: GetComponent) => {
   // console.log('getComponent schema: %o, uiSchema: %o', schema, uiSchema);
   const widget = uiSchema['ui:widget'];

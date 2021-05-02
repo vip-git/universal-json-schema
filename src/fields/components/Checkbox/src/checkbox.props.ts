@@ -15,7 +15,6 @@ const doOnChange = (onChange) => (e, checked) => onChange(checked);
 // const parseMultiSelectValue = (givenValue) => (Array.isArray(givenValue) ? givenValue : [givenValue]);
 
 const onCheckboxChangeHandler = (givenOnChange, value, schema, allValues, adds) => (e, checked) => {
-  console.log('adds asd is', adds);
   if (checked) {
     const finalValues = Array.isArray(allValues) ? [...allValues, value] : [value];
     givenOnChange(finalValues, adds);
@@ -38,7 +37,9 @@ const onEnumChangeHandler = (givenOnChange, value, adds) => (
   }
 };
 
-export default ({ onChange, schema = {}, value }: { onChange: Function, schema: any; value: boolean | string | Array<string>}) => ({
+export default ({ 
+  onChange, schema = {}, value }: 
+  { onChange: Function, schema: any; value: boolean | string | Array<string>}) => ({
   onChange: doOnChange(onChange),
   onEnumChange: (givenValue, adds) => onChange && onEnumChangeHandler(onChange, givenValue, adds),
   onGroupChange: (givenValue, adds) => onChange && onCheckboxChangeHandler(onChange, givenValue, schema, value, adds),

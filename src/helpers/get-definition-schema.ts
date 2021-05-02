@@ -47,7 +47,7 @@ const getDefinitionSchemaFromRef = (
     };
   }
   catch (err) {
-    console.log('error found', err);
+    // console.log('error found', err);
     return {
       ...schemaProperties,
       title: schemaProperties.title,

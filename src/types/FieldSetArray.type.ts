@@ -1,5 +1,4 @@
 // Shared
-import { MouseEventHandler } from 'react';
 import { SchemaProps } from './shared/SchemaProps.type';
 import { MaterialUIProps } from './shared/MaterialuiProps.type';
 import { OrderFunction } from './ReoderableFormField.type';

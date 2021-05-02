@@ -16,7 +16,7 @@ const toNumber = (v, options = false as any) => {
   const decimalRegex = decimalSeparator === '.' ? /[.]/g : /[,]/g;
   const returns = { v };
   const countDots = (num) => !Number.isNaN(Number(num)) && (num?.match(thRegex) || [])?.length;
-  const countDecimals = (num) => num && (String(num)?.match(decimalRegex) || [])?.length;
+  const countDecimals = (num) => num && (decimalRegex.exec(String(num)) || [])?.length;
   if (
     returns.v === ''
     || returns.v === undefined

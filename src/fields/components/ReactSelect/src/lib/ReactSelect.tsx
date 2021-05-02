@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types, react/jsx-handler-names */
+/* eslint-disable */
 
 import React from 'react';
 import classNames from 'classnames';
@@ -11,7 +11,7 @@ import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
 import CancelIcon from '@material-ui/icons/Cancel';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -98,9 +98,9 @@ function Option(props) {
       component='div'
       style={props.data.style ? {
         fontWeight: props.isSelected ? 500 : 400,
-        ...props.data.style
+        ...props.data.style,
       } : {
-          fontWeight: props.isSelected ? 500 : 400,
+        fontWeight: props.isSelected ? 500 : 400,
       }}
       {...props.innerProps}
     >
@@ -176,10 +176,10 @@ class IntegrationReactSelect extends React.Component<any, any> {
     const { classes, theme } = this.props;
 
     const selectStyles = {
-      input: base => ({
+      input: (base) => ({
         ...base,
-        height: 'auto',
-        color: theme.palette.text.primary,
+        'height': 'auto',
+        'color': theme.palette.text.primary,
         '& input': {
           font: 'inherit',
         },

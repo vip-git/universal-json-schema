@@ -27,13 +27,13 @@ import { FieldSetProps } from '../types/FieldSet.type';
 
 const isPageLayoutSet = (uiSchema) => {
   const pageSchema = uiSchema['ui:page'];
-  return pageSchema && pageSchema['ui:layout'] || false;
+  return pageSchema ? pageSchema['ui:layout'] : false;
 };
 
 export const shouldHideTitle = (uiSchema, schema) => isPageLayoutSet(uiSchema) || has(schema, 'items.enum');
 
 export const RawFieldSetContent = (props) => {
-  const { schema = {}, uiSchema = {}, xhrSchema = {}, } = props;
+  const { schema = {}, uiSchema = {}, xhrSchema = {} } = props;
   const { type } = schema;
   if (type === 'array') {
     return (
@@ -96,13 +96,13 @@ class RawFieldSet extends React.Component<FieldSetProps, {}> {
       schema = {},
       hideTitle, 
       noTitle, 
-      validation
+      validation,
     } = this.props;
-    const LegendTitle = () => (
+    const LegendTitle = () => ((
       !hideTitle 
       || path === '' 
       || path?.includes('.')
-    ) && !has(schema, 'items.enum') && schema.title && (
+    ) && !has(schema, 'items.enum') && schema.title ? (
           <>
             <Typography 
               gutterBottom 
@@ -116,13 +116,13 @@ class RawFieldSet extends React.Component<FieldSetProps, {}> {
             </Typography>
             <Divider style={{ marginBottom: 6 }} />
           </>
-    ) || <div />;
+      ) : <div />);
 
-    const LegendSubTitle = () => schema.description && (
+    const LegendSubTitle = () => (schema.description ? (
       <Typography color='textSecondary' variant='body2'>
         {schema.description}
       </Typography>
-    ) || <div />;
+    ) : <div />);
     
     return (
       <fieldset className={classNames(className, classes.root, { [classes.listItem]: endsWith(path, ']') })}>

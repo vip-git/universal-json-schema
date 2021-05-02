@@ -1,10 +1,10 @@
 // Library
 import React from 'react';
+import { FieldProps } from '@core-types/Field.type';
 import configureComponent from './configure';
 import ConfiguredField from './ConfiguredField';
 
 // Types
-import { FieldProps } from '@core-types/Field.type';
 
 export default (props: FieldProps) => {
   const { path, prefixId, schema, data, uiSchema, validation } = props;

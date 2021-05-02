@@ -1,7 +1,7 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { values, mapValues, isEmpty } from 'lodash';
 import CreatableReactSelect from 'react-select/creatable';
-import { any } from 'prop-types';
 
 const components = {
   DropdownIndicator: null,

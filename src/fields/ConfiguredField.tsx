@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 // Library
 import React from 'react';
 import isEmpty from 'lodash/isEmpty';

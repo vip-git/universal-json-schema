@@ -2,7 +2,6 @@
 import getComponentProps from '../get-component-props';
 
 describe('getComponentProps', () => {
-
   it('configures props for simple field', () => {
     const schema = {
       'title': 'First name',
@@ -35,7 +34,6 @@ describe('getComponentProps', () => {
   });
 
   describe('ui:options.disabled', () => {
-
     it('as boolean adds disabled property', () => {
       const schema = {
         'title': 'First name',
@@ -175,7 +173,7 @@ describe('getComponentProps', () => {
     const schema = { 'title': 'First name' };
     const uiSchema = { 'mui:myprop': 'boo' };
     const componentProps = getComponentProps({ schema, uiSchema });
-    expect(componentProps).toHaveProperty('uiSchema')
+    expect(componentProps).toHaveProperty('uiSchema');
     expect(componentProps.uiSchema['mui:myprop']).toBe('boo');
   });
 
@@ -193,7 +191,7 @@ describe('getComponentProps', () => {
       onChange(domEvent);
 
       // check
-      expect(spy).toHaveBeenLastCalledWith({"target": {"value": "new value"}}, undefined, false);
+      expect(spy).toHaveBeenLastCalledWith({ 'target': { 'value': 'new value' } }, undefined, false);
     });
 
     describe('is called with typed value', () => {
@@ -210,7 +208,7 @@ describe('getComponentProps', () => {
         onChange(domEvent);
 
         // check
-        expect(spy).toHaveBeenCalledWith({"target": {"value": "3"}}, undefined, false);
+        expect(spy).toHaveBeenCalledWith({ 'target': { 'value': '3' } }, undefined, false);
       });
       it('number -> text', () => {
         // prepare
@@ -225,9 +223,8 @@ describe('getComponentProps', () => {
         onChange(domEvent);
 
         // check
-        expect(spy).toHaveBeenCalledWith({"target": {"value": 3}}, undefined, false);
+        expect(spy).toHaveBeenCalledWith({ 'target': { 'value': 3 } }, undefined, false);
       });
     });
   });
-
 });

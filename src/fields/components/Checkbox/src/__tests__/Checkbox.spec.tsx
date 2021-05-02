@@ -1,10 +1,9 @@
-
 // Library
 import React from 'react';
 import { mount } from 'enzyme';
 
 // Internal
-import { default as CheckboxComp } from '../';
+import { default as CheckboxComp } from '..';
 
 describe('Checkbox', () => {
   it('mounts with standard attributes (control)', () => {

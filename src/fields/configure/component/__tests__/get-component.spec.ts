@@ -20,7 +20,7 @@ describe('getComponent', () => {
     const htmlid = 'unq';
     const onChange = jest.fn();
     const Component = getComponent({ schema, uiSchema, required, path, htmlid, onChange });
-    console.log(Component)
+    console.log(Component);
     expect(Component.id).toEqual(InputSpy.id);
   });
   // describe('yields Component', () => {

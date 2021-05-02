@@ -21,9 +21,9 @@ export const filterNestedEmptyValues = (obj) => {
   return omitBy(obj, isEmptyValues);
 };
 
-const removeEmptyObjects = (obj, schema) =>
-  schema?.type === 'string' || typeof obj === 'string'
-    ? schema?.type === 'string' ? obj || '' : obj
-    : filterNestedEmptyValues(obj);
+// eslint-disable-next-line no-nested-ternary
+const removeEmptyObjects = (obj, schema) => (schema?.type === 'string' || typeof obj === 'string'
+  ? schema?.type === 'string' ? obj || '' : obj
+  : filterNestedEmptyValues(obj));
 
 export default removeEmptyObjects;

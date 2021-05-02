@@ -61,12 +61,12 @@ const FieldSetTabs = (props) => {
     },
     tab = {
       style: {},
-      props: {}
+      props: {},
     },
     tabPanel = {
       style: {},
-      props: {}
-    }
+      props: {},
+    },
   } = uiSchema['ui:page'];
   const { style: tabsStyle, props: tabsProps } = tabs;
   const { style: tabStyle, props: tabProps } = tab;
@@ -114,6 +114,7 @@ const FieldSetTabs = (props) => {
           const newPath = path ? `${path}.${p}` : p;
           return (
               <TabPanel 
+                // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
                 key={`auto-tab-body-${newPath + k}`}
                 value={value}
                 index={k}

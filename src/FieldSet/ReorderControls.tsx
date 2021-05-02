@@ -9,10 +9,10 @@ import RemoveCircle from '@material-ui/icons/Close';
 import { withStyles } from '@material-ui/core/styles';
 
 // Styles
+import { ReorderControlsProps } from '@core-types/ReorderControls.type';
 import fieldSetStyles from './field-set-styles';
 
 // Types
-import { ReorderControlsProps } from '@core-types/ReorderControls.type';
 
 export const RawReorderControls = (
   { 
@@ -28,16 +28,16 @@ export const RawReorderControls = (
   <div className={classes.root}>
     {canReorder && (
       <div>
-        <IconButton data-testid="upButton" className={classes.up} onClick={onMoveItemUp} disabled={first}>
+        <IconButton data-testid='upButton' className={classes.up} onClick={onMoveItemUp} disabled={first}>
           <ArrowUpward />
         </IconButton>
-        <IconButton data-testid="downButton" className={classes.down} onClick={onMoveItemDown} disabled={last}>
+        <IconButton data-testid='downButton' className={classes.down} onClick={onMoveItemDown} disabled={last}>
           <ArrowDownward />
         </IconButton>
       </div>
     )}
     <IconButton
-      data-testid="closeButton"
+      data-testid='closeButton'
       className={
         canReorder ? [classes.remove, classes.removeCanReorder].join(' ') : classes.remove
       }

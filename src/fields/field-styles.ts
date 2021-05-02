@@ -8,8 +8,8 @@ export default makeStyles((theme: Theme) => createStyles({
     },
     'flexBasis': '100%',
     '&:focus': {
-        outline: 'none',
-    }
+      outline: 'none',
+    },
   },
   textarea: {
     '& textarea': {

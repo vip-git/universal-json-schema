@@ -1,4 +1,4 @@
-import { Dictionary, NumericDictionary } from "lodash";
+import { Dictionary, NumericDictionary } from 'lodash';
 
 export type GetLabelComponentProps = {
     htmlid?: string;

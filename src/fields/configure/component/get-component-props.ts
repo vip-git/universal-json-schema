@@ -2,10 +2,10 @@
 import isEmpty from 'lodash/isEmpty';
 
 // Context
+import { GetComponentProps } from '@core-types/configure/GetComponentProps.type';
 import { EventContext, LoadingContext } from '../../../helpers/context';
 
 // Types
-import { GetComponentProps } from '@core-types/configure/GetComponentProps.type';
 
 // Interceptors
 const {

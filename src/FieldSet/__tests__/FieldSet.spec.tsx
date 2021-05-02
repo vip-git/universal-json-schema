@@ -38,7 +38,7 @@ describe('FieldSet', () => {
           onKeyDown={jest.fn}
           onChange={jest.fn}
           onXHRSchemaEvent={jest.fn}
-        />
+        />,
       );
 
       // check
@@ -82,7 +82,7 @@ describe('FieldSet', () => {
           validation={{}}
           isTabContent={false}
           tabKey={''}
-        />
+        />,
       );
 
       // check
@@ -156,7 +156,7 @@ describe('FieldSet', () => {
       };
       const onMoveItemUp = jest.fn();
       const onMoveItemDown = jest.fn();
-      const onDeleteItem =  jest.fn();
+      const onDeleteItem = jest.fn();
 
       onMoveItemUp.mockReturnValue(array.map((i) => (`moveUp${i}`)));
       onMoveItemDown.mockReturnValue(array.map((i) => (`moveDown${i}`)));
@@ -345,7 +345,7 @@ describe('FieldSet', () => {
           onDeleteItem={onDeleteItem}
           onMoveItemUp={onMoveItemUp}
           classes={{ row }}
-          first={true}
+          first
           last={false}
           canReorder
         />,

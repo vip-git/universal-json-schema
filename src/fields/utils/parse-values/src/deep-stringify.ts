@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default (givenVal, givenDepth?: any, replacer?: any, space?: any, onGetObjID?: any) => {
   const newDepth = Number.isNaN(+givenDepth) ? 1 : givenDepth;
   const recursMap = new WeakMap();

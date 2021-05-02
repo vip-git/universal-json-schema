@@ -25,7 +25,7 @@ import getDefinitionSchemaFromRef from '../helpers/get-definition-schema';
 import { LoadingContext } from '../helpers/context';
 
 // types
-import { FieldSetObjectProps } from '../types/FieldSetObject.type'
+import { FieldSetObjectProps } from '../types/FieldSetObject.type';
 
 export const RawFieldSetObject = ({ 
   className, 
@@ -61,7 +61,7 @@ export const RawFieldSetObject = ({
             path={newPath}
             required={schema.required}
             schema={propSchema}
-            data={uiData[tabKey] && Object.assign(finalData, uiData[tabKey]) || finalData}
+            data={uiData[tabKey] ? Object.assign(finalData, uiData[tabKey]) : finalData}
             uiSchema={uiSchema[tabKey] || {}}
             xhrSchema={xhrSchema || {}}
             validation={validation[tabKey] || {}}
@@ -144,7 +144,7 @@ export const RawFieldSetObject = ({
           schema.additionalProperties && (
             <div className={classes.addItemBtn}>
               <IconButton 
-                data-testid="addButton"
+                data-testid='addButton'
                 onClick={
                   rest.onAddNewProperty 
                   && rest.onAddNewProperty(path, getDefaultValue(schema.additionalProperties))
@@ -180,7 +180,7 @@ export const RawFieldSetObject = ({
                   path={newPath}
                   required={schema.required}
                   schema={propSchema}
-                  data={typeof uiData[propId] === 'string' && uiData[propId] || data[propId]}
+                  data={typeof uiData[propId] === 'string' ? uiData[propId] : data[propId]}
                   uiSchema={uiSchema[propId] || {}}
                   xhrSchema={get(xhrSchema.properties, newPath) || {}}
                   validation={validation[propId] || {}}
