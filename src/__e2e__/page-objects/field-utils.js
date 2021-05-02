@@ -3,7 +3,8 @@ module.exports = {
     $(path).setValue(' ');
     if (browser.capabilities.platformName.includes('mac')) {
       browser.keys(['Meta', 'a']);
-    } else {
+    }
+    else {
       browser.keys(['Control', 'a']);
     }
     browser.keys(['Backspace']);

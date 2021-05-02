@@ -6,14 +6,14 @@ const compareCurrentValue = (
   fieldUIValue,
   fieldUIType,
   callbackBeforeCompare,
-  fieldOrder
+  fieldOrder,
 ) => {
   callbackBeforeCompare(fieldUIType);
   const { path } = getComponentSelector(
     fieldName,
     fieldUIType,
     fieldUIValue,
-    fieldOrder
+    fieldOrder,
   );
   const fieldValue = $(path).getValue() || $(path).getText();
   switch (fieldUIType) {
@@ -27,7 +27,7 @@ const compareCurrentValue = (
           fieldName,
           fieldUIType,
           uiValue,
-          fieldOrder
+          fieldOrder,
         );
         expect($(secondarySelector)).toBeChecked();
       }
@@ -48,7 +48,7 @@ const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
     fieldName,
     fieldUIType,
     newValue,
-    fieldOrder
+    fieldOrder,
   );
   const fieldValue = $(path).getValue() || $(path).getText();
   switch (fieldUIType) {
@@ -70,7 +70,8 @@ const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
       if (fieldValue.includes(newValue)) {
         $(path).click();
         browser.keys(['Backspace', 'Backspace', newValue, 'Enter']);
-      } else {
+      }
+      else {
         $(path).click();
         $(secondarySelector).click();
       }

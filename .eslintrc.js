@@ -3,7 +3,10 @@ module.exports = {
     'airbnb',
     'plugin:react-hooks/recommended',
   ],
+  'parser': '@typescript-eslint/parser',
+  'plugins': ['@typescript-eslint', 'jest'],
   'rules': {
+    'import/extensions': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-trailing-spaces': 'off',
     'react/jsx-indent': 'off',
@@ -29,7 +32,13 @@ module.exports = {
     'no-plusplus': 'off',
     'object-curly-newline': 'off',
   },
-  'parser': 'babel-eslint',
+  'settings': {
+    'import/resolver': {
+      'node': {
+        'extensions': ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
+  },
   'env': {
     'jest/globals': true,
   },

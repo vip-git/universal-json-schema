@@ -8,9 +8,9 @@ const validateTest = ({
   uiSelectors,
 }) => {
   if (
-    uiTestDef.steps &&
-    Array.isArray(uiTestDef.steps) &&
-    uiTestDef.steps.length
+    uiTestDef.steps
+    && Array.isArray(uiTestDef.steps)
+    && uiTestDef.steps.length
   ) {
     uiTestDef.steps.forEach((stepDef) => {
       const getPathBySelector = (selectorDef) => _.get(uiSelectors, selectorDef);
@@ -18,7 +18,8 @@ const validateTest = ({
       const fieldValue = stepDef.action !== 'click' ? $(path).getValue() || $(path).getText() : '';
       try {
         $(path).scrollIntoView();
-      } catch(err) {}
+      }
+      catch (err) {}
       switch (stepDef.action) {
         case 'click':
           try {
@@ -28,16 +29,15 @@ const validateTest = ({
                 value: newValue,
                 selector: verifySelector,
               } = stepDef.verify;
-              const selector =
-                getPathBySelector(verifySelector) ||
-                _.get(uiTestDef, verifySelector);
-              const verifyFieldValue =
-                $(selector).getValue() || $(selector).getText();
+              const selector = getPathBySelector(verifySelector)
+                || _.get(uiTestDef, verifySelector);
+              const verifyFieldValue = $(selector).getValue() || $(selector).getText();
               if (newValue && verifyFieldValue.includes(newValue) && action) {
                 $(selector).click();
               }
             }
-          } catch (err) {}
+          }
+          catch (err) {}
           $(path).click();
           return;
         case 'update':
@@ -54,10 +54,10 @@ const validateTest = ({
           return;
         case 'isChecked':
           expect($(path)).toBeChecked();
-          return;
       }
     });
-  } else {
+  }
+  else {
     expect('No Tests defined for custom components').toBe(uiTestDef);
   }
 };
@@ -80,13 +80,14 @@ const execute = ({
         fieldUIType,
       });
     });
-  } else {
-      validateTest({
-        uiTestDef: uiTestDefs,
-        callbackBeforeCompare,
-        uiSelectors,
-        fieldUIType,
-      });
+  }
+  else {
+    validateTest({
+      uiTestDef: uiTestDefs,
+      callbackBeforeCompare,
+      uiSelectors,
+      fieldUIType,
+    });
   }
 };
 

@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-const Page = require('./page');
 const _ = require('lodash');
+const Page = require('./page');
 // Fields
 const StringField = require('./field-types/string-field');
 const NumberField = require('./field-types/number-field');
@@ -56,9 +56,10 @@ class FormPage extends Page {
       this.btnSubmit.waitForClickable({ timeout: 10000 });
       try {
         $('//button[@aria-label="full-screen-code"]').click();
-      } catch(err) {}
+      }
+      catch (err) {}
       $(
-        `//button[@role="tab"][span[contains(text(), "${this.currentTab}")]]`
+        `//button[@role="tab"][span[contains(text(), "${this.currentTab}")]]`,
       ).click();
     }
   };
@@ -76,7 +77,7 @@ class FormPage extends Page {
     });
     table.rawTable.forEach((tbl, tbli) => {
       if (tbl.includes(this.testRef) && tbli >= 1) {
-         const {
+        const {
           hasTestsSchema,
           refrencePointer,
           folderName,
@@ -101,14 +102,12 @@ class FormPage extends Page {
 
         previousFields.push(fieldName);
 
-        const getRefrencePointer =
-          refrencePointer === folderName
-            ? `${fieldRef}.ui:test`
-            : `${refrencePointer}.${fieldRef}.ui:test`;
-        const getRefrencePointerSelectors =
-          refrencePointer === folderName
-            ? `${fieldRef}.ui:selectors`
-            : `${refrencePointer}.${fieldRef}.ui:selectors`;
+        const getRefrencePointer = refrencePointer === folderName
+          ? `${fieldRef}.ui:test`
+          : `${refrencePointer}.${fieldRef}.ui:test`;
+        const getRefrencePointerSelectors = refrencePointer === folderName
+          ? `${fieldRef}.ui:selectors`
+          : `${refrencePointer}.${fieldRef}.ui:selectors`;
         
         if (shouldSkip === 'false' && !_.has(hasTestsSchema, getRefrencePointer)) {
           switch (fieldType) {
@@ -118,7 +117,7 @@ class FormPage extends Page {
                 fieldUIValue,
                 fieldUIType,
                 this.callbackBeforeCompare,
-                fieldOrder[fieldName]
+                fieldOrder[fieldName],
               );
             case 'number':
             case 'integer':
@@ -127,7 +126,7 @@ class FormPage extends Page {
                 fieldUIValue,
                 fieldUIType,
                 this.callbackBeforeCompare,
-                fieldOrder[fieldName]
+                fieldOrder[fieldName],
               );
             case 'boolean':
               return BooleanField.compareCurrentValue(
@@ -135,7 +134,7 @@ class FormPage extends Page {
                 fieldUIValue,
                 fieldUIType,
                 this.callbackBeforeCompare,
-                fieldOrder[fieldName]
+                fieldOrder[fieldName],
               );
             case 'array':
               return ArrayField.compareCurrentValue(
@@ -143,7 +142,7 @@ class FormPage extends Page {
                 fieldUIValue,
                 fieldUIType,
                 this.callbackBeforeCompare,
-                fieldOrder[fieldName]
+                fieldOrder[fieldName],
               );
           }
         }
@@ -169,18 +168,16 @@ class FormPage extends Page {
         const fieldResultOnChange = tbl[0];
         const fieldUIResultOnChange = tbl[1];
         const fieldRef = tbl[2];
-        const getRefrencePointer =
-          refrencePointer === folderName
-            ? `${fieldRef}.ui:test`
-            : `${refrencePointer}.${fieldRef}.ui:test`;
-        const getRefrencePointerSelectors =
-          refrencePointer === folderName
-            ? `${fieldRef}.ui:selectors`
-            : `${refrencePointer}.${fieldRef}.ui:selectors`;
+        const getRefrencePointer = refrencePointer === folderName
+          ? `${fieldRef}.ui:test`
+          : `${refrencePointer}.${fieldRef}.ui:test`;
+        const getRefrencePointerSelectors = refrencePointer === folderName
+          ? `${fieldRef}.ui:selectors`
+          : `${refrencePointer}.${fieldRef}.ui:selectors`;
         if (
-          hasTestsSchema &&
-          refrencePointer &&
-          _.get(hasTestsSchema, getRefrencePointer)
+          hasTestsSchema
+          && refrencePointer
+          && _.get(hasTestsSchema, getRefrencePointer)
         ) {
           CustomField.execute({
             hasTestsSchema,
@@ -198,14 +195,14 @@ class FormPage extends Page {
               fieldName,
               fieldUIResultOnChange,
               fieldUIType,
-              fieldOrder[fieldName]
+              fieldOrder[fieldName],
             );
             StringField.compareCurrentValue(
               fieldName,
               fieldUIResultOnChange,
               fieldUIType,
               this.callbackBeforeCompare,
-              fieldOrder[fieldName]
+              fieldOrder[fieldName],
             );
             return;
 
@@ -215,14 +212,14 @@ class FormPage extends Page {
               fieldName,
               fieldUIResultOnChange,
               fieldUIType,
-              fieldOrder[fieldName]
+              fieldOrder[fieldName],
             );
             NumberField.compareCurrentValue(
               fieldName,
               fieldUIResultOnChange,
               fieldUIType,
               this.callbackBeforeCompare,
-              fieldOrder[fieldName]
+              fieldOrder[fieldName],
             );
             return;
 
@@ -231,14 +228,14 @@ class FormPage extends Page {
               fieldName,
               fieldUIResultOnChange,
               fieldUIType,
-              fieldOrder[fieldName]
+              fieldOrder[fieldName],
             );
             BooleanField.compareCurrentValue(
               fieldName,
               fieldUIResultOnChange,
               fieldUIType,
               this.callbackBeforeCompare,
-              fieldOrder[fieldName]
+              fieldOrder[fieldName],
             );
             return;
           case 'array':
@@ -246,16 +243,15 @@ class FormPage extends Page {
               fieldName,
               fieldUIResultOnChange,
               fieldUIType,
-              fieldOrder[fieldName]
+              fieldOrder[fieldName],
             );
             ArrayField.compareCurrentValue(
               fieldName,
               fieldUIResultOnChange,
               fieldUIType,
               this.callbackBeforeCompare,
-              fieldOrder[fieldName]
+              fieldOrder[fieldName],
             );
-            return;
         }
       }
     });
@@ -271,7 +267,7 @@ class FormPage extends Page {
     tabName,
     hasXHRData,
     folderName,
-    refrencePointer
+    refrencePointer,
   ) {
     this.testRef = testRef;
     this.hasXHRData = hasXHRData;
@@ -279,13 +275,14 @@ class FormPage extends Page {
       this.hasTestsSchema = require(`./generated/${folderName}/tests-schema.json`);
       this.refrencePointer = refrencePointer;
       this.folderName = folderName;
-    } catch (er) {}
+    }
+    catch (er) {}
     if (shouldReload === 'true') {
       if (tabName !== 'false') {
         super.open(formPage);
         this.currentTab = tabName;
         return $(
-          `//button[@role="tab"][span[contains(text(), "${tabName}")]]`
+          `//button[@role="tab"][span[contains(text(), "${tabName}")]]`,
         ).click();
       }
       return super.open(formPage);
