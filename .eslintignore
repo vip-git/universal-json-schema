@@ -3,3 +3,4 @@ build/
 __tests__
 dist
 __e2e__
+jest.config.js

@@ -22,7 +22,9 @@ module.exports = {
         '<rootDir>/src/demo',
         // Ignore E2E Folder
         '<rootDir>/src/__e2e__',
-		'<rootDir>/src/generated'
+		'<rootDir>/src/generated',
+		// Ignore Compiled folders
+		'<rootDir>/src/fields/components/Checkbox/dist'
 	],
 	testEnvironment: 'jsdom',
 	testURL: 'http://localhost',
