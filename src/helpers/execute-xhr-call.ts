@@ -5,7 +5,7 @@ const executeXHRCall = ({
   payload,
   onSuccess,
   onFailure,
-}) => {
+}: any) => {
   const options = {
     method, // *GET, POST, PUT, DELETE, etc.
     // mode: 'no-cors', // no-cors, *cors, same-origin

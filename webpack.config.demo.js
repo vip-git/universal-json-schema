@@ -148,7 +148,7 @@ var config = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias,
     modules: ['node_modules'],
     fallback: {

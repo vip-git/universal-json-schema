@@ -78,7 +78,7 @@ export const updateKeyFromSpec = (data, oldPath, newPath) => update(data, (obj) 
   }, {}),
 );
 
-export const setUISchemaData = (givenUIData, uiSchema, path, nestedSchema) => {
+export const setUISchemaData = (givenUIData, uiSchema, path?: string, nestedSchema?: any) => {
   const iterateSchema = nestedSchema || uiSchema; 
   if (typeof givenUIData === 'object') {
     each(iterateSchema, (val, key) => {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 // Library
 import React from 'react';
 import { MuiPickersUtilsProvider } from 'next-pickers-material-ui'; // Has to be made optional
@@ -11,6 +12,9 @@ import { generate } from 'shortid';
 import Ajv from 'ajv';
 import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
+// Types
+import { FormProps } from '@core-types/Form.type';
 
 // Internal
 import formStyles from './form-styles';
@@ -40,11 +44,11 @@ let uiData = {};
 let validSchema = {};
 
 /** Move this to side effects */
-const setUIData = (givenUIData, uiSchemaKeys, uiSchema, schema, path) => {
+const setUIData = (givenUIData: {}, uiSchemaKeys: string | any[], uiSchema: {}, schema: {}, path?: string) => {
   if (uiSchemaKeys.length) {
     each(uiSchemaKeys, (val) => {
       const getPath = path ? `${path}.${val}` : val;
-      const givenSchema = get(schema, getPath);
+      const givenSchema: any = get(schema, getPath);
       const fieldUIData = get(uiSchema, `${getPath}.ui:data`);
       if (fieldUIData) {
         set(givenUIData, getPath, fieldUIData);
@@ -57,12 +61,13 @@ const setUIData = (givenUIData, uiSchemaKeys, uiSchema, schema, path) => {
   return givenUIData;
 };
 
-const checkSchemaErrors = (givenSchema, givenData, onError) => {
+const checkSchemaErrors = (givenSchema: any, givenData: {}, onError: (arg0: Ajv.ErrorObject[]) => void) => {
   try {
     const transformedSchema = transformSchema(givenSchema);
     validSchema = transformedSchema;
     const ajv = new Ajv();
     const validate = ajv.compile(validSchema);
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     validate(givenData);
     if (validate.errors && onError && typeof onError === 'function') {
       onError(validate.errors);
@@ -76,12 +81,14 @@ const checkSchemaErrors = (givenSchema, givenData, onError) => {
 };
 
 const setData = (
-  givenData, 
-  givenUIData, 
-  uiSchema, 
-  schema,
-  onChange,
-  onError,
+  givenData: Pick<any, never>, 
+  givenUIData: {}, 
+  uiSchema?: {}, 
+  schema?: {},
+  onChange?: (arg0: 
+      { formData: {}; uiData: {}; uiSchema: any; schemaErrors: boolean | Ajv.ErrorObject[]; validSchema: {}; 
+    }) => void,
+  onError?: undefined,
 ) => {
   data = removeEmptyObjects(givenData, schema);
   if (uiSchema) {
@@ -122,7 +129,7 @@ const Form = ({
   onError,
   interceptors,
   ...rest 
-}) => {
+}: FormProps) => {
   const formGlobalState = {
     disabled,
   };
@@ -192,7 +199,7 @@ const Form = ({
         url: xhrSchema['ui:page'].onload['xhr:datasource'].url,
         method: xhrSchema['ui:page'].onload['xhr:datasource'].method,
         onFailure: () => set(xhrSchema, 'ui:page.onload.xhrProgress', undefined),
-        onSuccess: (xhrData) => {
+        onSuccess: (xhrData: any[]) => {
           set(xhrSchema, 'ui:page.onload.xhrProgress', undefined);
           mapData(
             resultsMappingInfo,
@@ -212,7 +219,7 @@ const Form = ({
     setFormId(hashCode(JSON.stringify(schema)));  
   }
 
-  const onFormValuesChange = (field) => (givenValue, givenUIValue, forceDeleteUIData = false) => {
+  const onFormValuesChange = (field: any) => (givenValue: any, givenUIValue: any, forceDeleteUIData = false) => {
     /**
      * Todo: if adds includes data then add that data to form data based on its path and disable add data
      *       - On uncheck remove the adds data
@@ -236,19 +243,21 @@ const Form = ({
     );
   };
 
-  const onXHRSchemaEvent = (givenField) => (xhrDef, xhrEvent) => {
+  const onXHRSchemaEvent = (
+    givenField: string) => (xhrDef: { [x: string]: any; url?: any; method?: any; payload?: any; }, xhrEvent: any,
+  ) => {
     const { url, method, payload } = xhrDef;
     const mapDef = Object.keys(xhrDef).find((t) => t.includes('map:'));
     const findMapDef = xhrDef[mapDef];
-    const field = givenField.split('.').map((gs, gsi) => gsi > 0 ? `properties.${gs}` : gs).join('.');
+    const field = givenField.split('.').map((gs: any, gsi: number) => (gsi > 0 ? `properties.${gs}` : gs)).join('.');
     set(xhrSchema, `properties.${givenField}.${xhrEvent}.xhrProgress`, true);
     setLoadingState({ ...loadingState, [givenField]: true });
     executeXHRCall({
       url,
       method,
       payload,
-      onSuccess: (xhrData) => {
-        const enums = xhrData.map((xh) => get(xh, findMapDef));
+      onSuccess: (xhrData: any[]) => {
+        const enums = xhrData.map((xh: any) => get(xh, findMapDef));
         set(
           schema, 
           `properties.${field}.${mapDef.replace('map:', '')}`,
@@ -261,7 +270,7 @@ const Form = ({
     });
   };
 
-  const onMoveItemUp = (path, idx) => () => setData(
+  const onMoveItemUp = (path: any, idx: any) => () => setData(
     moveListItem(data, path, idx, -1), 
     uiData, 
     uiSchema, 
@@ -270,7 +279,7 @@ const Form = ({
     onError,
   );
 
-  const onMoveItemDown = (path, idx) => () => setData(
+  const onMoveItemDown = (path: any, idx: any) => () => setData(
     moveListItem(data, path, idx, 1), 
     uiData, 
     uiSchema, 
@@ -279,7 +288,7 @@ const Form = ({
     onError,
   );
 
-  const onDeleteItem = (path, idx) => () => setData(
+  const onDeleteItem = (path: any, idx: any) => () => setData(
     removeListItem(data, path, idx), 
     uiData, 
     uiSchema, 
@@ -288,7 +297,7 @@ const Form = ({
     onError,
   );
 
-  const onAddItem = (path, defaultValue) => () => setData(
+  const onAddItem = (path: any, defaultValue: any) => () => setData(
     addListItem(data, path, defaultValue || ''), 
     uiData, 
     uiSchema, 
@@ -297,7 +306,7 @@ const Form = ({
     onError,
   );
 
-  const onAddNewProperty = (path, defaultValue) => () => setData(
+  const onAddNewProperty = (path: any, defaultValue: any) => () => setData(
     updateFormData(data, generate(), defaultValue || ''),
     uiData,
     uiSchema, 
@@ -306,7 +315,7 @@ const Form = ({
     onError,
   );
 
-  const onRemoveProperty = (path) => () => setData(
+  const onRemoveProperty = (path: any) => () => setData(
     removeValueFromSpec(data, path), 
     uiData, 
     uiSchema, 
@@ -315,7 +324,7 @@ const Form = ({
     onError,
   );
 
-  const onUpdateKeyProperty = (path) => (givenValue, givenUIValue, forceDeleteUIData = false) => {
+  const onUpdateKeyProperty = (path: any) => (givenValue: any, givenUIValue: any, forceDeleteUIData = false) => {
     if (!isEmptyValues(givenUIValue) && !isEmptyValues(givenValue)) {
       const givenFormData = updateKeyFromSpec(data, path, givenValue);
       const givenUIData = givenUIValue && updateKeyFromSpec(uiData, path, givenUIValue);
@@ -330,7 +339,7 @@ const Form = ({
     }
   };
 
-  const onFormSubmit = (callback) => {
+  const onFormSubmit = (callback?: () => any) => {
     if (
       xhrSchema 
       && has(xhrSchema, 'ui:page.onsubmit.xhr:datasource.url')
@@ -349,7 +358,7 @@ const Form = ({
         url,
         method,
         payload,
-        onSuccess: (xhrData) => {
+        onSuccess: (xhrData: any[]) => {
           const xhrDt = Array.isArray(xhrData) ? xhrData[0] : xhrData;
           const mappedResults = xhrSchema['ui:page'].onsubmit['xhr:datasource']['map:results'];
           const resultsMappingInfo = mappedResults.includes('#/') 
@@ -380,7 +389,7 @@ const Form = ({
     );
   };
 
-  const onFormNext = (path, callback) => {
+  const onFormNext = (path: string | number, callback: () => any) => {
     if (
       xhrSchema 
       && has(xhrSchema, `properties.${path}.onsubmit.xhr:datasource.url`)
@@ -392,7 +401,7 @@ const Form = ({
       const payloadData = xhrSchema.properties[path].onsubmit['xhr:datasource']['map:payload'];
       const schemaProps = schema.properties;
       const schemaDefs = schema.definitions;
-      const getPayloadFromTemplateString = (givenData, pKey) => {
+      const getPayloadFromTemplateString = (givenData: {}, pKey: string) => {
         const payloadKey = pKey.replace('${formData.', '').replace('}', '');
         return pKey.replace('${', '').replace('}', '') === 'formData' ? givenData : get(givenData, payloadKey);
       };
@@ -409,7 +418,7 @@ const Form = ({
         url,
         method,
         payload,
-        onSuccess: (xhrData) => {
+        onSuccess: (xhrData: any[]) => {
           const xhrDt = Array.isArray(xhrData) ? xhrData[0] : xhrData;
           const mappedResults = xhrSchema.properties[path].onsubmit['xhr:datasource']['map:results'];
           const resultsMappingInfo = mappedResults.includes('#/') 
@@ -440,31 +449,22 @@ const Form = ({
     );
   };
 
-  const onFormBack = (path, callback) => {
-    console.log('path is', path);
-    return onStepBack && onStepBack(
-      { formData: data, uiData, uiSchema, validation },
-      () => callback && callback(),
-    );
-  };
+  const onFormBack = (path: any, callback: () => any) => onStepBack && onStepBack(
+    { formData: data, uiData, uiSchema, validation },
+    () => callback && callback(),
+  );
 
-  const onFormSkip = (path, callback) => {
-    console.log('path is', path);
-    return onStepSkip && onStepSkip(
-      { formData: data, uiData, uiSchema, validation },
-      () => callback && callback(),
-    );
-  };
+  const onFormSkip = (path: any, callback: () => any) => onStepSkip && onStepSkip(
+    { formData: data, uiData, uiSchema, validation },
+    () => callback && callback(),
+  );
 
-  const onFormReset = (path, callback) => {
-    console.log('path is', path);
-    return onStepReset && onStepReset(
-      { formData: data, uiData, uiSchema, validation },
-      () => callback && callback(),
-    );
-  };
+  const onFormReset = (path: any, callback: () => any) => onStepReset && onStepReset(
+    { formData: data, uiData, uiSchema, validation },
+    () => callback && callback(),
+  );
 
-  const handleKeyEnter = (e) => {
+  const handleKeyEnter = (e: { keyCode: number; }) => {
     if (e.keyCode === 13 && submitOnEnter) {
       onFormSubmit();
     }
@@ -474,16 +474,16 @@ const Form = ({
   || !has(uiSchema, 'ui:page.props.ui:schemaErrors')) {
     try {
       const givenSchema = get(uiSchema, 'ui:page.ui:layout') === 'steps' 
-      ? JSON.parse(JSON.stringify(schema))
-      : schema;
+        ? JSON.parse(JSON.stringify(schema))
+        : schema;
       if (get(uiSchema, 'ui:page.ui:layout') === 'steps') {
         Object.keys(givenSchema.properties).forEach((propName) => {
           givenSchema.properties[propName] = propName === Object.keys(givenSchema.properties)[activeStep] ? {
-            ...givenSchema.properties[propName]
+            ...givenSchema.properties[propName],
           } : {
             ...givenSchema.properties[propName],
-            required: []
-          }
+            required: [],
+          };
         });
       }
       const transformedSchema = transformSchema(givenSchema);
@@ -503,12 +503,12 @@ const Form = ({
   }
   return (
       <MuiPickersUtilsProvider utils={MomentUtils}>
-        <Paper className={classes.root} style={uiSchema && uiSchema['ui:page'] && uiSchema['ui:page'].style || {}}>
+        <Paper className={classes.root} style={uiSchema && uiSchema['ui:page'] ? uiSchema['ui:page'].style : {}}>
           {
             (actionButtonPos === 'top' && !hasPageLayoutSteps) 
               ? (
                   <FormButtons 
-                    onSubmit={(callback) => onFormSubmit(callback)}
+                    onSubmit={(callback: any) => onFormSubmit(callback)}
                     submitValue={submitValue} 
                     inProgressValue={inProgressValue}
                     disabled={formGlobalState.disabled} 
@@ -524,7 +524,7 @@ const Form = ({
             
           }
           <LoadingContext.Provider value={loadingState}>
-            <StepperContext.Provider value={[activeStep, setActiveStep, buttonDisabled]}>
+            <StepperContext.Provider value={[activeStep, setActiveStep, buttonDisabled] as any}>
               <EventContext.Provider value={onUpload}>
                 {
                   xhrProgress && !hasPageLayoutTabs ? (
@@ -570,7 +570,7 @@ const Form = ({
             (!actionButtonPos && !hasPageLayoutSteps) 
               ? (
                   <FormButtons
-                    onSubmit={(callback) => onFormSubmit(callback)}
+                    onSubmit={(callback: any) => onFormSubmit(callback)}
                     disabled={formGlobalState.disabled}
                     submitValue={submitValue}
                     cancelValue={cancelValue} 
