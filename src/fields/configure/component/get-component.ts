@@ -1,5 +1,5 @@
-// Library
-import React from 'react';
+// Types
+import { GetComponent } from '@core-types/configure/GetComponent.type';
 
 const componentConfig = require('../component.config').default;
 const {
@@ -30,7 +30,12 @@ const {
   },
 } = require('../../../generated/app.config');
 
-export default ({ schema, uiSchema = {}, components, schemaVersion }) => {
+export default ({ 
+  schema, 
+  uiSchema = {}, 
+  components, 
+  schemaVersion 
+}: GetComponent) => {
   // console.log('getComponent schema: %o, uiSchema: %o', schema, uiSchema);
   const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'];
