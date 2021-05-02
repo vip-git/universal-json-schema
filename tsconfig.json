@@ -5,6 +5,7 @@
       "baseUrl": "./src/",
       "paths": {
         "@core-types/*": ["types/*"],
+        "@utils/*": ["./src/fields/utils/*"],
       },
       "declaration": true,
       "noImplicitAny": false,

@@ -10,3 +10,5 @@ _results_
 generator/package-lock.json
 generator/package.json
 coverage
+.husky
+src/fields/components/**/package-lock.json

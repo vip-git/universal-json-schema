@@ -1,5 +1,6 @@
 // Types
 import { GetComponent } from '@core-types/configure/GetComponent.type';
+import { isEnum } from '@react-jsonschema-form-utils/enum-utils';
 
 const componentConfig = require('../component.config').default;
 const {
@@ -19,13 +20,6 @@ const {
       ENUM_COMPONENTS,
       V2_PICKER_COMPONENT,
       COMMON_COMPONENTS,
-    },
-    UTILS: {
-      UTIL_CONFIG: {
-        ENUM_UTILS: {
-          util: { valuesToOptions, isEnum },
-        },
-      },
     },
   },
 } = require('../../../generated/app.config');

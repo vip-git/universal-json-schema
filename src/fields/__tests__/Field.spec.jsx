@@ -7,7 +7,7 @@ import { shallow } from 'enzyme'
 import FormLabel from '@material-ui/core/FormLabel';
 
 // Internal
-import RadioGroup from '../components/RadioGroup';
+import RadioGroup from '@react-jsonschema-form-components/material-radio-group';
 import ConfiguredField from '../ConfiguredField';
 
 const classes = {

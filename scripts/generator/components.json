@@ -2,12 +2,12 @@
     "name": "JSON Schema Components",
     "utils": {
         "@react-jsonschema-form-utils/enum-utils": {
-            "version": "1.0.8",
+            "version": "2.0.1",
             "name": "enum-utils",
             "isRequired": true
         },
         "@react-jsonschema-form-utils/parse-values": {
-            "version": "1.0.6",
+            "version": "2.0.1",
             "name": "parse-values",
             "isRequired": true
         }
@@ -29,21 +29,21 @@
     },
 	"components": {
         "@react-jsonschema-form-components/material-radio-group": {
-            "version": "1.0.9",
+            "version": "2.0.1",
             "type": "string",
             "isEnum": true,
             "name": "material-radio-group",
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/creatable-react-select": {
-            "version": "1.0.8",
+            "version": "2.0.2",
             "type": "string",
             "isEnum": true,
             "name": "creatable-react-select",
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/react-select": {
-            "version": "1.0.10",
+            "version": "2.0.1",
             "type": "string",
             "isEnum": true,
             "name": "react-select",
@@ -53,7 +53,7 @@
             ]
         },
         "@react-jsonschema-form-components/material-select": {
-            "version": "1.0.11",
+            "version": "2.0.1",
             "type": "string",
             "isEnum": true,
             "isRequired": true,
@@ -64,7 +64,7 @@
             ]
         },
         "@react-jsonschema-form-components/material-checkbox": {
-            "version": "1.0.9",
+            "version": "2.0.4",
             "type": "string",
             "isEnum": true,
             "isRequired": true,
@@ -98,7 +98,7 @@
             "name": "rich-text-editor"
         },
         "@react-jsonschema-form-components/material-input": {
-            "version": "1.0.11",
+            "version": "2.0.1",
             "type": "string",
             "isEnum": false,
             "isDefault": true,

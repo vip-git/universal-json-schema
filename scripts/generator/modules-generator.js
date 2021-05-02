@@ -27,6 +27,12 @@ const moduleGenerator = (
     `${generatedLocation}/${moduleName}`,
   );
 
+  Object.keys(componentSettings[moduleName])
+    .filter((c) => !componentSettings[moduleName][c].notAvailable)
+    .forEach((modName) => {
+      shelljs.rm('-rf', `${generatedLocation}/${moduleName}/${componentSettings[moduleName][modName].name}/package.json`);
+    });
+
   shellFileString.to(`${generatedLocation}/${moduleName}/index.js`);
 
   console.log(`${moduleName} downloaded successfully`);

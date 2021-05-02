@@ -3,6 +3,9 @@ import React from 'react';
 import slice from 'lodash/slice';
 import isArray from 'lodash/isArray';
 
+// Internal
+import { isEnum } from '@react-jsonschema-form-utils/enum-utils';
+
 // Material UI
 import IconButton from '@material-ui/core/IconButton';
 import AddCircle from '@material-ui/icons/AddCircle';
@@ -21,19 +24,6 @@ import getDefinitionSchemaFromRef from '../helpers/get-definition-schema';
 
 // Types
 import { FieldSetArrayProps } from '../types/FieldSetArray.type';
-
-// Generated UTILS
-const {
-  APP_CONFIG: {
-    UTILS: {
-      UTIL_CONFIG: {
-        ENUM_UTILS: {
-          util: { isEnum },
-        },
-      },
-    },
-  },
-} = require('../generated/app.config');
 
 export const RawFieldSetArray = (props: FieldSetArrayProps) => {
   const {

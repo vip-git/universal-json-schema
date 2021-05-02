@@ -24,6 +24,9 @@
     "test:e2e": "npx wdio run wdio.conf.js",
     "test:e2e:ci": "npx wdio run wdio-ci.conf.js"
   },
+  "pre-commit": [
+    "test"
+  ],
   "dependencies": {
     "@babel/plugin-syntax-jsx": "^7.12.13",
     "@cucumber/cucumber": "7.0.0",
@@ -34,6 +37,9 @@
     "@material-ui/lab": "^4.0.0-alpha.57 || next",
     "@material-ui/styled-engine": "^5.0.0-alpha.11 || next",
     "@monaco-editor/react": "4.0.6",
+    "@react-jsonschema-form-components/material-radio-group": "2.0.1",
+    "@react-jsonschema-form-utils/enum-utils": "2.0.1",
+    "@react-jsonschema-form-utils/parse-values": "2.0.1",
     "@types/jest": "26.0.21",
     "@wdio/cli": "7.4.6",
     "ajv": "6.12.6",
@@ -118,6 +124,7 @@
     "eslint-plugin-react-hooks": "4.2.0",
     "file-loader": "6.0.0",
     "html-webpack-plugin": "4.3.0",
+    "husky": "^6.0.0",
     "image-webpack-loader": "6.0.0",
     "immutable": "3.8.2",
     "jest": "26.6.3",
@@ -132,6 +139,7 @@
     "postcss-loader": "4.1.0",
     "postcss-nested": "5.0.3",
     "postcss-normalize": "9.0.0",
+    "pre-commit": "1.2.2",
     "raf": "3.4.1",
     "sass-loader": "11.0.1",
     "selenium-webdriver": "4.0.0-beta.3",

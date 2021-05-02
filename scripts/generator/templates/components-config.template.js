@@ -3,7 +3,7 @@ export const ENUM_COMPONENTS = {
  <% Object.values(components).filter((c) => c.isEnum && !c.notAvailable).forEach((comp) => { %>
   <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
     name: '<%= comp.name %>',
-    component: require('./<%= comp.name %>').default,
+    component: require('./<%= comp.name %>/dist').default,
   },
  <% }); %>
 };
@@ -11,7 +11,7 @@ export const ENUM_COMPONENTS = {
 export const COMMON_COMPONENTS = {
   NORMAL_INPUT: {
     name: '<%= Object.values(components).find((c) => c.isDefault).name %>',
-    component: require('./<%= Object.values(components).find((c) => c.isDefault).name %>').default,
+    component: require('./<%= Object.values(components).find((c) => c.isDefault).name %>/dist').default,
   },
 };
 

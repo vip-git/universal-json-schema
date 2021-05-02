@@ -10,20 +10,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@react-jsonschema-form-components/creatable-react-select": "1.0.8",
+    "@react-jsonschema-form-components/creatable-react-select": "2.0.2",
     "@react-jsonschema-form-components/empty-div": "1.0.1",
-    "@react-jsonschema-form-components/material-checkbox": "1.0.9",
-    "@react-jsonschema-form-components/material-input": "1.0.11",
+    "@react-jsonschema-form-components/material-checkbox": "2.0.4",
+    "@react-jsonschema-form-components/material-input": "2.0.1",
     "@react-jsonschema-form-components/material-picker": "1.0.4",
-    "@react-jsonschema-form-components/material-radio-group": "1.0.9",
-    "@react-jsonschema-form-components/material-select": "1.0.11",
-    "@react-jsonschema-form-components/react-select": "1.0.10",
+    "@react-jsonschema-form-components/material-radio-group": "2.0.1",
+    "@react-jsonschema-form-components/material-select": "2.0.1",
+    "@react-jsonschema-form-components/react-select": "2.0.1",
     "@react-jsonschema-form-components/rich-text-editor": "1.0.1",
     "@react-jsonschema-form-components/upload": "1.0.4",
     "@react-jsonschema-form-interceptors/translate-currency": "1.0.4",
     "@react-jsonschema-form-interceptors/translate-range-date": "1.0.2",
     "@react-jsonschema-form-interceptors/translate-ratings": "1.0.1",
-    "@react-jsonschema-form-utils/enum-utils": "1.0.8",
-    "@react-jsonschema-form-utils/parse-values": "1.0.6"
+    "@react-jsonschema-form-utils/enum-utils": "2.0.1",
+    "@react-jsonschema-form-utils/parse-values": "2.0.1"
   }
 }

@@ -1,0 +1,46 @@
+{
+    "compilerOptions": {
+      "allowSyntheticDefaultImports": true,
+      "module": "commonjs",
+      "baseUrl": "./src/",
+      "paths": {
+        "@core-types/*": ["types/*"],
+      },
+      "declaration": true,
+      "noImplicitAny": false,
+      "removeComments": true,
+      "noLib": false,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "target": "es6",
+      "resolveJsonModule": true,
+      "sourceMap": true,
+      "allowJs": true,
+      "jsx": "react",
+      "esModuleInterop": true,
+      "lib": [
+        "es5",
+        "es6",
+        "dom",
+        "es2015.core",
+        "es2015.collection",
+        "es2015.generator",
+        "es2015.iterable",
+        "es2015.promise",
+        "es2015.proxy",
+        "es2015.reflect",
+        "es2015.symbol",
+        "es2015.symbol.wellknown",
+        "esnext.asynciterable"
+      ],
+      "outDir": "dist"
+    },
+    "exclude": [
+      "node_modules",
+      "**/*.spec.ts",
+      "**/*.spec.tsx"
+    ],
+    "include": [
+      "src/**/*",
+    ]
+}

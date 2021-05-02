@@ -3,7 +3,7 @@ export const UTIL_CONFIG = {
    <% Object.values(utils).forEach((util) => { %>
    <%= util.name.toUpperCase().replace(/-/g, '_') %>: {
      name: '<%= util.name %>',
-     util: require('./<%= util.name %>'),
+     util: require('./<%= util.name %>/dist'),
    },
    <% }); %>
 };

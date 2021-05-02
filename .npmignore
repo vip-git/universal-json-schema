@@ -32,3 +32,4 @@ changelog.md
 contributing.md
 Dockerfile
 __tests__
+.husky

@@ -1,20 +1,8 @@
 // import Input, { InputLabel } from '@material-ui/core/Input'; // eslint-disable-line import/no-named-default
 import FormLabel from '@material-ui/core/FormLabel';
+import { isEnum } from '@react-jsonschema-form-utils/enum-utils';
 
 const InputLabel = require('@material-ui/core/InputLabel').default;
-
-// Generated UTILS
-const {
-  APP_CONFIG: {
-    UTILS: {
-      UTIL_CONFIG: {
-        ENUM_UTILS: {
-          util: { isEnum },
-        },
-      },
-    },
-  },
-} = require('../../../generated/app.config');
 
 export default ({ schema, uiSchema = {} }) => {
   const widget = uiSchema['ui:widget'];
