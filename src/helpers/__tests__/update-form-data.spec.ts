@@ -59,17 +59,19 @@ describe('updateFormData', () => {
       'three',
     ];
     const expected = ['one', 'three'];
-
-    expect(updateFormData(initial, '', { $apply: arr => without(arr, 'two') })).toStrictEqual(expected);
+    const updated = updateFormData(initial, '', without(initial, 'two'));
+    expect(updated).toStrictEqual(expected);
   });
   it('adds array item', () => {
     const initial = [
       'one',
       'two',
     ];
+    const updatedVal = [...initial, 'three'];
     const expected = ['one', 'two', 'three'];
+    const updated = updateFormData(initial, '', updatedVal);
 
-    expect(updateFormData(initial, '', { $push: ['three'] })).toStrictEqual(expected);
+    expect(updated).toStrictEqual(expected);
   });
   describe('addListItem', () => {
     it('adds list item', () => {

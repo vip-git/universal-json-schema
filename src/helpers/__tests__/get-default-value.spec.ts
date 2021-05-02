@@ -12,7 +12,7 @@ describe('getDefaultValue', () => {
     const actual = getDefaultValue(data);
 
     // assert
-    expect(actual).to.equal(expected);
+    expect(actual).toEqual(expected);
   });
   it('works for string with default value', () => {
     // assemble
@@ -26,7 +26,7 @@ describe('getDefaultValue', () => {
     const actual = getDefaultValue(data);
 
     // assert
-    expect(actual).to.equal(expected);
+    expect(actual).toEqual(expected);
   });
   it('works for object', () => {
     // assemble

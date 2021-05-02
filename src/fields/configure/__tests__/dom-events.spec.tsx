@@ -1,28 +1,30 @@
-/* globals describe,it */
-/* eslint-disable no-unused-expressions */
+// Library
 import React from 'react';
+
+// Enzyme
+import { shallow } from 'enzyme';
 
 describe('dom events', () => {
   it('test click button', () => {
-    const onClick = sinon.spy();
+    const onClick = jest.fn();
     const wrapper = shallow(
       <button onClick={onClick} />,
     );
 
     const btnComp = wrapper.find('button');
-    expect(btnComp).to.have.length(1);
+    expect(btnComp).toHaveLength(1);
     btnComp.simulate('click');
-    expect(onClick).to.have.been.calledOnce;
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
   it('test click checkbox', () => {
-    const onChange = sinon.spy();
+    const onChange = jest.fn();
     const wrapper = shallow(
       <input type={'checkbox'} onChange={onChange} value={'a'} checked />,
     );
 
     const btnComp = wrapper.find('input');
-    expect(btnComp).to.have.length(1);
+    expect(btnComp).toHaveLength(1);
     btnComp.simulate('change');
-    expect(onChange).to.have.been.calledOnce;
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 });

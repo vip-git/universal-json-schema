@@ -1,6 +1,6 @@
 import mapValues from 'lodash/mapValues';
 
-const getDefaultValue = (schema = {}) => {
+const getDefaultValue = (schema = {} as any) => {
   if (schema.default) return schema.default;
   switch (schema.type) {
     case 'object':
