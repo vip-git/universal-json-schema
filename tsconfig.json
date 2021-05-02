@@ -5,6 +5,7 @@
       "paths": {
         "@core-types/*": ["./src/types/*"],
         "@utils/*": ["./src/fields/utils/*"],
+        "@config/*": ["./src/config/*"],
       },
       "declaration": true,
       "noImplicitAny": false,

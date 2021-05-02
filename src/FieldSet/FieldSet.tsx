@@ -10,76 +10,34 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
+// Utils
+import Utils from '../helpers/utils';
+
 // Styles
 import fieldSetStyles from './field-set-styles';
-
-// Internal
-import FieldSetArray from './FieldSetArray';
-import FieldSetObject from './FieldSetObject';
-import FieldSetTabs from './FieldSetTabs';
-import FieldSetSteps from './FieldSetStepper';
 
 // Validation Messages
 import ValidationMessages from '../ValidationMessages';
 
+// Variants
+import { isPageLayoutSet } from './variants/page-layout.variants';
+import RENDER_BASED_ON_SCHEMA_TYPE from './variants/schema-type.variants';
+
 // Types
 import { FieldSetProps } from '../types/FieldSet.type';
-
-const isPageLayoutSet = (uiSchema) => {
-  const pageSchema = uiSchema['ui:page'];
-  return pageSchema ? pageSchema['ui:layout'] : false;
-};
 
 export const shouldHideTitle = (uiSchema, schema) => isPageLayoutSet(uiSchema) || has(schema, 'items.enum');
 
 export const RawFieldSetContent = (props) => {
   const { schema = {}, uiSchema = {}, xhrSchema = {} } = props;
   const { type } = schema;
-  if (type === 'array') {
-    return (
-      <FieldSetArray 
-        uiSchema={uiSchema}
-        schema={schema}
-        xhrSchema={xhrSchema}
-        {...props} 
-      />
-    );
-  }
-  if (type === 'object') {
-    const pageLayout = isPageLayoutSet(uiSchema);
-    switch (pageLayout) {
-      case 'tabs':
-        return (
-          <FieldSetTabs 
-            uiSchema={uiSchema} 
-            schema={schema} 
-            xhrSchema={xhrSchema}
-            {...props} 
-          />
-        );
-
-      case 'steps':
-        return (
-          <FieldSetSteps
-            uiSchema={uiSchema} 
-            schema={schema} 
-            xhrSchema={xhrSchema}
-            {...props} 
-          />
-        );  
-    
-      default:
-        return (
-          <FieldSetObject 
-            uiSchema={uiSchema} 
-            schema={schema} 
-            xhrSchema={xhrSchema}
-            {...props} 
-          />
-        );
-    }
-  }
-  return null;
+  const SchemaTypeComponents = RENDER_BASED_ON_SCHEMA_TYPE({
+    schema,
+    uiSchema,
+    xhrSchema,
+    props,
+  });
+  return Utils.callFunctionIfExists(SchemaTypeComponents, type);
 };
 
 export const FieldSetContent = withStyles(fieldSetStyles.fieldSetContent)(RawFieldSetContent);
