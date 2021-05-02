@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 
-export class RawFormButtons extends React.Component {
+export class RawFormButtons extends React.Component<any, any> {
   state = {
     inProgress: false,
   };
@@ -36,8 +36,7 @@ export class RawFormButtons extends React.Component {
             >
               {cancelValue || 'Reset'}
             </Button>
-          )
-        }
+          )}
         {onSubmit
           && (
           <Button
@@ -65,8 +64,7 @@ export class RawFormButtons extends React.Component {
           )}
           {(canProgress) ? inProgressValue || 'Processing...' : submitValue || 'Submit'}
           </Button>
-          )
-        }
+          )}
       </div>
     );
   }
