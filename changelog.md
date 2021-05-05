@@ -1,6 +1,7 @@
 ### [WIP] 3.0.0 
 ##### Follow [Releases](https://github.com/vip-git/react-jsonschema-form-material-ui/releases) to get detailed overview
 - Strict support for JSONSchema-Draft-7 including validations using [Ajv](https://github.com/ajv-validator/ajv#ajv-json-schema-validator)
+- Complete rewrite of v2 using `Typescript`
 - Build system now upgraded to `Webpack 5`
 - Support for `Material UI 5`
 - Support for `React 17` and `NextJS 10`

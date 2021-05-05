@@ -6,7 +6,7 @@ import schema from './schema.json';
 import uiSchema from './ui-schema.json';
 import xhrSchema from './xhr-schema.json';
 import formData from './form-data.json';
-import config from '../../../../../generator/components.json';
+import config from '../../../../../scripts/generator/components.json';
 
 const sessionId = generate();
 

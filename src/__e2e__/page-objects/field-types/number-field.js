@@ -6,14 +6,14 @@ const compareCurrentValue = (
   fieldUIValue,
   fieldUIType,
   callbackBeforeCompare,
-  fieldOrder
+  fieldOrder,
 ) => {
   callbackBeforeCompare(fieldUIType);
   const { path } = getComponentSelector(
     fieldName,
     fieldUIType,
     fieldUIValue,
-    fieldOrder
+    fieldOrder,
   );
   const fieldValue = $(path).getValue() || $(path).getText();
   if (fieldUIValue !== 'false') {
@@ -39,7 +39,7 @@ const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
     fieldName,
     fieldUIType,
     newValue,
-    fieldOrder
+    fieldOrder,
   );
   switch (fieldUIType) {
     case 'material-input':

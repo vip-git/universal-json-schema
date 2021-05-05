@@ -14,7 +14,7 @@ RUN mkdir -p /opt/react-json-schema
 WORKDIR /opt/react-json-schema
 COPY src/ /opt/react-json-schema/src
 COPY .babelrc /opt/react-json-schema/.babelrc
-COPY generator/ /opt/react-json-schema/generator
+COPY scripts/generator/ /opt/react-json-schema/scripts/generator
 COPY package.json /opt/react-json-schema/package.json
 COPY package-lock.json /opt/react-json-schema/package-lock.json
 COPY index.js /opt/react-json-schema/index.js
@@ -39,7 +39,7 @@ RUN npm link webpack && \
     npm link @babel/preset-typescript && \
     npm link @babel/register && \
     npm link @babel/runtime
-RUN node generator/index.js
+RUN node scripts/generator/index.js
 RUN npx webpack
 # EXPOSE 3000
 

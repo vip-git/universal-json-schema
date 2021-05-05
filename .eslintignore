@@ -1,0 +1,6 @@
+build/
+.eslintrc.js
+__tests__
+dist
+__e2e__
+jest.config.js
