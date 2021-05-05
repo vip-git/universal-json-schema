@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Library
 import React, { useState } from 'react';
 import { isEqual } from 'lodash';
@@ -70,12 +71,12 @@ const FormComponent = ({
         },
       }}
       components={{
-	  customComponent: ({ onChange, ...rest }) => (
-		<CustomComponent onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
-	  ),
-	  customRating: ({ onChange, ...rest }) => (
-		<CustomRating onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
-	  ),
+        customComponent: ({ onChange, ...rest }) => (
+          <CustomComponent onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
+        ),
+        customRating: ({ onChange, ...rest }) => (
+          <CustomRating onChange={onChange} formData={givenFormData} uiData={givenUIData} {...rest} />
+        ),
       }}
       validations={{
         confirmPassword: ({ schema, validations, formData, value }) => value !== formData.pass1 && ({
@@ -85,7 +86,7 @@ const FormComponent = ({
       }}
       submitOnEnter
       activityIndicatorEnabled
-   />
+    />
 );
 
 const SourceSchema = ({
@@ -104,14 +105,31 @@ const SourceSchema = ({
       <div>
         <Source key={`${locationHash}Schema`} title={'JSONSchema.json'} source={schema} onChange={onChange('schema')} />
         {
-          Object.keys(xhrSchema).length && (
-            <Source key={`${locationHash}xhrSchema`} title={'xhrSchema.json (Optional)'} source={xhrSchema} onChange={onChange('xhrSchema')} />
-          ) || ''
+          Object.keys(xhrSchema).length ? (
+            <Source 
+              key={`${locationHash}xhrSchema`} 
+              title={'xhrSchema.json (Optional)'} 
+              source={xhrSchema} 
+              onChange={onChange('xhrSchema')} 
+            />
+          ) : ''
         }
       </div>
       <div>
-        <Source key={`${locationHash}UISchema`} title={'uiSchema.json (Optional)'} source={uiSchema} onChange={onChange('uiSchema')} />
-        <Source key={`${locationHash}FormData`} title={'formData.json'} schema={validSchema} hasSchemaError={hasSchemaError} source={formData} onChange={onChange('formData')} />
+        <Source 
+          key={`${locationHash}UISchema`} 
+          title={'uiSchema.json (Optional)'} 
+          source={uiSchema} 
+          onChange={onChange('uiSchema')} 
+        />
+        <Source 
+          key={`${locationHash}FormData`} 
+          title={'formData.json'} 
+          schema={validSchema} 
+          hasSchemaError={hasSchemaError} 
+          source={formData} 
+          onChange={onChange('formData')} 
+        />
       </div>
     </div>
 );
@@ -121,10 +139,11 @@ const Example = ({
 }) => {
   const theme = useTheme();
   const classes = useStyles(theme);
+  const iniFormData = typeof data.formData === 'string' ? data.formData : { ...data.formData };
   const [fullscreenMode, setFullScreenMode] = useState(false);
   const [oldHash, setOldHash] = useState(window.location.hash);
   const [state, setState] = useState({ ...data });
-  const [formDataState, setFormData] = useState(typeof data.formData === 'string' ? data.formData : { ...data.formData });
+  const [formDataState, setFormData] = useState(iniFormData);
   const [schemaErrors, setSchemaErrors] = useState(null);
   const [validSchema, setValidSchema] = useState(null);
 
@@ -140,7 +159,13 @@ const Example = ({
     setState({ ...state, [type]: value || '' });
   };
 
-  const onFormChanged = ({ formData, uiSchema, uiData, schemaErrors: givenSchemaErrors, validSchema: givenValidSchema }) => {
+  const onFormChanged = ({ 
+    formData,
+    uiSchema,
+    uiData,
+    schemaErrors: givenSchemaErrors,
+    validSchema: givenValidSchema,
+  }) => {
     // console.log('formData is', formData);
     setState({ ...state, formData, uiSchema, uiData, validSchema });
     setSchemaErrors(givenSchemaErrors);
@@ -158,6 +183,7 @@ const Example = ({
   };
 
   const onFormError = (error = {}) => {
+    // eslint-disable-next-line no-console
     console.log('error is', error);
   };
 
@@ -206,7 +232,7 @@ const Example = ({
               xhrSchema['ui:page'].onload.xhrProgress = false;
               setState({ ...state, formData, uiSchema, xhrSchema, uiData, validSchema });
             }}
-          >
+        >
             <FullscreenExitIcon />
         </IconButton>
         <FormComponent
@@ -246,7 +272,7 @@ const Example = ({
             aria-label='full-screen-code'
             onClick={() => {
               setFullScreenMode(true);
-              uiSchema['ui:page'].tabs.style.width  = '81vw';
+              uiSchema['ui:page'].tabs.style.width = '81vw';
               xhrSchema['ui:page'].onload.xhrProgress = false;
               setState({ ...state, formData, xhrSchema, uiSchema, uiData, validSchema });
             }}

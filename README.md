@@ -12,6 +12,7 @@ A [**live playground**](https://react-jsonschema-form-material-ui.github56.now.s
 ```text
 npm install --save react-jsonschema-form-material-ui
 ```
+>Follow [Releases page](https://github.com/vip-git/react-jsonschema-form-material-ui/releases) to use latest or preleased tags.
 
 ## Basic Example Usage
 ```jsx

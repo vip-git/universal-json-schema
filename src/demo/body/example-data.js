@@ -1,4 +1,6 @@
-import { simple, nested } from './examples';
+import example from '../examples';
+
+const { simple, nested } = example[3];
 
 export default ({
   simple: {

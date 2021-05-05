@@ -31,3 +31,12 @@ wdio.conf.js
 changelog.md
 contributing.md
 Dockerfile
+__tests__
+jest.config.js
+tsconfig.json
+.eslintignore
+.prettierrc.js
+scripts/
+.vscode/
+changelog.md
+.husky

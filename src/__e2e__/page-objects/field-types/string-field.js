@@ -6,7 +6,7 @@ const compareCurrentValue = (
   fieldUIValue,
   fieldUIType,
   callbackBeforeCompare,
-  fieldOrder
+  fieldOrder,
 ) => {
   if (fieldUIValue !== 'false') {
     callbackBeforeCompare(fieldUIType);
@@ -14,12 +14,13 @@ const compareCurrentValue = (
       fieldName,
       fieldUIType,
       fieldUIValue,
-      fieldOrder
+      fieldOrder,
     );
     const fieldValue = fieldUIType !== 'checkboxes' ? $(path).getValue() || $(path).getText() : '';
     try {
       $(path).scrollIntoView();
-    } catch(err) {}
+    }
+    catch (err) {}
     switch (fieldUIType) {
       case 'material-input':
       case 'updown':
@@ -36,7 +37,7 @@ const compareCurrentValue = (
           fieldName,
           fieldUIType,
           fieldUIValue,
-          fieldOrder
+          fieldOrder,
         );
         expect($(singleSelector)).toBeChecked();
         return fieldValue;
@@ -53,11 +54,12 @@ const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
     fieldName,
     fieldUIType,
     newValue,
-    fieldOrder
+    fieldOrder,
   );
   try {
     $(path).scrollIntoView();
-  } catch(err) {}
+  }
+  catch (err) {}
   switch (fieldUIType) {
     case 'material-input':
     case 'password':
@@ -72,7 +74,7 @@ const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
         fieldName,
         fieldUIType,
         newValue,
-        fieldOrder
+        fieldOrder,
       );
       $(secondarySelector).click();
       $(thirdSelector).click();
@@ -95,7 +97,8 @@ const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
       $(path).click();
       if (browser.capabilities.platformName === 'mac os x') {
         browser.keys(['Meta', 'a']);
-      } else {
+      }
+      else {
         browser.keys(['Control', 'a']);
       }
       expect($(path)).toBeFocused();
@@ -105,7 +108,7 @@ const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
     case 'upload':
       FieldUtils.uploadFile(
         `${process.cwd()}/docs/checkbox.md`,
-        '//input[@id="button-file"]'
+        '//input[@id="button-file"]',
       );
       return newValue;
 
@@ -114,7 +117,7 @@ const updateNewValue = (fieldName, newValue, fieldUIType, fieldOrder) => {
         fieldName,
         fieldUIType,
         newValue,
-        fieldOrder
+        fieldOrder,
       );
       $(singleSelector).click();
       return newValue;
