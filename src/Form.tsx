@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 // Library
 import React from 'react';
-import { MuiPickersUtilsProvider } from 'next-pickers-material-ui'; // Has to be made optional
+import { MuiPickersUtilsProvider } from '@material-ui/pickers'; // Has to be made optional
 import MomentUtils from '@date-io/moment';
 import isEqual from 'lodash/isEqual';
 import set from 'lodash/set';

@@ -7,7 +7,7 @@ import {
   DatePicker, 
   TimePicker, 
   DateTimePicker, 
-} from 'next-pickers-material-ui';
+} from '@material-ui/pickers';
 import pickerProps from './picker.props';
 
 const renderPickerComp = (type) => {
@@ -74,9 +74,6 @@ export default ({ path, label, title, value, options = {}, htmlid, type, uiSchem
           className='material-form-datepicker'
           style={{ 
             'display': 'contents',
-            '&>div': {
-              flexBasis: '100%',
-            },
           }}
         >
             <PickerComp
