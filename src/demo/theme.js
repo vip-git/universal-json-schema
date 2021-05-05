@@ -28,7 +28,7 @@ const theme = {
       defaultProps: {
         variant: 'standard',
       },
-    }
+    },
   },
   overrides: {
     MuiInput: {
