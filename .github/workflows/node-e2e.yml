@@ -6,11 +6,11 @@ name: Test E2E CI
 on:
   pull_request:
     branches: [main]
-    types: [opened]
+    types: [closed]
 
 jobs:
   build:
-
+    if: "github.event.pull_request.merged"
     runs-on: ubuntu-latest
 
     strategy:
