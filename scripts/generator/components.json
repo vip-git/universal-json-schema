@@ -92,9 +92,10 @@
             "name": "upload"
         },
         "@react-jsonschema-form-components/rich-text-editor": {
-            "version": "1.0.3",
+            "version": "2.0.0",
             "type": "string",
             "isEnum": false,
+            "hasDist": true,
             "name": "rich-text-editor"
         },
         "@react-jsonschema-form-components/material-input": {

@@ -1,7 +1,6 @@
 import React from 'react';
-import { css } from '@emotion/css';
 
-export default function WordCount(options) {
+export default function WordCount() {
   return {
     renderEditor(props, editor, next) {
       const children = next();
@@ -12,14 +11,16 @@ export default function WordCount(options) {
         <div>
           <div>{children}</div>
           <span
-            className={css`
-              margin-top: 10px;
-              padding: 12px;
-              background-color: #ebebeb;
-              display: inline-block;
-            `}
+            style={{
+              marginTop: 10,
+              padding: 12,
+              backgroundColor: '#ebebeb',
+              display: 'inline-block',
+            }}
           >
-            Char Count: {wordCount}
+            Char Count:
+            {' '}
+            {wordCount}
           </span>
         </div>
       );

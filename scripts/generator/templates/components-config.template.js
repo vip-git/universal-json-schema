@@ -96,7 +96,7 @@ export const COMP_CONFIG = {
           .filter((c) => !c.isEnum && c.type === "string" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
       <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
         name: '<%= comp.name %>',
-        component: require('./<%= comp.name %>').default,
+        component: <% if(comp.hasDist) { %> require('./<%= comp.name %>/dist').default <% } else { %> require('./<%= comp.name %>').default <% } %>,
       },
       <% }); %>
       ...DEFAULT_COMPONENTS,

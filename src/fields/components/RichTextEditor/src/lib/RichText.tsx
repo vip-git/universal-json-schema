@@ -1,3 +1,8 @@
+/* eslint-disable react/sort-comp */
+/* eslint-disable react/state-in-constructor */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable default-case */
+/* eslint-disable consistent-return */
 import React from 'react';
 import Html from 'slate-html-serializer';
 import { Editor, getEventTransfer } from 'slate-react';
@@ -146,7 +151,7 @@ const isCodeHotkey = isKeyHotkey('mod+`');
  * @type {Component}
  */
 
-class RichText extends React.Component {
+class RichText extends React.Component<any, any> {
   /**
    * Deserialize the initial editor value.
    *
@@ -210,7 +215,7 @@ class RichText extends React.Component {
 
   onPaste = (event, change, next) => {
     const transfer = getEventTransfer(event);
-    if (transfer.type != 'html') return next();
+    if (transfer.type !== 'html') return next();
     const { document } = serializer.deserialize(transfer.html);
     change.insertFragment(document);
   }
@@ -247,7 +252,7 @@ class RichText extends React.Component {
       else {
         // Handle the extra wrapping required for list buttons.
         const isList = this.hasBlock('list-item');
-        const isType = value.blocks.some((block) => !!document.getClosest(block.key, (parent) => parent.type == type));
+        const isType = value.blocks.some((block) => !!document.getClosest(block.key, (parent) => parent.type === type));
 
         if (isList && isType) {
           change
@@ -375,6 +380,8 @@ class RichText extends React.Component {
         return next();
     }
   }
+
+  editor: any;
   
   /**
    * Render.
