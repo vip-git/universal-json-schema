@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-nested-ternary */
 import React from 'react';
-import { cx, css } from 'emotion';
+import { cx, css } from '@emotion/css';
 
 export const Button = React.forwardRef(
   ({ className, active, reversed, ...props }, ref) => (

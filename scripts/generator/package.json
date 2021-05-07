@@ -18,7 +18,7 @@
     "@react-jsonschema-form-components/material-radio-group": "2.0.1",
     "@react-jsonschema-form-components/material-select": "2.0.1",
     "@react-jsonschema-form-components/react-select": "2.0.1",
-    "@react-jsonschema-form-components/rich-text-editor": "1.0.1",
+    "@react-jsonschema-form-components/rich-text-editor": "1.0.3",
     "@react-jsonschema-form-components/upload": "1.0.4",
     "@react-jsonschema-form-interceptors/translate-currency": "1.0.4",
     "@react-jsonschema-form-interceptors/translate-range-date": "1.0.2",
