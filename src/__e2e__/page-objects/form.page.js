@@ -33,35 +33,42 @@ class FormPage extends Page {
    * define selectors using getter methods
    */
   get btnSubmit() {
-    return $('//button[span[contains(text(), "Submit")]]');
+    try {
+      return $('//button[span[contains(text(), "Submit")]]'); 
+    }
+    catch (err) {
+    }
   }
 
   callbackBeforeCompare = (fieldUIType, reverse) => {
-    const $btnSubmit = $('//button[span[contains(text(), "Submit")]]');
-    if (fieldUIType !== 'upload' && !reverse) {
-      this.btnSubmit.waitForClickable({ timeout: 10000 });
-      this.btnSubmit.click();
-      this.btnSubmit.waitForClickable({ timeout: 10000 });
-      if (this.hasXHRData) {
-        browser.refresh();
+    try {
+      const $btnSubmit = $('//button[span[contains(text(), "Submit")]]');
+      if (fieldUIType !== 'upload' && !reverse) {
+        this.btnSubmit.waitForClickable({ timeout: 10000 });
+        this.btnSubmit.click();
+        this.btnSubmit.waitForClickable({ timeout: 10000 });
+        if (this.hasXHRData) {
+          browser.refresh();
+        }
+      }
+
+      if (reverse) {
+        this.btnSubmit.waitForClickable({ timeout: 10000, reverse });
+        expect(this.btnSubmit).toBeDisabled();
+      }
+
+      if (this.currentTab) {
+        this.btnSubmit.waitForClickable({ timeout: 10000 });
+        try {
+          $('//button[@aria-label="full-screen-code"]').click();
+        }
+        catch (err) {}
+        $(
+          `//button[@role="tab"][span[contains(text(), "${this.currentTab}")]]`,
+        ).click();
       }
     }
-
-    if (reverse) {
-      this.btnSubmit.waitForClickable({ timeout: 10000, reverse });
-      expect(this.btnSubmit).toBeDisabled();
-    }
-
-    if (this.currentTab) {
-      this.btnSubmit.waitForClickable({ timeout: 10000 });
-      try {
-        $('//button[@aria-label="full-screen-code"]').click();
-      }
-      catch (err) {}
-      $(
-        `//button[@role="tab"][span[contains(text(), "${this.currentTab}")]]`,
-      ).click();
-    }
+    catch (err) {}
   };
 
   /**
