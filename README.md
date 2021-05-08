@@ -23,6 +23,7 @@ import MaterialJsonSchemaForm from 'react-jsonschema-form-material-ui';
 // Internals
 import schema from '../simple/schema.json';
 import uiSchema from '../simple/ui-schema.json';
+const givenXhrSchema = require('./path-to your-xhr-schema.json'); // Optional
 import givenFormData from '../simple/form-data.json';
 
 export default () => {
@@ -30,6 +31,7 @@ export default () => {
   return <MaterialJsonSchemaForm 
             schema={schema} 
             uiSchema={uiSchema} 
+	    xhrSchema={givenXhrSchema || {}} // Optional
             formData={formData} 
             onChange={({ formData }) => setFormData(formData)}
             onSubmit={(submittedData) => console.log('form submitted', submittedData)}
