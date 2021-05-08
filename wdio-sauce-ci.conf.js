@@ -97,7 +97,7 @@ exports.config = {
       "maxInstancesPerCapability": 1,
       'sauce:options': {
             // Example options
-            build: 'React-JsonSchema',
+            build: `React-JsonSchema build-${new Date().getTime()}`,
             screenResolution: '1600x1200',
             // ...
       }
