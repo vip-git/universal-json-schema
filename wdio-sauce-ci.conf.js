@@ -93,13 +93,11 @@ exports.config = {
       "browserVersion" : "latest",
       "maxInstances": 1,
       "maxInstancesPerCapability": 1,
-      'bstack:options' : {
-        "os" : "Windows",
-        "osVersion" : "10",
-        "local" : "false",
-        "seleniumVersion" : "4.0.0-beta-2",
-        sessionName: 'React JSON Schema Form - Material UI',
-        buildName: `Chrome (Windows) - ${process.env.VERCEL_URL}`
+      'sauce:options': {
+            // Example options
+            build: 'React-JsonSchema',
+            screenResolution: '1600x1200',
+            // ...
       }
     },
     // {
