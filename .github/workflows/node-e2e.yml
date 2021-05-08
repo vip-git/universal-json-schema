@@ -63,5 +63,7 @@ jobs:
       env:
         BROWSERSTACK_USER: ${{secrets.BROWSERSTACK_USER}}
         BROWSERSTACK_ACCESSKEY: ${{secrets.BROWSERSTACK_ACCESSKEY}}
+        SAUCE_USER: ${{secrets.SAUCE_USER}}
+        SAUCE_ACCESSKEY: ${{secrets.SAUCE_ACCESSKEY}}
         VERCEL_TOKEN: ${{secrets.VERCEL_TOKEN}}
         VERCEL_API: ${{secrets.VERCEL_API}}
