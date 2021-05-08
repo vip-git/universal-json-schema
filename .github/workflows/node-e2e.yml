@@ -10,6 +10,10 @@ on:
           required: true
           default: 'github56'
           description: 'Test UrlId'  
+        e2eId:  
+          required: true
+          default: 'sauce'
+          description: 'Testing Provider (sauce / browserstack)'   
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -55,7 +59,7 @@ jobs:
     #    echo ${VERCEL_URI} for ${GITHUB_SHA} with ${GIT_SHA} - ${GITHUB_REF} - ${GITHUB_HEAD_REF} - ${VERCEL_API}
     #    VERCEL_URL="https://${VERCEL_URI}" npm run test:e2e:ci
     - name: "Run E2E Tests"
-      run: VERCEL_URL="https://react-jsonschema-form-material-ui-${{ github.event.inputs.vercelId }}.vercel.app" npm run test:e2e:ci
+      run: VERCEL_URL="https://react-jsonschema-form-material-ui-${{ github.event.inputs.vercelId }}.vercel.app" npm run test:e2e:${{ github.event.inputs.e2eId }}:ci
       env:
         BROWSERSTACK_USER: ${{secrets.BROWSERSTACK_USER}}
         BROWSERSTACK_ACCESSKEY: ${{secrets.BROWSERSTACK_ACCESSKEY}}
