@@ -24,6 +24,7 @@
     "deploy": "npm run build && npm version patch && npm publish",
     "test:e2e": "npx wdio run wdio.conf.js",
     "test:e2e:ci": "npx wdio run wdio-ci.conf.js",
+    "test:e2e:sauce:ci": "npx wdio run wdio-sauce-ci.conf.js",
     "posttest": "npm run lint"
   },
   "pre-commit": [
