@@ -44,6 +44,9 @@ const validateTest = ({
           FieldUtils.clearValues(path);
           $(path).setValue(stepDef.value);
           return;
+        case 'append':
+          $(path).setValue(stepDef.value);
+          return;
         case 'compare':
           callbackBeforeCompare(fieldUIType);
           expect(stepDef.value).toContain(fieldValue);
@@ -54,6 +57,7 @@ const validateTest = ({
           return;
         case 'isChecked':
           expect($(path)).toBeChecked();
+          return;
       }
     });
   }
