@@ -75,6 +75,7 @@ const Example () => {
 	    // Define Schema
 	    schema={givenSchema}
 	    uiSchema={givenUISchema}
+	    xhrSchema={givenXhrSchema || {}}
             formData={formData}
 	    
 	    // Define Event handlers
