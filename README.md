@@ -49,6 +49,7 @@ import MaterialJsonSchemaForm from 'react-jsonschema-form-material-ui';
 // Internals
 const givenSchema = require('./path-to your-schema.json');
 const givenUISchema = require('./path-to your-ui-schema.json');
+const givenXhrSchema = require('./path-to your-xhr-schema.json');
 const givenFormData = require('./path-to your-ui-formData.json');
 
 const Example () => {
@@ -75,6 +76,7 @@ const Example () => {
 	    // Define Schema
 	    schema={givenSchema}
 	    uiSchema={givenUISchema}
+	    xhrSchema={givenXhrSchema || {}}
             formData={formData}
 	    
 	    // Define Event handlers
