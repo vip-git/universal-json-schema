@@ -1,6 +1,6 @@
 import update from 'immutability-helper';
 import { has, get, each, set, omit } from 'lodash';
-import size from 'lodash/size';
+// import size from 'lodash/size';
 
 const arrRegex = /^([^.]+)\[([0-9]+)\](\.(.*))?/;
 const dotRegex = /^([^[]+)\.(.*$)/;
@@ -78,6 +78,23 @@ export const updateKeyFromSpec = (data, oldPath, newPath) => update(data, (obj) 
   }, {}),
 );
 
+export const setUIData = (givenUIData: {}, uiSchemaKeys: string | any[], uiSchema: {}, schema: {}, path?: string) => {
+  if (uiSchemaKeys.length) {
+    each(uiSchemaKeys, (val) => {
+      const getPath = path ? `${path}.${val}` : val;
+      const givenSchema: any = get(schema, getPath);
+      const fieldUIData = get(uiSchema, `${getPath}.ui:data`);
+      if (fieldUIData) {
+        set(givenUIData, getPath, fieldUIData);
+      }
+      else if (givenSchema && givenSchema.type === 'object' && givenSchema.properties) {
+        setUIData(givenUIData, Object.keys(givenSchema.properties), uiSchema, schema, val);
+      }
+    });
+  }
+  return givenUIData;
+};
+
 export const setUISchemaData = (givenUIData, uiSchema, path?: string, nestedSchema?: any) => {
   const iterateSchema = nestedSchema || uiSchema; 
   if (typeof givenUIData === 'object') {
@@ -93,6 +110,7 @@ export const setUISchemaData = (givenUIData, uiSchema, path?: string, nestedSche
       }
     });
   }
+  return uiSchema;
 };
 
 export const removeValueFromSpec = (uiData, path) => omit(uiData, path);

@@ -1,7 +1,18 @@
 // Internal
 import { isEnum } from '@react-jsonschema-form-utils/enum-utils';
 
+interface ConditionProps {
+  callback: Function;
+  condition: any;
+  equals: any;
+  nestedCondition?: any;
+}
+
 const Utils = {
+  executeCondition: (cond: ConditionProps) => cond.condition === cond.equals && cond.callback(),
+  executeConditions: (conditions: Array<ConditionProps>) => conditions.forEach((cond) => Utils.executeCondition(cond)
+  && cond.nestedCondition 
+  && Utils.executeConditions(cond.nestedCondition)),
   callFunction: (Object: any, Key: string | number, Params?: any) => Object 
     && Key 
     && typeof Object[Key] === 'function' 

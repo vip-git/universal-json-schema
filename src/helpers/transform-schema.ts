@@ -20,6 +20,8 @@ const {
   },
 } = require('../generated/app.config');
 
+export const parsePath = (getPath) => getPath.replace(/\./g, '|').replace(/\[/g, '|').replace(/\]/g, '|');
+
 export const hashCode = (s) => {
   let h = 0; const l = s.length; let 
     i = 0;
