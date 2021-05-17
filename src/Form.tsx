@@ -2,7 +2,6 @@
 // Library
 import React from 'react';
 import { generate } from 'shortid';
-// import Ajv from 'ajv';
 
 // Material UI
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'; // Has to be made optional
@@ -31,10 +30,6 @@ import useStepperEvents from './helpers/state-machine/states/stepper/hooks/stepp
 
 // Initial Contexts
 import { LoadingContext, EventContext, StepperContext } from './helpers/context';
-
-// let data = {};
-// let uiData = {};
-// let validSchema = {};
 
 const Form = ({
   formData: originalFormData,

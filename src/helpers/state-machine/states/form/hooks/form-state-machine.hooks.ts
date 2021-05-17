@@ -1,6 +1,7 @@
 // Library
 import React from 'react';
 import { interpret } from 'xstate';
+import { get } from 'lodash';
 
 // Helpers
 import createStateMachine from '../../../create-state-machine';
@@ -55,10 +56,15 @@ const useFormStateMachine = ({
   const [formInfo, setFormInfo] = React.useState(givenFormInfo);
   const [loadingState, setLoadingState] = React.useState(null);
   const validation = getValidationResult(schema, formInfo.uiSchema, formInfo.formData, validations);
+  const isStepperUI = () => get(
+    formInfo.uiSchema, 'ui:page.ui:layout',
+  ) === 'steps';
   const { 
     executeFormActionsByState,
     buttonDisabled,
-  } = useFormActions();
+  } = useFormActions({
+    isStepperUI,
+  });
 
   const startMachine = () => {
     if (!formStateMachine && !stateMachineService) {
@@ -72,11 +78,12 @@ const useFormStateMachine = ({
         validation,
         effects: {
           setFormInfo,
+          setActiveStep,
           onChange,
           onError: originalOnError,
         },
       });
-      stateMachineService = interpret(formStateMachine).onTransition((state) => executeFormActionsByState({
+      stateMachineService = interpret(formStateMachine, { devTools: true }).onTransition((state) => executeFormActionsByState({
         state,
         stateMachineService,
       }));
@@ -96,6 +103,7 @@ const useFormStateMachine = ({
     buttonDisabled,
     validation,
     loadingState,
+    isStepperUI,
   };
 };
 

@@ -1,24 +1,21 @@
 // Library
 import React from 'react';
-import { 
-  State, 
-} from 'xstate';
-import Ajv from 'ajv';
-import { get, has } from 'lodash';
 
 // Helpers
 import removeEmptyObjects from '../../../../remove-empty-values';
-import transformSchema from '../../../../transform-schema';
-import isFormInValid from '../../../../validation/is-form-validated';
 import Utils from '../../../../utils';
+
+// State Helpers
+import isFormSchemaStateValid from '../../../helpers/is-form-schema-state-valid';
   
 // config
 import { FORM_STATE_CONFIG } from '../form-state.config';
 
-export type StateMachineInstance = State<Record<string, any>, any, any, {
-  value: any;
-  context: Record<string, any>;
-}>;
+// Stepper Actions
+import useStepperActions from '../../stepper/hooks/stepper.actions.hooks';
+
+// Types
+import { StateMachineInstance } from '../../../types/form-state-machine.type';
 
 interface ExecuteFormActions {
   state: StateMachineInstance;
@@ -35,19 +32,30 @@ interface ExecuteFormActions {
  * @param param0 
  * @returns 
  */
-const useFormActions = () => {
+const useFormActions = ({
+  isStepperUI,
+}) => {
+  const [buttonDisabled, setButtonDisabled] = React.useState(false);
+  const { 
+    executeStepperActions,
+    getValidStepperActionToExecute,
+  } = useStepperActions(buttonDisabled);
   const { 
     FORM_ACTIONS: actions, 
     FORM_STATE_EVENTS, 
     FORM_STATE_ARRAY_EVENTS, 
     FORM_STATE_ERROR_EVENTS,
   } = FORM_STATE_CONFIG;
-  const [buttonDisabled, setButtonDisabled] = React.useState(false);
 
   const getValidActionToExecute = (
     state: StateMachineInstance,
   ) => {
     const executable = [];
+
+    const formValidCondition = isStepperUI() ? Object.values(
+      state.value[Object.keys(state.value)[0]],
+    ).includes(FORM_STATE_ERROR_EVENTS.INVALID) 
+      : Object.values(state.value).includes(FORM_STATE_ERROR_EVENTS.INVALID);
 
     const PROPAGATE_ON_CHANGE_CONDITION = {
       condition: typeof state.context.effects.onChange,
@@ -66,13 +74,13 @@ const useFormActions = () => {
     };
 
     const ENABLE_FORM_CONDITION = {
-      condition: Object.values(state.value).includes(FORM_STATE_ERROR_EVENTS.INVALID),
+      condition: formValidCondition,
       equals: false,
       callback: () => executable.push(actions.ENABLE_FORM_SUBMIT),
     };
 
     const DISABLE_FORM_CONDITION = {
-      condition: Object.values(state.value).includes(FORM_STATE_ERROR_EVENTS.INVALID),
+      condition: formValidCondition,
       equals: true,
       callback: () => executable.push(actions.DISABLE_FORM_SUBMIT),
     };
@@ -86,77 +94,11 @@ const useFormActions = () => {
     return executable;
   };
 
-  const disableButtonOnSchemaErrors = ({
-    stateMachineService,
-    uiSchema,
-    schema,
-    validation,
-    activeStep,
-    data,
-    onError,
-  }) => {
-    if (get(uiSchema, 'ui:page.props.ui:schemaErrors') 
-  || !has(uiSchema, 'ui:page.props.ui:schemaErrors')) {
-      try {
-        const givenSchema = get(uiSchema, 'ui:page.ui:layout') === 'steps' 
-          ? JSON.parse(JSON.stringify(schema))
-          : schema;
-        if (get(uiSchema, 'ui:page.ui:layout') === 'steps') {
-          Object.keys(givenSchema.properties).forEach((propName) => {
-            givenSchema.properties[propName] = propName === Object.keys(givenSchema.properties)[activeStep] ? {
-              ...givenSchema.properties[propName],
-            } : {
-              ...givenSchema.properties[propName],
-              required: [],
-            };
-          });
-        }
-        const transformedSchema = transformSchema(givenSchema);
-        const ajv = new Ajv();
-        const validate = ajv.compile(transformedSchema);
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        validate(data);
-
-        Utils.executeCondition({
-          condition: validate.errors && onError && typeof onError,
-          equals: 'function',
-          callback: () => onError(validate.errors),
-        });
-
-        const externalValidations = isFormInValid(validation);
-        if (externalValidations && !buttonDisabled) {
-          stateMachineService.send('error', externalValidations);
-        }
-
-        if (!externalValidations && validate.errors && !buttonDisabled) {
-          validate.errors.forEach((err) => {
-            stateMachineService.send('error', err);
-          });
-        }
-
-        return {
-          schemaErrors: validate.errors,
-          transformedSchema,
-        };
-      }
-      catch (err) {
-        // console.log('err', err);
-      }
-    }
-
-    return {
-      schemaErrors: [],
-      transformedSchema: transformSchema(schema),
-    };
-  };
-
   const executeAction = {
     [actions.DISABLE_FORM_SUBMIT]: () => setButtonDisabled(true),
     [actions.ENABLE_FORM_SUBMIT]: () => setButtonDisabled(false),
     [actions.PROPOGATE_ONCHANGE_EVENT]: ({
       stateMachineService,
-      validation,
-      activeStep,
       state,
     }) => {
       const {
@@ -164,15 +106,23 @@ const useFormActions = () => {
         formData: currentData, 
         uiData: currentUIData, 
         uiSchema: currentUISchema,
-      } = state.context;
-      const { schemaErrors, transformedSchema } = disableButtonOnSchemaErrors({
-        stateMachineService,
-        schema: currentSchema,
-        uiSchema: currentUISchema,
         validation,
         activeStep,
-        data: currentData,
+      } = state.context;
+      const stepName = Object.keys(currentSchema.properties)[activeStep];
+      const schema = isStepperUI() 
+        ? currentSchema.properties[stepName] 
+        : currentSchema;
+      const data = isStepperUI() ? currentData[stepName] : currentData;
+      const { schemaErrors, transformedSchema } = isFormSchemaStateValid({
+        stateMachineService,
+        schema,
+        uiSchema: currentUISchema,
+        validation,
+        data,
         onError: state.context.effects.onError,
+        buttonDisabled,
+        setButtonDisabled,
       });
       state.context.effects.onChange({ 
         formData: currentData, 
@@ -199,12 +149,16 @@ const useFormActions = () => {
         },
       );
     },
+    ...executeStepperActions,
   };
 
   const executeFormActionsByState = ({
     state,
     stateMachineService,
-  }: ExecuteFormActions) => getValidActionToExecute(state).forEach((action) => {
+  }: ExecuteFormActions) => [
+    ...getValidStepperActionToExecute(state),
+    ...getValidActionToExecute(state),
+  ].forEach((action) => {
     console.log('executing action', action, 'for state', state);
     executeAction[action]({
       state,

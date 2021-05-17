@@ -1,113 +1,62 @@
 // Machines
 import { createParallelFormFieldStates } from '../form';
 
+// Mutations
+import stepperMutations from './stepper-state.mutations';
+
+// config
+import { STEPPER_STATE_CONFIG } from './stepper-state.config';
+
 // Helpers
-import getDefinitionSchemaFromRef from '../../../get-definition-schema';
+import { flattenDefinitionSchemaFromRef } from '../../../get-definition-schema';
 
 const createStepperStates = ({
   schema,
 }) => {
+  const { STEPPER_STATE_EVENTS: { ON_STEP_CHANGE } } = STEPPER_STATE_CONFIG;
+  const states = {};
   const givenSchema = JSON.parse(JSON.stringify(schema));
-  //   Object.keys(givenSchema.properties).forEach((propName) => {
-  //     const states = {};
-  //     const parsedSchema = getDefinitionSchemaFromRef(givenSchema.definitions, givenSchema.properties[propName], {});
-  //     const formFieldStates = createParallelFormFieldStates({
-  //       schema: parsedSchema,
-  //       states: new Map(),
-  //     });
+  const stepTransitions = {};
+  Object.keys(givenSchema.properties).forEach((propName) => {
+    states[propName] = {
+      states: {},
+      on: {},
+    };
+    stepTransitions[`${propName}.${ON_STEP_CHANGE}`] = {
+      target: `.${propName}`,
+      actions: ['updateActiveStep'],
+    };
+    const parsedSchema = flattenDefinitionSchemaFromRef(givenSchema.definitions, givenSchema.properties[propName]);
+    const formFieldStates = createParallelFormFieldStates({
+      schema: parsedSchema,
+      states: new Map(),
+    });
     
-  //     formFieldStates.forEach((state, stateKey) => {
-  //       states[stateKey] = state;
-  //     });
+    formFieldStates.forEach((state, stateKey) => {
+      states[propName].initial = stateKey;
+      states[propName].type = 'parallel';
+      states[propName].states[stateKey] = {
+        ...state,
+      };
+      states[propName].on[`${propName}.${stateKey}`] = {
+        target: `.${stateKey}`,
+      };
+    });
+  });
 
-  //     console.log('formFieldStates is', formFieldStates);
-  //     console.log('states is', states);
-  //   });
-  const fieldStates = {
-    'clean': {
-      'on': {
-        'update': {
-          'target': 'dirty',
-          'actions': [
-            'updateData',
-          ],
-        },
-        'error': {
-          'target': 'invalid',
-        },
-        'submit': {
-          'target': 'submitted',
-        },
-      },
-    },
-    'invalid': {
-      'on': {
-        'update': {
-          'target': 'dirty',
-          'actions': [
-            'updateData',
-          ],
-        },
-        'error': {
-          'target': 'invalid',
-        },
-      },
-    },
-    'dirty': {
-      'on': {
-        'update': {
-          'target': 'dirty',
-          'actions': [
-            'updateData',
-          ],
-        },
-        'error': {
-          'target': 'invalid',
-        },
-        'submit': {
-          'target': 'submitted',
-        },
-      },
-    },
-    'disabled': {
-      'type': 'final',
-    },
-    'submitted': {
-      'type': 'final',
-    },
-  };
   const stepperState = {
-    initial: 'inactive',
+    id: 'stepMachine',
+    initial: Object.keys(states)[0],
     states: {
-      inactive: {
-        on: {
-          'activate': {
-            target: 'active',
-          },
-          'submit': { target: 'submitted' },
-        },
-      },
-      active: {
-        initial: 'clean',  
-        on: {
-          'deactivate': {
-            target: 'inactive',
-          },
-          'submit': { target: 'submitted' },
-        },
-        states: {
-          ...fieldStates,
-        },
-      },
-      disabled: {
-        type: 'final',
-      },
-      submitted: {
-        type: 'final',
-      },
+      ...states,
+    },
+    on: {
+      ...stepTransitions,
     },
   };
   return stepperState;
 };
+
+export { stepperMutations };
 
 export default createStepperStates;

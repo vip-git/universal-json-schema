@@ -4,7 +4,7 @@ import { get } from 'lodash';
 
 // Machines
 import createFormFieldStates, { formMutations } from './states/form';
-import createStepperStates from './states/stepper';
+import createStepperStates, { stepperMutations } from './states/stepper';
 
 // Types
 import { FormContext } from './types/form-state-machine.type';
@@ -41,13 +41,13 @@ const createStateMachine = ({
   effects,
 }) => {
   const { updateArrayData, updateData } = formMutations;
+  const { updateActiveStep } = stepperMutations;
   
   const states: XStateObj = getStatesByUISchema(uiSchema, formSchema);
 
-  console.log('states are', states);
+  console.log('states are', JSON.stringify(states));
  
   return createMachine<FormContext, any>({
-    id: 'machine',
     context: {
       uiSchema,
       formSchema,
@@ -56,12 +56,14 @@ const createStateMachine = ({
       uiData,
       effects,
       validation,
+      activeStep: 0,
     },
     ...states,
   }, {
     actions: {
       updateData,
       updateArrayData,
+      updateActiveStep,
     },
   });
 };

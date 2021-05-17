@@ -26,7 +26,8 @@ const useStepperEvents = ({
   givenOnStepBack,
   givenOnStepSkip,
 }) => {
-  const onStepNext = (path: string | number, callback: () => any) => {
+  const { STEPPER_STATE_EVENTS: { ON_STEP_CHANGE } } = STEPPER_STATE_CONFIG;
+  const onStepNext = (path: string | number, nextPath: string | number, callback: () => any) => {
     if (
       xhrSchema 
       && has(xhrSchema, `properties.${path}.onsubmit.xhr:datasource.url`)
@@ -80,21 +81,28 @@ const useStepperEvents = ({
         },
       });
     }
+    stateMachineService.send(`${nextPath}.${ON_STEP_CHANGE}`, { stepName: nextPath });
     return givenOnStepNext && givenOnStepNext(
       { formData, uiData, uiSchema, validation },
       () => callback && callback(),
     );
   };
 
-  const onStepBack = (path: string, callback: () => any) => givenOnStepBack && givenOnStepBack(
-    { formData, uiData, uiSchema, validation },
-    () => callback && callback(),
-  );
+  const onStepBack = (path: string, nextPath: string | number, callback: () => any) => {
+    stateMachineService.send(`${nextPath}.${ON_STEP_CHANGE}`, { stepName: nextPath });
+    return givenOnStepBack && givenOnStepBack(
+      { formData, uiData, uiSchema, validation },
+      () => callback && callback(),
+    );
+  };
 
-  const onStepSkip = (path: string, callback: () => any) => givenOnStepSkip && givenOnStepSkip(
-    { formData, uiData, uiSchema, validation },
-    () => callback && callback(),
-  );
+  const onStepSkip = (path: string, nextPath: string | number, callback: () => any) => {
+    stateMachineService.send(`${nextPath}.${ON_STEP_CHANGE}`, { stepName: nextPath });
+    return givenOnStepSkip && givenOnStepSkip(
+      { formData, uiData, uiSchema, validation },
+      () => callback && callback(),
+    );
+  };
 
   const onStepReset = (path: string, callback: () => any) => givenOnStepReset && givenOnStepReset(
     { formData, uiData, uiSchema, validation },

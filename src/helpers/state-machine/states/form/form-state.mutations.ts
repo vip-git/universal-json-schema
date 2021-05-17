@@ -1,5 +1,5 @@
 // Library
-import { assign } from 'xstate';
+import { assign, EventObject } from 'xstate';
 import { isEqual, omit } from 'lodash';
 
 // Helpers

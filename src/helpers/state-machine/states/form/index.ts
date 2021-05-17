@@ -147,6 +147,7 @@ const createFormFieldStates = ({
   });
 
   return {
+    id: 'formMachine',
     initial: 'clean',
     type: 'parallel',
     states,
