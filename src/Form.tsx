@@ -253,7 +253,7 @@ const Form = ({
             )
           }
           <LoadingContext.Provider value={loadingState}>
-            <StepperContext.Provider value={[activeStep, setActiveStep, buttonDisabled] as any}>
+            <StepperContext.Provider value={[activeStep, buttonDisabled] as any}>
               <EventContext.Provider value={onUpload}>
                 {
                   xhrProgress && !hasPageLayoutTabs ? (
