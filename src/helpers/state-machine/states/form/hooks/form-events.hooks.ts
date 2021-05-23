@@ -25,7 +25,6 @@ const useFormEvents = ({
   stateMachineService,
   validation,
   formData,
-  setFormInfo,
   setLoadingState,
   loadingState,
   schema,
@@ -104,10 +103,7 @@ const useFormEvents = ({
         field,
         givenValue,
         givenUIValue,
-        forceDeleteUIData, 
-        effects: { 
-          setFormInfo,
-        }, 
+        forceDeleteUIData,
       },
     );
   };

@@ -22,6 +22,9 @@ import useFormStateMachine from './helpers/state-machine/states/form/hooks/form-
 import useFormEvents from './helpers/state-machine/states/form/hooks/form-events.hooks';
 import useStepperEvents from './helpers/state-machine/states/stepper/hooks/stepper-events.hooks';
 
+// config
+import { FORM_STATE_CONFIG } from './helpers/state-machine/states/form/form-state.config';
+
 // import removeEmptyObjects, { isEmptyValues } from './helpers/remove-empty-values';
 // import transformSchema, { 
 // hashCode, mapData, setNestedPayload, getDefinitionsValue } from './helpers/transform-schema';
@@ -60,25 +63,24 @@ const Form = ({
   interceptors,
   ...rest 
 }: FormProps) => {
-  const { 
-    formInfo: { 
-      formData,
+  const {
+    formInfo: {
+      // schema,
       uiData,
       uiSchema,
+      formData,
     },
     validation,
     loadingState,
     buttonDisabled,
     stateMachineService,
     activeStep,
-    setFormInfo,
     setLoadingState,
-    setActiveStep,
   } = useFormStateMachine({
     xhrSchema,
-    schema,
     validations,
     originalFormInfo: {
+      schema,
       uiSchema: originalUISchema,
       formData: originalFormData,
     },
@@ -105,7 +107,6 @@ const Form = ({
     validation,
     stateMachineService,
     formData,
-    setFormInfo,
     setLoadingState,
     loadingState,
     schema,
@@ -148,8 +149,6 @@ const Form = ({
                         && xhrSchema['ui:page'].onload 
                         && xhrSchema['ui:page'].onload.xhrProgress;
 
-  // const [prevData, setPrevData] = React.useState(null);
-  // const [prevSkippedData, setPrevSkippedData] = React.useState(null);
   // const iniUiData = setUIData({}, Object.keys(schema.properties || {}), uiSchema, schema);
 
   const classes = formStyles();
@@ -164,33 +163,8 @@ const Form = ({
 
   const hasPageLayoutSteps = uiSchema['ui:page'] 
                               && uiSchema['ui:page']['ui:layout'] 
-                              && uiSchema['ui:page']['ui:layout'] === 'steps';
-
-  // if (
-  //   !isEqual(prevData, { formData, schema, uiSchema }) 
-  //   && !isEqual(prevSkippedData, { formData: removeEmptyObjects(formData, schema), schema, uiSchema }) 
-  // ) {
-  //   if (prevData === null) {
-  //     setData(
-  //       formData, 
-  //       iniUiData,
-  //     );
-  //   }
-  //   else {
-  //     const currentUIData = Object.keys(uiData).length ? uiData : iniUiData;
-  //     setData(
-  //       formData, 
-  //       currentUIData,
-  //       uiSchema, 
-  //       schema,
-  //       onChange,
-  //       onError,
-  //     );
-  //   }
-  //   setPrevData({ formData, schema, uiSchema });
-  //   setPrevSkippedData({ formData: removeEmptyObjects(formData, schema), schema, uiSchema });
-  // }
-
+                              && uiSchema['ui:page']['ui:layout'] === 'steps';        
+             
   // if (
   //   !isEqual(hashCode(JSON.stringify(schema)), formId) 
   //   && get(xhrSchema, 'ui:page.onload.xhrProgress') === undefined
@@ -249,7 +223,7 @@ const Form = ({
         <Paper className={classes.root} style={uiSchema && uiSchema['ui:page'] ? uiSchema['ui:page'].style : {}}>
           {
             (actionButtonPos === 'top' && !hasPageLayoutSteps) && (
-                  <RenderFormButtons />
+              <RenderFormButtons />
             )
           }
           <LoadingContext.Provider value={loadingState}>
@@ -297,7 +271,7 @@ const Form = ({
           </LoadingContext.Provider>
           {
             (!actionButtonPos && !hasPageLayoutSteps) && (
-                <RenderFormButtons />
+              <RenderFormButtons />
             )
           }
         </Paper>

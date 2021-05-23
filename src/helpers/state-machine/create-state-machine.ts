@@ -45,7 +45,7 @@ const createStateMachine = ({
   
   const states: XStateObj = getStatesByUISchema(uiSchema, formSchema);
 
-  console.log('states are', JSON.stringify(states));
+  // console.log('states are', JSON.stringify(states));
  
   return createMachine<FormContext, any>({
     context: {

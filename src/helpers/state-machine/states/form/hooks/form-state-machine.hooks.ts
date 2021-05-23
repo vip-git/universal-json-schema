@@ -1,7 +1,7 @@
 // Library
 import React from 'react';
 import { interpret } from 'xstate';
-import { get } from 'lodash';
+import { get, isEqual } from 'lodash';
 
 // Helpers
 import createStateMachine from '../../../create-state-machine';
@@ -18,9 +18,9 @@ let stateMachineService = null;
 
 interface FormStateMachineProps {
   xhrSchema: any;
-  schema: any;
   validations: any;
   originalFormInfo: {
+    schema: any;
     formData: any;
     uiSchema: any;
   };
@@ -32,7 +32,6 @@ interface FormStateMachineProps {
 
 const useFormStateMachine = ({
   xhrSchema,
-  schema,
   originalFormInfo: givenOriginalFormInfo,
   validations,
   effects: {
@@ -42,22 +41,33 @@ const useFormStateMachine = ({
 }: FormStateMachineProps) => {
   const originalFormInfo = {
     ...givenOriginalFormInfo,
-    uiData: setUIData({}, Object.keys(schema.properties || {}), givenOriginalFormInfo.uiSchema, schema),
+    uiData: setUIData({}, 
+      Object.keys(givenOriginalFormInfo.schema.properties || {}), 
+      givenOriginalFormInfo.uiSchema, 
+      givenOriginalFormInfo.schema,
+    ),
   };
-  const givenFormInfo = !formStateMachine ? originalFormInfo : {
+  const stateFormInfo = formStateMachine ? {
     // eslint-disable-next-line no-underscore-dangle
     uiData: stateMachineService._state.context.uiData,
     // eslint-disable-next-line no-underscore-dangle
     formData: stateMachineService._state.context.formData,
     // eslint-disable-next-line no-underscore-dangle
     uiSchema: stateMachineService._state.context.uiSchema,
-  };
+    // eslint-disable-next-line no-underscore-dangle
+    schema: stateMachineService._state.context.formSchema,
+  } : {};
+  const givenFormInfo = !formStateMachine ? originalFormInfo : stateFormInfo;
   const [activeStep, setActiveStep] = React.useState(0);
-  const [formInfo, setFormInfo] = React.useState(givenFormInfo);
   const [loadingState, setLoadingState] = React.useState(null);
-  const validation = getValidationResult(schema, formInfo.uiSchema, formInfo.formData, validations);
+  const validation = getValidationResult(
+    givenFormInfo.schema, 
+    givenFormInfo.uiSchema, 
+    givenFormInfo.formData, 
+    validations,
+  );
   const isStepperUI = () => get(
-    formInfo.uiSchema, 'ui:page.ui:layout',
+    givenFormInfo.uiSchema, 'ui:page.ui:layout',
   ) === 'steps';
   const { 
     executeFormActionsByState,
@@ -66,9 +76,9 @@ const useFormStateMachine = ({
     isStepperUI,
   });
 
-  const startMachine = () => {
+  const startMachine = (givenInfo: { uiSchema: any; formData: any; uiData: any; schema: any; }) => {
     if (!formStateMachine && !stateMachineService) {
-      const { uiSchema, formData, uiData } = originalFormInfo;
+      const { uiSchema, formData, uiData, schema } = givenInfo;
       formStateMachine = createStateMachine({
         uiSchema,
         xhrSchema,
@@ -77,13 +87,14 @@ const useFormStateMachine = ({
         uiData,
         validation,
         effects: {
-          setFormInfo,
           setActiveStep,
           onChange,
           onError: originalOnError,
         },
       });
-      stateMachineService = interpret(formStateMachine, { devTools: true }).onTransition((state) => executeFormActionsByState({
+      stateMachineService = interpret(
+        formStateMachine, { devTools: true },
+      ).onTransition((state) => executeFormActionsByState({
         state,
         stateMachineService,
       }));
@@ -91,12 +102,27 @@ const useFormStateMachine = ({
     }
   };
   
-  startMachine();
-  
+  const condition = !isEqual(
+    { 
+      schema: originalFormInfo.schema, 
+      uiSchema: originalFormInfo.uiSchema,
+    }, 
+    { 
+      schema: stateFormInfo.schema,
+      uiSchema: stateFormInfo.uiSchema,
+    },
+  );
+
+  if (condition && formStateMachine && stateMachineService) {
+    formStateMachine = null;
+    stateMachineService = null;
+  }
+
+  startMachine(originalFormInfo);
+
   return {
-    formInfo,
+    formInfo: givenFormInfo,
     stateMachineService,
-    setFormInfo,
     setLoadingState,
     setActiveStep,
     activeStep,

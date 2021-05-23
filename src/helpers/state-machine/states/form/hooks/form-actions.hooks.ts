@@ -58,35 +58,32 @@ const useFormActions = ({
       : Object.values(state.value).includes(FORM_STATE_ERROR_EVENTS.INVALID);
 
     const PROPAGATE_ON_CHANGE_CONDITION = {
-      condition: typeof state.context.effects.onChange,
-      equals: 'function',
-      callback: () => executable.push(actions.PROPOGATE_ONCHANGE_EVENT),
-    };
-
-    const FORM_UPDATE_CONDITION = {
       condition: Object.values({
         ...FORM_STATE_EVENTS,
         ...FORM_STATE_ARRAY_EVENTS,
-      }).includes(state.event.type),
+      }).includes(state.event.type) && typeof state.context.effects.onChange === 'function',
       equals: true,
-      callback: () => executable.push(actions.DO_FORM_UPDATE),
-      nestedCondition: [{ ...PROPAGATE_ON_CHANGE_CONDITION }],
+      callback: () => executable.push(actions.PROPOGATE_ONCHANGE_EVENT),
     };
 
     const ENABLE_FORM_CONDITION = {
-      condition: formValidCondition,
+      condition: (
+        formValidCondition
+      ),
       equals: false,
       callback: () => executable.push(actions.ENABLE_FORM_SUBMIT),
     };
 
     const DISABLE_FORM_CONDITION = {
-      condition: formValidCondition,
+      condition: (
+        formValidCondition
+      ),
       equals: true,
       callback: () => executable.push(actions.DISABLE_FORM_SUBMIT),
     };
 
     Utils.executeConditions([
-      { ...FORM_UPDATE_CONDITION },
+      { ...PROPAGATE_ON_CHANGE_CONDITION },
       { ...ENABLE_FORM_CONDITION },
       { ...DISABLE_FORM_CONDITION },
     ]);
@@ -124,30 +121,14 @@ const useFormActions = ({
         buttonDisabled,
         setButtonDisabled,
       });
-      state.context.effects.onChange({ 
+      state.context.effects.onChange({
+        schema: currentSchema,
         formData: currentData, 
         uiData: currentUIData,
         uiSchema: currentUISchema, 
         schemaErrors,
         validSchema: transformedSchema,
       });
-    },
-    [actions.DO_FORM_UPDATE]: ({
-      state,
-    }) => {
-      const {
-        formData: currentData, 
-        uiData: currentUIData, 
-        uiSchema: currentUISchema,
-      } = state.context;
-      const finalData = removeEmptyObjects(currentData, state.context.formSchema);
-      state.context.effects.setFormInfo(
-        {
-          formData: finalData,
-          uiData: currentUIData,
-          uiSchema: currentUISchema,
-        },
-      );
     },
     ...executeStepperActions,
   };
@@ -158,13 +139,10 @@ const useFormActions = ({
   }: ExecuteFormActions) => [
     ...getValidStepperActionToExecute(state),
     ...getValidActionToExecute(state),
-  ].forEach((action) => {
-    console.log('executing action', action, 'for state', state);
-    executeAction[action]({
-      state,
-      stateMachineService,
-    });
-  });
+  ].forEach((action) => executeAction[action]({
+    state,
+    stateMachineService,
+  }));
 
   return {
     executeFormActionsByState,

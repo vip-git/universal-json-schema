@@ -10,6 +10,8 @@ import { FORM_STATE_CONFIG } from './form-state.config';
 // GUARDS
 import GUARDS from './form-state.guards';
 
+type ValidStates = 'clean' | 'dirty' | 'invalid' | 'disabled' | 'submitted';
+
 const addFormFieldStatesBasedOnPath = (getPath) => {
   const arrayTypeStates = {};
   Object.values(
