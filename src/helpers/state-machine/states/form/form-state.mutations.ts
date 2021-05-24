@@ -46,6 +46,7 @@ const FormMutations = {
       ), 
       context.formSchema,
     ),
+    lastField: (context: FormContext, event: EventObject & EventPayload) => event.field,
     formSchema: (context: FormContext, event: EventObject & EventPayload) => context.formSchema,
     uiData: (context: FormContext, event: EventPayload) => HELPERS.getValidUIData(context, event),
     uiSchema: (context: FormContext, event: EventPayload) => setUISchemaData(

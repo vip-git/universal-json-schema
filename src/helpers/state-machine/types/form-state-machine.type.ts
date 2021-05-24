@@ -15,4 +15,5 @@ export interface FormContext {
     validation: any;
     effects: any;
     activeStep: number;
+    lastField: string;
 }

@@ -2,6 +2,9 @@
 import Ajv from 'ajv';
 import { has, get } from 'lodash';
 
+// Config
+import { FORM_STATE_CONFIG } from '../states/form/form-state.config';
+
 // Helpers
 import transformSchema from '../../transform-schema';
 import isFormInValid from '../../validation/is-form-validated';
@@ -33,7 +36,7 @@ const isFormSchemaStateValid = ({
 
       const externalValidations = isFormInValid(validation);
       if (externalValidations && !buttonDisabled) {
-        stateMachineService.send('error', externalValidations);
+        stateMachineService.send(FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR, externalValidations);
         return {
           schemaErrors: externalValidations,
           transformedSchema,
@@ -42,7 +45,7 @@ const isFormSchemaStateValid = ({
 
       if (!externalValidations && validate.errors && !buttonDisabled) {
         validate.errors.forEach((err) => {
-          stateMachineService.send('error', err);
+          stateMachineService.send(FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR, err);
         });
         return {
           schemaErrors: validate.errors,

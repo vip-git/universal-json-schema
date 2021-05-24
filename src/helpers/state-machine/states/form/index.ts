@@ -1,5 +1,5 @@
 // Library
-import { get, each, map } from 'lodash';
+import { get, each } from 'lodash';
 
 // Mutations
 import formMutations from './form-state.mutations';
@@ -116,8 +116,6 @@ export const createParallelFormFieldStates = ({
   each(iterator, (givenValue, key) => {
     const stringifiedPath = isArray ? `${path}[${key}]` : `${path}.${key}`;
     const getPath = path ? stringifiedPath : key;
-
-    states.set(getPath, addFormFieldStatesBasedOnPath(getPath));
 
     if (get(givenValue, 'type') === 'object' || get(givenValue, 'type') === 'array') {
       return createParallelFormFieldStates({

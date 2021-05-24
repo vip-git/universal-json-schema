@@ -2,28 +2,26 @@
 import isEmpty from 'lodash/isEmpty';
 import omitBy from 'lodash/omitBy';
 import forEach from 'lodash/forEach';
-import unset from 'lodash/unset';
-
-// Utils
-import getDefinitionSchemaFromRef from './get-definition-schema';
 
 export const isEmptyValues = (value) => isEmpty(value) && typeof value !== 'number' && typeof value !== 'boolean';
 
 export const filterNestedEmptyValues = (obj) => {
-  forEach(obj, (val, key) => {
+  const givenObj = { ...obj };
+  forEach(givenObj, (val, key) => {
+    if (Array.isArray(val) && val.length) {
+      givenObj[key] = val.map((v) => (isEmptyValues(v) ? '' : v));
+    }
     if (val && typeof val === 'object') {
       filterNestedEmptyValues(val);
     }
-    if (Array.isArray(val) && !val.length) {
-      unset(obj, key);
-    }
   });
-  return omitBy(obj, isEmptyValues);
+  return omitBy(givenObj, isEmptyValues);
 };
 
-// eslint-disable-next-line no-nested-ternary
+const removeEmptyObjectsFromString = (obj, schema) => (schema?.type === 'string' ? obj || '' : obj);
+
 const removeEmptyObjects = (obj, schema) => (schema?.type === 'string' || typeof obj === 'string'
-  ? schema?.type === 'string' ? obj || '' : obj
+  ? removeEmptyObjectsFromString(obj, schema)
   : filterNestedEmptyValues(obj));
 
 export default removeEmptyObjects;

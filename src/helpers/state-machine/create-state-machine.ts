@@ -57,6 +57,7 @@ const createStateMachine = ({
       effects,
       validation,
       activeStep: 0,
+      lastField: '',
     },
     ...states,
   }, {

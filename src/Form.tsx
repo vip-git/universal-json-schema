@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
 // Library
 import React from 'react';
 import { generate } from 'shortid';
@@ -21,9 +20,6 @@ import FormButtons from './FormButtons';
 import useFormStateMachine from './helpers/state-machine/states/form/hooks/form-state-machine.hooks';
 import useFormEvents from './helpers/state-machine/states/form/hooks/form-events.hooks';
 import useStepperEvents from './helpers/state-machine/states/stepper/hooks/stepper-events.hooks';
-
-// config
-import { FORM_STATE_CONFIG } from './helpers/state-machine/states/form/form-state.config';
 
 // import removeEmptyObjects, { isEmptyValues } from './helpers/remove-empty-values';
 // import transformSchema, { 

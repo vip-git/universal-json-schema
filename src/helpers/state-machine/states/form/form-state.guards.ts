@@ -1,18 +1,20 @@
 const GUARDS = {
   isUpdatedField: (field: string) => (context, event, xstate) => {
     const defaultField = event.field === '' ? 'default' : event.field;
+    const arrayField = defaultField.replace(/[(1-9)]/g, '').replace('[]', '').replace(/^(.*?)\./g, '');
+    const matchField = defaultField.match(/[(1-9)]/g) ? arrayField === field : field === defaultField;
     return (
       Object.keys(xstate.state.value).includes(defaultField) 
-        ? field === defaultField : defaultField.includes(field)
+        ? matchField : defaultField.includes(arrayField)
     );
-  },  
-  isUpdatedErrorField: (field: string) => (context, event, xstate) => {
+  },
+  isUpdatedErrorField: (field: string) => (context, event) => {
     const givenField = event.dataPath.replace('.', '');
-    if (event.params && event.params.missingProperty === field) return true;
-    return (
-      Object.keys(xstate.state.value).includes(givenField) 
-        ? field === givenField : givenField.includes(field)
-    );
+    const hasMissingProp = givenField === '' 
+      ? event.params.missingProperty 
+      : `${givenField.replace(/[(0-9)]/g, 0)}.${event.params.missingProperty}`;
+    const errorField = event?.params?.missingProperty ? hasMissingProp : givenField;
+    return field === errorField;
   },
 };
 

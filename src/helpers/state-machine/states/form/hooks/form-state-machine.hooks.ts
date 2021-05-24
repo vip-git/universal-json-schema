@@ -24,6 +24,7 @@ interface FormStateMachineProps {
     formData: any;
     uiSchema: any;
     activeStep?: number;
+    xstate?: any;
   };
   effects: {
     onChange: Function;
@@ -59,6 +60,8 @@ const useFormStateMachine = ({
     schema: stateMachineService._state.context.formSchema,
     // eslint-disable-next-line no-underscore-dangle
     activeStep: stateMachineService._state.context.activeStep || 0,
+    // eslint-disable-next-line no-underscore-dangle
+    xstate: stateMachineService._state.value,
   } : {};
   const givenFormInfo = !formStateMachine ? originalFormInfo : stateFormInfo;
   const [loadingState, setLoadingState] = React.useState(null);
