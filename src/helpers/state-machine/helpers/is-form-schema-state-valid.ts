@@ -15,7 +15,6 @@ const isFormSchemaStateValid = ({
   validation,
   buttonDisabled,
   stateMachineService,
-  setButtonDisabled,
 }) => {
   if (get(uiSchema, 'ui:page.props.ui:schemaErrors') 
   || !has(uiSchema, 'ui:page.props.ui:schemaErrors')) {

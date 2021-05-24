@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Helpers
-import removeEmptyObjects from '../../../../remove-empty-values';
+import getDefinitionSchemaFromRef from '../../../../get-definition-schema';
 import Utils from '../../../../utils';
 
 // State Helpers
@@ -51,8 +51,10 @@ const useFormActions = ({
     state: StateMachineInstance,
   ) => {
     const executable = [];
-
-    const formValidCondition = isStepperUI() ? Object.values(
+    const {
+      uiSchema: currentUISchema,
+    } = state.context;
+    const formValidCondition = isStepperUI(currentUISchema) ? Object.values(
       state.value[Object.keys(state.value)[0]],
     ).includes(FORM_STATE_ERROR_EVENTS.INVALID) 
       : Object.values(state.value).includes(FORM_STATE_ERROR_EVENTS.INVALID);
@@ -91,6 +93,46 @@ const useFormActions = ({
     return executable;
   };
 
+  /**
+   * @description
+   * Gets Schema and form data to render/parse for current view.
+   * 
+   * @param { currentSchema, currentData, activeStep } 
+   * @returns { Schema, data }
+   */
+  const getSchemaAndFormData = ({
+    currentSchema: givenSchema,
+    currentData: givenData,
+    currentUISchema,
+    activeStep,
+  }) => {
+    const currentSchema = JSON.parse(JSON.stringify(givenSchema));
+    const currentData = JSON.parse(JSON.stringify(givenData));
+    if (currentSchema.properties) {
+      const stepName = Object.keys(currentSchema.properties)[activeStep];
+      const translatedSchema = getDefinitionSchemaFromRef(
+        currentSchema.definitions, 
+        currentSchema.properties[stepName], 
+        currentData[stepName],
+      );
+      const schema = isStepperUI(currentUISchema) 
+        ? {
+          ...translatedSchema,
+        }
+        : currentSchema;
+      const data = isStepperUI(currentUISchema) ? currentData[stepName] : currentData;
+      return {
+        schema,
+        data,
+      };
+    }
+
+    return {
+      schema: currentSchema,
+      data: currentData,
+    };
+  };
+
   const executeAction = {
     [actions.DISABLE_FORM_SUBMIT]: () => setButtonDisabled(true),
     [actions.ENABLE_FORM_SUBMIT]: () => setButtonDisabled(false),
@@ -106,11 +148,12 @@ const useFormActions = ({
         validation,
         activeStep,
       } = state.context;
-      const stepName = Object.keys(currentSchema.properties)[activeStep];
-      const schema = isStepperUI() 
-        ? currentSchema.properties[stepName] 
-        : currentSchema;
-      const data = isStepperUI() ? currentData[stepName] : currentData;
+      const { schema, data } = getSchemaAndFormData({
+        currentData,
+        currentSchema,
+        currentUISchema,
+        activeStep,
+      });
       const { schemaErrors, transformedSchema } = isFormSchemaStateValid({
         stateMachineService,
         schema,
@@ -119,7 +162,6 @@ const useFormActions = ({
         data,
         onError: state.context.effects.onError,
         buttonDisabled,
-        setButtonDisabled,
       });
       state.context.effects.onChange({
         schema: currentSchema,

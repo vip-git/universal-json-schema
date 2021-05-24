@@ -47,7 +47,6 @@ const useStepperActions = (buttonDisabled) => {
         validation,
         activeStep,
       } = state.context;
-      state.context.effects.setActiveStep(activeStep);
       const stepName = Object.keys(currentSchema.properties)[activeStep];
       const { schemaErrors, transformedSchema } = isFormSchemaStateValid({
         stateMachineService,

@@ -1,5 +1,5 @@
 // Library
-import { get, each } from 'lodash';
+import { get, each, map } from 'lodash';
 
 // Mutations
 import formMutations from './form-state.mutations';
@@ -10,27 +10,25 @@ import { FORM_STATE_CONFIG } from './form-state.config';
 // GUARDS
 import GUARDS from './form-state.guards';
 
-type ValidStates = 'clean' | 'dirty' | 'invalid' | 'disabled' | 'submitted';
-
 const addFormFieldStatesBasedOnPath = (getPath) => {
   const arrayTypeStates = {};
   Object.values(
     FORM_STATE_CONFIG.FORM_STATE_ARRAY_EVENTS,
   ).forEach((arrayVal) => {
     arrayTypeStates[arrayVal] = { 
-      target: 'dirty',
+      target: FORM_STATE_CONFIG.FORM_STATES.DIRTY,
       actions: ['updateArrayData'],
     };
   });
   
   const genericTypeStates = {
     [FORM_STATE_CONFIG.FORM_STATE_EVENTS.UPDATE]: { 
-      target: 'dirty',
+      target: FORM_STATE_CONFIG.FORM_STATES.DIRTY,
       cond: GUARDS.isUpdatedField(getPath),
       actions: ['updateData'],
     },
     [FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR]: { 
-      target: 'invalid',
+      target: FORM_STATE_CONFIG.FORM_STATES.INVALID,
       cond: GUARDS.isUpdatedErrorField(getPath),
     },
   };
@@ -39,31 +37,35 @@ const addFormFieldStatesBasedOnPath = (getPath) => {
     ...arrayTypeStates,
     ...genericTypeStates,
   };
+
+  const submitState = {
+    [FORM_STATE_CONFIG.FORM_STATE_SUBMIT_EVENT]: { target: FORM_STATE_CONFIG.FORM_STATES.SUBMITTED },
+  };
   
   const stateDefinition = {
-    initial: 'clean',
+    initial: FORM_STATE_CONFIG.FORM_STATES.INITIAL,
     states: {
-      clean: {
+      [FORM_STATE_CONFIG.FORM_STATES.INITIAL]: {
         on: {
           ...sharedStates,
-          'submit': { target: 'submitted' },
+          ...submitState,
         },
       },
-      invalid: {
+      [FORM_STATE_CONFIG.FORM_STATES.INVALID]: {
         on: {
           ...sharedStates,
         },
       },
-      dirty: {
+      [FORM_STATE_CONFIG.FORM_STATES.DIRTY]: {
         on: {
           ...sharedStates,
-          'submit': { target: 'submitted' },
+          ...submitState,
         },
       },
       disabled: {
         type: 'final',
       },
-      submitted: {
+      [FORM_STATE_CONFIG.FORM_STATES.SUBMITTED]: {
         type: 'final',
       },
     },
@@ -139,7 +141,12 @@ const createFormFieldStates = ({
 }) => {
   const states = {};
   const initialStates = createParallelFormFieldStates({
-    schema,
+    schema: schema.type === 'object' ? schema : {
+      type: 'object',
+      properties: {
+        'default': { ...schema },
+      },
+    },
     states: new Map(),
   });
 

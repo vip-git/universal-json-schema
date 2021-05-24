@@ -1,10 +1,11 @@
 // Actions
 type Actions = {
-    DO_FORM_UPDATE: 'doFormUpdate';
     DISABLE_FORM_SUBMIT: 'disableSubmit';
     ENABLE_FORM_SUBMIT: 'enableFormSubmit';
     PROPOGATE_ONCHANGE_EVENT: 'callOnChange';
 };
+
+type ValueOf<T> = T[keyof T];
 
 export type FormStateArrayEvents = {
   MOVE_ITEM_UP: 'moveItemUp';
@@ -20,6 +21,15 @@ export type FormStateEvents = {
     UPDATE: 'update';
 };
 
+export type FormStates = {
+  INITIAL: 'clean',
+  DIRTY: 'dirty',
+  SUBMITTED: 'submitted',
+  INVALID: 'invalid',
+};
+
+export type ValidStates = ValueOf<FormStates>;
+
 export type FormStateErrorEvents = {
   ERROR: 'error';
   INVALID: 'invalid';
@@ -27,9 +37,11 @@ export type FormStateErrorEvents = {
 
 type StateMachineConfig = {
     FORM_ACTIONS: Actions;
+    FORM_STATES: FormStates;
     FORM_STATE_EVENTS: FormStateEvents;
     FORM_STATE_ERROR_EVENTS: FormStateErrorEvents;
     FORM_STATE_ARRAY_EVENTS: FormStateArrayEvents;
+    FORM_STATE_SUBMIT_EVENT: 'submit';
 }
 
 /**
@@ -51,9 +63,14 @@ export const pathToEventName = (
 };
 
 export const FORM_STATE_CONFIG: StateMachineConfig = {
+  FORM_STATES: {
+    INITIAL: 'clean',
+    DIRTY: 'dirty',
+    SUBMITTED: 'submitted',
+    INVALID: 'invalid',
+  },
   // List of rules to execute
   FORM_ACTIONS: {
-    DO_FORM_UPDATE: 'doFormUpdate',
     DISABLE_FORM_SUBMIT: 'disableSubmit',
     ENABLE_FORM_SUBMIT: 'enableFormSubmit',
     PROPOGATE_ONCHANGE_EVENT: 'callOnChange',
@@ -74,6 +91,7 @@ export const FORM_STATE_CONFIG: StateMachineConfig = {
     ERROR: 'error',
     INVALID: 'invalid',
   },
+  FORM_STATE_SUBMIT_EVENT: 'submit',
 };
 
 export default FORM_STATE_CONFIG;

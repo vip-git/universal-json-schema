@@ -23,6 +23,7 @@ interface FormStateMachineProps {
     schema: any;
     formData: any;
     uiSchema: any;
+    activeStep?: number;
   };
   effects: {
     onChange: Function;
@@ -56,9 +57,10 @@ const useFormStateMachine = ({
     uiSchema: stateMachineService._state.context.uiSchema,
     // eslint-disable-next-line no-underscore-dangle
     schema: stateMachineService._state.context.formSchema,
+    // eslint-disable-next-line no-underscore-dangle
+    activeStep: stateMachineService._state.context.activeStep || 0,
   } : {};
   const givenFormInfo = !formStateMachine ? originalFormInfo : stateFormInfo;
-  const [activeStep, setActiveStep] = React.useState(0);
   const [loadingState, setLoadingState] = React.useState(null);
   const validation = getValidationResult(
     givenFormInfo.schema, 
@@ -66,8 +68,8 @@ const useFormStateMachine = ({
     givenFormInfo.formData, 
     validations,
   );
-  const isStepperUI = () => get(
-    givenFormInfo.uiSchema, 'ui:page.ui:layout',
+  const isStepperUI = (uiSchema) => get(
+    uiSchema, 'ui:page.ui:layout',
   ) === 'steps';
   const { 
     executeFormActionsByState,
@@ -87,7 +89,6 @@ const useFormStateMachine = ({
         uiData,
         validation,
         effects: {
-          setActiveStep,
           onChange,
           onError: originalOnError,
         },
@@ -124,8 +125,6 @@ const useFormStateMachine = ({
     formInfo: givenFormInfo,
     stateMachineService,
     setLoadingState,
-    setActiveStep,
-    activeStep,
     buttonDisabled,
     validation,
     loadingState,

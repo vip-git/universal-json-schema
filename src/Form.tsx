@@ -69,12 +69,12 @@ const Form = ({
       uiData,
       uiSchema,
       formData,
+      activeStep,
     },
     validation,
     loadingState,
     buttonDisabled,
     stateMachineService,
-    activeStep,
     setLoadingState,
   } = useFormStateMachine({
     xhrSchema,
