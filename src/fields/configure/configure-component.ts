@@ -4,13 +4,13 @@ import getLabelComponent from './label/get-label-component';
 import getComponent from './component/get-component';
 
 // Interceptors
+import {
+  APP_CONFIG,
+} from '../../generated/app.config';
+
 const {
-  APP_CONFIG: {
-    INTERCEPTORS: {
-      INTERCEPTOR_CONFIG,
-    },
-  },
-} = require('../../generated/app.config');
+  INTERCEPTORS: INTERCEPTOR_CONFIG,
+} = APP_CONFIG;
 
 const getClassName = ({ uiSchema = {} }) => {
   const widget = uiSchema['ui:widget'];

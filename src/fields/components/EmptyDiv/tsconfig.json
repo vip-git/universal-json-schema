@@ -1,15 +1,8 @@
 {
     "compilerOptions": {
       "allowSyntheticDefaultImports": true,
-      "paths": {
-        "@core-types/*": ["./src/types/*"],
-        "@utils/*": ["./src/fields/utils/*"],
-        "@config/*": ["./src/config/*"],
-      },
-      "forceConsistentCasingInFileNames": true,
-      "module": "es6",
-      "moduleResolution": "node",
-      "preserveConstEnums": true,
+      "module": "commonjs",
+      "baseUrl": "./src/",
       "declaration": true,
       "noImplicitAny": false,
       "removeComments": true,
@@ -18,7 +11,7 @@
       "experimentalDecorators": true,
       "target": "es6",
       "resolveJsonModule": true,
-      "sourceMap": true,
+      "sourceMap": false,
       "allowJs": true,
       "jsx": "react",
       "esModuleInterop": true,

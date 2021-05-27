@@ -86,9 +86,10 @@
             "name": "material-picker"
         },
         "@react-jsonschema-form-components/upload": {
-            "version": "1.0.4",
+            "version": "2.0.0",
             "type": "string",
             "isEnum": false,
+            "hasDist": true,
             "name": "upload"
         },
         "@react-jsonschema-form-components/rich-text-editor": {
@@ -96,7 +97,8 @@
             "type": "string",
             "isEnum": false,
             "hasDist": true,
-            "name": "rich-text-editor"
+            "name": "rich-text-editor",
+            "notAvailable": true
         },
         "@react-jsonschema-form-components/material-input": {
             "version": "2.0.1",
@@ -110,7 +112,7 @@
             ]
         },
         "@react-jsonschema-form-components/empty-div": {
-            "version": "1.0.1",
+            "version": "2.0.0",
             "type": "null",
             "isEnum": false,
             "isDefault": true,

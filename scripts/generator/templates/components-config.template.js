@@ -1,9 +1,41 @@
 const appConfigTemplate = `/* eslint-disable global-require */
+//  Imports
+<% Object.values(components).filter((c) => c.isEnum && !c.notAvailable).forEach((comp) => { %>
+  import <%= comp.name.replace(/-/g, '') %> from './<%= comp.name %>/dist/index';
+ <% }); %>
+import <%= Object.values(components).find((c) => c.isDefault).name.replace(/-/g, '') %> from './<%= Object.values(components).find((c) => c.isDefault).name %>/dist/index';
+import EmptyDiv from './empty-div';
+
+<% Object.values(components)
+    .filter((c) => !c.isEnum && c.type === "null" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
+import <%= comp.name.replace(/-/g, '') %> from './<%= comp.name %>/dist/index';
+<% }); %>
+
+<% Object.values(components)
+    .filter((c) => !c.isEnum && c.type === "integer" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
+import <%= comp.name.replace(/-/g, '') %> from './<%= comp.name %>/dist/index';
+<% }); %>
+
+<% Object.values(components)
+    .filter((c) => !c.isEnum && c.type === "number" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
+import <%= comp.name.replace(/-/g, '') %> from './<%= comp.name %>/dist/index';
+<% }); %>
+
+<% Object.values(components)
+    .filter((c) => !c.isEnum && c.type === "boolean" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
+import <%= comp.name.replace(/-/g, '') %> from './<%= comp.name %>/dist/index';
+<% }); %>
+
+<% Object.values(components)
+    .filter((c) => !c.isEnum && c.type === "string" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
+import <%= comp.name.replace(/-/g, '') %> from <% if(comp.hasDist) { %> './<%= comp.name %>/dist/index' <% } else { %> './<%= comp.name %>' <% } %>;
+<% }); %>
+
 export const ENUM_COMPONENTS = {
  <% Object.values(components).filter((c) => c.isEnum && !c.notAvailable).forEach((comp) => { %>
   <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
     name: '<%= comp.name %>',
-    component: require('./<%= comp.name %>/dist').default,
+    component: <%= comp.name.replace(/-/g, '') %>,
   },
  <% }); %>
 };
@@ -11,14 +43,14 @@ export const ENUM_COMPONENTS = {
 export const COMMON_COMPONENTS = {
   NORMAL_INPUT: {
     name: '<%= Object.values(components).find((c) => c.isDefault).name %>',
-    component: require('./<%= Object.values(components).find((c) => c.isDefault).name %>/dist').default,
+    component: <%= Object.values(components).find((c) => c.isDefault).name.replace(/-/g, '') %>,
   },
 };
 
 const NULL_COMPONENTS = {
   EMPTY_DIV: {
     name: 'empty-div',
-    component: require('./empty-div').default,
+    component: EmptyDiv,
   },
 };
 
@@ -56,15 +88,6 @@ const DEFAULT_NULL_COMPONENTS = {
   },
 };
 
-<% if(Object.keys(components).includes('@react-jsonschema-form-components/material-picker')) { %>
-export const V2_PICKER_COMPONENT = {
-  MATERIAL_PICKER: {
-    name: 'material-picker',
-    component: require('./material-picker').default,
-  },
-};
-<% } %>
-
 export const COMP_CONFIG = {
   SUPPORTED_TYPES: {
     STRING: 'string',
@@ -96,7 +119,7 @@ export const COMP_CONFIG = {
           .filter((c) => !c.isEnum && c.type === "string" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
       <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
         name: '<%= comp.name %>',
-        component: <% if(comp.hasDist) { %> require('./<%= comp.name %>/dist').default <% } else { %> require('./<%= comp.name %>').default <% } %>,
+        component: <%= comp.name.replace(/-/g, '') %>,
       },
       <% }); %>
       ...DEFAULT_COMPONENTS,
@@ -108,7 +131,7 @@ export const COMP_CONFIG = {
           .filter((c) => !c.isEnum && c.type === "boolean" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
       <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
         name: '<%= comp.name %>',
-        component: require('./<%= comp.name %>').default,
+        component: <%= comp.name.replace(/-/g, '') %>,
       },
       <% }); %>
       ...DEFAULT_BOOLEAN_COMPONENTS,
@@ -120,7 +143,7 @@ export const COMP_CONFIG = {
           .filter((c) => !c.isEnum && c.type === "number" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
       <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
         name: '<%= comp.name %>',
-        component: require('./<%= comp.name %>').default,
+        component: <%= comp.name.replace(/-/g, '') %>,
       },
       <% }); %>
     },
@@ -131,7 +154,7 @@ export const COMP_CONFIG = {
           .filter((c) => !c.isEnum && c.type === "integer" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
       <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
         name: '<%= comp.name %>',
-        component: require('./<%= comp.name %>').default,
+        component: <%= comp.name.replace(/-/g, '') %>,
       },
       <% }); %>
     },
@@ -141,7 +164,7 @@ export const COMP_CONFIG = {
           .filter((c) => !c.isEnum && c.type === "null" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
       <%= comp.name.toUpperCase().replace(/-/g, '_') %>: {
         name: '<%= comp.name %>',
-        component: require('./<%= comp.name %>').default,
+        component: <%= comp.name.replace(/-/g, '') %> ,
       },
       <% }); %>
     },

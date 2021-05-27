@@ -2,27 +2,27 @@
 import { GetComponent } from '@core-types/configure/GetComponent.type';
 import { isEnum } from '@react-jsonschema-form-utils/enum-utils';
 
-const componentConfig = require('../component.config').default;
+import componentConfig from '../component.config';
+
+import { APP_CONFIG } from '../../../generated/app.config';
+import {
+  ENUM_COMPONENTS,
+  COMMON_COMPONENTS,
+} from '../../../generated/components';
+
 const {
-  APP_CONFIG: {
-    COMPONENTS: {
-      COMP_CONFIG: {
-        V2_DEPRECATED_TYPES,
-        V2_DEPRECATED_OPTIONS,
-        V2_DEPRECATED_ENUMS,
-        V2_DEPRECATED_CREATABLE_ENUMS,
-        V2_DEPRECATED_PICKERS,
-        V2_DEPRECATED_WIDGET_RADIO,
-        V2_DEPRECATED_WIDGET_RANGE,
-        V2_DEPRECATED_WIDGET_CHECKBOXES,
-        SUPPORTED_TYPES: { STRING },
-      },
-      ENUM_COMPONENTS,
-      V2_PICKER_COMPONENT,
-      COMMON_COMPONENTS,
-    },
+  COMPONENTS: {
+    V2_DEPRECATED_TYPES,
+    V2_DEPRECATED_OPTIONS,
+    V2_DEPRECATED_ENUMS,
+    V2_DEPRECATED_CREATABLE_ENUMS,
+    V2_DEPRECATED_PICKERS,
+    V2_DEPRECATED_WIDGET_RADIO,
+    V2_DEPRECATED_WIDGET_RANGE,
+    V2_DEPRECATED_WIDGET_CHECKBOXES,
+    SUPPORTED_TYPES: { STRING },
   },
-} = require('../../../generated/app.config');
+} = APP_CONFIG;
 
 export default ({ 
   schema, 
@@ -48,13 +48,6 @@ export default ({
       && V2_DEPRECATED_CREATABLE_ENUMS.includes(widgetString)
     ) {
       return ENUM_COMPONENTS.CREATABLE_REACT_SELECT.name;
-    }
-
-    if (
-      V2_DEPRECATED_PICKERS.includes(givenType)
-      || V2_DEPRECATED_PICKERS.includes(widgetString)
-    ) {
-      return V2_PICKER_COMPONENT.MATERIAL_PICKER.name;
     }
 
     if (V2_DEPRECATED_TYPES.includes(givenType)) {

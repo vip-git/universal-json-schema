@@ -1,6 +1,5 @@
 // Library
 import React from 'react';
-import classNames from 'classnames';
 import endsWith from 'lodash/endsWith';
 import isEqual from 'lodash/isEqual';
 import has from 'lodash/has';
@@ -25,6 +24,8 @@ import RENDER_BASED_ON_SCHEMA_TYPE from './variants/schema-type.variants';
 
 // Types
 import { FieldSetProps } from '../types/FieldSet.type';
+
+const classNames = require('classnames');
 
 export const shouldHideTitle = (uiSchema, schema) => isPageLayoutSet(uiSchema) || has(schema, 'items.enum');
 

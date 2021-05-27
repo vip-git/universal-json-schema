@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import FormField from '../FormField';
 import fieldSetStyles from './field-set-styles';
@@ -8,6 +7,8 @@ import ReorderControls from './ReorderControls';
 
 // Type
 import { ReorderableFormFieldProps } from '../types/ReoderableFormField.type';
+
+const classNames = require('classnames');
 
 export const RawReorderableFormField = ({
   first, 
