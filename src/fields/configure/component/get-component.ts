@@ -7,6 +7,7 @@ import componentConfig from '../component.config';
 import { APP_CONFIG } from '../../../generated/app.config';
 import {
   ENUM_COMPONENTS,
+  V2_PICKER_COMPONENT,
   COMMON_COMPONENTS,
 } from '../../../generated/components';
 
@@ -48,6 +49,13 @@ export default ({
       && V2_DEPRECATED_CREATABLE_ENUMS.includes(widgetString)
     ) {
       return ENUM_COMPONENTS.CREATABLE_REACT_SELECT.name;
+    }
+
+    if (
+      V2_DEPRECATED_PICKERS.includes(givenType)
+      || V2_DEPRECATED_PICKERS.includes(widgetString)
+    ) {
+      return V2_PICKER_COMPONENT.MATERIAL_PICKER.name;
     }
 
     if (V2_DEPRECATED_TYPES.includes(givenType)) {
