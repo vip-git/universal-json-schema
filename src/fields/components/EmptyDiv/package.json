@@ -1,5 +1,10 @@
 {
   "name": "@react-jsonschema-form-components/empty-div",
-  "version": "1.0.1",
-  "author": "Vipin Tanna"
+  "version": "2.0.0",
+  "author": "Vipin Tanna",
+  "main": "dist/index.js",
+    "scripts": {
+        "build": "rm -rf dist && tsc",
+        "prepublishOnly": "npm run build"
+    }
 }

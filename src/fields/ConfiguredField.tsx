@@ -2,7 +2,6 @@
 // Library
 import React from 'react';
 import isEmpty from 'lodash/isEmpty';
-import classNames from 'classnames';
 
 // Material UI
 import FormControl from '@material-ui/core/FormControl';
@@ -16,6 +15,8 @@ import fieldStyles from './field-styles';
 
 // Types
 import { ConfiguredFieldProps } from '../types/ConfiguredField.type';
+
+const classNames = require('classnames');
 
 // for unit testing only
 export const RawConfiguredField = ({

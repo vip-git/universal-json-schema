@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { generate } from 'shortid';
+import { nanoid as generate } from 'nanoid';
 
 // Material UI
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'; // Has to be made optional

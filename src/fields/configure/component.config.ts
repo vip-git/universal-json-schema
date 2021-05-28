@@ -1,11 +1,14 @@
 // Config
+import {
+  APP_CONFIG,
+} from '../../generated/app.config';
+
 const {
-  APP_CONFIG: {
-    COMPONENTS: {
-      COMP_CONFIG: { SUPPORTED_TYPES, COMPONENT_MAPPING },
-    },
+  COMPONENTS: {
+    SUPPORTED_TYPES, 
+    COMPONENT_MAPPING,
   },
-} = require('../../generated/app.config');
+} = APP_CONFIG;
 
 const componentConfig = new Map();
 

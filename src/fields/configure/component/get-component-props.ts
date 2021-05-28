@@ -8,11 +8,11 @@ import { EventContext, LoadingContext } from '../../../helpers/context';
 // Types
 
 // Interceptors
+import { APP_CONFIG } from '../../../generated/app.config';
+
 const {
-  APP_CONFIG: {
-    INTERCEPTORS: { INTERCEPTOR_CONFIG },
-  },
-} = require('../../../generated/app.config');
+  INTERCEPTORS: INTERCEPTOR_CONFIG,
+} = APP_CONFIG;
 
 export default ({
   schema = {},

@@ -1,7 +1,6 @@
 // Library
 import React from 'react';
 import { get } from 'lodash';
-import classNames from 'classnames';
 import keys from 'lodash/keys';
 
 // Icons
@@ -26,6 +25,8 @@ import { LoadingContext } from '../helpers/context';
 
 // types
 import { FieldSetObjectProps } from '../types/FieldSetObject.type';
+
+const classNames = require('classnames');
 
 export const RawFieldSetObject = ({ 
   className, 

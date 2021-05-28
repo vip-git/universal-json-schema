@@ -9,7 +9,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-expressions */
 import React from 'react';
-import classNames from 'classnames';
 import Editor, { loader } from '@monaco-editor/react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
@@ -18,6 +17,8 @@ import Invalid from '@material-ui/icons/HighlightOff';
 import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
 import { withStyles } from '@material-ui/core/styles';
 import sourceStyles from './editor-styles';
+
+const classNames = require('classnames');
 
 const HtmlTooltip = withStyles((theme) => ({
   tooltip: {
