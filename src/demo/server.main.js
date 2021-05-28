@@ -3,7 +3,7 @@
 /* eslint-disable global-require,import/no-extraneous-dependencies */
 const express = require('express');
 const path = require('path');
-const { generate } = require('shortid');
+const { generate } = require('nanoid');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
