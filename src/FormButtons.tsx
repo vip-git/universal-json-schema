@@ -1,8 +1,9 @@
 /* eslint-disable react/state-in-constructor */
 import React from 'react';
-import classNames from 'classnames';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
+
+const classNames = require('classnames');
 
 export class RawFormButtons extends React.Component<any, any> {
   state = {

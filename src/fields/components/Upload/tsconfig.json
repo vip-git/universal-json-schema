@@ -1,15 +1,8 @@
 {
     "compilerOptions": {
       "allowSyntheticDefaultImports": true,
-      "paths": {
-        "@core-types/*": ["./src/types/*"],
-        "@utils/*": ["./src/fields/utils/*"],
-        "@config/*": ["./src/config/*"],
-      },
-      "forceConsistentCasingInFileNames": true,
-      "module": "es6",
-      "moduleResolution": "node",
-      "preserveConstEnums": true,
+      "module": "commonjs",
+      "baseUrl": "./src/",
       "declaration": true,
       "noImplicitAny": false,
       "removeComments": true,
@@ -40,11 +33,11 @@
       "outDir": "dist"
     },
     "exclude": [
+      "node_modules",
       "**/*.spec.ts",
       "**/*.spec.tsx"
     ],
     "include": [
       "src/**/*",
-      "node_modules/selection-is-backward/*"
     ]
 }

@@ -53,7 +53,7 @@ const babelLoader = {
 };
 
 var config = {
-  entry: path.join(__dirname, 'src/index.js'),
+  entry: path.join(__dirname, 'src/index.ts'),
   mode: 'production',
   output: {
     path: path.join(__dirname, 'dist'),
@@ -71,7 +71,7 @@ var config = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias,
   },
-  externals: /^(react|@material-ui(\/.*)?|immutability-helper|classnames|codemirror|lodash(\/.*)?|@material-ui\/icons(\/.*)?|react-codemirror2|shortid)$/,
+  externals: /^(react|@material-ui(\/.*)?|immutability-helper|classnames|codemirror|lodash(\/.*)?|@material-ui\/icons(\/.*)?|react-codemirror2|nanoid)$/,
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),

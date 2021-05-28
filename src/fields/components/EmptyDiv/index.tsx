@@ -1,10 +1,10 @@
 // Library
 import React from 'react';
 
-export default ({
+const EmptyDiv = ({
   type,
   value,
-  schema = {},
+  schema = {} as any,
   uiSchema = {},
   options = {},
   onChange,
@@ -17,3 +17,5 @@ export default ({
         {value}
     </div>
 );
+
+export default EmptyDiv;

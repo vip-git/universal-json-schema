@@ -8,7 +8,7 @@ import set from 'lodash/set';
 import get from 'lodash/get';
 import has from 'lodash/has';
 import each from 'lodash/each';
-import { generate } from 'shortid';
+import { nanoid as generate } from 'nanoid';
 import Ajv from 'ajv';
 import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';

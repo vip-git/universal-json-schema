@@ -12,13 +12,13 @@ import { SetNestedDataProps, SetNestedPayloadProps } from '@core-types/helpers/T
 import getDefinitionSchemaFromRef from './get-definition-schema';
 
 // Interceptors
-const {
-  APP_CONFIG: { 
-    INTERCEPTORS: {
-      INTERCEPTOR_CONFIG,
-    }, 
-  },
-} = require('../generated/app.config');
+import {
+  APP_CONFIG,
+} from '../generated/app.config';
+
+const { 
+  INTERCEPTORS: INTERCEPTOR_CONFIG, 
+} = APP_CONFIG;
 
 export const hashCode = (s) => {
   let h = 0; const l = s.length; let 

@@ -3,7 +3,7 @@ const onChangeHandler = (onChange) => (givenValue) => {
   if (value !== undefined) onChange(value);
 };
 
-export default ({ onChange, schema = {}, widget, uiSchema = {} }) => {
+export default ({ onChange, schema = {} as any, widget, uiSchema = {} }) => {
   const commonReturn = {
     onChange: onChange && onChangeHandler(onChange),
     label: schema.title,
