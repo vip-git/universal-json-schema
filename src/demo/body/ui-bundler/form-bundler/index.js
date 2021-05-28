@@ -1,5 +1,5 @@
 // Library
-import { generate } from 'nanoid';
+import { nanoid as generate } from 'nanoid';
 
 // JSON
 import schema from './schema.json';
