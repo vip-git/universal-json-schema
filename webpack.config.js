@@ -71,7 +71,7 @@ var config = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias,
   },
-  externals: /^(react|@material-ui(\/.*)?|immutability-helper|classnames|codemirror|lodash(\/.*)?|@material-ui\/icons(\/.*)?|react-codemirror2|nanoid)$/,
+  externals: /^(react|@material-ui(\/.*)?|immutability-helper|classnames|lodash(\/.*)?|@material-ui\/icons(\/.*)?|nanoid)$/,
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
