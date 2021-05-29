@@ -1,5 +1,5 @@
 // Library
-import { generate } from 'shortid';
+import { nanoid as generate } from 'nanoid';
 
 // Lodash
 import set from 'lodash/set';

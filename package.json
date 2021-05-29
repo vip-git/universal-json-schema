@@ -68,7 +68,8 @@
     "styled-components": "5.3.0",
     "typeface-roboto": "0.0.75",
     "url-shim": "1.0.1",
-    "util": "0.12.3"
+    "util": "0.12.3",
+    "xstate": "4.19.2"
   },
   "description": "Material UI implementation of react-jsonschema-form with UI and XHR Schema.",
   "devDependencies": {
