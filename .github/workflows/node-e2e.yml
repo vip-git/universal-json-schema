@@ -33,7 +33,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
+    - run: rm -rf package.json && mv wdio-package.json package.json && npm install
     #- name: "Check if deployment is done"
       #env:
       #  VERCEL_TOKEN: ${{secrets.VERCEL_TOKEN}}
