@@ -81,7 +81,7 @@ const useStepperEvents = ({
         },
       });
     }
-    stateMachineService.send(`${nextPath}.${ON_STEP_CHANGE}`, { stepName: nextPath });
+    stateMachineService.send(ON_STEP_CHANGE, { stepName: nextPath });
     return givenOnStepNext && givenOnStepNext(
       { formData, uiData, uiSchema, validation },
       () => callback && callback(),
@@ -89,7 +89,7 @@ const useStepperEvents = ({
   };
 
   const onStepBack = (path: string, nextPath: string | number, callback: () => any) => {
-    stateMachineService.send(`${nextPath}.${ON_STEP_CHANGE}`, { stepName: nextPath });
+    stateMachineService.send(ON_STEP_CHANGE, { stepName: nextPath });
     return givenOnStepBack && givenOnStepBack(
       { formData, uiData, uiSchema, validation },
       () => callback && callback(),
@@ -97,7 +97,7 @@ const useStepperEvents = ({
   };
 
   const onStepSkip = (path: string, nextPath: string | number, callback: () => any) => {
-    stateMachineService.send(`${nextPath}.${ON_STEP_CHANGE}`, { stepName: nextPath });
+    stateMachineService.send(ON_STEP_CHANGE, { stepName: nextPath });
     return givenOnStepSkip && givenOnStepSkip(
       { formData, uiData, uiSchema, validation },
       () => callback && callback(),

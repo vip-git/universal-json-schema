@@ -7,10 +7,11 @@ const GUARDS = {
     const defaultField = event.field === '' ? 'default' : event.field;
     const arrayField = defaultField.replace(/[(1-9)]/g, '').replace('[]', '').replace(/^(.*?)\./g, '');
     const matchField = defaultField.match(/[(1-9)]/g) ? arrayField === field : field === defaultField;
-    return (
-      Object.keys(xstate.state.value).includes(defaultField) 
-        ? matchField : defaultField.includes(arrayField)
-    );
+    // (
+    //   Object.keys(xstate.state.value).includes(defaultField) 
+    //     ? matchField : defaultField.includes(arrayField)
+    // )
+    return true;
   },
   isUpdatedErrorField: (field: string) => (context, event) => {
     const givenField = event.dataPath.replace('.', '');

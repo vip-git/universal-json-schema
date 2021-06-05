@@ -45,6 +45,8 @@ const useFormActions = ({
     FORM_STATE_EVENTS, 
     FORM_STATE_ARRAY_EVENTS, 
     FORM_STATE_ERROR_EVENTS,
+    STEPPER_ACTIONS: { DO_STEP_CHANGE },
+    STEPPER_STATE_EVENTS: { ON_STEP_CHANGE },
   } = FORM_STATE_CONFIG;
 
   const getValidActionToExecute = (
@@ -84,7 +86,14 @@ const useFormActions = ({
       callback: () => executable.push(actions.DISABLE_FORM_SUBMIT),
     };
 
+    const CHANGE_ACTIVE_STEP_CONDITION = {
+      condition: state.event.type.includes(ON_STEP_CHANGE),
+      equals: true,
+      callback: () => executable.push(DO_STEP_CHANGE),
+    };
+
     Utils.executeConditions([
+      { ...CHANGE_ACTIVE_STEP_CONDITION },
       { ...PROPAGATE_ON_CHANGE_CONDITION },
       { ...ENABLE_FORM_CONDITION },
       { ...DISABLE_FORM_CONDITION },

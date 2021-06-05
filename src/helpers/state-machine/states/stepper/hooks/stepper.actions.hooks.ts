@@ -36,13 +36,13 @@ const useStepperActions = (buttonDisabled) => {
 
   const executeStepperActions = {
     [DO_STEP_CHANGE]: ({
-      stateMachineService, 
+      stateMachineService,
       state,
     }) => {
       const {
-        formSchema: currentSchema, 
-        formData: currentData, 
-        uiData: currentUIData, 
+        formSchema: currentSchema,
+        formData: currentData,
+        uiData: currentUIData,
         uiSchema: currentUISchema,
         validation,
         activeStep,
@@ -57,7 +57,7 @@ const useStepperActions = (buttonDisabled) => {
         onError: state.context.effects.onError,
         buttonDisabled,
       });
-      state.context.effects.onChange({ 
+      state.context.effects.onChange({
         formData: currentData, 
         uiData: currentUIData,
         uiSchema: currentUISchema, 

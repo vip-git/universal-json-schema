@@ -1,9 +1,9 @@
 // Actions
-type Actions = {
+export type StepperActions = {
     DO_STEP_CHANGE: 'doStepChange';
 };
 
-export type StateEvents = {
+export type StepperStateEvents = {
     ON_STEP_CHANGE: 'stepChange',
     ON_STEP_NEXT: 'onFormNext',
     ON_STEP_BACK: 'onFormBack',
@@ -12,8 +12,8 @@ export type StateEvents = {
 };
 
 type StateMachineConfig = {
-    STEPPER_ACTIONS: Actions;
-    STEPPER_STATE_EVENTS: StateEvents;
+    STEPPER_ACTIONS: StepperActions;
+    STEPPER_STATE_EVENTS: StepperStateEvents;
 }
 
 export const STEPPER_STATE_CONFIG: StateMachineConfig = {

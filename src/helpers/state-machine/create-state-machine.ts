@@ -16,7 +16,7 @@ interface XStateObj {
 }
 
 const STATES = {
-  STEPPER: (schema) => createStepperStates({
+  STEPPER: (schema) => createFormFieldStates({
     schema,
   }) as XStateObj,
   FORM_FIELDS: (schema) => createFormFieldStates({

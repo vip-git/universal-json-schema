@@ -53,11 +53,11 @@ export default function HorizontalNonLinearStepperWithError(props) {
       stepKey: k,
       stepPath: p,
       component: (compProps) => (
-            <FieldSetObject
-                {...compProps} 
-                tabKey={p}
-                isTabContent
-            />
+        <FieldSetObject
+            {...compProps} 
+            tabKey={p}
+            isTabContent
+        />
       ),
     };
   });

@@ -1,6 +1,3 @@
-// Machines
-import { createParallelFormFieldStates } from '../form';
-
 // Mutations
 import stepperMutations from './stepper-state.mutations';
 
@@ -17,32 +14,32 @@ const createStepperStates = ({
   const states = {};
   const givenSchema = JSON.parse(JSON.stringify(schema));
   const stepTransitions = {};
-  Object.keys(givenSchema.properties).forEach((propName) => {
-    states[propName] = {
-      states: {},
-      on: {},
-    };
-    stepTransitions[`${propName}.${ON_STEP_CHANGE}`] = {
-      target: `.${propName}`,
-      actions: ['updateActiveStep'],
-    };
-    const parsedSchema = flattenDefinitionSchemaFromRef(givenSchema.definitions, givenSchema.properties[propName]);
-    const formFieldStates = createParallelFormFieldStates({
-      schema: parsedSchema,
-      states: new Map(),
-    });
+  // Object.keys(givenSchema.properties).forEach((propName) => {
+  //   states[propName] = {
+  //     states: {},
+  //     on: {},
+  //   };
+  //   stepTransitions[`${propName}.${ON_STEP_CHANGE}`] = {
+  //     target: `.${propName}`,
+  //     actions: ['updateActiveStep'],
+  //   };
+  //   const parsedSchema = flattenDefinitionSchemaFromRef(givenSchema.definitions, givenSchema.properties[propName]);
+  //   const formFieldStates = createParallelFormFieldStates({
+  //     schema: parsedSchema,
+  //     states: new Map(),
+  //   });
     
-    formFieldStates.forEach((state, stateKey) => {
-      states[propName].initial = stateKey;
-      states[propName].type = 'parallel';
-      states[propName].states[stateKey] = {
-        ...state,
-      };
-      states[propName].on[`${propName}.${stateKey}`] = {
-        target: `.${stateKey}`,
-      };
-    });
-  });
+  //   formFieldStates.forEach((state, stateKey) => {
+  //     states[propName].initial = stateKey;
+  //     states[propName].type = 'parallel';
+  //     states[propName].states[stateKey] = {
+  //       ...state,
+  //     };
+  //     states[propName].on[`${propName}.${stateKey}`] = {
+  //       target: `.${stateKey}`,
+  //     };
+  //   });
+  // });
 
   const stepperState = {
     id: 'stepMachine',

@@ -23,7 +23,7 @@ interface EventPayload {
 }
 
 const HELPERS = {
-  getValidUIData: (context: FormContext, event: EventPayload) => {
+  getValidUIData: (context: FormContext, event: EventObject & EventPayload) => {
     const { givenValue, givenUIValue, field, forceDeleteUIData } = event;
     const newUIData = isEmptyValues(givenUIValue) || forceDeleteUIData
       ? omit(context.uiData, field) 
@@ -48,22 +48,41 @@ const FormMutations = {
     ),
     lastField: (context: FormContext, event: EventObject & EventPayload) => event.field,
     formSchema: (context: FormContext, event: EventObject & EventPayload) => context.formSchema,
-    uiData: (context: FormContext, event: EventPayload) => HELPERS.getValidUIData(context, event),
-    uiSchema: (context: FormContext, event: EventPayload) => setUISchemaData(
+    uiData: (context: FormContext, event: EventObject & EventPayload) => HELPERS.getValidUIData(context, event),
+    uiSchema: (context: FormContext, event: EventObject & EventPayload) => setUISchemaData(
       HELPERS.getValidUIData(context, event),
       context.uiSchema,
     ),
-    effects: (context: FormContext, event: EventPayload) => ({
+    effects: (context: FormContext, event: EventObject & EventPayload) => ({
       ...context.effects,
       ...event.effects,
     }),
   }),
   updateArrayData: assign({
     // Todo: resolve inconsistent form update 
-    formData: (context: FormContext, event: { formData: any; }) => ({
+    /** *
+     * map all the functions in ./update-form-data.ts
+     * --------------------
+     * setValueSpec
+     * pushItemSpec
+     * removeItemSpec
+     * moveItemSpec
+     * updateKeyFromSpec
+     * removeValueFromSpec
+     * addListItem
+     * removeListItem
+     * moveListItem
+     * ---------------------
+     */
+    formData: (context: FormContext, event: EventObject & { formData: any; }) => ({
       ...context.formData,
       ...event.formData,
     }),
+  }),
+  updateActiveStep: assign({
+    activeStep: (context: FormContext, event: EventObject & { stepName: string }) => Object.keys(
+      context.formSchema.properties,
+    ).indexOf(event.stepName),
   }),
 };
 

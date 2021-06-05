@@ -107,11 +107,11 @@ const useFormStateMachine = ({
   };
   
   const condition = !isEqual(
-    { 
+    {
       schema: originalFormInfo.schema, 
       uiSchema: originalFormInfo.uiSchema,
     }, 
-    { 
+    {
       schema: stateFormInfo.schema,
       uiSchema: stateFormInfo.uiSchema,
     },
