@@ -74,9 +74,10 @@ const FormMutations = {
      * moveListItem
      * ---------------------
      */
-    formData: (context: FormContext, event: EventObject & { formData: any; }) => ({
-      ...context.formData,
-      ...event.formData,
+    formData: (context: FormContext, event: EventObject & { 
+      updateArrayFN: Function;
+    }) => ({
+      ...event.updateArrayFN(context.formData),
     }),
   }),
   updateActiveStep: assign({

@@ -71,7 +71,7 @@ const addFormFieldStatesBasedOnPath = (getPath) => {
       },
     },
   };
-  
+  // console.log('stateDefinition is', stateDefinition);
   return stateDefinition;
 };
 

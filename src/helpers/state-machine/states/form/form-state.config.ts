@@ -76,6 +76,7 @@ export const FORM_STATE_CONFIG: StateMachineConfig = {
     SUBMITTED: 'submitted',
     INVALID: 'invalid',
   },
+  
   // List of rules to execute
   FORM_ACTIONS: {
     DISABLE_FORM_SUBMIT: 'disableSubmit',

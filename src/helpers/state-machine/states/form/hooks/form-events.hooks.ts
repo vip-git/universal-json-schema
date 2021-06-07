@@ -40,52 +40,51 @@ const useFormEvents = ({
   const onMoveItemUp = (path: string, idx: number) => () => stateMachineService.send(
     FORM_STATE_CONFIG.FORM_STATE_ARRAY_EVENTS.MOVE_ITEM_UP,
     { 
-      formData: moveListItem(formData, path, idx, -1), 
+      updateArrayFN: (contextFormData) => moveListItem(contextFormData, path, idx, -1), 
     },
   );
 
   const onMoveItemDown = (path: string, idx: number) => () => stateMachineService.send(
     FORM_STATE_CONFIG.FORM_STATE_ARRAY_EVENTS.MOVE_ITEM_DOWN,
     { 
-      formData: moveListItem(formData, path, idx, 1), 
+      updateArrayFN: (contextFormData) => moveListItem(contextFormData, path, idx, 1), 
     },
   );
 
   const onDeleteItem = (path: string, idx: number) => () => stateMachineService.send(
     FORM_STATE_CONFIG.FORM_STATE_ARRAY_EVENTS.DELETE_ITEM,
     { 
-      formData: removeListItem(formData, path, idx), 
+      updateArrayFN: (contextFormData) => removeListItem(contextFormData, path, idx), 
     },
   );
 
   const onAddItem = (path: string, defaultValue: any) => () => stateMachineService.send(
     FORM_STATE_CONFIG.FORM_STATE_ARRAY_EVENTS.ADD_ITEM,
     { 
-      formData: addListItem(formData, path, defaultValue || ''), 
+      updateArrayFN: (contextFormData) => addListItem(contextFormData, path, defaultValue || ''), 
     },
   );
 
   const onAddNewProperty = (path: string, defaultValue: any) => () => stateMachineService.send(
     FORM_STATE_CONFIG.FORM_STATE_ARRAY_EVENTS.ADD_NEW_PROPERTY,
     { 
-      formData: updateFormData(formData, generate(), defaultValue || ''), 
+      updateArrayFN: (contextFormData) => updateFormData(contextFormData, generate(), defaultValue || ''), 
     },
   );
 
   const onRemoveProperty = (path: string) => () => stateMachineService.send(
     FORM_STATE_CONFIG.FORM_STATE_ARRAY_EVENTS.REMOVE_PROPERTY,
     { 
-      formData: removeValueFromSpec(formData, path), 
+      updateArrayFN: (contextFormData) => removeValueFromSpec(contextFormData, path), 
     },
   );
 
   const onUpdateKeyProperty = (path: string) => (givenValue: any, givenUIValue: any, forceDeleteUIData = false) => {
     if (!isEmptyValues(givenUIValue) && !isEmptyValues(givenValue)) {
-      const givenFormData = updateKeyFromSpec(formData, path, givenValue);
       stateMachineService.send(
         FORM_STATE_CONFIG.FORM_STATE_ARRAY_EVENTS.UPDATE_NEW_PROPERTY,
         { 
-          formData: givenFormData,
+          updateArrayFN: (contextFormData) => updateKeyFromSpec(contextFormData, path, givenValue),
         },
       );
     }
