@@ -1,26 +1,15 @@
-// Library
-import React from 'react';
-
 // Helpers
-import getDefinitionSchemaFromRef from '../../../../get-definition-schema';
-import Utils from '../../../../utils';
+import getDefinitionSchemaFromRef from '../../../get-definition-schema';
+import Utils from '../../../utils';
 
 // State Helpers
-import isFormSchemaStateValid from '../../../helpers/is-form-schema-state-valid';
+import isFormSchemaStateValid from '../../helpers/is-form-schema-state-valid';
   
 // config
-import { FORM_STATE_CONFIG } from '../form-state.config';
-
-// Stepper Actions
-import useStepperActions from '../../stepper/hooks/stepper.actions.hooks';
+import FORM_STATE_CONFIG from '../config';
 
 // Types
-import { StateMachineInstance } from '../../../types/form-state-machine.type';
-
-interface ExecuteFormActions {
-  state: StateMachineInstance;
-  stateMachineService: any;
-}
+import { StateMachineInstance } from '../../types/form-state-machine.type';
 
 /**
  * @description
@@ -35,11 +24,6 @@ interface ExecuteFormActions {
 const useFormActions = ({
   isStepperUI,
 }) => {
-  const [buttonDisabled, setButtonDisabled] = React.useState(false);
-  const { 
-    executeStepperActions,
-    getValidStepperActionToExecute,
-  } = useStepperActions(buttonDisabled);
   const { 
     FORM_ACTIONS: actions, 
     FORM_STATE_EVENTS, 
@@ -56,9 +40,7 @@ const useFormActions = ({
     const {
       uiSchema: currentUISchema,
     } = state.context;
-    const formValidCondition = isStepperUI(currentUISchema) ? Object.values(
-      state.value[Object.keys(state.value)[0]],
-    ).includes(FORM_STATE_ERROR_EVENTS.INVALID) 
+    const formValidCondition = isStepperUI(currentUISchema) ? state.value.formUI === FORM_STATE_ERROR_EVENTS.INVALID 
       : Object.values(state.value).includes(FORM_STATE_ERROR_EVENTS.INVALID);
 
     const PROPAGATE_ON_CHANGE_CONDITION = {
@@ -142,27 +124,27 @@ const useFormActions = ({
     };
   };
 
-  const executeAction = {
-    [actions.DISABLE_FORM_SUBMIT]: () => setButtonDisabled(true),
-    [actions.ENABLE_FORM_SUBMIT]: () => setButtonDisabled(false),
+  const executeFormActions = ({ buttonDisabled }) => ({
     [actions.PROPOGATE_ONCHANGE_EVENT]: ({
       stateMachineService,
       state,
     }) => {
       const {
-        formSchema: currentSchema, 
-        formData: currentData, 
-        uiData: currentUIData, 
+        formSchema: currentSchema,
+        formData: currentData,
+        uiData: currentUIData,
         uiSchema: currentUISchema,
         validation,
         activeStep,
       } = state.context;
+
       const { schema, data } = getSchemaAndFormData({
         currentData,
         currentSchema,
         currentUISchema,
         activeStep,
       });
+
       const { schemaErrors, transformedSchema } = isFormSchemaStateValid({
         stateMachineService,
         schema,
@@ -172,6 +154,7 @@ const useFormActions = ({
         onError: state.context.effects.onError,
         buttonDisabled,
       });
+
       state.context.effects.onChange({
         schema: currentSchema,
         formData: currentData, 
@@ -181,23 +164,11 @@ const useFormActions = ({
         validSchema: transformedSchema,
       });
     },
-    ...executeStepperActions,
-  };
-
-  const executeFormActionsByState = ({
-    state,
-    stateMachineService,
-  }: ExecuteFormActions) => [
-    ...getValidStepperActionToExecute(state),
-    ...getValidActionToExecute(state),
-  ].forEach((action) => executeAction[action]({
-    state,
-    stateMachineService,
-  }));
+  });
 
   return {
-    executeFormActionsByState,
-    buttonDisabled,
+    executeFormActions,
+    getValidActionToExecute,
   };
 };
 

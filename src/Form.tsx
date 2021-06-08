@@ -17,9 +17,11 @@ import FormField from './FormField';
 import FormButtons from './FormButtons';
 
 // State Machine Helpers
-import useFormStateMachine from './helpers/state-machine/states/form/hooks/form-state-machine.hooks';
-import useFormEvents from './helpers/state-machine/states/form/hooks/form-events.hooks';
-import useStepperEvents from './helpers/state-machine/states/stepper/hooks/stepper-events.hooks';
+import { 
+  useFormStateMachine,
+  useFormEvents,
+  useStepperEvents,
+} from './helpers/state-machine/form/hooks';
 
 // import removeEmptyObjects, { isEmptyValues } from './helpers/remove-empty-values';
 // import transformSchema, { 

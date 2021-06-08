@@ -5,7 +5,7 @@ import {
 export type StateMachineInstance = State<Record<string, any>, any, any, {
     value: any;
     context: Record<string, any>;
-  }>;
+  }> & { value: { formUI: string } };
 export interface FormContext {
     uiSchema: any;
     formSchema: any;

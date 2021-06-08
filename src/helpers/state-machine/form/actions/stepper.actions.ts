@@ -1,19 +1,21 @@
 // config
-import { STEPPER_STATE_CONFIG } from '../stepper-state.config';
+import STEPPER_STATE_CONFIG from '../config';
 
 // Helpers
-import Utils from '../../../../utils';
+import Utils from '../../../utils';
 
 // State Helpers
-import isFormSchemaStateValid from '../../../helpers/is-form-schema-state-valid';
+import isFormSchemaStateValid from '../../helpers/is-form-schema-state-valid';
 
 // Types
-import { StateMachineInstance } from '../../../types/form-state-machine.type';
+import { StateMachineInstance } from '../../types/form-state-machine.type';
 
-const useStepperActions = (buttonDisabled) => {
+const useStepperActions = () => {
   const { 
     STEPPER_ACTIONS: { DO_STEP_CHANGE },
     STEPPER_STATE_EVENTS: { ON_STEP_CHANGE },
+    FORM_ACTIONS: { ENABLE_FORM_SUBMIT, DISABLE_FORM_SUBMIT },
+    FORM_STATE_ERROR_EVENTS: { INVALID },
   } = STEPPER_STATE_CONFIG;
 
   const getValidStepperActionToExecute = (
@@ -34,7 +36,7 @@ const useStepperActions = (buttonDisabled) => {
     return executable;
   };
 
-  const executeStepperActions = {
+  const executeStepperActions = ({ buttonDisabled }) => ({
     [DO_STEP_CHANGE]: ({
       stateMachineService,
       state,
@@ -47,7 +49,9 @@ const useStepperActions = (buttonDisabled) => {
         validation,
         activeStep,
       } = state.context;
+      
       const stepName = Object.keys(currentSchema.properties)[activeStep];
+
       const { schemaErrors, transformedSchema } = isFormSchemaStateValid({
         stateMachineService,
         schema: currentSchema.properties[stepName],
@@ -57,6 +61,7 @@ const useStepperActions = (buttonDisabled) => {
         onError: state.context.effects.onError,
         buttonDisabled,
       });
+
       state.context.effects.onChange({
         formData: currentData, 
         uiData: currentUIData,
@@ -65,7 +70,7 @@ const useStepperActions = (buttonDisabled) => {
         validSchema: transformedSchema,
       });
     },
-  };
+  });
 
   return {
     executeStepperActions,

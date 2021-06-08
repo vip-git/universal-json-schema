@@ -1,8 +1,8 @@
 // Mutations
-import formMutations from './form-state.mutations';
+import { formMutations, stepperMutations } from './mutations';
 
 // Config
-import { FORM_STATE_CONFIG } from './form-state.config';
+import FORM_STATE_CONFIG from './config';
 
 // GUARDS
 import GUARDS from './form-state.guards';
@@ -26,7 +26,7 @@ const addFormFieldStatesBasedOnPath = (getPath) => {
     },
     [FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR]: {
       target: FORM_STATE_CONFIG.FORM_STATES.INVALID,
-      cond: GUARDS.isUpdatedErrorField(getPath),
+      // cond: GUARDS.isUpdatedErrorField(getPath),
     },
     [FORM_STATE_CONFIG.STEPPER_STATE_EVENTS.ON_STEP_CHANGE]: {
       target: FORM_STATE_CONFIG.FORM_STATES.DIRTY,
@@ -88,6 +88,6 @@ const createFormFieldStates = ({
   },
 });
 
-export { formMutations };
+export { formMutations, stepperMutations };
 
 export default createFormFieldStates;

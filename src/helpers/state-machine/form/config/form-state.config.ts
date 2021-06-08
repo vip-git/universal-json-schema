@@ -1,6 +1,3 @@
-// Import
-import { StepperStateEvents, StepperActions } from '../stepper/stepper-state.config';
-
 // Actions
 type Actions = {
     DISABLE_FORM_SUBMIT: 'disableSubmit';
@@ -38,18 +35,14 @@ export type FormStateErrorEvents = {
   INVALID: 'invalid';
 };
 
-type StateMachineConfig = {
+export type FormStateMachineConfig = {
     FORM_ACTIONS: Actions;
     FORM_STATES: FormStates;
     FORM_STATE_EVENTS: FormStateEvents;
     FORM_STATE_ERROR_EVENTS: FormStateErrorEvents;
     FORM_STATE_ARRAY_EVENTS: FormStateArrayEvents;
     FORM_STATE_SUBMIT_EVENT: 'submit';
-
-    // Stepper Related Actions - should come from a seperate file
-    STEPPER_ACTIONS: StepperActions;
-    STEPPER_STATE_EVENTS: StepperStateEvents;
-}
+};
 
 /**
  * @description
@@ -69,7 +62,7 @@ export const pathToEventName = (
     : `${eventNameString}.update`);
 };
 
-export const FORM_STATE_CONFIG: StateMachineConfig = {
+export const FORM_STATE_CONFIG: FormStateMachineConfig = {
   FORM_STATES: {
     INITIAL: 'clean',
     DIRTY: 'dirty',
@@ -100,18 +93,4 @@ export const FORM_STATE_CONFIG: StateMachineConfig = {
     INVALID: 'invalid',
   },
   FORM_STATE_SUBMIT_EVENT: 'submit',
-
-  // Stepper Actions - should be part of seperate file
-  STEPPER_ACTIONS: {
-    DO_STEP_CHANGE: 'doStepChange',
-  },
-  STEPPER_STATE_EVENTS: {
-    ON_STEP_CHANGE: 'stepChange',
-    ON_STEP_BACK: 'onFormBack',
-    ON_STEP_NEXT: 'onFormNext',
-    ON_STEP_RESET: 'onFormReset',
-    ON_STEP_SKIP: 'onFormSkip',
-  },
 };
-
-export default FORM_STATE_CONFIG;

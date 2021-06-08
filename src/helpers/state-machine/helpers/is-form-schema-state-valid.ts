@@ -3,7 +3,7 @@ import Ajv from 'ajv';
 import { has, get } from 'lodash';
 
 // Config
-import { FORM_STATE_CONFIG } from '../states/form/form-state.config';
+import FORM_STATE_CONFIG from '../form/config';
 
 // Helpers
 import transformSchema from '../../transform-schema';

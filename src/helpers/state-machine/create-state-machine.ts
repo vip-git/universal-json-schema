@@ -3,8 +3,7 @@ import { createMachine } from 'xstate';
 import { get } from 'lodash';
 
 // Machines
-import createFormFieldStates, { formMutations } from './states/form';
-import createStepperStates, { stepperMutations } from './states/stepper';
+import createFormFieldStates, { stepperMutations, formMutations } from './form';
 
 // Types
 import { FormContext } from './types/form-state-machine.type';

@@ -13,13 +13,13 @@ import updateFormData, {
   moveListItem,
   removeValueFromSpec,
   updateKeyFromSpec,
-} from '../../../../update-form-data';
-import { isEmptyValues } from '../../../../remove-empty-values';
-import { mapData, setNestedPayload, getDefinitionsValue } from '../../../../transform-schema';
-import executeXHRCall from '../../../../execute-xhr-call';
+} from '../../../update-form-data';
+import { isEmptyValues } from '../../../remove-empty-values';
+import { mapData, setNestedPayload, getDefinitionsValue } from '../../../transform-schema';
+import executeXHRCall from '../../../execute-xhr-call';
 
 // Config
-import { FORM_STATE_CONFIG } from '../form-state.config';
+import FORM_STATE_CONFIG from '../config';
   
 const useFormEvents = ({
   stateMachineService,

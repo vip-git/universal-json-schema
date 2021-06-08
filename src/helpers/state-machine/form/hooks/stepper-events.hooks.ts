@@ -3,11 +3,11 @@ import get from 'lodash/get';
 import has from 'lodash/has';
 
 // Helpers
-import { mapData, setNestedPayload, getDefinitionsValue } from '../../../../transform-schema';
-import executeXHRCall from '../../../../execute-xhr-call';
+import { mapData, setNestedPayload, getDefinitionsValue } from '../../../transform-schema';
+import executeXHRCall from '../../../execute-xhr-call';
 
 // Config
-import { STEPPER_STATE_CONFIG } from '../stepper-state.config';
+import STEPPER_STATE_CONFIG from '../config';
   
 const useStepperEvents = ({
   stateMachineService,

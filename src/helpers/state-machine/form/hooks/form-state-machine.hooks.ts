@@ -4,14 +4,15 @@ import { interpret } from 'xstate';
 import { get, isEqual } from 'lodash';
 
 // Helpers
-import createStateMachine from '../../../create-state-machine';
-import getValidationResult from '../../../../validation';
+import createStateMachine from '../../create-state-machine';
+import getValidationResult from '../../../validation';
 import {
   setUIData,
-} from '../../../../update-form-data';
+} from '../../../update-form-data';
 
 // Hooks
-import useFormActions from './form-actions.hooks';
+import useFormActions from '../actions';
+import { StateMachineInstance } from '../../types/form-state-machine.type';
 
 let formStateMachine = null;
 let stateMachineService = null;
@@ -98,7 +99,7 @@ const useFormStateMachine = ({
       });
       stateMachineService = interpret(
         formStateMachine, { devTools: true },
-      ).onTransition((state) => executeFormActionsByState({
+      ).onTransition((state: StateMachineInstance) => executeFormActionsByState({
         state,
         stateMachineService,
       }));
