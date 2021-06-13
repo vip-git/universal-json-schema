@@ -166,6 +166,7 @@ const useFormStateMachine = ({
                 FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_DATA,
                 {
                   formData: returnData,
+                  uiData: returnUIData,
                 },
               );
             };
@@ -174,7 +175,7 @@ const useFormStateMachine = ({
               resultsMappingInfo,
               Array.isArray(xhrData) ? xhrData[0] : xhrData,
               givenFormInfo.formData,
-              {}, // needs to be coming from uiSchema - this is uiData
+              givenFormInfo.uiData,
               givenFormInfo.uiSchema,
               interceptors,
               givenFormInfo.schema,

@@ -158,15 +158,16 @@ const useFormEvents = ({
             ? getDefinitionsValue(xhrSchema, mappedResults)
             : mappedResults;
           const setData = (
-              returnData,
-              returnUIData,
-            ) => {
-              stateMachineService.send(
-                FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_DATA,
-                {
-                  formData: returnData,
-                },
-              );
+            returnData,
+            returnUIData,
+          ) => {
+            stateMachineService.send(
+              FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_DATA,
+              {
+                formData: returnData,
+                uiData: returnUIData,
+              },
+            );
           };  
           mapData(
             resultsMappingInfo,
@@ -176,7 +177,7 @@ const useFormEvents = ({
             uiSchema,
             interceptors,
             schema,
-            setData
+            setData,
           );
           return onSubmit(
             { formData: xhrDt, uiData, uiSchema, validation }, 

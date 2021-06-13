@@ -70,6 +70,7 @@ const useStepperEvents = ({
               STEPPER_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_DATA,
               {
                 formData: returnData,
+                uiData: returnUIData,
               },
             );
           };  

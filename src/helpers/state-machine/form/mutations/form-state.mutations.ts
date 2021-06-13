@@ -63,6 +63,10 @@ const FormMutations = {
       ...context.formData,
       ...event.formData,
     }),
+    uiData: (context: FormContext, event: EventObject & EventPayload) => ({
+      ...context.uiData,
+      ...event.uiData,
+    }),
   }),
   updateXHRProgress: assign({
     xhrProgress: (context: FormContext, event: EventObject & { xhrProgress: boolean; }) => event.xhrProgress, 
