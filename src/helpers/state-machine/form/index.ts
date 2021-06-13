@@ -24,12 +24,16 @@ const addFormFieldStatesBasedOnPath = (getPath) => {
       cond: GUARDS.isUpdatedField(getPath),
       actions: ['updateData'],
     },
-    [FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_DATA]: {
+    [FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_ON_XHR_COMPLETE]: {
       target: FORM_STATE_CONFIG.FORM_STATES.DIRTY,
       actions: ['updateXHRData'],
     },
     [FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_XHR_PROGRESS]: {
       target: FORM_STATE_CONFIG.FORM_STATES.LOADING,
+      actions: ['updateXHRProgress'],
+    },
+    [FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.ERROR_XHR_PROGRESS]: {
+      target: FORM_STATE_CONFIG.FORM_STATES.DIRTY,
       actions: ['updateXHRProgress'],
     },
     [FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR]: {

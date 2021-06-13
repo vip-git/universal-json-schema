@@ -62,13 +62,21 @@ const FormMutations = {
     }),
   }),
   updateXHRData: assign({
-    formData: (context: FormContext, event: EventObject & EventPayload) => ({
+    formSchemaXHR: (context: FormContext, event: EventObject & EventPayload) => (event.formSchema ? ({
+      ...context.formSchemaXHR,
+      ...event.formSchema,
+    }) : ({ ...context.formSchemaXHR })),
+    formData: (context: FormContext, event: EventObject & EventPayload) => (event.formData ? ({
       ...context.formData,
       ...event.formData,
-    }),
-    uiData: (context: FormContext, event: EventObject & EventPayload) => ({
+    }) : ({ ...context.formData })),
+    uiData: (context: FormContext, event: EventObject & EventPayload) => (event.uiData ? ({
       ...context.uiData,
       ...event.uiData,
+    }) : ({ ...context.uiData })),
+    xhrProgress: (context: FormContext, event: EventObject & { status: boolean; hashRef: string }) => ({
+      ...context.xhrProgress,
+      [event.hashRef]: false,
     }),
   }),
   updateXHRProgress: assign({

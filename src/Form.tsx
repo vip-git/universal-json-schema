@@ -58,7 +58,7 @@ const Form = ({
 }: FormProps) => {
   const {
     formInfo: {
-      // schema,
+      formSchemaXHR,
       uiData,
       uiSchema,
       formData,
@@ -79,7 +79,6 @@ const Form = ({
       uiSchema: originalUISchema,
       formData: originalFormData,
       xhrSchema,
-      xhrProgress: false,
     },
     effects: {
       onChange,
@@ -170,7 +169,7 @@ const Form = ({
         activityIndicatorEnabled={activityIndicatorEnabled}
       />
   );
-
+  
   return (
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <Paper className={classes.root} style={uiSchema && uiSchema['ui:page'] ? uiSchema['ui:page'].style : {}}>
@@ -193,7 +192,10 @@ const Form = ({
                         data={formData}
                         uiData={uiData}
                         schemaVersion={schema.version}
-                        schema={schema}
+                        schema={{
+                          ...schema,
+                          ...formSchemaXHR,
+                        }}
                         uiSchema={uiSchema}
                         xhrSchema={xhrSchema}
                         definitions={schema.definitions}

@@ -1,5 +1,5 @@
 // Helpers
-import { has } from 'lodash';
+import { has, get } from 'lodash';
 import executeXHRCall from '../../execute-xhr-call';
 import getHashCodeFromXHRDef from './get-hashcode-from-xhr-def';
 import {
@@ -32,7 +32,7 @@ const persistXHRCall = ({
   eventName,
 }) => {
   if (has(xhrSchema, `${fieldPath}.${eventName}.xhr:datasource`)) {
-    const { url: eventUrl, method: eventMethod, payload } = xhrSchema[fieldPath][eventName]['xhr:datasource'];
+    const { url: eventUrl, method: eventMethod, payload } = get(xhrSchema, `${fieldPath}.${eventName}.xhr:datasource`);
     const hashRef = getHashCodeFromXHRDef({
       eventName,
       fieldPath,
@@ -55,7 +55,7 @@ const persistXHRCall = ({
         method: eventMethod,
         payload,
         onFailure: () => stateMachineService.send(
-          FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_XHR_PROGRESS, 
+          FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.ERROR_XHR_PROGRESS, 
           {
             status: false,
             hashRef,
@@ -67,22 +67,16 @@ const persistXHRCall = ({
           const resultsMappingInfo = mappedResults.includes('#/') 
             ? getDefinitionsValue(xhrSchema, mappedResults)
             : mappedResults;
-          stateMachineService.send(
-            FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_XHR_PROGRESS, 
-            {
-              status: false,
-              hashRef,
-            },
-          );
           const setData = (
             returnData,
             returnUIData,
           ) => {
             stateMachineService.send(
-              FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_DATA,
+              FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_ON_XHR_COMPLETE,
               {
                 formData: returnData,
                 uiData: returnUIData,
+                hashRef,
               },
             );
           };

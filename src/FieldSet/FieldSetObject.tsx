@@ -21,7 +21,6 @@ import fieldSetStyles from './field-set-styles';
 // Helpers
 import getDefaultValue from '../helpers/get-default-value';
 import getDefinitionSchemaFromRef from '../helpers/get-definition-schema';
-import { LoadingContext } from '../helpers/context';
 
 // types
 import { FieldSetObjectProps } from '../types/FieldSetObject.type';
@@ -46,7 +45,6 @@ export const RawFieldSetObject = ({
   ...rest 
 }: FieldSetObjectProps) => {
   const schema = { ...givenSchema };
-  const isLoading = React.useContext(LoadingContext);
   const orientation = (uiSchema['ui:orientation'] === 'row' ? classes.row : null);
   if (isTabContent) {
     const newPath = path ? `${path}.${tabKey}` : tabKey;
@@ -54,7 +52,7 @@ export const RawFieldSetObject = ({
       ? getDefinitionSchemaFromRef(definitions, schema.properties[tabKey], data[tabKey])
       : schema.properties[tabKey];
     const finalData = { ...data[tabKey] };  
-    return (isLoading && isLoading[newPath]) ? <div> Loading... </div> : (
+    return (
       <div className={classNames(classes.root, orientation)}>
         <FormField
             key={tabKey}
@@ -82,7 +80,7 @@ export const RawFieldSetObject = ({
           const propSchema = schema.properties[propId].$ref
             ? getDefinitionSchemaFromRef(definitions, schema.properties[propId], data[propId])
             : schema.properties[propId];
-          return (isLoading && isLoading[newPath]) ? 'Loading...' : (
+          return (
             <FormField
                 key={propId}
                 objectData={data}
@@ -174,7 +172,7 @@ export const RawFieldSetObject = ({
             const propSchema = schema.properties[propId].$ref
               ? getDefinitionSchemaFromRef(definitions, schema.properties[propId], data[propId])
               : schema.properties[propId];
-            return (isLoading && isLoading[newPath]) ? 'Loading...' : (
+            return (
               <FormField
                   key={propId}
                   objectData={data}

@@ -1,5 +1,5 @@
 // Helpers
-import { has } from 'lodash';
+import { has, get } from 'lodash';
 import {
   hashCode,
 } from '../../transform-schema';
@@ -8,9 +8,14 @@ const getHashCodeFromXHRDef = ({
   xhrSchema,
   eventName,
   fieldPath,
+}: {
+  xhrSchema: any;
+  eventName: string;
+  fieldPath?: string;
 }) => {
-  if (has(xhrSchema, `${fieldPath}.${eventName}.xhr:datasource`)) {
-    const { url: eventUrl, method: eventMethod, payload } = xhrSchema[fieldPath][eventName]['xhr:datasource'];
+  const xhrDataSourcePATH = fieldPath ? `${fieldPath}.${eventName}.xhr:datasource` : `${eventName}.xhr:datasource`;
+  if (has(xhrSchema, xhrDataSourcePATH)) {
+    const { url: eventUrl, method: eventMethod, payload } = get(xhrSchema, xhrDataSourcePATH);
     const hashRef = hashCode(JSON.stringify({
       eventName,
       eventUrl,

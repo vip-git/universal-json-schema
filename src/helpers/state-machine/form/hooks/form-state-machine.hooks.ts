@@ -1,7 +1,7 @@
 // Library
 import React from 'react';
 import { interpret } from 'xstate';
-import { get, isEqual, has } from 'lodash';
+import { get, isEqual, transform, isObject } from 'lodash';
 
 // Helpers
 import createStateMachine from '../../create-state-machine';
@@ -28,7 +28,8 @@ interface FormStateMachineProps {
     uiSchema: any;
     activeStep?: number;
     xhrSchema: any;
-    xhrProgress: boolean;
+    xhrProgress?: any;
+    formSchemaXHR?: any;
     xstate?: any;
   };
   effects: {
@@ -64,6 +65,8 @@ const useFormStateMachine = ({
     uiSchema: stateMachineService._state.context.uiSchema,
     // eslint-disable-next-line no-underscore-dangle
     schema: stateMachineService._state.context.formSchema,
+    // eslint-disable-next-line no-underscore-dangle
+    formSchemaXHR: stateMachineService._state.context.formSchemaXHR,
     // eslint-disable-next-line no-underscore-dangle
     xhrSchema: stateMachineService._state.context.xhrSchema,
     // eslint-disable-next-line no-underscore-dangle
@@ -113,17 +116,19 @@ const useFormStateMachine = ({
         stateMachineService,
       }));
       stateMachineService.start();
-      persistXHRCall({
-        fieldPath: 'ui:page',
-        eventName: 'onload',
-        xhrSchema,
-        stateMachineService,
-        formData: givenFormInfo.formData,
-        uiData: givenFormInfo.uiData,
-        uiSchema: givenFormInfo.uiSchema,
-        schema: givenFormInfo.schema,
-        interceptors,
-      }) as Promise<void>;
+      if (!isEqual(originalFormInfo.schema, stateFormInfo.schema)) {
+        persistXHRCall({
+          fieldPath: 'ui:page',
+          eventName: 'onload',
+          xhrSchema,
+          stateMachineService,
+          formData: givenFormInfo.formData,
+          uiData: givenFormInfo.uiData,
+          uiSchema: givenFormInfo.uiSchema,
+          schema: givenFormInfo.schema,
+          interceptors,
+        }) as Promise<void>;
+      }
     }
   };
   

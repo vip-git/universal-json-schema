@@ -9,6 +9,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-expressions */
 import React from 'react';
+import { isEmpty } from 'lodash';
 import Editor, { loader } from '@monaco-editor/react';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
@@ -122,10 +123,10 @@ class Source extends React.Component {
 
   render() {
     const { source, valid: validVal, isOpen } = this.state;
-    const { classes, title, hasSchemaError, schema } = this.props;
-    const valid = typeof validVal !== 'boolean';
+    const { classes, title, hasSchemaError } = this.props;
+    const valid = typeof validVal !== 'boolean' || isEmpty(hasSchemaError);
     const getInValidIcon = hasSchemaError ? WarningRoundedIcon : Invalid;
-    const Icon = valid && !hasSchemaError ? Valid : getInValidIcon;
+    const Icon = valid && isEmpty(hasSchemaError) ? Valid : getInValidIcon;
     return (
       <div 
         className={classes.root} 
@@ -138,7 +139,7 @@ class Source extends React.Component {
       >
         <div className={classNames(classes.ctr, { 
           [classes.invalid]: !valid, 
-          [classes.warning]: hasSchemaError && valid, 
+          [classes.warning]: !isEmpty(hasSchemaError) && valid, 
         })}
         >
           <div
@@ -156,10 +157,10 @@ class Source extends React.Component {
                           {' '}
                           {title}
                           {' is '}
-                          <b>{valid && !hasSchemaError ? 'Valid' : 'InValid'}</b>
+                          <b>{valid && isEmpty(hasSchemaError) ? 'Valid' : 'InValid'}</b>
                     </Typography>
                   </div>
-                  {hasSchemaError && (
+                  {!isEmpty(hasSchemaError) && (
                     <pre style={{ padding: 10, fontSize: '1rem', color: 'darkred' }}>
                       {JSON.stringify(hasSchemaError, null, 2)}
                     </pre>

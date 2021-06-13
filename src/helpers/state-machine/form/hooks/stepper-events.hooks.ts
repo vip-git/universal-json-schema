@@ -19,8 +19,6 @@ const useStepperEvents = ({
   xhrSchema,
   interceptors,
   onSubmit,
-  onChange,
-  onError,
   givenOnStepNext,
   givenOnStepReset,
   givenOnStepBack,
@@ -67,7 +65,7 @@ const useStepperEvents = ({
             returnUIData,
           ) => {
             stateMachineService.send(
-              STEPPER_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_DATA,
+              STEPPER_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_ON_XHR_COMPLETE,
               {
                 formData: returnData,
                 uiData: returnUIData,

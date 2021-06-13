@@ -11,4 +11,5 @@ export type FieldProps = FormEvents & {
     validation?: any;
     dependencies?: any;
     dynamicKeyField?: string;
+    xhrProgress?: any;
 };

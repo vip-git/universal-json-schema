@@ -17,6 +17,7 @@ import updateFormData, {
 import { isEmptyValues } from '../../../remove-empty-values';
 import { mapData, setNestedPayload, getDefinitionsValue } from '../../../transform-schema';
 import executeXHRCall from '../../../execute-xhr-call';
+import getHashCodeFromXHRDef from '../../helpers/get-hashcode-from-xhr-def';
 
 // Config
 import FORM_STATE_CONFIG from '../config';
@@ -112,22 +113,44 @@ const useFormEvents = ({
     const mapDef = Object.keys(xhrDef).find((t) => t.includes('map:'));
     const findMapDef = xhrDef[mapDef];
     const field = givenField.split('.').map((gs: any, gsi: number) => (gsi > 0 ? `properties.${gs}` : gs)).join('.');
-    set(xhrSchema, `properties.${givenField}.${xhrEvent}.xhrProgress`, true);
-    setLoadingState({ ...loadingState, [givenField]: true });
+    const hashRef = getHashCodeFromXHRDef({
+      eventName: xhrEvent,
+      fieldPath: `properties.${givenField}`,
+      xhrSchema,
+    });
+    stateMachineService.send(
+      FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_XHR_PROGRESS, 
+      {
+        status: true,
+        hashRef,
+      },
+    );
     return executeXHRCall({
       url,
       method,
       payload,
+      onFailure: () => stateMachineService.send(
+        FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.ERROR_XHR_PROGRESS, 
+        {
+          status: false,
+          hashRef,
+        },
+      ),
       onSuccess: (xhrData: any[]) => {
         const enums = xhrData.map((xh: any) => get(xh, findMapDef));
+        const formSchema = JSON.parse(JSON.stringify(schema));
         set(
-          schema, 
+          formSchema, 
           `properties.${field}.${mapDef.replace('map:', '')}`,
           enums,
         );
-        set(xhrSchema, `properties.${givenField}.${xhrEvent}.xhrComplete`, true);
-        set(xhrSchema, `properties.${givenField}.${xhrEvent}.xhrProgress`, false);
-        setLoadingState({ ...loadingState, [givenField]: false });
+        stateMachineService.send(
+          FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_ON_XHR_COMPLETE,
+          {
+            formSchema, 
+            hashRef,
+          },
+        );
       },
     });
   };
@@ -141,6 +164,18 @@ const useFormEvents = ({
       && has(xhrSchema, 'ui:page.onsubmit.xhr:datasource.map:payload')
     ) {
       const { url, method } = xhrSchema['ui:page'].onsubmit['xhr:datasource'];
+      const hashRef = getHashCodeFromXHRDef({
+        eventName: 'onsubmit',
+        fieldPath: 'ui:page',
+        xhrSchema,
+      });
+      stateMachineService.send(
+        FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_XHR_PROGRESS, 
+        {
+          status: true,
+          hashRef,
+        },
+      );
       const payload = setNestedPayload({
         payloadData: xhrSchema['ui:page'].onsubmit['xhr:datasource']['map:payload'],
         formData,
@@ -151,6 +186,13 @@ const useFormEvents = ({
         url,
         method,
         payload,
+        onFailure: () => stateMachineService.send(
+          FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.ERROR_XHR_PROGRESS, 
+          {
+            status: false,
+            hashRef,
+          },
+        ),
         onSuccess: (xhrData: any[]) => {
           const xhrDt = Array.isArray(xhrData) ? xhrData[0] : xhrData;
           const mappedResults = xhrSchema['ui:page'].onsubmit['xhr:datasource']['map:results'];
@@ -162,10 +204,11 @@ const useFormEvents = ({
             returnUIData,
           ) => {
             stateMachineService.send(
-              FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_DATA,
+              FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_ON_XHR_COMPLETE,
               {
                 formData: returnData,
                 uiData: returnUIData,
+                hashRef,
               },
             );
           };  

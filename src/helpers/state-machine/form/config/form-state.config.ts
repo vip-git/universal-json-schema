@@ -18,8 +18,9 @@ export type FormStateArrayEvents = {
 };
 
 export type FormStateXHREvents = {
-  UPDATE_FORM_DATA: 'updateFormData',
+  UPDATE_FORM_ON_XHR_COMPLETE: 'updateFormOnXHRComplete',
   UPDATE_XHR_PROGRESS: 'updateXHRProgress',
+  ERROR_XHR_PROGRESS: 'errorXHRProgress'
 };
 
 export type FormStateEvents = {
@@ -94,8 +95,9 @@ export const FORM_STATE_CONFIG: FormStateMachineConfig = {
     UPDATE_NEW_PROPERTY: 'updateNewProperty',
   },
   FORM_STATE_XHR_EVENTS: {
-    UPDATE_FORM_DATA: 'updateFormData',
+    UPDATE_FORM_ON_XHR_COMPLETE: 'updateFormOnXHRComplete',
     UPDATE_XHR_PROGRESS: 'updateXHRProgress',
+    ERROR_XHR_PROGRESS: 'errorXHRProgress',
   },
   FORM_STATE_EVENTS: {
     UPDATE: 'update',
