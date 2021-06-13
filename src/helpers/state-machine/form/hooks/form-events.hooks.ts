@@ -34,8 +34,6 @@ const useFormEvents = ({
   interceptors,
   submitOnEnter,
   onSubmit,
-  onChange,
-  onError,
 }) => {
   const onMoveItemUp = (path: string, idx: number) => () => stateMachineService.send(
     FORM_STATE_CONFIG.FORM_STATE_ARRAY_EVENTS.MOVE_ITEM_UP,
@@ -159,6 +157,17 @@ const useFormEvents = ({
           const resultsMappingInfo = mappedResults.includes('#/') 
             ? getDefinitionsValue(xhrSchema, mappedResults)
             : mappedResults;
+          const setData = (
+              returnData,
+              returnUIData,
+            ) => {
+              stateMachineService.send(
+                FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_DATA,
+                {
+                  formData: returnData,
+                },
+              );
+          };  
           mapData(
             resultsMappingInfo,
             xhrDt,
@@ -167,9 +176,7 @@ const useFormEvents = ({
             uiSchema,
             interceptors,
             schema,
-            onChange,
-            onError,
-            (d) => console.log(d), // setData
+            setData
           );
           return onSubmit(
             { formData: xhrDt, uiData, uiSchema, validation }, 

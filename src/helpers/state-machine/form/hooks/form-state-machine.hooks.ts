@@ -1,11 +1,17 @@
 // Library
 import React from 'react';
 import { interpret } from 'xstate';
-import { get, isEqual } from 'lodash';
+import { get, isEqual, has, set } from 'lodash';
 
 // Helpers
 import createStateMachine from '../../create-state-machine';
 import getValidationResult from '../../../validation';
+import { 
+  hashCode, 
+  mapData, 
+  getDefinitionsValue,
+} from '../../../transform-schema';
+import executeXHRCall from '../../../execute-xhr-call';
 import {
   setUIData,
 } from '../../../update-form-data';
@@ -14,17 +20,23 @@ import {
 import useFormActions from '../actions';
 import { StateMachineInstance } from '../../types/form-state-machine.type';
 
+// Config
+import FORM_STATE_CONFIG from '../config';
+
 let formStateMachine = null;
 let stateMachineService = null;
 
 interface FormStateMachineProps {
   xhrSchema: any;
   validations: any;
+  interceptors: any;
   originalFormInfo: {
     schema: any;
     formData: any;
     uiSchema: any;
     activeStep?: number;
+    xhrSchema: any;
+    xhrProgress: boolean;
     xstate?: any;
   };
   effects: {
@@ -37,6 +49,7 @@ const useFormStateMachine = ({
   xhrSchema,
   originalFormInfo: givenOriginalFormInfo,
   validations,
+  interceptors,
   effects: {
     onChange,
     onError: originalOnError,
@@ -60,12 +73,18 @@ const useFormStateMachine = ({
     // eslint-disable-next-line no-underscore-dangle
     schema: stateMachineService._state.context.formSchema,
     // eslint-disable-next-line no-underscore-dangle
+    xhrSchema: stateMachineService._state.context.xhrSchema,
+    // eslint-disable-next-line no-underscore-dangle
+    xhrProgress: stateMachineService._state.context.xhrProgress,
+    // eslint-disable-next-line no-underscore-dangle
     activeStep: stateMachineService._state.context.activeStep || 0,
     // eslint-disable-next-line no-underscore-dangle
     xstate: stateMachineService._state.value,
   } : {};
   const givenFormInfo = !formStateMachine ? originalFormInfo : stateFormInfo;
   const [loadingState, setLoadingState] = React.useState(null);
+  const [formId, setFormId] = React.useState(null);
+  // const iniUiData = setUIData({}, Object.keys(schema.properties || {}), uiSchema, schema);
   const validation = getValidationResult(
     givenFormInfo.schema, 
     givenFormInfo.uiSchema, 
@@ -104,6 +123,67 @@ const useFormStateMachine = ({
         stateMachineService,
       }));
       stateMachineService.start();
+    }
+
+    /**
+     * Todo: Try to figure out a way to remove this if condition
+     */
+    if (
+      !isEqual(hashCode(JSON.stringify(givenFormInfo.schema)), formId) 
+      && !givenFormInfo.xhrProgress
+    ) {
+      if (xhrSchema 
+          && has(xhrSchema, 'ui:page.onload.xhr:datasource.url')
+          && has(xhrSchema, 'ui:page.onload.xhr:datasource.method')
+          && has(xhrSchema, 'ui:page.onload.xhr:datasource.map:results')
+      ) {
+        const mappedResults = xhrSchema['ui:page'].onload['xhr:datasource']['map:results'];
+        const resultsMappingInfo = mappedResults.includes('#/') 
+          ? getDefinitionsValue(xhrSchema, mappedResults)
+          : mappedResults;
+        stateMachineService.send(
+          FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_XHR_PROGRESS, 
+          true,
+        );
+        executeXHRCall({
+          type: 'onload',
+          url: xhrSchema['ui:page'].onload['xhr:datasource'].url,
+          method: xhrSchema['ui:page'].onload['xhr:datasource'].method,
+          onFailure: () => stateMachineService.send(
+            FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_XHR_PROGRESS, 
+            false,
+          ),
+          onSuccess: (xhrData: any[]) => {
+            stateMachineService.send(
+              FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_XHR_PROGRESS, 
+              false,
+            );
+            const setData = (
+              returnData,
+              returnUIData,
+            ) => {
+              stateMachineService.send(
+                FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_DATA,
+                {
+                  formData: returnData,
+                },
+              );
+            };
+              /** Send the update event here to final data */
+            mapData(
+              resultsMappingInfo,
+              Array.isArray(xhrData) ? xhrData[0] : xhrData,
+              givenFormInfo.formData,
+              {}, // needs to be coming from uiSchema - this is uiData
+              givenFormInfo.uiSchema,
+              interceptors,
+              givenFormInfo.schema,
+              setData,
+            );
+          },
+        }) as Promise<void>;
+      }
+      setFormId(hashCode(JSON.stringify(givenFormInfo.schema)));
     }
   };
   

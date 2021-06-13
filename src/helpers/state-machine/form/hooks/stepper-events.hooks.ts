@@ -62,6 +62,17 @@ const useStepperEvents = ({
           const resultsMappingInfo = mappedResults.includes('#/') 
             ? getDefinitionsValue(xhrSchema, mappedResults)
             : mappedResults;
+          const setData = (
+            returnData,
+            returnUIData,
+          ) => {
+            stateMachineService.send(
+              STEPPER_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_DATA,
+              {
+                formData: returnData,
+              },
+            );
+          };  
           mapData(
             resultsMappingInfo,
             xhrDt,
@@ -70,9 +81,7 @@ const useStepperEvents = ({
             uiSchema,
             interceptors,
             schema,
-            onChange,
-            onError,
-            (d) => console.log(d), // setData
+            setData,
           );
           return onSubmit(
             { formData: xhrDt, uiData, uiSchema, validation }, 

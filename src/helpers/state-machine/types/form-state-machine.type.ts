@@ -16,4 +16,5 @@ export interface FormContext {
     effects: any;
     activeStep: number;
     lastField: string;
+    xhrProgress: boolean;
 }

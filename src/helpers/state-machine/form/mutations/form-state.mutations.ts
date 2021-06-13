@@ -58,22 +58,16 @@ const FormMutations = {
       ...event.effects,
     }),
   }),
+  updateXHRData: assign({
+    formData: (context: FormContext, event: EventObject & EventPayload) => ({
+      ...context.formData,
+      ...event.formData,
+    }),
+  }),
+  updateXHRProgress: assign({
+    xhrProgress: (context: FormContext, event: EventObject & { xhrProgress: boolean; }) => event.xhrProgress, 
+  }),
   updateArrayData: assign({
-    // Todo: resolve inconsistent form update 
-    /** *
-     * map all the functions in ./update-form-data.ts
-     * --------------------
-     * setValueSpec
-     * pushItemSpec
-     * removeItemSpec
-     * moveItemSpec
-     * updateKeyFromSpec
-     * removeValueFromSpec
-     * addListItem
-     * removeListItem
-     * moveListItem
-     * ---------------------
-     */
     formData: (context: FormContext, event: EventObject & { 
       updateArrayFN: Function;
     }) => ({

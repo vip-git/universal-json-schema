@@ -23,19 +23,13 @@ import {
   useStepperEvents,
 } from './helpers/state-machine/form/hooks';
 
-// import removeEmptyObjects, { isEmptyValues } from './helpers/remove-empty-values';
-// import transformSchema, { 
-// hashCode, mapData, setNestedPayload, getDefinitionsValue } from './helpers/transform-schema';
-// import getValidationResult from './helpers/validation';
-// import executeXHRCall from './helpers/execute-xhr-call';
-
 // Initial Contexts
 import { LoadingContext, EventContext, StepperContext } from './helpers/context';
 
 const Form = ({
   formData: originalFormData,
   schema = {},
-  xhrSchema = { 'ui:page': { onload: { xhrProgress: false } } },
+  xhrSchema = {},
   uiSchema: originalUISchema = {},
   validations,
   prefixId,
@@ -68,6 +62,7 @@ const Form = ({
       uiSchema,
       formData,
       activeStep,
+      xhrProgress,
     },
     validation,
     loadingState,
@@ -77,10 +72,13 @@ const Form = ({
   } = useFormStateMachine({
     xhrSchema,
     validations,
+    interceptors,
     originalFormInfo: {
       schema,
       uiSchema: originalUISchema,
       formData: originalFormData,
+      xhrSchema,
+      xhrProgress: false,
     },
     effects: {
       onChange,
@@ -142,18 +140,8 @@ const Form = ({
     givenOnStepSkip,
   });
 
-  const xhrProgress = xhrSchema 
-                        && xhrSchema['ui:page'] 
-                        && xhrSchema['ui:page'].onload 
-                        && xhrSchema['ui:page'].onload.xhrProgress;
-
-  // const iniUiData = setUIData({}, Object.keys(schema.properties || {}), uiSchema, schema);
-
   const classes = formStyles();
   const id = prefixId || generate();
-
-  // const autoId = generate();
-  // const [formId, setFormId] = React.useState(null);
 
   const hasPageLayoutTabs = uiSchema['ui:page'] 
                               && uiSchema['ui:page']['ui:layout'] 
@@ -161,46 +149,7 @@ const Form = ({
 
   const hasPageLayoutSteps = uiSchema['ui:page'] 
                               && uiSchema['ui:page']['ui:layout'] 
-                              && uiSchema['ui:page']['ui:layout'] === 'steps';        
-             
-  // if (
-  //   !isEqual(hashCode(JSON.stringify(schema)), formId) 
-  //   && get(xhrSchema, 'ui:page.onload.xhrProgress') === undefined
-  // ) {
-  //   if (xhrSchema 
-  //     && has(xhrSchema, 'ui:page.onload.xhr:datasource.url')
-  //     && has(xhrSchema, 'ui:page.onload.xhr:datasource.method')
-  //     && has(xhrSchema, 'ui:page.onload.xhr:datasource.map:results')
-  //   ) {
-  //     const mappedResults = xhrSchema['ui:page'].onload['xhr:datasource']['map:results'];
-  //     const resultsMappingInfo = mappedResults.includes('#/') 
-  //       ? getDefinitionsValue(xhrSchema, mappedResults)
-  //       : mappedResults;
-  //     set(xhrSchema, 'ui:page.onload.xhrProgress', true);
-  //     executeXHRCall({
-  //       type: 'onload',
-  //       url: xhrSchema['ui:page'].onload['xhr:datasource'].url,
-  //       method: xhrSchema['ui:page'].onload['xhr:datasource'].method,
-  //       onFailure: () => set(xhrSchema, 'ui:page.onload.xhrProgress', undefined),
-  //       onSuccess: (xhrData: any[]) => {
-  //         set(xhrSchema, 'ui:page.onload.xhrProgress', undefined);
-  //         mapData(
-  //           resultsMappingInfo,
-  //           Array.isArray(xhrData) ? xhrData[0] : xhrData,
-  //           data,
-  //           uiData,
-  //           uiSchema,
-  //           interceptors,
-  //           schema,
-  //           onChange,
-  //           onError,
-  //           setData,
-  //         );
-  //       },
-  //     });
-  //   }
-  //   setFormId(hashCode(JSON.stringify(schema)));  
-  // }
+                              && uiSchema['ui:page']['ui:layout'] === 'steps';
 
   const RenderFormButtons = () => (
       <FormButtons

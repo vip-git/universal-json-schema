@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 // Library
 import { has, get, set } from 'lodash';
 import each from 'lodash/each';
@@ -199,8 +196,6 @@ export const mapData = (
   uiSchema: any,
   interceptors: any,
   schema: any,
-  onChange: any,
-  onError: any,
   setData: any,
 ) => {
   const returnData = { ...data };
@@ -219,10 +214,6 @@ export const mapData = (
   setData(
     returnData,
     returnUIData,
-    uiSchema,
-    schema,
-    onChange,
-    onError,
   );
   return {
     returnData,

@@ -17,12 +17,18 @@ export type FormStateArrayEvents = {
   REMOVE_PROPERTY: 'removeProperty';
 };
 
+export type FormStateXHREvents = {
+  UPDATE_FORM_DATA: 'updateFormData',
+  UPDATE_XHR_PROGRESS: 'updateXHRProgress',
+};
+
 export type FormStateEvents = {
     UPDATE: 'update';
 };
 
 export type FormStates = {
   INITIAL: 'clean',
+  LOADING: 'loading',
   DIRTY: 'dirty',
   SUBMITTED: 'submitted',
   INVALID: 'invalid',
@@ -41,6 +47,7 @@ export type FormStateMachineConfig = {
     FORM_STATE_EVENTS: FormStateEvents;
     FORM_STATE_ERROR_EVENTS: FormStateErrorEvents;
     FORM_STATE_ARRAY_EVENTS: FormStateArrayEvents;
+    FORM_STATE_XHR_EVENTS: FormStateXHREvents;
     FORM_STATE_SUBMIT_EVENT: 'submit';
 };
 
@@ -65,6 +72,7 @@ export const pathToEventName = (
 export const FORM_STATE_CONFIG: FormStateMachineConfig = {
   FORM_STATES: {
     INITIAL: 'clean',
+    LOADING: 'loading',
     DIRTY: 'dirty',
     SUBMITTED: 'submitted',
     INVALID: 'invalid',
@@ -84,6 +92,10 @@ export const FORM_STATE_CONFIG: FormStateMachineConfig = {
     ADD_NEW_PROPERTY: 'addNewProperty',
     REMOVE_PROPERTY: 'removeProperty',
     UPDATE_NEW_PROPERTY: 'updateNewProperty',
+  },
+  FORM_STATE_XHR_EVENTS: {
+    UPDATE_FORM_DATA: 'updateFormData',
+    UPDATE_XHR_PROGRESS: 'updateXHRProgress',
   },
   FORM_STATE_EVENTS: {
     UPDATE: 'update',
