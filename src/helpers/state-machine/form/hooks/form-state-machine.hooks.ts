@@ -1,27 +1,19 @@
 // Library
 import React from 'react';
 import { interpret } from 'xstate';
-import { get, isEqual, has, set } from 'lodash';
+import { get, isEqual, has } from 'lodash';
 
 // Helpers
 import createStateMachine from '../../create-state-machine';
 import getValidationResult from '../../../validation';
-import { 
-  hashCode, 
-  mapData, 
-  getDefinitionsValue,
-} from '../../../transform-schema';
-import executeXHRCall from '../../../execute-xhr-call';
 import {
   setUIData,
 } from '../../../update-form-data';
+import persistXHRCall from '../../helpers/persist-xhr-call';
 
 // Hooks
 import useFormActions from '../actions';
 import { StateMachineInstance } from '../../types/form-state-machine.type';
-
-// Config
-import FORM_STATE_CONFIG from '../config';
 
 let formStateMachine = null;
 let stateMachineService = null;
@@ -83,8 +75,6 @@ const useFormStateMachine = ({
   } : {};
   const givenFormInfo = !formStateMachine ? originalFormInfo : stateFormInfo;
   const [loadingState, setLoadingState] = React.useState(null);
-  const [formId, setFormId] = React.useState(null);
-  // const iniUiData = setUIData({}, Object.keys(schema.properties || {}), uiSchema, schema);
   const validation = getValidationResult(
     givenFormInfo.schema, 
     givenFormInfo.uiSchema, 
@@ -123,68 +113,17 @@ const useFormStateMachine = ({
         stateMachineService,
       }));
       stateMachineService.start();
-    }
-
-    /**
-     * Todo: Try to figure out a way to remove this if condition
-     */
-    if (
-      !isEqual(hashCode(JSON.stringify(givenFormInfo.schema)), formId) 
-      && !givenFormInfo.xhrProgress
-    ) {
-      if (xhrSchema 
-          && has(xhrSchema, 'ui:page.onload.xhr:datasource.url')
-          && has(xhrSchema, 'ui:page.onload.xhr:datasource.method')
-          && has(xhrSchema, 'ui:page.onload.xhr:datasource.map:results')
-      ) {
-        const mappedResults = xhrSchema['ui:page'].onload['xhr:datasource']['map:results'];
-        const resultsMappingInfo = mappedResults.includes('#/') 
-          ? getDefinitionsValue(xhrSchema, mappedResults)
-          : mappedResults;
-        stateMachineService.send(
-          FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_XHR_PROGRESS, 
-          true,
-        );
-        executeXHRCall({
-          type: 'onload',
-          url: xhrSchema['ui:page'].onload['xhr:datasource'].url,
-          method: xhrSchema['ui:page'].onload['xhr:datasource'].method,
-          onFailure: () => stateMachineService.send(
-            FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_XHR_PROGRESS, 
-            false,
-          ),
-          onSuccess: (xhrData: any[]) => {
-            stateMachineService.send(
-              FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_XHR_PROGRESS, 
-              false,
-            );
-            const setData = (
-              returnData,
-              returnUIData,
-            ) => {
-              stateMachineService.send(
-                FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_DATA,
-                {
-                  formData: returnData,
-                  uiData: returnUIData,
-                },
-              );
-            };
-              /** Send the update event here to final data */
-            mapData(
-              resultsMappingInfo,
-              Array.isArray(xhrData) ? xhrData[0] : xhrData,
-              givenFormInfo.formData,
-              givenFormInfo.uiData,
-              givenFormInfo.uiSchema,
-              interceptors,
-              givenFormInfo.schema,
-              setData,
-            );
-          },
-        }) as Promise<void>;
-      }
-      setFormId(hashCode(JSON.stringify(givenFormInfo.schema)));
+      persistXHRCall({
+        fieldPath: 'ui:page',
+        eventName: 'onload',
+        xhrSchema,
+        stateMachineService,
+        formData: givenFormInfo.formData,
+        uiData: givenFormInfo.uiData,
+        uiSchema: givenFormInfo.uiSchema,
+        schema: givenFormInfo.schema,
+        interceptors,
+      }) as Promise<void>;
     }
   };
   

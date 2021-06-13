@@ -73,7 +73,7 @@ const useStepperEvents = ({
                 uiData: returnUIData,
               },
             );
-          };  
+          };
           mapData(
             resultsMappingInfo,
             xhrDt,

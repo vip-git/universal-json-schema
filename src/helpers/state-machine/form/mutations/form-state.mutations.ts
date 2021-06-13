@@ -57,6 +57,9 @@ const FormMutations = {
       ...context.effects,
       ...event.effects,
     }),
+    xhrProgress: (context: FormContext, event: EventObject & { status: boolean; hashRef: string }) => ({
+      ...context.xhrProgress,
+    }),
   }),
   updateXHRData: assign({
     formData: (context: FormContext, event: EventObject & EventPayload) => ({
@@ -69,7 +72,10 @@ const FormMutations = {
     }),
   }),
   updateXHRProgress: assign({
-    xhrProgress: (context: FormContext, event: EventObject & { xhrProgress: boolean; }) => event.xhrProgress, 
+    xhrProgress: (context: FormContext, event: EventObject & { status: boolean; hashRef: string }) => ({
+      ...context.xhrProgress,
+      [event.hashRef]: event.status,
+    }),
   }),
   updateArrayData: assign({
     formData: (context: FormContext, event: EventObject & { 

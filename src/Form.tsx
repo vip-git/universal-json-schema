@@ -21,6 +21,7 @@ import {
   useFormStateMachine,
   useFormEvents,
   useStepperEvents,
+  getHashCodeFromXHRDef,
 } from './helpers/state-machine/form/hooks';
 
 // Initial Contexts
@@ -112,8 +113,6 @@ const Form = ({
     interceptors,
     submitOnEnter,
     onSubmit,
-    onChange,
-    onError,
   });
 
   // Stepper Events
@@ -142,6 +141,13 @@ const Form = ({
 
   const classes = formStyles();
   const id = prefixId || generate();
+  const hashRef = getHashCodeFromXHRDef({
+    eventName: 'onload',
+    fieldPath: 'ui:page',
+    xhrSchema,
+  });
+
+  const isFormLoading = xhrProgress && hashRef && xhrProgress[hashRef];
 
   const hasPageLayoutTabs = uiSchema['ui:page'] 
                               && uiSchema['ui:page']['ui:layout'] 
@@ -169,7 +175,7 @@ const Form = ({
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <Paper className={classes.root} style={uiSchema && uiSchema['ui:page'] ? uiSchema['ui:page'].style : {}}>
           {
-            (actionButtonPos === 'top' && !hasPageLayoutSteps) && (
+            !isFormLoading && (actionButtonPos === 'top' && !hasPageLayoutSteps) && (
               <RenderFormButtons />
             )
           }
@@ -177,7 +183,7 @@ const Form = ({
             <StepperContext.Provider value={[activeStep, buttonDisabled] as any}>
               <EventContext.Provider value={onUpload}>
                 {
-                  xhrProgress && !hasPageLayoutTabs ? (
+                  isFormLoading && !hasPageLayoutTabs ? (
                       <div> 
                         <CircularProgress disableShrink />
                       </div>
@@ -192,6 +198,7 @@ const Form = ({
                         xhrSchema={xhrSchema}
                         definitions={schema.definitions}
                         interceptors={interceptors}
+                        xhrProgress={xhrProgress}
                         id={id}
                         onChange={onFormValuesChange}
                         onXHRSchemaEvent={onXHRSchemaEvent}
@@ -217,7 +224,7 @@ const Form = ({
             </StepperContext.Provider>
           </LoadingContext.Provider>
           {
-            (!actionButtonPos && !hasPageLayoutSteps) && (
+            !isFormLoading && (!actionButtonPos && !hasPageLayoutSteps) && (
               <RenderFormButtons />
             )
           }

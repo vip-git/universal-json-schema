@@ -15,6 +15,11 @@ import fieldSetStyles from './field-set-styles';
 // Internal
 import FieldSetObject from './FieldSetObject';
 
+// Helpers
+import {
+  getHashCodeFromXHRDef,
+} from '../helpers/state-machine/form/hooks';
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -48,12 +53,15 @@ const FieldSetTabs = (props) => {
     path,
     xhrSchema = {}, 
     uiSchema = { 'ui:page': { 'tabs': {} } },
+    xhrProgress,
   } = props;
   const classes = fieldSetStyles.fieldSetTabs();
-  const xhrProgress = xhrSchema 
-                        && xhrSchema['ui:page'] 
-                        && xhrSchema['ui:page'].onload 
-                        && xhrSchema['ui:page'].onload.xhrProgress;
+  const hashRef = getHashCodeFromXHRDef({
+    eventName: 'onload',
+    fieldPath: 'ui:page',
+    xhrSchema,
+  });
+  const isFormLoading = xhrProgress && hashRef && xhrProgress[hashRef];
   const { 
     tabs = {
       props: {},
@@ -123,7 +131,7 @@ const FieldSetTabs = (props) => {
                 {...tabPanelProps}
               >
                 {
-                  xhrProgress ? (
+                  isFormLoading ? (
                     <div 
                       style={{
                         display: 'flex',
