@@ -94,7 +94,12 @@ export const RawConfiguredField = ({
 			{...componentProps}
 		/>
 		{helpText && !isCustomComponent && (
-			<FormHelperText error={!isEmpty(hasInlineError) || undefined} id={`${id}-help`}>{helpText}</FormHelperText>
+			<FormHelperText 
+				error={!isEmpty(hasInlineError) || undefined} 
+				id={`${id}-help`}
+			>
+				{helpText}
+			</FormHelperText>
 		)}
 	</FormRoot>
   );
