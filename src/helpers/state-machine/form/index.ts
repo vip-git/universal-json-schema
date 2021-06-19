@@ -44,6 +44,10 @@ const addFormFieldStatesBasedOnPath = (getPath) => {
       target: FORM_STATE_CONFIG.FORM_STATES.DIRTY,
       actions: ['updateActiveStep'],
     },
+    [FORM_STATE_CONFIG.FORM_STATE_TAB_EVENTS.UPDATE_TAB_INDEX]: {
+      target: FORM_STATE_CONFIG.FORM_STATES.DIRTY,
+      actions: ['updateTabIndex'],
+    },
   };
   
   const sharedStates = {

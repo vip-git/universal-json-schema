@@ -88,6 +88,7 @@ const Form = ({
 
   // Form Events
   const {
+    onTabChange,
     onMoveItemUp,
     onMoveItemDown,
     onDeleteItem,
@@ -130,8 +131,6 @@ const Form = ({
     xhrSchema,
     interceptors,
     onSubmit,
-    onChange,
-    onError,
     givenOnStepNext,
     givenOnStepReset,
     givenOnStepBack,
@@ -217,6 +216,7 @@ const Form = ({
                         onNext={onStepNext}
                         onBack={onStepBack}
                         onSkip={onStepSkip}
+                        onTabChange={onTabChange}
                         isSubmitDisabled={buttonDisabled}
                         {...rest}
                       />

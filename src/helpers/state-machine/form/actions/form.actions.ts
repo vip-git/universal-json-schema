@@ -30,6 +30,7 @@ const useFormActions = ({
     FORM_STATE_ARRAY_EVENTS, 
     FORM_STATE_ERROR_EVENTS,
     FORM_STATE_XHR_EVENTS,
+    FORM_STATE_TAB_EVENTS,
     STEPPER_ACTIONS: { DO_STEP_CHANGE },
     STEPPER_STATE_EVENTS: { ON_STEP_CHANGE },
   } = FORM_STATE_CONFIG;
@@ -49,6 +50,7 @@ const useFormActions = ({
         ...FORM_STATE_EVENTS,
         ...FORM_STATE_ARRAY_EVENTS,
         ...FORM_STATE_XHR_EVENTS,
+        ...FORM_STATE_TAB_EVENTS,
       }).includes(state.event.type) && typeof state.context.effects.onChange === 'function',
       equals: true,
       callback: () => executable.push(actions.PROPOGATE_ONCHANGE_EVENT),

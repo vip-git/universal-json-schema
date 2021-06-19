@@ -42,12 +42,17 @@ export type FormStateErrorEvents = {
   INVALID: 'invalid';
 };
 
+export type FormStateTabEvents = {
+  UPDATE_TAB_INDEX: 'updateTabIndex';
+};
+
 export type FormStateMachineConfig = {
     FORM_ACTIONS: Actions;
     FORM_STATES: FormStates;
     FORM_STATE_EVENTS: FormStateEvents;
     FORM_STATE_ERROR_EVENTS: FormStateErrorEvents;
     FORM_STATE_ARRAY_EVENTS: FormStateArrayEvents;
+    FORM_STATE_TAB_EVENTS: FormStateTabEvents;
     FORM_STATE_XHR_EVENTS: FormStateXHREvents;
     FORM_STATE_SUBMIT_EVENT: 'submit';
 };
@@ -101,6 +106,9 @@ export const FORM_STATE_CONFIG: FormStateMachineConfig = {
   },
   FORM_STATE_EVENTS: {
     UPDATE: 'update',
+  },
+  FORM_STATE_TAB_EVENTS: {
+    UPDATE_TAB_INDEX: 'updateTabIndex',
   },
   FORM_STATE_ERROR_EVENTS: {
     ERROR: 'error',

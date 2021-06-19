@@ -54,6 +54,7 @@ const FieldSetTabs = (props) => {
     xhrSchema = {}, 
     uiSchema = { 'ui:page': { 'tabs': {} } },
     xhrProgress,
+    onTabChange,
   } = props;
   const classes = fieldSetStyles.fieldSetTabs();
   const hashRef = getHashCodeFromXHRDef({
@@ -79,11 +80,8 @@ const FieldSetTabs = (props) => {
   const { style: tabsStyle, props: tabsProps } = tabs;
   const { style: tabStyle, props: tabProps } = tab;
   const { style: tabPanelStyle, props: tabPanelProps } = tabPanel;
-  const [value, setValue] = React.useState(tabsProps?.tabIndex - 1 || 0);
+  const value = tabsProps?.tabIndex || 0;
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
   return (
     <div 
       style={{
@@ -95,7 +93,7 @@ const FieldSetTabs = (props) => {
         <Tabs 
           className={classes.root}
           value={value}
-          onChange={handleChange}
+          onChange={onTabChange}
           indicatorColor='primary'
           textColor='primary'
           variant='fullWidth'

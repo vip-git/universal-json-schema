@@ -39,7 +39,13 @@ const createStateMachine = ({
   uiData,
   effects,
 }) => {
-  const { updateArrayData, updateData, updateXHRData, updateXHRProgress } = formMutations;
+  const { 
+    updateArrayData,
+    updateData,
+    updateXHRData,
+    updateXHRProgress,
+    updateTabIndex
+  } = formMutations;
   const { updateActiveStep } = stepperMutations;
   
   const states: XStateObj = getStatesByUISchema(uiSchema, formSchema);
@@ -68,6 +74,7 @@ const createStateMachine = ({
       updateXHRProgress,
       updateArrayData,
       updateActiveStep,
+      updateTabIndex,
     },
   });
 };

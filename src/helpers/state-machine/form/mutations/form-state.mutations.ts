@@ -97,6 +97,27 @@ const FormMutations = {
       context.formSchema.properties,
     ).indexOf(event.stepName),
   }),
+  updateTabIndex: assign({
+    uiSchema: (context: FormContext, event: EventObject & { tabIndex: number }) => ({
+      ...context.uiSchema,
+      'ui:page': {
+        ...context.uiSchema['ui:page'],
+        tabs: context.uiSchema['ui:page']['tabs'] ? {
+          ...context.uiSchema['ui:page']['tabs'],
+          props: context.uiSchema['ui:page']['tabs']['props'] ? {
+            ...context.uiSchema['ui:page']['tabs']['props'],
+            tabIndex: event.tabIndex,
+          } : {
+            tabIndex: event.tabIndex
+          }
+        } : {
+          props: {
+            tabIndex: event.tabIndex,
+          }
+        }
+      },
+    }),
+  }),
 };
 
 export default FormMutations;
