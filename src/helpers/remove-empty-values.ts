@@ -23,8 +23,10 @@ export const filterNestedEmptyValues = (obj) => {
 
 const removeEmptyObjectsFromString = (obj, schema) => (schema?.type === 'string' ? obj || '' : obj);
 
-const removeEmptyObjects = (obj, schema) => (schema?.type === 'string' || schema?.type === 'null' || typeof obj === 'string'
+const removeEmptyObjects = (obj, schema) => (
+  schema?.type === 'string' || schema?.type === 'null' || typeof obj === 'string'
   ? removeEmptyObjectsFromString(obj, schema)
-  : filterNestedEmptyValues(obj));
+  : filterNestedEmptyValues(obj)
+);
 
 export default removeEmptyObjects;
