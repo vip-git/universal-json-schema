@@ -49,8 +49,10 @@ const FormMutations = {
     ),
     lastField: (context: FormContext, event: EventObject & EventPayload) => event.field,
     formSchema: (context: FormContext, event: EventObject & EventPayload) => context.formSchema,
-    parsedFormSchema: (context: FormContext, event: EventObject & EventPayload) => context.formSchema.definitions ? flattenSchemaPropFromDefinitions(context.formSchema, context.formData)
-    : context.formSchema,
+    parsedFormSchema: (context: FormContext, event: EventObject & EventPayload) => (context.formSchema.definitions 
+      ? flattenSchemaPropFromDefinitions(context.formSchema, context.formData)
+      : context.formSchema
+    ),
     uiData: (context: FormContext, event: EventObject & EventPayload) => HELPERS.getValidUIData(context, event),
     uiSchema: (context: FormContext, event: EventObject & EventPayload) => setUISchemaData(
       HELPERS.getValidUIData(context, event),
