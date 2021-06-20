@@ -2,6 +2,9 @@
 import { createMachine } from 'xstate';
 import { get } from 'lodash';
 
+// Helpers
+import { flattenSchemaPropFromDefinitions } from '../get-definition-schema';
+
 // Machines
 import createFormFieldStates, { stepperMutations, formMutations } from './form';
 
@@ -44,7 +47,7 @@ const createStateMachine = ({
     updateData,
     updateXHRData,
     updateXHRProgress,
-    updateTabIndex
+    updateTabIndex,
   } = formMutations;
   const { updateActiveStep } = stepperMutations;
   
@@ -61,6 +64,7 @@ const createStateMachine = ({
       uiData,
       effects,
       validation,
+      parsedFormSchema: formSchema.definitions ? flattenSchemaPropFromDefinitions(formSchema, formData) : formSchema,
       xhrProgress: {},
       formSchemaXHR: {},
       activeStep: 0,

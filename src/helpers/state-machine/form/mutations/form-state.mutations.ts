@@ -5,6 +5,7 @@ import { isEqual, omit } from 'lodash';
 // Helpers
 import removeEmptyObjects, { isEmptyValues } from '../../../remove-empty-values';
 import updateFormData, { setUISchemaData } from '../../../update-form-data'; 
+import { flattenSchemaPropFromDefinitions } from '../../../get-definition-schema';
 
 // Types
 import { FormContext } from '../../types/form-state-machine.type';
@@ -44,10 +45,12 @@ const FormMutations = {
         event.field, 
         event.givenValue,
       ), 
-      context.formSchema,
+      context.parsedFormSchema,
     ),
     lastField: (context: FormContext, event: EventObject & EventPayload) => event.field,
     formSchema: (context: FormContext, event: EventObject & EventPayload) => context.formSchema,
+    parsedFormSchema: (context: FormContext, event: EventObject & EventPayload) => context.formSchema.definitions ? flattenSchemaPropFromDefinitions(context.formSchema, context.formData)
+    : context.formSchema,
     uiData: (context: FormContext, event: EventObject & EventPayload) => HELPERS.getValidUIData(context, event),
     uiSchema: (context: FormContext, event: EventObject & EventPayload) => setUISchemaData(
       HELPERS.getValidUIData(context, event),
@@ -102,19 +105,19 @@ const FormMutations = {
       ...context.uiSchema,
       'ui:page': {
         ...context.uiSchema['ui:page'],
-        tabs: context.uiSchema['ui:page']['tabs'] ? {
-          ...context.uiSchema['ui:page']['tabs'],
-          props: context.uiSchema['ui:page']['tabs']['props'] ? {
-            ...context.uiSchema['ui:page']['tabs']['props'],
+        tabs: context.uiSchema['ui:page'].tabs ? {
+          ...context.uiSchema['ui:page'].tabs,
+          props: context.uiSchema['ui:page'].tabs.props ? {
+            ...context.uiSchema['ui:page'].tabs.props,
             tabIndex: event.tabIndex,
           } : {
-            tabIndex: event.tabIndex
-          }
+            tabIndex: event.tabIndex,
+          },
         } : {
           props: {
             tabIndex: event.tabIndex,
-          }
-        }
+          },
+        },
       },
     }),
   }),

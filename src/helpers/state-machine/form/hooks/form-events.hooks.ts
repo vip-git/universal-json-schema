@@ -244,7 +244,7 @@ const useFormEvents = ({
   const onTabChange = (event, newValue) => stateMachineService.send(
     FORM_STATE_CONFIG.FORM_STATE_TAB_EVENTS.UPDATE_TAB_INDEX, 
     { 
-      tabIndex: newValue
+      tabIndex: newValue,
     },
   );
 

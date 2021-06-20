@@ -102,4 +102,15 @@ const getDefinitionSchemaFromRef = (
   }
 };
 
+export const flattenSchemaPropFromDefinitions = (formSchema, formData) => {
+  const schema = {
+    ...formSchema,
+    properties: {},
+  };
+  Object.keys(formSchema.properties).forEach(fmp => {
+    schema.properties[fmp] = getDefinitionSchemaFromRef(formSchema.definitions, formSchema.properties[fmp], formData);
+  });
+  return schema;
+}
+
 export default getDefinitionSchemaFromRef;

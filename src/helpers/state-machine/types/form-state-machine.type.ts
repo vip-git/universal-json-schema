@@ -9,6 +9,7 @@ export type StateMachineInstance = State<Record<string, any>, any, any, {
 export interface FormContext {
     uiSchema: any;
     formSchema: any;
+    parsedFormSchema: any;
     formSchemaXHR: any;
     xhrSchema: any;
     formData: any;

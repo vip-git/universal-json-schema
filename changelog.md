@@ -19,6 +19,7 @@
 - Demo updated with vscode editor and live validation changes
 - New `xhrSchema` feature enabled to make xhr calls [onload](./src/demo/examples/simple/xhr-schema.json#L3), [onsubmit](./src/demo/examples/simple/xhr-schema.json#L12) and [onclick](./src/demo/examples/simple/xhr-schema.json#L59) to consume or post data
 - `type: null` support included for custom div support
+- Integration with xstate for logic refactors
 
 
 #### Previously version 2.x.x
