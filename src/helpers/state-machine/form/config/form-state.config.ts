@@ -27,6 +27,10 @@ export type FormStateEvents = {
     UPDATE: 'update';
 };
 
+export type FormStateInitialEvent = {
+  INITIAL: 'xstate.init',
+};
+
 export type FormStates = {
   INITIAL: 'clean',
   LOADING: 'loading',
@@ -39,6 +43,7 @@ export type ValidStates = ValueOf<FormStates>;
 
 export type FormStateErrorEvents = {
   ERROR: 'error';
+  NO_ERRORS: 'noErrors';
   INVALID: 'invalid';
 };
 
@@ -49,6 +54,7 @@ export type FormStateTabEvents = {
 export type FormStateMachineConfig = {
     FORM_ACTIONS: Actions;
     FORM_STATES: FormStates;
+    XSTATE_EVENTS: FormStateInitialEvent;
     FORM_STATE_EVENTS: FormStateEvents;
     FORM_STATE_ERROR_EVENTS: FormStateErrorEvents;
     FORM_STATE_ARRAY_EVENTS: FormStateArrayEvents;
@@ -76,6 +82,10 @@ export const pathToEventName = (
 };
 
 export const FORM_STATE_CONFIG: FormStateMachineConfig = {
+  XSTATE_EVENTS: {
+    INITIAL: 'xstate.init',
+  },
+
   FORM_STATES: {
     INITIAL: 'clean',
     LOADING: 'loading',
@@ -113,6 +123,7 @@ export const FORM_STATE_CONFIG: FormStateMachineConfig = {
   FORM_STATE_ERROR_EVENTS: {
     ERROR: 'error',
     INVALID: 'invalid',
+    NO_ERRORS: 'noErrors',
   },
   FORM_STATE_SUBMIT_EVENT: 'submit',
 };

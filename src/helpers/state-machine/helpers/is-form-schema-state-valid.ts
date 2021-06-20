@@ -36,7 +36,10 @@ const isFormSchemaStateValid = ({
 
       const externalValidations = isFormInValid(validation);
       if (externalValidations && !buttonDisabled) {
-        stateMachineService.send(FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR, externalValidations);
+        stateMachineService.send(FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR, {
+          hasError: externalValidations,
+          validation,
+        });
         return {
           schemaErrors: externalValidations,
           transformedSchema,
@@ -45,7 +48,10 @@ const isFormSchemaStateValid = ({
 
       if (!externalValidations && validate.errors && !buttonDisabled) {
         validate.errors.forEach((err) => {
-          stateMachineService.send(FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR, err);
+          stateMachineService.send(FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR, {
+            hasError: err,
+            validation,
+          });
         });
         return {
           schemaErrors: validate.errors,

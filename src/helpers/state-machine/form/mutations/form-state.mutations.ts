@@ -102,6 +102,10 @@ const FormMutations = {
       context.formSchema.properties,
     ).indexOf(event.stepName),
   }),
+  updateErrorData: assign({
+    hasError: (context: FormContext, event: EventObject & { hasError: any }) => event.hasError,
+    validation: (context: FormContext, event: EventObject & { validation: any }) => event.validation,
+  }),
   updateTabIndex: assign({
     uiSchema: (context: FormContext, event: EventObject & { tabIndex: number }) => ({
       ...context.uiSchema,

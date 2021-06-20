@@ -1,7 +1,7 @@
 // Library
 import React from 'react';
 import { interpret } from 'xstate';
-import { get, isEqual, transform, isObject } from 'lodash';
+import { get, isEqual } from 'lodash';
 
 // Helpers
 import createStateMachine from '../../create-state-machine';
@@ -20,13 +20,14 @@ let stateMachineService = null;
 
 interface FormStateMachineProps {
   xhrSchema: any;
-  validations: any;
   interceptors: any;
   originalFormInfo: {
     schema: any;
     formData: any;
+    validations: any;
     uiSchema: any;
     activeStep?: number;
+    validation?: any;
     xhrSchema: any;
     xhrProgress?: any;
     formSchemaXHR?: any;
@@ -41,7 +42,6 @@ interface FormStateMachineProps {
 const useFormStateMachine = ({
   xhrSchema,
   originalFormInfo: givenOriginalFormInfo,
-  validations,
   interceptors,
   effects: {
     onChange,
@@ -74,16 +74,12 @@ const useFormStateMachine = ({
     // eslint-disable-next-line no-underscore-dangle
     activeStep: stateMachineService._state.context.activeStep || 0,
     // eslint-disable-next-line no-underscore-dangle
+    validation: stateMachineService._state.context.validation,
+    // eslint-disable-next-line no-underscore-dangle
     xstate: stateMachineService._state.value,
   } : {};
   const givenFormInfo = !formStateMachine ? originalFormInfo : stateFormInfo;
   const [loadingState, setLoadingState] = React.useState(null);
-  const validation = getValidationResult(
-    givenFormInfo.schema, 
-    givenFormInfo.uiSchema, 
-    givenFormInfo.formData, 
-    validations,
-  );
   const isStepperUI = (uiSchema) => get(
     uiSchema, 'ui:page.ui:layout',
   ) === 'steps';
@@ -94,9 +90,15 @@ const useFormStateMachine = ({
     isStepperUI,
   });
 
-  const startMachine = (givenInfo: { uiSchema: any; formData: any; uiData: any; schema: any; }) => {
+  const startMachine = (givenInfo: { uiSchema: any; validations: any; formData: any; uiData: any; schema: any; }) => {
     if (!formStateMachine && !stateMachineService) {
-      const { uiSchema, formData, uiData, schema } = givenInfo;
+      const { uiSchema, formData, uiData, schema, validations } = givenInfo;
+      const validation = getValidationResult(
+        schema, 
+        uiSchema, 
+        formData, 
+        validations,
+      );
       formStateMachine = createStateMachine({
         uiSchema,
         xhrSchema,
@@ -104,6 +106,7 @@ const useFormStateMachine = ({
         formData,
         uiData,
         validation,
+        validations,
         effects: {
           onChange,
           onError: originalOnError,
@@ -155,7 +158,6 @@ const useFormStateMachine = ({
     stateMachineService,
     setLoadingState,
     buttonDisabled,
-    validation,
     loadingState,
     isStepperUI,
   };

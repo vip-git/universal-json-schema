@@ -38,6 +38,7 @@ const createStateMachine = ({
   formSchema,
   xhrSchema,
   validation,
+  validations,
   formData,
   uiData,
   effects,
@@ -48,6 +49,7 @@ const createStateMachine = ({
     updateXHRData,
     updateXHRProgress,
     updateTabIndex,
+    updateErrorData,
   } = formMutations;
   const { updateActiveStep } = stepperMutations;
   
@@ -64,9 +66,11 @@ const createStateMachine = ({
       uiData,
       effects,
       validation,
+      validations,
       parsedFormSchema: formSchema.definitions ? flattenSchemaPropFromDefinitions(formSchema, formData) : formSchema,
       xhrProgress: {},
       formSchemaXHR: {},
+      hasError: false,
       activeStep: 0,
       lastField: '',
     },
@@ -79,6 +83,7 @@ const createStateMachine = ({
       updateArrayData,
       updateActiveStep,
       updateTabIndex,
+      updateErrorData,
     },
   });
 };

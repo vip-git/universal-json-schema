@@ -64,20 +64,20 @@ const Form = ({
       formData,
       activeStep,
       xhrProgress,
+      validation,
     },
-    validation,
     loadingState,
     buttonDisabled,
     stateMachineService,
     setLoadingState,
   } = useFormStateMachine({
     xhrSchema,
-    validations,
     interceptors,
     originalFormInfo: {
       schema,
       uiSchema: originalUISchema,
       formData: originalFormData,
+      validations,
       xhrSchema,
     },
     effects: {

@@ -15,6 +15,8 @@ export interface FormContext {
     formData: any;
     uiData: any;
     validation: any;
+    validations: any;
+    hasError: boolean;
     effects: any;
     activeStep: number;
     lastField: string;

@@ -38,7 +38,11 @@ const addFormFieldStatesBasedOnPath = (getPath) => {
     },
     [FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR]: {
       target: FORM_STATE_CONFIG.FORM_STATES.INVALID,
-      // cond: GUARDS.isUpdatedErrorField(getPath),
+      actions: ['updateErrorData'],
+    },
+    [FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.NO_ERRORS]: {
+      target: FORM_STATE_CONFIG.FORM_STATES.DIRTY,
+      actions: ['updateErrorData'],
     },
     [FORM_STATE_CONFIG.STEPPER_STATE_EVENTS.ON_STEP_CHANGE]: {
       target: FORM_STATE_CONFIG.FORM_STATES.DIRTY,
