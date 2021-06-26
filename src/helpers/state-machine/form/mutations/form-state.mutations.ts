@@ -90,6 +90,22 @@ const FormMutations = {
       [event.hashRef]: event.status,
     }),
   }),
+  updateErrorXHRProgress: assign({
+    xhrProgress: (context: FormContext, event: EventObject & { status: boolean; hashRef: string }) => ({
+      ...context.xhrProgress,
+      [event.hashRef]: event.status,
+    }),
+    hasError: (context: FormContext, event: EventObject) => true,
+    validation: (context: FormContext, event: EventObject & { callback: Function }) => ({
+      xhr: [
+        {
+          "rule": "offline",
+          "message": "Please try again once you are online",
+          "callback": event.callback,
+        }
+      ]
+    }),
+  }),
   updateArrayData: assign({
     formData: (context: FormContext, event: EventObject & { 
       updateArrayFN: Function;

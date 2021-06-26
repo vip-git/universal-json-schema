@@ -50,6 +50,7 @@ const createStateMachine = ({
     updateXHRProgress,
     updateTabIndex,
     updateErrorData,
+    updateErrorXHRProgress,
   } = formMutations;
   const { updateActiveStep } = stepperMutations;
   
@@ -84,6 +85,7 @@ const createStateMachine = ({
       updateActiveStep,
       updateTabIndex,
       updateErrorData,
+      updateErrorXHRProgress,
     },
   });
 };

@@ -152,7 +152,7 @@ const useFormActions = ({
         validations,
       );
 
-      const isError = Object.keys(validation).map((vp) => validation[vp].length).filter(v => v !== 0).length > 0;
+      const isError = Object.keys(validation).map((vp) => validation[vp].length).filter((v) => v !== 0).length > 0;
 
       const { schema, data } = getSchemaAndFormData({
         currentData,
@@ -177,7 +177,7 @@ const useFormActions = ({
           {
             hasError: schemaErrors,
             validation,
-          }
+          },
         );
       }
 

@@ -1,20 +1,50 @@
+// Library
 import React from 'react';
-import Alert from '@material-ui/lab/Alert';
-import { withStyles } from '@material-ui/core/styles';
 import keys from 'lodash/keys';
 import filter from 'lodash/filter';
 
+// Material UI
+import Alert from '@material-ui/lab/Alert';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Icon from '@material-ui/core/Icon';
+import Button from '@material-ui/core/Button';
+
 const validationStyles = {};
 
-const Validation = ({ validation }) => (
-  <div style={{ marginTop: 20 }}>
-    <Alert severity='error'>{validation.message}</Alert>
-  </div>
-);
+const alertStyles = makeStyles({
+  root: {
+    '& > div.MuiAlert-message': {
+      display: 'flex',
+      justifyContent: 'space-between',
+      width: '100%'
+    }
+  }
+});
+
+const Validation = ({ validation }) => {
+  const styles = alertStyles();
+  return (
+    <div style={{ marginTop: 20 }}>
+      <Alert severity='error' className={styles.root}>
+        <span> {validation.message} </span>
+        {validation.rule === 'offline' && (
+          <Button onClick={validation.callback}> 
+            <Icon>{'autorenew'}</Icon>
+          </Button>
+        )}
+      </Alert>
+    </div>
+  );
+}
 
 const Validations = ({ validation }) => (
   <div>
-    {validation.map((v, idx) => !v.inline && (<Validation key={`${v + idx}`} validation={v} />))}
+    {validation.map((v, idx) => !v.inline && (
+      <Validation 
+        key={`${v + idx}`}
+        validation={v}
+      />
+    ))}
   </div>
 );
 const ValidationMessages = ({ validation }) => (

@@ -30,6 +30,18 @@ const persistXHRCall = ({
   interceptors,
   fieldPath,
   eventName,
+  forceReload,
+}: {
+  xhrSchema: any;
+  stateMachineService: any;
+  formData: any;
+  uiData: any;
+  uiSchema: any;
+  schema: any;
+  interceptors: any;
+  fieldPath: string;
+  eventName: string;
+  forceReload?: boolean;
 }) => {
   if (has(xhrSchema, `${fieldPath}.${eventName}.xhr:datasource`)) {
     const { url: eventUrl, method: eventMethod, payload } = get(xhrSchema, `${fieldPath}.${eventName}.xhr:datasource`);
@@ -41,7 +53,7 @@ const persistXHRCall = ({
     if (isXHRAlreadyCalled({
       hashRef,
       stateMachineService,
-    })) {
+    }) || forceReload) {
       stateMachineService.send(
         FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_XHR_PROGRESS, 
         {
@@ -59,6 +71,18 @@ const persistXHRCall = ({
           {
             status: false,
             hashRef,
+            callback: () => persistXHRCall({
+              xhrSchema,
+              stateMachineService,
+              formData,
+              uiData,
+              uiSchema,
+              schema,
+              interceptors,
+              fieldPath,
+              eventName,
+              forceReload: true,
+            })
           },
         ),
         onSuccess: (xhrData: any[]) => {

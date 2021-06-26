@@ -33,8 +33,8 @@ const addFormFieldStatesBasedOnPath = (getPath) => {
       actions: ['updateXHRProgress'],
     },
     [FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.ERROR_XHR_PROGRESS]: {
-      target: FORM_STATE_CONFIG.FORM_STATES.DIRTY,
-      actions: ['updateXHRProgress'],
+      target: FORM_STATE_CONFIG.FORM_STATES.INVALID,
+      actions: ['updateErrorXHRProgress'],
     },
     [FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR]: {
       target: FORM_STATE_CONFIG.FORM_STATES.INVALID,
