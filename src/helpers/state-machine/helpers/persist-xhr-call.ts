@@ -31,6 +31,7 @@ const persistXHRCall = ({
   fieldPath,
   eventName,
   forceReload,
+  setButtonDisabled,
 }: {
   xhrSchema: any;
   stateMachineService: any;
@@ -42,6 +43,7 @@ const persistXHRCall = ({
   fieldPath: string;
   eventName: string;
   forceReload?: boolean;
+  setButtonDisabled?: Function;
 }) => {
   if (has(xhrSchema, `${fieldPath}.${eventName}.xhr:datasource`)) {
     const { url: eventUrl, method: eventMethod, payload } = get(xhrSchema, `${fieldPath}.${eventName}.xhr:datasource`);
@@ -82,7 +84,7 @@ const persistXHRCall = ({
               fieldPath,
               eventName,
               forceReload: true,
-            })
+            }),
           },
         ),
         onSuccess: (xhrData: any[]) => {

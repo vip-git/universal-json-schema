@@ -96,6 +96,7 @@ export const RawFormField = React.memo(({
       || has(prevProps.schema, 'component')
     ) ? prevProps.prefixId === nextProps.prefixId : true
   )
+  && isEqual(prevProps.validation, nextProps.validation)
 ),
 );
 

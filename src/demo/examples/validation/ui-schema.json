@@ -1,6 +1,12 @@
 {
   "pass1": {
-    "ui:widget": "password"
+    "ui:widget": "password",
+     "ui:validations": {
+      "confirmPassword": {
+				"message": "Both passwords should be the same (2)",
+				"inline": true
+      }
+    }
   },
   "pass2": {
     "ui:widget": "password",

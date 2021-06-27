@@ -17,6 +17,7 @@ export interface FormContext {
     validation: any;
     validations: any;
     hasError: boolean;
+    hasXHRError: boolean;
     effects: any;
     activeStep: number;
     lastField: string;

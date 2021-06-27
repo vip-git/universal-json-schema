@@ -42,6 +42,7 @@ const createStateMachine = ({
   formData,
   uiData,
   effects,
+  hasError,
 }) => {
   const { 
     updateArrayData,
@@ -71,7 +72,8 @@ const createStateMachine = ({
       parsedFormSchema: formSchema.definitions ? flattenSchemaPropFromDefinitions(formSchema, formData) : formSchema,
       xhrProgress: {},
       formSchemaXHR: {},
-      hasError: false,
+      hasError,
+      hasXHRError: false,
       activeStep: 0,
       lastField: '',
     },

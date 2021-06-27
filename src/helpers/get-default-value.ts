@@ -7,6 +7,8 @@ const getDefaultValue = (schema = {} as any) => {
       return mapValues(schema.properties, getDefaultValue);
     case 'array':
       return [];
+    case 'boolean':
+      return false;  
     case 'string':
     case 'number':
     default:

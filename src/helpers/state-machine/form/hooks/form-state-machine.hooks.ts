@@ -1,11 +1,11 @@
 // Library
 import React from 'react';
-import { interpret } from 'xstate';
-import { get, isEqual } from 'lodash';
+import { interpret, Interpreter } from 'xstate';
+import { get, isEqual, has } from 'lodash';
 
 // Helpers
 import createStateMachine from '../../create-state-machine';
-import getValidationResult from '../../../validation';
+import { hasSchemaErrors } from '../../../validation';
 import {
   setUIData,
 } from '../../../update-form-data';
@@ -15,24 +15,30 @@ import persistXHRCall from '../../helpers/persist-xhr-call';
 import useFormActions from '../actions';
 import { StateMachineInstance } from '../../types/form-state-machine.type';
 
+interface FormContext {
+  uiData?: any;
+  schema: any;
+  formSchema?: any;
+  formData: any;
+  validations: any;
+  uiSchema: any;
+  activeStep?: number;
+  validation?: any;
+  xhrSchema: any;
+  xhrProgress?: any;
+  formSchemaXHR?: any;
+  xstate?: any;
+  hasError?: boolean;
+  hasXHRError?: boolean;
+}
+
 let formStateMachine = null;
-let stateMachineService = null;
+let stateMachineService: Interpreter<Record<string, any> | FormContext, any> = null;
 
 interface FormStateMachineProps {
   xhrSchema: any;
   interceptors: any;
-  originalFormInfo: {
-    schema: any;
-    formData: any;
-    validations: any;
-    uiSchema: any;
-    activeStep?: number;
-    validation?: any;
-    xhrSchema: any;
-    xhrProgress?: any;
-    formSchemaXHR?: any;
-    xstate?: any;
-  };
+  originalFormInfo: FormContext;
   effects: {
     onChange: Function;
     onError: Function;
@@ -57,29 +63,20 @@ const useFormStateMachine = ({
     ),
   };
   const stateFormInfo = formStateMachine ? {
-    // eslint-disable-next-line no-underscore-dangle
-    uiData: stateMachineService._state.context.uiData,
-    // eslint-disable-next-line no-underscore-dangle
-    formData: stateMachineService._state.context.formData,
-    // eslint-disable-next-line no-underscore-dangle
-    uiSchema: stateMachineService._state.context.uiSchema,
-    // eslint-disable-next-line no-underscore-dangle
-    schema: stateMachineService._state.context.formSchema,
-    // eslint-disable-next-line no-underscore-dangle
-    formSchemaXHR: stateMachineService._state.context.formSchemaXHR,
-    // eslint-disable-next-line no-underscore-dangle
-    xhrSchema: stateMachineService._state.context.xhrSchema,
-    // eslint-disable-next-line no-underscore-dangle
-    xhrProgress: stateMachineService._state.context.xhrProgress,
-    // eslint-disable-next-line no-underscore-dangle
-    activeStep: stateMachineService._state.context.activeStep || 0,
-    // eslint-disable-next-line no-underscore-dangle
-    validation: stateMachineService._state.context.validation,
-    // eslint-disable-next-line no-underscore-dangle
-    xstate: stateMachineService._state.value,
+    uiData: stateMachineService.state.context.uiData,
+    formData: stateMachineService.state.context.formData,
+    uiSchema: stateMachineService.state.context.uiSchema,
+    schema: stateMachineService.state.context.formSchema,
+    formSchemaXHR: stateMachineService.state.context.formSchemaXHR,
+    xhrSchema: stateMachineService.state.context.xhrSchema,
+    xhrProgress: stateMachineService.state.context.xhrProgress,
+    activeStep: stateMachineService.state.context.activeStep || 0,
+    validation: stateMachineService.state.context.validation,
+    xstate: stateMachineService.state.value,
+    hasError: stateMachineService.state.context.hasError || stateMachineService.state.context.hasXHRError,
   } : {};
   const givenFormInfo = !formStateMachine ? originalFormInfo : stateFormInfo;
-  const [loadingState, setLoadingState] = React.useState(null);
+  const [loadingState] = React.useState(null);
   const isStepperUI = (uiSchema) => get(
     uiSchema, 'ui:page.ui:layout',
   ) === 'steps';
@@ -90,15 +87,24 @@ const useFormStateMachine = ({
     isStepperUI,
   });
 
-  const startMachine = (givenInfo: { uiSchema: any; validations: any; formData: any; uiData: any; schema: any; }) => {
+  const startMachine = (givenInfo: FormContext) => {
     if (!formStateMachine && !stateMachineService) {
-      const { uiSchema, formData, uiData, schema, validations } = givenInfo;
-      const validation = getValidationResult(
-        schema, 
-        uiSchema, 
-        formData, 
+      const { uiSchema, formData, uiData, schema, validations, activeStep } = givenInfo;
+      const {
+        validation,
+        schemaErrors,
+        isError,
+      } = hasSchemaErrors({
+        currentSchema: schema,
+        currentUISchema: uiSchema,
+        currentData: formData,
         validations,
-      );
+        activeStep,
+        stateMachineService,
+        state: stateMachineService?.state,
+        buttonDisabled,
+        isStepperUI,
+      });
       formStateMachine = createStateMachine({
         uiSchema,
         xhrSchema,
@@ -107,13 +113,14 @@ const useFormStateMachine = ({
         uiData,
         validation,
         validations,
+        hasError: (has(schemaErrors, 'length') || isError),
         effects: {
           onChange,
           onError: originalOnError,
         },
       });
       stateMachineService = interpret(
-        formStateMachine, { devTools: true },
+        formStateMachine, { devTools: process.env.NODE_ENV === 'development' },
       ).onTransition((state: StateMachineInstance) => executeFormActionsByState({
         state,
         stateMachineService,
@@ -156,8 +163,7 @@ const useFormStateMachine = ({
   return {
     formInfo: givenFormInfo,
     stateMachineService,
-    setLoadingState,
-    buttonDisabled,
+    buttonDisabled: givenFormInfo?.hasError || false,
     loadingState,
     isStepperUI,
   };

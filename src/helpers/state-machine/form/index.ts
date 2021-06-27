@@ -19,11 +19,17 @@ const addFormFieldStatesBasedOnPath = (getPath) => {
   });
   
   const genericTypeStates = {
-    [FORM_STATE_CONFIG.FORM_STATE_EVENTS.UPDATE]: {
-      target: FORM_STATE_CONFIG.FORM_STATES.DIRTY,
-      cond: GUARDS.isUpdatedField(getPath),
-      actions: ['updateData'],
-    },
+    [FORM_STATE_CONFIG.FORM_STATE_EVENTS.UPDATE]: [
+      {
+        target: FORM_STATE_CONFIG.FORM_STATES.DIRTY,
+        cond: GUARDS.isUpdatedField(getPath),
+        actions: ['updateData'],
+      },
+      {
+        target: FORM_STATE_CONFIG.FORM_STATES.INVALID,
+        actions: ['updateData', 'updateErrorData'],
+      },
+    ],
     [FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.UPDATE_FORM_ON_XHR_COMPLETE]: {
       target: FORM_STATE_CONFIG.FORM_STATES.DIRTY,
       actions: ['updateXHRData'],

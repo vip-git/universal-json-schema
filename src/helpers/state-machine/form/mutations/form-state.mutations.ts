@@ -95,22 +95,25 @@ const FormMutations = {
       ...context.xhrProgress,
       [event.hashRef]: event.status,
     }),
-    hasError: (context: FormContext, event: EventObject) => true,
-    validation: (context: FormContext, event: EventObject & { callback: Function }) => ({
-      xhr: [
-        {
-          "rule": "offline",
-          "message": "Please try again once you are online",
-          "callback": event.callback,
-        }
-      ]
-    }),
+    hasXHRError: (context: FormContext, event: EventObject) => true,
+    validation: (context: FormContext, event: EventObject & { callback: Function }) => (
+      context?.xhrSchema['ui:errors']?.offline ? {
+        xhr: [
+          {
+            'rule': 'offline',
+            'title': context?.xhrSchema['ui:errors']?.offline?.title,
+            'message': context?.xhrSchema['ui:errors']?.offline?.message,
+            'callback': event.callback,
+          },
+        ],
+      } : {}
+    ),
   }),
   updateArrayData: assign({
     formData: (context: FormContext, event: EventObject & { 
       updateArrayFN: Function;
     }) => ({
-      ...event.updateArrayFN(context.formData),
+      ...event.updateArrayFN(context),
     }),
   }),
   updateActiveStep: assign({
@@ -119,8 +122,10 @@ const FormMutations = {
     ).indexOf(event.stepName),
   }),
   updateErrorData: assign({
-    hasError: (context: FormContext, event: EventObject & { hasError: any }) => event.hasError,
-    validation: (context: FormContext, event: EventObject & { validation: any }) => event.validation,
+    hasError: (context: FormContext, event: EventObject & { hasError: any }) => context.hasXHRError || event.hasError,
+    validation: (context: FormContext, event: EventObject & { validation: any }) => (
+      context.hasXHRError ? context.validation : event.validation
+    ),
   }),
   updateTabIndex: assign({
     uiSchema: (context: FormContext, event: EventObject & { tabIndex: number }) => ({

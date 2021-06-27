@@ -79,7 +79,7 @@ const FormComponent = ({
         ),
       }}
       validations={{
-        confirmPassword: ({ schema, validations, formData, value }) => value !== formData.pass1 && ({
+        confirmPassword: ({ schema, validations, formData, value }) => formData && formData.pass2 && formData.pass1 && formData.pass2 !== formData.pass1 && ({
           message: validations.confirmPassword.message,
           inline: true,
         }),

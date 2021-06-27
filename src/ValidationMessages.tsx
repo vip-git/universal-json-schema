@@ -16,9 +16,13 @@ const alertStyles = makeStyles({
     '& > div.MuiAlert-message': {
       display: 'flex',
       justifyContent: 'space-between',
-      width: '100%'
-    }
-  }
+      width: '100%',
+    },
+    '& > div.MuiAlert-icon': {
+      display: 'flex',
+      alignItems: 'center',
+    },
+  },
 });
 
 const Validation = ({ validation }) => {
@@ -26,7 +30,18 @@ const Validation = ({ validation }) => {
   return (
     <div style={{ marginTop: 20 }}>
       <Alert severity='error' className={styles.root}>
-        <span> {validation.message} </span>
+        <span>
+          {validation.title && (
+<b> 
+{' '}
+{validation.title} 
+{' '}
+<br />
+{' '}
+</b>
+          )}
+          {validation.message}
+        </span>
         {validation.rule === 'offline' && (
           <Button onClick={validation.callback}> 
             <Icon>{'autorenew'}</Icon>
@@ -35,7 +50,7 @@ const Validation = ({ validation }) => {
       </Alert>
     </div>
   );
-}
+};
 
 const Validations = ({ validation }) => (
   <div>

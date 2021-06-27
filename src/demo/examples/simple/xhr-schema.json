@@ -1,4 +1,10 @@
 {
+  "ui:errors": {
+    "offline": {
+       "title": "You are Offline !",
+       "message": "Please try again once you are online."
+    }
+  },
   "ui:page": {
     "onload": {
       "xhr:datasource": {

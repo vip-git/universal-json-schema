@@ -69,7 +69,6 @@ const Form = ({
     loadingState,
     buttonDisabled,
     stateMachineService,
-    setLoadingState,
   } = useFormStateMachine({
     xhrSchema,
     interceptors,
@@ -104,8 +103,6 @@ const Form = ({
     validation,
     stateMachineService,
     formData,
-    setLoadingState,
-    loadingState,
     schema,
     uiData, 
     uiSchema, 

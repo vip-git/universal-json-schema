@@ -1,10 +1,6 @@
 // Helpers
-import getDefinitionSchemaFromRef from '../../../get-definition-schema';
 import Utils from '../../../utils';
-
-// State Helpers
-import isFormSchemaStateValid from '../../helpers/is-form-schema-state-valid';
-import getValidationResult from '../../../validation';
+import { hasSchemaErrors } from '../../../validation';
   
 // config
 import FORM_STATE_CONFIG from '../config';
@@ -91,46 +87,6 @@ const useFormActions = ({
     return executable;
   };
 
-  /**
-   * @description
-   * Gets Schema and form data to render/parse for current view.
-   * 
-   * @param { currentSchema, currentData, activeStep } 
-   * @returns { Schema, data }
-   */
-  const getSchemaAndFormData = ({
-    currentSchema: givenSchema,
-    currentData: givenData,
-    currentUISchema,
-    activeStep,
-  }) => {
-    const currentSchema = JSON.parse(JSON.stringify(givenSchema));
-    const currentData = JSON.parse(JSON.stringify(givenData));
-    if (currentSchema.properties) {
-      const stepName = Object.keys(currentSchema.properties)[activeStep];
-      const translatedSchema = getDefinitionSchemaFromRef(
-        currentSchema.definitions, 
-        currentSchema.properties[stepName], 
-        currentData[stepName],
-      );
-      const schema = isStepperUI(currentUISchema) 
-        ? {
-          ...translatedSchema,
-        }
-        : currentSchema;
-      const data = isStepperUI(currentUISchema) ? currentData[stepName] : currentData;
-      return {
-        schema,
-        data,
-      };
-    }
-
-    return {
-      schema: currentSchema,
-      data: currentData,
-    };
-  };
-
   const executeFormActions = ({ buttonDisabled }) => ({
     [actions.PROPOGATE_ONCHANGE_EVENT]: ({
       stateMachineService,
@@ -143,35 +99,27 @@ const useFormActions = ({
         uiSchema: currentUISchema,
         validations,
         activeStep,
+        hasError,
       } = state.context;
 
-      const validation = getValidationResult(
-        currentSchema, 
-        currentUISchema, 
-        currentData, 
-        validations,
-      );
-
-      const isError = Object.keys(validation).map((vp) => validation[vp].length).filter((v) => v !== 0).length > 0;
-
-      const { schema, data } = getSchemaAndFormData({
-        currentData,
+      const {
+        validation,
+        schemaErrors,
+        transformedSchema,
+        isError,
+      } = hasSchemaErrors({
         currentSchema,
         currentUISchema,
+        currentData,
+        validations,
         activeStep,
-      });
-
-      const { schemaErrors, transformedSchema } = isFormSchemaStateValid({
         stateMachineService,
-        schema,
-        uiSchema: currentUISchema,
-        validation,
-        data,
-        onError: state.context.effects.onError,
+        state,
         buttonDisabled,
+        isStepperUI,
       });
       
-      if (!schemaErrors && !isError) {
+      if (!schemaErrors && !isError && hasError) {
         stateMachineService.send(
           FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.NO_ERRORS, 
           {
