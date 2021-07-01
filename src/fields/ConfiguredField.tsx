@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 // Library
 import React from 'react';
 import isEmpty from 'lodash/isEmpty';
@@ -41,35 +40,18 @@ export const RawConfiguredField = ({
   const isCustomComponent = type === 'null' || hasCustomComponent;
   const classes = fieldStyles();
   const FormRoot = isCustomComponent ? FormGroup : FormControl;
-  const isXHRNotImplemented = componentProps?.xhrSchema?.onload 
-							&& !componentProps?.xhrSchema?.onload?.xhrComplete 
-							&& !componentProps?.xhrSchema?.onload?.xhrProgress;
-
-  React.useEffect(() => {
-    if (isXHRNotImplemented) {
-	  componentProps.onXHRSchemaEvent(componentProps?.xhrSchema.onload['xhr:datasource'], 'onload');
-    }
-  }, [componentProps, isXHRNotImplemented]);
   return (
 	<FormRoot
 		id={`${htmlid}-formControl`}
-		className={classNames(classes.root, {
-		  [classes.withLabel]: LabelComponent,
-		})}
-		style={{ 
-		  display: isHidden ? 'none' : 'flex',
-		  flexDirection: activeCompColor ? 'row' : 'column',
-		}}
+		className={classNames(classes.root, { [classes.withLabel]: LabelComponent })}
+		style={{ display: isHidden ? 'none' : 'flex', flexDirection: activeCompColor ? 'row' : 'column' }}
 	>
 		{
 			LabelComponent && title && !isCustomComponent && (
 				<LabelComponent
 					id={`${htmlid}-labelControl`}
 					className={descriptionText ? classes.customLabel : classes.normalLabel}
-					style={activeCompColor ? {    
-					  left: 41,
-					  top: -8,
-					} : {}}
+					style={activeCompColor ? { left: 41, top: -8 } : {}}
 					{...labelComponentProps}
 				>
 					{title}
@@ -82,11 +64,11 @@ export const RawConfiguredField = ({
 		{activeCompColor && !isCustomComponent && (
 			<div
                 style={{
-				  flexBasis: '6%',
-				  top: 7,
-				  position: 'relative',
-				  marginRight: 10,
-				  color: activeCompColor || 'grey',
+                  flexBasis: '6%',
+                  top: 7,
+                  position: 'relative',
+                  marginRight: 10,
+                  color: activeCompColor || 'grey',
                 }}
 			>
 				<ActiveComp
@@ -102,9 +84,15 @@ export const RawConfiguredField = ({
 			{...componentProps}
 		/>
 		{helpText && !isCustomComponent && (
-			<FormHelperText error={!isEmpty(hasInlineError) || undefined} id={`${id}-help`}>{helpText}</FormHelperText>
+			<FormHelperText 
+				error={!isEmpty(hasInlineError) || undefined} 
+				id={`${id}-help`}
+			>
+				{helpText}
+			</FormHelperText>
 		)}
 	</FormRoot>
   );
 };
+
 export default RawConfiguredField;

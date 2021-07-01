@@ -39,7 +39,7 @@ export default function HorizontalNonLinearStepperWithError(props) {
     onSkip, 
     onSubmit,
   } = props;
-  const [activeStep, setActiveStep, buttonDisabled] = React.useContext(StepperContext) as any;
+  const [activeStep, buttonDisabled] = React.useContext(StepperContext) as any;
   const { 
     props: 
     { includeSkipButton, includeResetButton } = 
@@ -53,11 +53,11 @@ export default function HorizontalNonLinearStepperWithError(props) {
       stepKey: k,
       stepPath: p,
       component: (compProps) => (
-            <FieldSetObject
-                {...compProps} 
-                tabKey={p}
-                isTabContent
-            />
+        <FieldSetObject
+            {...compProps} 
+            tabKey={p}
+            isTabContent
+        />
       ),
     };
   });
@@ -76,19 +76,14 @@ export default function HorizontalNonLinearStepperWithError(props) {
       newSkipped.delete(activeStep);
     }
 
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
     if (activeStep === steps.length - 1) {
       return onSubmit();
     }
-    return onNext(getStep(activeStep).stepPath);
+    return onNext(getStep(activeStep).stepPath, getStep(activeStep + 1).stepPath);
   };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    return onBack(getStep(activeStep).stepPath);
-  };
+  const handleBack = () => onBack(getStep(activeStep).stepPath, getStep(activeStep - 1).stepPath);
 
   const handleSkip = () => {
     if (!isStepOptional(activeStep)) {
@@ -102,14 +97,10 @@ export default function HorizontalNonLinearStepperWithError(props) {
       newSkipped.add(activeStep);
       return newSkipped;
     });
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    return onSkip(getStep(activeStep).stepPath);
+    return onSkip(getStep(activeStep).stepPath, getStep(activeStep + 1).stepPath);
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+  const handleReset = () => getStep(0).stepPath;
 
   // make it configurable : alternativeLabel, nonLinear, orientation="vertical"
   return (

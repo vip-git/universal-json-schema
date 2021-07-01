@@ -21,9 +21,20 @@ const executeXHRCall = ({
   // eslint-disable-next-line no-undef
   const fetchData = (method === 'GET') ? fetch(url) : fetch(url, options);
   return fetchData
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) {
+        return res.json().then((text) => typeof onFailure === 'function' && onFailure(res.status, text));
+      } 
+      return res.json();
+    })
     .then((xhrData) => typeof onSuccess === 'function' && onSuccess(xhrData))
-    .catch(() => typeof onFailure === 'function' && onFailure());
+    .catch(
+      (error) => typeof onFailure === 'function' 
+      && onFailure(
+        String(error) === 'TypeError: Failed to fetch' ? 999 : 911, 
+        error,
+      ),
+    );
 };
 
 export default executeXHRCall;

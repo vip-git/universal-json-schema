@@ -79,7 +79,7 @@ const FormComponent = ({
         ),
       }}
       validations={{
-        confirmPassword: ({ schema, validations, formData, value }) => value !== formData.pass1 && ({
+        confirmPassword: ({ schema, validations, formData, value }) => formData && formData.pass2 && formData.pass1 && formData.pass2 !== formData.pass1 && ({
           message: validations.confirmPassword.message,
           inline: true,
         }),
@@ -228,8 +228,14 @@ const Example = ({
             aria-label='full-screen-exit-code'
             onClick={() => {
               setFullScreenMode(false);
-              uiSchema['ui:page'].tabs.style.width = '29vw';
-              xhrSchema['ui:page'].onload.xhrProgress = false;
+              if (uiSchema['ui:page']) {
+                if (uiSchema['ui:page'].tabs && uiSchema['ui:page'].tabs.style) {
+                  uiSchema['ui:page'].tabs.style.width = '29vw';
+                }
+                if (uiSchema['ui:page'].onload) {
+                  xhrSchema['ui:page'].onload.xhrProgress = false;
+                }
+              }
               setState({ ...state, formData, uiSchema, xhrSchema, uiData, validSchema });
             }}
         >
@@ -272,8 +278,14 @@ const Example = ({
             aria-label='full-screen-code'
             onClick={() => {
               setFullScreenMode(true);
-              uiSchema['ui:page'].tabs.style.width = '81vw';
-              xhrSchema['ui:page'].onload.xhrProgress = false;
+              if (uiSchema['ui:page']) {
+                if (uiSchema['ui:page'].tabs && uiSchema['ui:page'].tabs.style) {
+                  uiSchema['ui:page'].tabs.style.width = '81vw';
+                }
+                if (uiSchema['ui:page'].onload) {
+                  xhrSchema['ui:page'].onload.xhrProgress = false;
+                }
+              }
               setState({ ...state, formData, xhrSchema, uiSchema, uiData, validSchema });
             }}
           >

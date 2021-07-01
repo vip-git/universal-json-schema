@@ -158,7 +158,7 @@ var config = {
   mode: process.env.NODE_ENV,
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development'),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.NODE_DEBUG': JSON.stringify('debug'),
       'process.env.GENERATED_SESSION_ID': process.env.GENERATED_SESSION_ID,
     }),

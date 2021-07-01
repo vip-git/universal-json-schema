@@ -89,12 +89,14 @@ export const RawFormField = React.memo(({
   && isEqual(prevProps.uiData, nextProps.uiData)
   && isEqual(prevProps.uiSchema, nextProps.uiSchema)
   && isEqual(prevProps.xhrSchema, nextProps.xhrSchema)
+  && isEqual(prevProps.xhrProgress, nextProps.xhrProgress)
   && (
     (
       has(prevProps.schema, 'ui:component') 
       || has(prevProps.schema, 'component')
     ) ? prevProps.prefixId === nextProps.prefixId : true
   )
+  && isEqual(prevProps.validation, nextProps.validation)
 ),
 );
 
