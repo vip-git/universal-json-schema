@@ -32,13 +32,13 @@ const Validation = ({ validation }) => {
       <Alert severity='error' className={styles.root}>
         <span>
           {validation.title && (
-<b> 
-{' '}
-{validation.title} 
-{' '}
-<br />
-{' '}
-</b>
+          <b> 
+          {' '}
+          {validation.title} 
+          {' '}
+          <br />
+          {' '}
+          </b>
           )}
           {validation.message}
         </span>

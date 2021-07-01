@@ -68,10 +68,12 @@ const persistXHRCall = ({
         url: eventUrl,
         method: eventMethod,
         payload,
-        onFailure: () => stateMachineService.send(
+        onFailure: (statusCode, error) => stateMachineService.send(
           FORM_STATE_CONFIG.FORM_STATE_XHR_EVENTS.ERROR_XHR_PROGRESS, 
           {
             status: false,
+            statusCode,
+            error,
             hashRef,
             callback: () => persistXHRCall({
               xhrSchema,

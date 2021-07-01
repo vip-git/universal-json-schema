@@ -1,6 +1,6 @@
 ## Universal JSON Schema Form
 ```
-This document explains on how this project is aiming towards become "Universal" JSON Schema Form rather than just "React" JSON Schema Form.
+This document explains on how this project is aiming towards becoming "Universal" JSON Schema Form rather than just "React" JSON Schema Form.
 ```
 
 ## Core Modules
@@ -41,7 +41,8 @@ This document explains on how this project is aiming towards become "Universal" 
   - Material UI
   - Semantic UI
   - Bootstrap UI
-  - Microsoft UI
+  - Fluent UI
   - React Native Paper UI
-  - Ionic Material Theme
+  - Ionic Theme
+  - Custom Themes
 

@@ -79,6 +79,7 @@ const FormMutations = {
       ...context.uiData,
       ...event.uiData,
     }) : ({ ...context.uiData })),
+    hasXHRError: (context: FormContext, event: EventObject & { status: boolean; hashRef: string }) => false,
     xhrProgress: (context: FormContext, event: EventObject & { status: boolean; hashRef: string }) => ({
       ...context.xhrProgress,
       [event.hashRef]: false,
@@ -95,9 +96,9 @@ const FormMutations = {
       ...context.xhrProgress,
       [event.hashRef]: event.status,
     }),
-    hasXHRError: (context: FormContext, event: EventObject) => true,
-    validation: (context: FormContext, event: EventObject & { callback: Function }) => (
-      context?.xhrSchema['ui:errors']?.offline ? {
+    hasXHRError: (context: FormContext, event: EventObject & { status: boolean; hashRef: string }) => true,
+    validation: (context: FormContext, event: EventObject & { callback: Function, statusCode: number; }) => (
+      context?.xhrSchema['ui:errors']?.offline && event.statusCode === 999 ? {
         xhr: [
           {
             'rule': 'offline',
@@ -106,7 +107,16 @@ const FormMutations = {
             'callback': event.callback,
           },
         ],
-      } : {}
+      } : {
+        xhr: [
+          {
+            'rule': 'error',
+            'title': context?.xhrSchema['ui:errors']?.[event.statusCode]?.title,
+            'message': context?.xhrSchema['ui:errors']?.[event.statusCode]?.message,
+            'callback': event.callback,
+          },
+        ],
+      }
     ),
   }),
   updateArrayData: assign({
