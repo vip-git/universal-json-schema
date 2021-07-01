@@ -113,8 +113,10 @@ const FormMutations = {
         xhr: context?.xhrSchema['ui:errors']?.debug || context?.xhrSchema['ui:errors']?.[event.statusCode] ? [
           {
             'rule': 'error',
-            'title': context?.xhrSchema['ui:errors']?.[event.statusCode]?.title || context?.xhrSchema['ui:errors']?.debug ? event.statusCode : '',
-            'message': context?.xhrSchema['ui:errors']?.[event.statusCode]?.message || context?.xhrSchema['ui:errors']?.debug ? String(event.error) : '',
+            'title': context?.xhrSchema['ui:errors']?.[event.statusCode]?.title || 
+                      context?.xhrSchema['ui:errors']?.debug ? event.statusCode : '',
+            'message': context?.xhrSchema['ui:errors']?.[event.statusCode]?.message || 
+                        context?.xhrSchema['ui:errors']?.debug ? String(event.error) : '',
             'callback': event.callback,
           },
         ] : [],

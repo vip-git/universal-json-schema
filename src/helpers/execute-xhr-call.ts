@@ -32,8 +32,8 @@ const executeXHRCall = ({
       (error) => typeof onFailure === 'function' 
       && onFailure(
         String(error) === 'TypeError: Failed to fetch' ? 999 : 911, 
-        error
-      )
+        error,
+      ),
     );
 };
 
