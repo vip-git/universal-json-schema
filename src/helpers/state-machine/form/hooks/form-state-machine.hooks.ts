@@ -132,10 +132,10 @@ const useFormStateMachine = ({
           eventName: 'onload',
           xhrSchema,
           stateMachineService,
-          formData: givenFormInfo.formData,
-          uiData: givenFormInfo.uiData,
-          uiSchema: givenFormInfo.uiSchema,
-          schema: givenFormInfo.schema,
+          formData: originalFormInfo.formData,
+          uiData: originalFormInfo.uiData,
+          uiSchema: originalFormInfo.uiSchema,
+          schema: originalFormInfo.schema,
           interceptors,
         }) as Promise<void>;
       }

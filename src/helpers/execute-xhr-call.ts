@@ -28,7 +28,13 @@ const executeXHRCall = ({
       return res.json();
     })
     .then((xhrData) => typeof onSuccess === 'function' && onSuccess(xhrData))
-    .catch((error) => typeof onFailure === 'function' && onFailure(999, error));
+    .catch(
+      (error) => typeof onFailure === 'function' 
+      && onFailure(
+        String(error) === 'TypeError: Failed to fetch' ? 999 : 911, 
+        error
+      )
+    );
 };
 
 export default executeXHRCall;

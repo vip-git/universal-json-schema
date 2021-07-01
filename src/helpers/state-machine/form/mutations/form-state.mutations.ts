@@ -97,7 +97,9 @@ const FormMutations = {
       [event.hashRef]: event.status,
     }),
     hasXHRError: (context: FormContext, event: EventObject & { status: boolean; hashRef: string }) => true,
-    validation: (context: FormContext, event: EventObject & { callback: Function, statusCode: number; }) => (
+    validation: (context: FormContext, event: EventObject & { 
+      callback: Function, statusCode: number; error: string; 
+    }) => (
       context?.xhrSchema['ui:errors']?.offline && event.statusCode === 999 ? {
         xhr: [
           {
@@ -108,14 +110,14 @@ const FormMutations = {
           },
         ],
       } : {
-        xhr: [
+        xhr: context?.xhrSchema['ui:errors']?.debug || context?.xhrSchema['ui:errors']?.[event.statusCode] ? [
           {
             'rule': 'error',
-            'title': context?.xhrSchema['ui:errors']?.[event.statusCode]?.title,
-            'message': context?.xhrSchema['ui:errors']?.[event.statusCode]?.message,
+            'title': context?.xhrSchema['ui:errors']?.[event.statusCode]?.title || context?.xhrSchema['ui:errors']?.debug ? event.statusCode : '',
+            'message': context?.xhrSchema['ui:errors']?.[event.statusCode]?.message || context?.xhrSchema['ui:errors']?.debug ? String(event.error) : '',
             'callback': event.callback,
           },
-        ],
+        ] : [],
       }
     ),
   }),
@@ -125,11 +127,6 @@ const FormMutations = {
     }) => ({
       ...event.updateArrayFN(context),
     }),
-  }),
-  updateActiveStep: assign({
-    activeStep: (context: FormContext, event: EventObject & { stepName: string }) => Object.keys(
-      context.formSchema.properties,
-    ).indexOf(event.stepName),
   }),
   updateErrorData: assign({
     hasError: (context: FormContext, event: EventObject & { hasError: any }) => context.hasXHRError || event.hasError,

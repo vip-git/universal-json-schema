@@ -9,6 +9,10 @@ const StepperMutations = {
     activeStep: (context: FormContext, event: EventObject & { stepName: string }) => Object.keys(
       context.formSchema.properties,
     ).indexOf(event.stepName),
+    hasError: (context: FormContext, event: EventObject & { hasError: any }) => false,
+    validation: (context: FormContext, event: EventObject & { validation: any }) => (
+      context.hasXHRError ? context.validation : event.validation
+    ),
   }),
 };
 
