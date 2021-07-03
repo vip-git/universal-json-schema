@@ -24,7 +24,6 @@ import translateRangeDate from '../../fields/interceptors/translate-range-date';
 import translateRatings from '../../fields/interceptors/translate-ratings';
 
 const FormComponent = ({
-  locationHash,
   givenSchema,
   givenXhrSchema,
   givenUISchema,

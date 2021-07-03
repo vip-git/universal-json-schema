@@ -46,7 +46,7 @@ const GUARDS = {
           currentUISchema, 'ui:page.ui:layout',
         ) === 'steps',
       });
-      isSchemaValid = !schemaErrors && !isError;
+      isSchemaValid = Array.isArray(schemaErrors) ? schemaErrors.length === 0 && !isError : !schemaErrors && !isError;
     }
     catch (er) {
       // console.log(er);
