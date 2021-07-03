@@ -20,6 +20,16 @@
 - New `xhrSchema` feature enabled to make xhr calls [onload](./src/demo/examples/simple/xhr-schema.json#L3), [onsubmit](./src/demo/examples/simple/xhr-schema.json#L12) and [onclick](./src/demo/examples/simple/xhr-schema.json#L59) to consume or post data
 - `type: null` support included for custom div support
 - Integration with xstate for logic refactors
+- XHR Schema now supports `ui:errors` which includes errors by `statusCodes` and a special case for `offline`
+  Example :
+    ```
+    "ui:errors": {
+        "offline": {
+        "title": "You are Offline !",
+        "message": "Please try again once you are online."
+        }
+    }
+    ```
 
 
 #### Previously version 2.x.x

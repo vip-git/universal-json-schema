@@ -136,13 +136,22 @@ const Form = ({
 
   const classes = formStyles();
   const id = prefixId || generate();
+
   const hashRef = getHashCodeFromXHRDef({
     eventName: 'onload',
     fieldPath: 'ui:page',
     xhrSchema,
   });
 
+  const onSubmitHashRef = getHashCodeFromXHRDef({
+    eventName: 'onsubmit',
+    fieldPath: 'ui:page',
+    xhrSchema,
+  });
+
   const isFormLoading = xhrProgress && hashRef && xhrProgress[hashRef];
+
+  const isFormSubmitting = xhrProgress && onSubmitHashRef && xhrProgress[onSubmitHashRef];
 
   const hasPageLayoutTabs = uiSchema['ui:page'] 
                               && uiSchema['ui:page']['ui:layout'] 
@@ -161,8 +170,10 @@ const Form = ({
         onCancel={onCancel}
         cancelVariant={cancelVariant}
         submitVariant={submitVariant}
-        classes={classes} 
+        classes={classes}
         activityIndicatorEnabled={activityIndicatorEnabled}
+        inProgress={uiSchema['ui:page']?.isFormSubmitting || isFormSubmitting}
+        inProgressValue={uiSchema['ui:page']?.inProgressText}
       />
   );
   
