@@ -18,11 +18,16 @@ const isFormSchemaStateValid = ({
   validation,
   buttonDisabled,
   stateMachineService,
+  formSchemaXHR = {},
+  isStepper,
 }) => {
   if (get(uiSchema, 'ui:page.props.ui:schemaErrors') 
   || !has(uiSchema, 'ui:page.props.ui:schemaErrors')) {
     try {
-      const transformedSchema = transformSchema(schema);
+      const transformedSchema = transformSchema({
+        ...schema,
+        ...formSchemaXHR,
+      });
       const ajv = new Ajv();
       const validate = ajv.compile(transformedSchema);
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -36,10 +41,12 @@ const isFormSchemaStateValid = ({
 
       const externalValidations = isFormInValid(validation);
       if (externalValidations && !buttonDisabled) {
-        stateMachineService.send(FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR, {
-          hasError: externalValidations,
-          validation,
-        });
+        if (stateMachineService && typeof stateMachineService.send === 'function') {
+          stateMachineService.send(FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR, {
+            hasError: externalValidations,
+            validation,
+          });
+        }
         return {
           schemaErrors: externalValidations,
           transformedSchema,
@@ -48,10 +55,12 @@ const isFormSchemaStateValid = ({
 
       if (!externalValidations && validate.errors && !buttonDisabled) {
         validate.errors.forEach((err) => {
-          stateMachineService.send(FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR, {
-            hasError: err,
-            validation,
-          });
+          if (stateMachineService && typeof stateMachineService.send === 'function') {
+            stateMachineService.send(FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR, {
+              hasError: err,
+              validation,
+            });
+          }
         });
         return {
           schemaErrors: validate.errors,
@@ -65,7 +74,20 @@ const isFormSchemaStateValid = ({
       };
     }
     catch (err) {
-      // console.log('err', err);
+      if (!isStepper) {
+        const transformedSchema = transformSchema({
+          ...schema,
+          ...formSchemaXHR,
+        });
+        return {
+          schemaErrors: [{
+            "rule": "schemaError",
+            "title": "Invalid Form Schema",
+            "message": String(err)
+          }],
+          transformedSchema,
+        };
+      }
     }
   }
   

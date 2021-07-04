@@ -13,7 +13,7 @@ export { default } from './get-validation-result';
    * @returns { Schema, data }
    */
 const getSchemaAndFormData = ({
-  isStepperUI,
+  isPartialUI,
   currentSchema: givenSchema,
   currentData: givenData,
   currentUISchema,
@@ -28,12 +28,12 @@ const getSchemaAndFormData = ({
       currentSchema.properties[stepName], 
       currentData[stepName],
     );
-    const schema = isStepperUI(currentUISchema) 
+    const schema = isPartialUI(currentUISchema) 
       ? {
         ...translatedSchema,
       }
       : currentSchema;
-    const data = isStepperUI(currentUISchema) ? currentData[stepName] : currentData;
+    const data = isPartialUI(currentUISchema) ? currentData[stepName] : currentData;
     return {
       schema,
       data,
@@ -59,7 +59,8 @@ export const hasSchemaErrors = ({
   stateMachineService,
   state,
   buttonDisabled,
-  isStepperUI,
+  isPartialUI,
+  formSchemaXHR,
 }) => {
   const validation = getValidationResult(
     currentSchema, 
@@ -77,7 +78,7 @@ export const hasSchemaErrors = ({
     currentSchema,
     currentUISchema,
     activeStep,
-    isStepperUI,
+    isPartialUI,
   });
 
   const { schemaErrors, transformedSchema } = isFormSchemaStateValid({
@@ -88,6 +89,13 @@ export const hasSchemaErrors = ({
     data,
     onError: state?.context?.effects?.onError,
     buttonDisabled,
+    formSchemaXHR,
+    isStepper: (
+      currentUISchema 
+      && currentUISchema['ui:page'] 
+      && currentUISchema['ui:page']['ui:layout'] 
+      && currentUISchema['ui:page']['ui:layout'] === 'steps'
+    )
   });
 
   return {

@@ -19,7 +19,7 @@ import { StateMachineInstance } from '../../types/form-state-machine.type';
  * @returns 
  */
 const useFormActions = ({
-  isStepperUI,
+  isPartialUI,
 }) => {
   const { 
     FORM_ACTIONS: actions, 
@@ -40,7 +40,7 @@ const useFormActions = ({
     const {
       uiSchema: currentUISchema,
     } = state.context;
-    const formValidCondition = isStepperUI(currentUISchema) ? state.value.formUI === FORM_STATE_ERROR_EVENTS.INVALID 
+    const formValidCondition = isPartialUI(currentUISchema) ? state.value.formUI === FORM_STATE_ERROR_EVENTS.INVALID 
       : Object.values(state.value).includes(FORM_STATE_ERROR_EVENTS.INVALID);  
 
     const PROPAGATE_ON_CHANGE_CONDITION = {
@@ -97,6 +97,7 @@ const useFormActions = ({
         formData: currentData,
         uiData: currentUIData,
         uiSchema: currentUISchema,
+        formSchemaXHR,
         validations,
         activeStep,
         hasError,
@@ -116,7 +117,8 @@ const useFormActions = ({
         stateMachineService,
         state,
         buttonDisabled,
-        isStepperUI,
+        isPartialUI,
+        formSchemaXHR,
       });
       
       if (!schemaErrors && !isError && hasError) {

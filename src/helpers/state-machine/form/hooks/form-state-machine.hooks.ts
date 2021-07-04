@@ -77,14 +77,16 @@ const useFormStateMachine = ({
   } : {};
   const givenFormInfo = !formStateMachine ? originalFormInfo : stateFormInfo;
   const [loadingState] = React.useState(null);
-  const isStepperUI = (uiSchema) => get(
+  const isPartialUI = (uiSchema) => get(
     uiSchema, 'ui:page.ui:layout',
-  ) === 'steps';
+  ) === 'steps' || get(
+    uiSchema, 'ui:page.ui:layout',
+  ) === 'tabs';
   const { 
     executeFormActionsByState,
     buttonDisabled,
   } = useFormActions({
-    isStepperUI,
+    isPartialUI,
   });
 
   const startMachine = (givenInfo: FormContext) => {
@@ -98,12 +100,13 @@ const useFormStateMachine = ({
         currentSchema: schema,
         currentUISchema: uiSchema,
         currentData: formData,
+        formSchemaXHR: {},
         validations,
         activeStep,
         stateMachineService,
         state: stateMachineService?.state,
         buttonDisabled,
-        isStepperUI,
+        isPartialUI,
       });
       formStateMachine = createStateMachine({
         uiSchema,
@@ -165,7 +168,7 @@ const useFormStateMachine = ({
     stateMachineService,
     buttonDisabled: givenFormInfo?.hasError || false,
     loadingState,
-    isStepperUI,
+    isPartialUI,
   };
 };
 

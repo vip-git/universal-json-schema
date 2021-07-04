@@ -2,7 +2,6 @@
   "ui:page": {
     "ui:layout": "tabs",
     "props": {
-      "tabIndex": 1,
       "ui:schemaErrors": true
     },
     "style": {

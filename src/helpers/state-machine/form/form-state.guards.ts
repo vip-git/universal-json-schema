@@ -40,11 +40,14 @@ const GUARDS = {
             // console.log(er);
           }, 
         },
+        formSchemaXHR: context.formSchemaXHR,
         state: { context },
         buttonDisabled: false,
-        isStepperUI: (currentUISchema) => get(
+        isPartialUI: (currentUISchema) => get(
           currentUISchema, 'ui:page.ui:layout',
-        ) === 'steps',
+        ) === 'steps' || get(
+          currentUISchema, 'ui:page.ui:layout',
+        ) === 'tabs',
       });
       isSchemaValid = Array.isArray(schemaErrors) ? schemaErrors.length === 0 && !isError : !schemaErrors && !isError;
     }

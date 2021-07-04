@@ -137,6 +137,7 @@ const FormMutations = {
     ),
   }),
   updateTabIndex: assign({
+    activeStep: (context: FormContext, event: EventObject & { tabIndex: number }) => event.tabIndex,
     uiSchema: (context: FormContext, event: EventObject & { tabIndex: number }) => ({
       ...context.uiSchema,
       'ui:page': {

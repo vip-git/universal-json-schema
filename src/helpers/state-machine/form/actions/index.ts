@@ -17,7 +17,7 @@ interface ExecuteFormActions {
 }
 
 const useActions = ({
-  isStepperUI,
+  isPartialUI,
 }) => {
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
 
@@ -29,7 +29,7 @@ const useActions = ({
   const {
     getValidActionToExecute,
     executeFormActions,
-  } = useFormActions({ isStepperUI });
+  } = useFormActions({ isPartialUI });
 
   const executeAction = {
     [FORM_STATE_CONFIG.FORM_ACTIONS.DISABLE_FORM_SUBMIT]: () => setButtonDisabled(true),
