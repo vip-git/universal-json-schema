@@ -60,6 +60,7 @@ const useStepperActions = () => {
         data: currentData[stepName],
         onError: state.context.effects.onError,
         buttonDisabled,
+        isStepper: true,
       });
 
       state.context.effects.onChange({

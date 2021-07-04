@@ -95,7 +95,7 @@ export const hasSchemaErrors = ({
       && currentUISchema['ui:page'] 
       && currentUISchema['ui:page']['ui:layout'] 
       && currentUISchema['ui:page']['ui:layout'] === 'steps'
-    )
+    ),
   });
 
   return {

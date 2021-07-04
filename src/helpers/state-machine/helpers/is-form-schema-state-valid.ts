@@ -81,9 +81,9 @@ const isFormSchemaStateValid = ({
         });
         return {
           schemaErrors: [{
-            "rule": "schemaError",
-            "title": "Invalid Form Schema",
-            "message": String(err)
+            'rule': 'schemaError',
+            'title': 'Invalid Form Schema',
+            'message': String(err),
           }],
           transformedSchema,
         };
