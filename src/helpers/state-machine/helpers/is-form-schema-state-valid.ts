@@ -40,7 +40,7 @@ const isFormSchemaStateValid = ({
       });
 
       const externalValidations = isFormInValid(validation);
-      if (externalValidations && !buttonDisabled) {
+      if (externalValidations) {
         if (stateMachineService && typeof stateMachineService.send === 'function') {
           stateMachineService.send(FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR, {
             hasError: externalValidations,
@@ -53,7 +53,7 @@ const isFormSchemaStateValid = ({
         };
       }
 
-      if (!externalValidations && validate.errors && !buttonDisabled) {
+      if (!externalValidations && validate.errors) {
         validate.errors.forEach((err) => {
           if (stateMachineService && typeof stateMachineService.send === 'function') {
             stateMachineService.send(FORM_STATE_CONFIG.FORM_STATE_ERROR_EVENTS.ERROR, {

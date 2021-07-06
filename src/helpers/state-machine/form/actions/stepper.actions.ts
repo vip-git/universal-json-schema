@@ -14,8 +14,6 @@ const useStepperActions = () => {
   const { 
     STEPPER_ACTIONS: { DO_STEP_CHANGE },
     STEPPER_STATE_EVENTS: { ON_STEP_CHANGE },
-    FORM_ACTIONS: { ENABLE_FORM_SUBMIT, DISABLE_FORM_SUBMIT },
-    FORM_STATE_ERROR_EVENTS: { INVALID },
   } = STEPPER_STATE_CONFIG;
 
   const getValidStepperActionToExecute = (
