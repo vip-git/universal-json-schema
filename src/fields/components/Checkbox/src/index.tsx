@@ -33,7 +33,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }: C
                     checked={
                       typeof value === 'string'
                       || Array.isArray(value) ? value?.includes(o.key) 
-                      : typeof value === 'boolean' && value
+                        : typeof value === 'boolean' && value
                     }
                     onChange={onGroupChange(String(o.key), o.adds)}
                     disabled={o.disabled || false}

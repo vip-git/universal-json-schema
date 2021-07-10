@@ -19,10 +19,10 @@ const schema: JSONSchema7 = {
   ],
   'uniqueItems': true
 };
+const checked = 'foo';
 
 describe('Enum Checkbox', () => {
   it('mounts with standard attributes (control)', () => {
-    const checked = 'foo';
     const path = 'done'; 
     const label = 'A single choice list';
     const wrapper = mount(
@@ -55,7 +55,6 @@ describe('Enum Checkbox', () => {
 
   it('calls onChange when clicked', () => {
     const onChange = jest.fn();
-    const checked = true;
     const wrapper = mount(
       <CheckboxComp path={'a'} value={checked} onChange={onChange} schema={schema} />,
     );

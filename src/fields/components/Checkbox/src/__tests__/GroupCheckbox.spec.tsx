@@ -21,12 +21,13 @@ const schema: JSONSchema7 & { parsedArray: boolean } = {
   'parsedArray': true
 };
 
+const checked: Array<JSONSchema7Type> = [
+  "foo",
+  "bar"
+];
+
 describe('Group Checkbox', () => {
   it('mounts with standard attributes (control)', () => {
-    const checked: Array<JSONSchema7Type> = [
-        "foo",
-        "bar"
-    ];
     const path = 'done'; 
     const label = 'A multiple choices list';
     const wrapper = mount(
@@ -59,7 +60,6 @@ describe('Group Checkbox', () => {
 
   it('calls onChange when clicked', () => {
     const onChange = jest.fn();
-    const checked = true;
     const wrapper = mount(
       <CheckboxComp path={'a'} value={checked} onChange={onChange} schema={schema} />,
     );
