@@ -126,4 +126,32 @@ describe('MaterialSelect', () => {
     });
     expect(onChange).toHaveBeenCalledTimes(1);
   });
+
+  it('calls onChange when clicked (multiple) (edge case)', () => {
+    const onChange = jest.fn();
+    multiOptionSchema.anyOf = [];
+    const wrapper = mount(
+      <MaterialSelectComp 
+        path={'a'} 
+        value={'foo'} 
+        onChange={onChange} 
+        schema={multiOptionSchema}
+        type={'string'}
+        htmlid={htmlid}
+        label={'label'}
+      />,
+    );
+    const cbComp = wrapper.find('WithStyles(ForwardRef(Select))');
+    expect(cbComp).toHaveLength(1);
+    cbComp.prop('onChange')({
+      target: { value: ['foo', 'bar'] }
+    });
+    cbComp.prop('onChange')({
+      target: { value: null }
+    });
+    cbComp.prop('onChange')({
+      target: null
+    });
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
 });
