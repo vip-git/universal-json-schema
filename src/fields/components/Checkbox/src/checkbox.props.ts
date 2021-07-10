@@ -1,11 +1,16 @@
 // Utils
 import { valuesToOptions, isEnum } from '@react-jsonschema-form-utils/enum-utils';
 
+// Types
+import { JSONSchema7, JSONSchema7Type } from 'json-schema';
+
+type Value = boolean | string | Array<string> | JSONSchema7Type;
+
 export type CheckBoxProps = {
-  value?: boolean | string | Array<string>;
+  value?: Value;
   type?: string;
   onChange?: Function;
-  schema?: any;
+  schema?: JSONSchema7 & { parsedArray?: boolean };
   options?: any;
   [key: string]: any;
 };
@@ -38,8 +43,14 @@ const onEnumChangeHandler = (givenOnChange, value, adds) => (
 };
 
 export default ({ 
-  onChange, schema = {}, value }: 
-  { onChange: Function, schema: any; value: boolean | string | Array<string>}) => ({
+  onChange,
+  schema = {},
+  value,
+}:{
+  onChange: Function, 
+  schema: JSONSchema7 & { parsedArray?: boolean }; 
+  value: Value;
+}) => ({
   onChange: doOnChange(onChange),
   onEnumChange: (givenValue, adds) => onChange && onEnumChangeHandler(onChange, givenValue, adds),
   onGroupChange: (givenValue, adds) => onChange && onCheckboxChangeHandler(onChange, givenValue, schema, value, adds),

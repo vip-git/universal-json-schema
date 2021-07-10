@@ -5,12 +5,17 @@ import { mount } from 'enzyme';
 // Internal
 import { default as CheckboxComp } from '..';
 
+// Types
+import { JSONSchema7 } from 'json-schema';
+
+const schema: JSONSchema7 = { type: 'boolean' };
+
 describe('Checkbox', () => {
   it('mounts with standard attributes (control)', () => {
     const checked = true;
     const path = 'done'; 
     const label = 'Done';
-    const schema = { type: 'boolean', description: label };
+    schema.description = label;
     const wrapper = mount(
       <CheckboxComp label={label} path={path} value={checked} schema={schema} />,
     );
@@ -26,8 +31,7 @@ describe('Checkbox', () => {
   it('passes additional properties to the Checkbox component', () => {
     const props = {
       color: 'secondary',
-    };
-    const schema = { type: 'boolean' };
+    }
     const wrapper = mount(
       <CheckboxComp {...props} schema={schema} />,
     );
@@ -39,7 +43,6 @@ describe('Checkbox', () => {
   it('calls onChange when clicked', () => {
     const onChange = jest.fn();
     const checked = true;
-    const schema = { type: 'boolean' };
     const wrapper = mount(
       <CheckboxComp path={'a'} value={checked} onChange={onChange} schema={schema} />,
     );

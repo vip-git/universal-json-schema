@@ -95,6 +95,7 @@
     "@rollup/plugin-typescript": "8.2.1",
     "@types/estree": "0.0.47",
     "@types/jest": "26.0.21",
+    "@types/json-schema": "^7.0.8",
     "@types/node": "15.6.1",
     "@typescript-eslint/eslint-plugin": "4.22.0",
     "@typescript-eslint/parser": "4.22.0",

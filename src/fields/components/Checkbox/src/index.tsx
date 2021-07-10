@@ -30,7 +30,11 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }: C
               key={o.key}
               control={(
                 <Checkbox
-                    checked={typeof value === 'string' || Array.isArray(value) ? value?.includes(o.key) : value}
+                    checked={
+                      typeof value === 'string'
+                      || Array.isArray(value) ? value?.includes(o.key) 
+                      : typeof value === 'boolean' && value
+                    }
                     onChange={onGroupChange(String(o.key), o.adds)}
                     disabled={o.disabled || false}
                 />
