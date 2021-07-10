@@ -90,27 +90,8 @@ describe('Radiogroup', () => {
     schema.enum.forEach((ev, ek) => {
       cbComp.at(ek).simulate('change');
     });
-    expect(onChange).toHaveBeenCalledTimes(schema.enum.length);
-  });
-
-  it('calls onChange when clicked (edge case)', () => {
-    const onChange = jest.fn();
-    const wrapper = mount(
-      <RadioGroupComp 
-        path={'a'} 
-        value={undefined} 
-        onChange={onChange} 
-        schema={schema} 
-        htmlid={'test'}
-        inputProps={{}}
-        nullOption
-      />,
-    );
-
-    const cbComp = wrapper.find('input');
-    expect(cbComp).toHaveLength(schema.enum.length);
-    schema.enum.forEach((ev, ek) => {
-      cbComp.at(ek).simulate('change');
+    cbComp.at(0).prop('onChange')({
+      target: { value: undefined }
     });
     expect(onChange).toHaveBeenCalledTimes(schema.enum.length);
   });
