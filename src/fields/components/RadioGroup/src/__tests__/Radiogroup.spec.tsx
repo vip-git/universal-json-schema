@@ -73,11 +73,32 @@ describe('Radiogroup', () => {
 
   it('calls onChange when clicked', () => {
     const onChange = jest.fn();
-    const checked = true;
     const wrapper = mount(
       <RadioGroupComp 
         path={'a'} 
-        value={checked} 
+        value={selectedValue} 
+        onChange={onChange} 
+        schema={schema} 
+        htmlid={'test'}
+        inputProps={{}}
+        nullOption
+      />,
+    );
+
+    const cbComp = wrapper.find('input');
+    expect(cbComp).toHaveLength(schema.enum.length);
+    schema.enum.forEach((ev, ek) => {
+      cbComp.at(ek).simulate('change');
+    });
+    expect(onChange).toHaveBeenCalledTimes(schema.enum.length);
+  });
+
+  it('calls onChange when clicked (edge case)', () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <RadioGroupComp 
+        path={'a'} 
+        value={undefined} 
         onChange={onChange} 
         schema={schema} 
         htmlid={'test'}
