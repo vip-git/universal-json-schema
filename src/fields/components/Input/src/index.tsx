@@ -11,7 +11,7 @@ export default ({
   uiSchema = {},
   options,
   onChange,
-  isKeyField,
+  isKeyField = false,
   htmlid,
   onBlur,
 }) => {
