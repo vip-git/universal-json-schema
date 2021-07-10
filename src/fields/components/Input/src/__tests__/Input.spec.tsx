@@ -58,6 +58,26 @@ describe('Input', () => {
     expect(cbComp.prop('inputProps')).toStrictEqual(props.inputProps);
   });
 
+  it('can pass mui additional properties to the Input component', () => {
+    const props = {
+      'mui:color': 'primary',
+    };
+    const wrapper = mount(
+      <InputComp  
+        value={''} 
+        type={'string'}
+        uiSchema={
+          {...props}
+        }
+        onChange={jest.fn}
+        htmlid={'test'}
+        onBlur={jest.fn}
+      />,
+    );
+    const cbComp = wrapper.find('ForwardRef(InputBase)');
+    expect(cbComp.prop('color')).toStrictEqual(props['mui:color']);
+  });
+
   it('calls onChange when clicked', () => {
     const onChange = jest.fn();
     const checked = true;

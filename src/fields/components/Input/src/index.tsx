@@ -9,7 +9,7 @@ export default ({
   type,
   value,
   uiSchema = {},
-  options,
+  options = {},
   onChange,
   isKeyField = false,
   htmlid,

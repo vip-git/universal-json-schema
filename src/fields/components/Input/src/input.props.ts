@@ -29,7 +29,7 @@ export default ({
   onChange,
   onBlur,
   type,
-  options = {},
+  options,
   uiSchema = {},
   htmlid,
   schema = {},
