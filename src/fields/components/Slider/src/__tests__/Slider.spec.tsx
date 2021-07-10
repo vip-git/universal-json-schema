@@ -57,7 +57,6 @@ describe('Slider', () => {
     const wrapper = mount(
       <SliderComp 
         path={'a'}
-        value={value}
         onChange={onChange}
         schema={schema}
       />,
