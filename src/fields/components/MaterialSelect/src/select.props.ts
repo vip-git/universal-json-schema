@@ -26,7 +26,7 @@ const onChangeHandler = (onChange, type, isMultiple) => (e) => {
   if (value !== undefined) onChange(value);
 };
 
-export default ({ onChange, schema = {}, type, isMultiple }) => ({
+export default ({ onChange, schema, type, isMultiple }) => ({
   onChange: onChange && onChangeHandler(onChange, type, isMultiple),
   choices: valuesToOptions(isEnum(schema)),
   nullOption: 'Please select...',

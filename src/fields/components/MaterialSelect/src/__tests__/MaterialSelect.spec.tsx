@@ -118,6 +118,12 @@ describe('MaterialSelect', () => {
     cbComp.prop('onChange')({
       target: { value: ['foo', 'bar'] }
     });
+    cbComp.prop('onChange')({
+      target: { value: null }
+    });
+    cbComp.prop('onChange')({
+      target: null
+    });
     expect(onChange).toHaveBeenCalledTimes(1);
   });
 });

@@ -21,7 +21,7 @@ export default ({
 
   const { 
     onChange: givenOnChange,
-    choices
+    choices,
   } = materialSelectProps({ 
     onChange,
     schema,
