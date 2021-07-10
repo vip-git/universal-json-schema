@@ -41,6 +41,7 @@ describe('Slider', () => {
     const wrapper = mount(
       <SliderComp 
         schema={schema}
+        value={value}
         onChange={jest.fn}
         options={
           {...props}
@@ -57,6 +58,7 @@ describe('Slider', () => {
     const wrapper = mount(
       <SliderComp 
         path={'a'}
+        value={value}
         onChange={onChange}
         schema={schema}
       />,

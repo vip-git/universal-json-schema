@@ -21,7 +21,7 @@ function valuetext(value) {
 export default ({
   label = '',
   path = '',
-  value = 0,
+  value,
   schema,
   onChange,
   disabled = false,
