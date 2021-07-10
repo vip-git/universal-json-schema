@@ -27,6 +27,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }: C
         {
           choices.map((o) => (
             <FormControlLabel
+              key={o.key}
               control={(
                 <Checkbox
                     checked={typeof value === 'string' || Array.isArray(value) ? value?.includes(o.key) : value}
@@ -52,6 +53,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }: C
       {
         choices.map((ev) => (
           <FormControlLabel
+            key={ev.key}
             control={(
               <Checkbox
                   checked={String(value) === String(ev.key)}
