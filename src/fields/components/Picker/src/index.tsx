@@ -45,7 +45,7 @@ const renderPickerComp = (type) => {
         PickerComp: KeyboardDateTimePicker,
         maskInput: [
           /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ':', /\d/, /\d/, ' ', /a|p/i, 
-          'M'
+          'M',
         ],
         format: 'DD-MM-YYYY hh:mm A',
         placeholder: '__-__-___ __:__ __',
@@ -55,7 +55,7 @@ const renderPickerComp = (type) => {
         PickerComp: DateTimePicker,
         maskInput: [
           /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ':', /\d/, /\d/, ' ', /a|p/i, 
-          'M'
+          'M',
         ],
         format: 'DD-MM-YYYY hh:mm A',
         placeholder: '__-__-___ __:__ __',

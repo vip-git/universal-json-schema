@@ -16,6 +16,15 @@ const schema: JSONSchema7 = {
 };
 const value = '2010-10-10';
 
+const uiDateTypes = [
+  { type: 'material-date', default: '2010-10-10' },
+  { type: 'material-date-keyboard-disable', default: '12:00 AM' },
+  { type: 'material-time-keyboard-disable', default: '2010-10-10' },
+  { type: 'material-time', default: '12:00 AM' },
+  { type: 'material-datetime', default: '10-10-2010 12:00 AM' },
+  { type: 'material-datetime-keyboard-disable', default: '10-10-2010 12:00 AM' },
+];
+
 describe('Picker', () => {
   it('mounts with standard attributes (control)', () => {
     const path = 'done'; 
@@ -43,6 +52,36 @@ describe('Picker', () => {
     expect(cbComp).toHaveLength(1);
     expect(cbComp.prop('value')).toBe('10-10-2010');
   });
+
+  uiDateTypes.forEach((type) => {
+    it(`mounts with standard attributes (${type})`, () => {
+      const path = 'done'; 
+      const label = 'Done';
+      schema.description = label;
+      const wrapper = mount(
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <PickerComp 
+            label={label}
+            path={path}
+            value={value}
+            schema={schema}
+            uiSchema={{ 'ui:widget': type }}
+            title={label}
+            htmlid={'test'}
+            type={'string'}
+            onChange={jest.fn}
+          />
+        </MuiPickersUtilsProvider>,
+      );
+      const fcComp = wrapper.find('label');
+      expect(fcComp).toHaveLength(1);
+      expect(fcComp.text()).toBe(label);
+  
+      const cbComp = wrapper.find('input');
+      expect(cbComp).toHaveLength(1);
+      expect(cbComp.prop('value')).toBe('10-10-2010');
+    });
+  })
 
   it('passes additional properties to the Checkbox component', () => {
     const props = {
