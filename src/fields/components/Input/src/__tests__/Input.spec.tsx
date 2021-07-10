@@ -98,4 +98,44 @@ describe('Input', () => {
     cbComp.simulate('change');
     expect(onChange).toHaveBeenCalledTimes(1);
   });
+
+  it('calls onChange when clicked (null check)', () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <InputComp 
+        value={null} 
+        onChange={onChange} 
+        type={'string'}
+        options={{}}
+        htmlid={'test'}
+        onBlur={jest.fn}
+      />,
+    );
+
+    const cbComp = wrapper.find('input');
+    expect(cbComp).toHaveLength(1);
+    cbComp.simulate('change');
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+
+  it('calls onChange when clicked (null check key field)', () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <InputComp 
+        value={null} 
+        onChange={onChange} 
+        type={'string'}
+        options={{}}
+        htmlid={'test'}
+        onBlur={jest.fn}
+        isKeyField
+      />,
+    );
+
+    const cbComp = wrapper.find('input');
+    expect(cbComp).toHaveLength(1);
+    cbComp.simulate('change');
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
 });
