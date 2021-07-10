@@ -9,13 +9,24 @@ import { default as MaterialSelectComp } from '..';
 import { JSONSchema7 } from 'json-schema';
 
 const schema: JSONSchema7 = {
-  "type": "string",
-  "title": "Which  Theme ?",
-  "enum": [
-    "Material UI",
-    "No Theme"
+  'type': 'string',
+  'title': 'Which  Theme ?',
+  'enum': [
+    'Material UI',
+    'No Theme'
   ],
-  "default": "Material UI"
+  'default': 'Material UI'
+};
+const multiOptionSchema: JSONSchema7 & { parsedArray: boolean } = {
+  'type': 'string',
+  'enum': [
+    'foo',
+    'bar',
+    'fuzz',
+    'qux'
+  ],
+  'uniqueItems': true,
+  'parsedArray': true
 };
 const value = 'Material UI';
 const htmlid = 'test';
@@ -36,7 +47,7 @@ describe('MaterialSelect', () => {
         onChange={jest.fn}
       />,
     );
-    
+
     const fcComp = wrapper.find('WithStyles(ForwardRef(Select))');
     expect(fcComp).toHaveLength(1);
     expect(fcComp.prop('id')).toBe(htmlid);
@@ -85,6 +96,28 @@ describe('MaterialSelect', () => {
     const cbComp = wrapper.find('input');
     expect(cbComp).toHaveLength(1);
     cbComp.simulate('change');
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onChange when clicked (multiple)', () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <MaterialSelectComp 
+        path={'a'} 
+        value={['foo', 'bar']} 
+        onChange={onChange} 
+        schema={multiOptionSchema}
+        type={'string'}
+        htmlid={htmlid}
+        label={'label'}
+        options={{ multiple: true }}
+      />,
+    );
+    const cbComp = wrapper.find('WithStyles(ForwardRef(Select))');
+    expect(cbComp).toHaveLength(1);
+    cbComp.prop('onChange')({
+      target: { value: ['foo', 'bar'] }
+    });
     expect(onChange).toHaveBeenCalledTimes(1);
   });
 });

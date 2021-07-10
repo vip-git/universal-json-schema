@@ -3,10 +3,8 @@ import React from 'react';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
-
 // Props
 import materialSelectProps, { SelectProps } from './select.props';
-
 
 export default ({ 
   type, 
@@ -23,9 +21,7 @@ export default ({
 
   const { 
     onChange: givenOnChange,
-    choices,
-    label,  
-    nullOption, 
+    choices
   } = materialSelectProps({ 
     onChange,
     schema,
