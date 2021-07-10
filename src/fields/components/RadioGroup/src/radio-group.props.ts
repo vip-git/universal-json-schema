@@ -9,7 +9,7 @@ const onChangeHandler = (givenOnChange, schema) => (e) => {
   }
 };
 
-export default ({ onChange, options = {}, schema = {} }: {
+export default ({ onChange, options, schema }: {
   onChange: Function;
   options: any;
   schema: any;
