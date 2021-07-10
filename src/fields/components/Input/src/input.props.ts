@@ -30,7 +30,7 @@ export default ({
   onBlur,
   type,
   options,
-  uiSchema = {},
+  uiSchema,
   htmlid,
   schema = {},
 }: InputProps) => {

@@ -78,6 +78,26 @@ describe('Input', () => {
     expect(cbComp.prop('color')).toStrictEqual(props['mui:color']);
   });
 
+  it('can pass additional properties for textArea to the Input component', () => {
+    const props = {
+      'ui:widget': 'textarea',
+    };
+    const wrapper = mount(
+      <InputComp  
+        value={''} 
+        type={'string'}
+        uiSchema={
+          {...props}
+        }
+        onChange={jest.fn}
+        htmlid={'test'}
+        onBlur={jest.fn}
+      />,
+    );
+    const cbComp = wrapper.find('textarea');
+    expect(cbComp).toHaveLength(1);
+  });
+
   it('calls onChange when clicked', () => {
     const onChange = jest.fn();
     const checked = true;
