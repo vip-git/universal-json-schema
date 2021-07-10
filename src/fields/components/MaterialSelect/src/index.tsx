@@ -3,32 +3,22 @@ import React from 'react';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
-// Props
-import materialSelectProps from './select.props';
 
-type Props = {
-  type: any;
-  value: any;
-  schema: any;
-  disabled: any;
-  onChange: any;
-  htmlid: any;
-  xhrSchema: any;
-  options: any;
-  [key: string]: any;
-}
+// Props
+import materialSelectProps, { SelectProps } from './select.props';
+
 
 export default ({ 
   type, 
   value = '',
   schema,
-  disabled,
+  disabled = false,
   onChange, 
   htmlid,
-  xhrSchema,
+  xhrSchema = {},
   options = {},
   ...rest 
-}: Props) => {
+}: SelectProps) => {
   const isMultiple = (options.multiple || (schema.anyOf && schema.parsedArray)) && !schema.oneOf;
 
   const { 
