@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+// Library
 import React from 'react';
 import { 
   KeyboardDatePicker,
@@ -43,14 +43,20 @@ const renderPickerComp = (type) => {
     case 'material-datetime':
       return {
         PickerComp: KeyboardDateTimePicker,
-        maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ':', /\d/, /\d/, ' ', /a|p/i, 'M'],
+        maskInput: [
+          /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ':', /\d/, /\d/, ' ', /a|p/i, 
+          'M'
+        ],
         format: 'DD-MM-YYYY hh:mm A',
         placeholder: '__-__-___ __:__ __',
       }; 
     case 'material-datetime-keyboard-disable':
       return {
         PickerComp: DateTimePicker,
-        maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ':', /\d/, /\d/, ' ', /a|p/i, 'M'],
+        maskInput: [
+          /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ':', /\d/, /\d/, ' ', /a|p/i, 
+          'M'
+        ],
         format: 'DD-MM-YYYY hh:mm A',
         placeholder: '__-__-___ __:__ __',
       };

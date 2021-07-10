@@ -4,7 +4,7 @@ const appConfigTemplate = `/* eslint-disable global-require */
   import <%= comp.name.replace(/-/g, '') %> from './<%= comp.name %>/dist/index';
  <% }); %>
 import <%= Object.values(components).find((c) => c.isDefault).name.replace(/-/g, '') %> from './<%= Object.values(components).find((c) => c.isDefault).name %>/dist/index';
-import EmptyDiv from './empty-div';
+import EmptyDiv from './empty-div/dist/index';
 
 <% Object.values(components)
     .filter((c) => !c.isEnum && c.type === "null" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
