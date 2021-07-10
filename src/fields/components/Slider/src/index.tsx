@@ -18,16 +18,24 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-export default function DiscreteSlider() {
+export default ({
+  label = '',
+  path = '',
+  value = 0,
+  schema,
+  onChange,
+  disabled = false,
+  options = {},
+}) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Typography id='discrete-slider' gutterBottom>
-        Temperature
+        {label}
       </Typography>
       <Slider
-        defaultValue={30}
+        defaultValue={value}
         getAriaValueText={valuetext}
         aria-labelledby='discrete-slider'
         valueLabelDisplay='auto'
@@ -35,20 +43,9 @@ export default function DiscreteSlider() {
         marks
         min={10}
         max={110}
-      />
-      <Typography id='discrete-slider' gutterBottom>
-        Disabled
-      </Typography>
-      <Slider
-        defaultValue={30}
-        getAriaValueText={valuetext}
-        aria-labelledby='discrete-slider'
-        valueLabelDisplay='auto'
-        step={10}
-        marks
-        min={10}
-        max={110}
-        disabled
+        disabled={disabled}
+        onChange={onChange}
+        {...options}
       />
     </div>
   );
