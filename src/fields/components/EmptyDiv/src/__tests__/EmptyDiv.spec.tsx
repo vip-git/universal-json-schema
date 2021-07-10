@@ -40,4 +40,16 @@ describe('EmptyDiv', () => {
     const cbComp = wrapper.find('div');
     expect(cbComp.prop('color')).toBe(props.color);
   });
+
+  it('renders the div when no schema is passed', () => {
+    const props = {
+      color: 'secondary',
+    }
+    const wrapper = mount(
+      <EmptyDivComp />,
+    );
+
+    const cbComp = wrapper.find('div');
+    expect(cbComp).toHaveLength(1);
+  });
 });
