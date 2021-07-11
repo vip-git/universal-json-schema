@@ -1,12 +1,6 @@
 // Library
 import isEmpty from 'lodash/isEmpty';
-
-type translateCurrencyProps = {
-  value: string;
-  options: {
-    useLocaleString: string;
-  }
-};
+import { TranslateCurrencyProps, ReturnType } from './index.type';
 
 const isEmptyValues = (value) => isEmpty(value) && typeof value !== 'number' && typeof value !== 'boolean';
 
@@ -32,7 +26,7 @@ const parseCurrencyValue = (value, useLocaleString) => {
   return value.replace(whatDecimalSeparatorRegex, '');
 };
 
-const translateCurrency = ({ value, options }: translateCurrencyProps) => {
+const translateCurrency = ({ value, options }: TranslateCurrencyProps): ReturnType => {
   // eslint-disable-next-line no-undef
   const locale = options.useLocaleString || window?.navigator?.language;
   if (isEmptyValues(value)) {
