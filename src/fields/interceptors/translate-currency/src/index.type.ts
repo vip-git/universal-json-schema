@@ -1,6 +1,6 @@
 export type TranslateCurrencyProps = {
     value: string;
-    options: {
+    options?: {
       useLocaleString: string;
     }
 };

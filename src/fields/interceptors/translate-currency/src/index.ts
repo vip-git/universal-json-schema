@@ -28,7 +28,7 @@ const parseCurrencyValue = (value, useLocaleString) => {
 
 const translateCurrency = ({ value, options }: TranslateCurrencyProps): ReturnType => {
   // eslint-disable-next-line no-undef
-  const locale = options.useLocaleString || window?.navigator?.language;
+  const locale = options?.useLocaleString || window?.navigator?.language;
   if (isEmptyValues(value)) {
     return {
       formData: '',

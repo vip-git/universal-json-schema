@@ -91,4 +91,18 @@ describe('translateCurrency', () => {
       });
       expect(actual).toStrictEqual(expected);
     });
+
+    it('returns formatted currency with original value (scientific notation)', () => {
+      const languageGetter = jest.spyOn(window.navigator, 'language', 'get');
+      languageGetter.mockReturnValue('in');
+      const value = '1231231231231231231231231231231231231231312313';
+      const expected = {
+        'formData': '1231231231231231300000000000000000000000000000',
+        'uiData': '1.231.231.231.231.231.300.000.000.000.000.000.000.000.000.000',
+      };
+      const actual = translateCurrency({
+          value
+      });
+      expect(actual).toStrictEqual(expected);
+    });
 });
