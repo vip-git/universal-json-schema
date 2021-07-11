@@ -61,4 +61,34 @@ describe('translateCurrency', () => {
       });
       expect(actual).toStrictEqual(expected);
     });
+
+    it('returns formatted currency with original value (edge case)', () => {
+      const value = '123123.';
+      const expected = {
+        'formData': 123123, 
+        'uiData': '123.123'
+      };
+      const actual = translateCurrency({
+          value,
+          options: {
+            useLocaleString: 'in'
+          }
+      });
+      expect(actual).toStrictEqual(expected);
+    });
+
+    it('returns formatted currency with original value (scientific notation)', () => {
+      const value = '1231231231231231231231231231231231231231312313';
+      const expected = {
+        'formData': '1231231231231231300000000000000000000000000000',
+        'uiData': '1.231.231.231.231.231.300.000.000.000.000.000.000.000.000.000',
+      };
+      const actual = translateCurrency({
+          value,
+          options: {
+            useLocaleString: 'in'
+          }
+      });
+      expect(actual).toStrictEqual(expected);
+    });
 });
