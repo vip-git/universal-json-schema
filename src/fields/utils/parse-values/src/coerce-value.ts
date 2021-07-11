@@ -71,7 +71,7 @@ const toNumber = (v, options = false as any) => {
   }
 };
 
-export default (type, value, options = false) => {
+export default (type, value, options?: { useLocaleString: string }) => {
   switch (type) {
     case 'string':
       return typeof value === 'string' ? value : String(value);
