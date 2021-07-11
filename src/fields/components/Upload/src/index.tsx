@@ -3,11 +3,11 @@ import MaterialUploadButton from './lib';
 import uploadProps from './upload.props';
 
 export default ({ 
-  onChange, 
-  schema = {}, 
-  widget, 
-  uiSchema = {}, 
-  htmlid, 
+  onChange,
+  schema = {},
+  widget,
+  uiSchema = {},
+  htmlid,
   ...rest
 }) => (
    <MaterialUploadButton 

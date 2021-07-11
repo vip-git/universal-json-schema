@@ -21,6 +21,13 @@ describe('Upload', () => {
     const checked = true;
     const path = 'done'; 
     const label = 'Done';
+    const uploadProps = {
+      variant: 'outlined', 
+      accept: '*', 
+      isMulti: false, 
+      icon: 'hello.png', 
+      buttonTitle: 'New Title'
+    };
     schema.description = label;
     const wrapper = mount(
       <EventContext.Provider value={'jest.fn'}>
@@ -33,6 +40,40 @@ describe('Upload', () => {
           widget={'outlined'}
           htmlid={'test'}
           EventContext={EventContext}
+        />
+      </EventContext.Provider>,
+    );
+    const wrapper2 = mount(
+      <EventContext.Provider value={'jest.fn'}>
+        <UploadComp 
+          label={label} 
+          path={path} 
+          value={checked} 
+          schema={schema} 
+          onChange={jest.fn}
+          widget={'outlined'}
+          htmlid={'test'}
+          EventContext={EventContext}
+          uiSchema={{
+            'ui:props': uploadProps
+          }}
+        />
+      </EventContext.Provider>,
+    );
+    const wrapper3 = mount(
+      <EventContext.Provider value={'jest.fn'}>
+        <UploadComp 
+          label={label} 
+          path={path} 
+          value={checked} 
+          schema={schema} 
+          onChange={jest.fn}
+          widget={'outlined'}
+          htmlid={'test'}
+          EventContext={EventContext}
+          uiSchema={{
+            'ui:options': uploadProps
+          }}
         />
       </EventContext.Provider>,
     );
@@ -77,6 +118,35 @@ describe('Upload', () => {
           value={checked} 
           onChange={onChange} 
           schema={schema} 
+          widget={'outlined'}
+          htmlid={'test'}
+          EventContext={EventContext}
+        />
+      </EventContext.Provider>,
+    );
+
+    const cbComp = wrapper.find('input');
+    expect(cbComp).toHaveLength(1);
+    cbComp.prop('onChange')({
+      target: {
+        files: [{
+          name: 'MYFile.txt'
+        }]
+      }
+    });
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onUpload).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onChange when clicked (edge case)', () => {
+    const onChange = jest.fn();
+    const checked = true;
+    const wrapper = mount(
+      <EventContext.Provider value={null}>
+        <UploadComp 
+          path={'a'} 
+          value={checked} 
+          onChange={onChange} 
           widget={'outlined'}
           htmlid={'test'}
           EventContext={EventContext}
