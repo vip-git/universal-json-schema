@@ -1,15 +1,15 @@
 import React from 'react';
 import MaterialUploadButton from './lib';
-import uploadProps, { UploadProps } from './upload.props';
+import uploadProps from './upload.props';
 
 export default ({ 
   onChange,
   schema = {},
-  widget,
+  widget = null,
   uiSchema = {},
   htmlid,
   ...rest
-}: UploadProps) => (
+}) => (
    <MaterialUploadButton 
         htmlid={htmlid} 
         {...rest}

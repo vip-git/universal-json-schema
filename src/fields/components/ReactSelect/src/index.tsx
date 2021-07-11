@@ -9,14 +9,14 @@ import MultiSelect from './lib/ReactSelect';
 import reactSelectProps from './react-select.props';
 
 export default ({ 
-  type, 
+  type,
   value = '[]',
   uiSchema,
   schema,
   xhrSchema,
   disabled,
   widget,
-  onChange, 
+  onChange,
   schemaVersion,
   options = {},
   ...rest
