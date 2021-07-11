@@ -3,7 +3,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 // Internal
-import { default as ReactSelectComp } from '..';
+import { default as CreatableReactSelectComp } from '..';
 
 // Types
 import { JSONSchema7 } from 'json-schema';
@@ -19,7 +19,7 @@ const schema: JSONSchema7 & { parsedArray?: boolean } = {
 
 const value = 'Yes';
 
-describe('ReactSelect', () => {
+describe('CreatableReactSelect', () => {
   it('mounts with standard attributes (control)', () => {
     const value4: any = [{'disabled': undefined, 'label': 'Yes', 'style': undefined, 'value': 'Yes'}];
     const value5: any = ['Yes'];
@@ -27,7 +27,7 @@ describe('ReactSelect', () => {
     const label = 'Done';
     schema.description = label;
     const wrapper2 = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         label={label}
         path={path}
@@ -42,7 +42,7 @@ describe('ReactSelect', () => {
       />,
     );
     const wrapper6 = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         label={label}
         path={path}
@@ -54,7 +54,7 @@ describe('ReactSelect', () => {
       />,
     );
     const wrapper = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         label={label}
         path={path}
@@ -70,7 +70,7 @@ describe('ReactSelect', () => {
     );
 
     const wrapper3 = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         label={label}
         path={path}
@@ -86,7 +86,7 @@ describe('ReactSelect', () => {
     );
 
     const wrapper5 = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         label={label}
         path={path}
@@ -106,7 +106,7 @@ describe('ReactSelect', () => {
     );
 
     const wrapper46 = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         label={label}
         path={path}
@@ -124,8 +124,7 @@ describe('ReactSelect', () => {
         schemaVersion='3'
       />,
     );
-
-    const fcComp = wrapper.find('label');
+    const fcComp = wrapper.find('span');
     expect(fcComp).toHaveLength(1);
     expect(fcComp.text()).toBe(schema.title);
 
@@ -135,7 +134,7 @@ describe('ReactSelect', () => {
 
     const cbComp = wrapper.find('Select');
     expect(cbComp).toHaveLength(1);
-    expect(cbComp.prop('value')).toStrictEqual({'disabled': undefined, 'label': 'Yes', 'style': undefined, 'value': 'Yes'});
+    expect(cbComp.prop('value')).toStrictEqual('Yes');
   });
 
   it('mounts with standard attributes (MultiSelect)', () => {
@@ -145,7 +144,7 @@ describe('ReactSelect', () => {
     const label = 'Done';
     schema.description = label;
     const wrapper2 = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         label={label}
         path={path}
@@ -162,7 +161,7 @@ describe('ReactSelect', () => {
     );
 
     const wrapper4 = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         label={label}
         path={path}
@@ -179,7 +178,7 @@ describe('ReactSelect', () => {
     );
 
     const wrapper3 = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         label={label}
         path={path}
@@ -196,7 +195,7 @@ describe('ReactSelect', () => {
     );
 
     const wrapper36 = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         label={label}
         path={path}
@@ -213,7 +212,7 @@ describe('ReactSelect', () => {
     );
 
     const wrapper5 = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         label={label}
         path={path}
@@ -234,7 +233,7 @@ describe('ReactSelect', () => {
     );
 
     const wrapper = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         label={label}
         path={path}
@@ -249,7 +248,7 @@ describe('ReactSelect', () => {
         options={{ multiSelect: true }}
       />,
     );
-    const fcComp = wrapper.find('label');
+    const fcComp = wrapper.find('span');
     expect(fcComp).toHaveLength(1);
     expect(fcComp.text()).toBe(schema.title);
 
@@ -261,10 +260,11 @@ describe('ReactSelect', () => {
   it('calls onChange when clicked', () => {
     const onChange = jest.fn();
     const wrapper = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         label={'label'}
         path={'path'}
+        value={''}
         schema={schema}
         uiSchema={{}}
         xhrSchema={{}}
@@ -274,11 +274,12 @@ describe('ReactSelect', () => {
         schemaVersion='2'
       />,
     );
-
     const cbComp = wrapper.find('Select');
     expect(cbComp).toHaveLength(1);
     cbComp.prop('onChange')({
       target: { value: 'No' }
+    }, {
+        action: ''
     });
     expect(onChange).toHaveBeenCalledTimes(1);
   });
@@ -287,7 +288,7 @@ describe('ReactSelect', () => {
     const value4: any = [{'label': 'Yes', 'value': 'Yes'}];
     const onChange = jest.fn();
     const wrapper = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         schema={{
           ...schema,
@@ -309,6 +310,8 @@ describe('ReactSelect', () => {
     expect(cbComp).toHaveLength(1);
     cbComp.prop('onChange')({
       target: { value: value4 }
+    }, {
+        action: ''
     });
     expect(onChange).toHaveBeenCalledTimes(0);
   });
@@ -317,7 +320,7 @@ describe('ReactSelect', () => {
     const value4: any = JSON.stringify([{'label': 'Yes', 'value': 'Yes'}]);
     const onChange = jest.fn();
     const wrapper = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         schema={{
           ...schema,
@@ -336,6 +339,8 @@ describe('ReactSelect', () => {
     expect(cbComp).toHaveLength(1);
     cbComp.prop('onChange')({
       target: { value: value4 }
+    }, {
+        action: ''
     });
     expect(onChange).toHaveBeenCalledTimes(0);
   });
@@ -344,7 +349,7 @@ describe('ReactSelect', () => {
     const value4: any = JSON.stringify([{'label': 'Yes', 'value': 'Yes'}]);
     const onChange = jest.fn();
     const wrapper = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         schema={{
           ...schema,
@@ -364,6 +369,8 @@ describe('ReactSelect', () => {
     expect(cbComp).toHaveLength(1);
     cbComp.prop('onChange')({
       target: { value: value4 }
+    }, {
+        action: ''
     });
     expect(onChange).toHaveBeenCalledTimes(0);
   });
@@ -372,7 +379,7 @@ describe('ReactSelect', () => {
     const value4: any = true;
     const onChange = jest.fn();
     const wrapper = mount(
-      <ReactSelectComp
+      <CreatableReactSelectComp
         type={'string'}
         schema={schema}
         value={value}
@@ -389,6 +396,8 @@ describe('ReactSelect', () => {
     expect(cbComp).toHaveLength(1);
     cbComp.prop('onChange')({
       target: { value: {'value4': ''} }
+    }, {
+        action: ''
     });
     expect(onChange).toHaveBeenCalledTimes(0);
   });

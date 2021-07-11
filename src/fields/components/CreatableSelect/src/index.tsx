@@ -1,6 +1,9 @@
 import React from 'react';
 import { isEmpty, values, mapValues } from 'lodash';
+import { JSONSchema7 } from 'json-schema';
 import CreatableSelect from './lib/CreatableReactSelect';
+
+// Types
 
 // Props
 import creatableReactSelectProps from './creatable-select.props';
@@ -8,8 +11,8 @@ import creatableReactSelectProps from './creatable-select.props';
 export default ({   
   type, 
   value,
-  uiSchema,
-  schema,
+  uiSchema = {},
+  schema = { parsedArray: false } as JSONSchema7 & { parsedArray?: boolean },
   disabled,
   options = {},
   widget,

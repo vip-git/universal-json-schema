@@ -2,6 +2,9 @@
 import React from 'react';
 import { values, mapValues } from 'lodash';
 
+// Types
+import { JSONSchema7 } from 'json-schema';
+
 // Internal
 import MultiSelect from './lib/ReactSelect';
 
@@ -11,9 +14,9 @@ import reactSelectProps from './react-select.props';
 export default ({ 
   type,
   value = '[]',
-  uiSchema,
-  schema,
-  xhrSchema,
+  uiSchema = {},
+  schema = { parsedArray: false } as JSONSchema7 & { parsedArray?: boolean },
+  xhrSchema = {},
   disabled,
   widget,
   onChange,

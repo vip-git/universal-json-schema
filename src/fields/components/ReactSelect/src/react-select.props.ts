@@ -46,12 +46,12 @@ const onChangeHandler = (
 
 export default ({
   onChange,
-  schema = {},
-  uiSchema = {},
+  schema,
+  uiSchema,
   type,
   schemaVersion,
   widget,
-  options = {},
+  options,
 }: Props) => {
   const multiSelect = (widget === 'material-multiselect'
     || options.multiSelect
