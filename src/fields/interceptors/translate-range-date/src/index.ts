@@ -1,4 +1,4 @@
-type translateRangeDateProps = {
+interface translateRangeDateProps {
   data: {
     startDate: string;
     endDate: string;
