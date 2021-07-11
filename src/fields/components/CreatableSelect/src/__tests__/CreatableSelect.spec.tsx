@@ -281,7 +281,7 @@ describe('CreatableReactSelect', () => {
         type={'string'}
         label={'label'}
         path={'path'}
-        value={''}
+        value={[]}
         schema={schema}
         uiSchema={{}}
         xhrSchema={{}}
@@ -293,12 +293,15 @@ describe('CreatableReactSelect', () => {
     );
     const cbComp = wrapper.find('Select');
     expect(cbComp).toHaveLength(1);
-    cbComp.prop('onChange')({
-      target: { value: 'No' }
-    }, {
+    cbComp.prop('onChange')(['No'], {
         action: ''
     });
-    expect(onChange).toHaveBeenCalledTimes(1);
+    cbComp.prop('onInputChange')('No');
+    cbComp.prop('onKeyDown')({
+        key: 'Tab',
+        preventDefault: jest.fn
+    });
+    expect(onChange).toHaveBeenCalledTimes(2);
   });
 
   it('calls onChange when clicked (Multi-Select)', () => {
@@ -330,6 +333,7 @@ describe('CreatableReactSelect', () => {
     }, {
         action: ''
     });
+    cbComp.prop('onInputChange')('No');
     expect(onChange).toHaveBeenCalledTimes(0);
   });
 
@@ -359,6 +363,7 @@ describe('CreatableReactSelect', () => {
     }, {
         action: ''
     });
+    cbComp.prop('onInputChange')('No');
     expect(onChange).toHaveBeenCalledTimes(0);
   });
 
@@ -389,6 +394,7 @@ describe('CreatableReactSelect', () => {
     }, {
         action: ''
     });
+    cbComp.prop('onInputChange')('No');
     expect(onChange).toHaveBeenCalledTimes(0);
   });
 
@@ -416,6 +422,7 @@ describe('CreatableReactSelect', () => {
     }, {
         action: ''
     });
+    cbComp.prop('onInputChange')('No');
     expect(onChange).toHaveBeenCalledTimes(0);
   });
 });
