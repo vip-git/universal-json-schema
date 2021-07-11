@@ -92,7 +92,7 @@ describe('translateCurrency', () => {
       expect(actual).toStrictEqual(expected);
     });
 
-    it('returns formatted currency with original value (scientific notation)', () => {
+    it('returns formatted currency with original value (window navigator)', () => {
       const languageGetter = jest.spyOn(window.navigator, 'language', 'get');
       languageGetter.mockReturnValue('in');
       const value = '1231231231231231231231231231231231231231312313';
