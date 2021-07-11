@@ -232,6 +232,23 @@ describe('CreatableReactSelect', () => {
       />,
     );
 
+    const wrapper7 = mount(
+        <CreatableReactSelectComp
+          type={'string'}
+          label={label}
+          path={path}
+          schema={schema}
+          value={value}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='3'
+          options={{ multiSelect: true, optionsOnly: false }}
+        />,
+      );
+
     const wrapper = mount(
       <CreatableReactSelectComp
         type={'string'}
