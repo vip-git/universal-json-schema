@@ -66,12 +66,12 @@ describe('translateCurrency', () => {
       const value = '123123.';
       const expected = {
         'formData': 123123, 
-        'uiData': '123.123'
+        'uiData': '123123.'
       };
       const actual = translateCurrency({
           value,
           options: {
-            useLocaleString: 'in'
+            useLocaleString: 'us'
           }
       });
       expect(actual).toStrictEqual(expected);
