@@ -38,9 +38,9 @@ const onChangeHandler = (onChange, type, schemaVersion, schema) => (e) => {
 
 export default ({
   onChange,
-  schema = {},
-  uiSchema = {},
-  options = {},
+  schema,
+  uiSchema,
+  options,
   type,
   schemaVersion,
 }: Props) => ({
