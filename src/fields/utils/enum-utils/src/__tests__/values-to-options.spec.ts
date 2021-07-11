@@ -99,4 +99,9 @@ describe('valuesToOptions', () => {
     const actual = valuesToOptions(values);
     expect(actual).toStrictEqual(values);
   });
+  it('handles strings', () => {
+    const values = '';
+    const actual = valuesToOptions(values);
+    expect(actual).toStrictEqual([]);
+  });
 });
