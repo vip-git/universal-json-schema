@@ -131,4 +131,13 @@ describe('getDefaultValue', () => {
     // assert
     expect(actual).toStrictEqual(expected);
   });
+  it('works for unknown types', () => {
+    const expected = '';
+
+    // act
+    const actual = getDefaultValue();
+
+    // assert
+    expect(actual).toEqual(expected);
+  });
 });
