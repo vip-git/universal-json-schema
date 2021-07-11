@@ -245,7 +245,7 @@ describe('CreatableReactSelect', () => {
           widget={{}}
           onChange={jest.fn}
           schemaVersion='3'
-          options={{ multiSelect: true, optionsOnly: false }}
+          options={{ multiSelect: true, optionsOnly: true }}
         />,
       );
 
