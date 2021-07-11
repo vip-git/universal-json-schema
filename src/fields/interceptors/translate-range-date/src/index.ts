@@ -1,14 +1,6 @@
-interface translateRangeDateProps {
-  data: {
-    startDate: string;
-    endDate: string;
-  };
-  options: {
-    useLocaleString: string;
-  }
-};
+import { TranslateRangeDateProps, ReturnType } from './index.type';
 
-const translateRangeDate = ({ data, options }: translateRangeDateProps) => {
+const translateRangeDate = ({ data, options }: TranslateRangeDateProps): ReturnType => {
   const startDate = new Date(data.startDate);
   const endDate = new Date(data.endDate);
   const uiData = `${
