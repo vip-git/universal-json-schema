@@ -81,4 +81,22 @@ describe('valuesToOptions', () => {
     const actual = valuesToOptions(values);
     expect(actual).toStrictEqual(expected);
   });
+  it('handles without const in array', () => {
+    const values = [
+      {
+        'type': 'string',
+        'title': 'Red'
+      },
+      {
+        'type': 'string',
+        'title': 'Green'
+      },
+      {
+        'type': 'string',
+        'title': 'Blue'
+      }
+    ];
+    const actual = valuesToOptions(values);
+    expect(actual).toStrictEqual(values);
+  });
 });
