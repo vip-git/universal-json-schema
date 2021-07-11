@@ -1,10 +1,11 @@
-const appConfigTemplate = `/* eslint-disable global-require */
-//  Imports
+const appConfigTemplate = `//  Imports
 <% Object.values(components).filter((c) => c.isEnum && !c.notAvailable).forEach((comp) => { %>
   import <%= comp.name.replace(/-/g, '') %> from './<%= comp.name %>/dist/index';
- <% }); %>
-import <%= Object.values(components).find((c) => c.isDefault).name.replace(/-/g, '') %> from './<%= Object.values(components).find((c) => c.isDefault).name %>/dist/index';
-import EmptyDiv from './empty-div/dist/index';
+<% }); %>
+
+<% Object.values(components).filter((c) => c.isDefault && !c.notAvailable).forEach((comp) => { %>
+ import <%= comp.name.replace(/-/g, '') %> from './<%= comp.name %>/dist/index';
+<% }); %>
 
 <% Object.values(components)
     .filter((c) => !c.isEnum && c.type === "null" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
@@ -49,8 +50,8 @@ export const COMMON_COMPONENTS = {
 
 const NULL_COMPONENTS = {
   EMPTY_DIV: {
-    name: 'empty-div',
-    component: EmptyDiv,
+    name: '<%= Object.values(components).find((c) => c.isDefault && c.type === 'null').name %>',
+    component: <%= Object.values(components).find((c) => c.isDefault && c.type === 'null').name.replace(/-/g, '') %>,
   },
 };
 

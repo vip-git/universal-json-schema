@@ -24,7 +24,7 @@ module.exports = {
         '<rootDir>/src/__e2e__',
 		'<rootDir>/src/generated',
 		// Ignore Compiled folders
-		'<rootDir>/src/fields/components/(Checkbox|CreatableSelect|Input|EmptyDiv|MaterialSelect|RadioGroup|ReactSelect)/dist',
+		'<rootDir>/src/fields/components/(Checkbox|CreatableSelect|Input|EmptyDiv|MaterialSelect|RadioGroup|ReactSelect|RichTextEditor)/dist',
 		'<rootDir>/src/fields/utils/(enum-utils|parse-values)/dist'
 	],
 	testEnvironment: 'jsdom',

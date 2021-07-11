@@ -1,6 +1,13 @@
 // Library
 import isEmpty from 'lodash/isEmpty';
 
+type translateCurrencyProps = {
+  value: string;
+  options: {
+    useLocaleString: string;
+  }
+};
+
 const isEmptyValues = (value) => isEmpty(value) && typeof value !== 'number' && typeof value !== 'boolean';
 
 const getDecimalSeparator = (locale) => {
@@ -25,7 +32,7 @@ const parseCurrencyValue = (value, useLocaleString) => {
   return value.replace(whatDecimalSeparatorRegex, '');
 };
 
-const translateCurrency = ({ value, options }) => {
+const translateCurrency = ({ value, options }: translateCurrencyProps) => {
   // eslint-disable-next-line no-undef
   const locale = options.useLocaleString || window?.navigator?.language;
   if (isEmptyValues(value)) {

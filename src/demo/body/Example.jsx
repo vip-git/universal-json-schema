@@ -20,8 +20,8 @@ import CustomRating from './custom-components/rating.component';
 import CustomComponent from './custom-components/range-picker.component';
 
 // Custom interceptors
-import translateRangeDate from '../../fields/interceptors/translate-range-date';
-import translateRatings from '../../fields/interceptors/translate-ratings';
+import translateRangeDate from '../../fields/interceptors/translate-range-date/dist';
+import translateRatings from '../../fields/interceptors/translate-ratings/dist';
 
 const FormComponent = ({
   givenSchema,
@@ -57,6 +57,9 @@ const FormComponent = ({
                 startDate,
                 endDate,
               },
+              options: {
+                useLocaleString: 'us'
+              }
             });
             return {
               formData,

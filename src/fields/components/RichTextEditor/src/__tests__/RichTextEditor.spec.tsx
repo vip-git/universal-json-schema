@@ -56,7 +56,19 @@ describe('RichTextEditor', () => {
         onChange={onChange} 
       />,
     );
-
+    const wrapper2 = mount(
+      <RichTextEditorComp 
+        label={'label'}
+        path={'path'}
+        value={undefined}
+        schema={schema}
+        type={'string'}
+        options={{}}
+        htmlid={'test'}
+        nullOption={false}
+        onChange={onChange} 
+      />,
+    );
     const cbComp = wrapper.find('RichText');
     expect(cbComp).toHaveLength(1);
     cbComp.prop('onChange')({
@@ -68,5 +80,69 @@ describe('RichTextEditor', () => {
       }
     });
     expect(onChange).toHaveBeenCalledTimes(1);
+  });
+
+
+  it('calls renderds Editor events', () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <RichTextEditorComp 
+        label={'label'}
+        path={'path'}
+        value={'checked'}
+        schema={schema}
+        type={'string'}
+        options={{}}
+        htmlid={'test'}
+        nullOption={false}
+        onChange={onChange} 
+      />,
+    );
+    const cbComp = wrapper.find('Editor');
+    expect(cbComp).toHaveLength(1);
+    cbComp.prop('renderMark')({ mark: {type: 'bold' }}, jest.fn);
+    cbComp.prop('renderMark')({ mark: {type: 'code' }}, jest.fn);
+    cbComp.prop('renderMark')({ mark: {type: 'italic' }}, jest.fn);
+    cbComp.prop('renderMark')({ mark: {type: 'underlined' }}, jest.fn);
+    cbComp.prop('renderMark')({ mark: {type: 'heading-one' }}, jest.fn);
+    cbComp.prop('renderMark')({ mark: {type: 'heading-two' }}, jest.fn);
+    cbComp.prop('renderMark')({ mark: {type: 'heading-three' }}, jest.fn);
+    cbComp.prop('renderMark')({ mark: {type: 'numbered-list' }}, jest.fn);
+    cbComp.prop('renderMark')({ mark: {type: 'bulleted-list' }}, jest.fn);
+    cbComp.prop('onPaste')({ 
+      dataTransfer: {
+        getData: () => '<b> Hello </b>'
+      },
+      types: 'html'
+    }, 'text/html', jest.fn);
+    expect(onChange).toHaveBeenCalledTimes(0);
+  });
+
+  it('calls Editor events when clicked', () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <RichTextEditorComp 
+        label={'label'}
+        path={'path'}
+        value={'checked'}
+        schema={schema}
+        type={'string'}
+        options={{}}
+        htmlid={'test'}
+        nullOption={false}
+        onChange={onChange} 
+      />,
+    );
+    // console.log(wrapper.debug());
+    const cbComp = wrapper.find('ForwardRef').find('ForwardRef').find('span');
+    expect(cbComp).toHaveLength(20);
+    cbComp.at(1).prop('onMouseDown')({
+      preventDefault: onChange,
+    })
+    console.log(cbComp.at(15).text())
+    cbComp.at(15).prop('onMouseDown')({
+      preventDefault: onChange,
+    })
+    expect(onChange).toHaveBeenCalledTimes(2);
   });
 });
