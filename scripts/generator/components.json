@@ -14,16 +14,16 @@
     },
     "interceptors": {
         "@react-jsonschema-form-interceptors/translate-ratings": {
-            "version": "1.0.1",
+            "version": "2.0.0",
             "name": "translate-ratings"
         },
         "@react-jsonschema-form-interceptors/translate-currency": {
-            "version": "1.0.4",
+            "version": "2.0.0",
             "name": "translate-currency",
             "isRequired": true
         },
         "@react-jsonschema-form-interceptors/translate-range-date": {
-            "version": "1.0.2",
+            "version": "2.0.0",
             "name": "translate-range-date"
         }
     },

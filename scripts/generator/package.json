@@ -20,9 +20,9 @@
     "@react-jsonschema-form-components/react-select": "2.0.1",
     "@react-jsonschema-form-components/rich-text-editor": "2.0.0",
     "@react-jsonschema-form-components/upload": "2.0.0",
-    "@react-jsonschema-form-interceptors/translate-currency": "1.0.4",
-    "@react-jsonschema-form-interceptors/translate-range-date": "1.0.2",
-    "@react-jsonschema-form-interceptors/translate-ratings": "1.0.1",
+    "@react-jsonschema-form-interceptors/translate-currency": "2.0.0",
+    "@react-jsonschema-form-interceptors/translate-range-date": "2.0.0",
+    "@react-jsonschema-form-interceptors/translate-ratings": "2.0.0",
     "@react-jsonschema-form-utils/enum-utils": "2.0.1",
     "@react-jsonschema-form-utils/parse-values": "2.0.1"
   }

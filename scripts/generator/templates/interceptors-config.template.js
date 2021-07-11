@@ -1,7 +1,6 @@
-const interceptorConfigTemplate = `/* eslint-disable global-require */
-// Imports
+const interceptorConfigTemplate = `// Imports
 <% Object.values(interceptors).forEach((interceptor) => { %>
-  import <%= interceptor.name.replace(/-/g, '') %> from './<%= interceptor.name %>';
+  import <%= interceptor.name.replace(/-/g, '') %> from './<%= interceptor.name %>/dist/index';
 <% }); %>
 
 export const INTERCEPTOR_CONFIG = {
