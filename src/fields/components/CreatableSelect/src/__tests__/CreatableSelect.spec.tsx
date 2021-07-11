@@ -328,12 +328,14 @@ describe('CreatableReactSelect', () => {
 
     const cbComp = wrapper.find('Select');
     expect(cbComp).toHaveLength(1);
-    cbComp.prop('onChange')({
-      target: { value: value4 }
-    }, {
+    cbComp.prop('onChange')(['No'], {
         action: ''
     });
-    cbComp.prop('onInputChange')('No');
+    cbComp.prop('onInputChange')('No Yes');
+    cbComp.prop('onKeyDown')({
+        key: 'Enter',
+        preventDefault: jest.fn
+    });
     expect(onChange).toHaveBeenCalledTimes(0);
   });
 
