@@ -46,4 +46,19 @@ describe('translateCurrency', () => {
       });
       expect(actual).toStrictEqual(expected);
     });
+
+    it('returns formatted currency with original value (empty)', () => {
+      const value = '';
+      const expected = {
+        'formData': '', 
+        'uiData': ''
+      };
+      const actual = translateCurrency({
+          value,
+          options: {
+            useLocaleString: 'in'
+          }
+      });
+      expect(actual).toStrictEqual(expected);
+    });
 });
