@@ -28,6 +28,32 @@ describe('getDefaultValue', () => {
     // assert
     expect(actual).toEqual(expected);
   });
+  it('works for array', () => {
+    // assemble
+    const data = {
+      type: 'array',
+    };
+    const expected = [];
+
+    // act
+    const actual = getDefaultValue(data);
+
+    // assert
+    expect(actual).toStrictEqual(expected);
+  });
+  it('works for boolean', () => {
+    // assemble
+    const data = {
+      type: 'boolean',
+    };
+    const expected = false;
+
+    // act
+    const actual = getDefaultValue(data);
+
+    // assert
+    expect(actual).toStrictEqual(expected);
+  });
   it('works for object', () => {
     // assemble
     const data = {
