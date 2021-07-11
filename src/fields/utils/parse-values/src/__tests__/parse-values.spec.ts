@@ -50,4 +50,21 @@ describe('parseValues', () => {
             expect(actual).toStrictEqual(121231.23);
         })
     });
+
+    it('can parse num values (de)', () => {
+        const parserType = [
+            'number',
+            'integer',
+            'double',
+            'float',
+            'decimal'
+        ];
+        parserType.forEach((pt) => {
+            const value = '121231,23';
+            const actual = coerceValue(pt, value, {
+                useLocaleString: 'de'
+              });
+            expect(actual).toStrictEqual(121231);
+        })
+    });
 });
