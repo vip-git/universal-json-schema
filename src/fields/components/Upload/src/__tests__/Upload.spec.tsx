@@ -18,8 +18,6 @@ const schema: JSONSchema7 = {
 
 describe('Upload', () => {
   it('mounts with standard attributes (control)', () => {
-    const checked = true;
-    const path = 'done'; 
     const label = 'Done';
     const uploadProps = {
       variant: 'outlined', 
@@ -32,9 +30,6 @@ describe('Upload', () => {
     const wrapper = mount(
       <EventContext.Provider value={'jest.fn'}>
         <UploadComp 
-          label={label} 
-          path={path} 
-          value={checked} 
           schema={schema} 
           onChange={jest.fn}
           widget={'outlined'}
@@ -45,10 +40,7 @@ describe('Upload', () => {
     );
     const wrapper2 = mount(
       <EventContext.Provider value={'jest.fn'}>
-        <UploadComp 
-          label={label} 
-          path={path} 
-          value={checked} 
+        <UploadComp  
           schema={schema} 
           onChange={jest.fn}
           widget={'outlined'}
@@ -63,9 +55,6 @@ describe('Upload', () => {
     const wrapper3 = mount(
       <EventContext.Provider value={'jest.fn'}>
         <UploadComp 
-          label={label} 
-          path={path} 
-          value={checked} 
           schema={schema} 
           onChange={jest.fn}
           widget={'outlined'}
@@ -74,6 +63,30 @@ describe('Upload', () => {
           uiSchema={{
             'ui:options': uploadProps
           }}
+        />
+      </EventContext.Provider>,
+    );
+    const wrapper4 = mount(
+      <EventContext.Provider value={'jest.fn'}>
+        <UploadComp 
+          schema={schema} 
+          onChange={jest.fn}
+          widget={'outlined'}
+          htmlid={'test'}
+          EventContext={EventContext}
+          uiSchema={{
+            'ui:options': {}
+          }}
+        />
+      </EventContext.Provider>,
+    );
+    const wrapper5 = mount(
+      <EventContext.Provider value={'jest.fn'}>
+        <UploadComp 
+          schema={schema} 
+          onChange={jest.fn}
+          htmlid={'test'}
+          EventContext={EventContext}
         />
       </EventContext.Provider>,
     );
@@ -114,8 +127,6 @@ describe('Upload', () => {
     const wrapper = mount(
       <EventContext.Provider value={onUpload}>
         <UploadComp 
-          path={'a'} 
-          value={checked} 
           onChange={onChange} 
           schema={schema} 
           widget={'outlined'}
@@ -140,12 +151,9 @@ describe('Upload', () => {
 
   it('calls onChange when clicked (edge case)', () => {
     const onChange = jest.fn();
-    const checked = true;
     const wrapper = mount(
       <EventContext.Provider value={null}>
         <UploadComp 
-          path={'a'} 
-          value={checked} 
           onChange={onChange} 
           widget={'outlined'}
           htmlid={'test'}

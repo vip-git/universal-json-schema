@@ -1,6 +1,6 @@
 import React from 'react';
 import MaterialUploadButton from './lib';
-import uploadProps from './upload.props';
+import uploadProps, { UploadProps } from './upload.props';
 
 export default ({ 
   onChange,
@@ -9,7 +9,7 @@ export default ({
   uiSchema = {},
   htmlid,
   ...rest
-}) => (
+}: UploadProps) => (
    <MaterialUploadButton 
         htmlid={htmlid} 
         {...rest}

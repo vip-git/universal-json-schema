@@ -1,3 +1,15 @@
+// Types
+import { JSONSchema7 } from 'json-schema';
+
+export type UploadProps = {
+  onChange: Function;
+  schema?: JSONSchema7;
+  widget?: string;
+  uiSchema?: any;
+  htmlid: string;
+  EventContext: React.Context<any>;
+};
+
 const onChangeHandler = (onChange) => (givenValue) => {
   const value = typeof givenValue === 'string' ? givenValue : String(givenValue);
   if (value !== undefined) onChange(value);
