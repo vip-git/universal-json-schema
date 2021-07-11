@@ -1,6 +1,10 @@
+// Imports
 import mapValues from 'lodash/mapValues';
 
-const getDefaultValue = (schema = {} as any) => {
+// Types
+import { JSONSchema7 } from 'json-schema';
+
+const getDefaultValue = (schema = {} as JSONSchema7) => {
   if (schema.default) return schema.default;
   switch (schema.type) {
     case 'object':

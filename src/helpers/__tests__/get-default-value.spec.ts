@@ -1,9 +1,13 @@
+// import
 import getDefaultValue from '../get-default-value';
+
+// Types
+import { JSONSchema7 } from 'json-schema';
 
 describe('getDefaultValue', () => {
   it('works for string', () => {
     // assemble
-    const data = {
+    const data: JSONSchema7 = {
       type: 'string',
     };
     const expected = '';
@@ -16,7 +20,7 @@ describe('getDefaultValue', () => {
   });
   it('works for string with default value', () => {
     // assemble
-    const data = {
+    const data: JSONSchema7 = {
       type: 'string',
       default: 'foo',
     };
@@ -30,7 +34,7 @@ describe('getDefaultValue', () => {
   });
   it('works for array', () => {
     // assemble
-    const data = {
+    const data: JSONSchema7 = {
       type: 'array',
     };
     const expected = [];
@@ -43,7 +47,7 @@ describe('getDefaultValue', () => {
   });
   it('works for boolean', () => {
     // assemble
-    const data = {
+    const data: JSONSchema7 = {
       type: 'boolean',
     };
     const expected = false;
@@ -56,7 +60,7 @@ describe('getDefaultValue', () => {
   });
   it('works for object', () => {
     // assemble
-    const data = {
+    const data: JSONSchema7 = {
       type: 'object',
     };
     const expected = {};
@@ -69,7 +73,7 @@ describe('getDefaultValue', () => {
   });
   it('works for object with properties', () => {
     // assemble
-    const data = {
+    const data: JSONSchema7 = {
       type: 'object',
       properties: {
         name: {
@@ -87,7 +91,7 @@ describe('getDefaultValue', () => {
   });
   it('works for object with properties with default values', () => {
     // assemble
-    const data = {
+    const data: JSONSchema7 = {
       type: 'object',
       properties: {
         name: {
@@ -106,7 +110,7 @@ describe('getDefaultValue', () => {
   });
   it('works for nested object', () => {
     // assemble
-    const data = {
+    const data: JSONSchema7 = {
       type: 'object',
       properties: {
         name: {
