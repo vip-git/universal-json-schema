@@ -25,7 +25,7 @@ describe('ReactSelect', () => {
     const path = 'done'; 
     const label = 'Done';
     schema.description = label;
-    const wrapper = mount(
+    const wrapper2 = mount(
       <ReactSelectComp
         type={'string'}
         label={label}
@@ -40,20 +40,6 @@ describe('ReactSelect', () => {
         schemaVersion='2'
       />,
     );
-    const fcComp = wrapper.find('label');
-    expect(fcComp).toHaveLength(1);
-    expect(fcComp.text()).toBe(schema.title);
-
-    const cbComp = wrapper.find('Select');
-    expect(cbComp).toHaveLength(1);
-    expect(cbComp.prop('value')).toBe(value);
-  });
-
-  it('mounts with standard attributes (MultiSelect)', () => {
-    const checked = true;
-    const path = 'done'; 
-    const label = 'Done';
-    schema.description = label;
     const wrapper = mount(
       <ReactSelectComp
         type={'string'}
@@ -66,7 +52,56 @@ describe('ReactSelect', () => {
         disabled={false}
         widget={{}}
         onChange={jest.fn}
+        schemaVersion='3'
+      />,
+    );
+    const fcComp = wrapper.find('label');
+    expect(fcComp).toHaveLength(1);
+    expect(fcComp.text()).toBe(schema.title);
+
+    const cbComp2 = wrapper2.find('Select');
+    expect(cbComp2).toHaveLength(1);
+    expect(cbComp2.prop('value')).toBe(value);
+
+    const cbComp = wrapper.find('Select');
+    expect(cbComp).toHaveLength(1);
+    expect(cbComp.prop('value')).toStrictEqual({"disabled": undefined, "label": "Yes", "style": undefined, "value": "Yes"});
+  });
+
+  it('mounts with standard attributes (MultiSelect)', () => {
+    const checked = true;
+    const path = 'done'; 
+    const label = 'Done';
+    schema.description = label;
+    const wrapper2 = mount(
+      <ReactSelectComp
+        type={'string'}
+        label={label}
+        path={path}
+        schema={schema}
+        value={value}
+        uiSchema={{}}
+        xhrSchema={{}}
+        disabled={false}
+        widget={{}}
+        onChange={jest.fn}
         schemaVersion='2'
+        options={{ multiSelect: true }}
+      />,
+    );
+    const wrapper = mount(
+      <ReactSelectComp
+        type={'string'}
+        label={label}
+        path={path}
+        schema={schema}
+        value={value}
+        uiSchema={{}}
+        xhrSchema={{}}
+        disabled={false}
+        widget={{}}
+        onChange={jest.fn}
+        schemaVersion='3'
         options={{ multiSelect: true }}
       />,
     );
