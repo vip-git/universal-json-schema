@@ -14,6 +14,19 @@ describe('removeEmptyValues', () => {
     // assert
     expect(actual).toEqual(data);
   });
+  it('can remove empty values null schema', () => {
+    // assemble
+    const data = {
+      type: 'string',
+    };
+    const expected = '';
+
+    // act
+    const actual = removeEmptyValues(data, null);
+
+    // assert
+    expect(actual).toEqual(data);
+  });
   it('can remove empty values (null)', () => {
     // assemble
     const data = {
