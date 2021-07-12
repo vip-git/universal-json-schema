@@ -1,5 +1,5 @@
 import without from 'lodash/without';
-import updateFormData, { addListItem, removeListItem, moveListItem, updateKeyFromSpec } from '../update-form-data';
+import updateFormData, { setUISchemaData, addListItem, removeListItem, moveListItem, updateKeyFromSpec } from '../update-form-data';
 
 describe('updateFormData', () => {
   it('updates simple field', () => {
@@ -212,6 +212,146 @@ describe('updateFormData', () => {
         Harry: 'Bob',
       };
       expect(updateKeyFromSpec(initial, 'name', 'Harry')).toStrictEqual(expected);
+      expect(updateKeyFromSpec(initial, 'namze', 'Harzry')).toStrictEqual(initial);
     });
-  })
+  });
+  describe('uiSchema', () => {
+    it('updates ui Schema', () => {
+      const initial = {
+        name: 'Bob',
+      };
+      const uiSchema = {
+        "ui:page": {
+          "ui:layout": "tabs",
+          "props": {
+            "ui:schemaErrors": true
+          },
+          "style": {
+            "boxShadow": "none"
+          },
+          "tabs": {
+            "style": {
+              "width": "29vw",
+              "marginTop": 10
+            }
+          },
+          "tab": {
+            "style": {
+              "minWidth": 81
+            }
+          }
+        },
+        "string": {
+          "firstName": {
+            "ui:autofocus": true,
+            "ui:emptyValue": ""
+          },
+          "react-select": {
+            "ui:widget": "material-select",
+            "ui:isClearable": true,
+            "ui:placeholder": "Example Placeholder"
+          },
+          "upload": {
+            "ui:widget": "upload",
+            "ui:props": {
+              "variant": "outlined",
+              "accept": "image/*",
+              "isMulti": true,
+              "buttonTitle": "Upload",
+              "icon": "add_circle"
+            }
+          },
+          "bio": {
+            "ui:widget": "textarea",
+            "ui:options": "rich-text-editor"
+          },
+          "password": {
+            "ui:widget": "password",
+            "ui:help": "Hint: Make it strong!",
+            "ui:validations": {
+              "minLength": {
+                "value": 3,
+                "message": "'Password' must be at least 3 characters",
+                "inline": true
+              }
+            }
+          },
+          "date": {
+            "ui:activeCompColor": "red",
+            "ui:widget": "material-date"
+          },
+          "telephone": {
+            "ui:options": {
+              "inputType": "tel"
+            },
+            "ui:validations": {
+              "minLength": {
+                "value": 10,
+                "message": "'Telephone' must be at least 10 digits",
+                "inline": true
+              }
+            }
+          }
+        },
+        "integer": {
+          "age": {
+            "ui:widget": "updown",
+            "ui:title": "Age of person",
+            "ui:description": "(earthian year)",
+            "mui:className": "money"
+          },
+          "customRating": {
+            "ui:component": "customRating",
+            "ui:interceptor": "translate-ratings",
+            "ui:options": {
+              "color": "red"
+            }
+          }
+        },
+        "number": {
+          "currency": {
+            "ui:interceptor": "translate-currency",
+            "ui:options": {
+              "useLocaleString": "nl"
+            },
+            "ui:data": "1.121.212.122"
+          }
+        },
+        "boolean": {
+          "radio": {
+            "ui:widget": "radio",
+            "ui:options": {
+              "row": true
+            }
+          }
+        },
+        "array": {
+          "selectTest": {
+            "ui:widget": "material-multiselect",
+            "mui:inputProps": {
+              "className": "money"
+            }
+          },
+          "xhrSelectTest": {
+            "ui:widget": "material-multiselect"
+          },
+          "creatableSelectTest": {
+            "ui:widget": "creatable-select",
+            "ui:options": {
+              "optionsOnly": true
+            }
+          }
+        },
+        "object": {
+          "customComponent": {
+            "ui:component": "customComponent",
+            "ui:interceptor": "translateRangeDate",
+            "ui:options": {}
+          }
+        }
+      };
+      const expected = {"array": {"creatableSelectTest": {"ui:options": {"optionsOnly": true}, "ui:widget": "creatable-select"}, "selectTest": {"mui:inputProps": {"className": "money"}, "ui:widget": "material-multiselect"}, "xhrSelectTest": {"ui:widget": "material-multiselect"}}, "boolean": {"radio": {"ui:options": {"row": true}, "ui:widget": "radio"}}, "integer": {"age": {"mui:className": "money", "ui:description": "(earthian year)", "ui:title": "Age of person", "ui:widget": "updown"}, "customRating": {"ui:component": "customRating", "ui:interceptor": "translate-ratings", "ui:options": {"color": "red"}}}, "number": {"currency": {"ui:data": "1.121.212.122", "ui:interceptor": "translate-currency", "ui:options": {"useLocaleString": "nl"}}}, "object": {"customComponent": {"ui:component": "customComponent", "ui:interceptor": "translateRangeDate", "ui:options": {}}}, "string": {"bio": {"ui:options": "rich-text-editor", "ui:widget": "textarea"}, "date": {"ui:activeCompColor": "red", "ui:widget": "material-date"}, "firstName": {"ui:autofocus": true, "ui:emptyValue": ""}, "password": {"ui:help": "Hint: Make it strong!", "ui:validations": {"minLength": {"inline": true, "message": "'Password' must be at least 3 characters", "value": 3}}, "ui:widget": "password"}, "react-select": {"ui:isClearable": true, "ui:placeholder": "Example Placeholder", "ui:widget": "material-select"}, "telephone": {"ui:options": {"inputType": "tel"}, "ui:validations": {"minLength": {"inline": true, "message": "'Telephone' must be at least 10 digits", "value": 10}}}, "upload": {"ui:props": {"accept": "image/*", "buttonTitle": "Upload", "icon": "add_circle", "isMulti": true, "variant": "outlined"}, "ui:widget": "upload"}}, "ui:page": {"props": {"ui:schemaErrors": true}, "style": {"boxShadow": "none"}, "tab": {"style": {"minWidth": 81}}, "tabs": {"style": {"marginTop": 10, "width": "29vw"}}, "ui:layout": "tabs"}};
+      expect(setUISchemaData(initial, uiSchema, '', {})).toStrictEqual(expected);
+    });
+  });
 });
