@@ -489,7 +489,7 @@ describe('updateFormData', () => {
         }
       };
       const expected = { "name": "Bob" };
-      expect(setUIData(initial, '', uiSchema,  null)).toStrictEqual(expected);
+      expect(setUIData(initial, Object.keys(uiSchema), uiSchema,  null)).toStrictEqual(expected);
       expect(setUIData(initial, '', uiSchema,  uiSchema)).toStrictEqual(expected);
     });
   });
