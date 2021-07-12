@@ -1,5 +1,5 @@
 import without from 'lodash/without';
-import updateFormData, { addListItem, removeListItem, moveListItem } from '../update-form-data';
+import updateFormData, { addListItem, removeListItem, moveListItem, updateKeyFromSpec } from '../update-form-data';
 
 describe('updateFormData', () => {
   it('updates simple field', () => {
@@ -203,4 +203,15 @@ describe('updateFormData', () => {
       expect(moveListItem(initial, 'listItems', 0, 1)).toStrictEqual(expected);
     });
   });
+  describe('updateKeyFromSpec', () => {
+    it('updates simple field', () => {
+      const initial = {
+        name: 'Bob',
+      };
+      const expected = {
+        Harry: 'Bob',
+      };
+      expect(updateKeyFromSpec(initial, 'name', 'Harry')).toStrictEqual(expected);
+    });
+  })
 });

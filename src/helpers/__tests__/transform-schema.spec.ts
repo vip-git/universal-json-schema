@@ -221,6 +221,7 @@ describe('transformSchema', () => {
     // assert
     expect(actual).toEqual(expected);
   });
+  
   it('can transform schema (ref)', () => {
     // assemble
     const data = {
@@ -359,6 +360,7 @@ describe('transformSchema', () => {
     // assert
     expect(actual).toEqual(expected);
   });
+
   it('can map data from schema', () => {
     const setData = jest.fn();
     // assemble
