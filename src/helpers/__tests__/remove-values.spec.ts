@@ -66,7 +66,27 @@ describe('removeEmptyValues', () => {
     // assemble
     const data = {
       "simple": {
-        "name": "Randy"
+        "name": ""
+      },
+      "conditional": {
+        "doYouHavePets": "No"
+      },
+      "arrayOfConditionals": [
+        {
+          "doYouHavePets": "Yes: One",
+          "howOldPet": 6
+        },
+        {
+          "doYouHavePets": "Yes: More than one",
+          "getRidPet": false
+        }
+      ],
+      "fixedArrayOfConditionals": [],
+      "new": ""
+    };
+    const expected = {
+      "simple": {
+        "name": ""
       },
       "conditional": {
         "doYouHavePets": "No"
@@ -83,13 +103,12 @@ describe('removeEmptyValues', () => {
       ],
       "fixedArrayOfConditionals": []
     };
-    const expected = '';
 
     // act
     const actual = removeEmptyValues(data, { type: 'object' });
 
     // assert
-    expect(actual).toEqual(data);
+    expect(actual).toEqual(expected);
   });
   it('can remove empty values (object)', () => {
     // assemble
