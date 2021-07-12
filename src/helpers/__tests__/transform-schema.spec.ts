@@ -224,96 +224,134 @@ describe('transformSchema', () => {
   it('can transform schema (ref)', () => {
     // assemble
     const data = {
-      "definitions": {
-        "Color": {
-          "title": "Color",
-          "type": "string",
-          "anyOf": [
-            {
-              "type": "string",
-              "const": "#ff0000",
-              "title": "Red"
-            },
-            {
-              "type": "string",
-              "const": "#00ff00",
-              "title": "Green"
-            },
-            {
-              "type": "string",
-              "const": "#0000ff",
-              "title": "Blue"
-            }
-          ]
-        },
-        "Toggle": {
-          "title": "Toggle",
-          "type": "boolean",
-          "oneOf": [
-            {
-              "title": "Enable",
-              "const": true
-            },
-            {
-              "title": "Disable",
-              "const": false
-            }
-          ]
-        }
-      },
-      "title": "Image editor",
+      "title": "Schema dependencies",
+      "description": "These samples are best viewed without live validation.",
       "type": "object",
-      "required": [
-        "currentColor",
-        "colorMask",
-        "blendMode"
-      ],
       "properties": {
-        "currentColor": {
-          "$ref": "#/definitions/Color",
-          "title": "Brush color"
-        },
-        "colorMask": {
-          "type": "array",
-          "uniqueItems": true,
-          "items": {
-            "$ref": "#/definitions/Color"
+        "simple": {
+          "src": "https://spacetelescope.github.io/understanding-json-schema/reference/object.html#dependencies",
+          "title": "Simple",
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "credit_card": {
+              "type": "number"
+            }
           },
-          "title": "Color mask"
-        },
-        "toggleMask": {
-          "title": "Apply color mask",
-          "$ref": "#/definitions/Toggle"
-        },
-        "colorPalette": {
-          "type": "array",
-          "title": "Color palette",
-          "items": {
-            "$ref": "#/definitions/Color"
+          "required": [
+            "name"
+          ],
+          "dependencies": {
+            "credit_card": {
+              "properties": {
+                "billing_address": {
+                  "type": "string",
+                  "title": "Billing Address"
+                }
+              },
+              "required": [
+                "billing_address"
+              ]
+            }
           }
         },
-        "blendMode": {
-          "title": "Blend mode",
-          "type": "string",
-          "enum": [
+        "conditional": {
+          "title": "Conditional",
+          "$ref": "#/definitions/person"
+        },
+        "arrayOfConditionals": {
+          "title": "Array of conditionals",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/person"
+          }
+        },
+        "fixedArrayOfConditionals": {
+          "title": "Fixed array of conditionals",
+          "type": "array",
+          "items": [
             {
-              "key": "screen",
-              "value": "Screen"
-            },
-            {
-              "key": "multiply",
-              "value": "Multiply"
-            },
-            {
-              "key": "overlay",
-              "value": "Overlay"
+              "title": "Primary person",
+              "$ref": "#/definitions/person"
             }
-          ]
+          ],
+          "additionalItems": {
+            "title": "Additional person",
+            "$ref": "#/definitions/person"
+          }
+        }
+      },
+      "definitions": {
+        "person": {
+          "title": "Person",
+          "type": "object",
+          "properties": {
+            "doYouHavePets": {
+              "type": "string",
+              "title": "Do you have any pets?",
+              "enum": [
+                "No",
+                "Yes: One",
+                "Yes: More than one"
+              ],
+              "default": "No"
+            }
+          },
+          "required": [
+            "doYouHavePets"
+          ],
+          "dependencies": {
+            "doYouHavePets": {
+              "oneOf": [
+                {
+                  "properties": {
+                    "doYouHavePets": {
+                      "const": "No"
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "doYouHavePets": {
+                      "const": "Yes: One"
+                    },
+                    "howOldPet": {
+                      "title": "How old is your pet?",
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "howOldPet"
+                  ]
+                },
+                {
+                  "properties": {
+                    "doYouHavePets": {
+                      "const": "Yes: More than one"
+                    },
+                    "getRidPet": {
+                      "title": "Do you want to get rid of any?",
+                      "type": "boolean"
+                    },
+                    "setRidPet": {
+                      "title": "Do you want to set rid of any?",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "getRidPet"
+                  ]
+                }
+              ]
+            }
+          }
         }
       }
     };
     
-    const expected = {"definitions": {"Color": {"anyOf": [{"const": "#ff0000", "title": "Red", "type": "string"}, {"const": "#00ff00", "title": "Green", "type": "string"}, {"const": "#0000ff", "title": "Blue", "type": "string"}], "title": "Color", "type": "string"}, "Toggle": {"oneOf": [{"const": true, "title": "Enable"}, {"const": false, "title": "Disable"}], "title": "Toggle", "type": "boolean"}}, "properties": {"blendMode": {"enum": ["screen", "multiply", "overlay"], "enum_titles": ["screen", "multiply", "overlay"], "title": "Blend mode", "type": "string"}, "colorMask": {"items": {"$ref": "#/definitions/Color", "anyOf": [{"const": "#ff0000", "title": "Red", "type": "string"}, {"const": "#00ff00", "title": "Green", "type": "string"}, {"const": "#0000ff", "title": "Blue", "type": "string"}], "title": "Color", "type": "string"}, "title": "Color mask", "type": "array", "uniqueItems": true}, "colorPalette": {"items": {"$ref": "#/definitions/Color", "anyOf": [{"const": "#ff0000", "title": "Red", "type": "string"}, {"const": "#00ff00", "title": "Green", "type": "string"}, {"const": "#0000ff", "title": "Blue", "type": "string"}], "title": "Color", "type": "string"}, "title": "Color palette", "type": "array"}, "currentColor": {"$ref": "#/definitions/Color", "anyOf": [{"const": "#ff0000", "title": "Red", "type": "string"}, {"const": "#00ff00", "title": "Green", "type": "string"}, {"const": "#0000ff", "title": "Blue", "type": "string"}], "title": "Color", "type": "string"}, "toggleMask": {"$ref": "#/definitions/Toggle", "oneOf": [{"const": true, "title": "Enable"}, {"const": false, "title": "Disable"}], "title": "Toggle", "type": "boolean"}}, "required": ["currentColor", "colorMask", "blendMode"], "title": "Image editor", "type": "object"};
+    const expected = {"definitions": {"person": {"dependencies": {"doYouHavePets": {"oneOf": [{"properties": {"doYouHavePets": {"const": "No"}}}, {"properties": {"doYouHavePets": {"const": "Yes: One"}, "howOldPet": {"title": "How old is your pet?", "type": "number"}}, "required": ["howOldPet"]}, {"properties": {"doYouHavePets": {"const": "Yes: More than one"}, "getRidPet": {"title": "Do you want to get rid of any?", "type": "boolean"}, "setRidPet": {"title": "Do you want to set rid of any?", "type": "string"}}, "required": ["getRidPet"]}]}}, "properties": {"doYouHavePets": {"default": "No", "enum": ["No", "Yes: One", "Yes: More than one"], "title": "Do you have any pets?", "type": "string"}}, "required": ["doYouHavePets"], "title": "Person", "type": "object"}}, "description": "These samples are best viewed without live validation.", "properties": {"arrayOfConditionals": {"items": {"$ref": "#/definitions/person", "properties": {"doYouHavePets": {"default": "No", "enum": ["No", "Yes: One", "Yes: More than one"], "title": "Do you have any pets?", "type": "string"}}, "required": ["doYouHavePets"], "title": "Person", "type": "object"}, "title": "Array of conditionals", "type": "array"}, "conditional": {"$ref": "#/definitions/person", "properties": {"doYouHavePets": {"default": "No", "enum": ["No", "Yes: One", "Yes: More than one"], "title": "Do you have any pets?", "type": "string"}}, "required": ["doYouHavePets"], "title": "Person", "type": "object"}, "fixedArrayOfConditionals": {"additionalItems": {"$ref": "#/definitions/person", "title": "Additional person"}, "items": [{"$ref": "#/definitions/person", "title": "Primary person"}], "title": "Fixed array of conditionals", "type": "array"}, "simple": {"dependencies": {"credit_card": {"properties": {"billing_address": {"title": "Billing Address", "type": "string"}}, "required": ["billing_address"]}}, "properties": {"credit_card": {"type": "number"}, "name": {"type": "string"}}, "required": ["name"], "src": "https://spacetelescope.github.io/understanding-json-schema/reference/object.html#dependencies", "title": "Simple", "type": "object"}}, "title": "Schema dependencies", "type": "object"};
 
     // act
     const actual = transformSchema(data);
