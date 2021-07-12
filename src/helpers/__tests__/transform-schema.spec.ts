@@ -1,4 +1,4 @@
-import transformSchema, { mapData, setNestedPayload } from '../transform-schema';
+import transformSchema, { mapData, setNestedPayload, hashCode } from '../transform-schema';
 
 describe('transformSchema', () => {
   it('can transform schema', () => {
@@ -779,7 +779,7 @@ describe('transformSchema', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('can map data from schema', () => {
+  it('can setNestedPayload from XHRSchema', () => {
     const setData = jest.fn();
     // assemble
     const data = {
@@ -1173,5 +1173,13 @@ describe('transformSchema', () => {
 
     // assert
     expect(actual).toEqual(expected);
+  });
+
+  it('can translate a given object to hashcode', () => {
+    const mappedCode = JSON.stringify({
+      "type": "string",
+      "title": "First name"
+    });
+    expect(hashCode(mappedCode)).toBe(-193240954)
   });
 });
