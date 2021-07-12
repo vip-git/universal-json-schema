@@ -1,4 +1,4 @@
-import transformSchema, { mapData, setNestedPayload, hashCode } from '../transform-schema';
+import transformSchema, { mapData, setNestedPayload, hashCode, parsePath } from '../transform-schema';
 
 describe('transformSchema', () => {
   it('can transform schema', () => {
@@ -1181,5 +1181,10 @@ describe('transformSchema', () => {
       "title": "First name"
     });
     expect(hashCode(mappedCode)).toBe(-193240954)
+  });
+
+  it('can translate a given object to parsePath', () => {
+    const parsedPath = 'mapData.[1].helloWorld';
+    expect(parsePath(parsedPath)).toBe('mapData||1||helloWorld')
   });
 });
