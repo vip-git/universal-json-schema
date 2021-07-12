@@ -1,4 +1,4 @@
-import transformSchema, { mapData } from '../transform-schema';
+import transformSchema, { mapData, setNestedPayload } from '../transform-schema';
 
 describe('transformSchema', () => {
   it('can transform schema', () => {
@@ -774,6 +774,402 @@ describe('transformSchema', () => {
       schema,
       setData,
     );
+
+    // assert
+    expect(actual).toEqual(expected);
+  });
+
+  it('can map data from schema', () => {
+    const setData = jest.fn();
+    // assemble
+    const data = {
+      "string": {
+        "firstName": "${string.first_name}",
+        "lastName": "${string.last_name}",
+        "select": "${string.select}",
+        "react-select": "${string.react_select}",
+        "upload": "${string.upload}",
+        "bio": "${string.bio}",
+        "date": "${string.date}",
+        "password": "${string.password}",
+        "telephone": "${string.telephone}"
+      },
+      "integer": {
+        "customRating": "${integer.custom_rating}",
+        "age": "${integer.age}"
+      },
+      "number": {
+        "currency": "${number.currency}"
+      },
+      "boolean": {
+        "default": "${boolean.default}",
+        "radio": "${boolean.radio}"
+      },
+      "array": {
+        "multiSelect": "${array.multiSelect}",
+        "creatableSelectTest": "${array.creatable_select_test}",
+        "selectTest": "${array.select_test}"
+      },
+      "object": {
+        "customComponent": "${object.custom_component}"
+      }
+    };
+
+    const xhrSchema = {
+      "ui:errors": {
+        "offline": {
+          "title": "You are Offline !",
+          "message": "Please try again once you are online."
+        }
+      },
+      "ui:page": {
+        "onload": {
+          "xhr:datasource": {
+            "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api/2",
+            "method": "GET",
+            "headers": {},
+            "payload": {},
+            "map:results": "#/definitions/results"
+          }
+        },
+        "onsubmit": {
+          "xhr:datasource": {
+            "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api/2",
+            "method": "PUT",
+            "headers": {},
+            "map:payload": {
+              "string": {
+                "firstName:first_name": "${string.firstName}",
+                "lastName:last_name": "${string.lastName}",
+                "select": "${string.select}",
+                "react-select:react_select": "${string.react-select}",
+                "upload": "${string.upload}",
+                "bio": "${string.bio}",
+                "date": "${string.date}",
+                "password": "${string.password}",
+                "telephone": "${string.telephone}"
+              },
+              "integer": {
+                "customRating:custom_rating": "${integer.customRating}",
+                "age": "${integer.age}"
+              },
+              "number": {
+                "currency": "${number.currency}"
+              },
+              "boolean": {
+                "default": "${boolean.default}",
+                "radio": "${boolean.radio}"
+              },
+              "array": {
+                "multiSelect": "${array.multiSelect}",
+                "creatableSelectTest:creatable_select_test": "${array.creatableSelectTest}",
+                "selectTest:select_test": "${array.selectTest}"
+              },
+              "object": {
+                "customComponent:custom_component": {
+                  "startDate:start_date": "${object.customComponent.startDate}",
+                  "endDate:end_date": "${object.customComponent.endDate}"
+                }
+              }
+            },
+            "map:results": "#/definitions/results"
+          }
+        }
+      },
+      "properties": {
+        "array": {
+          "xhrSelectTest": {
+            "onload": {
+              "xhr:datasource": {
+                "url": "https://60154dbe55dfbd00174ca231.mockapi.io/api",
+                "method": "GET",
+                "headers": {},
+                "payload": {},
+                "map:items.enum": "name"
+              }
+            }
+          }
+        }
+      },
+      "definitions": {
+        "results": {
+          "string": {
+            "firstName": "${string.first_name}",
+            "lastName": "${string.last_name}",
+            "select": "${string.select}",
+            "react-select": "${string.react_select}",
+            "upload": "${string.upload}",
+            "bio": "${string.bio}",
+            "date": "${string.date}",
+            "password": "${string.password}",
+            "telephone": "${string.telephone}"
+          },
+          "integer": {
+            "customRating": "${integer.custom_rating}",
+            "age": "${integer.age}"
+          },
+          "number": {
+            "currency": "${number.currency}"
+          },
+          "boolean": {
+            "default": "${boolean.default}",
+            "radio": "${boolean.radio}"
+          },
+          "array": {
+            "multiSelect": "${array.multiSelect}",
+            "creatableSelectTest": "${array.creatable_select_test}",
+            "selectTest": "${array.select_test}"
+          },
+          "object": {
+            "customComponent": "${object.custom_component}"
+          }
+        }
+      }
+    };
+
+    const schema = {
+      "title": "A registration form",
+      "description": "A simple form example with various formData return types per tab.",
+      "type": "object",
+      "properties": {
+        "string": {
+          "type": "object",
+          "title": "String",
+          "required": [
+            "firstName",
+            "lastName"
+          ],
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "title": "First name"
+            },
+            "lastName": {
+              "type": "string",
+              "title": "Last name"
+            },
+            "select": {
+              "type": "string",
+              "title": "Example select",
+              "enum": [
+                "Yes",
+                "No"
+              ]
+            },
+            "react-select": {
+              "type": "string",
+              "title": "Example React select",
+              "enum": [
+                "Yes",
+                "No"
+              ]
+            },
+            "password": {
+              "type": "string",
+              "title": "Password",
+              "minLength": 3
+            },
+            "upload": {
+              "type": "string",
+              "title": "Please upload your file"
+            },
+            "bio": {
+              "type": "string",
+              "title": "Bio"
+            },
+            "date": {
+              "type": "string",
+              "title": "Date"
+            },
+            "telephone": {
+              "type": "string",
+              "title": "Telephone"
+            }
+          }
+        },
+        "integer": {
+          "type": "object",
+          "title": "Integer",
+          "properties": {
+            "age": {
+              "type": "integer",
+              "title": "Age"
+            },
+            "customRating": {
+              "type": "integer",
+              "title": "Rating (Custom Component)"
+            }
+          }
+        },
+        "number": {
+          "type": "object",
+          "title": "Number",
+          "properties": {
+            "currency": {
+              "type": "number",
+              "title": "Currency"
+            }
+          }
+        },
+        "boolean": {
+          "type": "object",
+          "title": "Boolean",
+          "properties": {
+            "default": {
+              "type": "boolean",
+              "title": "checkbox (default)",
+              "description": "This is the checkbox-description"
+            },
+            "radio": {
+              "type": "boolean",
+              "title": "radio buttons",
+              "description": "This is the radio-description",
+              "enum": [
+                {
+                  "key": true,
+                  "value": "Yes"
+                },
+                {
+                  "key": false,
+                  "value": "No"
+                }
+              ]
+            }
+          }
+        },
+        "array": {
+          "type": "object",
+          "title": "Array",
+          "properties": {
+            "multiSelect": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "title": "Example Multi select",
+                "type": "string",
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "#ff0000",
+                    "title": "Red"
+                  },
+                  {
+                    "type": "string",
+                    "const": "#00ff00",
+                    "title": "Green"
+                  },
+                  {
+                    "type": "string",
+                    "const": "#0000ff",
+                    "title": "Blue"
+                  }
+                ]
+              }
+            },
+            "creatableSelectTest": {
+              "type": "array",
+              "title": "Example creatable select",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "test",
+                  "teete",
+                  "etetet"
+                ]
+              }
+            },
+            "selectTest": {
+              "type": "array",
+              "title": "Example React Multi Select",
+              "items": {
+                "type": "string",
+                "enum": [
+                  {
+                    "key": "Yes",
+                    "style": {
+                      "borderBottom": "solid 1px black"
+                    },
+                    "value": "Yes",
+                    "disabled": true
+                  },
+                  "No",
+                  "etetet"
+                ]
+              },
+              "uniqueItems": true
+            },
+            "xhrSelectTest": {
+              "type": "array",
+              "title": "Example XHR React Multi Select",
+              "items": {
+                "type": "string",
+                "enum": []
+              },
+              "uniqueItems": true
+            }
+          }
+        },
+        "object": {
+          "type": "object",
+          "title": "Object",
+          "properties": {
+            "customComponent": {
+              "type": "object",
+              "title": "Custom Component",
+              "component": "customComponent",
+              "properties": {
+                "startDate": {
+                  "type": "string",
+                  "title": "Start Date"
+                },
+                "endDate": {
+                  "type": "string",
+                  "title": "End Date"
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+
+    const formData = {
+      "string": {
+        "firstName": "Chuck",
+        "lastName": "Norris",
+        "upload": "",
+        "bio": "<p><u>ads</u></p>",
+        "password": "noneed",
+        "telephone": ""
+      },
+      "integer": {
+        "age": 75,
+        "customRating": 3
+      },
+      "number": {},
+      "boolean": {},
+      "array": {
+        "creatableSelectTest": [
+          "test"
+        ],
+        "selectTest": [
+          "Yes",
+          "No"
+        ]
+      },
+      "object": {
+        "customComponent": ""
+      }
+    }
+
+    const expected = {"array": {"creatable_select_test": ["test"], "multiSelect": [], "select_test": ["Yes", "No"]}, "boolean": {"default": false, "radio": false}, "integer": {"age": 75, "custom_rating": 3}, "number": {"currency": 0}, "object": {"custom_component": {"end_date": "", "start_date": ""}}, "string": {"bio": "<p><u>ads</u></p>", "date": "", "first_name": "Chuck", "last_name": "Norris", "password": "noneed", "react_select": "", "select": "", "telephone": "", "upload": ""}};
+
+    // act
+    const actual = setNestedPayload({
+      payloadData: xhrSchema['ui:page'].onsubmit['xhr:datasource']['map:payload'],
+      formData,
+      schemaProps: schema.properties,
+    });
 
     // assert
     expect(actual).toEqual(expected);
