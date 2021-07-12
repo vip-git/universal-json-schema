@@ -4,313 +4,184 @@ describe('getDefinitionSchema', () => {
   it('can get definitions from schema', () => {
     // assemble
     const def = {
-        "Thing": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "default": "Default name"
-                }
+        "person": {
+          "title": "Person",
+          "type": "object",
+          "properties": {
+            "doYouHavePets": {
+              "type": "string",
+              "title": "Do you have any pets?",
+              "enum": [
+                "No",
+                "Yes: One",
+                "Yes: More than one"
+              ],
+              "default": "No"
             }
+          },
+          "required": [
+            "doYouHavePets"
+          ],
+          "dependencies": {
+            "doYouHavePets": {
+              "oneOf": [
+                {
+                  "properties": {
+                    "doYouHavePets": {
+                      "const": "No"
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "doYouHavePets": {
+                      "const": "Yes: One"
+                    },
+                    "howOldPet": {
+                      "title": "How old is your pet?",
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "howOldPet"
+                  ]
+                },
+                {
+                  "properties": {
+                    "doYouHavePets": {
+                      "const": "Yes: More than one"
+                    },
+                    "getRidPet": {
+                      "title": "Do you want to get rid of any?",
+                      "type": "boolean"
+                    },
+                    "setRidPet": {
+                      "title": "Do you want to set rid of any?",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "getRidPet"
+                  ]
+                }
+              ]
+            }
+          }
         }
     };
     const properties = {
-        "Technical": {
-            "type": "object",
-            "title": "Technical",
-            "properties": {
-            "listOfStrings": {
-                "type": "array",
-                "title": "A list of strings",
-                "items": {
-                "type": "string",
-                "default": "bazinga"
-                }
+        "simple": {
+          "src": "https://spacetelescope.github.io/understanding-json-schema/reference/object.html#dependencies",
+          "title": "Simple",
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
             },
-            "multipleChoicesList": {
-                "type": "array",
-                "title": "A multiple choices list",
-                "items": {
-                "type": "string",
-                "enum": [
-                    "foo",
-                    "bar",
-                    "fuzz",
-                    "qux"
-                ]
-                },
-                "uniqueItems": true
-            },
-            "fixedItemsList": {
-                "type": "array",
-                "title": "A list of fixed items",
-                "items": [
-                {
-                    "title": "A string value",
-                    "type": "string",
-                    "default": "lorem ipsum"
-                },
-                {
-                    "title": "a boolean value",
-                    "type": "boolean"
-                }
-                ],
-                "additionalItems": {
-                "title": "Additional item",
-                "type": "number"
-                }
-            },
-            "minItemsList": {
-                "type": "array",
-                "title": "A list with a minimal number of items",
-                "minItems": 3,
-                "items": {
-                "$ref": "#/definitions/Thing"
-                }
-            },
-            "defaultsAndMinItems": {
-                "type": "array",
-                "title": "List and item level defaults",
-                "minItems": 5,
-                "default": [
-                "carp",
-                "trout",
-                "bream",
-                "dream",
-                "cream"
-                ],
-                "items": {
-                "type": "string",
-                "default": "unidentified"
-                }
-            },
-            "nestedList": {
-                "type": "array",
-                "title": "Nested list",
-                "items": {
-                "type": "array",
-                "title": "Inner list",
-                "items": {
-                    "type": "string",
-                    "default": "lorem ipsum"
-                }
-                }
-            },
-            "unorderable": {
-                "title": "Unorderable items",
-                "type": "array",
-                "items": {
-                "type": "string",
-                "default": "lorem ipsum"
-                }
-            },
-            "unremovable": {
-                "title": "Unremovable items",
-                "type": "array",
-                "items": {
-                "type": "string",
-                "default": "lorem ipsum"
-                }
-            },
-            "noToolbar": {
-                "title": "No add, remove and order buttons",
-                "type": "array",
-                "items": {
-                "type": "string",
-                "default": "lorem ipsum"
-                }
-            },
-            "fixedNoToolbar": {
-                "title": "Fixed array without buttons",
-                "type": "array",
-                "items": [
-                {
-                    "title": "A number",
-                    "type": "number",
-                    "default": 42
-                },
-                {
-                    "title": "A boolean",
-                    "type": "boolean",
-                    "default": false
-                }
-                ],
-                "additionalItems": {
-                "title": "A string",
-                "type": "string",
-                "default": "lorem ipsum"
-                }
+            "credit_card": {
+              "type": "number"
             }
+          },
+          "required": [
+            "name"
+          ],
+          "dependencies": {
+            "credit_card": {
+              "properties": {
+                "billing_address": {
+                  "type": "string",
+                  "title": "Billing Address"
+                }
+              },
+              "required": [
+                "billing_address"
+              ]
             }
+          }
         },
-        "Changedata": {
-            "title": "Change Data",
-            "type": "object",
-            "properties": {
-            "Createdon": {
-                "type": "string",
-                "title": "Createdon"
-            },
-            "Createdby": {
-                "type": "string",
-                "title": "Createdby"
+        "conditional": {
+          "title": "Conditional",
+          "$ref": "#/definitions/person"
+        },
+        "arrayOfConditionals": {
+          "title": "Array of conditionals",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/person"
+          }
+        },
+        "fixedArrayOfConditionals": {
+          "title": "Fixed array of conditionals",
+          "type": "array",
+          "items": [
+            {
+              "title": "Primary person",
+              "$ref": "#/definitions/person"
             }
-            },
-            "required": [
-            "Createdon",
-            "Createdby"
-            ]
+          ],
+          "additionalItems": {
+            "title": "Additional person",
+            "$ref": "#/definitions/person"
+          }
         }
     };
     const expected = {
-        "Changedata": {
-         "properties": {
-           "Createdby": {
-             "title": "Createdby",
-             "type": "string",
-           },
-           "Createdon": {
-             "title": "Createdon",
-             "type": "string",
-           },
-         },
-         "required": [
-           "Createdon",
-           "Createdby",
-         ],
-         "title": "Change Data",
-         "type": "object",
-       },
-       "Technical": {
-         "properties": {
-           "defaultsAndMinItems": {
-             "default": [
-               "carp",
-               "trout",
-               "bream",
-               "dream",
-               "cream",
-             ],
+           "arrayOfConditionals": {
              "items": {
-               "default": "unidentified",
-               "type": "string",
+               "$ref": "#/definitions/person",
              },
-             "minItems": 5,
-             "title": "List and item level defaults",
+             "title": "Array of conditionals",
              "type": "array",
            },
-           "fixedItemsList": {
+           "conditional": {
+             "$ref": "#/definitions/person",
+             "title": "Conditional",
+           },
+           "fixedArrayOfConditionals": {
              "additionalItems": {
-               "title": "Additional item",
-               "type": "number",
+               "$ref": "#/definitions/person",
+               "title": "Additional person",
              },
              "items": [
                {
-                 "default": "lorem ipsum",
-                 "title": "A string value",
-                 "type": "string",
-               },
-               {
-                 "title": "a boolean value",
-                 "type": "boolean",
+                 "$ref": "#/definitions/person",
+                 "title": "Primary person",
                },
              ],
-             "title": "A list of fixed items",
+             "title": "Fixed array of conditionals",
              "type": "array",
            },
-           "fixedNoToolbar": {
-             "additionalItems": {
-               "default": "lorem ipsum",
-               "title": "A string",
-               "type": "string",
+           "simple": {
+             "dependencies": {
+               "credit_card": {
+                 "properties": {
+                   "billing_address": {
+                     "title": "Billing Address",
+                     "type": "string",
+                   },
+                 },
+                 "required": [
+                   "billing_address",
+                 ],
+               },
              },
-             "items": [
-               {
-                 "default": 42,
-                 "title": "A number",
+             "properties": {
+               "credit_card": {
                  "type": "number",
                },
-               {
-                 "default": false,
-                 "title": "A boolean",
-                 "type": "boolean",
-               },
-             ],
-             "title": "Fixed array without buttons",
-             "type": "array",
-           },
-           "listOfStrings": {
-             "items": {
-               "default": "bazinga",
-               "type": "string",
-             },
-             "title": "A list of strings",
-             "type": "array",
-           },
-           "minItemsList": {
-             "items": {
-               "$ref": "#/definitions/Thing",
-             },
-             "minItems": 3,
-             "title": "A list with a minimal number of items",
-             "type": "array",
-           },
-           "multipleChoicesList": {
-             "items": {
-               "enum": [
-                 "foo",
-                 "bar",
-                 "fuzz",
-                 "qux",
-               ],
-               "type": "string",
-             },
-             "title": "A multiple choices list",
-             "type": "array",
-             "uniqueItems": true,
-           },
-           "nestedList": {
-             "items": {
-               "items": {
-                 "default": "lorem ipsum",
+               "name": {
                  "type": "string",
                },
-               "title": "Inner list",
-               "type": "array",
              },
-             "title": "Nested list",
-             "type": "array",
+             "required": [
+               "name",
+             ],
+             "src": "https://spacetelescope.github.io/understanding-json-schema/reference/object.html#dependencies",
+             "title": "Simple",
+             "type": "object",
            },
-           "noToolbar": {
-             "items": {
-               "default": "lorem ipsum",
-               "type": "string",
-             },
-             "title": "No add, remove and order buttons",
-             "type": "array",
-           },
-           "unorderable": {
-             "items": {
-               "default": "lorem ipsum",
-               "type": "string",
-             },
-             "title": "Unorderable items",
-             "type": "array",
-           },
-           "unremovable": {
-             "items": {
-               "default": "lorem ipsum",
-               "type": "string",
-             },
-             "title": "Unremovable items",
-             "type": "array",
-           },
-         },
-         "title": "Technical",
-         "type": "object",
-       },
-        "title": undefined
-    };
+           "title": undefined,
+        };
 
     // act
     const actual = getDefinitionSchema(def, properties, {});
