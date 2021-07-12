@@ -62,6 +62,35 @@ describe('removeEmptyValues', () => {
     // assert
     expect(actual).toEqual(data);
   });
+  it('can remove empty values (object schema)', () => {
+    // assemble
+    const data = {
+      "simple": {
+        "name": "Randy"
+      },
+      "conditional": {
+        "doYouHavePets": "No"
+      },
+      "arrayOfConditionals": [
+        {
+          "doYouHavePets": "Yes: One",
+          "howOldPet": 6
+        },
+        {
+          "doYouHavePets": "Yes: More than one",
+          "getRidPet": false
+        }
+      ],
+      "fixedArrayOfConditionals": []
+    };
+    const expected = '';
+
+    // act
+    const actual = removeEmptyValues(data, { type: 'object' });
+
+    // assert
+    expect(actual).toEqual(data);
+  });
   it('can remove empty values (object)', () => {
     // assemble
     const expected = false;
