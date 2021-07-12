@@ -14,6 +14,30 @@ describe('removeEmptyValues', () => {
     // assert
     expect(actual).toEqual(data);
   });
+  it('can remove empty values (null)', () => {
+    // assemble
+    const data = {
+      type: 'null',
+    };
+    const expected = '';
+
+    // act
+    const actual = removeEmptyValues(data, { type: 'null' });
+
+    // assert
+    expect(actual).toEqual(data);
+  });
+  it('can remove empty values (string)', () => {
+    // assemble
+    const data = '';
+    const expected = '';
+
+    // act
+    const actual = removeEmptyValues(data, { type: 'string' });
+
+    // assert
+    expect(actual).toEqual(data);
+  });
   it('can remove empty values (object)', () => {
     // assemble
     const expected = false;
