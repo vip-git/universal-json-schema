@@ -41,7 +41,7 @@ const useStepperEvents = ({
         const payloadKey = pKey.replace('${formData.', '').replace('}', '');
         return pKey.replace('${', '').replace('}', '') === 'formData' ? givenData : get(givenData, payloadKey);
       };
-      const payload = payloadData.includes('${formData') 
+      const payload = typeof payloadData === 'string' && payloadData.includes('${formData') 
         ? getPayloadFromTemplateString(formData, payloadData) // Todo: add map results functionality as optional
         : setNestedPayload({ // Todo: make map resulsts functionality optional
           payloadData,
