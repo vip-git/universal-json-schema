@@ -5,27 +5,27 @@ describe('useFormEvents', () => {
     [
         { 
             name: 'onMoveItemDown',
-            fn: (formEvents) => formEvents['onMoveItemDown']('test.me', 1)('hello', 'world'),
+            fn: (formEvents) => formEvents['onMoveItemDown']('test.me', 1)(),
             spy: (params) => jest.spyOn(params.stateMachineService, 'send')
         },
         { 
             name: 'onDeleteItem',
-            fn: (formEvents) => formEvents['onDeleteItem']('test.me', 1)('hello', 'world'),
+            fn: (formEvents) => formEvents['onDeleteItem']('test.me', 1)(),
             spy: (params) => jest.spyOn(params.stateMachineService, 'send')
         },
         { 
             name: 'onAddItem',
-            fn: (formEvents) => formEvents['onAddItem']('test.me', 1)('hello', 'world'),
+            fn: (formEvents) => formEvents['onAddItem']('test.me', 1)(),
             spy: (params) => jest.spyOn(params.stateMachineService, 'send')
         },
         { 
             name: 'onAddNewProperty',
-            fn: (formEvents) => formEvents['onAddNewProperty']('test.me', 1)('hello', 'world'),
+            fn: (formEvents) => formEvents['onAddNewProperty']('test.me', 1)(),
             spy: (params) => jest.spyOn(params.stateMachineService, 'send')
         },
         { 
             name: 'onRemoveProperty',
-            fn: (formEvents) => formEvents['onRemoveProperty']('test.me', 1)('hello', 'world'),
+            fn: (formEvents) => formEvents['onRemoveProperty']('test.me', 1)(),
             spy: (params) => jest.spyOn(params.stateMachineService, 'send')
         },
         { 
