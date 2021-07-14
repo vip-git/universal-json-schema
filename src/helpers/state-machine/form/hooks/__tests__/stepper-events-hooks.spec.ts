@@ -6,24 +6,24 @@ describe('useStepperEvents', () => {
     [
         { 
             name: 'onStepNext (XHR)',
-            fn: (formEvents) => formEvents['onStepNext']('array', 1),
+            fn: (formEvents) => formEvents['onStepNext']('array', 1, jest.fn),
             spy: (params) => jest.spyOn(executeXHRCall, 'default'),
         },
         { 
           name: 'onStepNext',
-          fn: (formEvents) => formEvents['onStepNext']('test.me', 1)
+          fn: (formEvents) => formEvents['onStepNext']('test.me', 1, jest.fn)
         },
         { 
             name: 'onStepBack',
-            fn: (formEvents) => formEvents['onStepBack']('test.me', 1)
+            fn: (formEvents) => formEvents['onStepBack']('test.me', 1, jest.fn)
         },
         { 
             name: 'onStepSkip',
-            fn: (formEvents) => formEvents['onStepSkip']('test.me', 1)
+            fn: (formEvents) => formEvents['onStepSkip']('test.me', 1, jest.fn)
         },
         { 
             name: 'onStepReset',
-            fn: (formEvents) => formEvents['onStepReset']('test.me', 1),
+            fn: (formEvents) => formEvents['onStepReset']('test.me', 1, jest.fn),
             spy: (params) => jest.spyOn(params, 'givenOnStepReset'),
         },
     ].map((actionName) => {
