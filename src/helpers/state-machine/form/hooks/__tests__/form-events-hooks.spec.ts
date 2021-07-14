@@ -5,60 +5,49 @@ describe('useFormEvents', () => {
     [
         { 
             name: 'onMoveItemDown',
-            fn: (formEvents) => formEvents['onMoveItemDown']('test.me', 1)(),
-            spy: (params) => jest.spyOn(params.stateMachineService, 'send')
+            fn: (formEvents) => formEvents['onMoveItemDown']('test.me', 1)()
         },
         { 
             name: 'onDeleteItem',
-            fn: (formEvents) => formEvents['onDeleteItem']('test.me', 1)(),
-            spy: (params) => jest.spyOn(params.stateMachineService, 'send')
+            fn: (formEvents) => formEvents['onDeleteItem']('test.me', 1)()
         },
         { 
             name: 'onAddItem',
-            fn: (formEvents) => formEvents['onAddItem']('test.me', 1)(),
-            spy: (params) => jest.spyOn(params.stateMachineService, 'send')
+            fn: (formEvents) => formEvents['onAddItem']('test.me', 1)()
         },
         { 
             name: 'onAddNewProperty',
-            fn: (formEvents) => formEvents['onAddNewProperty']('test.me', 1)(),
-            spy: (params) => jest.spyOn(params.stateMachineService, 'send')
+            fn: (formEvents) => formEvents['onAddNewProperty']('test.me', 1)()
         },
         { 
             name: 'onRemoveProperty',
-            fn: (formEvents) => formEvents['onRemoveProperty']('test.me', 1)(),
-            spy: (params) => jest.spyOn(params.stateMachineService, 'send')
+            fn: (formEvents) => formEvents['onRemoveProperty']('test.me', 1)()
         },
         { 
             name: 'onUpdateKeyProperty',
-            fn: (formEvents) => formEvents['onUpdateKeyProperty']('test.me', 1)('hello', 'world'),
-            spy: (params) => jest.spyOn(params.stateMachineService, 'send') 
+            fn: (formEvents) => formEvents['onUpdateKeyProperty']('test.me', 1)('hello', 'world') 
         },
         { 
             name: 'onFormValuesChange',
-            fn: (formEvents) => formEvents['onFormValuesChange']('test.me', 1)('hello', 'world'),
-            spy: (params) => jest.spyOn(params.stateMachineService, 'send')
+            fn: (formEvents) => formEvents['onFormValuesChange']('test.me', 1)('hello', 'world')
         },
         { 
             name: 'onXHRSchemaEvent',
-            fn: (formEvents) => formEvents['onXHRSchemaEvent']('test.me', 1)('hello', 'world'),
-            spy: (params) => jest.spyOn(params.stateMachineService, 'send')
+            fn: (formEvents) => formEvents['onXHRSchemaEvent']('test.me', 1)('hello', 'world')
         },
         { 
             name: 'onFormSubmit',
-            fn: (formEvents) => formEvents['onFormSubmit']('test.me', 1),
-            spy: (params) => jest.spyOn(params.stateMachineService, 'send')
+            fn: (formEvents) => formEvents['onFormSubmit']('test.me', 1)
         },
         { 
             name: 'handleKeyEnter',
             fn: (formEvents) => formEvents['handleKeyEnter']({
                 keyCode: 13,
-            }),
-            spy: (params) => jest.spyOn(params.stateMachineService, 'send')
+            })
         },
         { 
             name: 'onTabChange',
-            fn: (formEvents) => formEvents['onTabChange']('test.me', 1),
-            spy: (params) => jest.spyOn(params.stateMachineService, 'send')
+            fn: (formEvents) => formEvents['onTabChange']('test.me', 1)
         },
     ].map((actionName) => {
         it(`Should be able execute ${actionName.name}`, () => {
@@ -545,8 +534,8 @@ describe('useFormEvents', () => {
                 submitOnEnter: true,
                 onSubmit: jest.fn(),
             };
+            const sendSpy = jest.spyOn(params.stateMachineService, 'send');
             const formEvents = useFormEvents(params);
-            const sendSpy = actionName['spy'](params);
             actionName['fn'](formEvents);
             expect(sendSpy).toHaveBeenCalledTimes(1);
         });
