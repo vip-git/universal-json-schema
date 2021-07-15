@@ -82,5 +82,13 @@ describe('FormMutations', () => {
             const expected = {"activeStep": 0, "formData": {"test": "test-2"}, "formSchema": {}, "formSchemaXHR": {"new": "info"}, "hasError": false, "hasXHRError": false, "lastField": "test", "parsedFormSchema": {}, "uiData": {}, "uiSchema": {}, "validation": {}, "validations": {}, "xhrProgress": {"undefined": false}, "xhrSchema": {}};
             expect(contextMutations).toStrictEqual(expected);
         });
+
+        it('updateXHRData (edge case)', () => {
+            const updateMutation = stateMachineService.send('updateFormOnXHRComplete', {});
+            const contextMutations = JSON.parse(JSON.stringify(updateMutation.context));
+            delete contextMutations.effects;
+            const expected = {"activeStep": 0, "formData": {"test": "test-2"}, "formSchema": {}, "formSchemaXHR": {"new": "info"}, "hasError": false, "hasXHRError": false, "lastField": "test", "parsedFormSchema": {}, "uiData": {}, "uiSchema": {}, "validation": {}, "validations": {}, "xhrProgress": {"undefined": false}, "xhrSchema": {}};
+            expect(contextMutations).toStrictEqual(expected);
+        });
     });
 });
