@@ -126,6 +126,18 @@ describe('FormMutations', () => {
             expect(stateMachineService.state.value).toStrictEqual({"formUI": "dirty"});
         });
 
+        it('stepChange', () => {
+            const updateMutation = stateMachineService.send('updateTabIndex', {
+                stepName: '',
+            });
+            const contextMutations = JSON.parse(JSON.stringify(updateMutation.context));
+            delete contextMutations.effects;
+            const expected = {"formData": {"test": "test-2"}, "formSchema": {}, "formSchemaXHR": {"new": "info"}, "hasError": false, "hasXHRError": false, "lastField": "test", "parsedFormSchema": {}, "uiData": {}, "uiSchema": {"ui:page": {"props": {"ui:schemaErrors": true}, "style": {"boxShadow": "none"}, "tab": {"style": {"minWidth": 81}}, "tabs": {"props": {}, "style": {"marginTop": 10, "width": "29vw"}}, "ui:layout": "tabs"}}, "validation": {}, "validations": {}, "xhrProgress": {"undefined": false}, "xhrSchema": {"ui:errors": {"offline": {"message": "Please try again once you are online.", "title": "You are Offline !"}}}}
+            expect(contextMutations).toStrictEqual(expected);
+            expect(onChange).toHaveBeenCalled();
+            expect(stateMachineService.state.value).toStrictEqual({"formUI": "dirty"});
+        });
+
         it('updateTabIndex', () => {
             const updateMutation = stateMachineService.send('updateTabIndex', {
                 tabIndex: 1,
@@ -137,6 +149,7 @@ describe('FormMutations', () => {
             expect(onChange).toHaveBeenCalled();
             expect(stateMachineService.state.value).toStrictEqual({"formUI": "dirty"});
         });
+
 
         it('updateArrayData', () => {
             const updateArrayFN = jest.fn();
