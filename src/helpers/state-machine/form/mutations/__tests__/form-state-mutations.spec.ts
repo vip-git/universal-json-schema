@@ -27,6 +27,8 @@ describe('FormMutations', () => {
     });
 
     describe('All actions in the state machine', () => {
+        const onChange = jest.fn();
+        const onError = jest.fn();
         const params = {
             uiSchema: {},
             xhrSchema: {},
@@ -37,8 +39,8 @@ describe('FormMutations', () => {
             validations: {},
             hasError: false,
             effects: {
-              onChange: jest.fn(),
-              onError: jest.fn(),
+              onChange,
+              onError,
             },
         };
         const formStateMachine = createStateMachine(params);
@@ -55,10 +57,30 @@ describe('FormMutations', () => {
         }));
         stateMachineService.start();
         it('updateData', () => {
-            stateMachineService.send('update', {
+            const updateMutation = stateMachineService.send('update', {
                 field: 'test',
                 givenValue: 'test-2'
             });
+            const contextMutations = JSON.parse(JSON.stringify(updateMutation.context));
+            delete contextMutations.effects;
+            const expected = {"activeStep": 0, "formData": {"test": "test-2"}, "formSchema": {}, "formSchemaXHR": {}, "hasError": false, "hasXHRError": false, "lastField": "test", "parsedFormSchema": {}, "uiData": {}, "uiSchema": {}, "validation": {}, "validations": {}, "xhrProgress": {}, "xhrSchema": {}}
+            expect(contextMutations).toStrictEqual(expected);
+        });
+        it('updateXHRData', () => {
+            const updateMutation = stateMachineService.send('updateFormOnXHRComplete', {
+                formSchema: {
+                    'new': 'info'
+                },
+                formSchemaXHR: {
+                    'new': 'info'
+                },
+                formData: {},
+                uiData: {}
+            });
+            const contextMutations = JSON.parse(JSON.stringify(updateMutation.context));
+            delete contextMutations.effects;
+            const expected = {"activeStep": 0, "formData": {"test": "test-2"}, "formSchema": {}, "formSchemaXHR": {"new": "info"}, "hasError": false, "hasXHRError": false, "lastField": "test", "parsedFormSchema": {}, "uiData": {}, "uiSchema": {}, "validation": {}, "validations": {}, "xhrProgress": {"undefined": false}, "xhrSchema": {}};
+            expect(contextMutations).toStrictEqual(expected);
         });
     });
 });
