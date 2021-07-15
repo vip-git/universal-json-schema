@@ -26,7 +26,7 @@ describe('FormMutations', () => {
         });
     });
 
-    describe('All actions in the state machine', () => {
+    describe('All form actions in the state machine', () => {
         const onChange = jest.fn();
         const onError = jest.fn();
         const params = {
@@ -126,18 +126,6 @@ describe('FormMutations', () => {
             expect(stateMachineService.state.value).toStrictEqual({"formUI": "dirty"});
         });
 
-        it('stepChange', () => {
-            const updateMutation = stateMachineService.send('updateTabIndex', {
-                stepName: '',
-            });
-            const contextMutations = JSON.parse(JSON.stringify(updateMutation.context));
-            delete contextMutations.effects;
-            const expected = {"formData": {"test": "test-2"}, "formSchema": {}, "formSchemaXHR": {"new": "info"}, "hasError": false, "hasXHRError": false, "lastField": "test", "parsedFormSchema": {}, "uiData": {}, "uiSchema": {"ui:page": {"props": {"ui:schemaErrors": true}, "style": {"boxShadow": "none"}, "tab": {"style": {"minWidth": 81}}, "tabs": {"props": {}, "style": {"marginTop": 10, "width": "29vw"}}, "ui:layout": "tabs"}}, "validation": {}, "validations": {}, "xhrProgress": {"undefined": false}, "xhrSchema": {"ui:errors": {"offline": {"message": "Please try again once you are online.", "title": "You are Offline !"}}}}
-            expect(contextMutations).toStrictEqual(expected);
-            expect(onChange).toHaveBeenCalled();
-            expect(stateMachineService.state.value).toStrictEqual({"formUI": "dirty"});
-        });
-
         it('updateTabIndex', () => {
             const updateMutation = stateMachineService.send('updateTabIndex', {
                 tabIndex: 1,
@@ -219,6 +207,85 @@ describe('FormMutations', () => {
             expect(contextMutations).toStrictEqual(expected);
             expect(onChange).toHaveBeenCalled();
             expect(stateMachineService.state.value).toStrictEqual({"formUI": "invalid"});
+        });
+    });
+
+
+    describe('All stepper actions in the state machine', () => {
+        const onChange = jest.fn();
+        const onError = jest.fn();
+        const params = {
+            uiSchema: {
+                "ui:page": {
+                    "ui:layout": "tabs",
+                    "props": {
+                      "ui:schemaErrors": true
+                    },
+                    "style": {
+                      "boxShadow": "none"
+                    },
+                    "tabs": {
+                      "style": {
+                        "width": "29vw",
+                        "marginTop": 10
+                      }
+                    },
+                    "tab": {
+                      "style": {
+                        "minWidth": 81
+                      }
+                    }
+                }
+            },
+            xhrSchema: {
+                "ui:errors": {
+                    "offline": {
+                        "title": "You are Offline !",
+                        "message": "Please try again once you are online."
+                    }
+                }
+            },
+            formSchema: {
+                "properties": {
+                    "SelectComponents": {
+                      "title": "Select Components",
+                      "$ref": "#/definitions/componentsList"
+                    }
+                }
+            },
+            formData: {},
+            uiData: {},
+            validation: {},
+            validations: {},
+            hasError: false,
+            effects: {
+              onChange,
+              onError,
+            },
+        };
+        const formStateMachine = createStateMachine(params);
+        const stateMachineService = interpret(
+            formStateMachine, { devTools: process.env.NODE_ENV === 'development' },
+        ).onTransition((state: any) => executeFormActionsByState({
+            state,
+            stateMachineService,
+        }));
+        const { 
+            result: { current: { executeFormActionsByState } },
+        } = renderHook(() => useFormActions({
+            isPartialUI: () => false,
+        }));
+        stateMachineService.start();
+        it('stepChange', () => {
+            const updateMutation = stateMachineService.send('stepChange', {
+                stepName: '',
+            });
+            const contextMutations = JSON.parse(JSON.stringify(updateMutation.context));
+            delete contextMutations.effects;
+            const expected = {"activeStep": -1, "formData": {}, "formSchema": {"properties": {"SelectComponents": {"$ref": "#/definitions/componentsList", "title": "Select Components"}}}, "formSchemaXHR": {}, "hasError": false, "hasXHRError": false, "lastField": "", "parsedFormSchema": {"properties": {"SelectComponents": {"$ref": "#/definitions/componentsList", "title": "Select Components"}}}, "uiData": {}, "uiSchema": {"ui:page": {"props": {"ui:schemaErrors": true}, "style": {"boxShadow": "none"}, "tab": {"style": {"minWidth": 81}}, "tabs": {"style": {"marginTop": 10, "width": "29vw"}}, "ui:layout": "tabs"}}, "validations": {}, "xhrProgress": {}, "xhrSchema": {"ui:errors": {"offline": {"message": "Please try again once you are online.", "title": "You are Offline !"}}}}
+            expect(contextMutations).toStrictEqual(expected);
+            expect(onChange).toHaveBeenCalled();
+            expect(stateMachineService.state.value).toStrictEqual({"formUI": "dirty"});
         });
     });
 });
