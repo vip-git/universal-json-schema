@@ -65,9 +65,11 @@ describe('FormMutations', () => {
             delete contextMutations.effects;
             const expected = {"activeStep": 0, "formData": {"test": "test-2"}, "formSchema": {}, "formSchemaXHR": {}, "hasError": false, "hasXHRError": false, "lastField": "test", "parsedFormSchema": {}, "uiData": {}, "uiSchema": {}, "validation": {}, "validations": {}, "xhrProgress": {}, "xhrSchema": {}}
             expect(contextMutations).toStrictEqual(expected);
+            expect(onChange).toHaveBeenCalledTimes(2);
+            expect(stateMachineService.state.value).toStrictEqual({"formUI": "dirty"});
         });
         it('updateXHRData', () => {
-            const updateMutation = stateMachineService.send('updateFormOnXHRComplete', {
+            const updateFormOnXHRComplete = stateMachineService.send('updateFormOnXHRComplete', {
                 formSchema: {
                     'new': 'info'
                 },
@@ -77,18 +79,76 @@ describe('FormMutations', () => {
                 formData: {},
                 uiData: {}
             });
-            const contextMutations = JSON.parse(JSON.stringify(updateMutation.context));
+            const contextMutations = JSON.parse(JSON.stringify(updateFormOnXHRComplete.context));
             delete contextMutations.effects;
             const expected = {"activeStep": 0, "formData": {"test": "test-2"}, "formSchema": {}, "formSchemaXHR": {"new": "info"}, "hasError": false, "hasXHRError": false, "lastField": "test", "parsedFormSchema": {}, "uiData": {}, "uiSchema": {}, "validation": {}, "validations": {}, "xhrProgress": {"undefined": false}, "xhrSchema": {}};
             expect(contextMutations).toStrictEqual(expected);
+            expect(onChange).toHaveBeenCalledTimes(3);
+            expect(stateMachineService.state.value).toStrictEqual({"formUI": "dirty"});
         });
 
         it('updateXHRData (edge case)', () => {
-            const updateMutation = stateMachineService.send('updateFormOnXHRComplete', {});
-            const contextMutations = JSON.parse(JSON.stringify(updateMutation.context));
+            const updateFormOnXHRComplete = stateMachineService.send('updateFormOnXHRComplete', {});
+            const contextMutations = JSON.parse(JSON.stringify(updateFormOnXHRComplete.context));
             delete contextMutations.effects;
             const expected = {"activeStep": 0, "formData": {"test": "test-2"}, "formSchema": {}, "formSchemaXHR": {"new": "info"}, "hasError": false, "hasXHRError": false, "lastField": "test", "parsedFormSchema": {}, "uiData": {}, "uiSchema": {}, "validation": {}, "validations": {}, "xhrProgress": {"undefined": false}, "xhrSchema": {}};
             expect(contextMutations).toStrictEqual(expected);
+            expect(onChange).toHaveBeenCalledTimes(4);
+            expect(stateMachineService.state.value).toStrictEqual({"formUI": "dirty"});
+        });
+
+        it('updateErrorData', () => {
+            const noErrors = stateMachineService.send('noErrors', {
+                hasError: false,
+            });
+            const contextMutations = JSON.parse(JSON.stringify(noErrors.context));
+            delete contextMutations.effects;
+            const expected = {"activeStep": 0, "hasError": false, "formData": {"test": "test-2"}, "formSchema": {}, "formSchemaXHR": {"new": "info"}, "hasXHRError": false, "lastField": "test", "parsedFormSchema": {}, "uiData": {}, "uiSchema": {}, "validations": {}, "xhrProgress": {"undefined": false}, "xhrSchema": {}};
+            expect(contextMutations).toStrictEqual(expected);
+            expect(onChange).toHaveBeenCalledTimes(4);
+            expect(stateMachineService.state.value).toStrictEqual({"formUI": "dirty"});
+        });
+
+        it('updateErrorXHRProgress', () => {
+            const updateErrorXHRProgress = stateMachineService.send('errorXHRProgress', {
+                status: true,
+                statusCode: 500,
+                formSchema: {
+                    'new': 'info'
+                },
+                formSchemaXHR: {
+                    'new': 'info'
+                },
+                formData: {},
+                uiData: {}
+            });
+            const contextMutations = JSON.parse(JSON.stringify(updateErrorXHRProgress.context));
+            delete contextMutations.effects;
+            const expected = {"activeStep": 0, "formData": {"test": "test-2"}, "formSchema": {}, "formSchemaXHR": {"new": "info"}, "hasError": false, "hasXHRError": true, "lastField": "test", "parsedFormSchema": {}, "uiData": {}, "uiSchema": {}, "validation": {"xhr": []}, "validations": {}, "xhrProgress": {"undefined": true}, "xhrSchema": {}};
+            expect(contextMutations).toStrictEqual(expected);
+            expect(onChange).toHaveBeenCalledTimes(5);
+            expect(stateMachineService.state.value).toStrictEqual({"formUI": "invalid"});
+        });
+
+        it('updateErrorXHRProgress (offline)', () => {
+            const updateErrorXHRProgress = stateMachineService.send('errorXHRProgress', {
+                status: true,
+                statusCode: 999,
+                formSchema: {
+                    'new': 'info'
+                },
+                formSchemaXHR: {
+                    'new': 'info'
+                },
+                formData: {},
+                uiData: {}
+            });
+            const contextMutations = JSON.parse(JSON.stringify(updateErrorXHRProgress.context));
+            delete contextMutations.effects;
+            const expected = {"activeStep": 0, "formData": {"test": "test-2"}, "formSchema": {}, "formSchemaXHR": {"new": "info"}, "hasError": false, "hasXHRError": true, "lastField": "test", "parsedFormSchema": {}, "uiData": {}, "uiSchema": {}, "validation": {"xhr": []}, "validations": {}, "xhrProgress": {"undefined": true}, "xhrSchema": {}};
+            expect(contextMutations).toStrictEqual(expected);
+            expect(onChange).toHaveBeenCalledTimes(6);
+            expect(stateMachineService.state.value).toStrictEqual({"formUI": "invalid"});
         });
     });
 });
