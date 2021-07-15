@@ -1,5 +1,5 @@
 // Import
-import { renderHook, act } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-hooks';
 import useFormStateMachine from '../form-state-machine.hooks';
 
 describe('Form State Guards', () => {
