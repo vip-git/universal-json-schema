@@ -131,4 +131,72 @@ describe('FormField', () => {
     expect(fsComp.prop('uiSchema')).toStrictEqual(uiSchema);
     expect(fsComp.prop('onChange')).toBe(onChange);
   });
+
+
+  it('renders object as FieldSet, passing all properties (With Errors)', () => {
+    const onChange = jest.fn();
+    const path = 'name';
+    const schema = {
+      'type': 'object',
+      'properties': {
+        firstName: {
+          type: 'string',
+          title: 'First Name',
+        },
+        surname: {
+          type: 'string',
+          title: 'Surname',
+        },
+      },
+    };
+    
+    const data = {
+      firstName: 'Bob',
+      surname: 'Hope',
+    };
+
+    const uiSchema = {
+      firstName: {},
+      surname: {},
+    };
+
+    const validation = {
+      xhr: [
+        {
+          'rule': 'offline',
+          'title': 'You are Offline !',
+          'message': 'Please try again once you are online.',
+          'callback': jest.fn(),
+        },
+      ],
+    };
+
+    // act
+    const wrapper = mount(
+      <FormField 
+        uiSchema={uiSchema}
+        path={path}
+        schema={schema}
+        data={data}
+        onChange={onChange}
+        xhrSchema={{}}
+        uiData={{}}
+        prefixId={'test'}
+        validation={validation}
+        id={'test'}
+        onXHRSchemaEvent={jest.fn}
+      />,
+    );
+
+    // check
+    expect(wrapper).toHaveLength(1);
+    const fsComp = wrapper.find(FieldSet);
+    expect(fsComp).toHaveLength(1);
+    expect(fsComp.prop('path')).toStrictEqual(path);
+    expect(fsComp.prop('schema')).toStrictEqual(schema);
+    expect(fsComp.prop('data')).toStrictEqual(data);
+    expect(fsComp.prop('uiSchema')).toStrictEqual(uiSchema);
+    expect(fsComp.prop('validation')).toStrictEqual(validation);
+    expect(fsComp.prop('onChange')).toBe(onChange);
+  });
 });
