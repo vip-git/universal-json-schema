@@ -1,5 +1,0 @@
-const FIELDSET_STEPPER_VARIANTS = {
-
-};
-
-export default FIELDSET_STEPPER_VARIANTS;

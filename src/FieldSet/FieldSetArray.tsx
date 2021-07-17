@@ -17,7 +17,7 @@ import { FieldSetArrayProps } from '../types/FieldSetArray.type';
 import Utils from '../helpers/utils';
 
 // Variant
-import RENDER_ARRAY_WRAPPERS from './variants/fieldset/array/field-array.wrappers';
+import RENDER_ARRAY_WRAPPERS from './variants/fieldset-array/field-array.wrappers';
 
 export const RawFieldSetArray = (props: FieldSetArrayProps) => {
   const {

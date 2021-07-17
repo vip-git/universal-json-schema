@@ -94,6 +94,48 @@ describe('FieldSet', () => {
       expect(ffComp.prop('data')).toBe(data.name);
       expect(ffComp.prop('objectData')).toStrictEqual(data);
     });
+    it('mounts with single field with additional properties (control)', () => {
+      const schema = {
+        type: 'object',
+        additionalProperties: {
+          name: {
+            'type': 'string',
+            'title': 'Name',
+          },
+        },
+      };
+
+      const data = { name: 'Bob' };
+
+      // act
+      const wrapper = mount(
+        <RawFieldSetObject 
+          classes={{ row }}
+          schema={schema}
+          data={data}
+          path={''}
+          uiSchema={{}}
+          xhrSchema={{}}
+          onKeyDown={jest.fn}
+          onChange={jest.fn}
+          onXHRSchemaEvent={jest.fn}
+          id={'1'}
+          idxKey={'1'}
+          validation={{}}
+          isTabContent={false}
+          tabKey={''}
+        />,
+      );
+
+      // check
+      expect(wrapper).toHaveLength(1);
+      // expect(wrapper.prop('className')).toMatch(/rowClassName/);
+      const ffComp = wrapper.find(FormField);
+      expect(ffComp).toHaveLength(2);
+      expect(ffComp.at(1).prop('path')).toBe('name');
+      expect(ffComp.at(1).prop('data')).toBe(data.name);
+      expect(ffComp.at(1).prop('objectData')).toStrictEqual(data);
+    });
     it('respects orientation hint', () => {
       const schema = {
         type: 'object',

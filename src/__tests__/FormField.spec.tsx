@@ -138,10 +138,11 @@ describe('FormField', () => {
     const path = '';
     const schema = {
       'type': 'object',
+      'description': 'Something Extra',
       'properties': {
         firstName: {
           type: 'string',
-          title: 'First Name',
+          title: 'First Name'
         },
         surname: {
           type: 'string',

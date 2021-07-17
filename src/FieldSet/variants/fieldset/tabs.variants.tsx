@@ -1,5 +1,0 @@
-const FIELDSET_TABS_VARIANTS = {
-
-};
-
-export default FIELDSET_TABS_VARIANTS;

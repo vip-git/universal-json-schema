@@ -1,5 +1,0 @@
-const FIELDSET_OBJECT_VARIANTS = {
-
-};
-
-export default FIELDSET_OBJECT_VARIANTS;

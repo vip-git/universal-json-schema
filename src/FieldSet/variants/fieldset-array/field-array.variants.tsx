@@ -7,14 +7,14 @@ import IconButton from '@material-ui/core/IconButton';
 import AddCircle from '@material-ui/icons/AddCircle';
 
 // Helpers
-import getDefaultValue from '../../../../helpers/get-default-value';
+import getDefaultValue from '../../../helpers/get-default-value';
 
 // config
-import FIELDSET_CONFIG, { ArrayVariants, ArrayWrapperVariants } from '../../../../config/fieldset.config';
+import FIELDSET_CONFIG, { ArrayVariants, ArrayWrapperVariants } from '../../../config/fieldset.config';
 
 // Component
-import FormField from '../../../../FormField';
-import ReorderableFormField from '../../../ReorderableFormField';
+import FormField from '../../../FormField';
+import ReorderableFormField from '../../ReorderableFormField';
 
 const { ARRAY_VARIANTS } = FIELDSET_CONFIG;
 

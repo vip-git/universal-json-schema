@@ -3,10 +3,10 @@
 import React from 'react';
 
 // Helpers
-import getDefinitionSchemaFromRef from '../../../../helpers/get-definition-schema';
+import getDefinitionSchemaFromRef from '../../../helpers/get-definition-schema';
 
 // Utils
-import Utils from '../../../../helpers/utils';
+import Utils from '../../../helpers/utils';
 
 // Variants
 import FIELDSET_ARRAY_VARIANTS, { 
