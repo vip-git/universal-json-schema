@@ -3,7 +3,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 // Internal
-import Form from '../Form';
+import Form from '..';
 
 describe('Form', () => {
   it('Mount the form with basic fields', () => {
@@ -40,14 +40,14 @@ describe('Form', () => {
     const path = 'name';
     const onChange = jest.fn(() => 'onChangeFunc');
     const schema = {
-      'type': 'string',
+      'type': 'integer',
       'title': 'First Name',
     };
 
     const uiSchema = {
     };
 
-    const data = 1;
+    const data = 'hello';
 
     // act
     const wrapper = mount(
