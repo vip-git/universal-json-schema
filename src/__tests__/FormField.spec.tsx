@@ -135,7 +135,7 @@ describe('FormField', () => {
 
   it('renders object as FieldSet, passing all properties (With Errors)', () => {
     const onChange = jest.fn();
-    const path = 'name';
+    const path = '';
     const schema = {
       'type': 'object',
       'properties': {
@@ -149,7 +149,7 @@ describe('FormField', () => {
         },
       },
     };
-    
+
     const data = {
       firstName: 'Bob',
       surname: 'Hope',
