@@ -156,18 +156,14 @@ describe('getComponentProps', () => {
     });
   });
 
-  // Should be moved to components
-  // describe('with ui:widget=textarea', () => {
-  //   it('sets rows and multiline', () => {
-  //     const schema = { 'title': 'First name', 'type': 'string' };
-  //     const uiSchema = { 'ui:widget': 'textarea' };
-  //     const componentProps = getComponentProps({ schema, uiSchema });
-  //     expect(componentProps).toHaveProperty('rows');
-  //     expect(componentProps).toHaveProperty('multiline');
-  //     expect(componentProps.rows).toBe(5);
-  //     expect(componentProps.multiline).toBe(true);
-  //   });
-  // });
+  describe('with ui:widget=textarea', () => {
+    it('sets widget to textarea', () => {
+      const schema = { 'title': 'First name', 'type': 'string' };
+      const uiSchema = { 'ui:widget': 'textarea' };
+      const componentProps = getComponentProps({ schema, uiSchema });
+      expect(componentProps.widget).toBe('textarea');
+    });
+  });
 
   it('passes mui:* properties', () => {
     const schema = { 'title': 'First name' };

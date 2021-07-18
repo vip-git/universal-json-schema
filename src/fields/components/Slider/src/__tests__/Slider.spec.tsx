@@ -13,15 +13,12 @@ const value = 20;
 
 describe('Slider', () => {
   it('mounts with standard attributes (control)', () => {
-    const path = 'done';
     const label = 'Done';
     schema.description = label;
     const wrapper = mount(
       <SliderComp 
         label={label}
-        path={path}
         value={value}
-        schema={schema}
         onChange={jest.fn}
       />,
     );
@@ -40,7 +37,6 @@ describe('Slider', () => {
     }
     const wrapper = mount(
       <SliderComp 
-        schema={schema}
         value={value}
         onChange={jest.fn}
         options={
@@ -57,10 +53,8 @@ describe('Slider', () => {
     const onChange = jest.fn();
     const wrapper = mount(
       <SliderComp 
-        path={'a'}
         value={value}
         onChange={onChange}
-        schema={schema}
       />,
     );
     const cbComp = wrapper.find('ForwardRef(Slider)');

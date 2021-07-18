@@ -1,5 +1,4 @@
 // Library
-import moment from 'moment';
 import React from 'react';
 import { mount } from 'enzyme';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
