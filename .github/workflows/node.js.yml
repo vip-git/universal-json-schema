@@ -31,3 +31,6 @@ jobs:
     - run: npm install
     - run: npm run build
     - run: npx jest --env=jsdom --config=jest.config.js --coverage --ci --updateSnapshot --detectOpenHandles --forceExit
+    - name: Codecov
+      uses: codecov/codecov-action@v1.5.2
+
