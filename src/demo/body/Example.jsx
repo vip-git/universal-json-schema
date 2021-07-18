@@ -10,6 +10,10 @@ import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import Paper from '@material-ui/core/Paper';
 
+// Custom interceptors
+import translateRangeDate from '@react-jsonschema-form-interceptors/translate-range-date/dist';
+import translateRatings from '@react-jsonschema-form-interceptors/translate-ratings/dist';
+
 // Internal
 import Form from '../../Form';
 import useStyles from './example-styles';
@@ -19,9 +23,6 @@ import Source from './Source';
 import CustomRating from './custom-components/rating.component';
 import CustomComponent from './custom-components/range-picker.component';
 
-// Custom interceptors
-import translateRangeDate from '../../fields/interceptors/translate-range-date/dist';
-import translateRatings from '../../fields/interceptors/translate-ratings/dist';
 
 const FormComponent = ({
   givenSchema,
