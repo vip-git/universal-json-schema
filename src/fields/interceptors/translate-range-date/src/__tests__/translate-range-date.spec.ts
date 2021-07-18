@@ -4,15 +4,15 @@ import translateRangeDate from '..';
 describe('translateRangeDate', () => {
     it('returns formatted date with original value', () => {
       const data = {
-        startDate: '10-10-2010',
-        endDate: '10-10-2020'
+        startDate: '05 October 2011 14:48 UTC',
+        endDate: '06 October 2011 14:48 UTC'
       };
       const expected = {
         'formData': {
-          'endDate': '2020-10-09T22:00:00.000Z',
-          'startDate': '2010-10-09T22:00:00.000Z',
+          'endDate': '2011-10-06T14:48:00.000Z',
+          'startDate': '2011-10-05T14:48:00.000Z',
         },
-        'uiData': '10/10/2010 - 10/10/2020',
+        'uiData': '10/5/2011 - 10/6/2011',
       };
       const actual = translateRangeDate({
           data,

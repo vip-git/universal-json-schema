@@ -3,7 +3,9 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 // Internal
-import Form from '..';
+import ReactForm from '..';
+
+const Form: any = ReactForm;
 
 describe('Form', () => {
   it('Mount the form with basic fields', () => {
