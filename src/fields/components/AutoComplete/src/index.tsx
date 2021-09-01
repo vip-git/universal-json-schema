@@ -56,7 +56,7 @@ export default ({
       groupBy={groupBy}
       getOptionDisabled={getOptionDisabled}
       value={value && String(value)}
-      getOptionLabel={(option: { key: string; value: string; }) => option && String(option)}
+      getOptionLabel={(option: string) => option && String(option)}
       getOptionSelected={(val) => val && String(val)}
       renderInput={(params) => <TextField {...params} label={title} value={value && String(value)} />}
       onChange={givenOnChange}

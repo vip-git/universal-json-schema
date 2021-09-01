@@ -1,5 +1,5 @@
 // Utils
-import { valuesToOptions, isEnum, getEnumTitle } from '@react-jsonschema-form-utils/enum-utils';
+import { isEnum, getEnumTitle } from '@react-jsonschema-form-utils/enum-utils';
 import { coerceValue } from '@react-jsonschema-form-utils/parse-values';
 
 // Types
