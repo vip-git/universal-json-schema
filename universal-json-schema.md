@@ -24,25 +24,23 @@ This document explains on how this project is aiming towards becoming "Universal
     - translate-range-date
 
 - Components
-  - material-radio-group
-  - creatable-react-select
-  - react-select
-  - material-select
-  - material-checkbox
-  - material-switch
-  - material-picker
-  - upload
-  - rich-text-editor
-  - material-input
-  - empty-div
-  - ratings
+  - Material UI (Theme)
+    - material-radio-group
+    - creatable-react-select
+    - react-select
+    - material-select
+    - material-checkbox
+    - material-switch
+    - material-picker
+    - upload
+    - rich-text-editor
+    - material-input
+    - empty-div
+    - ratings
+  - Semantic UI (Theme)
+  - Bootstrap UI (Theme)
+  - Fluent UI (Theme)
+  - React Native Paper UI (Theme)
+  - Ionic  (Theme)
 
-- Theme
-  - Material UI
-  - Semantic UI
-  - Bootstrap UI
-  - Fluent UI
-  - React Native Paper UI
-  - Ionic Theme
-  - Custom Themes
 

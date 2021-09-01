@@ -1,3 +1,9 @@
+/**
+ * Todo:
+ * - This file should be generated for react framework code gen
+ * - All Material UI libs should come from UIFramework const
+ * - All imports should be optional based on what gets selected
+ */
 // Library
 import React from 'react';
 import { nanoid as generate } from 'nanoid';
@@ -10,6 +16,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Types
 import { FormProps } from '@core-types/Form.type';
+import Framework from './universal-schema/react.framework';
 
 // Internal
 import formStyles from './form-styles';
@@ -26,6 +33,11 @@ import {
 
 // Initial Contexts
 import { LoadingContext, EventContext, StepperContext } from './helpers/context';
+
+// const {
+//   React,
+//   nanoId: generate,
+// } = Framework.library;
 
 const Form = ({
   formData: originalFormData,
