@@ -63,6 +63,16 @@
               "@react-jsonschema-form-utils/parse-values"
             ]
         },
+        "@react-jsonschema-form-components/material-auto-complete": {
+            "version": "2.0.0",
+            "type": "string",
+            "isEnum": true,
+            "name": "material-auto-complete",
+            "utils": [
+              "@react-jsonschema-form-utils/enum-utils",
+              "@react-jsonschema-form-utils/parse-values"
+            ]
+        },
         "@react-jsonschema-form-components/material-checkbox": {
             "version": "2.0.4",
             "type": "string",

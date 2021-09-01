@@ -24,6 +24,12 @@
       "ui:autofocus": true,
       "ui:emptyValue": ""
     },
+    "auto-complete": {
+      "ui:widget": "material-auto-complete",
+      "ui:props": {
+        "disableClearable": false
+      }
+    },
     "react-select": {
       "ui:widget": "material-select",
       "ui:isClearable": true,
@@ -107,6 +113,12 @@
       "ui:widget": "material-multiselect",
       "mui:inputProps": {
         "className": "money"
+      }
+    },
+    "autoComplete": {
+      "ui:widget": "material-auto-complete",
+      "ui:props": {
+        "disableClearable": false
       }
     },
     "xhrSelectTest": {
