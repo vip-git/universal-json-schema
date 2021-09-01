@@ -81,6 +81,7 @@ export const RawConfiguredField = ({
 			value={data}
 			type={type}
 			error={!isEmpty(hasError) || undefined}
+			title={title}
 			{...componentProps}
 		/>
 		{helpText && !isCustomComponent && (

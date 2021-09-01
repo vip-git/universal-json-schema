@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-jsonschema-form-components/creatable-react-select": "2.0.2",
     "@react-jsonschema-form-components/empty-div": "2.0.1",
+    "@react-jsonschema-form-components/material-auto-complete": "1.0.0",
     "@react-jsonschema-form-components/material-checkbox": "2.0.4",
     "@react-jsonschema-form-components/material-input": "2.0.1",
     "@react-jsonschema-form-components/material-picker": "2.0.1",

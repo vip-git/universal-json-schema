@@ -15,6 +15,7 @@ export default ({ schema, uiSchema = {} }) => {
     'material-date',
     'material-time',
     'material-datetime',
+    'material-auto-complete',
   ];
   
   const nonInputWidgets = [

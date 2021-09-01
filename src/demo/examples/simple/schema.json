@@ -29,6 +29,11 @@
           "title": "Example React select",
           "enum": ["Yes", "No"]
         },
+        "auto-complete": {
+          "type": "string",
+          "title": "Example Auto Complete",
+          "enum": ["Yes", "No"]
+        },
         "password": {
           "type": "string",
           "title": "Password",
@@ -129,6 +134,14 @@
                 "title": "Blue"
               }
             ]
+          }
+        },
+        "autoComplete": {
+          "type": "array",
+          "title": "Example Multi-Select Auto Complete",
+          "items": {
+            "type": "string",
+            "enum": ["test", "teete", "etetet"]
           }
         },
         "creatableSelectTest": {
