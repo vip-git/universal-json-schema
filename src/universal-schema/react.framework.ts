@@ -2,8 +2,8 @@ import { UniversalSchemaFramework } from './types/universal-schema-framework.typ
 
 const Framework: UniversalSchemaFramework = {
   library: {
-    React: import('react'),
-    nanoId: async () => (await import('nanoid')).nanoid,
+    React: require('react'),
+    nanoId: require('nanoid').nanoid,
   },
   uiFramework: {
     name: 'MaterialUI',
