@@ -81,7 +81,7 @@ if (process.env.NODE_ENV !== 'production' && process.env.NO_STUBS === undefined)
 
 var config = {
   entry: {
-    bundle: ['@babel/polyfill', path.join(__dirname, 'src/demo/index.jsx')],
+    bundle: ['@babel/polyfill', path.join(__dirname, 'demo/web/react/index.jsx')],
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -163,7 +163,7 @@ var config = {
       'process.env.GENERATED_SESSION_ID': process.env.GENERATED_SESSION_ID,
     }),
     new HtmlWebpackPlugin({
-      template: 'src/demo/index.html',
+      template: 'demo/web/react/index.html',
       templateParameters(compilation, assets, options) {
         return {
           compilation: compilation,

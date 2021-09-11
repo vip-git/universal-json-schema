@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import { UniversalSchemaFramework } from './types/universal-schema-framework.type';
 
 const Framework: UniversalSchemaFramework = {
