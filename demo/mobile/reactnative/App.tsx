@@ -16,6 +16,9 @@ import {
   useColorScheme,
 } from 'react-native';
 
+// Internal
+import ReactNativeForm from '../../../src/Form';
+
 const LeftContent = (props: any) => <Avatar.Icon {...props} icon="folder" />
 
 const App = () => {
@@ -51,6 +54,7 @@ const App = () => {
             <Button>Ok</Button>
           </Card.Actions>
         </Card>
+        <ReactNativeForm />
       </SafeAreaView>
     </PaperProvider>
   );
