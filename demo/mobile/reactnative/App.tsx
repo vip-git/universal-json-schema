@@ -1,21 +1,12 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
+// Library
 import React from 'react';
-import { 
+import {
   DefaultTheme,
   Provider as PaperProvider,
-  Avatar, 
-  Button, 
+  Avatar,
+  Button,
   Card,
-  Title, 
+  Title,
   Paragraph
 } from 'react-native-paper';
 import {
