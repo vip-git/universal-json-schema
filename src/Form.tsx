@@ -7,10 +7,10 @@
 // Library
 
 // Material UI
-import { MuiPickersUtilsProvider } from '@material-ui/pickers'; // Has to be made optional
-import MomentUtils from '@date-io/moment';
 import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import AdapterMoment from '@material-ui/lab/AdapterMoment';
+import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
 
 // Types
 import { FormProps } from '@core-types/Form.type';
@@ -188,68 +188,68 @@ const Form = ({
   );
   
   return (
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-        <Paper className={classes.root} style={uiSchema && uiSchema['ui:page'] ? uiSchema['ui:page'].style : {}}>
-          {
-            !isFormLoading && (actionButtonPos === 'top' && !hasPageLayoutSteps) && (
-              <RenderFormButtons />
-            )
-          }
-          <LoadingContext.Provider value={loadingState}>
-            <StepperContext.Provider value={[activeStep, buttonDisabled] as any}>
-              <EventContext.Provider value={onUpload}>
-                {
-                  isFormLoading && !hasPageLayoutTabs ? (
-                      <div> 
-                        <CircularProgress disableShrink />
-                      </div>
-                  ) : (
-                      <FormField
-                        path={''}
-                        data={formData}
-                        uiData={uiData}
-                        schemaVersion={schema.version}
-                        schema={{
-                          ...schema,
-                          ...formSchemaXHR,
-                        }}
-                        uiSchema={uiSchema}
-                        xhrSchema={xhrSchema}
-                        definitions={schema.definitions}
-                        interceptors={interceptors}
-                        xhrProgress={xhrProgress}
-                        id={id}
-                        onChange={onFormValuesChange}
-                        onXHRSchemaEvent={onXHRSchemaEvent}
-                        onSubmit={onFormSubmit}
-                        validation={validation}
-                        onKeyDown={handleKeyEnter}
-                        onMoveItemUp={onMoveItemUp}
-                        onMoveItemDown={onMoveItemDown}
-                        onDeleteItem={onDeleteItem}
-                        onAddItem={onAddItem}
-                        onAddNewProperty={onAddNewProperty}
-                        onRemoveProperty={onRemoveProperty}
-                        onUpdateKeyProperty={onUpdateKeyProperty}
-                        onNext={onStepNext}
-                        onBack={onStepBack}
-                        onSkip={onStepSkip}
-                        onTabChange={onTabChange}
-                        isSubmitDisabled={buttonDisabled}
-                        {...rest}
-                      />
-                  )
-                }
-              </EventContext.Provider>
-            </StepperContext.Provider>
-          </LoadingContext.Provider>
-          {
-            !isFormLoading && (!actionButtonPos && !hasPageLayoutSteps) && (
-              <RenderFormButtons />
-            )
-          }
-        </Paper>
-      </MuiPickersUtilsProvider>
+    <Paper className={classes.root} style={uiSchema && uiSchema['ui:page'] ? uiSchema['ui:page'].style : {}}>
+      {
+        !isFormLoading && (actionButtonPos === 'top' && !hasPageLayoutSteps) && (
+          <RenderFormButtons />
+        )
+      }
+      <LocalizationProvider dateAdapter={AdapterMoment}>
+        <LoadingContext.Provider value={loadingState}>
+          <StepperContext.Provider value={[activeStep, buttonDisabled] as any}>
+            <EventContext.Provider value={onUpload}>
+              {
+                isFormLoading && !hasPageLayoutTabs ? (
+                    <div> 
+                      <CircularProgress disableShrink />
+                    </div>
+                ) : (
+                    <FormField
+                      path={''}
+                      data={formData}
+                      uiData={uiData}
+                      schemaVersion={schema.version}
+                      schema={{
+                        ...schema,
+                        ...formSchemaXHR,
+                      }}
+                      uiSchema={uiSchema}
+                      xhrSchema={xhrSchema}
+                      definitions={schema.definitions}
+                      interceptors={interceptors}
+                      xhrProgress={xhrProgress}
+                      id={id}
+                      onChange={onFormValuesChange}
+                      onXHRSchemaEvent={onXHRSchemaEvent}
+                      onSubmit={onFormSubmit}
+                      validation={validation}
+                      onKeyDown={handleKeyEnter}
+                      onMoveItemUp={onMoveItemUp}
+                      onMoveItemDown={onMoveItemDown}
+                      onDeleteItem={onDeleteItem}
+                      onAddItem={onAddItem}
+                      onAddNewProperty={onAddNewProperty}
+                      onRemoveProperty={onRemoveProperty}
+                      onUpdateKeyProperty={onUpdateKeyProperty}
+                      onNext={onStepNext}
+                      onBack={onStepBack}
+                      onSkip={onStepSkip}
+                      onTabChange={onTabChange}
+                      isSubmitDisabled={buttonDisabled}
+                      {...rest}
+                    />
+                )
+              }
+            </EventContext.Provider>
+          </StepperContext.Provider>
+        </LoadingContext.Provider>
+      </LocalizationProvider>
+      {
+        !isFormLoading && (!actionButtonPos && !hasPageLayoutSteps) && (
+          <RenderFormButtons />
+        )
+      }
+    </Paper>
   );
 };
 

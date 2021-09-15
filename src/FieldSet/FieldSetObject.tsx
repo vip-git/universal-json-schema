@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AddCircle from '@material-ui/icons/AddCircle';
 
 // Material UI
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import { Typography } from '@material-ui/core';
 
 // Internal

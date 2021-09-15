@@ -16,7 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import Valid from '@material-ui/icons/CheckCircle';
 import Invalid from '@material-ui/icons/HighlightOff';
 import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import sourceStyles from './editor-styles';
 
 const classNames = require('classnames');

@@ -1,5 +1,6 @@
 // Library
 import React from 'react';
+import TextField from '@material-ui/core/TextField';
 import pickerProps, { renderPickerComp } from './picker.props';
 
 export default ({
@@ -26,13 +27,11 @@ export default ({
           }}
         >
             <PickerComp
-                format={format}
-                style={{ flexBasis: '100%' }}
-                placeholder={placeholder}
+                mask={placeholder}
                 label={label}
                 value={(value === undefined) ? null : value}
                 maxDate={'2200-01-01'}
-                animateYearScrolling={false}
+                renderInput={(params) => <TextField {...params} />}
                 {...pickerProps({ onChange })}
                 {...options}
             />

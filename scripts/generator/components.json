@@ -43,7 +43,7 @@
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/react-select": {
-            "version": "2.0.1",
+            "version": "3.0.0",
             "type": "string",
             "isEnum": true,
             "name": "react-select",
@@ -90,14 +90,14 @@
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/material-picker": {
-            "version": "2.0.1",
+            "version": "3.0.0",
             "type": "string",
             "hasDist": true,
             "isEnum": false,
             "name": "material-picker"
         },
         "@react-jsonschema-form-components/upload": {
-            "version": "2.0.0",
+            "version": "3.0.0",
             "type": "string",
             "isEnum": false,
             "hasDist": true,

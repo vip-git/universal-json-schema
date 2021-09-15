@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import styles from './body-styles';
 import Example from './Example';
 import UIBundler from './ui-bundler';

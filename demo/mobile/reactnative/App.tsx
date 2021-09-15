@@ -29,7 +29,7 @@ const App = () => {
     colors: {
       ...DefaultTheme.colors,
       primary: 'tomato',
-      accent: 'yellow',
+      accent: 'gray',
     },
   };
 

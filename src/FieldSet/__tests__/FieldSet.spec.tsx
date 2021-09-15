@@ -3,6 +3,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 // Material UI
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 
 // Internal
@@ -28,17 +29,19 @@ describe('FieldSet', () => {
 
       // act
       const wrapper = mount(
-        <RawFieldSet
-          classes={{ root }} 
-          schema={schema} 
-          data={data} 
-          path={'path'}
-          uiSchema={{}}
-          xhrSchema={{}}
-          onKeyDown={jest.fn}
-          onChange={jest.fn}
-          onXHRSchemaEvent={jest.fn}
-        />,
+        <ThemeProvider theme={createTheme()}>
+          <RawFieldSet
+            classes={{ root }} 
+            schema={schema} 
+            data={data} 
+            path={'path'}
+            uiSchema={{}}
+            xhrSchema={{}}
+            onKeyDown={jest.fn}
+            onChange={jest.fn}
+            onXHRSchemaEvent={jest.fn}
+          />
+        </ThemeProvider>,
       );
 
       // check
@@ -67,22 +70,24 @@ describe('FieldSet', () => {
 
       // act
       const wrapper = mount(
-        <RawFieldSetObject 
-          classes={{ row }}
-          schema={schema}
-          data={data}
-          path={''}
-          uiSchema={{}}
-          xhrSchema={{}}
-          onKeyDown={jest.fn}
-          onChange={jest.fn}
-          onXHRSchemaEvent={jest.fn}
-          id={'1'}
-          idxKey={'1'}
-          validation={{}}
-          isTabContent={false}
-          tabKey={''}
-        />,
+        <ThemeProvider theme={createTheme()}>
+          <RawFieldSetObject 
+            classes={{ row }}
+            schema={schema}
+            data={data}
+            path={''}
+            uiSchema={{}}
+            xhrSchema={{}}
+            onKeyDown={jest.fn}
+            onChange={jest.fn}
+            onXHRSchemaEvent={jest.fn}
+            id={'1'}
+            idxKey={'1'}
+            validation={{}}
+            isTabContent={false}
+            tabKey={''}
+          />
+        </ThemeProvider>,
       );
 
       // check
@@ -109,22 +114,24 @@ describe('FieldSet', () => {
 
       // act
       const wrapper = mount(
-        <RawFieldSetObject 
-          classes={{ row }}
-          schema={schema}
-          data={data}
-          path={''}
-          uiSchema={{}}
-          xhrSchema={{}}
-          onKeyDown={jest.fn}
-          onChange={jest.fn}
-          onXHRSchemaEvent={jest.fn}
-          id={'1'}
-          idxKey={'1'}
-          validation={{}}
-          isTabContent={false}
-          tabKey={''}
-        />,
+        <ThemeProvider theme={createTheme()}>
+          <RawFieldSetObject 
+            classes={{ row }}
+            schema={schema}
+            data={data}
+            path={''}
+            uiSchema={{}}
+            xhrSchema={{}}
+            onKeyDown={jest.fn}
+            onChange={jest.fn}
+            onXHRSchemaEvent={jest.fn}
+            id={'1'}
+            idxKey={'1'}
+            validation={{}}
+            isTabContent={false}
+            tabKey={''}
+          />
+        </ThemeProvider>,
       );
 
       // check
@@ -153,22 +160,24 @@ describe('FieldSet', () => {
 
       // act
       const wrapper = shallow(
-        <RawFieldSetObject 
-          classes={{ row }}
-          schema={schema} 
-          data={data} 
-          uiSchema={uiSchema}
-          path={''}
-          xhrSchema={{}}
-          onKeyDown={jest.fn}
-          onChange={jest.fn}
-          onXHRSchemaEvent={jest.fn}
-          id={'1'}
-          idxKey={'1'}
-          validation={{}}
-          isTabContent={false}
-          tabKey={''}
-        />,
+        <ThemeProvider theme={createTheme()}>
+          <RawFieldSetObject 
+            classes={{ row }}
+            schema={schema} 
+            data={data} 
+            uiSchema={uiSchema}
+            path={''}
+            xhrSchema={{}}
+            onKeyDown={jest.fn}
+            onChange={jest.fn}
+            onXHRSchemaEvent={jest.fn}
+            id={'1'}
+            idxKey={'1'}
+            validation={{}}
+            isTabContent={false}
+            tabKey={''}
+          />
+        </ThemeProvider>,
       );
 
       // check
@@ -214,18 +223,20 @@ describe('FieldSet', () => {
 
       // act
       const wrapper = shallow(
-        <RawFieldSetArray
-          startIdx={startIdx}
-          onAddItem={onAddItem}
-          onMoveItemUp={onMoveItemUp}
-          onMoveItemDown={onMoveItemDown}
-          onDeleteItem={onDeleteItem}
-          uiSchema={uiSchema}
-          path={path}
-          classes={{ row }}
-          schema={schema}
-          data={data}
-        />,
+        <ThemeProvider theme={createTheme()}>
+          <RawFieldSetArray
+            startIdx={startIdx}
+            onAddItem={onAddItem}
+            onMoveItemUp={onMoveItemUp}
+            onMoveItemDown={onMoveItemDown}
+            onDeleteItem={onDeleteItem}
+            uiSchema={uiSchema}
+            path={path}
+            classes={{ row }}
+            schema={schema}
+            data={data}
+          />
+        </ThemeProvider>,
       );
 
       // check
@@ -276,13 +287,15 @@ describe('FieldSet', () => {
 
       // act
       const wrapper = shallow(
-        <RawFieldSetArray 
-          uiSchema={uiSchema} 
-          path={path} 
-          classes={{ row }} 
-          schema={schema} 
-          data={data} 
-        />,
+        <ThemeProvider theme={createTheme()}>
+          <RawFieldSetArray 
+            uiSchema={uiSchema} 
+            path={path} 
+            classes={{ row }} 
+            schema={schema} 
+            data={data} 
+          />
+        </ThemeProvider>,
       );
 
       // check
@@ -334,16 +347,18 @@ describe('FieldSet', () => {
 
       // act
       const wrapper = shallow(
-        <RawFieldSetArray
-          onMoveItemUp={onMoveItemUp}
-          onMoveItemDown={onMoveItemDown}
-          onDeleteItem={onDeleteItem}
-          uiSchema={uiSchema}
-          path={path}
-          classes={{ row }}
-          schema={schema}
-          data={data}
-        />,
+        <ThemeProvider theme={createTheme()}>
+          <RawFieldSetArray
+            onMoveItemUp={onMoveItemUp}
+            onMoveItemDown={onMoveItemDown}
+            onDeleteItem={onDeleteItem}
+            uiSchema={uiSchema}
+            path={path}
+            classes={{ row }}
+            schema={schema}
+            data={data}
+          />
+        </ThemeProvider>,
       );
 
       // check

@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import VersionContext from './context/version.context';
 
 import Menu from './menu';

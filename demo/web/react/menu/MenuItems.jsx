@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import keys from 'lodash/keys';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';

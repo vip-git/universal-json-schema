@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import RemoveCircle from '@material-ui/icons/Close';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 
 // Styles
 import { ReorderControlsProps } from '@core-types/ReorderControls.type';

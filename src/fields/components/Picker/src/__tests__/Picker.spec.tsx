@@ -1,7 +1,6 @@
 // Library
 import React from 'react';
 import { mount } from 'enzyme';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 
 // Internal
@@ -32,7 +31,6 @@ describe('Picker', () => {
       const label = 'Done';
       schema.description = label;
       const wrapper2 = mount(
-        <MuiPickersUtilsProvider utils={MomentUtils}>
           <PickerComp 
             label={label}
             path={path}
@@ -43,11 +41,9 @@ describe('Picker', () => {
             htmlid={'test'}
             type={type}
             onChange={jest.fn}
-          />
-        </MuiPickersUtilsProvider>,
+          />,
       );
       const wrapper3 = mount(
-        <MuiPickersUtilsProvider utils={MomentUtils}>
           <PickerComp 
             label={label}
             path={path}
@@ -58,11 +54,9 @@ describe('Picker', () => {
             htmlid={'test'}
             type={type}
             onChange={jest.fn}
-          />
-        </MuiPickersUtilsProvider>,
+          />,
       );
       const wrapper = mount(
-        <MuiPickersUtilsProvider utils={MomentUtils}>
           <PickerComp 
             label={label}
             path={path}
@@ -73,8 +67,7 @@ describe('Picker', () => {
             htmlid={'test'}
             type={type}
             onChange={jest.fn}
-          />
-        </MuiPickersUtilsProvider>,
+          />,
       );
       const fcComp = wrapper.find('label');
       expect(fcComp).toHaveLength(1);
@@ -90,7 +83,6 @@ describe('Picker', () => {
         color: 'secondary',
       }
       const wrapper = mount(
-        <MuiPickersUtilsProvider utils={MomentUtils}>
           <PickerComp 
             label={'label'}
             path={'path'}
@@ -103,8 +95,7 @@ describe('Picker', () => {
             options={
               {...props} 
             }
-          />
-        </MuiPickersUtilsProvider>,
+          />,
       );
 
       const cbComp = wrapper.find('WithStyles(ForwardRef(TextField))');
@@ -114,7 +105,6 @@ describe('Picker', () => {
     it(`calls onChange when clicked (${type})`, () => {
       const onChange = jest.fn();
       const wrapper = mount(
-        <MuiPickersUtilsProvider utils={MomentUtils}>
           <PickerComp 
             path={'a'}
             value={value}
@@ -124,8 +114,7 @@ describe('Picker', () => {
             title={'label'}
             htmlid={'test'}
             type={'string'}
-          />
-        </MuiPickersUtilsProvider>,
+          />,
       );
       const cbComp = wrapper.find('WithStyles(ForwardRef(TextField))');
       expect(cbComp).toHaveLength(1);
