@@ -4,8 +4,8 @@ import React from 'react';
 import { DateRangePicker } from 'react-material-ui-5-date-range-picker';
 
 // Material UI
-import Dialog from '@material-ui/core/Dialog';
-import { TextField } from '@material-ui/core';
+import Dialog from '@mui/material/Dialog';
+import { TextField } from '@mui/material';
 
 const CustomDateRangePicker = ({ onChange, formData, uiData = { object: { } } }) => {
   const [open, setOpen] = React.useState(false);

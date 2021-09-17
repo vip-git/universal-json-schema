@@ -4,10 +4,10 @@ import keys from 'lodash/keys';
 import filter from 'lodash/filter';
 
 // Material UI
-import Alert from '@material-ui/lab/Alert';
+import Alert from '@mui/lab/Alert';
 import { withStyles, makeStyles } from '@material-ui/styles';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
+import Icon from '@mui/material/Icon';
+import Button from '@mui/material/Button';
 
 const validationStyles = {};
 

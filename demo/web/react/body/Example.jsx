@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import { isEqual } from 'lodash';
 
 // Material UI
-import { useTheme } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import FullscreenIcon from '@material-ui/icons/Fullscreen';
-import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
-import Paper from '@material-ui/core/Paper';
+import { useTheme } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
+import Paper from '@mui/material/Paper';
 
 // Custom interceptors
 import translateRangeDate from '@react-jsonschema-form-interceptors/translate-range-date/dist';

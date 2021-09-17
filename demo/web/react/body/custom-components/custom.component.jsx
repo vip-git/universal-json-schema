@@ -1,6 +1,6 @@
 // Library
 import React, { useState } from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField } from '@mui/material';
 
 const CustomComponent = ({ onChange, formData }) => {
   const [data, setData] = useState(formData.customComponent || '');

@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
+import Drawer from '@mui/material/Drawer';
+import Hidden from '@mui/material/Hidden';
 import MenuItems from './MenuItems';
 import menuStyles from './menu-styles';
 

@@ -3,8 +3,8 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 // Material UI
-import { ThemeProvider, createTheme } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
 
 // Internal
 import RawFieldSet, {

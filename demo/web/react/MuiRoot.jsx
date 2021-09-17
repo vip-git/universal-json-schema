@@ -1,7 +1,6 @@
 import React from 'react';
 import 'typeface-roboto'; // eslint-disable-line import/extensions
-import CssBaseline from '@material-ui/core/CssBaseline';
-import StyledEngineProvider from '@material-ui/styled-engine';
+import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
 import theme from './theme';
 

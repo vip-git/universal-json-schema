@@ -1,4 +1,4 @@
-import { Theme } from '@material-ui/core/styles';
+import { Theme } from '@mui/material/styles';
 import { makeStyles, createStyles } from '@material-ui/styles';
 
 const common = (theme: Theme) => ({

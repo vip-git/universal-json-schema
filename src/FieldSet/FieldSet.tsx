@@ -6,8 +6,8 @@ import has from 'lodash/has';
 
 // Material UI
 import { withStyles } from '@material-ui/styles';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 
 // Utils
 import Utils from '../helpers/utils';

@@ -1,7 +1,7 @@
 /* eslint-disable react/state-in-constructor */
 import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Button from '@material-ui/core/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button';
 
 const classNames = require('classnames');
 

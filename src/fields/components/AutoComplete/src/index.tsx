@@ -2,8 +2,8 @@
 import React from 'react';
 
 // Material UI
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/lab/Autocomplete';
 
 // Props
 import materialSelectProps, { AutoSelectProps } from './auto-complete.props';

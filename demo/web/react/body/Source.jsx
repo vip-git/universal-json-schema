@@ -11,11 +11,11 @@
 import React from 'react';
 import { isEmpty } from 'lodash';
 import Editor, { loader } from '@monaco-editor/react';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
-import Valid from '@material-ui/icons/CheckCircle';
-import Invalid from '@material-ui/icons/HighlightOff';
-import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import Valid from '@mui/icons-material/CheckCircle';
+import Invalid from '@mui/icons-material/HighlightOff';
+import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
 import { withStyles } from '@material-ui/styles';
 import sourceStyles from './editor-styles';
 

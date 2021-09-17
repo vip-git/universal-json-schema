@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
+import Typography from '@mui/material/Typography';
+import Slider from '@mui/material/Slider';
 
 /**
  * Todo: Implement all of this

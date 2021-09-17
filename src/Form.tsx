@@ -7,10 +7,10 @@
 // Library
 
 // Material UI
-import Paper from '@material-ui/core/Paper';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import AdapterMoment from '@material-ui/lab/AdapterMoment';
-import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
+import Paper from '@mui/material/Paper';
+import CircularProgress from '@mui/material/CircularProgress';
+import AdapterMoment from '@mui/lab/AdapterMoment';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 // Types
 import { FormProps } from '@core-types/Form.type';

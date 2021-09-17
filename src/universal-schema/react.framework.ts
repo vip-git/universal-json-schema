@@ -11,16 +11,16 @@ const Framework: UniversalSchemaFramework = {
     platform: 'web',
     components: {
       string: {
-        input: import('@material-ui/core/Input'),
+        input: import('@mui/material/Input'),
       },
       array: {
-        select: import('@material-ui/core/Select'),
+        select: import('@mui/material/Select'),
       },
       boolean: {
-        checkbox: import('@material-ui/core/Checkbox'),
+        checkbox: import('@mui/material/Checkbox'),
       },
       null: {
-        emptyDiv: import('@material-ui/core/Divider'),
+        emptyDiv: import('@mui/material/Divider'),
       },
     },
   },

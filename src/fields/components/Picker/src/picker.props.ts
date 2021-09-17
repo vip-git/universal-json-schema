@@ -1,7 +1,7 @@
 // Library
-import MobileDatePicker from '@material-ui/lab/MobileDatePicker';
-import MobileDateTimePicker from '@material-ui/lab/MobileDateTimePicker';
-import TimePicker from '@material-ui/lab/TimePicker';
+import MobileDatePicker from '@mui/lab/MobileDatePicker';
+import MobileDateTimePicker from '@mui/lab/MobileDateTimePicker';
+import TimePicker from '@mui/lab/TimePicker';
 
 export const renderPickerComp = (type) => {
   switch (type) {

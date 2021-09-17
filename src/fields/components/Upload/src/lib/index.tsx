@@ -3,9 +3,9 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Button from '@mui/material/Button';
+import Icon from '@mui/material/Icon';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 /** Todo: fix - this is the place where label sticks sometimes */
 let uploadLabel = null;

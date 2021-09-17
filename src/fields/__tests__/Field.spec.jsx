@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 import { shallow } from 'enzyme'
 
 // Material UI
-import FormLabel from '@material-ui/core/FormLabel';
+import FormLabel from '@mui/material/FormLabel';
 
 // Internal
 import RadioGroup from '@react-jsonschema-form-components/material-radio-group';

@@ -3,11 +3,11 @@ import React from 'react';
 import isEmpty from 'lodash/isEmpty';
 
 // Material UI
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Input from '@material-ui/core/Input';
-import ActiveComp from '@material-ui/icons/FiberManualRecord';
+import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
+import FormHelperText from '@mui/material/FormHelperText';
+import Input from '@mui/material/Input';
+import ActiveComp from '@mui/icons-material/FiberManualRecord';
 
 // Styles
 import fieldStyles from './field-styles';
