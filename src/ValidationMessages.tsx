@@ -23,6 +23,9 @@ const alertStyles = makeStyles({
       alignItems: 'center',
     },
   },
+  button: {
+    color: '#f1645f'
+  }
 });
 
 const Validation = ({ validation }) => {
@@ -43,7 +46,7 @@ const Validation = ({ validation }) => {
           {validation.message}
         </span>
         {validation.rule === 'offline' && (
-          <Button onClick={validation.callback}> 
+          <Button onClick={validation.callback} className={styles.button}> 
             <Icon>{'autorenew'}</Icon>
           </Button>
         )}
