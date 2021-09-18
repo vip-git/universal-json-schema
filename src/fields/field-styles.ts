@@ -23,7 +23,7 @@ export default makeStyles((theme: Theme) => createStyles({
     color: theme.palette.grey[500],
   },
   normalLabel: {
-    left: 6,
+    left: 1,
     top: 8,
   },
   customLabel: {
