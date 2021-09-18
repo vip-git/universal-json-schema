@@ -17,9 +17,9 @@ const styles = (theme) => ({
     flexGrow: 1,
   },
   input: {
-    display: 'flex',
-    padding: 0,
-    height: 'auto',
+    display: 'flex!important',
+    padding: '0px!important',
+    height: 'auto!important',
   },
   valueContainer: {
     display: 'flex',
