@@ -1,5 +1,5 @@
 // Material UI
-import { ClassNameMap } from '@material-ui/styles/withStyles';
+import { ClassNameMap } from '@mui/styles/withStyles';
 
 export type MaterialUIProps = {
     className?: string;

@@ -29,21 +29,21 @@
     },
 	"components": {
         "@react-jsonschema-form-components/material-radio-group": {
-            "version": "2.0.1",
+            "version": "3.0.0",
             "type": "string",
             "isEnum": true,
             "name": "material-radio-group",
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/creatable-react-select": {
-            "version": "2.0.2",
+            "version": "3.0.0",
             "type": "string",
             "isEnum": true,
             "name": "creatable-react-select",
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/react-select": {
-            "version": "3.0.0",
+            "version": "4.0.0",
             "type": "string",
             "isEnum": true,
             "name": "react-select",
@@ -53,7 +53,7 @@
             ]
         },
         "@react-jsonschema-form-components/material-select": {
-            "version": "2.0.1",
+            "version": "3.0.0",
             "type": "string",
             "isEnum": true,
             "isRequired": true,
@@ -64,7 +64,7 @@
             ]
         },
         "@react-jsonschema-form-components/material-auto-complete": {
-            "version": "2.0.0",
+            "version": "3.0.0",
             "type": "string",
             "isEnum": true,
             "name": "material-auto-complete",
@@ -74,7 +74,7 @@
             ]
         },
         "@react-jsonschema-form-components/material-checkbox": {
-            "version": "2.0.4",
+            "version": "3.0.0",
             "type": "string",
             "isEnum": true,
             "isRequired": true,
@@ -90,28 +90,28 @@
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/material-picker": {
-            "version": "3.0.0",
+            "version": "4.0.0",
             "type": "string",
             "hasDist": true,
             "isEnum": false,
             "name": "material-picker"
         },
         "@react-jsonschema-form-components/upload": {
-            "version": "3.0.0",
+            "version": "4.0.0",
             "type": "string",
             "isEnum": false,
             "hasDist": true,
             "name": "upload"
         },
         "@react-jsonschema-form-components/rich-text-editor": {
-            "version": "2.0.0",
+            "version": "3.0.0",
             "type": "string",
             "isEnum": false,
             "hasDist": true,
             "name": "rich-text-editor"
         },
         "@react-jsonschema-form-components/material-input": {
-            "version": "2.0.1",
+            "version": "3.0.0",
             "type": "string",
             "isEnum": false,
             "isDefault": true,
@@ -122,7 +122,7 @@
             ]
         },
         "@react-jsonschema-form-components/empty-div": {
-            "version": "2.0.1",
+            "version": "3.0.0",
             "type": "null",
             "isEnum": false,
             "hasDist": true,

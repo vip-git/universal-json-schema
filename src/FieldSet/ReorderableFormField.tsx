@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@mui/styles';
 import FormField from '../FormField';
 import fieldSetStyles from './field-set-styles';
 import ReorderControls from './ReorderControls';

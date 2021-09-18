@@ -5,7 +5,7 @@ import filter from 'lodash/filter';
 
 // Material UI
 import Alert from '@mui/lab/Alert';
-import { withStyles, makeStyles } from '@material-ui/styles';
+import { withStyles, makeStyles } from '@mui/styles';
 import Icon from '@mui/material/Icon';
 import Button from '@mui/material/Button';
 

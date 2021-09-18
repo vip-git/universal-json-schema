@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Select from 'react-select';
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';

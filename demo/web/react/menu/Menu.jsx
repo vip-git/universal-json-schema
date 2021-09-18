@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@mui/styles';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@mui/styles';
 import Drawer from '@mui/material/Drawer';
 import Hidden from '@mui/material/Hidden';
 import MenuItems from './MenuItems';

@@ -1,6 +1,6 @@
 {
 	"name": "@react-jsonschema-form-components/react-select",
-	"version": "3.0.0",
+	"version": "4.0.0",
 	"author": "Vipin Tanna",
 	"main": "dist/index.js",
     "scripts": {

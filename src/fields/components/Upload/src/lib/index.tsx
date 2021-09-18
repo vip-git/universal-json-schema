@@ -2,7 +2,7 @@
 /* eslint-disable no-tabs */
 /* eslint-disable no-unused-expressions */
 import React from 'react';
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import Icon from '@mui/material/Icon';
 import FormControlLabel from '@mui/material/FormControlLabel';

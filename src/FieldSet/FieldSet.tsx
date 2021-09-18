@@ -5,7 +5,7 @@ import isEqual from 'lodash/isEqual';
 import has from 'lodash/has';
 
 // Material UI
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 

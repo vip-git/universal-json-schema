@@ -1,5 +1,5 @@
 import { Theme } from '@mui/material/styles';
-import { makeStyles, createStyles } from '@material-ui/styles';
+import { makeStyles, createStyles } from '@mui/styles';
 
 const common = (theme: Theme) => ({
   addItemBtn: {
