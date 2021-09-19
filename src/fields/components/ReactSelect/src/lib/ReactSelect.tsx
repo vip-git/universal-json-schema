@@ -2,13 +2,13 @@
 
 import React from 'react';
 import Select from 'react-select';
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import Chip from '@material-ui/core/Chip';
-import MenuItem from '@material-ui/core/MenuItem';
-import CancelIcon from '@material-ui/icons/Cancel';
+import { withStyles } from '@mui/styles';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Paper from '@mui/material/Paper';
+import Chip from '@mui/material/Chip';
+import MenuItem from '@mui/material/MenuItem';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const classNames = require('classnames');
 
@@ -17,9 +17,9 @@ const styles = (theme) => ({
     flexGrow: 1,
   },
   input: {
-    display: 'flex',
-    padding: 0,
-    height: 'auto',
+    display: 'flex!important',
+    padding: '0px!important',
+    height: 'auto!important',
   },
   valueContainer: {
     display: 'flex',

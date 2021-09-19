@@ -1,8 +1,8 @@
-// import Input, { InputLabel } from '@material-ui/core/Input'; // eslint-disable-line import/no-named-default
-import FormLabel from '@material-ui/core/FormLabel';
+// import Input, { InputLabel } from '@mui/material/Input'; // eslint-disable-line import/no-named-default
+import FormLabel from '@mui/material/FormLabel';
 import { isEnum } from '@react-jsonschema-form-utils/enum-utils';
 
-const InputLabel = require('@material-ui/core/InputLabel').default;
+const InputLabel = require('@mui/material/InputLabel').default;
 
 export default ({ schema, uiSchema = {} }) => {
   const widget = uiSchema['ui:widget'];

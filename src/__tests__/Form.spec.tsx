@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { mount } from 'enzyme';
+import { mountTheme } from '../helpers/enzyme-unit-test';
 
 // Internal
 import ReactForm from '..';
@@ -22,16 +22,18 @@ describe('Form', () => {
     const data = 'Bob';
 
     // act
-    const wrapper = mount(
-      <Form 
-        schema={schema}
-        uiSchema={uiSchema}
-        formData={data}
-        prefixId={'test'}
-        onChange={({ formData }) => jest.fn(formData)}
-        onSubmit={(submittedData) => jest.fn(submittedData)}
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <Form 
+          schema={schema}
+          uiSchema={uiSchema}
+          formData={data}
+          prefixId={'test'}
+          onChange={({ formData }) => jest.fn(formData)}
+          onSubmit={(submittedData) => jest.fn(submittedData)}
+        />
+      )
+    });
 
     // check
     expect(wrapper).toHaveLength(1);
@@ -52,16 +54,18 @@ describe('Form', () => {
     const data = 'hello';
 
     // act
-    const wrapper = mount(
-      <Form 
-        schema={schema}
-        uiSchema={uiSchema}
-        formData={data}
-        prefixId={'test'}
-        onChange={({ formData }) => jest.fn(formData)}
-        onSubmit={(submittedData) => jest.fn(submittedData)}
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <Form 
+          schema={schema}
+          uiSchema={uiSchema}
+          formData={data}
+          prefixId={'test'}
+          onChange={({ formData }) => jest.fn(formData)}
+          onSubmit={(submittedData) => jest.fn(submittedData)}
+        />
+      )
+    });
 
     // check
     expect(wrapper).toHaveLength(1);

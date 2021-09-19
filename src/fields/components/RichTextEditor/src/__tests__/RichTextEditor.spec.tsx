@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { mount } from 'enzyme';
+import { mountTheme } from '../../../../../helpers/enzyme-unit-test';
 
 // Internal
 import { default as RichTextEditorComp } from '..';
@@ -19,19 +19,21 @@ describe('RichTextEditor', () => {
     const path = 'done'; 
     const label = 'Done';
     schema.description = label;
-    const wrapper = mount(
-      <RichTextEditorComp 
-        label={label}
-        path={path}
-        value={value}
-        schema={schema}
-        type={'string'}
-        options={{}}
-        htmlid={'test'}
-        nullOption={false}
-        onChange={jest.fn}
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <RichTextEditorComp 
+          label={label}
+          path={path}
+          value={value}
+          schema={schema}
+          type={'string'}
+          options={{}}
+          htmlid={'test'}
+          nullOption={false}
+          onChange={jest.fn}
+        />
+      )
+    });
     const fcComp = wrapper.find('div > div');
     expect(fcComp).toHaveLength(2);
     expect(fcComp.at(0).text()).toBe(label);
@@ -43,32 +45,36 @@ describe('RichTextEditor', () => {
 
   it('calls onChange when clicked', () => {
     const onChange = jest.fn();
-    const wrapper = mount(
-      <RichTextEditorComp 
-        label={'label'}
-        path={'path'}
-        value={'checked'}
-        schema={schema}
-        type={'string'}
-        options={{}}
-        htmlid={'test'}
-        nullOption={false}
-        onChange={onChange} 
-      />,
-    );
-    const wrapper2 = mount(
-      <RichTextEditorComp 
-        label={'label'}
-        path={'path'}
-        value={undefined}
-        schema={schema}
-        type={'string'}
-        options={{}}
-        htmlid={'test'}
-        nullOption={false}
-        onChange={onChange} 
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <RichTextEditorComp 
+          label={'label'}
+          path={'path'}
+          value={'checked'}
+          schema={schema}
+          type={'string'}
+          options={{}}
+          htmlid={'test'}
+          nullOption={false}
+          onChange={onChange} 
+        />
+      )
+    });
+    const wrapper2 = mountTheme({
+      component: (
+        <RichTextEditorComp 
+          label={'label'}
+          path={'path'}
+          value={undefined}
+          schema={schema}
+          type={'string'}
+          options={{}}
+          htmlid={'test'}
+          nullOption={false}
+          onChange={onChange} 
+        />
+      )
+    });
     const cbComp = wrapper.find('RichText');
     expect(cbComp).toHaveLength(1);
     cbComp.prop('onChange')({
@@ -85,19 +91,21 @@ describe('RichTextEditor', () => {
 
   it('calls renderds Editor events', () => {
     const onChange = jest.fn();
-    const wrapper = mount(
-      <RichTextEditorComp 
-        label={'label'}
-        path={'path'}
-        value={'checked'}
-        schema={schema}
-        type={'string'}
-        options={{}}
-        htmlid={'test'}
-        nullOption={false}
-        onChange={onChange} 
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <RichTextEditorComp 
+          label={'label'}
+          path={'path'}
+          value={'checked'}
+          schema={schema}
+          type={'string'}
+          options={{}}
+          htmlid={'test'}
+          nullOption={false}
+          onChange={onChange} 
+        />
+      )
+    });
     const cbComp = wrapper.find('Editor');
     expect(cbComp).toHaveLength(1);
     cbComp.prop('renderMark')({ mark: {type: 'bold' }}, jest.fn);
@@ -120,19 +128,21 @@ describe('RichTextEditor', () => {
 
   it('calls Editor events when clicked', () => {
     const onChange = jest.fn();
-    const wrapper = mount(
-      <RichTextEditorComp 
-        label={'label'}
-        path={'path'}
-        value={'checked'}
-        schema={schema}
-        type={'string'}
-        options={{}}
-        htmlid={'test'}
-        nullOption={false}
-        onChange={onChange} 
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <RichTextEditorComp 
+          label={'label'}
+          path={'path'}
+          value={'checked'}
+          schema={schema}
+          type={'string'}
+          options={{}}
+          htmlid={'test'}
+          nullOption={false}
+          onChange={onChange} 
+        />
+      )
+    });
     // console.log(wrapper.debug());
     const cbComp = wrapper.find('ForwardRef').find('ForwardRef').find('span');
     expect(cbComp).toHaveLength(20);

@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { mount } from 'enzyme';
+import { mountTheme } from '../../../../../helpers/enzyme-unit-test';
 
 // Internal
 import { default as AutoCompleteComp } from '..';
@@ -36,19 +36,20 @@ describe('AutoComplete', () => {
         const path = 'done'; 
         const label = 'Done';
         schema.description = label;
-        const wrapper = mount(
-          <AutoCompleteComp 
-            type={'string'}
-            htmlid={htmlid}
-            label={label}
-            path={path}
-            value={value}
-            schema={schema}
-            onChange={jest.fn}
-          />,
-        );
-    
-        const fcComp = wrapper.find('WithStyles(ForwardRef(TextField))');
+        const wrapper = mountTheme({
+          component: (
+              <AutoCompleteComp 
+                type={'string'}
+                htmlid={htmlid}
+                label={label}
+                path={path}
+                value={value}
+                schema={schema}
+                onChange={jest.fn}
+              />
+            )
+        });
+        const fcComp = wrapper.find('ForwardRef(TextField)');
         expect(fcComp).toHaveLength(1);
         expect(fcComp.prop('id')).toBe(htmlid);
     
@@ -61,45 +62,47 @@ describe('AutoComplete', () => {
         const props = {
           color: 'secondary',
         }
-        const wrapper = mount(
-          <AutoCompleteComp
-            type={'string'}
-            htmlid={htmlid}
-            label={'label'}
-            path={'path'}
-            schema={schema}
-            onChange={jest.fn}
-            options={
-              {...props}
-            }
-          />,
-        );
+        const wrapper = mountTheme({
+          component: (
+              <AutoCompleteComp
+                type={'string'}
+                htmlid={htmlid}
+                label={'label'}
+                path={'path'}
+                schema={schema}
+                onChange={jest.fn}
+                options={props}
+              />
+            )
+        });
     
-        const cbComp = wrapper.find('WithStyles(ForwardRef(Autocomplete))');
+        const cbComp = wrapper.find('ForwardRef(Autocomplete)');
         expect(cbComp.prop('color')).toBe(props.color);
       });
     
       it('calls onChange when clicked', () => {
         const onChange = jest.fn();
-        const wrapper = mount(
-          <AutoCompleteComp 
-            path={'a'} 
-            value={value} 
-            onChange={onChange} 
-            schema={schema}
-            type={'string'}
-            htmlid={htmlid}
-            label={'label'}
-          />,
-        );
-        const cbComp = wrapper.find('WithStyles(ForwardRef(Autocomplete))');
+        const wrapper = mountTheme({
+          component: (
+            <AutoCompleteComp 
+                path={'a'} 
+                value={value} 
+                onChange={onChange} 
+                schema={schema}
+                type={'string'}
+                htmlid={htmlid}
+                label={'label'}
+              />
+            )
+        });
+        const cbComp = wrapper.find('ForwardRef(Autocomplete)');
         expect(cbComp).toHaveLength(1);
         cbComp.prop('onChange')({
             target: {
                 value: 'new change'
             }
         });
-        cbComp.prop('getOptionSelected')('new change');
+        cbComp.prop('isOptionEqualToValue')('new change');
         cbComp.prop('getOptionLabel')('new change');
         cbComp.prop('groupBy')('new change');
         cbComp.prop('getOptionDisabled')('new change');
@@ -108,19 +111,21 @@ describe('AutoComplete', () => {
     
       it('calls onChange when clicked (multiple)', () => {
         const onChange = jest.fn();
-        const wrapper = mount(
-          <AutoCompleteComp 
-            path={'a'} 
-            value={['foo', 'bar']} 
-            onChange={onChange} 
-            schema={multiOptionSchema}
-            type={'string'}
-            htmlid={htmlid}
-            label={'label'}
-            options={{ multiple: true }}
-          />,
-        );
-        const cbComp = wrapper.find('WithStyles(ForwardRef(Autocomplete))');
+        const wrapper = mountTheme({
+          component: (
+            <AutoCompleteComp 
+              path={'a'} 
+              value={['foo', 'bar']} 
+              onChange={onChange} 
+              schema={multiOptionSchema}
+              type={'string'}
+              htmlid={htmlid}
+              label={'label'}
+              options={{ multiple: true }}
+            />
+          )
+        });
+        const cbComp = wrapper.find('ForwardRef(Autocomplete)');
         expect(cbComp).toHaveLength(1);
         cbComp.prop('onChange')({
           target: { value: ['foo', 'bar'] }
@@ -136,18 +141,20 @@ describe('AutoComplete', () => {
       it('calls onChange when clicked (multiple) (edge case)', () => {
         const onChange = jest.fn();
         multiOptionSchema.anyOf = [];
-        const wrapper = mount(
-          <AutoCompleteComp 
-            path={'a'} 
-            value={'foo'} 
-            onChange={onChange} 
-            schema={multiOptionSchema}
-            type={'string'}
-            htmlid={htmlid}
-            label={'label'}
-          />,
-        );
-        const cbComp = wrapper.find('WithStyles(ForwardRef(Autocomplete))');
+        const wrapper = mountTheme({
+          component: (
+            <AutoCompleteComp 
+              path={'a'} 
+              value={'foo'} 
+              onChange={onChange} 
+              schema={multiOptionSchema}
+              type={'string'}
+              htmlid={htmlid}
+              label={'label'}
+            />
+          )
+        });
+        const cbComp = wrapper.find('ForwardRef(Autocomplete)');
         expect(cbComp).toHaveLength(1);
         cbComp.prop('onChange')({
           target: { value: ['foo', 'bar'] }

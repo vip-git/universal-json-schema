@@ -2,10 +2,10 @@
 import getComponent from '../get-component';
 
 // Material UI
-const InputSpy = require('@material-ui/core/Input').default;
-const RadioGroupSpy = require('@material-ui/core/RadioGroup').default;
-const CheckboxSpy = require('@material-ui/core/Checkbox').default;
-const SelectSpy = require('@material-ui/core/Select').default;
+const InputSpy = require('@mui/material/Input').default;
+const RadioGroupSpy = require('@mui/material/RadioGroup').default;
+const CheckboxSpy = require('@mui/material/Checkbox').default;
+const SelectSpy = require('@mui/material/Select').default;
 
 describe('getComponent', () => {
   it('configures props for simple field', () => {

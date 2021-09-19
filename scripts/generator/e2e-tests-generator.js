@@ -214,21 +214,21 @@ const e2eTestsGenerator = (
   const template = ejs.compile(templateFile, {});
   let xhrSchema = {};
   let uiSchema = {};
-  const schema = require(`../../src/demo/examples/${pageName}/schema.json`);
+  const schema = require(`../../demo/web/react/examples/${pageName}/schema.json`);
   try {
-    uiSchema = require(`../../src/demo/examples/${pageName}/ui-schema.json`);
+    uiSchema = require(`../../demo/web/react/examples/${pageName}/ui-schema.json`);
   } catch (err) {}
   try {
-    xhrSchema = require(`../../src/demo/examples/${pageName}/xhr-schema.json`);
+    xhrSchema = require(`../../demo/web/react/examples/${pageName}/xhr-schema.json`);
   } catch (err) {}
-  const formData = require(`../../src/demo/examples/${pageName}/form-data.json`);
+  const formData = require(`../../demo/web/react/examples/${pageName}/form-data.json`);
 
   if (schema.additionalProperties) {
     schema.properties.additionalProperties = schema.additionalProperties;
   }
 
   try {
-    const testSchema = require(`../../src/demo/examples/${pageName}/tests-schema.json`);
+    const testSchema = require(`../../demo/web/react/examples/${pageName}/tests-schema.json`);
     const subTestsFolder = `${testsGeneratedFolder}/${pageName}`;
     shelljs.rm('-rf', subTestsFolder);
     shelljs.mkdir(subTestsFolder);

@@ -2,7 +2,7 @@
 // Internal
 import getLabelComponent from '../get-label-component';
 
-const InputLabel = require('@material-ui/core/InputLabel').default;
+const InputLabel = require('@mui/material/InputLabel').default;
 
 describe('getLabelComponent', () => {
   it('returns InputLabel by default', () => {

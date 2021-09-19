@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { mount } from 'enzyme';
+import { mountTheme } from '../../../../../helpers/enzyme-unit-test';
 
 // Internal
 import { default as ReactSelectComp } from '..';
@@ -26,104 +26,116 @@ describe('ReactSelect', () => {
     const path = 'done'; 
     const label = 'Done';
     schema.description = label;
-    const wrapper2 = mount(
-      <ReactSelectComp
-        type={'string'}
-        label={label}
-        path={path}
-        schema={schema}
-        value={value}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='2'
-      />,
-    );
-    const wrapper6 = mount(
-      <ReactSelectComp
-        type={'string'}
-        label={label}
-        path={path}
-        value={value}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='3'
-      />,
-    );
-    const wrapper = mount(
-      <ReactSelectComp
-        type={'string'}
-        label={label}
-        path={path}
-        schema={schema}
-        value={value}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='3'
-      />,
-    );
+    const wrapper2 = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          label={label}
+          path={path}
+          schema={schema}
+          value={value}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='2'
+        />
+      )
+    });
+    const wrapper6 = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          label={label}
+          path={path}
+          value={value}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='3'
+        />
+      )
+    });
+    const wrapper = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          label={label}
+          path={path}
+          schema={schema}
+          value={value}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='3'
+        />
+      )
+    });
 
-    const wrapper3 = mount(
-      <ReactSelectComp
-        type={'string'}
-        label={label}
-        path={path}
-        schema={schema}
-        value={JSON.stringify([value])}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='3'
-      />,
-    );
+    const wrapper3 = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          label={label}
+          path={path}
+          schema={schema}
+          value={JSON.stringify([value])}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='3'
+        />
+      )
+    });
 
-    const wrapper5 = mount(
-      <ReactSelectComp
-        type={'string'}
-        label={label}
-        path={path}
-        schema={{
-          ...schema,
-          anyOf: [],
-          parsedArray: true,
-        }}
-        value={value4}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='3'
-      />,
-    );
+    const wrapper5 = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          label={label}
+          path={path}
+          schema={{
+            ...schema,
+            anyOf: [],
+            parsedArray: true,
+          }}
+          value={value4}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='3'
+        />
+      )
+    });
 
-    const wrapper46 = mount(
-      <ReactSelectComp
-        type={'string'}
-        label={label}
-        path={path}
-        schema={{
-          ...schema,
-          anyOf: [],
-          parsedArray: true,
-        }}
-        value={value5}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='3'
-      />,
-    );
+    const wrapper46 = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          label={label}
+          path={path}
+          schema={{
+            ...schema,
+            anyOf: [],
+            parsedArray: true,
+          }}
+          value={value5}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='3'
+        />
+      )
+    });
 
     const fcComp = wrapper.find('label');
     expect(fcComp).toHaveLength(1);
@@ -144,111 +156,123 @@ describe('ReactSelect', () => {
     const path = 'done'; 
     const label = 'Done';
     schema.description = label;
-    const wrapper2 = mount(
-      <ReactSelectComp
-        type={'string'}
-        label={label}
-        path={path}
-        schema={schema}
-        value={value}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='2'
-        options={{ multiSelect: true }}
-      />,
-    );
+    const wrapper2 = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          label={label}
+          path={path}
+          schema={schema}
+          value={value}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='2'
+          options={{ multiSelect: true }}
+        />
+      )
+    });
 
-    const wrapper4 = mount(
-      <ReactSelectComp
-        type={'string'}
-        label={label}
-        path={path}
-        schema={schema}
-        value={null}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='2'
-        options={{ multiSelect: true }}
-      />,
-    );
+    const wrapper4 = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          label={label}
+          path={path}
+          schema={schema}
+          value={null}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='2'
+          options={{ multiSelect: true }}
+        />
+      )
+    });
 
-    const wrapper3 = mount(
-      <ReactSelectComp
-        type={'string'}
-        label={label}
-        path={path}
-        schema={schema}
-        value={value4}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='3'
-        options={{ multiSelect: true }}
-      />,
-    );
+    const wrapper3 = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          label={label}
+          path={path}
+          schema={schema}
+          value={value4}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='3'
+          options={{ multiSelect: true }}
+        />
+      )
+    });
 
-    const wrapper36 = mount(
-      <ReactSelectComp
-        type={'string'}
-        label={label}
-        path={path}
-        schema={schema}
-        value={value5}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='3'
-        options={{ multiSelect: true }}
-      />,
-    );
+    const wrapper36 = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          label={label}
+          path={path}
+          schema={schema}
+          value={value5}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='3'
+          options={{ multiSelect: true }}
+        />
+      )
+    });
 
-    const wrapper5 = mount(
-      <ReactSelectComp
-        type={'string'}
-        label={label}
-        path={path}
-        schema={{
-          ...schema,
-          anyOf: [],
-          parsedArray: true,
-        }}
-        value={value4}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='3'
-        options={{ multiSelect: true }}
-      />,
-    );
+    const wrapper5 = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          label={label}
+          path={path}
+          schema={{
+            ...schema,
+            anyOf: [],
+            parsedArray: true,
+          }}
+          value={value4}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='3'
+          options={{ multiSelect: true }}
+        />
+      )
+    });
 
-    const wrapper = mount(
-      <ReactSelectComp
-        type={'string'}
-        label={label}
-        path={path}
-        schema={schema}
-        value={value}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='3'
-        options={{ multiSelect: true }}
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          label={label}
+          path={path}
+          schema={schema}
+          value={value}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='3'
+          options={{ multiSelect: true }}
+        />
+      )
+    });
     const fcComp = wrapper.find('label');
     expect(fcComp).toHaveLength(1);
     expect(fcComp.text()).toBe(schema.title);
@@ -260,20 +284,22 @@ describe('ReactSelect', () => {
 
   it('calls onChange when clicked', () => {
     const onChange = jest.fn();
-    const wrapper = mount(
-      <ReactSelectComp
-        type={'string'}
-        label={'label'}
-        path={'path'}
-        schema={schema}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={onChange}
-        schemaVersion='2'
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          label={'label'}
+          path={'path'}
+          schema={schema}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={onChange}
+          schemaVersion='2'
+        />
+      )
+    });
 
     const cbComp = wrapper.find('Select');
     expect(cbComp).toHaveLength(1);
@@ -286,24 +312,26 @@ describe('ReactSelect', () => {
   it('calls onChange when clicked (Multi-Select)', () => {
     const value4: any = [{'label': 'Yes', 'value': 'Yes'}];
     const onChange = jest.fn();
-    const wrapper = mount(
-      <ReactSelectComp
-        type={'string'}
-        schema={{
-          ...schema,
-          anyOf: [],
-          parsedArray: true,
-        }}
-        value={value}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='3'
-        options={{ multiSelect: true }}
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          schema={{
+            ...schema,
+            anyOf: [],
+            parsedArray: true,
+          }}
+          value={value}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='3'
+          options={{ multiSelect: true }}
+        />
+      )
+    });
 
     const cbComp = wrapper.find('Select');
     expect(cbComp).toHaveLength(1);
@@ -316,21 +344,23 @@ describe('ReactSelect', () => {
   it('calls onChange when clicked (Single-Select) Edge case', () => {
     const value4: any = JSON.stringify([{'label': 'Yes', 'value': 'Yes'}]);
     const onChange = jest.fn();
-    const wrapper = mount(
-      <ReactSelectComp
-        type={'string'}
-        schema={{
-          ...schema,
-        }}
-        value={value}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='3'
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          schema={{
+            ...schema,
+          }}
+          value={value}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='3'
+        />
+      )
+    });
 
     const cbComp = wrapper.find('Select');
     expect(cbComp).toHaveLength(1);
@@ -343,22 +373,24 @@ describe('ReactSelect', () => {
   it('calls onChange when clicked (Multi-Select) Edge case', () => {
     const value4: any = JSON.stringify([{'label': 'Yes', 'value': 'Yes'}]);
     const onChange = jest.fn();
-    const wrapper = mount(
-      <ReactSelectComp
-        type={'string'}
-        schema={{
-          ...schema,
-        }}
-        value={value}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='3'
-        options={{ multiSelect: true }}
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          schema={{
+            ...schema,
+          }}
+          value={value}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='3'
+          options={{ multiSelect: true }}
+        />
+      )
+    });
 
     const cbComp = wrapper.find('Select');
     expect(cbComp).toHaveLength(1);
@@ -371,19 +403,21 @@ describe('ReactSelect', () => {
   it('calls onChange when clicked (Single-Select) Edge case 2', () => {
     const value4: any = true;
     const onChange = jest.fn();
-    const wrapper = mount(
-      <ReactSelectComp
-        type={'string'}
-        schema={schema}
-        value={value}
-        uiSchema={{}}
-        xhrSchema={{}}
-        disabled={false}
-        widget={{}}
-        onChange={jest.fn}
-        schemaVersion='3'
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <ReactSelectComp
+          type={'string'}
+          schema={schema}
+          value={value}
+          uiSchema={{}}
+          xhrSchema={{}}
+          disabled={false}
+          widget={{}}
+          onChange={jest.fn}
+          schemaVersion='3'
+        />
+      )
+    });
 
     const cbComp = wrapper.find('Select');
     expect(cbComp).toHaveLength(1);

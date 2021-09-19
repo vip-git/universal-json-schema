@@ -4,10 +4,10 @@ import keys from 'lodash/keys';
 import filter from 'lodash/filter';
 
 // Material UI
-import Alert from '@material-ui/lab/Alert';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
+import Alert from '@mui/lab/Alert';
+import { withStyles, makeStyles } from '@mui/styles';
+import Icon from '@mui/material/Icon';
+import Button from '@mui/material/Button';
 
 const validationStyles = {};
 
@@ -22,6 +22,9 @@ const alertStyles = makeStyles({
       display: 'flex',
       alignItems: 'center',
     },
+  },
+  button: {
+    color: '#f1645f',
   },
 });
 
@@ -43,7 +46,7 @@ const Validation = ({ validation }) => {
           {validation.message}
         </span>
         {validation.rule === 'offline' && (
-          <Button onClick={validation.callback}> 
+          <Button onClick={validation.callback} className={styles.button}> 
             <Icon>{'autorenew'}</Icon>
           </Button>
         )}

@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { mount } from 'enzyme';
+import { mountTheme } from '../../../../../helpers/enzyme-unit-test';
 
 // Internal
 import { default as EmptyDivComp } from '..';
@@ -20,9 +20,11 @@ describe('EmptyDiv', () => {
     const path = 'done'; 
     const label = 'Done';
     schema.description = label;
-    const wrapper = mount(
-      <EmptyDivComp label={label} htmlid={path} value={value} schema={schema} />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <EmptyDivComp label={label} htmlid={path} value={value} schema={schema} />
+      )
+    });
     const fcComp = wrapper.find('div');
     expect(fcComp).toHaveLength(1);
     expect(fcComp.prop('id')).toBe(path);
@@ -33,9 +35,11 @@ describe('EmptyDiv', () => {
     const props = {
       color: 'secondary',
     }
-    const wrapper = mount(
-      <EmptyDivComp options={{...props}} schema={schema} />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <EmptyDivComp options={{...props}} schema={schema} />
+      )
+    });
 
     const cbComp = wrapper.find('div');
     expect(cbComp.prop('color')).toBe(props.color);
@@ -45,9 +49,11 @@ describe('EmptyDiv', () => {
     const props = {
       color: 'secondary',
     }
-    const wrapper = mount(
-      <EmptyDivComp />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <EmptyDivComp />
+      )
+    });
 
     const cbComp = wrapper.find('div');
     expect(cbComp).toHaveLength(1);

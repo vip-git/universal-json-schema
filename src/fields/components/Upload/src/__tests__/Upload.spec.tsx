@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { mount } from 'enzyme';
+import { mountTheme } from '../../../../../helpers/enzyme-unit-test';
 
 // Internal
 import { default as UploadComp } from '..';
@@ -27,69 +27,79 @@ describe('Upload', () => {
       buttonTitle: 'New Title'
     };
     schema.description = label;
-    const wrapper = mount(
-      <EventContext.Provider value={'jest.fn'}>
-        <UploadComp 
-          schema={schema} 
-          onChange={jest.fn}
-          widget={'outlined'}
-          htmlid={'test'}
-          EventContext={EventContext}
-        />
-      </EventContext.Provider>,
-    );
-    const wrapper2 = mount(
-      <EventContext.Provider value={'jest.fn'}>
-        <UploadComp  
-          schema={schema} 
-          onChange={jest.fn}
-          widget={'outlined'}
-          htmlid={'test'}
-          EventContext={EventContext}
-          uiSchema={{
-            'ui:props': uploadProps
-          }}
-        />
-      </EventContext.Provider>,
-    );
-    const wrapper3 = mount(
-      <EventContext.Provider value={'jest.fn'}>
-        <UploadComp 
-          schema={schema} 
-          onChange={jest.fn}
-          widget={'outlined'}
-          htmlid={'test'}
-          EventContext={EventContext}
-          uiSchema={{
-            'ui:options': uploadProps
-          }}
-        />
-      </EventContext.Provider>,
-    );
-    const wrapper4 = mount(
-      <EventContext.Provider value={'jest.fn'}>
-        <UploadComp 
-          schema={schema} 
-          onChange={jest.fn}
-          widget={'outlined'}
-          htmlid={'test'}
-          EventContext={EventContext}
-          uiSchema={{
-            'ui:options': {}
-          }}
-        />
-      </EventContext.Provider>,
-    );
-    const wrapper5 = mount(
-      <EventContext.Provider value={'jest.fn'}>
-        <UploadComp 
-          schema={schema} 
-          onChange={jest.fn}
-          htmlid={'test'}
-          EventContext={EventContext}
-        />
-      </EventContext.Provider>,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <EventContext.Provider value={'jest.fn'}>
+          <UploadComp 
+            schema={schema} 
+            onChange={jest.fn}
+            widget={'outlined'}
+            htmlid={'test'}
+            EventContext={EventContext}
+          />
+        </EventContext.Provider>
+      )
+    });
+    const wrapper2 = mountTheme({
+      component: (
+        <EventContext.Provider value={'jest.fn'}>
+          <UploadComp  
+            schema={schema} 
+            onChange={jest.fn}
+            widget={'outlined'}
+            htmlid={'test'}
+            EventContext={EventContext}
+            uiSchema={{
+              'ui:props': uploadProps
+            }}
+          />
+        </EventContext.Provider>
+      )
+    });
+    const wrapper3 = mountTheme({
+      component: (
+        <EventContext.Provider value={'jest.fn'}>
+          <UploadComp 
+            schema={schema} 
+            onChange={jest.fn}
+            widget={'outlined'}
+            htmlid={'test'}
+            EventContext={EventContext}
+            uiSchema={{
+              'ui:options': uploadProps
+            }}
+          />
+        </EventContext.Provider>
+      )
+    });
+    const wrapper4 = mountTheme({
+      component: (
+        <EventContext.Provider value={'jest.fn'}>
+          <UploadComp 
+            schema={schema} 
+            onChange={jest.fn}
+            widget={'outlined'}
+            htmlid={'test'}
+            EventContext={EventContext}
+            uiSchema={{
+              'ui:options': {}
+            }}
+          />
+        </EventContext.Provider>
+      )
+    });
+    const wrapper5 = mountTheme({
+      component: (
+        <EventContext.Provider value={'jest.fn'}>
+          <UploadComp 
+            schema={schema} 
+            onChange={jest.fn}
+            htmlid={'test'}
+            EventContext={EventContext}
+          />
+        </EventContext.Provider>
+      )
+    });
     const fcComp = wrapper.find('UploadButton');
     expect(fcComp).toHaveLength(1);
     expect(fcComp.prop('label')).toBe('Please upload your file');
@@ -103,18 +113,20 @@ describe('Upload', () => {
     const props = {
       color: 'secondary',
     }
-    const wrapper = mount(
-      <EventContext.Provider value={'jest.fn'}>
-        <UploadComp 
-          {...props} 
-          schema={schema} 
-          onChange={jest.fn}
-          widget={'outlined'}
-          htmlid={'test'}
-          EventContext={EventContext}
-        />
-      </EventContext.Provider>,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <EventContext.Provider value={'jest.fn'}>
+          <UploadComp 
+            {...props} 
+            schema={schema} 
+            onChange={jest.fn}
+            widget={'outlined'}
+            htmlid={'test'}
+            EventContext={EventContext}
+          />
+        </EventContext.Provider>
+      )
+    });
 
     const cbComp = wrapper.find('UploadButton');
     expect(cbComp.prop('color')).toBe(props.color);
@@ -124,17 +136,19 @@ describe('Upload', () => {
     const onUpload: any = jest.fn();
     const onChange = jest.fn();
     const checked = true;
-    const wrapper = mount(
-      <EventContext.Provider value={onUpload}>
-        <UploadComp 
-          onChange={onChange} 
-          schema={schema} 
-          widget={'outlined'}
-          htmlid={'test'}
-          EventContext={EventContext}
-        />
-      </EventContext.Provider>,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <EventContext.Provider value={onUpload}>
+          <UploadComp 
+            onChange={onChange} 
+            schema={schema} 
+            widget={'outlined'}
+            htmlid={'test'}
+            EventContext={EventContext}
+          />
+        </EventContext.Provider>
+      )
+    });
 
     const cbComp = wrapper.find('input');
     expect(cbComp).toHaveLength(1);
@@ -151,16 +165,18 @@ describe('Upload', () => {
 
   it('calls onChange when clicked (edge case)', () => {
     const onChange = jest.fn();
-    const wrapper = mount(
-      <EventContext.Provider value={null}>
-        <UploadComp 
-          onChange={onChange} 
-          widget={'outlined'}
-          htmlid={'test'}
-          EventContext={EventContext}
-        />
-      </EventContext.Provider>,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <EventContext.Provider value={null}>
+          <UploadComp 
+            onChange={onChange} 
+            widget={'outlined'}
+            htmlid={'test'}
+            EventContext={EventContext}
+          />
+        </EventContext.Provider>
+      )
+    });
 
     const cbComp = wrapper.find('input');
     expect(cbComp).toHaveLength(1);

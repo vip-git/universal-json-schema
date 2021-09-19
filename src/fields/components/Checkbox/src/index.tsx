@@ -2,11 +2,11 @@
 import React from 'react';
 
 // Material UI
-import Checkbox from '@material-ui/core/Checkbox';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
+import Checkbox from '@mui/material/Checkbox';
+import FormLabel from '@mui/material/FormLabel';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
 
 // Props
 import checkboxProps, { CheckBoxProps } from './checkbox.props';
@@ -37,6 +37,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }: C
                     }
                     onChange={onGroupChange(String(o.key), o.adds)}
                     disabled={o.disabled || false}
+                    {...options}
                 />
               )}
               label={o.value}
@@ -63,6 +64,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }: C
                   checked={String(value) === String(ev.key)}
                   onChange={onEnumChange(ev.key, ev.adds)}
                   disabled={ev.disabled || false}
+                  {...options}
               />
             )}
             label={ev.value}
@@ -83,6 +85,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }: C
                 checked={typeof value === 'boolean' ? value : stringToBoolean}
                 onChange={givenOnChange}
                 disabled={options.disabled || false}
+                {...options}
             />
           )}
           label={label}

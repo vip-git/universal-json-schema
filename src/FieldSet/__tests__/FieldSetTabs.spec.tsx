@@ -1,8 +1,6 @@
 // Library
 import React from 'react';
-import { mount } from 'enzyme';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers'; // Has to be made optional
-import MomentUtils from '@date-io/moment';
+import { mountTheme } from '../../helpers/enzyme-unit-test';
 
 // Internal
 import FieldSetTabs from '../FieldSetTabs';
@@ -382,8 +380,8 @@ describe('FieldSetTabs', () => {
       };
 
       // act
-      const wrapper = mount(
-        <MuiPickersUtilsProvider utils={MomentUtils}>
+      const wrapper = mountTheme({
+        component: (
             <StepperContext.Provider value={[1, false] as any}>
                 <FieldSetTabs 
                     classes={{ row }}
@@ -401,9 +399,9 @@ describe('FieldSetTabs', () => {
                     isTabContent={false}
                     tabKey={''}
                 />
-            </StepperContext.Provider>
-        </MuiPickersUtilsProvider>,
-      );
+            </StepperContext.Provider> 
+        )
+      });
 
       // check
       expect(wrapper).toHaveLength(1);

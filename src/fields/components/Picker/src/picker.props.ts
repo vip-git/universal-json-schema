@@ -1,25 +1,28 @@
 // Library
-import { 
-  KeyboardDatePicker,
-  KeyboardDateTimePicker,
-  KeyboardTimePicker, 
-  DatePicker, 
-  TimePicker, 
-  DateTimePicker, 
-} from '@material-ui/pickers';
+import MobileDatePicker from '@mui/lab/MobileDatePicker';
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+import MobileDateTimePicker from '@mui/lab/MobileDateTimePicker';
+import TimePicker from '@mui/lab/TimePicker';
 
 export const renderPickerComp = (type) => {
   switch (type) {
+    case 'material-mobile-date':
+      return {
+        PickerComp: MobileDatePicker,
+        maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+        format: 'DD-MM-YYYY',
+        placeholder: '__-__-____',
+      };
     case 'material-date':
       return {
-        PickerComp: KeyboardDatePicker,
+        PickerComp: DesktopDatePicker,
         maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
         format: 'DD-MM-YYYY',
         placeholder: '__-__-____',
       };
     case 'material-date-keyboard-disable':
       return {
-        PickerComp: DatePicker,
+        PickerComp: MobileDatePicker,
         maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
         format: 'DD-MM-YYYY',
         placeholder: '__-__-____',
@@ -33,14 +36,14 @@ export const renderPickerComp = (type) => {
       };
     case 'material-time':
       return {
-        PickerComp: KeyboardTimePicker,
+        PickerComp: TimePicker,
         maskInput: [/\d/, /\d/, ':', /\d/, /\d/, ' ', /a|p/i, 'M'],
         format: 'hh:mm A',
         placeholder: '__:__ __',
       };
     case 'material-datetime':
       return {
-        PickerComp: KeyboardDateTimePicker,
+        PickerComp: MobileDateTimePicker,
         maskInput: [
           /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ':', /\d/, /\d/, ' ', /a|p/i, 
           'M',
@@ -50,7 +53,7 @@ export const renderPickerComp = (type) => {
       }; 
     case 'material-datetime-keyboard-disable':
       return {
-        PickerComp: DateTimePicker,
+        PickerComp: MobileDateTimePicker,
         maskInput: [
           /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ':', /\d/, /\d/, ' ', /a|p/i, 
           'M',
@@ -60,7 +63,7 @@ export const renderPickerComp = (type) => {
       };
     default:
       return {
-        PickerComp: KeyboardDatePicker,
+        PickerComp: DesktopDatePicker,
         maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
         format: 'DD-MM-YYYY',
         placeholder: '__-__-____',

@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Material UI
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@mui/styles';
 
 // Style
 import fieldSetStyles from './field-set-styles';

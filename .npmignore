@@ -4,13 +4,16 @@ node_modules
 mocheawesome-report-unit
 docs/
 src/
+demo/
 .gitbook/
 .idea/
 .github/
+coverage/
 todo
 jsdom-setup.js
 mocha.setup.js
 postcss.config.js
+rollup.config.js
 webpack.config.demo.js
 webpack.config.js
 .prettier.json
@@ -28,6 +31,7 @@ generator/
 wdio-ci.conf.js
 wdio.conf.js
 .dockerignore
+.gitignore
 changelog.md
 contributing.md
 Dockerfile
@@ -39,4 +43,5 @@ tsconfig.json
 scripts/
 .vscode/
 changelog.md
+universal-json-schema.md
 .husky

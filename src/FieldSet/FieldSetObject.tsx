@@ -4,12 +4,12 @@ import { get } from 'lodash';
 import keys from 'lodash/keys';
 
 // Icons
-import IconButton from '@material-ui/core/IconButton';
-import AddCircle from '@material-ui/icons/AddCircle';
+import IconButton from '@mui/material/IconButton';
+import AddCircle from '@mui/icons-material/AddCircle';
 
 // Material UI
-import { withStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { withStyles } from '@mui/styles';
+import { Typography } from '@mui/material';
 
 // Internal
 import ReorderableFormField from './ReorderableFormField';

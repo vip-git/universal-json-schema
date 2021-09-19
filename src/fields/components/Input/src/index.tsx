@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import Input from '@material-ui/core/Input';
+import Input from '@mui/material/Input';
 
 // Internal
 import inputProps from './input.props';

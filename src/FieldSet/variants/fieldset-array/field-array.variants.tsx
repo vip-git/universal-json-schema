@@ -3,8 +3,8 @@ import React from 'react';
 import slice from 'lodash/slice';
 
 // Material UI
-import IconButton from '@material-ui/core/IconButton';
-import AddCircle from '@material-ui/icons/AddCircle';
+import IconButton from '@mui/material/IconButton';
+import AddCircle from '@mui/icons-material/AddCircle';
 
 // Helpers
 import getDefaultValue from '../../../helpers/get-default-value';

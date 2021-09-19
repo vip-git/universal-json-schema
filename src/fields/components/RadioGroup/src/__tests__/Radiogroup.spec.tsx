@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { mount } from 'enzyme';
+import { mountTheme } from '../../../../../helpers/enzyme-unit-test';
 
 // Internal
 import { default as RadioGroupComp } from '..';
@@ -25,74 +25,79 @@ describe('Radiogroup', () => {
     const path = 'done'; 
     const label = 'Done';
     schema.description = label;
-    const wrapper = mount(
-      <RadioGroupComp 
-        label={label} 
-        path={path} 
-        value={selectedValue} 
-        schema={schema}
-        htmlid={'test'}
-        inputProps={{}}
-        nullOption
-        onChange={jest.fn}
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <RadioGroupComp 
+          label={label} 
+          path={path} 
+          value={selectedValue} 
+          schema={schema}
+          htmlid={'test'}
+          inputProps={{}}
+          nullOption
+          onChange={jest.fn}
+        />
+      )
+    });
     const fcComp = wrapper.find('label');
     expect(fcComp).toHaveLength(schema.enum.length);
     schema.enum.forEach((ev, ek) => {
       expect(fcComp.at(ek).text()).toBe(String(ev));
 
-      const cbComp = wrapper.find('WithStyles(ForwardRef(SwitchBase))');
+      const cbComp = wrapper.find('ForwardRef(SwitchBase)');
       expect(cbComp).toHaveLength(schema.enum.length);
       expect(cbComp.at(ek).prop('checked')).toBe(ev === selectedValue);
     });
   });
 
-  it('passes additional properties to the Checkbox component', () => {
+  it('passes additional properties to the Radiogroup component', () => {
     const props = {
       color: 'secondary',
     }
-    const wrapper = mount(
-      <RadioGroupComp 
-        {...props} 
-        path={'a'} 
-        schema={schema} 
-        value={'checked'} 
-        htmlid={'test'}
-        inputProps={{}}
-        nullOption
-        onChange={jest.fn}
-      />,
-    );
-
-    const cbComp = wrapper.find('WithStyles(ForwardRef(SwitchBase))');
-    schema.enum.forEach((ev, ek) => {
-      expect(cbComp.at(ek).prop('color')).toBe(props.color);
+    const wrapper = mountTheme({
+      component: (
+        <RadioGroupComp 
+          options={props}
+          path={'a'} 
+          schema={schema} 
+          value={'checked'} 
+          htmlid={'test'}
+          inputProps={{}}
+          nullOption
+          onChange={jest.fn}
+        />
+      )
     });
+    const cbComp = wrapper.find('ForwardRef(RadioGroup)');
+    expect(cbComp.prop('color')).toBe(props.color);
   });
 
   it('calls onChange when clicked', () => {
     const onChange = jest.fn();
-    const wrapper = mount(
-      <RadioGroupComp 
-        path={'a'} 
-        value={selectedValue} 
-        onChange={onChange} 
-        schema={schema} 
-        htmlid={'test'}
-        inputProps={{}}
-        nullOption
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <RadioGroupComp 
+          path={'a'} 
+          value={selectedValue} 
+          onChange={onChange} 
+          schema={schema} 
+          htmlid={'test'}
+          inputProps={{}}
+          nullOption
+        />
+      )
+    });
 
     const cbComp = wrapper.find('input');
     expect(cbComp).toHaveLength(schema.enum.length);
     schema.enum.forEach((ev, ek) => {
       cbComp.at(ek).simulate('change');
     });
-    cbComp.at(0).prop('onChange')({
-      target: { value: undefined }
-    });
+    // cbComp.at(1).prop('onChange')({
+    //   preventDefault: jest.fn,
+    //   defaultPrevented: jest.fn,
+    //   target: { value: undefined, defaultPrevented: false, }
+    // });
     expect(onChange).toHaveBeenCalledTimes(schema.enum.length);
   });
 });

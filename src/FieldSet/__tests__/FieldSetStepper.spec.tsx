@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { mount } from 'enzyme';
+import { mountTheme } from '../../helpers/enzyme-unit-test';
 import { act } from 'react-dom/test-utils';
 
 // Internal
@@ -335,8 +335,9 @@ describe('FieldSetStepper', () => {
       const onSkip = jest.fn();
 
       // act
-      const wrapper = mount(
-        <StepperContext.Provider value={[1, false] as any}>
+      const wrapper = mountTheme({
+        component: (
+          <StepperContext.Provider value={[1, false] as any}>
             <FieldSetStepper 
                 classes={{ row }}
                 schema={schema}
@@ -356,11 +357,13 @@ describe('FieldSetStepper', () => {
                 onBack={onBack}
                 onSkip={onSkip}
             />
-        </StepperContext.Provider>,
-      );
+          </StepperContext.Provider>
+        )
+      });
 
-      const wrapper2 = mount(
-        <StepperContext.Provider value={[1, false] as any}>
+      const wrapper2 = mountTheme({
+        component: (
+          <StepperContext.Provider value={[1, false] as any}>
             <FieldSetStepper 
                 classes={{ row }}
                 schema={schema}
@@ -377,19 +380,20 @@ describe('FieldSetStepper', () => {
                 isTabContent={false}
                 tabKey={''}
             />
-        </StepperContext.Provider>,
-      );
+          </StepperContext.Provider>
+        )
+      });
 
       // check
       expect(wrapper).toHaveLength(1);
-      const ffComp = wrapper.find('WithStyles(ForwardRef(Stepper))');
+      const ffComp = wrapper.find('ForwardRef(Stepper)');
       expect(ffComp).toHaveLength(1);
       expect(ffComp.prop('activeStep')).toBe(1);
 
       //act
       act(() => {
-        const backButton = wrapper.find('WithStyles(ForwardRef(Button))').first();
-        const nextButton = wrapper.find('WithStyles(ForwardRef(Button))').last();
+        const backButton = wrapper.find('ForwardRef(Button)').first();
+        const nextButton = wrapper.find('ForwardRef(Button)').last();
         nextButton.prop('onClick')();
         backButton.prop('onClick')();
         expect(onNext).toHaveBeenCalled();
@@ -398,7 +402,7 @@ describe('FieldSetStepper', () => {
 
       //act
       act(() => {
-        const nextButton = wrapper.find('WithStyles(ForwardRef(Button))').at(1);
+        const nextButton = wrapper.find('ForwardRef(Button)').at(1);
         nextButton.prop('onClick')();
         nextButton.prop('onClick')();
         expect(onSkip).toHaveBeenCalled();
