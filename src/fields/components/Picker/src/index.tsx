@@ -15,6 +15,7 @@ export default ({
   htmlid, 
   type, 
   uiSchema = {}, 
+  schema,
   onChange, 
   ...rest
 }) => {
@@ -33,16 +34,17 @@ export default ({
             <PickerComp
                 mask={placeholder}
                 label={label}
-                toolbarTitle={label}
+                toolbarTitle={schema.title}
                 value={typeof value === 'undefined' ? null : value}
                 inputFormat={format}
                 open={open}
                 onClose={() => setOpen(false)}
+                cancelText={false}
+                readOnly={false}
                 renderInput={(params) => (
                   <TextField 
                     {...params} 
                     style={{ width: '100%'}}
-                    onClick={() => setOpen(true)}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position='end'>

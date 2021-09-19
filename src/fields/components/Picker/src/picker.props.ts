@@ -6,16 +6,16 @@ import TimePicker from '@mui/lab/TimePicker';
 
 export const renderPickerComp = (type) => {
   switch (type) {
-    case 'material-desktop-date':
+    case 'material-mobile-date':
       return {
-        PickerComp: DesktopDatePicker,
+        PickerComp: MobileDatePicker,
         maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
         format: 'DD-MM-YYYY',
         placeholder: '__-__-____',
       };
     case 'material-date':
       return {
-        PickerComp: MobileDatePicker,
+        PickerComp: DesktopDatePicker,
         maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
         format: 'DD-MM-YYYY',
         placeholder: '__-__-____',
@@ -63,7 +63,7 @@ export const renderPickerComp = (type) => {
       };
     default:
       return {
-        PickerComp: MobileDatePicker,
+        PickerComp: DesktopDatePicker,
         maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
         format: 'DD-MM-YYYY',
         placeholder: '__-__-____',
