@@ -15,7 +15,7 @@
     "@react-jsonschema-form-components/material-auto-complete": "3.0.0",
     "@react-jsonschema-form-components/material-checkbox": "3.0.0",
     "@react-jsonschema-form-components/material-input": "3.0.0",
-    "@react-jsonschema-form-components/material-picker": "4.0.0",
+    "@react-jsonschema-form-components/material-picker": "4.0.1",
     "@react-jsonschema-form-components/material-radio-group": "3.0.0",
     "@react-jsonschema-form-components/material-select": "3.0.0",
     "@react-jsonschema-form-components/react-select": "4.0.0",

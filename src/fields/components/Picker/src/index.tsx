@@ -31,7 +31,7 @@ export default ({
                 label={label}
                 value={(value === undefined) ? null : value}
                 maxDate={'2200-01-01'}
-                renderInput={(params) => <TextField {...params} />}
+                renderInput={(params) => <TextField {...params} value={(value === undefined) ? null : value} />}
                 {...pickerProps({ onChange })}
                 {...options}
             />

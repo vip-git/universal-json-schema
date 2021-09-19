@@ -4,8 +4,6 @@
  * - All Material UI libs should come from UIFramework const
  * - All imports should be optional based on what gets selected
  */
-// Library
-
 // Material UI
 import Paper from '@mui/material/Paper';
 import CircularProgress from '@mui/material/CircularProgress';

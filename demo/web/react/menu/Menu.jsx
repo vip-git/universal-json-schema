@@ -42,7 +42,7 @@ class RawMenuAppBar extends React.Component {
             <div className={classes.flexCtr}>
               <Typography color='inherit'>React JSONSchema Form (Material UI)</Typography>
             </div>
-            <MaterialVersionSelect version={4} />
+            <MaterialVersionSelect version={5} />
             <VersionSelect setVersion={setVersion} />
             <IconButton aria-label="github" onClick={() => { window.location.href = 'https://github.com/vip-git/react-jsonschema-form-material-ui'}}>
               <GitHubIcon fontSize="large" />
