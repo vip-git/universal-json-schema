@@ -3,7 +3,8 @@ import { UIWidgetType } from './ui/UIWidget.type';
 import { UISchemaPageType } from './ui/UIPage.type';
 import { UISchemaValidations } from './ui/UIValidations.type';
 
-interface UISchemaAutoCompleteProps<T> extends Omit<AutocompleteProps<{}, boolean, boolean, false>, 'options' | 'renderInput'> {
+interface UISchemaAutoCompleteProps<T> extends 
+Omit<AutocompleteProps<{}, boolean, boolean, false>, 'options' | 'renderInput'> {
   options?: ReadonlyArray<T>; 
   renderInput?: any; 
 }
