@@ -90,7 +90,7 @@
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/material-picker": {
-            "version": "4.0.2",
+            "version": "4.0.3",
             "type": "string",
             "hasDist": true,
             "isEnum": false,

@@ -1,10 +1,18 @@
 // Library
 import MobileDatePicker from '@mui/lab/MobileDatePicker';
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import MobileDateTimePicker from '@mui/lab/MobileDateTimePicker';
 import TimePicker from '@mui/lab/TimePicker';
 
 export const renderPickerComp = (type) => {
   switch (type) {
+    case 'material-desktop-date':
+      return {
+        PickerComp: DesktopDatePicker,
+        maskInput: [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+        format: 'DD-MM-YYYY',
+        placeholder: '__-__-____',
+      };
     case 'material-date':
       return {
         PickerComp: MobileDatePicker,
