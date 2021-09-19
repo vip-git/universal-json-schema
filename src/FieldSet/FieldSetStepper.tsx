@@ -2,6 +2,7 @@
 import React from 'react';
 
 // Material UI
+import { Theme } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -15,7 +16,7 @@ import { StepperContext } from '../helpers/context';
 // Internal
 import FieldSetObject from './FieldSetObject';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '100%',
   },

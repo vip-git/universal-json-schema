@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { mount } from 'enzyme';
+import { mountTheme } from '../helpers/enzyme-unit-test';
 
 // Internal
 import { RawFormField as FormField } from '../FormField';
@@ -22,19 +22,23 @@ describe('FormField', () => {
     const data = 'Bob';
 
     // act
-    const wrapper = mount(
-      <FormField 
-        path={path}
-        schema={schema}
-        uiSchema={uiSchema}
-        data={data}
-        uiData={{}}
-        xhrSchema={{}} 
-        prefixId={'test'}
-        id={'test'}
-        onChange={onChange}
-        onXHRSchemaEvent={jest.fn}
-      />,
+    const wrapper = mountTheme(
+      {
+        component: (
+            <FormField 
+              path={path}
+              schema={schema}
+              uiSchema={uiSchema}
+              data={data}
+              uiData={{}}
+              xhrSchema={{}} 
+              prefixId={'test'}
+              id={'test'}
+              onChange={onChange}
+              onXHRSchemaEvent={jest.fn}
+            />
+        )
+      }
     );
 
     // check
@@ -58,20 +62,24 @@ describe('FormField', () => {
     const myProp = 'blah';
 
     // act
-    const wrapper = mount(
-      <FormField 
-        schema={schema}
-        myProp={myProp}
-        path={''}
-        xhrSchema={{}}
-        uiSchema={{}}
-        data={{}}
-        uiData={{}}
-        prefixId={'test'}
-        id={'test'}
-        onChange={jest.fn}
-        onXHRSchemaEvent={jest.fn}
-      />,
+    const wrapper = mountTheme(
+      {
+        component: (
+          <FormField 
+            schema={schema}
+            myProp={myProp}
+            path={''}
+            xhrSchema={{}}
+            uiSchema={{}}
+            data={{}}
+            uiData={{}}
+            prefixId={'test'}
+            id={'test'}
+            onChange={jest.fn}
+            onXHRSchemaEvent={jest.fn}
+          />
+        )
+      }
     );
 
     // check
@@ -106,19 +114,23 @@ describe('FormField', () => {
     };
 
     // act
-    const wrapper = mount(
-      <FormField 
-        uiSchema={uiSchema}
-        path={path}
-        schema={schema}
-        data={data}
-        onChange={onChange}
-        xhrSchema={{}}
-        uiData={{}}
-        prefixId={'test'}
-        id={'test'}
-        onXHRSchemaEvent={jest.fn}
-      />,
+    const wrapper = mountTheme(
+      {
+        component: (
+          <FormField 
+            uiSchema={uiSchema}
+            path={path}
+            schema={schema}
+            data={data}
+            onChange={onChange}
+            xhrSchema={{}}
+            uiData={{}}
+            prefixId={'test'}
+            id={'test'}
+            onXHRSchemaEvent={jest.fn}
+          />
+        )
+      }
     );
 
     // check
@@ -173,20 +185,24 @@ describe('FormField', () => {
     };
 
     // act
-    const wrapper = mount(
-      <FormField 
-        uiSchema={uiSchema}
-        path={path}
-        schema={schema}
-        data={data}
-        onChange={onChange}
-        xhrSchema={{}}
-        uiData={{}}
-        prefixId={'test'}
-        validation={validation}
-        id={'test'}
-        onXHRSchemaEvent={jest.fn}
-      />,
+    const wrapper = mountTheme(
+      {
+        component: (
+          <FormField 
+            uiSchema={uiSchema}
+            path={path}
+            schema={schema}
+            data={data}
+            onChange={onChange}
+            xhrSchema={{}}
+            uiData={{}}
+            prefixId={'test'}
+            validation={validation}
+            id={'test'}
+            onXHRSchemaEvent={jest.fn}
+          />
+        )
+      }
     );
 
     // check

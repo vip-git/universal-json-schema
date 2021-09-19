@@ -3,7 +3,7 @@ import React from 'react';
 
 // Material UI
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/lab/Autocomplete';
+import Autocomplete from '@mui/material/Autocomplete';
 
 // Props
 import materialSelectProps, { AutoSelectProps } from './auto-complete.props';
@@ -57,7 +57,7 @@ export default ({
       getOptionDisabled={getOptionDisabled}
       value={value && String(value)}
       getOptionLabel={(option: string) => option && String(option)}
-      getOptionSelected={(val) => val && String(val)}
+      isOptionEqualToValue={(val) => val && String(val)}
       renderInput={(params) => <TextField {...params} label={title} value={value && String(value)} />}
       onChange={givenOnChange}
     />

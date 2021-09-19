@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { mount } from 'enzyme';
+import { mountTheme } from '../../../../../helpers/enzyme-unit-test';
 
 // Internal
 import { default as InputComp } from '..';
@@ -15,16 +15,18 @@ describe('Input', () => {
     const checked = true;
     const label = 'Done';
     schema.title = label;
-    const wrapper = mount(
-      <InputComp
-        value={checked}
-        type={'string'}
-        options={{}}
-        onChange={jest.fn}
-        htmlid={'test'}
-        onBlur={jest.fn}
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <InputComp
+          value={checked}
+          type={'string'}
+          options={{}}
+          onChange={jest.fn}
+          htmlid={'test'}
+          onBlur={jest.fn}
+        />
+      )
+    });
 
     const fcComp = wrapper.find('ForwardRef(InputBase)');
     expect(fcComp).toHaveLength(1);
@@ -41,18 +43,20 @@ describe('Input', () => {
         color: 'secondary',
       }
     }
-    const wrapper = mount(
-      <InputComp  
-        value={''} 
-        type={'string'}
-        options={
-          {...props}
-        }
-        onChange={jest.fn}
-        htmlid={'test'}
-        onBlur={jest.fn}
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <InputComp  
+          value={''} 
+          type={'string'}
+          options={
+            {...props}
+          }
+          onChange={jest.fn}
+          htmlid={'test'}
+          onBlur={jest.fn}
+        />
+      )
+    });
 
     const cbComp = wrapper.find('ForwardRef(InputBase)');
     expect(cbComp.prop('inputProps')).toStrictEqual(props.inputProps);
@@ -62,18 +66,20 @@ describe('Input', () => {
     const props = {
       'mui:color': 'primary',
     };
-    const wrapper = mount(
-      <InputComp  
-        value={''} 
-        type={'string'}
-        uiSchema={
-          {...props}
-        }
-        onChange={jest.fn}
-        htmlid={'test'}
-        onBlur={jest.fn}
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <InputComp  
+          value={''} 
+          type={'string'}
+          uiSchema={
+            {...props}
+          }
+          onChange={jest.fn}
+          htmlid={'test'}
+          onBlur={jest.fn}
+        />
+      )
+    });
     const cbComp = wrapper.find('ForwardRef(InputBase)');
     expect(cbComp.prop('color')).toStrictEqual(props['mui:color']);
   });
@@ -82,35 +88,39 @@ describe('Input', () => {
     const props = {
       'ui:widget': 'textarea',
     };
-    const wrapper = mount(
-      <InputComp  
-        value={''} 
-        type={'string'}
-        uiSchema={
-          {...props}
-        }
-        onChange={jest.fn}
-        htmlid={'test'}
-        onBlur={jest.fn}
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <InputComp  
+          value={''} 
+          type={'string'}
+          uiSchema={
+            {...props}
+          }
+          onChange={jest.fn}
+          htmlid={'test'}
+          onBlur={jest.fn}
+        />
+      )
+    });
     const cbComp = wrapper.find('textarea');
-    expect(cbComp).toHaveLength(1);
+    expect(cbComp).toHaveLength(2);
   });
 
   it('calls onChange when clicked', () => {
     const onChange = jest.fn();
     const checked = true;
-    const wrapper = mount(
-      <InputComp 
-        value={checked} 
-        onChange={onChange} 
-        type={'string'}
-        options={{}}
-        htmlid={'test'}
-        onBlur={jest.fn}
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <InputComp 
+          value={checked} 
+          onChange={onChange} 
+          type={'string'}
+          options={{}}
+          htmlid={'test'}
+          onBlur={jest.fn}
+        />
+      )
+    });
 
     const cbComp = wrapper.find('input');
     expect(cbComp).toHaveLength(1);
@@ -121,17 +131,19 @@ describe('Input', () => {
   it('calls onChange when clicked (keyfield)', () => {
     const onChange = jest.fn();
     const checked = true;
-    const wrapper = mount(
-      <InputComp 
-        value={checked} 
-        onChange={onChange} 
-        type={'string'}
-        options={{}}
-        htmlid={'test'}
-        onBlur={jest.fn}
-        isKeyField
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <InputComp 
+          value={checked} 
+          onChange={onChange} 
+          type={'string'}
+          options={{}}
+          htmlid={'test'}
+          onBlur={jest.fn}
+          isKeyField
+        />
+      )
+    });
 
     const cbComp = wrapper.find('input');
     expect(cbComp).toHaveLength(1);
@@ -141,16 +153,18 @@ describe('Input', () => {
 
   it('calls onChange when clicked (null check)', () => {
     const onChange = jest.fn();
-    const wrapper = mount(
-      <InputComp 
-        value={null} 
-        onChange={onChange} 
-        type={'string'}
-        options={{}}
-        htmlid={'test'}
-        onBlur={jest.fn}
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <InputComp 
+          value={null} 
+          onChange={onChange} 
+          type={'string'}
+          options={{}}
+          htmlid={'test'}
+          onBlur={jest.fn}
+        />
+      )
+    });
 
     const cbComp = wrapper.find('input');
     expect(cbComp).toHaveLength(1);
@@ -161,17 +175,19 @@ describe('Input', () => {
 
   it('calls onChange when clicked (null check key field)', () => {
     const onChange = jest.fn();
-    const wrapper = mount(
-      <InputComp 
-        value={null} 
-        onChange={onChange} 
-        type={'string'}
-        options={{}}
-        htmlid={'test'}
-        onBlur={jest.fn}
-        isKeyField
-      />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <InputComp 
+          value={null} 
+          onChange={onChange} 
+          type={'string'}
+          options={{}}
+          htmlid={'test'}
+          onBlur={jest.fn}
+          isKeyField
+        />
+      )
+    });
 
     const cbComp = wrapper.find('input');
     expect(cbComp).toHaveLength(1);

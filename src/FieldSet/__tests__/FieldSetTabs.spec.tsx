@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { mount } from 'enzyme';
+import { mountTheme } from '../../helpers/enzyme-unit-test';
 
 // Internal
 import FieldSetTabs from '../FieldSetTabs';
@@ -380,7 +380,8 @@ describe('FieldSetTabs', () => {
       };
 
       // act
-      const wrapper = mount(
+      const wrapper = mountTheme({
+        component: (
             <StepperContext.Provider value={[1, false] as any}>
                 <FieldSetTabs 
                     classes={{ row }}
@@ -398,8 +399,9 @@ describe('FieldSetTabs', () => {
                     isTabContent={false}
                     tabKey={''}
                 />
-            </StepperContext.Provider>,
-      );
+            </StepperContext.Provider> 
+        )
+      });
 
       // check
       expect(wrapper).toHaveLength(1);

@@ -37,6 +37,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }: C
                     }
                     onChange={onGroupChange(String(o.key), o.adds)}
                     disabled={o.disabled || false}
+                    {...options}
                 />
               )}
               label={o.value}
@@ -63,6 +64,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }: C
                   checked={String(value) === String(ev.key)}
                   onChange={onEnumChange(ev.key, ev.adds)}
                   disabled={ev.disabled || false}
+                  {...options}
               />
             )}
             label={ev.value}
@@ -83,6 +85,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }: C
                 checked={typeof value === 'boolean' ? value : stringToBoolean}
                 onChange={givenOnChange}
                 disabled={options.disabled || false}
+                {...options}
             />
           )}
           label={label}

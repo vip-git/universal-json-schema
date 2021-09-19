@@ -24,8 +24,8 @@ const alertStyles = makeStyles({
     },
   },
   button: {
-    color: '#f1645f'
-  }
+    color: '#f1645f',
+  },
 });
 
 const Validation = ({ validation }) => {

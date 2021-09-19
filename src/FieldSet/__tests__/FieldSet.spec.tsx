@@ -1,9 +1,8 @@
 // Library
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mountTheme, shallowTheme } from '../../helpers/enzyme-unit-test';
 
 // Material UI
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 
 // Internal
@@ -28,21 +27,21 @@ describe('FieldSet', () => {
       const data = {};
 
       // act
-      const wrapper = mount(
-        <ThemeProvider theme={createTheme()}>
-          <RawFieldSet
-            classes={{ root }} 
-            schema={schema} 
-            data={data} 
-            path={'path'}
-            uiSchema={{}}
-            xhrSchema={{}}
-            onKeyDown={jest.fn}
-            onChange={jest.fn}
-            onXHRSchemaEvent={jest.fn}
-          />
-        </ThemeProvider>,
-      );
+      const wrapper = mountTheme({
+        component: (
+            <RawFieldSet
+              classes={{ root }} 
+              schema={schema} 
+              data={data} 
+              path={'path'}
+              uiSchema={{}}
+              xhrSchema={{}}
+              onKeyDown={jest.fn}
+              onChange={jest.fn}
+              onXHRSchemaEvent={jest.fn}
+            />
+          )
+      });
 
       // check
       expect(wrapper).toHaveLength(1);
@@ -69,26 +68,26 @@ describe('FieldSet', () => {
       const data = { name: 'Bob' };
 
       // act
-      const wrapper = mount(
-        <ThemeProvider theme={createTheme()}>
+      const wrapper = mountTheme({
+        component: (
           <RawFieldSetObject 
-            classes={{ row }}
-            schema={schema}
-            data={data}
-            path={''}
-            uiSchema={{}}
-            xhrSchema={{}}
-            onKeyDown={jest.fn}
-            onChange={jest.fn}
-            onXHRSchemaEvent={jest.fn}
-            id={'1'}
-            idxKey={'1'}
-            validation={{}}
-            isTabContent={false}
-            tabKey={''}
+              classes={{ row }}
+              schema={schema}
+              data={data}
+              path={''}
+              uiSchema={{}}
+              xhrSchema={{}}
+              onKeyDown={jest.fn}
+              onChange={jest.fn}
+              onXHRSchemaEvent={jest.fn}
+              id={'1'}
+              idxKey={'1'}
+              validation={{}}
+              isTabContent={false}
+              tabKey={''}
           />
-        </ThemeProvider>,
-      );
+        )
+      });
 
       // check
       expect(wrapper).toHaveLength(1);
@@ -113,8 +112,8 @@ describe('FieldSet', () => {
       const data = { name: 'Bob' };
 
       // act
-      const wrapper = mount(
-        <ThemeProvider theme={createTheme()}>
+      const wrapper = mountTheme({
+        component: (
           <RawFieldSetObject 
             classes={{ row }}
             schema={schema}
@@ -131,8 +130,8 @@ describe('FieldSet', () => {
             isTabContent={false}
             tabKey={''}
           />
-        </ThemeProvider>,
-      );
+        )
+      });
 
       // check
       expect(wrapper).toHaveLength(1);
@@ -159,26 +158,28 @@ describe('FieldSet', () => {
       const data = { name: 'Bob' };
 
       // act
-      const wrapper = shallow(
-        <ThemeProvider theme={createTheme()}>
+      const parent = shallowTheme({
+        component: (
           <RawFieldSetObject 
-            classes={{ row }}
-            schema={schema} 
-            data={data} 
-            uiSchema={uiSchema}
-            path={''}
-            xhrSchema={{}}
-            onKeyDown={jest.fn}
-            onChange={jest.fn}
-            onXHRSchemaEvent={jest.fn}
-            id={'1'}
-            idxKey={'1'}
-            validation={{}}
-            isTabContent={false}
-            tabKey={''}
+              classes={{ row }}
+              schema={schema} 
+              data={data} 
+              uiSchema={uiSchema}
+              path={''}
+              xhrSchema={{}}
+              onKeyDown={jest.fn}
+              onChange={jest.fn}
+              onXHRSchemaEvent={jest.fn}
+              id={'1'}
+              idxKey={'1'}
+              validation={{}}
+              isTabContent={false}
+              tabKey={''}
           />
-        </ThemeProvider>,
-      );
+        )
+      });
+
+      const wrapper = parent.find('RawFieldSetObject').dive();
 
       // check
       expect(wrapper).toHaveLength(1);
@@ -222,8 +223,8 @@ describe('FieldSet', () => {
       const onAddItem = jest.fn();
 
       // act
-      const wrapper = shallow(
-        <ThemeProvider theme={createTheme()}>
+      const parent = shallowTheme({
+        component: (
           <RawFieldSetArray
             startIdx={startIdx}
             onAddItem={onAddItem}
@@ -236,8 +237,10 @@ describe('FieldSet', () => {
             schema={schema}
             data={data}
           />
-        </ThemeProvider>,
-      );
+        )
+      });
+
+      const wrapper = parent.find('RawFieldSetArray').dive();
 
       // check
       expect(wrapper).toHaveLength(1);
@@ -286,8 +289,8 @@ describe('FieldSet', () => {
       const data = ['Bob', false];
 
       // act
-      const wrapper = shallow(
-        <ThemeProvider theme={createTheme()}>
+      const parent = shallowTheme({
+        component: (
           <RawFieldSetArray 
             uiSchema={uiSchema} 
             path={path} 
@@ -295,8 +298,10 @@ describe('FieldSet', () => {
             schema={schema} 
             data={data} 
           />
-        </ThemeProvider>,
-      );
+        )
+      });
+
+      const wrapper = parent.find('RawFieldSetArray').dive();
 
       // check
       expect(wrapper).toHaveLength(1);
@@ -346,8 +351,8 @@ describe('FieldSet', () => {
       const data = ['Bob', false, 'Harry', 'Susan'];
 
       // act
-      const wrapper = shallow(
-        <ThemeProvider theme={createTheme()}>
+      const parent = shallowTheme({
+        component: (
           <RawFieldSetArray
             onMoveItemUp={onMoveItemUp}
             onMoveItemDown={onMoveItemDown}
@@ -358,8 +363,10 @@ describe('FieldSet', () => {
             schema={schema}
             data={data}
           />
-        </ThemeProvider>,
-      );
+        )
+      });
+
+      const wrapper = parent.find('RawFieldSetArray').dive();
 
       // check
       expect(wrapper).toHaveLength(1);
@@ -396,17 +403,22 @@ describe('FieldSet', () => {
       const onDeleteItem = jest.fn();
 
       // act
-      const wrapper = shallow(
-        <RawReorderControls
-          onMoveItemDown={onMoveItemDown}
-          onDeleteItem={onDeleteItem}
-          onMoveItemUp={onMoveItemUp}
-          classes={{ row }}
-          first
-          last={false}
-          canReorder
-        />,
-      );
+      const parent = shallowTheme({
+        component: (
+          <RawReorderControls
+            onMoveItemDown={onMoveItemDown}
+            onDeleteItem={onDeleteItem}
+            onMoveItemUp={onMoveItemUp}
+            classes={{ row }}
+            first
+            last={false}
+            canReorder
+          />
+        )
+      });
+
+      const wrapper = parent.find('RawReorderControls').dive();
+
       // check
       expect(wrapper).toHaveLength(1);
       const buttonList = wrapper.find(IconButton);
@@ -420,9 +432,18 @@ describe('FieldSet', () => {
     });
     it('ReorderControls - first', () => {
       // act
-      const wrapper = shallow(
-        <RawReorderControls first last={false} classes={{ row }} canReorder />,
-      );
+      const parent = shallowTheme({
+        component: (
+          <RawReorderControls 
+            first 
+            last={false} 
+            classes={{ row }} 
+            canReorder  
+          />
+        )
+      });
+
+      const wrapper = parent.find('RawReorderControls').dive();
 
       // check
       expect(wrapper).toHaveLength(1);
@@ -434,9 +455,18 @@ describe('FieldSet', () => {
     });
     it('ReorderControls - last', () => {
       // act
-      const wrapper = shallow(
-        <RawReorderControls first={false} last classes={{ row }} canReorder />,
-      );
+      const parent = shallowTheme({
+        component: (
+          <RawReorderControls 
+            first={false} 
+            last 
+            classes={{ row }} 
+            canReorder 
+          />
+        )
+      });
+
+      const wrapper = parent.find('RawReorderControls').dive();
 
       // check
       expect(wrapper).toHaveLength(1);
@@ -454,14 +484,18 @@ describe('FieldSet', () => {
       const first = true;
       const last = false;
       // act
-      const wrapper = shallow(
-        <RawReorderableFormField
-          path={path}
-          first={first}
-          last={last}
-          classes={{ row }}
-        />,
-      );
+      const parent = shallowTheme({
+        component: (
+            <RawReorderableFormField
+              path={path}
+              first={first}
+              last={last}
+              classes={{ row }}
+            />
+          )
+      });
+
+      const wrapper = parent.find('RawReorderableFormField').dive();
 
       // check
       const ffComp = wrapper.find(FormField);

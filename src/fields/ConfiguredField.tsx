@@ -41,7 +41,7 @@ export const RawConfiguredField = ({
   const isCustomComponent = type === 'null' || hasCustomComponent;
   const classes = fieldStyles();
   const FormRoot = isCustomComponent ? FormGroup : FormControl;
-  const newLabel = widget === 'radio' ? classes.radioLabel : classes.normalLabel
+  const newLabel = widget === 'radio' ? classes.radioLabel : classes.normalLabel;
   return (
 	<FormRoot
 		id={`${htmlid}-formControl`}

@@ -1,7 +1,7 @@
 // Library
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { shallow } from 'enzyme'
+import { mountTheme, shallowTheme } from '../../helpers/enzyme-unit-test';
 
 // Material UI
 import FormLabel from '@mui/material/FormLabel';
@@ -24,9 +24,11 @@ describe('Field', () => {
     };
     const data = 'Hello';
     const type = 'string';
-    const givenField = mount(
-      <ConfiguredField type={type} data={data} classes={classes} componentProps={componentProps} />,
-    );
+    const givenField = mountTheme({
+      component: (
+        <ConfiguredField type={type} data={data} classes={classes} componentProps={componentProps}  />
+      )
+    });
     
     const wrapper = givenField.find('RawConfiguredField');
 
@@ -50,15 +52,21 @@ describe('Field', () => {
   });
   
   it('applies given className', () => {
-    const wrapper = shallow(<ConfiguredField classes={classes} className={'myComp'} />)
-      .find('RawConfiguredField');
+    const wrapper = shallowTheme({
+        component: (<ConfiguredField classes={classes} className={'myComp'} />
+      )
+    }).find('RawConfiguredField');
     const Component = wrapper.find('ForwardRef(Input)');
     expect(Component).toBeDefined();
     // expect(Component.prop('classes')).toBe('myComp');
   });
 
   it('renders provided Component', () => {
-    const wrapper = mount(<ConfiguredField Component={RadioGroup} />).find('RawConfiguredField');
+    const wrapper = mountTheme({
+        component: (
+          <ConfiguredField Component={RadioGroup} />
+        )
+      }).find('RawConfiguredField');
     expect(wrapper.find('ForwardRef(Input)')).toHaveLength(0);
     expect(wrapper.find('ForwardRef(RadioGroup)')).toHaveLength(1);
   });
@@ -70,9 +78,11 @@ describe('Field', () => {
     const title = 'Hello';
     const DummyLabel = ({ children }) => <div>{children}</div>;
 
-    const wrapper = mount(
-      <ConfiguredField title={title} labelComponentProps={labelComponentProps} LabelComponent={DummyLabel} />,
-    ).find('RawConfiguredField');
+    const wrapper =  mountTheme({
+      component: (
+        <ConfiguredField title={title} labelComponentProps={labelComponentProps} LabelComponent={DummyLabel} />
+      )
+    }).find('RawConfiguredField');
 
     const labelComp = wrapper.find(DummyLabel);
     expect(labelComp).toHaveLength(1);
@@ -83,18 +93,26 @@ describe('Field', () => {
 
   it('renders provided descriptionText', () => {
     const descriptionText = 'This is a field';
-    const wrapper = mount(<ConfiguredField classes={classes} descriptionText={descriptionText} />).find('RawConfiguredField');
+    const wrapper = mountTheme({
+        component: (
+          <ConfiguredField classes={classes} descriptionText={descriptionText} />
+        )
+      }).find('RawConfiguredField');
 
     const descriptionComp = wrapper.find('p');
     expect(descriptionComp).toHaveLength(1);
-    expect(descriptionComp.prop('className')).toBe('makeStyles-description-3');
+    expect(descriptionComp.prop('className')).toBe('makeStyles-description-24');
     expect(descriptionComp.text()).toBe(descriptionText);
   });
 
   it('renders provided helpText', () => {
     const helpText = 'Help! I need somebody!';
     const id = 'unq-id';
-    const wrapper = mount(<ConfiguredField id={id} helpText={helpText} />).find('RawConfiguredField');
+    const wrapper = mountTheme({
+        component: (
+          <ConfiguredField id={id} helpText={helpText} />
+        )
+      }).find('RawConfiguredField');
 
     const helpComp = wrapper.find('ForwardRef(FormHelperText)');
     expect(helpComp).toHaveLength(1);
@@ -109,9 +127,13 @@ describe('Field', () => {
     const componentProps = {
       onChange,
     };
-    const wrapper = mount(<ConfiguredField componentProps={componentProps} data={data} />).find('RawConfiguredField');
+    const wrapper = mountTheme({
+        component: (
+          <ConfiguredField componentProps={componentProps} data={data} />
+        )
+      }).find('RawConfiguredField');
 
-    const inputComp = wrapper.find('WithStyles(ForwardRef(Input))');
+    const inputComp = wrapper.find('ForwardRef(Input)');
     act(() => {
       inputComp.prop('onChange')('value');
     });
@@ -119,7 +141,11 @@ describe('Field', () => {
   });
 
   it('has withLabel className ', () => {
-    const wrapper = mount(<ConfiguredField LabelComponent={FormLabel} classes={classes} />).find('RawConfiguredField');
-    expect(wrapper.find('WithStyles(ForwardRef(FormControl))').prop('className')).toMatch(/makeStyles-withLabel/);
+    const wrapper =  mountTheme({
+        component: (
+          <ConfiguredField LabelComponent={FormLabel} classes={classes} />
+        )
+      }).find('RawConfiguredField');
+    expect(wrapper.find('ForwardRef(FormControl)').prop('className')).toMatch(/makeStyles-withLabel/);
   });
 });

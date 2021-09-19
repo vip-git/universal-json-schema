@@ -19,7 +19,7 @@ export default ({
   onChange, 
   ...rest
 }) => {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
   const pickerType = uiSchema['ui:props']?.variant || uiSchema['ui:widget'] || type;
   const { PickerComp, placeholder, format } = renderPickerComp(pickerType);
   return (
@@ -44,7 +44,7 @@ export default ({
                 renderInput={(params) => (
                   <TextField 
                     {...params} 
-                    style={{ width: '100%'}}
+                    style={{ width: '100%' }}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position='end'>
@@ -55,7 +55,7 @@ export default ({
                             <EventIcon />
                           </IconButton>
                         </InputAdornment>
-                      )
+                      ),
                     }}
                   />
                 )}

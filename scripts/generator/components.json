@@ -64,7 +64,7 @@
             ]
         },
         "@react-jsonschema-form-components/material-auto-complete": {
-            "version": "3.0.0",
+            "version": "3.0.1",
             "type": "string",
             "isEnum": true,
             "name": "material-auto-complete",
@@ -74,7 +74,7 @@
             ]
         },
         "@react-jsonschema-form-components/material-checkbox": {
-            "version": "3.0.0",
+            "version": "3.0.1",
             "type": "string",
             "isEnum": true,
             "isRequired": true,

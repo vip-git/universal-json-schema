@@ -1,7 +1,7 @@
 // Library
 import React from 'react';
-import { mount } from 'enzyme';
-import MomentUtils from '@date-io/moment';
+import { act } from 'react-dom/test-utils';
+import { mountTheme } from '../../../../../helpers/enzyme-unit-test';
 
 // Internal
 import { default as PickerComp } from '..';
@@ -16,21 +16,23 @@ const schema: JSONSchema7 = {
 const value = '2010-10-10';
 
 const uiDateTypes = [
-  { type: 'material-date', defaultValue: '10-10-2010', changeValue: '2010-10-10' },
-  { type: 'material-date-keyboard-disable', defaultValue: '10-10-2010', changeValue: '2010-10-10' },
-  { type: 'material-time-keyboard-disable', defaultValue: '12:00 AM', changeValue: '2010-10-10' },
-  { type: 'material-time', defaultValue: '12:00 AM', changeValue: '12:00 AM' },
-  { type: 'material-datetime', defaultValue: '10-10-2010 12:00 AM', changeValue: '2010-10-10' },
-  { type: 'material-datetime-keyboard-disable', defaultValue: '10-10-2010 12:00 AM', changeValue: '2010-10-10' },
+  { type: 'material-date', pickerComp: 'DesktopDatePicker', defaultValue: '10-10-2010', changeValue: '2010-10-10' },
+  { type: 'material-mobile-date', pickerComp: 'DesktopDatePicker', defaultValue: '10-10-2010', changeValue: '2010-10-10' },
+  { type: 'material-date-keyboard-disable', pickerComp: 'DesktopDatePicker', defaultValue: '10-10-2010', changeValue: '2010-10-10' },
+  { type: 'material-time-keyboard-disable', pickerComp: 'DesktopDatePicker', defaultValue: '12:00 AM', changeValue: '2010-10-10' },
+  { type: 'material-time', pickerComp: 'DesktopDatePicker', defaultValue: '12:00 AM', changeValue: '12:00 AM' },
+  { type: 'material-datetime', pickerComp: 'DesktopDatePicker', defaultValue: '10-10-2010 12:00 AM', changeValue: '2010-10-10' },
+  { type: 'material-datetime-keyboard-disable', pickerComp: 'DesktopDatePicker', defaultValue: '10-10-2010 12:00 AM', changeValue: '2010-10-10' },
 ];
 
 describe('Picker', () => {
-  uiDateTypes.forEach(({ type, defaultValue, changeValue }) => {
+  uiDateTypes.forEach(({ type, defaultValue, pickerComp, changeValue }) => {
     it(`mounts with standard attributes (${type})`, () => {
       const path = 'done'; 
       const label = 'Done';
       schema.description = label;
-      const wrapper2 = mount(
+      const wrapper2 = mountTheme({
+        component: (
           <PickerComp 
             label={label}
             path={path}
@@ -41,9 +43,11 @@ describe('Picker', () => {
             htmlid={'test'}
             type={type}
             onChange={jest.fn}
-          />,
-      );
-      const wrapper3 = mount(
+          />
+        )
+      });
+      const wrapper3 = mountTheme({
+        component: (
           <PickerComp 
             label={label}
             path={path}
@@ -54,9 +58,11 @@ describe('Picker', () => {
             htmlid={'test'}
             type={type}
             onChange={jest.fn}
-          />,
-      );
-      const wrapper = mount(
+          />
+        )
+      });
+      const wrapper = mountTheme({
+        component: (
           <PickerComp 
             label={label}
             path={path}
@@ -67,8 +73,9 @@ describe('Picker', () => {
             htmlid={'test'}
             type={type}
             onChange={jest.fn}
-          />,
-      );
+          />
+        )
+      });
       const fcComp = wrapper.find('label');
       expect(fcComp).toHaveLength(1);
       expect(fcComp.text()).toBe(label);
@@ -82,7 +89,8 @@ describe('Picker', () => {
       const props = {
         color: 'secondary',
       }
-      const wrapper = mount(
+      const wrapper = mountTheme({
+        component: (
           <PickerComp 
             label={'label'}
             path={'path'}
@@ -92,19 +100,18 @@ describe('Picker', () => {
             htmlid={'test'}
             type={'string'}
             onChange={jest.fn}
-            options={
-              {...props} 
-            }
-          />,
-      );
-
-      const cbComp = wrapper.find('WithStyles(ForwardRef(TextField))');
+            options={props}
+          />
+        )
+      });
+      const cbComp = wrapper.find(`ForwardRef(${pickerComp})`);
       expect(cbComp.prop('color')).toBe(props.color);
     });
 
     it(`calls onChange when clicked (${type})`, () => {
       const onChange = jest.fn();
-      const wrapper = mount(
+      const wrapper = mountTheme({
+        component: (
           <PickerComp 
             path={'a'}
             value={value}
@@ -114,12 +121,15 @@ describe('Picker', () => {
             title={'label'}
             htmlid={'test'}
             type={'string'}
-          />,
-      );
-      const cbComp = wrapper.find('WithStyles(ForwardRef(TextField))');
+          />
+        )
+      });
+      const cbComp = wrapper.find('input');
       expect(cbComp).toHaveLength(1);
-      cbComp.prop('onChange')({
-        target: { value: changeValue }
+      act(() => {
+        cbComp.prop('onChange')({
+          target: { value: changeValue }
+        });
       });
       expect(onChange).toHaveBeenCalledTimes(1);
     });

@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { mount } from 'enzyme';
+import { mountTheme } from '../../../../../helpers/enzyme-unit-test';
 
 // Internal
 import { default as CheckboxComp } from '..';
@@ -25,9 +25,11 @@ describe('Enum Checkbox', () => {
   it('mounts with standard attributes (control)', () => {
     const path = 'done'; 
     const label = 'A single choice list';
-    const wrapper = mount(
-      <CheckboxComp label={label} path={path} value={checked} schema={schema} />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <CheckboxComp label={label} path={path} value={checked} schema={schema} />
+      )
+    });
     const fcComp = wrapper.find('legend');
     expect(fcComp).toHaveLength(1);
     expect(fcComp.text()).toBe(label);
@@ -43,11 +45,13 @@ describe('Enum Checkbox', () => {
     const props = {
       color: 'secondary',
     };
-    const wrapper = mount(
-      <CheckboxComp {...props} schema={schema} />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <CheckboxComp options={props} schema={schema} />
+      )
+    });
 
-    const cbComp = wrapper.find('ForwardRef(SwitchBase)');
+    const cbComp = wrapper.find('ForwardRef(Checkbox)');
     schema.enum.forEach((en, ek) => {
       expect(cbComp.at(ek).prop('color')).toBe(props.color);
     });
@@ -55,9 +59,11 @@ describe('Enum Checkbox', () => {
 
   it('calls onChange when clicked', () => {
     const onChange = jest.fn();
-    const wrapper = mount(
-      <CheckboxComp path={'a'} value={checked} onChange={onChange} schema={schema} />,
-    );
+    const wrapper = mountTheme({
+      component: (
+        <CheckboxComp path={'a'} value={checked} onChange={onChange} schema={schema} />
+      )
+    });
 
     const cbComp = wrapper.find('input');
     expect(cbComp).toHaveLength(schema.enum.length);

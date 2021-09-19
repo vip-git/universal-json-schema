@@ -1,6 +1,6 @@
 {
     "name": "@react-jsonschema-form-components/material-auto-complete",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "main": "dist/index.js",
     "scripts": {
         "build": "rm -rf dist && tsc",
