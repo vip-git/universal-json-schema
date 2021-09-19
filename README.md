@@ -9,12 +9,17 @@ A [**Material UI**](http://www.material-ui.com/) port of [**jsonschema-form.**](
 
 A [**live playground**](https://react-jsonschema-form-material-ui.github56.now.sh/) and [**Detailed Docs**](https://react-json-schema.app/docs)
 
-## Install instructions via npm
+## Install instructions via npm (MUI 5+)
 
 ```text
 npm install --save react-jsonschema-form-material-ui
 ```
 >Follow [Releases page](https://github.com/vip-git/react-jsonschema-form-material-ui/releases) to use latest or preleased tags.
+
+#### For legacy version of < MUI 4 
+```text
+npm install --save react-jsonschema-form-material-ui@3.0.0-mui-4
+```
 
 ## Basic Example Usage
 ```jsx
