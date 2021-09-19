@@ -23,6 +23,7 @@ export default (props: FieldProps) => {
     isCustomComponent,
   } = configureComponent({ ...props, htmlid });
 
+  const widget = uiSchema['ui:widget'];
   const options = uiSchema['ui:options'] || uiSchema['ui:props'];
   const descriptionText = uiSchema && uiSchema['ui:description'];
   const activeCompColor = uiSchema && uiSchema['ui:activeCompColor'];
@@ -62,6 +63,7 @@ export default (props: FieldProps) => {
       isCustomComponent={isCustomComponent}
       hasError={validation && validation.length}
       hasInlineError={hasInlineError}
+      widget={widget}
 		/>
   );
 };

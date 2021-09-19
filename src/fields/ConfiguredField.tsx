@@ -19,6 +19,7 @@ const classNames = require('classnames');
 
 // for unit testing only
 export const RawConfiguredField = ({
+  widget,
   data,
   type,
   descriptionText,
@@ -40,6 +41,7 @@ export const RawConfiguredField = ({
   const isCustomComponent = type === 'null' || hasCustomComponent;
   const classes = fieldStyles();
   const FormRoot = isCustomComponent ? FormGroup : FormControl;
+  const newLabel = widget === 'radio' ? classes.radioLabel : classes.normalLabel
   return (
 	<FormRoot
 		id={`${htmlid}-formControl`}
@@ -50,7 +52,7 @@ export const RawConfiguredField = ({
 			LabelComponent && title && !isCustomComponent && (
 				<LabelComponent
 					id={`${htmlid}-labelControl`}
-					className={descriptionText ? classes.customLabel : classes.normalLabel}
+					className={descriptionText ? classes.customLabel : newLabel}
 					style={activeCompColor ? { left: 41, top: -8 } : {}}
 					{...labelComponentProps}
 				>
@@ -88,6 +90,7 @@ export const RawConfiguredField = ({
 			<FormHelperText 
 				error={!isEmpty(hasInlineError) || undefined} 
 				id={`${id}-help`}
+				style={{ marginLeft: 0, marginRight: 0 }}
 			>
 				{helpText}
 			</FormHelperText>

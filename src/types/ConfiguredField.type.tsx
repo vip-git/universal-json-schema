@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 
 export type ConfiguredFieldProps = {
+    widget: string;
     data: any;
     type: string;
     descriptionText: string;

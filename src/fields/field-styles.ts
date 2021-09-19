@@ -26,6 +26,10 @@ export default makeStyles((theme: Theme) => createStyles({
     left: 8,
     top: 8,
   },
+  radioLabel: {
+    left: 1,
+    top: 8,
+  },
   customLabel: {
     'left': 10,
     'transform': 'translate(0, 31px) scale(1)',
