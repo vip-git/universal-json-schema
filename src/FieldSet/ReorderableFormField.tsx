@@ -50,7 +50,7 @@ export const RawReorderableFormField = ({
           canReorder={canReorder}
         />
       </div>
-    );
-}
+  );
+};
 
 export default RawReorderableFormField;

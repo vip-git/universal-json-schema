@@ -70,7 +70,7 @@ export default {
     },
   }),
 
-  reorderable:  makeStyles(() => createStyles({
+  reorderable: makeStyles(() => createStyles({
     root: {
       'display': 'flex',
       'alignItems': 'baseline',

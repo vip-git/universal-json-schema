@@ -189,7 +189,7 @@ const Form = ({
   
   return (
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={createTheme(theme || defaultTheme)}>
+      <ThemeProvider theme={createTheme(theme ? { ...defaultTheme, ...theme } : defaultTheme)}>
         <Paper className={classes.root} style={uiSchema && uiSchema['ui:page'] ? uiSchema['ui:page'].style : {}}>
           {
             !isFormLoading && (actionButtonPos === 'top' && !hasPageLayoutSteps) && (
