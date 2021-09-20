@@ -21,7 +21,7 @@ const common = (theme: Theme) => ({
 });
 
 export default {
-  fieldSet: (theme: Theme) => createStyles({
+  fieldSet: makeStyles((theme: Theme) => createStyles({
     root: {
       display: 'flex',
       flexDirection: 'column',
@@ -34,9 +34,9 @@ export default {
       margin: theme.spacing(1),
       padding: theme.spacing(1),
     },
-  }),
+  })),
 
-  fieldSetObject: (theme: Theme) => createStyles({
+  fieldSetObject: makeStyles((theme: Theme) => createStyles({
     root: {
       'display': 'flex',
       'flexDirection': 'column',
@@ -51,16 +51,16 @@ export default {
       marginTop: 15,
       marginBottom: 20,
     },
-  }),
+  })),
 
-  fieldSetArray: (theme: Theme) => createStyles({
+  fieldSetArray: makeStyles((theme: Theme) => createStyles({
     root: {
       display: 'flex',
       flexDirection: 'column',
     },
     listItem: {},
     ...common(theme),
-  }),
+  })),
 
   fieldSetTabs: makeStyles({
     root: {
@@ -70,7 +70,7 @@ export default {
     },
   }),
 
-  reorderable: {
+  reorderable:  makeStyles(() => createStyles({
     root: {
       'display': 'flex',
       'alignItems': 'baseline',
@@ -81,9 +81,9 @@ export default {
       },
     },
     listItem: {},
-  },
+  })),
 
-  reorderControls: (theme: Theme) => createStyles({
+  reorderControls: makeStyles((theme: Theme) => createStyles({
     root: {
       'display': 'flex',
       'border': `1px solid ${theme.palette.grey[400]}`,
@@ -110,12 +110,12 @@ export default {
     removeCanReorder: {
       marginRight: 10,
     },
-  }),
+  })),
   
-  fieldSetContent: {
+  fieldSetContent: makeStyles(() => createStyles({
     root: {
       marginTop: 20,
     },
     listItem: {},
-  },
+  })),
 };

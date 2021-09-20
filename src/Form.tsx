@@ -5,6 +5,7 @@
  * - All imports should be optional based on what gets selected
  */
 // Material UI
+import { StyledEngineProvider, ThemeProvider, createTheme } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import CircularProgress from '@mui/material/CircularProgress';
 import AdapterMoment from '@mui/lab/AdapterMoment';
@@ -15,7 +16,7 @@ import { FormProps } from '@core-types/Form.type';
 import Framework from './universal-schema/react.framework';
 
 // Internal
-import formStyles from './form-styles';
+import formStyles, { defaultTheme } from './form-styles';
 import FormField from './FormField';
 import FormButtons from './FormButtons';
 
@@ -36,6 +37,7 @@ const {
 } = Framework.library;
 
 const Form = ({
+  theme,
   formData: originalFormData,
   schema = {},
   xhrSchema = {},
@@ -186,68 +188,72 @@ const Form = ({
   );
   
   return (
-    <Paper className={classes.root} style={uiSchema && uiSchema['ui:page'] ? uiSchema['ui:page'].style : {}}>
-      {
-        !isFormLoading && (actionButtonPos === 'top' && !hasPageLayoutSteps) && (
-          <RenderFormButtons />
-        )
-      }
-      <LocalizationProvider dateAdapter={AdapterMoment}>
-        <LoadingContext.Provider value={loadingState}>
-          <StepperContext.Provider value={[activeStep, buttonDisabled] as any}>
-            <EventContext.Provider value={onUpload}>
-              {
-                isFormLoading && !hasPageLayoutTabs ? (
-                    <div> 
-                      <CircularProgress disableShrink />
-                    </div>
-                ) : (
-                    <FormField
-                      path={''}
-                      data={formData}
-                      uiData={uiData}
-                      schemaVersion={schema.version}
-                      schema={{
-                        ...schema,
-                        ...formSchemaXHR,
-                      }}
-                      uiSchema={uiSchema}
-                      xhrSchema={xhrSchema}
-                      definitions={schema.definitions}
-                      interceptors={interceptors}
-                      xhrProgress={xhrProgress}
-                      id={id}
-                      onChange={onFormValuesChange}
-                      onXHRSchemaEvent={onXHRSchemaEvent}
-                      onSubmit={onFormSubmit}
-                      validation={validation}
-                      onKeyDown={handleKeyEnter}
-                      onMoveItemUp={onMoveItemUp}
-                      onMoveItemDown={onMoveItemDown}
-                      onDeleteItem={onDeleteItem}
-                      onAddItem={onAddItem}
-                      onAddNewProperty={onAddNewProperty}
-                      onRemoveProperty={onRemoveProperty}
-                      onUpdateKeyProperty={onUpdateKeyProperty}
-                      onNext={onStepNext}
-                      onBack={onStepBack}
-                      onSkip={onStepSkip}
-                      onTabChange={onTabChange}
-                      isSubmitDisabled={buttonDisabled}
-                      {...rest}
-                    />
-                )
-              }
-            </EventContext.Provider>
-          </StepperContext.Provider>
-        </LoadingContext.Provider>
-      </LocalizationProvider>
-      {
-        !isFormLoading && (!actionButtonPos && !hasPageLayoutSteps) && (
-          <RenderFormButtons />
-        )
-      }
-    </Paper>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={createTheme(theme || defaultTheme)}>
+        <Paper className={classes.root} style={uiSchema && uiSchema['ui:page'] ? uiSchema['ui:page'].style : {}}>
+          {
+            !isFormLoading && (actionButtonPos === 'top' && !hasPageLayoutSteps) && (
+              <RenderFormButtons />
+            )
+          }
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <LoadingContext.Provider value={loadingState}>
+              <StepperContext.Provider value={[activeStep, buttonDisabled] as any}>
+                <EventContext.Provider value={onUpload}>
+                  {
+                    isFormLoading && !hasPageLayoutTabs ? (
+                        <div> 
+                          <CircularProgress disableShrink />
+                        </div>
+                    ) : (
+                        <FormField
+                          path={''}
+                          data={formData}
+                          uiData={uiData}
+                          schemaVersion={schema.version}
+                          schema={{
+                            ...schema,
+                            ...formSchemaXHR,
+                          }}
+                          uiSchema={uiSchema}
+                          xhrSchema={xhrSchema}
+                          definitions={schema.definitions}
+                          interceptors={interceptors}
+                          xhrProgress={xhrProgress}
+                          id={id}
+                          onChange={onFormValuesChange}
+                          onXHRSchemaEvent={onXHRSchemaEvent}
+                          onSubmit={onFormSubmit}
+                          validation={validation}
+                          onKeyDown={handleKeyEnter}
+                          onMoveItemUp={onMoveItemUp}
+                          onMoveItemDown={onMoveItemDown}
+                          onDeleteItem={onDeleteItem}
+                          onAddItem={onAddItem}
+                          onAddNewProperty={onAddNewProperty}
+                          onRemoveProperty={onRemoveProperty}
+                          onUpdateKeyProperty={onUpdateKeyProperty}
+                          onNext={onStepNext}
+                          onBack={onStepBack}
+                          onSkip={onStepSkip}
+                          onTabChange={onTabChange}
+                          isSubmitDisabled={buttonDisabled}
+                          {...rest}
+                        />
+                    )
+                  }
+                </EventContext.Provider>
+              </StepperContext.Provider>
+            </LoadingContext.Provider>
+          </LocalizationProvider>
+          {
+            !isFormLoading && (!actionButtonPos && !hasPageLayoutSteps) && (
+              <RenderFormButtons />
+            )
+          }
+        </Paper>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 

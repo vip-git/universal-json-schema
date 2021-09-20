@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { withStyles } from '@mui/styles';
 import FormField from '../FormField';
 import fieldSetStyles from './field-set-styles';
 import ReorderControls from './ReorderControls';
@@ -14,7 +13,6 @@ export const RawReorderableFormField = ({
   first, 
   last, 
   className, 
-  classes, 
   path, 
   onMoveItemUp, 
   onMoveItemDown, 
@@ -24,32 +22,35 @@ export const RawReorderableFormField = ({
   recursiveDeleteItem,
   schema,
   ...rest
-}: ReorderableFormFieldProps) => (
-  <div className={classNames(className, classes.root)}>
-    {dynamicKeyField && (
-      <FormField
-        path={path}
-        {...rest}
-        schema={{ ...schema, type: 'string' }}
-        data={dynamicKeyField}
-        dynamicKeyField={'key'}
-      />
-    )}
-    <FormField
-      path={path}
-      {...rest}
-      schema={schema}
-      onDeleteItem={recursiveDeleteItem}
-    />
-    <ReorderControls
-      first={first}
-      last={last}
-      onMoveItemUp={onMoveItemUp}
-      onMoveItemDown={onMoveItemDown}
-      onDeleteItem={onDeleteItem}
-      canReorder={canReorder}
-    />
-  </div>
-);
+}: ReorderableFormFieldProps) => { 
+  const classes = fieldSetStyles.reorderable();
+  return (
+      <div className={classNames(className, classes.root)}>
+        {dynamicKeyField && (
+          <FormField
+            path={path}
+            {...rest}
+            schema={{ ...schema, type: 'string' }}
+            data={dynamicKeyField}
+            dynamicKeyField={'key'}
+          />
+        )}
+        <FormField
+          path={path}
+          {...rest}
+          schema={schema}
+          onDeleteItem={recursiveDeleteItem}
+        />
+        <ReorderControls
+          first={first}
+          last={last}
+          onMoveItemUp={onMoveItemUp}
+          onMoveItemDown={onMoveItemDown}
+          onDeleteItem={onDeleteItem}
+          canReorder={canReorder}
+        />
+      </div>
+    );
+}
 
-export default withStyles(fieldSetStyles.reorderable)(RawReorderableFormField);
+export default RawReorderableFormField;

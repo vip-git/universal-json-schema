@@ -5,7 +5,6 @@ import isEqual from 'lodash/isEqual';
 import has from 'lodash/has';
 
 // Material UI
-import { withStyles } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 
@@ -32,31 +31,30 @@ export const shouldHideTitle = (uiSchema, schema) => isPageLayoutSet(uiSchema) |
 export const RawFieldSetContent = (props) => {
   const { schema = {}, uiSchema = {}, xhrSchema = {} } = props;
   const { type } = schema;
+  const classes = fieldSetStyles.fieldSetContent();
   const SchemaTypeComponents = RENDER_BASED_ON_SCHEMA_TYPE({
     schema,
     uiSchema,
     xhrSchema,
-    props,
+    props: { ...props, classes },
   });
   return Utils.callFunctionIfExists(SchemaTypeComponents, type);
 };
 
-export const FieldSetContent = withStyles(fieldSetStyles.fieldSetContent)(RawFieldSetContent);
+export const FieldSetContent = RawFieldSetContent;
 
 // for unit testing
-class RawFieldSet extends React.Component<FieldSetProps, {}> {
-  shouldComponentUpdate = (nextProps) => !isEqual(this.props, nextProps)
-
-  render() {
+const RawFieldSet = React.memo(
+  (props: FieldSetProps) => {
     const {
       className,
       path,
-      classes,
       schema = {},
       hideTitle, 
       noTitle, 
       validation,
-    } = this.props;
+    } = props;
+    const classes = fieldSetStyles.fieldSet();
     const LegendTitle = () => ((
       !hideTitle 
       || path === '' 
@@ -88,10 +86,9 @@ class RawFieldSet extends React.Component<FieldSetProps, {}> {
         {!noTitle && (<LegendTitle />)}
         {!noTitle && (<LegendSubTitle />)}
         {path === '' && <ValidationMessages validation={validation} />}
-        <FieldSetContent path={path} {...this.props} />
+        <FieldSetContent path={path} {...props} />
       </fieldset>
     );
-  }
-}
+  }, (prevProps, nextProps) => isEqual(prevProps, nextProps));
 
-export default withStyles(fieldSetStyles.fieldSet)(RawFieldSet);
+export default RawFieldSet;

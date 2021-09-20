@@ -29,7 +29,6 @@ const classNames = require('classnames');
 
 export const RawFieldSetObject = ({ 
   className, 
-  classes,
   schema: givenSchema = {},
   uiSchema = {},
   xhrSchema = {},
@@ -44,6 +43,7 @@ export const RawFieldSetObject = ({
   tabKey,
   ...rest 
 }: FieldSetObjectProps) => {
+  const classes = fieldSetStyles.fieldSetObject();
   const schema = { ...givenSchema };
   const orientation = (uiSchema['ui:orientation'] === 'row' ? classes.row : null);
   if (isTabContent) {
@@ -192,4 +192,4 @@ export const RawFieldSetObject = ({
     </div>
   );
 };
-export default withStyles(fieldSetStyles.fieldSetObject)(RawFieldSetObject);
+export default RawFieldSetObject;

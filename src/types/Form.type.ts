@@ -1,8 +1,13 @@
+// Material UI
+import { ThemeOptions } from '@mui/material/styles';
+import { UISchemaType } from './UISchema.type';
+
 export type FormProps = {
+    theme?: ThemeOptions;
     formData: any;
     schema: any;
     xhrSchema: any;
-    uiSchema: any;
+    uiSchema: UISchemaType<{}>;
     validations: any;
     prefixId: any;
     submitOnEnter: any;

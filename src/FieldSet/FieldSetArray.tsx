@@ -23,7 +23,6 @@ export const RawFieldSetArray = (props: FieldSetArrayProps) => {
   const {
     startIdx = 0,
     className,
-    classes,
     schema = {},
     uiSchema = {},
     definitions = {},
@@ -34,7 +33,7 @@ export const RawFieldSetArray = (props: FieldSetArrayProps) => {
     onDeleteItem,
     ...rest
   } = props;
-  // const schema = { ...givenSchema };
+  const classes = fieldSetStyles.fieldSetArray();
   const canReorder = uiSchema && uiSchema['ui:options'] && uiSchema['ui:options'].canReorder;
   const allowRecursive = uiSchema && uiSchema['ui:options'] && uiSchema['ui:options'].allowRecursive;
   const hasSelectWidget = uiSchema && uiSchema['ui:widget'];
@@ -118,4 +117,4 @@ export const RawFieldSetArray = (props: FieldSetArrayProps) => {
     </div>
   );
 };
-export default withStyles(fieldSetStyles.fieldSetArray)(RawFieldSetArray);
+export default RawFieldSetArray;

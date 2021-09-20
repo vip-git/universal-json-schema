@@ -40,7 +40,7 @@
     "@mui/material": "5.0.0",
     "@mui/styles": "5.0.0",
     "@material-ui/pickers": "3.3.10",
-    "@react-jsonschema-form-components/material-radio-group": "2.0.1",
+    "@react-jsonschema-form-components/material-radio-group": "3.0.0",
     "@react-jsonschema-form-interceptors/translate-currency": "2.0.0",
     "@react-jsonschema-form-interceptors/translate-range-date": "2.0.0",
     "@react-jsonschema-form-interceptors/translate-ratings": "2.0.0",
@@ -183,7 +183,7 @@
   "peerDependencies": {
     "immutability-helper": "^2.6.5 || ^3.0.0"
   },
-  "version": "3.0.0-beta.0",
+  "version": "3.0.0-beta.1",
   "directories": {
     "doc": "docs"
   },

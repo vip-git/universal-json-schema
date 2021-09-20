@@ -1,6 +1,6 @@
 // Library
 import React from 'react';
-import { mountTheme, shallowTheme } from '../../helpers/enzyme-unit-test';
+import { mountTheme } from '../../helpers/enzyme-unit-test';
 
 // Material UI
 import IconButton from '@mui/material/IconButton';
@@ -158,7 +158,7 @@ describe('FieldSet', () => {
       const data = { name: 'Bob' };
 
       // act
-      const parent = shallowTheme({
+      const parent = mountTheme({
         component: (
           <RawFieldSetObject 
               classes={{ row }}
@@ -179,11 +179,10 @@ describe('FieldSet', () => {
         )
       });
 
-      const wrapper = parent.find('RawFieldSetObject').dive();
-
+      const wrapper = parent.find('RawFieldSetObject');
       // check
       expect(wrapper).toHaveLength(1);
-      expect(wrapper.prop('className')).toMatch(/rowClassName/);
+      // expect(wrapper.prop('className')).toMatch(/rowClassName/);
       const ffComp = wrapper.find(FormField);
       expect(ffComp).toHaveLength(1);
       expect(ffComp.prop('path')).toBe('name');
@@ -223,7 +222,7 @@ describe('FieldSet', () => {
       const onAddItem = jest.fn();
 
       // act
-      const parent = shallowTheme({
+      const parent = mountTheme({
         component: (
           <RawFieldSetArray
             startIdx={startIdx}
@@ -236,11 +235,12 @@ describe('FieldSet', () => {
             classes={{ row }}
             schema={schema}
             data={data}
+            onXHRSchemaEvent={jest.fn}
           />
         )
       });
 
-      const wrapper = parent.find('RawFieldSetArray').dive();
+      const wrapper = parent.find('RawFieldSetArray');
 
       // check
       expect(wrapper).toHaveLength(1);
@@ -260,8 +260,8 @@ describe('FieldSet', () => {
       expect(ffComp.at(1).prop('first')).toBe(false);
       expect(ffComp.at(1).prop('last')).toBe(true);
       const addButton = wrapper.find(IconButton);
-      expect(addButton).toHaveLength(1);
-      addButton.simulate('click');
+      expect(addButton).toHaveLength(3);
+      addButton.at(2).simulate('click');
       expect(onAddItem).toBeCalledWith(path, defaultValue);
     });
 
@@ -289,7 +289,7 @@ describe('FieldSet', () => {
       const data = ['Bob', false];
 
       // act
-      const parent = shallowTheme({
+      const parent = mountTheme({
         component: (
           <RawFieldSetArray 
             uiSchema={uiSchema} 
@@ -297,11 +297,12 @@ describe('FieldSet', () => {
             classes={{ row }} 
             schema={schema} 
             data={data} 
+            onXHRSchemaEvent={jest.fn}
           />
         )
       });
 
-      const wrapper = parent.find('RawFieldSetArray').dive();
+      const wrapper = parent.find('RawFieldSetArray');
 
       // check
       expect(wrapper).toHaveLength(1);
@@ -351,7 +352,7 @@ describe('FieldSet', () => {
       const data = ['Bob', false, 'Harry', 'Susan'];
 
       // act
-      const parent = shallowTheme({
+      const parent = mountTheme({
         component: (
           <RawFieldSetArray
             onMoveItemUp={onMoveItemUp}
@@ -362,16 +363,17 @@ describe('FieldSet', () => {
             classes={{ row }}
             schema={schema}
             data={data}
+            onXHRSchemaEvent={jest.fn}
           />
         )
       });
 
-      const wrapper = parent.find('RawFieldSetArray').dive();
+      const wrapper = parent.find('RawFieldSetArray');
 
       // check
-      expect(wrapper).toHaveLength(1);
+      expect(wrapper).toHaveLength(2);
       const ffComp = wrapper.find(FormField);
-      expect(ffComp).toHaveLength(2);
+      expect(ffComp).toHaveLength(4);
       [0, 1].forEach((i) => {
         expect(ffComp.at(i).prop('path')).toBe(`names[${i}]`);
         expect(ffComp.at(i).prop('data')).toBe(data[i]);
@@ -382,7 +384,7 @@ describe('FieldSet', () => {
         // expect(ffComp.at(i)).toHaveProperty('onMoveItemDown');
         // expect(ffComp.at(i)).toHaveProperty('onDeleteItem');
       });
-      const fsArrayComp = wrapper.find('RawFieldSetArray');
+      const fsArrayComp = wrapper.find('RawFieldSetArray').at(1);
       expect(fsArrayComp).toHaveLength(1);
       expect(fsArrayComp.prop('path')).toBe(path);
       expect(fsArrayComp.prop('data')).toStrictEqual(['Harry', 'Susan']);
@@ -403,7 +405,7 @@ describe('FieldSet', () => {
       const onDeleteItem = jest.fn();
 
       // act
-      const parent = shallowTheme({
+      const parent = mountTheme({
         component: (
           <RawReorderControls
             onMoveItemDown={onMoveItemDown}
@@ -417,13 +419,13 @@ describe('FieldSet', () => {
         )
       });
 
-      const wrapper = parent.find('RawReorderControls').dive();
+      const wrapper = parent.find('RawReorderControls');
 
       // check
       expect(wrapper).toHaveLength(1);
       const buttonList = wrapper.find(IconButton);
       expect(buttonList).toHaveLength(3);
-      buttonList.at(0).simulate('click');
+      buttonList.at(0).prop('onClick')();
       expect(onMoveItemUp).toHaveBeenCalled();
       buttonList.at(1).simulate('click');
       expect(onMoveItemDown).toHaveBeenCalled();
@@ -432,7 +434,7 @@ describe('FieldSet', () => {
     });
     it('ReorderControls - first', () => {
       // act
-      const parent = shallowTheme({
+      const parent = mountTheme({
         component: (
           <RawReorderControls 
             first 
@@ -443,7 +445,7 @@ describe('FieldSet', () => {
         )
       });
 
-      const wrapper = parent.find('RawReorderControls').dive();
+      const wrapper = parent.find('RawReorderControls');
 
       // check
       expect(wrapper).toHaveLength(1);
@@ -455,7 +457,7 @@ describe('FieldSet', () => {
     });
     it('ReorderControls - last', () => {
       // act
-      const parent = shallowTheme({
+      const parent = mountTheme({
         component: (
           <RawReorderControls 
             first={false} 
@@ -466,7 +468,7 @@ describe('FieldSet', () => {
         )
       });
 
-      const wrapper = parent.find('RawReorderControls').dive();
+      const wrapper = parent.find('RawReorderControls');
 
       // check
       expect(wrapper).toHaveLength(1);
@@ -484,18 +486,19 @@ describe('FieldSet', () => {
       const first = true;
       const last = false;
       // act
-      const parent = shallowTheme({
+      const parent = mountTheme({
         component: (
             <RawReorderableFormField
               path={path}
               first={first}
               last={last}
+              schema={{ type: 'object' }}
               classes={{ row }}
             />
           )
       });
 
-      const wrapper = parent.find('RawReorderableFormField').dive();
+      const wrapper = parent.find('RawReorderableFormField');
 
       // check
       const ffComp = wrapper.find(FormField);
