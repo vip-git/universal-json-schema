@@ -35,10 +35,12 @@ import givenFormData from '../simple/form-data.json';
 
 export default () => {
   const [formData, setFormData] = React.useState(givenFormData);
+  
   return <MaterialJsonSchemaForm 
             schema={schema} 
             uiSchema={uiSchema} 
 	    xhrSchema={givenXhrSchema || {}} // Optional
+	    theme={} // Optional - You need to explicitly provide your custom theme from MUI5 onwards
             formData={formData} 
             onChange={({ formData }) => setFormData(formData)}
             onSubmit={(submittedData) => console.log('form submitted', submittedData)}
@@ -48,7 +50,7 @@ export default () => {
 
 ## Advanced Example Usage
 
-> More detailed example can be seen [here](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/src/demo/body/Example.jsx)
+> More detailed example can be seen [here](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/main/demo/web/react/body/Example.jsx#L39)
 
 ```jsx
 // Library
@@ -87,6 +89,7 @@ const Example () => {
 	    uiSchema={givenUISchema}
 	    xhrSchema={givenXhrSchema || {}}
             formData={formData}
+	    theme={} // Optional - You need to explicitly provide your custom theme from MUI5 onwards
 	    
 	    // Define Event handlers
             onChange={onFormChanged} 
