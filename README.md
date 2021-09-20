@@ -50,7 +50,7 @@ export default () => {
 
 ## Advanced Example Usage
 
-> More detailed example can be seen [here](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/src/demo/body/Example.jsx)
+> More detailed example can be seen [here](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/demo/body/Example.jsx)
 
 ```jsx
 // Library
