@@ -35,10 +35,12 @@ import givenFormData from '../simple/form-data.json';
 
 export default () => {
   const [formData, setFormData] = React.useState(givenFormData);
+  
   return <MaterialJsonSchemaForm 
             schema={schema} 
             uiSchema={uiSchema} 
 	    xhrSchema={givenXhrSchema || {}} // Optional
+	    theme={} // Optional - You need to explicitly provide your custom theme from MUI5 onwards
             formData={formData} 
             onChange={({ formData }) => setFormData(formData)}
             onSubmit={(submittedData) => console.log('form submitted', submittedData)}
@@ -87,6 +89,7 @@ const Example () => {
 	    uiSchema={givenUISchema}
 	    xhrSchema={givenXhrSchema || {}}
             formData={formData}
+	    theme={} // Optional - You need to explicitly provide your custom theme from MUI5 onwards
 	    
 	    // Define Event handlers
             onChange={onFormChanged} 
