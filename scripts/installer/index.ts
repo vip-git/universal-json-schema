@@ -21,7 +21,7 @@ if (process.argv && process.argv.length === 3) {
             shelljs.rm('-rf', frameworkDir);
             shelljs.ln(
                 '-s',
-                `${shelljs.pwd()}/scripts/installer/templates/react/src`,
+                `${shelljs.pwd()}/scripts/installer/frameworks/react/src`,
                 `${shelljs.pwd()}/src/framework`,
             );
             const uiFrameworkTemplate = `import { uiFramework } from './mui.framework';
