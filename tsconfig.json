@@ -41,7 +41,8 @@
     },
     "exclude": [
       "**/*.spec.ts",
-      "**/*.spec.tsx"
+      "**/*.spec.tsx",
+      "scripts/installer/**/*"
     ],
     "include": [
       "src/**/*",
