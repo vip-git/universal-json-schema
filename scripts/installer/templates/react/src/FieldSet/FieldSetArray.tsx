@@ -1,9 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-// Material UI
-import { withStyles } from '@mui/styles';
-
 // Style
 import fieldSetStyles from './field-set-styles';
 
