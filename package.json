@@ -9,7 +9,7 @@
     "url": "https://github.com/vip-git/universal-jsonschema-form-material-ui/issues"
   },
   "scripts": {
-    "postinstall": "node scripts/generator/index.js && ts-node scripts/installer/index.ts",
+    "postinstall": "ts-node scripts/installer/index.ts",
     "install-react-mui": "ts-node scripts/installer/index.ts --reactMUI",
     "install-vue-mui": "ts-node scripts/installer/index.ts --vueMUI",
     "install-react-native-paper": "ts-node scripts/installer/index.ts --reactNativePaper",

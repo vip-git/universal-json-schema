@@ -18,6 +18,7 @@ if (process.argv && process.argv.length === 3) {
     const helpersDir = `${shelljs.pwd()}/scripts/installer/frameworks/react/helpers`;
     const configDir = `${shelljs.pwd()}/scripts/installer/frameworks/react/config`;
     const uniSchemaDir = `${shelljs.pwd()}/scripts/installer/frameworks/react/universal-schema`;
+    const reactMUIPackageJson = `${shelljs.pwd()}/scripts/installer/frameworks/react/package.json`;
     
     switch (framework) {
         case 'reactMUI':
@@ -50,6 +51,11 @@ if (process.argv && process.argv.length === 3) {
             `;
             const shellFileString = new shelljs.ShellString(uiFrameworkTemplate);  
             shellFileString.to(`${shelljs.pwd()}/src/framework/ui-framework/index.ts`);
+            shelljs.mv(`${shelljs.pwd()}/package.json`, `${shelljs.pwd()}/package-original.json`);
+            shelljs.cp(reactMUIPackageJson, `${shelljs.pwd()}/package.json`);
+            shelljs.exec('npm install');
+            shelljs.rm('-rf', `${shelljs.pwd()}/package.json`);
+            shelljs.mv(`${shelljs.pwd()}/package-original.json`, `${shelljs.pwd()}/package.json`);
             break;
         
         case 'vueMUI':
