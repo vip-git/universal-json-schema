@@ -3,7 +3,7 @@ import { has, get, set } from 'lodash';
 import each from 'lodash/each';
 
 // Types
-import { SetNestedDataProps, SetNestedPayloadProps } from '@core-types/helpers/TransformSchema.type';
+import { SetNestedDataProps, SetNestedPayloadProps } from '../framework/types/helpers/TransformSchema.type';
 
 // Helpers
 import getDefinitionSchemaFromRef from './get-definition-schema';
@@ -11,7 +11,7 @@ import getDefinitionSchemaFromRef from './get-definition-schema';
 // Interceptors
 import {
   APP_CONFIG,
-} from '../generated/app.config';
+} from '../framework/generated/app.config';
 
 const { 
   INTERCEPTORS: INTERCEPTOR_CONFIG, 
