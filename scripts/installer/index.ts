@@ -19,23 +19,16 @@ if (process.argv && process.argv.length === 3) {
     switch (framework) {
         case 'reactMUI':
             shelljs.rm('-rf', frameworkDir);
-            shelljs.mkdir(frameworkDir);
-            shelljs.cp(
-                '-R',
-                'scripts/installer/templates/react/src/*',
-                'src/framework/',
+            shelljs.ln(
+                '-s',
+                `${shelljs.pwd()}/scripts/installer/templates/react/src`,
+                `${shelljs.pwd()}/src/framework`,
             );
-            shelljs.cp(
-                '-R',
-                `${frameworkDir}/ui-framework/mui.framework.ts`,
-                `${shelljs.pwd()}/src/universal-schema/ui-framework.ts`,
-            );
-            shelljs.cp(
-                '-R',
-                `${frameworkDir}/ui-framework/types/mui-framework.type.ts`,
-                `${shelljs.pwd()}/src/universal-schema/types/ui-framework.type.ts`,
-            );
-            shelljs.rm('-rf', `${frameworkDir}/ui-framework`);
+            const uiFrameworkTemplate = `import { uiFramework } from './mui.framework';
+            export { uiFramework };
+            `;
+            const shellFileString = new shelljs.ShellString(uiFrameworkTemplate);  
+            shellFileString.to(`${shelljs.pwd()}/src/framework/ui-framework/index.ts`);
             break;
         
         case 'vueMUI':

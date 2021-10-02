@@ -1,4 +1,4 @@
-import { UIFramework } from './types/ui-framework.type';
+import { UIFramework } from './types/mui-framework.type';
 
 export const uiFramework: UIFramework = {
   name: 'MaterialUI',
