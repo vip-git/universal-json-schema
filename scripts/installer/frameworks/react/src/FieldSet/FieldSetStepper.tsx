@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 // Context
-import { StepperContext } from '../helpers/context';
+import { StepperContext } from '../../helpers/context';
 
 // Internal
 import FieldSetObject from './FieldSetObject';

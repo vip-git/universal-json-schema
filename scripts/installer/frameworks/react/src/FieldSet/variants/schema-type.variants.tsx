@@ -5,8 +5,8 @@ import React from 'react';
 import FieldSetArray from '../FieldSetArray';
 
 // Config
-import CONFIG from '../../config';
-import Utils from '../../helpers/utils';
+import CONFIG from '../../../config';
+import Utils from '../../../helpers/utils';
 
 // Internal
 import RENDER_PAGE_PAGE_LAYOUT, { getPageLayout } from './page-layout.variants';

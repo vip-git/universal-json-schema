@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Config
-import CONFIG from '../../config';
+import CONFIG from '../../../config';
 
 // Layout types
 import FieldSetObject from '../FieldSetObject';

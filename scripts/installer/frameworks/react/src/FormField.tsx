@@ -10,7 +10,7 @@ import get from 'lodash/get';
 import FieldSet, { shouldHideTitle } from './FieldSet';
 import Field from './fields';
 import styles from './form-field-styles';
-import { isEmptyValues } from './helpers/remove-empty-values';
+import { isEmptyValues } from '../helpers/remove-empty-values';
 
 // Types
 import { FormFieldProps } from './types/FormField.type';

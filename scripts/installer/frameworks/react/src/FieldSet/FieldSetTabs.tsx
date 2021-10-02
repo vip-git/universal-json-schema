@@ -18,7 +18,7 @@ import FieldSetObject from './FieldSetObject';
 // Helpers
 import {
   getHashCodeFromXHRDef,
-} from '../helpers/state-machine/form/hooks';
+} from '../../helpers/state-machine/form/hooks';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

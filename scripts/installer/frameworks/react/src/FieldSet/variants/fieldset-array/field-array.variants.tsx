@@ -7,10 +7,10 @@ import IconButton from '@mui/material/IconButton';
 import AddCircle from '@mui/icons-material/AddCircle';
 
 // Helpers
-import getDefaultValue from '../../../helpers/get-default-value';
+import getDefaultValue from '../../../../helpers/get-default-value';
 
 // config
-import FIELDSET_CONFIG, { ArrayVariants, ArrayWrapperVariants } from '../../../config/fieldset.config';
+import FIELDSET_CONFIG, { ArrayVariants, ArrayWrapperVariants } from '../../../../config/fieldset.config';
 
 // Component
 import FormField from '../../../FormField';

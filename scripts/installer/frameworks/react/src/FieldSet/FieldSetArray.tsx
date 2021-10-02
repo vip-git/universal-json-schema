@@ -5,13 +5,13 @@ import React from 'react';
 import fieldSetStyles from './field-set-styles';
 
 // Helpers
-import getDefinitionSchemaFromRef from '../helpers/get-definition-schema';
+import getDefinitionSchemaFromRef from '../../helpers/get-definition-schema';
 
 // Types
 import { FieldSetArrayProps } from '../types/FieldSetArray.type';
 
 // Utils
-import Utils from '../helpers/utils';
+import Utils from '../../helpers/utils';
 
 // Variant
 import RENDER_ARRAY_WRAPPERS from './variants/fieldset-array/field-array.wrappers';

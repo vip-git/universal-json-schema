@@ -18,8 +18,8 @@ import FormField from '../FormField';
 import fieldSetStyles from './field-set-styles';
 
 // Helpers
-import getDefaultValue from '../helpers/get-default-value';
-import getDefinitionSchemaFromRef from '../helpers/get-definition-schema';
+import getDefaultValue from '../../helpers/get-default-value';
+import getDefinitionSchemaFromRef from '../../helpers/get-definition-schema';
 
 // types
 import { FieldSetObjectProps } from '../types/FieldSetObject.type';
