@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 
 // Utils
-import Utils from '../helpers/utils';
+import Utils from '../../helpers/utils';
 
 // Styles
 import fieldSetStyles from './field-set-styles';

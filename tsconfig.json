@@ -2,9 +2,9 @@
     "compilerOptions": {
       "allowSyntheticDefaultImports": true,
       "paths": {
-        "@core-types/*": ["./src/types/*"],
-        "@utils/*": ["./src/fields/utils/*"],
-        "@config/*": ["./src/config/*"],
+        "@core-types/*": ["./src/framework/types/*"],
+        "@utils/*": ["./src/framework/fields/utils/*"],
+        "@config/*": ["./src/framework/config/*"],
       },
       "forceConsistentCasingInFileNames": true,
       "module": "esnext",

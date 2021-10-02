@@ -15,14 +15,35 @@ const shelljs = require('shelljs');
 if (process.argv && process.argv.length === 3) {
     const framework = process.argv[2].replace('--', '');
     const frameworkDir = `${shelljs.pwd()}/src/framework`;
-
+    const helpersDir = `${shelljs.pwd()}/scripts/installer/frameworks/react/helpers`;
+    const configDir = `${shelljs.pwd()}/scripts/installer/frameworks/react/config`;
+    const uniSchemaDir = `${shelljs.pwd()}/scripts/installer/frameworks/react/universal-schema`;
+    
     switch (framework) {
         case 'reactMUI':
             shelljs.rm('-rf', frameworkDir);
+            shelljs.rm('-rf', helpersDir);
+            shelljs.rm('-rf', configDir);
+            shelljs.rm('-rf', uniSchemaDir);
             shelljs.ln(
                 '-s',
                 `${shelljs.pwd()}/scripts/installer/frameworks/react/src`,
-                `${shelljs.pwd()}/src/framework`,
+                frameworkDir,
+            );
+            shelljs.ln(
+                '-s',
+                `${shelljs.pwd()}/src/helpers`,
+                helpersDir,
+            );
+            shelljs.ln(
+                '-s',
+                `${shelljs.pwd()}/src/config`,
+                configDir,
+            );
+            shelljs.ln(
+                '-s',
+                `${shelljs.pwd()}/src/universal-schema`,
+                uniSchemaDir,
             );
             const uiFrameworkTemplate = `import { uiFramework } from './mui.framework';
             export { uiFramework };

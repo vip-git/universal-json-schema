@@ -1,6 +1,6 @@
 // Types
-import { GetComponent } from '@core-types/configure/GetComponent.type';
 import { isEnum } from '@react-jsonschema-form-utils/enum-utils';
+import { GetComponent } from '../../../types/configure/GetComponent.type';
 
 import componentConfig from '../component.config';
 

@@ -2,8 +2,8 @@
 import isEmpty from 'lodash/isEmpty';
 
 // Context
-import { GetComponentProps } from '@core-types/configure/GetComponentProps.type';
-import { EventContext, LoadingContext } from '../../../helpers/context';
+import { GetComponentProps } from '../../../types/configure/GetComponentProps.type';
+import { EventContext, LoadingContext } from '../../../../helpers/context';
 
 // Types
 

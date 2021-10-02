@@ -1,13 +1,13 @@
 // Library
 import React from 'react';
-import { FieldProps } from '@core-types/Field.type';
+import { FieldProps } from '../types/Field.type';
 import configureComponent from './configure';
 import ConfiguredField from './ConfiguredField';
 
 // Helpers
 import {
   getHashCodeFromXHRDef,
-} from '../helpers/state-machine/form/hooks';
+} from '../../helpers/state-machine/form/hooks';
 
 export default (props: FieldProps) => {
   const { path, prefixId, schema, data, uiSchema, validation, xhrProgress } = props;
