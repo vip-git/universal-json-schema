@@ -8,11 +8,11 @@
  const path = require('path');
 
  const extraNodeModules = {
-   '../../../src': path.resolve(__dirname + '/../../../src'),
+   '../../../scripts/installer/frameworks/react-native/src': path.resolve(__dirname + '/../../../scripts/installer/frameworks/react-native/src'),
  };
 
  const watchFolders = [
-   path.resolve(__dirname + '/../../../src')
+   path.resolve(__dirname + '/../../../scripts/installer/frameworks/react-native/src')
  ];
  
 module.exports = {

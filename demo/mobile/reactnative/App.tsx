@@ -3,11 +3,6 @@ import React from 'react';
 import {
   DefaultTheme,
   Provider as PaperProvider,
-  Avatar,
-  Button,
-  Card,
-  Title,
-  Paragraph
 } from 'react-native-paper';
 import {
   SafeAreaView,
@@ -17,9 +12,7 @@ import {
 } from 'react-native';
 
 // Internal
-import ReactNativeForm from '../../../src/framework/Form';
-
-const LeftContent = (props: any) => <Avatar.Icon {...props} icon="folder" />
+import ReactNativeForm from '../../../scripts/installer/frameworks/react-native/src/Form';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -42,18 +35,6 @@ const App = () => {
     <PaperProvider theme={theme}>
       <SafeAreaView style={backgroundStyle}>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <Card>
-          <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
-          <Card.Content>
-            <Title>Card title</Title>
-            <Paragraph>Card content</Paragraph>
-          </Card.Content>
-          <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-          <Card.Actions>
-            <Button>Cancel</Button>
-            <Button>Ok</Button>
-          </Card.Actions>
-        </Card>
         <ReactNativeForm />
       </SafeAreaView>
     </PaperProvider>
