@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 
 // Internal
-import ReactNativeForm from '../../../src/Form';
+import ReactNativeForm from '../../../src/framework/Form';
 
 const LeftContent = (props: any) => <Avatar.Icon {...props} icon="folder" />
 

@@ -17,3 +17,5 @@ const MyComponent = () => (
         </Card.Actions>
     </Card>
 );
+
+export default MyComponent;
