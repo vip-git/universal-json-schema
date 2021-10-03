@@ -14,10 +14,10 @@
 - Support alternatives - oneOf, anyOf
 - Support for dependencies - array of conditionals
 - new Prop [onError](./src/demo/body/Example.jsx#L48) to get errors available in form on every change
-- New [interceptors](./src/demo/body/Example.jsx#L49-L71) prop to transform form and uiData using uiSchema - [ui:interceptor]./src/demo/examples/simple/ui-schema.json#L84)
+- New [interceptors](./src/demo/body/Example.jsx#L49-L71) prop to transform form and uiData using uiSchema - [ui:interceptor]./demo/examples/simple/ui-schema.json#L84)
 - new concept called [uiData](./src/demo/body/Example.jsx#L68) to control ui only data to add seperation of concern with form data needs use of [interceptors](./src/demo/body/Example.jsx#L49-L71)
 - Demo updated with vscode editor and live validation changes
-- New `xhrSchema` feature enabled to make xhr calls [onload](./src/demo/examples/simple/xhr-schema.json#L3), [onsubmit](./src/demo/examples/simple/xhr-schema.json#L12) and [onclick](./src/demo/examples/simple/xhr-schema.json#L59) to consume or post data
+- New `xhrSchema` feature enabled to make xhr calls [onload](./demo/examples/simple/xhr-schema.json#L3), [onsubmit](./demo/examples/simple/xhr-schema.json#L12) and [onclick](./demo/examples/simple/xhr-schema.json#L59) to consume or post data
 - `type: null` support included for custom div support
 - Integration with xstate for logic refactors
 - XHR Schema now supports `ui:errors` which includes errors by `statusCodes` and a special case for `offline`

@@ -42,7 +42,7 @@ const shellFileString = new shelljs.ShellString(finalString);
 // Folder Variables
 const generatedLocation = `${shelljs.pwd()}/src/framework/generated`;
 const generatorLocation = `${shelljs.pwd()}/scripts/generator`;
-const demoFolder = `${shelljs.pwd()}/demo/web/react/examples`;
+const demoFolder = `${shelljs.pwd()}/demo/examples`;
 const testsGeneratedFolder = `${shelljs.pwd()}/src/__e2e__/page-objects/generated`;
 
 const myArgs = process.argv.slice(2);
