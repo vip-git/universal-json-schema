@@ -37,6 +37,7 @@ This document explains on how this project is aiming towards becoming "Universal
     - material-input
     - empty-div
     - ratings
+  - ANT Design UI (Theme)
   - Semantic UI (Theme)
   - Bootstrap UI (Theme)
   - Fluent UI (Theme)
