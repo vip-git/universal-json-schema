@@ -9,8 +9,7 @@ This document explains on how this project is aiming towards becoming "Universal
   - React Native
   - Angular
   - Vue
-  - Web Components
-  - Ionic
+  - Stencil JS (Web Components)
   - Nativescript
 
 - Logic
