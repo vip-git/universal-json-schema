@@ -9,10 +9,14 @@
 
  const extraNodeModules = {
    '../../../scripts/installer/frameworks/react-native/src': path.resolve(__dirname + '/../../../scripts/installer/frameworks/react-native/src'),
+   '../../examples': path.resolve(__dirname + '/../../examples'),
+   '../../../scripts/generator': path.resolve(__dirname + '/../../../scripts/generator')
  };
 
  const watchFolders = [
-   path.resolve(__dirname + '/../../../scripts/installer/frameworks/react-native/src')
+   path.resolve(__dirname + '/../../../scripts/installer/frameworks/react-native/src'),
+   path.resolve(__dirname + '/../../examples'),
+   path.resolve(__dirname + '/../../../scripts/generator'),
  ];
  
 module.exports = {

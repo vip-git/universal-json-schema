@@ -14,6 +14,9 @@ import {
 // Internal
 import ReactNativeForm from '../../../scripts/installer/frameworks/react-native/src/Form';
 
+// Demo
+import numbers from '../../examples/numbers';
+
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -26,16 +29,39 @@ const App = () => {
     },
   };
 
-
   const backgroundStyle = {
     backgroundColor: isDarkMode ? theme.colors.primary : theme.colors.accent,
   };
+
+  const { schema, uiSchema, formData } = numbers;
+
+  const onSubmit = () => {};
+  const onCancel = () => {};
+  const onUpload = () => {};
+  const onFormChanged = () => {};
+  const onError = () => {};
 
   return (
     <PaperProvider theme={theme}>
       <SafeAreaView style={backgroundStyle}>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <ReactNativeForm />
+        <ReactNativeForm 
+          schema={schema}
+          xhrSchema={{}}
+          uiSchema={uiSchema}
+          formData={formData}
+          onCancel={onCancel}
+          onSubmit={onSubmit}
+          onStepNext={onSubmit}
+          onUpload={onUpload}
+          onChange={onFormChanged}
+          onError={onError}
+          interceptors={{}}
+          components={{}}
+          validations={{}}
+          submitOnEnter
+          activityIndicatorEnabled
+        />
       </SafeAreaView>
     </PaperProvider>
   );

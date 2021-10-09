@@ -2,13 +2,29 @@
 import React from 'react';
 import { Avatar, Button as RNPButton, Card as RNPCard, Title, TextInput as RNPTextInput } from 'react-native-paper';
 
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+const LeftContent = (props: any) => <Avatar.Icon {...props} icon="folder" />
 
 const Card: any = RNPCard;
 const Button: any = RNPButton;
 const TextInput: any = RNPTextInput;
 
-const MyComponent = () => { 
+const MyComponent = ({
+    schema,
+    xhrSchema,
+    uiSchema,
+    formData,
+    onCancel,
+    onSubmit,
+    onStepNext,
+    onUpload,
+    onChange,
+    onError,
+    interceptors,
+    components,
+    validations,
+    submitOnEnter,
+    activityIndicatorEnabled
+}: any) => { 
     const [text, setText] = React.useState('');
     return (
         <Card>
@@ -18,7 +34,7 @@ const MyComponent = () => {
                 <TextInput
                     label="Email"
                     value={text}
-                    onChangeText={text => setText(text)}
+                    onChangeText={(text: string) => setText(text)}
                 />
             </Card.Content>
             <Card.Actions>
