@@ -2,6 +2,7 @@ const frameworkGenerator = ({ shelljs, frameworkName }) => {
     const frameworkDir = `${shelljs.pwd()}/src/framework`;
     const helpersDir = `${shelljs.pwd()}/scripts/installer/frameworks/${frameworkName}/helpers`;
     const configDir = `${shelljs.pwd()}/scripts/installer/frameworks/${frameworkName}/config`;
+    const typesDir = `${shelljs.pwd()}/scripts/installer/frameworks/${frameworkName}/src/types`;
     const uniSchemaDir = `${shelljs.pwd()}/scripts/installer/frameworks/${frameworkName}/universal-schema`;
     const reactMUIPackageJson = `${shelljs.pwd()}/scripts/installer/frameworks/${frameworkName}/package.json`;
     shelljs.rm('-rf', frameworkDir);
@@ -22,6 +23,11 @@ const frameworkGenerator = ({ shelljs, frameworkName }) => {
         '-s',
         `${shelljs.pwd()}/src/config`,
         configDir,
+    );
+    shelljs.ln(
+        '-s',
+        `${shelljs.pwd()}/src/types`,
+        typesDir,
     );
     shelljs.ln(
         '-s',

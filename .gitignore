@@ -21,3 +21,4 @@ temp
 scripts/installer/frameworks/**/config
 scripts/installer/frameworks/**/helpers
 scripts/installer/frameworks/**/universal-schema
+scripts/installer/frameworks/**/src/types
