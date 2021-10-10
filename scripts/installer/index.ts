@@ -18,28 +18,70 @@ if (process.argv && process.argv.length === 3) {
     const framework = process.argv[2].replace('--', '');
     
     switch (framework) {
-        case 'reactMUI':
-            generateFramework({ shelljs, frameworkName: 'react' });
+        case 'reactMUI': 
+            const reactUIFrameworkTemplate = `import { uiFramework } from './mui.framework';
+            export { uiFramework };
+            `;
+            generateFramework({ 
+                shelljs, 
+                frameworkName: 'react',
+                uiFrameworkTemplate: reactUIFrameworkTemplate
+            });
             break;
         
         case 'vueMUI':
-            generateFramework({ shelljs, frameworkName: 'vue' });
+            const vueUIFrameworkTemplate = `import { uiFramework } from './mui.framework';
+            export { uiFramework };
+            `;
+            generateFramework({ 
+                shelljs, 
+                frameworkName: 'vue', 
+                uiFrameworkTemplate: vueUIFrameworkTemplate
+            });
             break;
 
         case 'reactNativePaper':
-            generateFramework({ shelljs, frameworkName: 'react-native' });
+            const rnUIFrameworkTemplate = `import { uiFramework } from './rnpaper.framework';
+            export { uiFramework };
+            `;
+            generateFramework({ 
+                shelljs, 
+                frameworkName: 'react-native',
+                uiFrameworkTemplate: rnUIFrameworkTemplate
+            });
             break;
         
         case 'angularMUI':
-            generateFramework({ shelljs, frameworkName: 'angular' });
+            const angularUIFrameworkTemplate = `import { uiFramework } from './mui.framework';
+            export { uiFramework };
+            `;
+            generateFramework({ 
+                shelljs, 
+                frameworkName: 'angular',
+                uiFrameworkTemplate: angularUIFrameworkTemplate
+            });
             break;
         
         case 'stencilIonic':
-            generateFramework({ shelljs, frameworkName: 'stencil' });
+            const stencilUIFrameworkTemplate = `import { uiFramework } from './mui.framework';
+            export { uiFramework };
+            `;
+            generateFramework({ 
+                shelljs, 
+                frameworkName: 'stencil',
+                uiFrameworkTemplate: stencilUIFrameworkTemplate
+            });
             break;
         
         case 'svelteMUI':
-            generateFramework({ shelljs, frameworkName: 'stencil' });
+            const svelteUIFrameworkTemplate = `import { uiFramework } from './mui.framework';
+            export { uiFramework };
+            `;
+            generateFramework({ 
+                shelljs, 
+                frameworkName: 'svelte',
+                uiFrameworkTemplate: svelteUIFrameworkTemplate
+            });
             break;
         
         default:

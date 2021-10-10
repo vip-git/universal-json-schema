@@ -2,9 +2,13 @@
     "compilerOptions": {
       "allowSyntheticDefaultImports": true,
       "paths": {
-        "@core-types/*": ["./src/framework/types/*"],
-        "@utils/*": ["./src/framework/fields/utils/*"],
-        "@config/*": ["./src/framework/config/*"],
+        "@core-types/*": ["./src/types/*"],
+        "@utils/*": ["./src/helpers/utils/*"],
+        "@config/*": ["./src/config/*"],
+        "@helpers/*": ["./src/helpers/*"],
+        "@universal-schema/*": ["./src/universal-schema/*"],
+        "@cross-framework-wrapper/*": ["./src/cross-framework-wrapper/*"],
+        "@generated/*": ["./src/framework/generated/*"],
       },
       "forceConsistentCasingInFileNames": true,
       "module": "esnext",

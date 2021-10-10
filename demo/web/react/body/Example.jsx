@@ -15,7 +15,7 @@ import translateRangeDate from '@react-jsonschema-form-interceptors/translate-ra
 import translateRatings from '@react-jsonschema-form-interceptors/translate-ratings/dist';
 
 // Internal
-import Form from '../../../../src/framework/Form';
+import Form from '../../../../src/framework';
 import useStyles from './example-styles';
 import Source from './Source';
 
