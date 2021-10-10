@@ -1,4 +1,4 @@
-import { UIFramework } from './ui-framework.type';
+import { uiFramework } from '../../framework/ui-framework';
 
 interface Library {
     // Frameworks
@@ -28,5 +28,5 @@ export interface UniversalSchemaFramework {
     library: Library;
     parsers: Parsers;
     interceptors: Interceptors;
-    uiFramework: UIFramework;
+    uiFramework: typeof uiFramework;
 }

@@ -25,7 +25,8 @@ const {
 
 const {
   internal: {
-    CrossPlatformWrapper
+    CrossPlatformWrapper,
+    CrossPlatformLoadingWrapper
   }
 } = Framework.uiFramework;
 
@@ -190,49 +191,51 @@ const Form = ({
       actionButtonPos={actionButtonPos}
       hasPageLayoutSteps={hasPageLayoutSteps}
       isFormLoading={isFormLoading}
-      loadingState={loadingState}
-      activeStep={activeStep}
-      buttonDisabled={buttonDisabled}
-      onUpload={onUpload}
-      hasPageLayoutTabs={hasPageLayoutTabs}
-      LoadingContext={LoadingContext}
-      StepperContext={StepperContext}
-      EventContext={EventContext}
     >
-      <FormField
-        path={''}
-        data={formData}
-        uiData={uiData}
-        schemaVersion={schema.version}
-        schema={{
-          ...schema,
-          ...formSchemaXHR,
-        }}
-        uiSchema={uiSchema}
-        xhrSchema={xhrSchema}
-        definitions={schema.definitions}
-        interceptors={interceptors}
-        xhrProgress={xhrProgress}
-        id={id}
-        onChange={onFormValuesChange}
-        onXHRSchemaEvent={onXHRSchemaEvent}
-        onSubmit={onFormSubmit}
-        validation={validation}
-        onKeyDown={handleKeyEnter}
-        onMoveItemUp={onMoveItemUp}
-        onMoveItemDown={onMoveItemDown}
-        onDeleteItem={onDeleteItem}
-        onAddItem={onAddItem}
-        onAddNewProperty={onAddNewProperty}
-        onRemoveProperty={onRemoveProperty}
-        onUpdateKeyProperty={onUpdateKeyProperty}
-        onNext={onStepNext}
-        onBack={onStepBack}
-        onSkip={onStepSkip}
-        onTabChange={onTabChange}
-        isSubmitDisabled={buttonDisabled}
-        {...rest}
-      />
+      <LoadingContext.Provider value={loadingState}>
+        <StepperContext.Provider value={[activeStep, buttonDisabled] as any}>
+          <EventContext.Provider value={onUpload}>
+              {
+                  isFormLoading && !hasPageLayoutTabs ? <CrossPlatformLoadingWrapper /> : (
+                    <FormField
+                      path={''}
+                      data={formData}
+                      uiData={uiData}
+                      schemaVersion={schema.version}
+                      schema={{
+                        ...schema,
+                        ...formSchemaXHR,
+                      }}
+                      uiSchema={uiSchema}
+                      xhrSchema={xhrSchema}
+                      definitions={schema.definitions}
+                      interceptors={interceptors}
+                      xhrProgress={xhrProgress}
+                      id={id}
+                      onChange={onFormValuesChange}
+                      onXHRSchemaEvent={onXHRSchemaEvent}
+                      onSubmit={onFormSubmit}
+                      validation={validation}
+                      onKeyDown={handleKeyEnter}
+                      onMoveItemUp={onMoveItemUp}
+                      onMoveItemDown={onMoveItemDown}
+                      onDeleteItem={onDeleteItem}
+                      onAddItem={onAddItem}
+                      onAddNewProperty={onAddNewProperty}
+                      onRemoveProperty={onRemoveProperty}
+                      onUpdateKeyProperty={onUpdateKeyProperty}
+                      onNext={onStepNext}
+                      onBack={onStepBack}
+                      onSkip={onStepSkip}
+                      onTabChange={onTabChange}
+                      isSubmitDisabled={buttonDisabled}
+                      {...rest}
+                    />
+                  )
+              }
+          </EventContext.Provider>
+          </StepperContext.Provider>
+      </LoadingContext.Provider>
     </CrossPlatformWrapper>
   );
 };

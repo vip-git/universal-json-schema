@@ -2,6 +2,7 @@ import { UIFramework } from './types/mui-framework.type';
 
 // Material UI
 import CrossPlatformWrapper from './mui/platform-wrapper';
+import CrossPlatformLoadingWrapper from './mui/platform-loading-wrapper';
 
 // Form Components
 import Input from '@mui/material/Input';
@@ -14,6 +15,7 @@ export const uiFramework: UIFramework = {
   platform: 'web',
   internal: {
     CrossPlatformWrapper,
+    CrossPlatformLoadingWrapper,
   },
   components: {
     string: {

@@ -11,15 +11,7 @@ const FormContextWrapper = ({
     children, 
     actionButtonPos, 
     hasPageLayoutSteps, 
-    isFormLoading,
-    loadingState,
-    activeStep,
-    buttonDisabled,
-    onUpload,
-    hasPageLayoutTabs,
-    LoadingContext,
-    StepperContext,
-    EventContext,
+    isFormLoading
 }) => (<>
 {
 !isFormLoading && (actionButtonPos === 'top' && !hasPageLayoutSteps) && (
@@ -27,19 +19,7 @@ const FormContextWrapper = ({
 )
 }
 <LocalizationProvider dateAdapter={AdapterMoment}>
-    <LoadingContext.Provider value={loadingState}>
-        <StepperContext.Provider value={[activeStep, buttonDisabled] as any}>
-        <EventContext.Provider value={onUpload}>
-            {
-                 isFormLoading && !hasPageLayoutTabs ? (
-                    <div> 
-                      <CircularProgress disableShrink />
-                    </div>
-                ) : {children}
-            }
-        </EventContext.Provider>
-        </StepperContext.Provider>
-    </LoadingContext.Provider>
+    {children}
 </LocalizationProvider>
 {
 !isFormLoading && (!actionButtonPos && !hasPageLayoutSteps) && (

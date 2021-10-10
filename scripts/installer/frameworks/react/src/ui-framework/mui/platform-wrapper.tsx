@@ -6,10 +6,9 @@ import { StyledEngineProvider, ThemeProvider, createTheme } from '@mui/material/
 import Paper from '@mui/material/Paper';
 
 // Internal
-import FormContextWrapper from './form-wrapper';
+import FormContextWrapper from './form-context-wrapper';
 
 const WebWrapper = ({ 
-    children, 
     classes, 
     uiSchema, 
     defaultTheme, 
@@ -18,14 +17,7 @@ const WebWrapper = ({
     actionButtonPos, 
     hasPageLayoutSteps, 
     isFormLoading,
-    loadingState,
-    activeStep,
-    buttonDisabled,
-    onUpload,
-    hasPageLayoutTabs,
-    LoadingContext,
-    StepperContext,
-    EventContext,
+    children,
 }) => (
     <StyledEngineProvider injectFirst>
         <ThemeProvider theme={createTheme(theme ? { ...defaultTheme, ...theme } : defaultTheme)}>
@@ -35,14 +27,6 @@ const WebWrapper = ({
                     actionButtonPos={actionButtonPos}
                     hasPageLayoutSteps={hasPageLayoutSteps}
                     isFormLoading={isFormLoading}
-                    loadingState={loadingState}
-                    activeStep={activeStep}
-                    buttonDisabled={buttonDisabled}
-                    onUpload={onUpload}
-                    hasPageLayoutTabs={hasPageLayoutTabs}
-                    LoadingContext={LoadingContext}
-                    StepperContext={StepperContext}
-                    EventContext={EventContext}
                 >
                     {children}
                 </FormContextWrapper>

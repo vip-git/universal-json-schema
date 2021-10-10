@@ -1,3 +1,6 @@
+// Types
+import { FunctionComponent } from 'react';
+
 type UIFrameworkNames = 'MaterialUI';
 type UIFrameworkPlatforms = 'web';
 
@@ -40,22 +43,14 @@ export interface UIFramework {
     name: UIFrameworkNames;
     platform: UIFrameworkPlatforms;
     components: Components;
-    internal: Record<string, (
-        classes: any,
-        uiSchema: any,
-        defaultTheme: any, 
-        theme: any,
-        RenderFormButtons: any,
-        actionButtonPos: any,
-        hasPageLayoutSteps: any,
-        isFormLoading: any,
-        loadingState: any,
-        activeStep: any,
-        buttonDisabled: any,
-        onUpload: any,
-        hasPageLayoutTabs: any,
-        LoadingContext: any,
-        StepperContext: any,
-        EventContext: any
-    ) => void>;
+    internal: Record<string, FunctionComponent<{
+        classes?: any,
+        uiSchema?: any,
+        defaultTheme?: any, 
+        theme?: any,
+        RenderFormButtons?: any,
+        actionButtonPos?: any,
+        hasPageLayoutSteps?: any,
+        isFormLoading?: any,
+    }>>;
 }
