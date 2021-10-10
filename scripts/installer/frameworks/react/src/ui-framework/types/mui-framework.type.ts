@@ -43,14 +43,30 @@ export interface UIFramework {
     name: UIFrameworkNames;
     platform: UIFrameworkPlatforms;
     components: Components;
-    internal: Record<string, FunctionComponent<{
-        classes?: any,
-        uiSchema?: any,
-        defaultTheme?: any, 
-        theme?: any,
-        RenderFormButtons?: any,
-        actionButtonPos?: any,
-        hasPageLayoutSteps?: any,
-        isFormLoading?: any,
-    }>>;
+    internal: {
+        CrossPlatformWrapper: FunctionComponent<{
+            classes: any,
+            uiSchema: any,
+            defaultTheme: any, 
+            theme: any,
+            RenderFormButtons: any,
+            actionButtonPos: any,
+            hasPageLayoutSteps: any,
+            isFormLoading: any,
+        }>;
+        CrossPlatformLoadingWrapper: FunctionComponent<{}>;
+        FormButtons: FunctionComponent<{
+            classes: any; 
+            onCancel: any; 
+            onSubmit: any; 
+            submitValue: any; 
+            cancelValue: any; 
+            inProgressValue: any; 
+            disabled: any; 
+            cancelVariant: any; 
+            submitVariant: any; 
+            activityIndicatorEnabled: any; 
+            inProgress: any;
+        }>;
+    };
 }

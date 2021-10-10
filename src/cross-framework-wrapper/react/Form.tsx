@@ -16,7 +16,6 @@ import { LoadingContext, EventContext, StepperContext } from '@helpers/context';
 // Internal
 import formStyles, { defaultTheme } from './form-styles';
 import FormField from './FormField';
-import FormButtons from './FormButtons';
 
 const {
   React,
@@ -26,7 +25,8 @@ const {
 const {
   internal: {
     CrossPlatformWrapper,
-    CrossPlatformLoadingWrapper
+    CrossPlatformLoadingWrapper,
+    FormButtons,
   }
 } = Framework.uiFramework;
 
@@ -194,7 +194,7 @@ const Form = ({
     >
       <LoadingContext.Provider value={loadingState}>
         <StepperContext.Provider value={[activeStep, buttonDisabled] as any}>
-          <EventContext.Provider value={onUpload}>
+            <EventContext.Provider value={onUpload}>
               {
                   isFormLoading && !hasPageLayoutTabs ? <CrossPlatformLoadingWrapper /> : (
                     <FormField
@@ -233,7 +233,7 @@ const Form = ({
                     />
                   )
               }
-          </EventContext.Provider>
+            </EventContext.Provider>
           </StepperContext.Provider>
       </LoadingContext.Provider>
     </CrossPlatformWrapper>
