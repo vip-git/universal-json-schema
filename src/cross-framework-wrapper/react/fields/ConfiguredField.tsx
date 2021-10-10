@@ -11,6 +11,8 @@ const {
     FormGroup,
     FormHelperText,
 	ActiveComp,
+	Div,
+	Para,
   },
   components: {
 	string: {
@@ -71,10 +73,10 @@ export const RawConfiguredField = ({
 			)
 		}
 		{descriptionText && !isCustomComponent && (
-			<p className={classes.description}>{descriptionText}</p>
+			<Para className={classes.description}>{descriptionText}</Para>
 		)}
 		{activeCompColor && !isCustomComponent && (
-			<div
+			<Div
                 style={{
                   flexBasis: '6%',
                   top: 7,
@@ -86,7 +88,7 @@ export const RawConfiguredField = ({
 				<ActiveComp
 					id={`${htmlid}-activeComp`}
 				/>
-			</div>
+			</Div>
 		)}
 		<Component
 			className={className && classes[className]}

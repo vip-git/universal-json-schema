@@ -77,6 +77,7 @@ export const uiFramework: UIFramework = {
     ActiveComp,
     Div: ({ children, className, style }) => <div className={className} style={style}> {children} </div>,
     FieldsetHTML: ({ children, className }) => <fieldset className={className}> {children} </fieldset>,
+    Para: ({ children, className }) => <p className={className}> {children} </p>,
   },
   styles: {
     FieldSetStyles,

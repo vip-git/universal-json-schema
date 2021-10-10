@@ -50,6 +50,12 @@ module.exports = {
       if(realModuleName.includes('@framework')) {
         module = module.replace('@framework', path.resolve(__dirname + '/../../../scripts/installer/frameworks/react-native/src'));
       }
+      if(realModuleName.includes('@config')) {
+        module = module.replace('@config', path.resolve(__dirname + '/../../../src/config'));
+      }
+      if(realModuleName.includes('@generated')) {
+        module = module.replace('@generated', path.resolve(__dirname + '/../../../scripts/installer/frameworks/react-native/src/generated'));
+      }
       const { resolveRequest: removed, ...restContext } = context;
       return require("metro-resolver").resolve(restContext, module, platform);
     }

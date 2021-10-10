@@ -9,6 +9,15 @@ import {
   getHashCodeFromXHRDef,
 } from '@helpers/state-machine/form/hooks';
 
+// UI
+import Framework from '@universal-schema/framework';
+
+const {
+  wrapperComponents: {
+	  Div,
+  }
+} = Framework.uiFramework;
+
 export default (props: FieldProps) => {
   const { path, prefixId, schema, data, uiSchema, validation, xhrProgress } = props;
   const { type } = schema;
@@ -41,7 +50,7 @@ export default (props: FieldProps) => {
 
   if (hashRef && xhrProgress && xhrProgress[hashRef]) {
     /** Todo: should be replaced with xhr loading variant of component */
-    return <div style={{ padding: 15 }}> Loading... </div>;
+    return <Div style={{ padding: 15 }}> Loading... </Div>;
   }
 
   return (
