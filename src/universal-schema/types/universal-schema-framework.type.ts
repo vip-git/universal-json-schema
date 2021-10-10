@@ -1,4 +1,4 @@
-import { uiFramework } from '../../framework/ui-framework';
+import { uiFramework } from '@framework/ui-framework';
 
 interface Library {
     // Frameworks

@@ -4,18 +4,24 @@ import endsWith from 'lodash/endsWith';
 import isEqual from 'lodash/isEqual';
 import has from 'lodash/has';
 
-// Material UI
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
+// UI
+import Framework from '@universal-schema/framework';
+
+const {
+  internal: {
+    ValidationMessages
+  },
+  wrapperComponents: {
+    Typography,
+    Divider,
+  },
+  styles: {
+    FieldSetStyles: fieldSetStyles
+  }
+} = Framework.uiFramework;
 
 // Utils
 import Utils from '@helpers/utils';
-
-// Styles
-import fieldSetStyles from './field-set-styles';
-
-// Validation Messages
-import ValidationMessages from '../ValidationMessages';
 
 // Variants
 import { isPageLayoutSet } from './variants/page-layout.variants';

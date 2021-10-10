@@ -3,19 +3,23 @@ import React from 'react';
 import { get } from 'lodash';
 import keys from 'lodash/keys';
 
-// Icons
-import IconButton from '@mui/material/IconButton';
-import AddCircle from '@mui/icons-material/AddCircle';
-
-// Material UI
-import { Typography } from '@mui/material';
-
 // Internal
 import ReorderableFormField from './ReorderableFormField';
 import FormField from '../FormField';
 
-// Style
-import fieldSetStyles from './field-set-styles';
+// UI
+import Framework from '@universal-schema/framework';
+
+const {
+  wrapperComponents: {
+    Typography,
+    IconButton,
+    AddCircle,
+  },
+  styles: {
+    FieldSetStyles: fieldSetStyles
+  }
+} = Framework.uiFramework;
 
 // Helpers
 import getDefaultValue from '@helpers/get-default-value';

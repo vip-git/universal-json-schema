@@ -14,7 +14,6 @@ import {
 import { LoadingContext, EventContext, StepperContext } from '@helpers/context';
 
 // Internal
-import formStyles, { defaultTheme } from './form-styles';
 import FormField from './FormField';
 
 const {
@@ -27,6 +26,10 @@ const {
     CrossPlatformWrapper,
     CrossPlatformLoadingWrapper,
     FormButtons,
+  },
+  styles: {
+    FormStyles: formStyles,
+    defaultTheme,
   }
 } = Framework.uiFramework;
 

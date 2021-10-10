@@ -2,13 +2,6 @@
 import React from 'react';
 
 // Material UI
-import { Theme } from '@mui/material/styles';
-import { makeStyles } from '@mui/styles';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 
 // Context
 import { StepperContext } from '@helpers/context';
@@ -16,18 +9,21 @@ import { StepperContext } from '@helpers/context';
 // Internal
 import FieldSetObject from './FieldSetObject';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    width: '100%',
+// UI
+import Framework from '@universal-schema/framework';
+
+const {
+  wrapperComponents: {
+    Typography,
+    Stepper,
+    Step,
+    StepLabel,
+    Button,
   },
-  button: {
-    marginRight: theme.spacing(1),
-  },
-  instructions: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-}));
+  styles: {
+    FormStepperStyles: useStyles
+  }
+} = Framework.uiFramework;
 
 export default function HorizontalNonLinearStepperWithError(props) {
   const classes = useStyles();

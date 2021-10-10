@@ -5,12 +5,20 @@ import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
-// Style
-import fieldSetStyles from './field-set-styles';
+// UI
+import Framework from '@universal-schema/framework';
+
+const {
+  wrapperComponents: {
+    Typography,
+  },
+  styles: {
+    FieldSetStyles: fieldSetStyles
+  }
+} = Framework.uiFramework;
 
 // Internal
 import FieldSetObject from './FieldSetObject';

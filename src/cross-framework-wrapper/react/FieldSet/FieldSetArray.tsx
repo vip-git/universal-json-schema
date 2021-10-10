@@ -1,8 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 
-// Style
-import fieldSetStyles from './field-set-styles';
+// UI
+import Framework from '@universal-schema/framework';
+
+const {
+  styles: {
+    FieldSetStyles: fieldSetStyles
+  }
+} = Framework.uiFramework;
 
 // Helpers
 import getDefinitionSchemaFromRef from '@helpers/get-definition-schema';

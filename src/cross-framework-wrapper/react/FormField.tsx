@@ -9,11 +9,19 @@ import get from 'lodash/get';
 // Internal
 import FieldSet, { shouldHideTitle } from './FieldSet';
 import Field from './fields';
-import styles from './form-field-styles';
 import { isEmptyValues } from '@helpers/remove-empty-values';
 
 // Types
 import { FormFieldProps } from '@core-types/FormField.type';
+
+// UI
+import Framework from '@universal-schema/framework';
+
+const {
+  styles: {
+    FormFieldStyles: styles
+  }
+} = Framework.uiFramework;
 
 // exported for unit testing
 export const RawFormField = React.memo(({

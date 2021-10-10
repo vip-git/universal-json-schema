@@ -1,5 +1,5 @@
 // Types
-import { FunctionComponent } from 'react';
+import { FunctionComponent, ReactElement, JSXElementConstructor } from 'react';
 
 type UIFrameworkNames = 'MaterialUI';
 type UIFrameworkPlatforms = 'web';
@@ -7,7 +7,7 @@ type UIFrameworkPlatforms = 'web';
 interface Components {
     // Mandatory components for every UIFramework
     string: {
-        Input: Function;
+        Input: (props: any) => ReactElement<any, string | JSXElementConstructor<any>>;
 
         // Optional Components
         select?: Function;
@@ -68,5 +68,31 @@ export interface UIFramework {
             activityIndicatorEnabled: any; 
             inProgress: any;
         }>;
+        ValidationMessages: any;
+    };
+    wrapperComponents: {
+        Typography: Function;
+        Divider: Function;
+        IconButton: Function;
+        AddCircle: Function;
+        Stepper: Function;
+        Step: Function;
+        StepLabel: Function;
+        Button: Function;
+        ArrowUpward: Function;
+        ArrowDownward: Function;
+        RemoveCircle: Function;
+        FormControl: Function;
+        FormGroup: Function;
+        FormHelperText: Function;
+        ActiveComp: Function;
+    };
+    styles: {
+        FieldSetStyles: any;
+        FormFieldStyles: Function;
+        FormStyles: Function;
+        defaultTheme: any;
+        FieldStyles: Function;
+        FormStepperStyles: Function;
     };
 }

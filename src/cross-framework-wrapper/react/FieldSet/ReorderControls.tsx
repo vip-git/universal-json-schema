@@ -1,17 +1,23 @@
 // Library
 import React from 'react';
 
-// Material UI
-import IconButton from '@mui/material/IconButton';
-import ArrowUpward from '@mui/icons-material/ArrowUpward';
-import ArrowDownward from '@mui/icons-material/ArrowDownward';
-import RemoveCircle from '@mui/icons-material/Close';
-
 // Styles
 import { ReorderControlsProps } from '@core-types/ReorderControls.type';
-import fieldSetStyles from './field-set-styles';
 
-// Types
+// UI
+import Framework from '@universal-schema/framework';
+
+const {
+  wrapperComponents: {
+    ArrowUpward,
+    ArrowDownward,
+    RemoveCircle,
+    IconButton,
+  },
+  styles: {
+    FieldSetStyles: fieldSetStyles
+  }
+} = Framework.uiFramework;
 
 export const RawReorderControls = (
   { 

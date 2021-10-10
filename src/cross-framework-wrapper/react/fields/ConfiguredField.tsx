@@ -2,18 +2,28 @@
 import React from 'react';
 import isEmpty from 'lodash/isEmpty';
 
-// Material UI
-import FormControl from '@mui/material/FormControl';
-import FormGroup from '@mui/material/FormGroup';
-import FormHelperText from '@mui/material/FormHelperText';
-import Input from '@mui/material/Input';
-import ActiveComp from '@mui/icons-material/FiberManualRecord';
+// UI
+import Framework from '@universal-schema/framework';
 
-// Styles
-import fieldStyles from './field-styles';
+const {
+  wrapperComponents: {
+	FormControl,
+    FormGroup,
+    FormHelperText,
+	ActiveComp,
+  },
+  components: {
+	string: {
+	   Input,
+	}
+  },
+  styles: {
+    FieldStyles: fieldStyles
+  }
+} = Framework.uiFramework;
 
 // Types
-import { ConfiguredFieldProps } from '../types/ConfiguredField.type';
+import { ConfiguredFieldProps } from '@core-types/ConfiguredField.type';
 
 const classNames = require('classnames');
 
