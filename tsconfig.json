@@ -9,6 +9,7 @@
         "@universal-schema/*": ["./src/universal-schema/*"],
         "@cross-framework-wrapper/*": ["./src/cross-framework-wrapper/*"],
         "@generated/*": ["./src/framework/generated/*"],
+        "@framework/*": ["./src/framework/*"],
       },
       "forceConsistentCasingInFileNames": true,
       "module": "esnext",

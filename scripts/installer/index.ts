@@ -49,6 +49,8 @@ if (process.argv && process.argv.length === 3) {
                 frameworkName: 'react-native',
                 uiFrameworkTemplate: rnUIFrameworkTemplate
             });
+            //shelljs.rm('-rf', `${shelljs.pwd()}/scripts/installer/frameworks/react-native/cross-framework-wrapper/react/form-styles.ts`);
+            //shelljs.rm('-rf', `${shelljs.pwd()}/scripts/installer/frameworks/react-native/cross-framework-wrapper/react/form-field-styles.ts`);
             break;
         
         case 'angularMUI':

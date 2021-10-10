@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 // Internal
-import ReactNativeForm from '../../../scripts/installer/frameworks/react-native/src/Form';
+import ReactNativeForm from '../../../src/cross-framework-wrapper/react/Form';
 
 // Demo
 import numbers from '../../examples/numbers';

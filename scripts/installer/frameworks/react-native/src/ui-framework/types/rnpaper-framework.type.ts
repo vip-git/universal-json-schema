@@ -4,35 +4,35 @@ type UIFrameworkPlatforms = 'mobile';
 interface Components {
     // Mandatory components for every UIFramework
     string: {
-        input: Promise<any>;
+        input: Function;
 
         // Optional Components
-        select?: Promise<any>;
-        radioGroup?: Promise<any>;
-        autoComplete?: Promise<any>;
-        picker?: Promise<any>;
-        upload?: Promise<any>;
-        richTextEditor?: Promise<any>;
-        ratings?: Promise<any>;
+        select?: Function;
+        radioGroup?: Function;
+        autoComplete?: Function;
+        picker?: Function;
+        upload?: Function;
+        richTextEditor?: Function;
+        ratings?: Function;
     },
     null: {
-        emptyDiv: Promise<any>;
+        emptyDiv: Function;
     },
     array: {
-        select: Promise<any>;
+        select: Function;
 
         // Optional Components
-        autoComplete?: Promise<any>;
+        autoComplete?: Function;
         
         // React Specific Components
-        creatableSelect?: Promise<any>;
-        reactSelect?: Promise<any>;
+        creatableSelect?: Function;
+        reactSelect?: Function;
     },
     boolean: {
-        checkbox: Promise<any>;
+        checkbox: Function;
 
         // Optional Components
-        switch?: Promise<any>;
+        switch?: Function;
     },
 }
 
@@ -40,4 +40,5 @@ export interface UIFramework {
     name: UIFrameworkNames;
     platform: UIFrameworkPlatforms;
     components: Components;
+    internal: any;
 }
