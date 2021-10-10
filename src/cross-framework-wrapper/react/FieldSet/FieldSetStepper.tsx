@@ -19,6 +19,7 @@ const {
     Step,
     StepLabel,
     Button,
+    Div,
   },
   styles: {
     FormStepperStyles: useStyles
@@ -101,7 +102,7 @@ export default function HorizontalNonLinearStepperWithError(props) {
 
   // make it configurable : alternativeLabel, nonLinear, orientation="vertical"
   return (
-    <div className={classes.root}>
+    <Div className={classes.root}>
       <Stepper alternativeLabel nonLinear activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps: any = {};
@@ -126,9 +127,9 @@ export default function HorizontalNonLinearStepperWithError(props) {
           );
         })}
       </Stepper>
-      <div>
+      <Div>
         {activeStep === steps.length ? (
-          <div>
+          <Div>
             <Typography className={classes.instructions}>
               All steps completed - you&apos;re finished
             </Typography>
@@ -138,13 +139,13 @@ export default function HorizontalNonLinearStepperWithError(props) {
                 Reset
               </Button>
             )}
-          </div>
+          </Div>
         ) : (
-          <div>
-            <div className={classes.instructions}>
+          <Div>
+            <Div className={classes.instructions}>
                 {getStep(activeStep).component(props)}
-            </div>
-            <div style={{
+            </Div>
+            <Div style={{
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'flex-end',
@@ -173,10 +174,10 @@ export default function HorizontalNonLinearStepperWithError(props) {
               >
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
-            </div>
-          </div>
+            </Div>
+          </Div>
         )}
-      </div>
-    </div>
+      </Div>
+    </Div>
   );
 }

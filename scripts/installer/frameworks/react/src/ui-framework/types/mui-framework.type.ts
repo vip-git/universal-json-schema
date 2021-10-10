@@ -71,6 +71,11 @@ export interface UIFramework {
         ValidationMessages: any;
     };
     wrapperComponents: {
+        AppBar: Function;
+        Tabs: Function;
+        Tab: Function;
+        Box: Function;
+        CircularProgress: Function;
         Typography: Function;
         Divider: Function;
         IconButton: Function;
@@ -86,6 +91,8 @@ export interface UIFramework {
         FormGroup: Function;
         FormHelperText: Function;
         ActiveComp: Function;
+        Div: FunctionComponent<{ className?: any; style?: React.CSSProperties; }>;
+        FieldsetHTML: FunctionComponent<{ className: any; }>;
     };
     styles: {
         FieldSetStyles: any;

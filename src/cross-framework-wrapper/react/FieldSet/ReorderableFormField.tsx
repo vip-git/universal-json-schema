@@ -10,6 +10,9 @@ import { ReorderableFormFieldProps } from '@core-types/ReoderableFormField.type'
 import Framework from '@universal-schema/framework';
 
 const {
+  wrapperComponents: {
+    Div,
+  },
   styles: {
     FieldSetStyles: fieldSetStyles
   }
@@ -33,7 +36,7 @@ export const RawReorderableFormField = ({
 }: ReorderableFormFieldProps) => { 
   const classes = fieldSetStyles.reorderable();
   return (
-      <div className={classNames(className, classes.root)}>
+      <Div className={classNames(className, classes.root)}>
         {dynamicKeyField && (
           <FormField
             path={path}
@@ -57,7 +60,7 @@ export const RawReorderableFormField = ({
           onDeleteItem={onDeleteItem}
           canReorder={canReorder}
         />
-      </div>
+      </Div>
   );
 };
 

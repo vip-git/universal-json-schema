@@ -14,6 +14,8 @@ const {
   wrapperComponents: {
     Typography,
     Divider,
+    Div,
+    FieldsetHTML,
   },
   styles: {
     FieldSetStyles: fieldSetStyles
@@ -79,21 +81,21 @@ const RawFieldSet = React.memo(
             </Typography>
             <Divider style={{ marginBottom: 6 }} />
           </>
-      ) : <div />);
+      ) : <Div />);
 
     const LegendSubTitle = () => (schema.description ? (
       <Typography color='textSecondary' variant='body2'>
         {schema.description}
       </Typography>
-    ) : <div />);
+    ) : <Div />);
     
     return (
-      <fieldset className={classNames(className, classes.root, { [classes.listItem]: endsWith(path, ']') })}>
+      <FieldsetHTML className={classNames(className, classes.root, { [classes.listItem]: endsWith(path, ']') })}>
         {!noTitle && (<LegendTitle />)}
         {!noTitle && (<LegendSubTitle />)}
         {path === '' && <ValidationMessages validation={validation} />}
         <FieldSetContent path={path} {...props} />
-      </fieldset>
+      </FieldsetHTML>
     );
   }, (prevProps, nextProps) => isEqual(prevProps, nextProps));
 

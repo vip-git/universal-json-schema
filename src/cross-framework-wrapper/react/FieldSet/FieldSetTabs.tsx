@@ -1,19 +1,18 @@
 // Library
 import React from 'react';
 
-// Material UI
-import AppBar from '@mui/material/AppBar';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
-
 // UI
 import Framework from '@universal-schema/framework';
 
 const {
   wrapperComponents: {
     Typography,
+    AppBar,
+    Tabs,
+    Tab,
+    Box,
+    CircularProgress,
+    Div,
   },
   styles: {
     FieldSetStyles: fieldSetStyles
@@ -32,7 +31,7 @@ function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
+    <Div
       role='tabpanel'
       hidden={value !== index}
       id={`scrollable-auto-tabpanel-${index}`}
@@ -44,7 +43,7 @@ function TabPanel(props) {
           <Typography component={'div'}>{children}</Typography>
         </Box>
       )}
-    </div>
+    </Div>
   );
 }
 
@@ -91,7 +90,7 @@ const FieldSetTabs = (props) => {
   const value = tabsProps?.tabIndex || 0;
 
   return (
-    <div 
+    <Div 
       style={{
         width: '100%',
         ...tabsStyle,
@@ -138,7 +137,7 @@ const FieldSetTabs = (props) => {
               >
                 {
                   isFormLoading ? (
-                    <div 
+                    <Div 
                       style={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -147,7 +146,7 @@ const FieldSetTabs = (props) => {
                       }}
                     > 
                       <CircularProgress disableShrink />
-                    </div>
+                    </Div>
                   ) : (
                     <FieldSetObject 
                         {...props} 
@@ -160,7 +159,7 @@ const FieldSetTabs = (props) => {
           );
         })
       }
-    </div>
+    </Div>
   );
 };
 

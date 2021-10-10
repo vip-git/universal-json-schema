@@ -13,6 +13,7 @@ const {
     ArrowDownward,
     RemoveCircle,
     IconButton,
+    Div,
   },
   styles: {
     FieldSetStyles: fieldSetStyles
@@ -31,16 +32,16 @@ export const RawReorderControls = (
 ) => {
   const classes = fieldSetStyles.reorderControls();
   return (
-    <div className={classes.root}>
+    <Div className={classes.root}>
       {canReorder && (
-        <div>
+        <Div>
           <IconButton data-testid='upButton' onClick={onMoveItemUp} disabled={first}>
             <ArrowUpward />
           </IconButton>
           <IconButton data-testid='downButton' onClick={onMoveItemDown} disabled={last}>
             <ArrowDownward />
           </IconButton>
-        </div>
+        </Div>
       )}
       <IconButton
         data-testid='closeButton'
@@ -51,7 +52,7 @@ export const RawReorderControls = (
       >
         <RemoveCircle />
       </IconButton>
-    </div>
+    </Div>
   );
 };
 export default RawReorderControls;

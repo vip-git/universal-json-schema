@@ -15,6 +15,7 @@ const {
     Typography,
     IconButton,
     AddCircle,
+    Div,
   },
   styles: {
     FieldSetStyles: fieldSetStyles
@@ -56,7 +57,7 @@ export const RawFieldSetObject = ({
       : schema.properties[tabKey];
     const finalData = { ...data[tabKey] };  
     return (
-      <div className={classNames(classes.root, orientation)}>
+      <Div className={classNames(classes.root, orientation)}>
         <FormField
             key={tabKey}
             objectData={data}
@@ -70,12 +71,12 @@ export const RawFieldSetObject = ({
             definitions={definitions}
             {...rest}
         />
-      </div>
+      </Div>
     );
   }
   
   return (
-    <div className={classNames(classes.root, orientation)}>
+    <Div className={classNames(classes.root, orientation)}>
       {
         Object.keys(schema).indexOf('additionalProperties') > Object.keys(schema).indexOf('properties') 
         && keys(schema.properties).map((propId) => {
@@ -144,7 +145,7 @@ export const RawFieldSetObject = ({
         }
         {
           schema.additionalProperties && (
-            <div className={classes.addItemBtn}>
+            <Div className={classes.addItemBtn}>
               <IconButton 
                 data-testid='addButton'
                 onClick={
@@ -165,7 +166,7 @@ export const RawFieldSetObject = ({
                   { uiSchema?.additionalProperties && uiSchema?.additionalProperties['ui:options']?.buttonTitle }
                   </span>
               </IconButton>
-            </div>
+            </Div>
           )
         }
         {
@@ -192,7 +193,7 @@ export const RawFieldSetObject = ({
             );
           })
         }
-    </div>
+    </Div>
   );
 };
 export default RawFieldSetObject;

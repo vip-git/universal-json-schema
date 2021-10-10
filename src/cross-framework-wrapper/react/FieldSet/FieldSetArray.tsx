@@ -5,6 +5,9 @@ import React from 'react';
 import Framework from '@universal-schema/framework';
 
 const {
+  wrapperComponents: {
+    Div,
+  },
   styles: {
     FieldSetStyles: fieldSetStyles
   }
@@ -72,7 +75,7 @@ export const RawFieldSetArray = (props: FieldSetArrayProps) => {
   }
 
   return (
-    <div className={classes.root}>
+    <Div className={classes.root}>
       {
         Utils.callFunctionIfExists(RENDER_ARRAY_WRAPPERS({
           schema,
@@ -117,7 +120,7 @@ export const RawFieldSetArray = (props: FieldSetArrayProps) => {
           Utils.doesSchemaHaveAdditionalItems(schema),
         )
       }
-    </div>
+    </Div>
   );
 };
 export default RawFieldSetArray;

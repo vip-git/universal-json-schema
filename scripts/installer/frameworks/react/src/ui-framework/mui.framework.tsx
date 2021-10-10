@@ -1,3 +1,5 @@
+// Library
+import React from 'react';
 import { UIFramework } from './types/mui-framework.type';
 
 // Material UI
@@ -22,6 +24,11 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
+import AppBar from '@mui/material/AppBar';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // Icons
 import IconButton from '@mui/material/IconButton';
@@ -48,6 +55,11 @@ export const uiFramework: UIFramework = {
     ValidationMessages,
   },
   wrapperComponents: {
+    AppBar,
+    Tabs,
+    Tab,
+    Box,
+    CircularProgress,
     Typography,
     Divider,
     IconButton,
@@ -63,6 +75,8 @@ export const uiFramework: UIFramework = {
     FormGroup,
     FormHelperText,
     ActiveComp,
+    Div: ({ children, className, style }) => <div className={className} style={style}> {children} </div>,
+    FieldsetHTML: ({ children, className }) => <fieldset className={className}> {children} </fieldset>,
   },
   styles: {
     FieldSetStyles,
