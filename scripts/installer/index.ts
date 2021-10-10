@@ -24,6 +24,7 @@ if (process.argv && process.argv.length === 3) {
             `;
             generateFramework({ 
                 shelljs, 
+                framework,
                 frameworkName: 'react',
                 uiFrameworkTemplate: reactUIFrameworkTemplate
             });
@@ -35,6 +36,7 @@ if (process.argv && process.argv.length === 3) {
             `;
             generateFramework({ 
                 shelljs, 
+                framework,
                 frameworkName: 'vue', 
                 uiFrameworkTemplate: vueUIFrameworkTemplate
             });
@@ -46,6 +48,7 @@ if (process.argv && process.argv.length === 3) {
             `;
             generateFramework({ 
                 shelljs, 
+                framework,
                 frameworkName: 'react-native',
                 uiFrameworkTemplate: rnUIFrameworkTemplate
             });
@@ -59,6 +62,7 @@ if (process.argv && process.argv.length === 3) {
             `;
             generateFramework({ 
                 shelljs, 
+                framework,
                 frameworkName: 'angular',
                 uiFrameworkTemplate: angularUIFrameworkTemplate
             });
@@ -70,6 +74,7 @@ if (process.argv && process.argv.length === 3) {
             `;
             generateFramework({ 
                 shelljs, 
+                framework,
                 frameworkName: 'stencil',
                 uiFrameworkTemplate: stencilUIFrameworkTemplate
             });
@@ -81,6 +86,7 @@ if (process.argv && process.argv.length === 3) {
             `;
             generateFramework({ 
                 shelljs, 
+                framework,
                 frameworkName: 'svelte',
                 uiFrameworkTemplate: svelteUIFrameworkTemplate
             });

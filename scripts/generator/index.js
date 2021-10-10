@@ -23,7 +23,7 @@
 const ejs = require('ejs');
 const shelljs = require('shelljs');
 
-const componentSettings = require('./components.json');
+const componentSettings = require('./frameworks/react/mui/components.json');
 
 // Config
 const { CONFIG, folderHashMapping } = require('./config');
