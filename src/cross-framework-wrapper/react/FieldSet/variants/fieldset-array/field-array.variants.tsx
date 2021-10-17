@@ -2,9 +2,8 @@
 import React from 'react';
 import slice from 'lodash/slice';
 
-// Material UI
-import IconButton from '@mui/material/IconButton';
-import AddCircle from '@mui/icons-material/AddCircle';
+// UI
+import Framework from '@universal-schema/framework';
 
 // Helpers
 import getDefaultValue from '@helpers/get-default-value';
@@ -15,6 +14,13 @@ import FIELDSET_CONFIG, { ArrayVariants, ArrayWrapperVariants } from '@config/fi
 // Component
 import FormField from '../../../FormField';
 import ReorderableFormField from '../../ReorderableFormField';
+
+const {
+  wrapperComponents: {
+    IconButton,
+    AddCircle
+  }
+} = Framework.uiFramework;
 
 const { ARRAY_VARIANTS } = FIELDSET_CONFIG;
 

@@ -16,6 +16,8 @@ import EmptyDiv from '@mui/material/Divider';
 import FormControl from '@mui/material/FormControl';
 import FormGroup from '@mui/material/FormGroup';
 import FormHelperText from '@mui/material/FormHelperText';
+import FormLabel from '@mui/material/FormLabel';
+import InputLabel from '@mui/material/InputLabel';
 
 // MUI
 import Typography from '@mui/material/Typography';
@@ -55,6 +57,8 @@ export const uiFramework: UIFramework = {
     ValidationMessages,
   },
   wrapperComponents: {
+    FormLabel,
+    InputLabel,
     AppBar,
     Tabs,
     Tab,

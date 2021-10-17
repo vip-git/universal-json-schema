@@ -71,6 +71,8 @@ export interface UIFramework {
         ValidationMessages: any;
     };
     wrapperComponents: {
+        InputLabel: Function;
+        FormLabel: Function;
         AppBar: Function;
         Tabs: Function;
         Tab: Function;
