@@ -23,9 +23,9 @@ if (process.argv && process.argv.length === 3) {
             export { uiFramework };
             `;
             generateFramework({ 
-                shelljs, 
-                framework,
+                shelljs,
                 frameworkName: 'react',
+                uiFrameworkName: 'mui',
                 uiFrameworkTemplate: reactUIFrameworkTemplate
             });
             break;
@@ -35,9 +35,9 @@ if (process.argv && process.argv.length === 3) {
             export { uiFramework };
             `;
             generateFramework({ 
-                shelljs, 
-                framework,
-                frameworkName: 'vue', 
+                shelljs,
+                frameworkName: 'vue',
+                uiFrameworkName: 'mui',
                 uiFrameworkTemplate: vueUIFrameworkTemplate
             });
             break;
@@ -47,9 +47,9 @@ if (process.argv && process.argv.length === 3) {
             export { uiFramework };
             `;
             generateFramework({ 
-                shelljs, 
-                framework,
+                shelljs,
                 frameworkName: 'react-native',
+                uiFrameworkName: 'rnpaper',
                 uiFrameworkTemplate: rnUIFrameworkTemplate
             });
             //shelljs.rm('-rf', `${shelljs.pwd()}/scripts/installer/frameworks/react-native/cross-framework-wrapper/react/form-styles.ts`);
@@ -61,9 +61,9 @@ if (process.argv && process.argv.length === 3) {
             export { uiFramework };
             `;
             generateFramework({ 
-                shelljs, 
-                framework,
+                shelljs,
                 frameworkName: 'angular',
+                uiFrameworkName: 'mui',
                 uiFrameworkTemplate: angularUIFrameworkTemplate
             });
             break;
@@ -73,9 +73,9 @@ if (process.argv && process.argv.length === 3) {
             export { uiFramework };
             `;
             generateFramework({ 
-                shelljs, 
-                framework,
+                shelljs,
                 frameworkName: 'stencil',
+                uiFrameworkName: 'mui',
                 uiFrameworkTemplate: stencilUIFrameworkTemplate
             });
             break;
@@ -85,9 +85,9 @@ if (process.argv && process.argv.length === 3) {
             export { uiFramework };
             `;
             generateFramework({ 
-                shelljs, 
-                framework,
+                shelljs,
                 frameworkName: 'svelte',
+                uiFrameworkName: 'mui',
                 uiFrameworkTemplate: svelteUIFrameworkTemplate
             });
             break;

@@ -1,7 +1,7 @@
 const frameworkGenerator = ({ 
     shelljs, 
-    framework,
     frameworkName, 
+    uiFrameworkName,
     uiFrameworkTemplate,
 }) => {
     const frameworkDir = `${shelljs.pwd()}/src/framework`;
@@ -50,7 +50,7 @@ const frameworkGenerator = ({
     shellFileString.to(`${shelljs.pwd()}/src/framework/ui-framework/index.ts`);
     shelljs.mv(`${shelljs.pwd()}/package.json`, `${shelljs.pwd()}/package-original.json`);
     shelljs.cp(reactMUIPackageJson, `${shelljs.pwd()}/package.json`);
-    shelljs.exec(`npm install -- --${framework}`);
+    shelljs.exec(`cross-env FRAMEWORK_NAME=${frameworkName} UI_FRAMEWORK_NAME=${uiFrameworkName} npm install`);
     shelljs.rm('-rf', `${shelljs.pwd()}/package.json`);
     shelljs.mv(`${shelljs.pwd()}/package-original.json`, `${shelljs.pwd()}/package.json`);
 }

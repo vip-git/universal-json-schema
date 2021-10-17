@@ -9,7 +9,7 @@
     "url": "https://github.com/vip-git/react-jsonschema-form-material-ui/issues"
   },
   "scripts": {
-    "postinstall": "node scripts/generator/index.js",
+    "postinstall": "cross-env FRAMEWORK_NAME=$FRAMEWORK_NAME UI_FRAMEWORK_NAME=$UI_FRAMEWORK_NAME node scripts/generator/index.js",
     "build": "rollup -c",
     "build:demo": "cross-env NODE_ENV=production webpack --config webpack.config.demo.js",
     "generate:tests": "node scripts/generator/index.js --testsOnly",

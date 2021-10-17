@@ -1,0 +1,84 @@
+{
+    "name": "JSON Schema Components",
+    "utils": {
+        "@react-jsonschema-form-utils/enum-utils": {
+            "version": "2.0.1",
+            "name": "enum-utils",
+            "isRequired": true
+        },
+        "@react-jsonschema-form-utils/parse-values": {
+            "version": "2.0.1",
+            "name": "parse-values",
+            "isRequired": true
+        }
+    },
+    "interceptors": {
+        "@react-jsonschema-form-interceptors/translate-ratings": {
+            "version": "2.0.0",
+            "name": "translate-ratings"
+        },
+        "@react-jsonschema-form-interceptors/translate-currency": {
+            "version": "2.0.0",
+            "name": "translate-currency",
+            "isRequired": true
+        },
+        "@react-jsonschema-form-interceptors/translate-range-date": {
+            "version": "2.0.0",
+            "name": "translate-range-date"
+        }
+    },
+	"components": {
+        "@react-native-jsonschema-form-components/material-radio-group": {
+            "version": "0.0.1",
+            "type": "string",
+            "isEnum": true,
+            "name": "material-radio-group",
+            "utils": ["@react-jsonschema-form-utils/enum-utils"]
+        },
+        "@react-native-jsonschema-form-components/material-select": {
+            "version": "0.0.1",
+            "type": "string",
+            "isEnum": true,
+            "isRequired": true,
+            "name": "material-select",
+            "utils": [
+              "@react-jsonschema-form-utils/enum-utils",
+              "@react-jsonschema-form-utils/parse-values"
+            ]
+        },
+        "@react-native-jsonschema-form-components/material-checkbox": {
+            "version": "0.0.1",
+            "type": "string",
+            "isEnum": true,
+            "isRequired": true,
+            "name": "material-checkbox",
+            "utils": ["@react-jsonschema-form-utils/enum-utils"]
+        },
+        "@react-native-jsonschema-form-components/material-slider": {
+            "version": "0.0.1",
+            "type": "string",
+            "hasDist": true,
+            "isEnum": false,
+            "name": "material-slider"
+        },
+        "@react-native-jsonschema-form-components/material-input": {
+            "version": "0.0.1",
+            "type": "string",
+            "isEnum": false,
+            "isDefault": true,
+            "name": "material-input",
+            "utils": [
+              "@react-jsonschema-form-utils/enum-utils",
+              "@react-jsonschema-form-utils/parse-values"
+            ]
+        },
+        "@react-native-jsonschema-form-components/empty-div": {
+            "version": "0.0.1",
+            "type": "null",
+            "isEnum": false,
+            "hasDist": true,
+            "isDefault": true,
+            "name": "empty-div"
+        }
+    }
+}
