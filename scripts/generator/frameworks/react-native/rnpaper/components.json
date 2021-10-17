@@ -54,7 +54,7 @@
             "name": "material-checkbox",
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
-        "@react-native-jsonschema-form-components/material-slider": {
+        "@react-native-jsonschema-form-components/material-switch": {
             "version": "0.0.1",
             "type": "string",
             "hasDist": true,
