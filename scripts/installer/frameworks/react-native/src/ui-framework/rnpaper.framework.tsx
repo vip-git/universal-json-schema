@@ -13,10 +13,38 @@ export const uiFramework: UIFramework = {
     CrossPlatformWrapper: () => (<View />),
     CrossPlatformLoadingWrapper: () => (<View />),
     FormButtons: () => (<View />),
+    ValidationMessages: () => (<View />),
+  },
+  wrapperComponents: {
+    InputLabel: () => (<View />),
+    FormLabel: () => (<View />),
+    AppBar: () => (<View />),
+    Tabs: () => (<View />),
+    Tab: () => (<View />),
+    Box: () => (<View />),
+    CircularProgress: () => (<View />),
+    Typography: () => (<View />),
+    Divider: () => (<View />),
+    IconButton: () => (<View />),
+    AddCircle: () => (<View />),
+    Stepper: () => (<View />),
+    Step: () => (<View />),
+    StepLabel: () => (<View />),
+    Button: () => (<View />),
+    ArrowUpward: () => (<View />),
+    ArrowDownward: () => (<View />),
+    RemoveCircle: () => (<View />),
+    FormControl: () => (<View />),
+    FormGroup: () => (<View />),
+    FormHelperText: () => (<View />),
+    ActiveComp: () => (<View />),
+    Div: () => (<View />),
+    FieldsetHTML: () => (<View />),
+    Para: () => (<View />)
   },
   components: {
     string: {
-      input: TextInput,
+      Input: TextInput,
     },
     array: {
       select: TextInput,
@@ -28,4 +56,12 @@ export const uiFramework: UIFramework = {
       emptyDiv: View,
     },
   },
-};
+  styles: {
+    FieldSetStyles: () => {},
+    FormFieldStyles: () => {},
+    FormStyles: () => {},
+    defaultTheme: () => {},
+    FieldStyles: () => {},
+    FormStepperStyles: () => {}
+  }
+}

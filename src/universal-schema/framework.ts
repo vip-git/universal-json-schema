@@ -5,7 +5,7 @@ import { uiFramework } from '@framework/ui-framework';
 const Framework: UniversalSchemaFramework = {
   library: {
     React: require('react'),
-    nanoId: require('nanoid').nanoid,
+    // nanoId: require('nanoid').nanoid,
   },
   uiFramework,
   interceptors: {

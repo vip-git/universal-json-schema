@@ -7,7 +7,7 @@ type UIFrameworkPlatforms = 'mobile';
 interface Components {
     // Mandatory components for every UIFramework
     string: {
-        Input: (props: any) => ReactElement<any, string | JSXElementConstructor<any>>;
+        Input: Function;
 
         // Optional Components
         select?: Function;

@@ -18,7 +18,7 @@ import FormField from './FormField';
 
 const {
   React,
-  nanoId: generate,
+  // nanoId: generate,
 } = Framework.library;
 
 const {
@@ -142,7 +142,7 @@ const Form = ({
   });
 
   const classes = formStyles();
-  const id = prefixId || generate();
+  const id = prefixId; // || generate();
 
   const hashRef = getHashCodeFromXHRDef({
     eventName: 'onload',
