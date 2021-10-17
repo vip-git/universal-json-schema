@@ -26,7 +26,9 @@ if (process.argv && process.argv.length === 3) {
                 shelljs,
                 frameworkName: 'react',
                 uiFrameworkName: 'mui',
-                uiFrameworkTemplate: reactUIFrameworkTemplate
+                uiFrameworkTemplate: reactUIFrameworkTemplate,
+                interceptorFrameworkName: 'react',
+                utilsFrameworkName: 'react'
             });
             break;
         
@@ -38,7 +40,9 @@ if (process.argv && process.argv.length === 3) {
                 shelljs,
                 frameworkName: 'vue',
                 uiFrameworkName: 'mui',
-                uiFrameworkTemplate: vueUIFrameworkTemplate
+                uiFrameworkTemplate: vueUIFrameworkTemplate,
+                interceptorFrameworkName: 'vue',
+                utilsFrameworkName: 'vue'
             });
             break;
 
@@ -50,7 +54,9 @@ if (process.argv && process.argv.length === 3) {
                 shelljs,
                 frameworkName: 'react-native',
                 uiFrameworkName: 'rnpaper',
-                uiFrameworkTemplate: rnUIFrameworkTemplate
+                uiFrameworkTemplate: rnUIFrameworkTemplate,
+                interceptorFrameworkName: 'react',
+                utilsFrameworkName: 'react'
             });
             //shelljs.rm('-rf', `${shelljs.pwd()}/scripts/installer/frameworks/react-native/cross-framework-wrapper/react/form-styles.ts`);
             //shelljs.rm('-rf', `${shelljs.pwd()}/scripts/installer/frameworks/react-native/cross-framework-wrapper/react/form-field-styles.ts`);
@@ -64,7 +70,9 @@ if (process.argv && process.argv.length === 3) {
                 shelljs,
                 frameworkName: 'angular',
                 uiFrameworkName: 'mui',
-                uiFrameworkTemplate: angularUIFrameworkTemplate
+                uiFrameworkTemplate: angularUIFrameworkTemplate,
+                interceptorFrameworkName: 'angular',
+                utilsFrameworkName: 'angular'
             });
             break;
         
@@ -76,7 +84,9 @@ if (process.argv && process.argv.length === 3) {
                 shelljs,
                 frameworkName: 'stencil',
                 uiFrameworkName: 'mui',
-                uiFrameworkTemplate: stencilUIFrameworkTemplate
+                uiFrameworkTemplate: stencilUIFrameworkTemplate,
+                interceptorFrameworkName: 'stencil',
+                utilsFrameworkName: 'stencil'
             });
             break;
         
@@ -88,7 +98,9 @@ if (process.argv && process.argv.length === 3) {
                 shelljs,
                 frameworkName: 'svelte',
                 uiFrameworkName: 'mui',
-                uiFrameworkTemplate: svelteUIFrameworkTemplate
+                uiFrameworkTemplate: svelteUIFrameworkTemplate,
+                interceptorFrameworkName: 'svelte',
+                utilsFrameworkName: 'svelte'
             });
             break;
         

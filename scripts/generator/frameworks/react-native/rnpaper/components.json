@@ -59,7 +59,7 @@
             "type": "string",
             "hasDist": true,
             "isEnum": false,
-            "name": "material-slider"
+            "name": "material-switch"
         },
         "@react-native-jsonschema-form-components/material-input": {
             "version": "0.0.1",

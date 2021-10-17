@@ -21,11 +21,25 @@ const moduleGenerator = (
         `npm install ${modName}@${componentSettings[moduleName][modName].version} --save-exact`,
       );
     });
-  shelljs.cp(
-    '-R',
-    `node_modules/@react-jsonschema-form-${moduleName}/`,
-    `${generatedLocation}/${moduleName}`,
-  );
+  if (moduleName === 'interceptors') {
+    shelljs.cp(
+      '-R',
+      `node_modules/@${process.env.INTERCEPTORS_FRAMEWORK_NAME}-jsonschema-form-${moduleName}/`,
+      `${generatedLocation}/${moduleName}`,
+    );
+  } else if(moduleName === 'utils') {
+    shelljs.cp(
+      '-R',
+      `node_modules/@${process.env.UTILS_FRAMEWORK_NAME}-jsonschema-form-${moduleName}/`,
+      `${generatedLocation}/${moduleName}`,
+    );
+  } else {
+    shelljs.cp(
+      '-R',
+      `node_modules/@${process.env.COMPONENTS_FRAMEWORK_NAME}-jsonschema-form-${moduleName}/`,
+      `${generatedLocation}/${moduleName}`,
+    );
+  }
 
   Object.keys(componentSettings[moduleName])
     .filter((c) => !componentSettings[moduleName][c].notAvailable)

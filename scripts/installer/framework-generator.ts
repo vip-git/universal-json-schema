@@ -3,6 +3,8 @@ const frameworkGenerator = ({
     frameworkName, 
     uiFrameworkName,
     uiFrameworkTemplate,
+    interceptorFrameworkName,
+    utilsFrameworkName
 }) => {
     const frameworkDir = `${shelljs.pwd()}/src/framework`;
     const helpersDir = `${shelljs.pwd()}/scripts/installer/frameworks/${frameworkName}/helpers`;
@@ -50,7 +52,7 @@ const frameworkGenerator = ({
     shellFileString.to(`${shelljs.pwd()}/src/framework/ui-framework/index.ts`);
     shelljs.mv(`${shelljs.pwd()}/package.json`, `${shelljs.pwd()}/package-original.json`);
     shelljs.cp(reactMUIPackageJson, `${shelljs.pwd()}/package.json`);
-    shelljs.exec(`cross-env FRAMEWORK_NAME=${frameworkName} UI_FRAMEWORK_NAME=${uiFrameworkName} npm install`);
+    shelljs.exec(`cross-env INTERCEPTORS_FRAMEWORK_NAME=${interceptorFrameworkName} UTILS_FRAMEWORK_NAME=${utilsFrameworkName} COMPONENTS_FRAMEWORK_NAME=${frameworkName} UI_FRAMEWORK_NAME=${uiFrameworkName} npm install`);
     shelljs.rm('-rf', `${shelljs.pwd()}/package.json`);
     shelljs.mv(`${shelljs.pwd()}/package-original.json`, `${shelljs.pwd()}/package.json`);
 }
