@@ -1,7 +1,6 @@
 // Library
 import React from 'react';
-import { View } from 'react-native';
-import { TextInput, Checkbox } from 'react-native-paper';
+import { TextInput, Checkbox, Paragraph } from 'react-native-paper';
 
 // Types
 import { UIFramework } from './types/rnpaper-framework.type';
@@ -10,58 +9,82 @@ export const uiFramework: UIFramework = {
   name: 'ReactNativePaper',
   platform: 'mobile',
   internal: {
-    CrossPlatformWrapper: () => (<View />),
-    CrossPlatformLoadingWrapper: () => (<View />),
-    FormButtons: () => (<View />),
-    ValidationMessages: () => (<View />),
+    CrossPlatformWrapper: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    CrossPlatformLoadingWrapper: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    FormButtons: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    ValidationMessages: ({ children }) => (<Paragraph> {children} </Paragraph>),
   },
   wrapperComponents: {
-    InputLabel: () => (<View />),
-    FormLabel: () => (<View />),
-    AppBar: () => (<View />),
-    Tabs: () => (<View />),
-    Tab: () => (<View />),
-    Box: () => (<View />),
-    CircularProgress: () => (<View />),
-    Typography: () => (<View />),
-    Divider: () => (<View />),
-    IconButton: () => (<View />),
-    AddCircle: () => (<View />),
-    Stepper: () => (<View />),
-    Step: () => (<View />),
-    StepLabel: () => (<View />),
-    Button: () => (<View />),
-    ArrowUpward: () => (<View />),
-    ArrowDownward: () => (<View />),
-    RemoveCircle: () => (<View />),
-    FormControl: () => (<View />),
-    FormGroup: () => (<View />),
-    FormHelperText: () => (<View />),
-    ActiveComp: () => (<View />),
-    Div: () => (<View />),
-    FieldsetHTML: () => (<View />),
-    Para: () => (<View />)
+    InputLabel: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    FormLabel: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    AppBar: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    Tabs: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    Tab: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    Box: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    CircularProgress: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    Typography: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    Divider: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    IconButton: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    AddCircle: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    Stepper: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    Step: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    StepLabel: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    Button: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    ArrowUpward: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    ArrowDownward: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    RemoveCircle: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    FormControl: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    FormGroup: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    FormHelperText: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    ActiveComp: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    Div: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    FieldsetHTML: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    Para: ({ children }) => (<Paragraph> {children} </Paragraph>)
   },
   components: {
     string: {
-      Input: TextInput,
+      Input: (props) => <TextInput {...props} />,
     },
     array: {
-      select: TextInput,
+      select: (props) => <TextInput {...props} />,
     },
     boolean: {
-      checkbox: Checkbox,
+      checkbox: (props) => <Checkbox {...props} />,
     },
     null: {
-      emptyDiv: View,
+      emptyDiv: Paragraph,
     },
   },
   styles: {
-    FieldSetStyles: () => {},
-    FormFieldStyles: () => {},
-    FormStyles: () => {},
+    FieldSetStyles: {
+      fieldSetContent: () => ({
+        root: ''
+      }),
+      fieldSet: () => ({
+        root: ''
+      }),
+      reorderControls: () => ({
+        root: ''
+      }),
+      fieldSetObject: () => ({
+        root: ''
+      })
+    },
+    FormFieldStyles: () => ({
+      root: '',
+    }),
+    FormStyles: () => ({
+      root: '',
+    }),
     defaultTheme: () => {},
-    FieldStyles: () => {},
+    FieldStyles: () => ({
+      root: '',
+      radioLabel: '',
+      normalLabel: '',
+      withLabel: '',
+      customLabel: '',
+      description: '',
+    }),
     FormStepperStyles: () => {}
   }
 }

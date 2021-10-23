@@ -2,6 +2,7 @@
 import React from 'react';
 import {
   DefaultTheme,
+  Card,
   Provider as PaperProvider,
 } from 'react-native-paper';
 import {
@@ -45,23 +46,28 @@ const App = () => {
     <PaperProvider theme={theme}>
       <SafeAreaView style={backgroundStyle}>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <ReactNativeForm 
-          schema={schema}
-          xhrSchema={{}}
-          uiSchema={uiSchema}
-          formData={formData}
-          onCancel={onCancel}
-          onSubmit={onSubmit}
-          onStepNext={onSubmit}
-          onUpload={onUpload}
-          onChange={onFormChanged}
-          onError={onError}
-          interceptors={{}}
-          components={{}}
-          validations={{}}
-          submitOnEnter
-          activityIndicatorEnabled
-        />
+        <Card>
+          <Card.Title title="Card Title" subtitle="Card Subtitle" />
+          <Card.Content>
+            <ReactNativeForm 
+              schema={schema}
+              xhrSchema={{}}
+              uiSchema={uiSchema}
+              formData={formData}
+              onCancel={onCancel}
+              onSubmit={onSubmit}
+              onStepNext={onSubmit}
+              onUpload={onUpload}
+              onChange={onFormChanged}
+              onError={onError}
+              interceptors={{}}
+              components={{}}
+              validations={{}}
+              submitOnEnter
+              activityIndicatorEnabled
+            />
+          </Card.Content>
+        </Card>
       </SafeAreaView>
     </PaperProvider>
   );

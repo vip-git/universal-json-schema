@@ -7,7 +7,7 @@ type UIFrameworkPlatforms = 'mobile';
 interface Components {
     // Mandatory components for every UIFramework
     string: {
-        Input: Function;
+        Input: (props: any) => ReactElement<any, string | JSXElementConstructor<any>>;
 
         // Optional Components
         select?: Function;
@@ -71,38 +71,62 @@ export interface UIFramework {
         ValidationMessages: any;
     };
     wrapperComponents: {
-        InputLabel: Function;
-        FormLabel: Function;
-        AppBar: Function;
-        Tabs: Function;
-        Tab: Function;
-        Box: Function;
-        CircularProgress: Function;
-        Typography: Function;
-        Divider: Function;
-        IconButton: Function;
-        AddCircle: Function;
-        Stepper: Function;
-        Step: Function;
-        StepLabel: Function;
-        Button: Function;
-        ArrowUpward: Function;
-        ArrowDownward: Function;
-        RemoveCircle: Function;
-        FormControl: Function;
-        FormGroup: Function;
-        FormHelperText: Function;
-        ActiveComp: Function;
+        InputLabel: (props: any) => ReactElement;
+        FormLabel: (props: any) => ReactElement;
+        AppBar: (props: any) => ReactElement;
+        Tabs: (props: any) => ReactElement;
+        Tab: (props: any) => ReactElement;
+        Box: (props: any) => ReactElement;
+        CircularProgress: (props: any) => ReactElement;
+        Typography: (props: any) => ReactElement;
+        Divider: (props: any) => ReactElement;
+        IconButton: (props: any) => ReactElement;
+        AddCircle: (props: any) => ReactElement;
+        Stepper: (props: any) => ReactElement;
+        Step: (props: any) => ReactElement;
+        StepLabel: (props: any) => ReactElement;
+        Button: (props: any) => ReactElement;
+        ArrowUpward: (props: any) => ReactElement;
+        ArrowDownward: (props: any) => ReactElement;
+        RemoveCircle: (props: any) => ReactElement;
+        FormControl: (props: any) => ReactElement;
+        FormGroup: (props: any) => ReactElement;
+        FormHelperText: (props: any) => ReactElement;
+        ActiveComp: (props: any) => ReactElement;
         Div: FunctionComponent<{ className?: any; style?: React.CSSProperties; }>;
         FieldsetHTML: FunctionComponent<{ className: any; }>;
         Para: FunctionComponent<{ className: any; }>;
     };
     styles: {
-        FieldSetStyles: any;
-        FormFieldStyles: Function;
-        FormStyles: Function;
+        FieldSetStyles: {
+            fieldSetContent: () => ({
+                root: string;
+            });
+            fieldSet: () => ({
+                root: string;
+            });
+            reorderControls: () => ({
+                root: string;
+            }),
+            fieldSetObject: () => ({
+                root: string;
+            }),
+        };
+        FormFieldStyles: () => ({
+            root: string;
+        });
+        FormStyles: () => ({
+            root: string;
+        });
         defaultTheme: any;
-        FieldStyles: Function;
+        FieldStyles: () => {
+            root: string;
+            radioLabel: string;
+            normalLabel: string;
+            withLabel: string;
+            customLabel: string;
+            description: string;
+        };
         FormStepperStyles: Function;
     };
 }
