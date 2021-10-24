@@ -3,6 +3,8 @@ import React from 'react';
 import {
   DefaultTheme,
   Card,
+  TextInput,
+  Portal,
   Provider as PaperProvider,
 } from 'react-native-paper';
 import {
@@ -66,6 +68,12 @@ const App = () => {
               submitOnEnter
               activityIndicatorEnabled
             />
+            {/* <Portal>
+              <TextInput />
+              <TextInput />
+              <TextInput />
+              <TextInput />
+            </Portal> */}
           </Card.Content>
         </Card>
       </SafeAreaView>

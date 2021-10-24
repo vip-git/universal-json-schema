@@ -16,6 +16,7 @@ const {
     IconButton,
     AddCircle,
     Div,
+    Span,
   },
   styles: {
     FieldSetStyles: fieldSetStyles
@@ -157,14 +158,14 @@ export const RawFieldSetObject = ({
                 } : {}}
               >
                 <AddCircle /> 
-                  <span 
+                  <Span 
                   style={{ 
                     position: 'relative',
                     right: 5,
                   }}
                   >
                   { uiSchema?.additionalProperties && uiSchema?.additionalProperties['ui:options']?.buttonTitle }
-                  </span>
+                  </Span>
               </IconButton>
             </Div>
           )

@@ -6,11 +6,11 @@ import SelectDropdown from 'react-native-select-dropdown'
 import materialSelectProps, { SelectProps } from './select.props';
 
 export default ({ 
-  type, 
+  type,
   value = '',
   schema,
   disabled = false,
-  onChange, 
+  onChange,
   htmlid,
   xhrSchema = {},
   options = {},
@@ -34,13 +34,29 @@ export default ({
     <SelectDropdown
         {...options}
         id={htmlid}
+        buttonStyle={{
+          padding: 0,
+          marginTop: 2,
+          marginBottom: 15,
+          height: 35,
+          width: '100%',
+          backgroundColor: '#f6f6f6',
+          borderColor: 'rgba(0, 0, 0, 0.54)',
+          borderRadius: 4,
+          borderWidth: 1,
+        }}
+        buttonTextStyle={{
+          fontSize: 14,
+          textAlign: 'left'
+        }}
+        defaultButtonText={' '}
         value={isMultiple ? parseMultiSelectValue(value) : String(value)}
         data={choices}
-        onSelect={(selectedItem, index) => givenOnChange(selectedItem)}
+        onSelect={(selectedItem, index) => givenOnChange({ target: { value: String(selectedItem.key) }})}
         buttonTextAfterSelection={(selectedItem, index) => {
           // text represented after item is selected
           // if data array is an array of objects then return selectedItem.property to render after item is selected
-          return selectedItem
+          return String(selectedItem.value)
         }}
         rowTextForSelection={(item, index) => {
           // text represented for each item in dropdown

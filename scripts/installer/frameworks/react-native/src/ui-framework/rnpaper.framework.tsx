@@ -1,49 +1,84 @@
 // Library
 import React from 'react';
-import { TextInput, Checkbox, Paragraph } from 'react-native-paper';
+import { ScrollView, TextInput } from 'react-native';
+import { Checkbox, Portal, Text as RNText } from 'react-native-paper';
 
 // Types
 import { UIFramework } from './types/rnpaper-framework.type';
+
+const Surface = Portal.Host as any;
+const Text = RNText as any;
 
 export const uiFramework: UIFramework = {
   name: 'ReactNativePaper',
   platform: 'mobile',
   internal: {
-    CrossPlatformWrapper: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    CrossPlatformLoadingWrapper: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    FormButtons: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    ValidationMessages: ({ children }) => (<Paragraph> {children} </Paragraph>),
+    CrossPlatformWrapper: ({ children }) => (
+      <ScrollView>
+        {children} 
+      </ScrollView>
+    ),
+    CrossPlatformLoadingWrapper: ({ children }) => (
+      <Text> 
+        {children} 
+      </Text>
+    ),
+    FormButtons: ({ children }) => (<Surface> {children} </Surface>),
+    ValidationMessages: ({ children }) => (<Surface> {children} </Surface>),
   },
   wrapperComponents: {
-    InputLabel: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    FormLabel: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    AppBar: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    Tabs: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    Tab: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    Box: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    CircularProgress: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    Typography: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    Divider: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    IconButton: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    AddCircle: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    Stepper: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    Step: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    StepLabel: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    Button: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    ArrowUpward: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    ArrowDownward: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    RemoveCircle: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    FormControl: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    FormGroup: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    FormHelperText: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    ActiveComp: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    Div: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    FieldsetHTML: ({ children }) => (<Paragraph> {children} </Paragraph>),
-    Para: ({ children }) => (<Paragraph> {children} </Paragraph>)
+    InputLabel: ({ children }) => (
+      <Text>
+        {children} 
+      </Text>
+    ),
+    FormLabel: ({ children }) => (<Text> {children} </Text>),
+    AppBar: ({ children }) => (<Surface> {children} </Surface>),
+    Tabs: ({ children }) => (<Surface> {children} </Surface>),
+    Tab: ({ children }) => (<Surface> {children} </Surface>),
+    Box: ({ children }) => (<Surface> {children} </Surface>),
+    CircularProgress: ({ children }) => (<Surface> {children} </Surface>),
+    Typography: ({ children }) => (<Text> {children} </Text>),
+    Divider: ({ children }) => (<Surface> {children} </Surface>),
+    IconButton: ({ children }) => (<Surface> {children} </Surface>),
+    AddCircle: ({ children }) => (<Surface> {children} </Surface>),
+    Stepper: ({ children }) => (<Surface> {children} </Surface>),
+    Step: ({ children }) => (<Surface> {children} </Surface>),
+    StepLabel: ({ children }) => (<Surface> {children} </Surface>),
+    Button: ({ children }) => (<Surface> {children} </Surface>),
+    ArrowUpward: ({ children }) => (<Surface> {children} </Surface>),
+    ArrowDownward: ({ children }) => (<Surface> {children} </Surface>),
+    RemoveCircle: ({ children }) => (<Surface> {children} </Surface>),
+
+    // Configure Field Wrapper
+    FormControl: ({ children }) => (
+      <Surface>
+        {children} 
+      </Surface>
+    ),
+    FormGroup: ({ children }) => (<Surface> {children} </Surface>),
+
+
+    FormHelperText: ({ children }) => (<Text> {children} </Text>),
+    ActiveComp: ({ children }) => (<Text> {children} </Text>),
+    Div: ({ children }) => (
+      <Surface>
+        {children}
+      </Surface>
+    ),
+    Span: ({ children }) => (<Text> {children} </Text>),
+    FieldsetHTML: ({ children }) => (
+      <Surface>
+        {children} 
+      </Surface>
+    ),
+    Para: ({ children }) => (<Text> {children} </Text>)
   },
   components: {
     string: {
-      Input: (props) => <TextInput {...props} />,
+      Input: (props) => (
+        <TextInput {...props} />
+      ),
     },
     array: {
       select: (props) => <TextInput {...props} />,
@@ -52,7 +87,7 @@ export const uiFramework: UIFramework = {
       checkbox: (props) => <Checkbox {...props} />,
     },
     null: {
-      emptyDiv: Paragraph,
+      emptyDiv: Surface,
     },
   },
   styles: {
@@ -61,13 +96,16 @@ export const uiFramework: UIFramework = {
         root: ''
       }),
       fieldSet: () => ({
-        root: ''
+        root: '',
+        listItem: ''
       }),
       reorderControls: () => ({
         root: ''
       }),
       fieldSetObject: () => ({
-        root: ''
+        root: '',
+        row: '',
+        addItemBtn: ''
       })
     },
     FormFieldStyles: () => ({

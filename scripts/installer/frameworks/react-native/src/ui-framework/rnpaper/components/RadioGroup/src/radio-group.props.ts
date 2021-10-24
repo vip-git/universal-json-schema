@@ -14,7 +14,7 @@ export default ({ onChange, options, schema }: {
   options: any;
   schema: any;
 }) => ({
-  onChange: onChange && onChangeHandler(onChange, schema),
+  onPress: onChange && onChangeHandler(onChange, schema),
   row: options.inline,
   label: schema.title,
   choices: valuesToOptions(isEnum(schema)),

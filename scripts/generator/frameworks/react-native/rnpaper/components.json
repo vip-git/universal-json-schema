@@ -29,14 +29,14 @@
     },
 	"components": {
         "@react-native-jsonschema-form-components/material-radio-group": {
-            "version": "0.0.1",
+            "version": "0.0.2",
             "type": "string",
             "isEnum": true,
             "name": "material-radio-group",
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-native-jsonschema-form-components/material-select": {
-            "version": "0.0.1",
+            "version": "0.0.3",
             "type": "string",
             "isEnum": true,
             "isRequired": true,
@@ -62,7 +62,7 @@
             "name": "material-switch"
         },
         "@react-native-jsonschema-form-components/material-input": {
-            "version": "0.0.1",
+            "version": "0.0.2",
             "type": "string",
             "isEnum": false,
             "isDefault": true,

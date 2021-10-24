@@ -93,6 +93,7 @@ export interface UIFramework {
         FormGroup: (props: any) => ReactElement;
         FormHelperText: (props: any) => ReactElement;
         ActiveComp: (props: any) => ReactElement;
+        Span: FunctionComponent<{ className?: any; style?: React.CSSProperties; }>;
         Div: FunctionComponent<{ className?: any; style?: React.CSSProperties; }>;
         FieldsetHTML: FunctionComponent<{ className: any; }>;
         Para: FunctionComponent<{ className: any; }>;
@@ -104,12 +105,15 @@ export interface UIFramework {
             });
             fieldSet: () => ({
                 root: string;
+                listItem: string;
             });
             reorderControls: () => ({
                 root: string;
             }),
             fieldSetObject: () => ({
                 root: string;
+                row: string;
+                addItemBtn: string;
             }),
         };
         FormFieldStyles: () => ({

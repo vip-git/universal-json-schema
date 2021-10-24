@@ -80,6 +80,7 @@ export const uiFramework: UIFramework = {
     FormHelperText,
     ActiveComp,
     Div: ({ children, className, style }) => <div className={className} style={style}> {children} </div>,
+    Span: ({ children, className, style }) => <span className={className} style={style}> {children} </span>,
     FieldsetHTML: ({ children, className }) => <fieldset className={className}> {children} </fieldset>,
     Para: ({ children, className }) => <p className={className}> {children} </p>,
   },

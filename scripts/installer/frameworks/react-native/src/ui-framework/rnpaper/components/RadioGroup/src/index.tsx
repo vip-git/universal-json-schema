@@ -17,27 +17,27 @@ export default ({
   onChange,
   ...rest 
 }) => {
-  const { choices } = radioGroupProps({ onChange, schema, options });
+  const { choices, onPress } = radioGroupProps({ onChange, schema, options });
   return (
-      <View
-        id={htmlid}
-        aria-label={path}
-        name={path}
+    <View style={{ marginBottom: 10 }}>
+      <RadioButton.Group
         value={String(value)} 
-        {...radioGroupProps({ onChange, schema, options })}
+        onValueChange={(newValue) => onPress({ target: { value: String(newValue) }})}
         {...options}
       >
         {
           choices 
           && choices.length 
           && choices.map((o) => (
-              <RadioButton 
-                key={o.key} 
-                value={String(o.key)}
-              />
+            <RadioButton.Item 
+              key={o.key} 
+              label={String(o.value)} 
+              value={String(o.key)} 
+            />
           ),
           )
         }
-      </View>
+      </RadioButton.Group>
+    </View>
   );
 };

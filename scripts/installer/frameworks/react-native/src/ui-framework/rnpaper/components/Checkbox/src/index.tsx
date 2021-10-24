@@ -29,6 +29,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }: C
             return (
               <Checkbox
                 checked={checked ? 'checked' : 'unchecked'}
+                color={'red'}
                 onPress={onGroupChange(String(o.key), o.adds)}
                 disabled={o.disabled || false}
                 {...options}
@@ -54,6 +55,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }: C
             <Checkbox
                 checked={checked ? 'checked' : 'unchecked'}
                 onPress={onEnumChange(ev.key, ev.adds)}
+                color={'red'}
                 disabled={ev.disabled || false}
                 {...options}
             />
@@ -71,6 +73,7 @@ export default ({ value, type, onChange, schema = {}, options = {}, ...rest }: C
         <Checkbox
             checked={typeof value === 'boolean' ? value : stringToBoolean}
             onChange={givenOnChange}
+            color={'red'}
             disabled={options.disabled || false}
             {...options}
         />
