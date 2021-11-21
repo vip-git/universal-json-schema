@@ -21,3 +21,4 @@ LICENSE
 .eslintrc.js
 browserstack.js
 src/generated
+demo/
