@@ -28,7 +28,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
+    - run: npm install --force
     - run: npm run build
     - run: npx jest --env=jsdom --config=jest.config.js --coverage --ci --updateSnapshot --detectOpenHandles --forceExit
     - name: Codecov
