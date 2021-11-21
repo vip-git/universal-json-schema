@@ -196,7 +196,7 @@ const Form = ({
               <RenderFormButtons />
             )
           }
-          <LocalizationProvider dateAdapter={AdapterMoment}>
+          <LocalizationProvider dateAdapter={AdapterMoment as any}>
             <LoadingContext.Provider value={loadingState}>
               <StepperContext.Provider value={[activeStep, buttonDisabled] as any}>
                 <EventContext.Provider value={onUpload}>
