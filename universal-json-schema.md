@@ -10,6 +10,7 @@ This document explains on how this project is aiming towards becoming "Universal
   - Angular
   - Vue
   - Stencil JS (Web Components)
+  - Svelte
   - Nativescript
 
 - Logic
