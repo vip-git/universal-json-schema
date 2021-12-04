@@ -3,8 +3,6 @@ import React from 'react';
 import {
   DefaultTheme,
   Card,
-  TextInput,
-  Portal,
   Provider as PaperProvider,
 } from 'react-native-paper';
 import {
@@ -18,7 +16,7 @@ import {
 import ReactNativeForm from '../../../src/cross-framework-wrapper/react/Form';
 
 // Demo
-import numbers from '../../examples/numbers';
+import examples from '../../examples';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -35,8 +33,9 @@ const App = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? theme.colors.primary : theme.colors.accent,
   };
-
-  const { schema, uiSchema, formData } = numbers;
+  
+  // Make this dynamic based on array selection
+  const { schema, uiSchema, formData } = examples[3].numbers;
 
   const onSubmit = () => {};
   const onCancel = () => {};
@@ -68,12 +67,6 @@ const App = () => {
               submitOnEnter
               activityIndicatorEnabled
             />
-            {/* <Portal>
-              <TextInput />
-              <TextInput />
-              <TextInput />
-              <TextInput />
-            </Portal> */}
           </Card.Content>
         </Card>
       </SafeAreaView>
