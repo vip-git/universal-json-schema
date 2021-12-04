@@ -80,10 +80,10 @@ const alias = {
   "@utils": path.resolve(__dirname, './src/helpers/utils/'),
   "@config": path.resolve(__dirname, './src/config/'),
   "@helpers": path.resolve(__dirname, './src/helpers/'),
-  "@universal-schema": path.resolve(__dirname, 'src/universal-schema/'),
-  "@cross-framework-wrapper": path.resolve(__dirname, 'src/cross-framework-wrapper/'),
-  "@generated": path.resolve(__dirname, 'src/framework/generated/'),
-  "@framework": path.resolve(__dirname, 'src/framework/'),
+  "@universal-schema": path.resolve(__dirname, './src/universal-schema/'),
+  "@cross-framework-wrapper": path.resolve(__dirname, './src/cross-framework-wrapper/'),
+  "@generated": path.resolve(__dirname, './src/framework/generated/'),
+  "@framework": path.resolve(__dirname, './src/framework/'),
 };
 
 if (process.env.NODE_ENV !== 'production' && process.env.NO_STUBS === undefined) {
