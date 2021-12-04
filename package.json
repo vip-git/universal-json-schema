@@ -40,6 +40,8 @@
     "test"
   ],
   "dependencies": {
+    "ts-node": "10.4.0",
+    "shelljs": "0.8.4"
   },
   "description": "universal-jsonschema-form with UI and XHR Schema.",
   "devDependencies": {

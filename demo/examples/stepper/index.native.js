@@ -1,14 +1,11 @@
-// Library
-import { nanoid as generate } from 'nanoid';
-
 // JSON
 import schema from './schema.json';
 import uiSchema from './ui-schema.json';
 import xhrSchema from './xhr-schema.json';
 import formData from './form-data.json';
-import config from '../../../scripts/generator/frameworks/react/mui/components.json';
+import config from '../../../scripts/generator/frameworks/react-native/rnpaper/components.json';
 
-const sessionId = generate();
+const sessionId = Math.random(123);
 
 formData.SelectComponents = {
   sessionId,
