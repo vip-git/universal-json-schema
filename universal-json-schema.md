@@ -37,11 +37,17 @@ This document explains on how this project is aiming towards becoming "Universal
     - material-input
     - empty-div
     - ratings
+  - React Native Paper UI (Theme)
+    - Checkbox
+    - Input
+    - Material Select
+    - Radio Group
+    - Switch
+    - Empty Div 
   - ANT Design UI (Theme)
   - Semantic UI (Theme)
   - Bootstrap UI (Theme)
   - Fluent UI (Theme)
-  - React Native Paper UI (Theme)
   - Ionic  (Theme)
 
 
