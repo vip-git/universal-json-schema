@@ -10,32 +10,32 @@ interface Components {
         Input: (props: any) => ReactElement<any, string | JSXElementConstructor<any>>;
 
         // Optional Components
-        select?: Function;
-        radioGroup?: Function;
-        autoComplete?: Function;
-        picker?: Function;
-        upload?: Function;
-        richTextEditor?: Function;
-        ratings?: Function;
+        select?: any;
+        radioGroup?: any;
+        autoComplete?: any;
+        picker?: any;
+        upload?: any;
+        richTextEditor?: any;
+        ratings?: any;
     },
     null: {
-        EmptyDiv: Function;
+        EmptyDiv: any;
     },
     array: {
-        Select: Function;
+        Select: any;
 
         // Optional Components
-        autoComplete?: Function;
+        autoComplete?: any;
         
         // React Specific Components
-        creatableSelect?: Function;
-        reactSelect?: Function;
+        creatableSelect?: any;
+        reactSelect?: any;
     },
     boolean: {
-        Checkbox: Function;
+        Checkbox: any;
 
         // Optional Components
-        switch?: Function;
+        switch?: any;
     },
 }
 
@@ -71,28 +71,28 @@ export interface UIFramework {
         ValidationMessages: any;
     };
     wrapperComponents: {
-        InputLabel: Function;
-        FormLabel: Function;
-        AppBar: Function;
-        Tabs: Function;
-        Tab: Function;
-        Box: Function;
-        CircularProgress: Function;
-        Typography: Function;
-        Divider: Function;
-        IconButton: Function;
-        AddCircle: Function;
-        Stepper: Function;
-        Step: Function;
-        StepLabel: Function;
-        Button: Function;
-        ArrowUpward: Function;
-        ArrowDownward: Function;
-        RemoveCircle: Function;
-        FormControl: Function;
-        FormGroup: Function;
-        FormHelperText: Function;
-        ActiveComp: Function;
+        InputLabel: any;
+        FormLabel: any;
+        AppBar: any;
+        Tabs: any;
+        Tab: any;
+        Box: any;
+        CircularProgress: any;
+        Typography: any;
+        Divider: any;
+        IconButton: any;
+        AddCircle: any;
+        Stepper: any;
+        Step: any;
+        StepLabel: any;
+        Button: any;
+        ArrowUpward: any;
+        ArrowDownward: any;
+        RemoveCircle: any;
+        FormControl: any;
+        FormGroup: any;
+        FormHelperText: any;
+        ActiveComp: any;
         Div: FunctionComponent<{ className?: any; style?: React.CSSProperties; }>;
         Span: FunctionComponent<{ className?: any; style?: React.CSSProperties; }>;
         FieldsetHTML: FunctionComponent<{ className: any; }>;
@@ -100,10 +100,10 @@ export interface UIFramework {
     };
     styles: {
         FieldSetStyles: any;
-        FormFieldStyles: Function;
-        FormStyles: Function;
+        FormFieldStyles: any;
+        FormStyles: any;
         defaultTheme: any;
-        FieldStyles: Function;
-        FormStepperStyles: Function;
+        FieldStyles: any;
+        FormStepperStyles: any;
     };
 }
