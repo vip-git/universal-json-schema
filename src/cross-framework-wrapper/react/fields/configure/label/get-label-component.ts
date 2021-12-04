@@ -1,12 +1,13 @@
 // UI
 import Framework from '@universal-schema/framework';
+import { isEnum } from '@react-jsonschema-form-utils/enum-utils';
+
 const {
   wrapperComponents: {
 	 FormLabel,
-   InputLabel,
+    InputLabel,
   },
 } = Framework.uiFramework;
-import { isEnum } from '@react-jsonschema-form-utils/enum-utils';
 
 export default ({ schema, uiSchema = {} }) => {
   const widget = uiSchema['ui:widget'];

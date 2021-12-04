@@ -7,8 +7,6 @@ import set from 'lodash/set';
 import get from 'lodash/get';
 
 // Internal
-import FieldSet, { shouldHideTitle } from './FieldSet';
-import Field from './fields';
 import { isEmptyValues } from '@helpers/remove-empty-values';
 
 // Types
@@ -16,11 +14,13 @@ import { FormFieldProps } from '@core-types/FormField.type';
 
 // UI
 import Framework from '@universal-schema/framework';
+import Field from './fields';
+import FieldSet, { shouldHideTitle } from './FieldSet';
 
 const {
   styles: {
-    FormFieldStyles: styles
-  }
+    FormFieldStyles: styles,
+  },
 } = Framework.uiFramework;
 
 // exported for unit testing

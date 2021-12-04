@@ -19,6 +19,7 @@ module.exports = {
     'no-trailing-spaces': 'off',
     'react/jsx-indent': 'off',
     'no-unused-vars': 'off',
+    'no-mixed-spaces-and-tabs': 'off',
     'react/jsx-indent-props': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/prop-types': 'off',
@@ -74,4 +75,7 @@ module.exports = {
   'env': {
     'jest/globals': true
   },
+  "ignorePatterns": [
+    "src/types/helpers/TransformSchema.type.ts"
+  ],
 };

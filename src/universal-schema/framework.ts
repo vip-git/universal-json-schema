@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
-import { UniversalSchemaFramework } from './types/universal-schema-framework.type';
 import { uiFramework } from '@framework/ui-framework';
+import { UniversalSchemaFramework } from './types/universal-schema-framework.type';
 
 const Framework: UniversalSchemaFramework = {
   library: {

@@ -3,7 +3,7 @@ import React from 'react';
 import { mountTheme } from '@helpers/enzyme-unit-test';
 
 // Internal
-import ReactForm from '..';
+import ReactForm from '../Form';
 
 const Form: any = ReactForm;
 

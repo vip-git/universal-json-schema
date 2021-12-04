@@ -2,14 +2,13 @@
 import { isEnum } from '@react-jsonschema-form-utils/enum-utils';
 import { GetComponent } from '@core-types/configure/GetComponent.type';
 
-import componentConfig from '../component.config';
-
 import { APP_CONFIG } from '@generated/app.config';
 import {
   ENUM_COMPONENTS,
   V2_PICKER_COMPONENT,
   COMMON_COMPONENTS,
 } from '@generated/components';
+import componentConfig from '../component.config';
 
 const {
   COMPONENTS: {

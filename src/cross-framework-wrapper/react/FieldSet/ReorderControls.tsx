@@ -16,8 +16,8 @@ const {
     Div,
   },
   styles: {
-    FieldSetStyles: fieldSetStyles
-  }
+    FieldSetStyles: fieldSetStyles,
+  },
 } = Framework.uiFramework;
 
 export const RawReorderControls = (

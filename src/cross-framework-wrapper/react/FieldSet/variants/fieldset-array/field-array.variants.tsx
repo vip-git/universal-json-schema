@@ -18,8 +18,8 @@ import ReorderableFormField from '../../ReorderableFormField';
 const {
   wrapperComponents: {
     IconButton,
-    AddCircle
-  }
+    AddCircle,
+  },
 } = Framework.uiFramework;
 
 const { ARRAY_VARIANTS } = FIELDSET_CONFIG;

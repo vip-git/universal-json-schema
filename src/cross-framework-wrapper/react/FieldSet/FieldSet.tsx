@@ -7,9 +7,19 @@ import has from 'lodash/has';
 // UI
 import Framework from '@universal-schema/framework';
 
+// Utils
+import Utils from '@helpers/utils';
+
+// Variants
+import { FieldSetProps } from '@core-types/FieldSet.type';
+import { isPageLayoutSet } from './variants/page-layout.variants';
+import RENDER_BASED_ON_SCHEMA_TYPE from './variants/schema-type.variants';
+
+// Types
+
 const {
   internal: {
-    ValidationMessages
+    ValidationMessages,
   },
   wrapperComponents: {
     Typography,
@@ -18,19 +28,9 @@ const {
     FieldsetHTML,
   },
   styles: {
-    FieldSetStyles: fieldSetStyles
-  }
+    FieldSetStyles: fieldSetStyles,
+  },
 } = Framework.uiFramework;
-
-// Utils
-import Utils from '@helpers/utils';
-
-// Variants
-import { isPageLayoutSet } from './variants/page-layout.variants';
-import RENDER_BASED_ON_SCHEMA_TYPE from './variants/schema-type.variants';
-
-// Types
-import { FieldSetProps } from '@core-types/FieldSet.type';
 
 const classNames = require('classnames');
 

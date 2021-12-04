@@ -5,27 +5,27 @@ import isEmpty from 'lodash/isEmpty';
 // UI
 import Framework from '@universal-schema/framework';
 
-const {
-  wrapperComponents: {
-	FormControl,
-    FormGroup,
-    FormHelperText,
-	ActiveComp,
-	Div,
-	Para,
-  },
-  components: {
-	string: {
-	   Input,
-	}
-  },
-  styles: {
-    FieldStyles: fieldStyles
-  }
-} = Framework.uiFramework;
-
 // Types
 import { ConfiguredFieldProps } from '@core-types/ConfiguredField.type';
+
+const {
+  wrapperComponents: {
+    FormControl,
+    FormGroup,
+    FormHelperText,
+    ActiveComp,
+    Div,
+    Para,
+  },
+  components: {
+    string: {
+	   Input,
+    },
+  },
+  styles: {
+    FieldStyles: fieldStyles,
+  },
+} = Framework.uiFramework;
 
 const classNames = require('classnames');
 

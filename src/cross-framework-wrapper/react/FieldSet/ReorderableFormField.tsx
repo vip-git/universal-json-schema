@@ -1,21 +1,21 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import { ReorderableFormFieldProps } from '@core-types/ReoderableFormField.type';
+import Framework from '@universal-schema/framework';
 import FormField from '../FormField';
 import ReorderControls from './ReorderControls';
 
 // Type
-import { ReorderableFormFieldProps } from '@core-types/ReoderableFormField.type';
 
 // UI
-import Framework from '@universal-schema/framework';
 
 const {
   wrapperComponents: {
     Div,
   },
   styles: {
-    FieldSetStyles: fieldSetStyles
-  }
+    FieldSetStyles: fieldSetStyles,
+  },
 } = Framework.uiFramework;
 
 const classNames = require('classnames');

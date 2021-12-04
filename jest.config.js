@@ -6,6 +6,16 @@ module.exports = {
 		'<rootDir>/node_modules/regenerator-runtime/runtime',
 		'<rootDir>/scripts/config/polyfills.js'
 	],
+	moduleNameMapper: {
+		"^@root(.*)$": "<rootDir>/src/types$1",
+        "^@utils(.*)$": "<rootDir>/src/helpers/utils$1",
+        "^@config(.*)$": "<rootDir>/src/config$1",
+        "^@helpers(.*)$": "<rootDir>/src/helpers$1",
+        "^@universal-schema(.*)$": "<rootDir>/src/universal-schema$1",
+        "^@cross-framework-wrapper(.*)$": "<rootDir>/src/cross-framework-wrapper$1",
+        "^@generated(.*)$": "<rootDir>/src/framework/generated$1",
+        "^@framework(.*)$": "<rootDir>/src/framework$1",
+	},
 	snapshotSerializers: ['enzyme-to-json/serializer'],
 	setupFilesAfterEnv: ['<rootDir>/scripts/config/jest/setup.js'],
 	testMatch: [

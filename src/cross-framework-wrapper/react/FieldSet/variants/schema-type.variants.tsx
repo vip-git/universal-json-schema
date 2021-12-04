@@ -2,11 +2,11 @@
 import React from 'react';
 
 // Internal
-import FieldSetArray from '../FieldSetArray';
 
 // Config
 import CONFIG from '@config/index';
 import Utils from '@helpers/utils';
+import FieldSetArray from '../FieldSetArray';
 
 // Internal
 import RENDER_PAGE_PAGE_LAYOUT, { getPageLayout } from './page-layout.variants';

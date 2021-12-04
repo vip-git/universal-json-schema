@@ -7,10 +7,10 @@ import React from 'react';
 import { StepperContext } from '@helpers/context';
 
 // Internal
+import Framework from '@universal-schema/framework';
 import FieldSetObject from './FieldSetObject';
 
 // UI
-import Framework from '@universal-schema/framework';
 
 const {
   wrapperComponents: {
@@ -22,8 +22,8 @@ const {
     Div,
   },
   styles: {
-    FormStepperStyles: useStyles
-  }
+    FormStepperStyles: useStyles,
+  },
 } = Framework.uiFramework;
 
 export default function HorizontalNonLinearStepperWithError(props) {

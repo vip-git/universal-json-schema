@@ -30,7 +30,7 @@ const {
   styles: {
     FormStyles: formStyles,
     defaultTheme,
-  }
+  },
 } = Framework.uiFramework;
 
 const Form = ({
@@ -237,7 +237,7 @@ const Form = ({
                   )
               }
             </EventContext.Provider>
-          </StepperContext.Provider>
+        </StepperContext.Provider>
       </LoadingContext.Provider>
     </CrossPlatformWrapper>
   );

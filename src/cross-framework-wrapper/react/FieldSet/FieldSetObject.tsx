@@ -4,11 +4,18 @@ import { get } from 'lodash';
 import keys from 'lodash/keys';
 
 // Internal
-import ReorderableFormField from './ReorderableFormField';
-import FormField from '../FormField';
 
 // UI
 import Framework from '@universal-schema/framework';
+
+// Helpers
+import getDefaultValue from '@helpers/get-default-value';
+import getDefinitionSchemaFromRef from '@helpers/get-definition-schema';
+
+// types
+import { FieldSetObjectProps } from '@core-types/FieldSetObject.type';
+import FormField from '../FormField';
+import ReorderableFormField from './ReorderableFormField';
 
 const {
   wrapperComponents: {
@@ -19,16 +26,9 @@ const {
     Span,
   },
   styles: {
-    FieldSetStyles: fieldSetStyles
-  }
+    FieldSetStyles: fieldSetStyles,
+  },
 } = Framework.uiFramework;
-
-// Helpers
-import getDefaultValue from '@helpers/get-default-value';
-import getDefinitionSchemaFromRef from '@helpers/get-definition-schema';
-
-// types
-import { FieldSetObjectProps } from '@core-types/FieldSetObject.type';
 
 const classNames = require('classnames');
 

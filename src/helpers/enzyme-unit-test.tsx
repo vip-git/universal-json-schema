@@ -6,7 +6,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterMoment from '@mui/lab/AdapterMoment';
 
 // Internal
-import { defaultTheme } from '../form-styles';
+import { defaultTheme } from '@framework/ui-framework/mui/styles/form-styles';
 
 export const mountTheme = ({ component }) => mount(
     <StyledEngineProvider injectFirst>

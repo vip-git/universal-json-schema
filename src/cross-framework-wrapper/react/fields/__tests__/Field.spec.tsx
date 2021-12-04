@@ -26,7 +26,7 @@ describe('Field', () => {
     const type = 'string';
     const givenField = mountTheme({
       component: (
-        <ConfiguredField type={type} data={data} classes={classes} componentProps={componentProps}  />
+        <ConfiguredField type={type} data={data} componentProps={componentProps}  />
       )
     });
     
@@ -53,7 +53,7 @@ describe('Field', () => {
   
   it('applies given className', () => {
     const wrapper = shallowTheme({
-        component: (<ConfiguredField classes={classes} className={'myComp'} />
+        component: (<ConfiguredField className={'myComp'} />
       )
     }).find('RawConfiguredField');
     const Component = wrapper.find('ForwardRef(Input)');
@@ -95,14 +95,14 @@ describe('Field', () => {
     const descriptionText = 'This is a field';
     const wrapper = mountTheme({
         component: (
-          <ConfiguredField classes={classes} descriptionText={descriptionText} />
+          <ConfiguredField descriptionText={descriptionText} />
         )
       }).find('RawConfiguredField');
 
     const descriptionComp = wrapper.find('p');
     expect(descriptionComp).toHaveLength(1);
     expect(descriptionComp.prop('className')).toBe('makeStyles-description-24');
-    expect(descriptionComp.text()).toBe(descriptionText);
+    expect(descriptionComp.text().trim()).toBe(descriptionText);
   });
 
   it('renders provided helpText', () => {
@@ -143,7 +143,7 @@ describe('Field', () => {
   it('has withLabel className ', () => {
     const wrapper =  mountTheme({
         component: (
-          <ConfiguredField LabelComponent={FormLabel} classes={classes} />
+          <ConfiguredField LabelComponent={FormLabel} />
         )
       }).find('RawConfiguredField');
     expect(wrapper.find('ForwardRef(FormControl)').prop('className')).toMatch(/makeStyles-withLabel/);

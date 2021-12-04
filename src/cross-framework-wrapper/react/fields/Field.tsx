@@ -1,21 +1,21 @@
 // Library
 import React from 'react';
 import { FieldProps } from '@core-types/Field.type';
+import {
+  getHashCodeFromXHRDef,
+} from '@helpers/state-machine/form/hooks';
+import Framework from '@universal-schema/framework';
 import configureComponent from './configure';
 import ConfiguredField from './ConfiguredField';
 
 // Helpers
-import {
-  getHashCodeFromXHRDef,
-} from '@helpers/state-machine/form/hooks';
 
 // UI
-import Framework from '@universal-schema/framework';
 
 const {
   wrapperComponents: {
 	  Div,
-  }
+  },
 } = Framework.uiFramework;
 
 export default (props: FieldProps) => {

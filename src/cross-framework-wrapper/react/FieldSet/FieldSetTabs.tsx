@@ -4,6 +4,14 @@ import React from 'react';
 // UI
 import Framework from '@universal-schema/framework';
 
+// Internal
+import {
+  getHashCodeFromXHRDef,
+} from '@helpers/state-machine/form/hooks';
+import FieldSetObject from './FieldSetObject';
+
+// Helpers
+
 const {
   wrapperComponents: {
     Typography,
@@ -15,17 +23,9 @@ const {
     Div,
   },
   styles: {
-    FieldSetStyles: fieldSetStyles
-  }
+    FieldSetStyles: fieldSetStyles,
+  },
 } = Framework.uiFramework;
-
-// Internal
-import FieldSetObject from './FieldSetObject';
-
-// Helpers
-import {
-  getHashCodeFromXHRDef,
-} from '@helpers/state-machine/form/hooks';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

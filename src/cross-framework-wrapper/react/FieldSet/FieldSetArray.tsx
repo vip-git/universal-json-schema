@@ -4,15 +4,6 @@ import React from 'react';
 // UI
 import Framework from '@universal-schema/framework';
 
-const {
-  wrapperComponents: {
-    Div,
-  },
-  styles: {
-    FieldSetStyles: fieldSetStyles
-  }
-} = Framework.uiFramework;
-
 // Helpers
 import getDefinitionSchemaFromRef from '@helpers/get-definition-schema';
 
@@ -24,6 +15,15 @@ import Utils from '@helpers/utils';
 
 // Variant
 import RENDER_ARRAY_WRAPPERS from './variants/fieldset-array/field-array.wrappers';
+
+const {
+  wrapperComponents: {
+    Div,
+  },
+  styles: {
+    FieldSetStyles: fieldSetStyles,
+  },
+} = Framework.uiFramework;
 
 export const RawFieldSetArray = (props: FieldSetArrayProps) => {
   const {

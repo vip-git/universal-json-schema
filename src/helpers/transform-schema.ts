@@ -6,12 +6,12 @@ import each from 'lodash/each';
 import { SetNestedDataProps, SetNestedPayloadProps } from '@framework/types/helpers/TransformSchema.type';
 
 // Helpers
-import getDefinitionSchemaFromRef from './get-definition-schema';
-
-// Interceptors
 import {
   APP_CONFIG,
 } from '@framework/generated/app.config';
+import getDefinitionSchemaFromRef from './get-definition-schema';
+
+// Interceptors
 
 const { 
   INTERCEPTORS: INTERCEPTOR_CONFIG, 
