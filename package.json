@@ -47,6 +47,7 @@
   },
   "description": "universal-jsonschema-form with UI and XHR Schema.",
   "devDependencies": {
+    "@types/node": "14.18.0"
   },
   "license": "ISC",
   "main": "index.js",
