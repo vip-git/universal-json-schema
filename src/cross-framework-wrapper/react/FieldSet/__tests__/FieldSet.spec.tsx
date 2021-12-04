@@ -261,7 +261,7 @@ describe('FieldSet', () => {
       expect(ffComp.at(1).prop('last')).toBe(true);
       const addButton = wrapper.find(IconButton);
       expect(addButton).toHaveLength(3);
-      addButton.at(2).simulate('click');
+      expect(addButton.at(2).prop('onClick')).toBe(undefined);
       expect(onAddItem).toBeCalledWith(path, defaultValue);
     });
 
@@ -427,9 +427,9 @@ describe('FieldSet', () => {
       expect(buttonList).toHaveLength(3);
       buttonList.at(0).prop('onClick')();
       expect(onMoveItemUp).toHaveBeenCalled();
-      buttonList.at(1).simulate('click');
+      buttonList.at(1).prop('onClick')();
       expect(onMoveItemDown).toHaveBeenCalled();
-      buttonList.at(2).simulate('click');
+      buttonList.at(2).prop('onClick')();
       expect(onDeleteItem).toHaveBeenCalled();
     });
     it('ReorderControls - first', () => {

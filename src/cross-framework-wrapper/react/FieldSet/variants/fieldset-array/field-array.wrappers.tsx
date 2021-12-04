@@ -41,7 +41,7 @@ const RENDER_ARRAY_WRAPPER = ({
           }
           return Utils.callFunctionIfExists(
             FIELDSET_ARRAY_VARIANTS, 
-            'hasReorderableButtons', 
+            ARRAY_VARIANTS.HAS_REORDERABLE_BUTTONS,
             {
               path,
               schema,
@@ -60,7 +60,7 @@ const RENDER_ARRAY_WRAPPER = ({
         })}
         {(!isRecursiveHole() || allowRecursive) && Utils.callFunctionIfExists(
           FIELDSET_ARRAY_VARIANTS, 
-          'addNewButton', 
+          ARRAY_VARIANTS.ADD_NEW_BUTTON, 
           {
             classes,
             uiSchema,
@@ -88,7 +88,7 @@ const RENDER_ARRAY_WRAPPER = ({
     }),
   [ARRAY_VARIANTS.HAS_ENUM_VALUES]: () => Utils.callFunctionIfExists(
     FIELDSET_ARRAY_VARIANTS, 
-    'hasEnumValues',
+    ARRAY_VARIANTS.HAS_ENUM_VALUES,
     {
       path,
       schema,

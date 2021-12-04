@@ -11,7 +11,7 @@ import { defaultTheme } from '../form-styles';
 export const mountTheme = ({ component }) => mount(
     <StyledEngineProvider injectFirst>
         <ThemeProvider theme={createTheme(defaultTheme)}>
-            <LocalizationProvider dateAdapter={AdapterMoment}>
+            <LocalizationProvider dateAdapter={AdapterMoment as any}>
                     {component}
             </LocalizationProvider>
         </ThemeProvider>
@@ -21,7 +21,7 @@ export const mountTheme = ({ component }) => mount(
 export const shallowTheme = ({ component }) => shallow(
     <StyledEngineProvider injectFirst>
         <ThemeProvider theme={createTheme(defaultTheme)}>
-            <LocalizationProvider dateAdapter={AdapterMoment}>
+            <LocalizationProvider dateAdapter={AdapterMoment as any}>
                     {component}
             </LocalizationProvider>
         </ThemeProvider>
