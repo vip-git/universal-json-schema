@@ -5,13 +5,16 @@ This document explains on how this project is aiming towards becoming "Universal
 
 ## Core Modules
 - Framework
-  - React
-  - React Native
-  - Angular
-  - Vue
-  - Stencil JS (Web Components)
-  - Svelte
-  - Nativescript
+  - Web   
+    - React
+    - Angular
+    - Vue
+    - Stencil JS (Web Components)
+    - Svelte
+  - Mobile
+    - React Native
+    - Nativescript
+    - Ionic
 
 - Logic
   - Utils
