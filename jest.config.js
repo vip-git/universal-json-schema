@@ -37,6 +37,7 @@ module.exports = {
         '<rootDir>/src/__e2e__',
 		'<rootDir>/src/generated',
 		// Ignore Compiled folders
+		'<rootDir>/src/index.ts',
 		'<rootDir>/src/fields/components/(Checkbox|CreatableSelect|Input|EmptyDiv|MaterialSelect|RadioGroup|ReactSelect|RichTextEditor)/dist',
 		'<rootDir>/src/parsers/(enum-utils|parse-values)/dist',
 		'<rootDir>/src/fields/interceptors/(translate-currency|translate-range-date|translate-ratings)/dist',
