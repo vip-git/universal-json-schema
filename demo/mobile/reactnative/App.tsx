@@ -48,7 +48,7 @@ const App = () => {
       <SafeAreaView style={backgroundStyle}>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <Card>
-          <Card.Title title="Card Title" subtitle="Card Subtitle" />
+          <Card.Title title="JSON Schema Form" subtitle="React-Native Paper" />
           <Card.Content>
             <ReactNativeForm 
               schema={schema}
