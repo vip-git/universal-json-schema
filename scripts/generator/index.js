@@ -23,7 +23,7 @@
 const ejs = require('ejs');
 const shelljs = require('shelljs');
 
-const componentSettings = require('./components.json');
+const componentSettings = require(`./frameworks/${process.env.COMPONENTS_FRAMEWORK_NAME}/${process.env.UI_FRAMEWORK_NAME}/components.json`);
 
 // Config
 const { CONFIG, folderHashMapping } = require('./config');
@@ -40,9 +40,9 @@ const finalString = template({ ...CONFIG });
 const shellFileString = new shelljs.ShellString(finalString);
 
 // Folder Variables
-const generatedLocation = `${shelljs.pwd()}/src/generated`;
+const generatedLocation = `${shelljs.pwd()}/src/framework/generated`;
 const generatorLocation = `${shelljs.pwd()}/scripts/generator`;
-const demoFolder = `${shelljs.pwd()}/demo/web/react/examples`;
+const demoFolder = `${shelljs.pwd()}/demo/examples`;
 const testsGeneratedFolder = `${shelljs.pwd()}/src/__e2e__/page-objects/generated`;
 
 const myArgs = process.argv.slice(2);

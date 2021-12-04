@@ -1,0 +1,13 @@
+{
+    "name": "@react-native-jsonschema-form-components/material-checkbox",
+    "version": "0.0.1",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "rm -rf dist && tsc",
+        "prepublishOnly": "npm run build"
+    },
+    "dependencies": {
+        "@react-jsonschema-form-utils/enum-utils": "2.0.1"
+    },
+    "author": "Vipin Tanna"
+}

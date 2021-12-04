@@ -2,12 +2,8 @@
 import React from 'react';
 import {
   DefaultTheme,
-  Provider as PaperProvider,
-  Avatar,
-  Button,
   Card,
-  Title,
-  Paragraph
+  Provider as PaperProvider,
 } from 'react-native-paper';
 import {
   SafeAreaView,
@@ -17,9 +13,10 @@ import {
 } from 'react-native';
 
 // Internal
-import ReactNativeForm from '../../../src/Form';
+import ReactNativeForm from '../../../src/cross-framework-wrapper/react/Form';
 
-const LeftContent = (props: any) => <Avatar.Icon {...props} icon="folder" />
+// Demo
+import examples from '../../examples';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -33,28 +30,45 @@ const App = () => {
     },
   };
 
-
   const backgroundStyle = {
     backgroundColor: isDarkMode ? theme.colors.primary : theme.colors.accent,
   };
+  
+  // Make this dynamic based on array selection
+  const { schema, uiSchema, formData } = examples[3].numbers;
+
+  const onSubmit = () => {};
+  const onCancel = () => {};
+  const onUpload = () => {};
+  const onFormChanged = () => {};
+  const onError = () => {};
 
   return (
     <PaperProvider theme={theme}>
       <SafeAreaView style={backgroundStyle}>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <Card>
-          <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
+          <Card.Title title="JSON Schema Form" subtitle="React-Native Paper" />
           <Card.Content>
-            <Title>Card title</Title>
-            <Paragraph>Card content</Paragraph>
+            <ReactNativeForm 
+              schema={schema}
+              xhrSchema={{}}
+              uiSchema={uiSchema}
+              formData={formData}
+              onCancel={onCancel}
+              onSubmit={onSubmit}
+              onStepNext={onSubmit}
+              onUpload={onUpload}
+              onChange={onFormChanged}
+              onError={onError}
+              interceptors={{}}
+              components={{}}
+              validations={{}}
+              submitOnEnter
+              activityIndicatorEnabled
+            />
           </Card.Content>
-          <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-          <Card.Actions>
-            <Button>Cancel</Button>
-            <Button>Ok</Button>
-          </Card.Actions>
         </Card>
-        <ReactNativeForm />
       </SafeAreaView>
     </PaperProvider>
   );

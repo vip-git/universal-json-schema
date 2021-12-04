@@ -1,7 +1,7 @@
 // Library
 import React from 'react';
 
-import Form from '../../../../../src/Form';
+import Form from '../../../../../src/framework';
 import stepper from './form-bundler';
 
 export default function FormComponent() {

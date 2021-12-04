@@ -12,3 +12,15 @@ generator/package.json
 coverage
 .husky
 src/fields/components/**/package-lock.json
+src/framework
+src/universal-schema/ui-framework.ts
+src/universal-schema/types/ui-framework.type.ts
+scripts/installer/templates/react/src/ui-framework/index.ts
+package-lock.json
+temp
+scripts/installer/frameworks/**/config
+scripts/installer/frameworks/**/helpers
+scripts/installer/frameworks/**/universal-schema
+scripts/installer/frameworks/**/src/types
+scripts/generator/package-lock.json
+scripts/generator/package.json

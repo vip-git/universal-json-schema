@@ -6,7 +6,7 @@ import VersionContext from './context/version.context';
 import Menu from './menu';
 import Body from './body';
 import './main.scss'; // eslint-disable-line import/no-unresolved,import/no-extraneous-dependencies
-import examples from './examples';
+import examples from '../../examples';
 
 const styles = ({});
 const hash = window.location.hash.replace('#', '');

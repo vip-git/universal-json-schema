@@ -1,4 +1,4 @@
-import example from '../examples';
+import example from '../../../examples';
 
 const { simple, nested } = example[3];
 

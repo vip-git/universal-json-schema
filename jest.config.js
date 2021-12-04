@@ -6,6 +6,16 @@ module.exports = {
 		'<rootDir>/node_modules/regenerator-runtime/runtime',
 		'<rootDir>/scripts/config/polyfills.js'
 	],
+	moduleNameMapper: {
+		"^@root(.*)$": "<rootDir>/src/types$1",
+        "^@utils(.*)$": "<rootDir>/src/helpers/utils$1",
+        "^@config(.*)$": "<rootDir>/src/config$1",
+        "^@helpers(.*)$": "<rootDir>/src/helpers$1",
+        "^@universal-schema(.*)$": "<rootDir>/src/universal-schema$1",
+        "^@cross-framework-wrapper(.*)$": "<rootDir>/src/cross-framework-wrapper$1",
+        "^@generated(.*)$": "<rootDir>/src/framework/generated$1",
+        "^@framework(.*)$": "<rootDir>/src/framework$1",
+	},
 	snapshotSerializers: ['enzyme-to-json/serializer'],
 	setupFilesAfterEnv: ['<rootDir>/scripts/config/jest/setup.js'],
 	testMatch: [
@@ -27,8 +37,9 @@ module.exports = {
         '<rootDir>/src/__e2e__',
 		'<rootDir>/src/generated',
 		// Ignore Compiled folders
+		'<rootDir>/src/index.ts',
 		'<rootDir>/src/fields/components/(Checkbox|CreatableSelect|Input|EmptyDiv|MaterialSelect|RadioGroup|ReactSelect|RichTextEditor)/dist',
-		'<rootDir>/src/fields/utils/(enum-utils|parse-values)/dist',
+		'<rootDir>/src/parsers/(enum-utils|parse-values)/dist',
 		'<rootDir>/src/fields/interceptors/(translate-currency|translate-range-date|translate-ratings)/dist',
 	],
 	testEnvironment: 'jsdom',

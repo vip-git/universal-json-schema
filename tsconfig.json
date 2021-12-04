@@ -3,11 +3,16 @@
       "allowSyntheticDefaultImports": true,
       "paths": {
         "@core-types/*": ["./src/types/*"],
-        "@utils/*": ["./src/fields/utils/*"],
+        "@utils/*": ["./src/helpers/utils/*"],
         "@config/*": ["./src/config/*"],
+        "@helpers/*": ["./src/helpers/*"],
+        "@universal-schema/*": ["./src/universal-schema/*"],
+        "@cross-framework-wrapper/*": ["./src/cross-framework-wrapper/*"],
+        "@generated/*": ["./src/framework/generated/*"],
+        "@framework/*": ["./src/framework/*"],
       },
       "forceConsistentCasingInFileNames": true,
-      "module": "es6",
+      "module": "esnext",
       "moduleResolution": "node",
       "preserveConstEnums": true,
       "declaration": true,
@@ -16,7 +21,7 @@
       "noLib": false,
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "target": "es6",
+      "target": "esnext",
       "resolveJsonModule": true,
       "sourceMap": true,
       "allowJs": true,
@@ -41,7 +46,8 @@
     },
     "exclude": [
       "**/*.spec.ts",
-      "**/*.spec.tsx"
+      "**/*.spec.tsx",
+      "scripts/installer/**/*"
     ],
     "include": [
       "src/**/*",
