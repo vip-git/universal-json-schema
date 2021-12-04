@@ -5,26 +5,30 @@ import React from 'react';
 import AdapterMoment from '@mui/lab/AdapterMoment';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
+const LocalizationProviderContext: any = LocalizationProvider;
+
 const FormContextWrapper = ({
     RenderFormButtons,
     children, 
     actionButtonPos, 
     hasPageLayoutSteps, 
     isFormLoading
-}) => (<>
-{
-!isFormLoading && (actionButtonPos === 'top' && !hasPageLayoutSteps) && (
-    <RenderFormButtons />
+}) => (
+    <>
+        {
+            !isFormLoading && (actionButtonPos === 'top' && !hasPageLayoutSteps) && (
+                <RenderFormButtons />
+            )
+        }
+        <LocalizationProviderContext dateAdapter={AdapterMoment}>
+            {children}
+        </LocalizationProviderContext>
+        {
+            !isFormLoading && (!actionButtonPos && !hasPageLayoutSteps) && (
+                <RenderFormButtons />
+            )
+        }
+    </>
 )
-}
-<LocalizationProvider dateAdapter={AdapterMoment}>
-    {children}
-</LocalizationProvider>
-{
-!isFormLoading && (!actionButtonPos && !hasPageLayoutSteps) && (
-    <RenderFormButtons />
-)
-}
-</>)
 
 export default FormContextWrapper;
