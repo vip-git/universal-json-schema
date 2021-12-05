@@ -4,12 +4,29 @@
 name: Create New Release
 
 on:
+  workflow_dispatch:
   release:
     types: [created]
 
 jobs:
+  validate-build:
+    if: "!github.event.release.prelease"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14    
+      - run: npm install -g json    
+      - run: |
+              if [[ $(npm view react-jsonschema-form-material-ui version) != $(json -f package.json version) ]]; then
+                echo "Creating New Release"
+              fi
+              exit 1
+          
   build:
     if: "!github.event.release.prerelease"
+    needs: validate-build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
