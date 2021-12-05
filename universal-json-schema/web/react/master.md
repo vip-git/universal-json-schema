@@ -2,9 +2,10 @@
 cover: >-
   https://images.unsplash.com/photo-1546900703-cf06143d1239?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxOTcwMjR8MHwxfHNlYXJjaHw3fHxjb2RlfGVufDB8fHx8MTYzNDY2OTAxMg&ixlib=rb-1.2.1&q=85
 coverY: 107.31064483111572
+description: React JSON Schema Form (Material UI)
 ---
 
-# React Json Schema Form (Mui)
+# Material UI
 
 [![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge\_key=MzZ5RE5vdml6Yk5EM0JTZ3l5cGxJKzVLRWlqNVdHbDkzdkprejFkSWZtZz0tLTdxdGFIY3F5a2pXSmNMM2ZLaVMwQ3c9PQ==--74a6da6f146182f21dbe380708e81c257b1cefab%)](https://automate.browserstack.com/public-build/MzZ5RE5vdml6Yk5EM0JTZ3l5cGxJKzVLRWlqNVdHbDkzdkprejFkSWZtZz0tLTdxdGFIY3F5a2pXSmNMM2ZLaVMwQ3c9PQ==--74a6da6f146182f21dbe380708e81c257b1cefab%) [![GitHub package.json version](https://img.shields.io/github/package-json/v/vip-git/react-jsonschema-form-material-ui?style=plastic)](https://github.com/vip-git/react-jsonschema-form-material-ui) [![npm](https://img.shields.io/npm/dt/react-jsonschema-form-material-ui)](https://www.npmjs.com/package/react-jsonschema-form-material-ui) [![GitHub issues](https://img.shields.io/github/issues/vip-git/react-jsonschema-form-material-ui)](https://github.com/vip-git/react-jsonschema-form-material-ui/issues/) [![GitHub pull requests](https://img.shields.io/github/issues-pr/vip-git/react-jsonschema-form-material-ui)](https://github.com/vip-git/react-jsonschema-form-material-ui/pulls/)
 

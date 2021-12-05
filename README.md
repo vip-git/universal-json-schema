@@ -6,7 +6,7 @@ description: This document explains the concept on universal JSON Schema
 
 ## Web
 
-* [React JSON Schema](universal-json-schema/master.md)
+* [React JSON Schema](universal-json-schema/web/react/master.md)
 * Angular JSON Schema
 * Vue JSON Schema
 * Stencil JSON Schema
