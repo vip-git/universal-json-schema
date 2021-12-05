@@ -20,7 +20,7 @@ jobs:
       - run: npm run build
       - run: npx jest --env=jsdom --config=jest.config.js --coverage --ci --updateSnapshot --detectOpenHandles --forceExit
 
-  publish-npm:
+  publish-npm-react:
     if: "!github.event.release.prerelease"
     needs: build
     runs-on: ubuntu-latest
@@ -34,12 +34,13 @@ jobs:
       - run: npm run build
       - run: npx tsc index.js --declaration --allowJs --emitDeclarationOnly --skipLibCheck --outDir .
       - run: npm install -g json
+      - run: json -I -f package.json -e 'this.name="react-jsonschema-form-material-ui"'
       - run: json -I -f package.json -e 'this.scripts.postinstall="echo done"'
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
-  publish-gpr:
+  publish-gp-react:
     if: "!github.event.release.prerelease"
     needs: build
     runs-on: ubuntu-latest
