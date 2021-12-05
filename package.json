@@ -1,12 +1,12 @@
 {
   "author": "Vipin Tanna",
-  "homepage": "https://universal-json-schema.app",
+  "homepage": "https://docs.universal-json-schema.app",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vip-git/universal-jsonschema-form-material-ui.git"
+    "url": "git+https://github.com/vip-git/universal-json-schema.git"
   },
   "bugs": {
-    "url": "https://github.com/vip-git/universal-jsonschema-form-material-ui/issues"
+    "url": "https://github.com/vip-git/universal-json-schema/issues"
   },
   "scripts": {
     "postinstall": "ts-node scripts/installer/index.ts --reactMUI",
