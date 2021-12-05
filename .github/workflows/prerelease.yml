@@ -17,7 +17,6 @@ jobs:
         with:
           node-version: 14
       - run: npm install
-      - run: npm run install-react-mui
       - run: npm run build
       - run: npx jest --env=jsdom --config=jest.config.js --coverage --ci --updateSnapshot --detectOpenHandles --forceExit
 
@@ -32,7 +31,6 @@ jobs:
           node-version: 14
           registry-url: https://registry.npmjs.org/
       - run: npm install
-      - run: npm run install-react-mui
       - run: npm run build
       - run: npm install -g json
       - run: json -I -f package.json -e 'this.scripts.postinstall="echo done"'
@@ -51,7 +49,6 @@ jobs:
           node-version: 14
           registry-url: https://npm.pkg.github.com/
       - run: npm install
-      - run: npm run install-react-mui
       - run: npm run build
       - run: npm install -g json
       - run: json -I -f package.json -e 'this.name="@vip-git/react-jsonschema-form-material-ui"'
