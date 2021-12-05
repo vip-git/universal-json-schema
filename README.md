@@ -1,5 +1,9 @@
 # React Json Schema Form \(Mui\)
-
+```
+This Project will soon become a umbrella repo for JSON Schema Support to major Frameworks and UI Frameworks. 
+```
+More info on this has been outlined in [Universal JSON Schema](./universal-json-schema.md) document.
+#
 [![codecov](https://codecov.io/gh/vip-git/react-jsonschema-form-material-ui/branch/main/graph/badge.svg?token=NAyWIbQN4g)](https://codecov.io/gh/vip-git/react-jsonschema-form-material-ui) [![Known Vulnerabilities](https://snyk.io/test/github/vip-git/react-jsonschema-form-material-ui/badge.svg?targetFile=package.json)](https://snyk.io/test/github/vip-git/react-jsonschema-form-material-ui?targetFile=package.json) [![GitHub package.json version](https://img.shields.io/github/package-json/v/vip-git/react-jsonschema-form-material-ui?style=plastic)](https://github.com/vip-git/react-jsonschema-form-material-ui) [![npm](https://img.shields.io/npm/dt/react-jsonschema-form-material-ui)](https://www.npmjs.com/package/react-jsonschema-form-material-ui) [![GitHub issues](https://img.shields.io/github/issues/vip-git/react-jsonschema-form-material-ui)](https://github.com/vip-git/react-jsonschema-form-material-ui/issues/) [![GitHub pull requests](https://img.shields.io/github/issues-pr/vip-git/react-jsonschema-form-material-ui)](https://github.com/vip-git/react-jsonschema-form-material-ui/pulls/)
  
 
