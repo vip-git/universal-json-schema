@@ -1,12 +1,12 @@
 {
   "author": "Vipin Tanna",
-  "homepage": "https://react-json-schema.app",
+  "homepage": "https://docs.universal-json-schema.app",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vip-git/react-jsonschema-form-material-ui.git"
+    "url": "git+https://github.com/vip-git/universal-json-schema.git"
   },
   "bugs": {
-    "url": "https://github.com/vip-git/react-jsonschema-form-material-ui/issues"
+    "url": "https://github.com/vip-git/universal-json-schema/issues"
   },
   "scripts": {
     "postinstall": "node scripts/generator/index.js",
@@ -183,7 +183,7 @@
   "peerDependencies": {
     "immutability-helper": "^2.6.5 || ^3.0.0"
   },
-  "version": "3.0.0-beta.1",
+  "version": "3.0.0-rc.0",
   "directories": {
     "doc": "docs"
   },
