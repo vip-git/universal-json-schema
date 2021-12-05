@@ -3,6 +3,8 @@
 This document explains on how this project is aiming towards becoming "Universal" JSON Schema Form rather than just "React" JSON Schema Form.
 ```
 
+Detailed Docs Can be [seen here](https://docs.universal-json-schema.com)
+
 ## Core Modules
 - Framework
   - Web   
