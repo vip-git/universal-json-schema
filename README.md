@@ -7,7 +7,7 @@
 
 A [**Material UI**](http://www.material-ui.com/) port of [**jsonschema-form.**](https://json-schema.org/)
 
-A [**live playground**](https://react-jsonschema-form-material-ui.github56.now.sh/) and [**Detailed Docs**](https://react-json-schema.app/docs)
+A [**live playground**](https://react-jsonschema-form-material-ui.github56.now.sh/) and [**Detailed Docs**](https://react-json-schema.app/universal-json-schema/platform/web/react/material-ui)
 
 ## Install instructions via npm (MUI 5+)
 
