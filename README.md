@@ -11,7 +11,7 @@ More info on this has been outlined in [Universal JSON Schema](./universal-json-
 
 A [**Material UI**](http://www.material-ui.com/) port of [**jsonschema-form.**](https://json-schema.org/)
 
-A [**live playground**](https://react-jsonschema-form-material-ui.github56.now.sh/) and [**Detailed Docs**](https://react-json-schema.app/universal-json-schema/platform/web/react/material-ui)
+A [**live playground**](https://react-jsonschema-form-material-ui.github56.now.sh/) and [**Detailed Docs**](https://docs.universal-json-schema.com/universal-json-schema/platform/web/react/material-ui)
 
 ## Install instructions via npm (MUI 5+)
 
