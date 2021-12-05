@@ -13,6 +13,7 @@
       * [Svelte](universal-json-schema/platform/web/svelte.md)
       * [Vue](universal-json-schema/platform/web/vue.md)
       * [Angular](universal-json-schema/platform/web/angular.md)
+      * [Stencil](universal-json-schema/platform/web/stencil.md)
     * [Mobile](universal-json-schema/platform/mobile/README.md)
       * [React Native](universal-json-schema/platform/mobile/react-native.md)
       * [Ionic](universal-json-schema/platform/mobile/ionic.md)
