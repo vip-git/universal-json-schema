@@ -10,7 +10,7 @@ description: This document explains the concept on universal JSON Schema
 
 * **Web**
   * React&#x20;
-    * [Material UI](universal-json-schema/platform/web/react/master.md) (React JSON Schema Form Material ui)
+    * [Material UI](universal-json-schema/platform/web/react/material-ui/) (React JSON Schema Form Material ui)
   * Angular&#x20;
   * Vue&#x20;
   * Stencil&#x20;
