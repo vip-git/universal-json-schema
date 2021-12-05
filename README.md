@@ -9,12 +9,12 @@ description: This document explains the concept on universal JSON Schema
 ## Platform
 
 * **Web**
-  * React JSON Schema
-    * [Material UI](universal-json-schema/platform/web/react/master.md) (React JSON Schema Material ui)
-  * Angular JSON Schema
-  * Vue JSON Schema
-  * Stencil JSON Schema
-  * Svelte JSON Schema
+  * React&#x20;
+    * [Material UI](universal-json-schema/platform/web/react/master.md) (React JSON Schema Form Material ui)
+  * Angular&#x20;
+  * Vue&#x20;
+  * Stencil&#x20;
+  * Svelte&#x20;
 * **Mobile**
   * React Native
   * Native Script
