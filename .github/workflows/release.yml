@@ -4,7 +4,6 @@
 name: Create New Release
 
 on:
-  workflow_dispatch:
   release:
     types: [created]
 
@@ -19,7 +18,7 @@ jobs:
           node-version: 14    
       - run: npm install -g json    
       - run: |
-              if [[ $(npm view react-jsonschema-form-material-ui version) != $(json -f package.json version) ]]; then
+              if [[ $(npm view react-jsonschema-form-material-ui version) != $(json -f scripts/installer/frameworks/react/package.json version) ]]; then
                 echo "Creating New Release"
               fi
               exit 1
