@@ -18,7 +18,7 @@ A [**live playground**](https://react-jsonschema-form-material-ui.github56.now.s
 ```text
 npm install --save react-jsonschema-form-material-ui
 ```
->Follow [Releases page](https://github.com/vip-git/react-jsonschema-form-material-ui/releases) to use latest or preleased tags.
+>Follow [Releases page](https://github.com/vip-git/universal-json-schema/releases) to use latest or preleased tags.
 
 #### For legacy version of < MUI 4 
 ```text
@@ -54,7 +54,7 @@ export default () => {
 
 ## Advanced Example Usage
 
-> More detailed example can be seen [here](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/main/demo/web/react/body/Example.jsx#L39)
+> More detailed example can be seen [here](https://github.com/vip-git/universal-json-schema/blob/main/demo/web/react/body/Example.jsx#L39)
 
 ```jsx
 // Library
@@ -152,18 +152,18 @@ export default Example;
 - Demo updated with monaco editor and live validation changes
 - New interceptors to transform form and uiData using uiSchema - `ui:interceptor`
 
-> For more info you can follow our [changelog](https://github.com/vip-git/react-jsonschema-form-material-ui/blob/master/changelog.md)
+> For more info you can follow our [changelog](https://github.com/vip-git/universal-json-schema/blob/main/changelog.md)
 
 ## Contributing 
 > We welcome [all contributions](/contributing.md), enhancements, and bug-fixes. 
-> Open an [issue on GitHub](https://github.com/vip-git/react-jsonschema-form-material-ui/issues) and submit a [pull request](https://github.com/vip-git/react-jsonschema-form-material-ui/pulls).
+> Open an [issue on GitHub](https://github.com/vip-git/universal-json-schema/issues) and submit a [pull request](https://github.com/vip-git/universal-json-schema/pulls).
 
 #### Building/Testing
 To build/test the project locally on your computer:
 
 > Fork this repo and then clone
 ```
-git clone https://github.com/vip-git/react-jsonschema-form-material-ui.git
+git clone https://github.com/vip-git/universal-json-schema.git
 ```
 
 > Install dependencies and module generator
