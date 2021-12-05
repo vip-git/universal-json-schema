@@ -1,4 +1,4 @@
 # Table of contents
 
-* [React Json Schema Form (Mui)](README.md)
-* [Docs](docs.md)
+* [Universal JSON Schema](README.md)
+  * [React Json Schema Form (Mui)](universal-json-schema/master.md)
