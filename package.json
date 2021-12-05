@@ -51,7 +51,7 @@
   },
   "license": "ISC",
   "main": "index.js",
-  "name": "universal-jsonschema-form",
+  "name": "react-jsonschema-form-material-ui",
   "version": "3.0.0-rc.0",
   "directories": {
     "doc": "docs"
