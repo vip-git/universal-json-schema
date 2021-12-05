@@ -3,10 +3,10 @@
   "homepage": "https://react-json-schema.app",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vip-git/react-jsonschema-form-material-ui.git"
+    "url": "git+https://github.com/vip-git/universal-json-schema.git"
   },
   "bugs": {
-    "url": "https://github.com/vip-git/react-jsonschema-form-material-ui/issues"
+    "url": "https://github.com/vip-git/universal-json-schema/issues"
   },
   "scripts": {
     "postinstall": "cross-env FRAMEWORK_NAME=$FRAMEWORK_NAME UI_FRAMEWORK_NAME=$UI_FRAMEWORK_NAME node scripts/generator/index.js",
