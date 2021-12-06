@@ -45,3 +45,6 @@ scripts/
 changelog.md
 universal-json-schema.md
 .husky
+wdio-sauce-ci.conf.js
+wdio-package.json
+changelog.md
