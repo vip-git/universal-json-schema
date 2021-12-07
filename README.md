@@ -4,7 +4,7 @@ description: This document explains the concept on universal JSON Schema
 
 # Universal JSON Schema
 
-![Rough Diagram explaining the flow of cross framework connections](<.gitbook/assets/Screenshot 2021-12-06 at 14.29.27.png>)
+![Rough Diagram explaining the flow of cross framework connections](<.gitbook/assets/Screenshot 2021-12-07 at 09.08.20.png>)
 
 ## Platform
 
