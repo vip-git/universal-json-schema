@@ -18,10 +18,10 @@ jobs:
           node-version: 14    
       - run: npm install -g json    
       - run: |
-              if [[ $(npm view react-jsonschema-form-material-ui version) != $(json -f scripts/installer/frameworks/react/package.json version) ]]; then
-                echo "Creating New Release"
+              if [[ $(npm view react-jsonschema-form-material-ui version) == $(json -f scripts/installer/frameworks/react/package.json version) ]]; then
+                exit 1
               fi
-              exit 1
+              echo "Creating New Release"
           
   build:
     if: "!github.event.release.prerelease"
