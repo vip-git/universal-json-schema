@@ -32,7 +32,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14
-      - run: npm install
+      - run: CI_RUN=true npm install
       - run: npm run build
       - run: npx jest --env=jsdom --config=jest.config.js --coverage --ci --updateSnapshot --detectOpenHandles --forceExit
 
@@ -46,7 +46,7 @@ jobs:
         with:
           node-version: 14
           registry-url: https://registry.npmjs.org/
-      - run: npm install
+      - run: CI_RUN=true npm install
       - run: npm run build
       - run: npx tsc index.js --declaration --allowJs --emitDeclarationOnly --skipLibCheck --outDir .
       - run: npm install -g json
@@ -66,7 +66,7 @@ jobs:
         with:
           node-version: 14
           registry-url: https://npm.pkg.github.com/
-      - run: npm install
+      - run: CI_RUN=true npm install
       - run: npm run build
       - run: npx tsc index.js --declaration --allowJs --emitDeclarationOnly --skipLibCheck --outDir .
       - run: npm install -g json
