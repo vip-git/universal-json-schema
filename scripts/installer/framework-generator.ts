@@ -58,6 +58,10 @@ const frameworkGenerator = ({
         shelljs.rm('-rf', `${shelljs.pwd()}/package.json`);
         shelljs.mv(`${shelljs.pwd()}/package-original.json`, `${shelljs.pwd()}/package.json`);
     }
+
+    if (process.env.CI_RUN) {
+        shelljs.rm('-rf', `${shelljs.pwd()}/package-original.json`);
+    }
 }
 
 module.exports = frameworkGenerator;
