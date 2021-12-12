@@ -113,3 +113,5 @@ if (process.argv && process.argv.length === 3) {
         console.log(framework + ' installed successfully');
     }
 }
+
+export {};

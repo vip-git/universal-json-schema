@@ -25,7 +25,7 @@ const frameworkGenerator = ({
 
     // Dependancy and bundler info
     const frameworkPackageJson = `${shelljs.pwd()}/scripts/installer/frameworks/${frameworkName}/package.json`;
-    const frameworkBuildJSON: { copy: Array<string> } = require(`${shelljs.pwd()}/scripts/installer/frameworks/${frameworkName}/build.json`);
+    const frameworkBuildJSON: { copy: Array<string> } = require(`./frameworks/${frameworkName}/build.json`);
 
     shelljs.rm('-rf', frameworkDir);
     shelljs.rm('-rf', helpersDir);
@@ -73,9 +73,9 @@ const frameworkGenerator = ({
     shelljs.mv(`${shelljs.pwd()}/package.json`, `${shelljs.pwd()}/package-original.json`);
     shelljs.cp(frameworkPackageJson, `${shelljs.pwd()}/package.json`);
     frameworkBuildJSON.copy.forEach((buildFile) => {
-        shelljs.cp(buildFile, `${shelljs.pwd()}/${buildFile}`);
+        shelljs.cp(`${shelljs.pwd()}/scripts/installer/frameworks/${frameworkName}/${buildFile}`, `${shelljs.pwd()}/${buildFile}`);
     });
-    
+
     shelljs.exec(`cross-env INTERCEPTORS_FRAMEWORK_NAME=${interceptorFrameworkName} UTILS_FRAMEWORK_NAME=${utilsFrameworkName} COMPONENTS_FRAMEWORK_NAME=${frameworkName} UI_FRAMEWORK_NAME=${uiFrameworkName} npm install --force`);
     shelljs.exec(`cross-env INTERCEPTORS_FRAMEWORK_NAME=${interceptorFrameworkName} UTILS_FRAMEWORK_NAME=${utilsFrameworkName} COMPONENTS_FRAMEWORK_NAME=${frameworkName} UI_FRAMEWORK_NAME=${uiFrameworkName} npm run postinstall`);
 
@@ -90,3 +90,5 @@ const frameworkGenerator = ({
 }
 
 module.exports = frameworkGenerator;
+
+export {};

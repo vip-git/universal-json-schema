@@ -90,7 +90,7 @@ if (myArgs[0] && myArgs[0] === '--testsOnly') {
 
   CONFIG.modules.forEach((md) => {
     // Generate Module
-    moduleGenerator(md, componentSettings, generatedLocation, shelljs, ejs);
+    moduleGenerator(md, componentSettings, generatedLocation, shelljs, ejs, CONFIG.uiFrameworkDepKey);
   });
 
   generateE2ETests();

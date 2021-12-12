@@ -6,6 +6,7 @@ const moduleGenerator = (
   generatedLocation,
   shelljs,
   ejs,
+  uiFrameworkDepKey,
 ) => {
   const templateFile = require(`./templates/${moduleName}-config.template.js`);
   const template = ejs.compile(templateFile, {});
@@ -21,6 +22,17 @@ const moduleGenerator = (
         `npm install ${modName}@${componentSettings[moduleName][modName].version} --save-exact`,
       );
     });
+  
+  if (moduleName === 'components') {
+    Object.keys(componentSettings[uiFrameworkDepKey])
+    .filter((c) => !componentSettings[uiFrameworkDepKey][c].notAvailable)
+    .forEach((modName) => {
+      shelljs.exec(
+        `npm install ${modName}@${componentSettings[uiFrameworkDepKey][modName].version} --save-exact`,
+      );
+    });
+  }  
+    
   if (moduleName === 'interceptors') {
     shelljs.cp(
       '-R',
