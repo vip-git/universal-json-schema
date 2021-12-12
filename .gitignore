@@ -30,3 +30,5 @@ demo/web/svelte/public/build
 /rollup.config.js
 /tsconfig.json
 /webpack.config.js
+/stencil.config.ts
+/custom-elements.json

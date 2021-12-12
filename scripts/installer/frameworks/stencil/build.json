@@ -1,0 +1,7 @@
+{
+    "copy": [
+        "custom-elements.json",
+        "tsconfig.json",
+        "stencil.config.ts"
+    ]
+}
