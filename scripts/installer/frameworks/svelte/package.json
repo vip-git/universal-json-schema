@@ -45,6 +45,7 @@
   },
   "description": "Material UI implementation of svelte-jsonschema-form with UI and XHR Schema.",
   "devDependencies": {
+    "sirv-cli": "1.0.0",
     "@rollup/plugin-commonjs": "17.0.0",
     "@rollup/plugin-node-resolve": "11.0.0",
     "@rollup/plugin-typescript": "8.0.0",
