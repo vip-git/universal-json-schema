@@ -1,0 +1,35 @@
+{
+  "version": 1.2,
+  "tags": [
+    {
+      "name": "my-component",
+      "path": "./src/components/my-component/my-component.tsx",
+      "description": "",
+      "attributes": [
+        {
+          "name": "first",
+          "type": "string",
+          "description": "The first name",
+          "required": false
+        },
+        {
+          "name": "last",
+          "type": "string",
+          "description": "The last name",
+          "required": false
+        },
+        {
+          "name": "middle",
+          "type": "string",
+          "description": "The middle name",
+          "required": false
+        }
+      ],
+      "events": [],
+      "methods": [],
+      "slots": [],
+      "cssProperties": [],
+      "cssParts": []
+    }
+  ]
+}

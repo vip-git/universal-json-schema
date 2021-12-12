@@ -1,5 +1,5 @@
 const CONFIG = {
-  modules: ['components', 'utils', 'interceptors'],
+  modules: ['uiFramework', 'components', 'utils', 'interceptors'],
 };
 
 const folderHashMapping = {

@@ -1,4 +1,3 @@
-/* eslint-disable react/state-in-constructor */
 import React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
