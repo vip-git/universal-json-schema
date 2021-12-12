@@ -14,7 +14,7 @@
     "install-vue-mui": "ts-node scripts/installer/index.ts --vueMUI",
     "install-react-native-paper": "ts-node scripts/installer/index.ts --reactNativePaper",
     "install-angular-mui": "ts-node scripts/installer/index.ts --angularMUI",
-    "install-stencil-ionic": "ts-node scripts/installer/index.ts --stencilIonic",
+    "install-stencil-duetds": "ts-node scripts/installer/index.ts --stencilDuetds",
     "install-svelte-mui": "ts-node --project scripts/installer/frameworks/svelte/tsconfig.json scripts/installer/index.ts --svelteMUI",
     "build": "rollup -c",
     "build:demo": "cross-env NODE_ENV=production webpack --config webpack.config.demo.js",

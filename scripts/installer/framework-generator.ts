@@ -90,5 +90,3 @@ const frameworkGenerator = ({
 }
 
 module.exports = frameworkGenerator;
-
-export {};

@@ -1,0 +1,44 @@
+{
+    "name": "JSON Schema Components",
+    "uiFramework": {
+        "@duetds/components": {
+            "version": "4.32.0"
+        }
+    },
+    "utils": {
+    },
+    "interceptors": {
+    },
+	"components": {
+        "@react-jsonschema-form-components/material-select": {
+            "version": "3.0.0",
+            "type": "string",
+            "isEnum": true,
+            "isRequired": true,
+            "name": "material-select",
+            "utils": [
+              "@react-jsonschema-form-utils/enum-utils",
+              "@react-jsonschema-form-utils/parse-values"
+            ]
+        },
+        "@react-jsonschema-form-components/material-input": {
+            "version": "3.0.0",
+            "type": "string",
+            "isEnum": false,
+            "isDefault": true,
+            "name": "material-input",
+            "utils": [
+              "@react-jsonschema-form-utils/enum-utils",
+              "@react-jsonschema-form-utils/parse-values"
+            ]
+        },
+        "@react-jsonschema-form-components/empty-div": {
+            "version": "3.0.0",
+            "type": "null",
+            "isEnum": false,
+            "hasDist": true,
+            "isDefault": true,
+            "name": "empty-div"
+        }
+    }
+}

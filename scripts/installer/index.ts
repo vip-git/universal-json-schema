@@ -76,14 +76,14 @@ if (process.argv && process.argv.length === 3) {
             });
             break;
         
-        case 'stencilIonic':
-            const stencilUIFrameworkTemplate = `import { uiFramework } from './mui.framework';
+        case 'stencilDuetds':
+            const stencilUIFrameworkTemplate = `import { uiFramework } from './duetds.framework';
             export { uiFramework };
             `;
             generateFramework({ 
                 shelljs,
                 frameworkName: 'stencil',
-                uiFrameworkName: 'mui',
+                uiFrameworkName: 'duetds',
                 uiFrameworkTemplate: stencilUIFrameworkTemplate,
                 interceptorFrameworkName: 'stencil',
                 utilsFrameworkName: 'stencil'
@@ -113,5 +113,3 @@ if (process.argv && process.argv.length === 3) {
         console.log(framework + ' installed successfully');
     }
 }
-
-export {};
