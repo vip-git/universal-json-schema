@@ -12,13 +12,42 @@
  */
 // Library
 const shelljs = require('shelljs');
+const inquirer = require('inquirer');
 const generateFramework = require('./framework-generator');
 
-if (process.argv && process.argv.length === 3) {
-    const framework = process.argv[2].replace('--', '');
-    
+const frameworks = {
+    reactMUI: 'reactMUI',
+    vueMUI: 'vueMUI',
+    reactNativePaper: 'reactNativePaper',
+    angularMUI: 'angularMUI',
+    stencilDuetds: 'stencilDuetds',
+    svelteMUI: 'svelteMUI'
+}
+
+const askWhichFrameworkToInstall = () => inquirer
+.prompt([
+    {
+      type: 'list',
+      name: 'framework',
+      message: 'What would you like to install ?',
+      choices: Object.keys(frameworks),
+    },
+])
+.then((answers) => {
+    installFramework(answers.framework);
+});
+
+const installFramework = (framework) => {
+    const { 
+        reactMUI,
+        vueMUI,
+        reactNativePaper,
+        angularMUI,
+        stencilDuetds,
+        svelteMUI
+    } = frameworks;
     switch (framework) {
-        case 'reactMUI': 
+        case reactMUI: 
             const reactUIFrameworkTemplate = `import { uiFramework } from './mui.framework';
             export { uiFramework };
             `;
@@ -32,7 +61,7 @@ if (process.argv && process.argv.length === 3) {
             });
             break;
         
-        case 'vueMUI':
+        case vueMUI:
             const vueUIFrameworkTemplate = `import { uiFramework } from './mui.framework';
             export { uiFramework };
             `;
@@ -46,7 +75,7 @@ if (process.argv && process.argv.length === 3) {
             });
             break;
 
-        case 'reactNativePaper':
+        case reactNativePaper:
             const rnUIFrameworkTemplate = `import { uiFramework } from './rnpaper.framework';
             export { uiFramework };
             `;
@@ -62,7 +91,7 @@ if (process.argv && process.argv.length === 3) {
             //shelljs.rm('-rf', `${shelljs.pwd()}/scripts/installer/frameworks/react-native/cross-framework-wrapper/react/form-field-styles.ts`);
             break;
         
-        case 'angularMUI':
+        case angularMUI:
             const angularUIFrameworkTemplate = `import { uiFramework } from './mui.framework';
             export { uiFramework };
             `;
@@ -76,7 +105,7 @@ if (process.argv && process.argv.length === 3) {
             });
             break;
         
-        case 'stencilDuetds':
+        case stencilDuetds:
             const stencilUIFrameworkTemplate = `import { uiFramework } from './duetds.framework';
             export { uiFramework };
             `;
@@ -90,7 +119,7 @@ if (process.argv && process.argv.length === 3) {
             });
             break;
         
-        case 'svelteMUI':
+        case svelteMUI:
             const svelteUIFrameworkTemplate = `import { uiFramework } from './mui.framework';
             export { uiFramework };
             `;
@@ -105,11 +134,19 @@ if (process.argv && process.argv.length === 3) {
             break;
         
         default:
-            console.log('Nothing generated - please provide one of reactMUI, vueMUI, reactNativePaper, angularMUI, stencilIonic or svelteMUI');
+            console.log(' you selected ', framework );
             break;
     }
+}
 
+if (process.argv && process.argv.length === 3) {
+    const framework = process.argv[2].replace('--', '');
+    
+    installFramework(framework);
+    
     if (framework) {
         console.log(framework + ' installed successfully');
     }
+} else {
+    askWhichFrameworkToInstall()
 }

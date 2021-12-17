@@ -9,13 +9,13 @@
     "url": "https://github.com/vip-git/universal-json-schema/issues"
   },
   "scripts": {
-    "postinstall": "ts-node scripts/installer/index.ts --reactMUI",
+    "postinstall": "TS_NODE_COMPILER_OPTIONS='{\"isolatedModules\": false }' ts-node scripts/installer/index.ts",
     "install-react-mui": "ts-node --project scripts/installer/frameworks/react/tsconfig.json scripts/installer/index.ts --reactMUI",
     "install-vue-mui": "ts-node scripts/installer/index.ts --vueMUI",
     "install-react-native-paper": "ts-node scripts/installer/index.ts --reactNativePaper",
     "install-angular-mui": "ts-node scripts/installer/index.ts --angularMUI",
     "install-stencil-duetds": "ts-node scripts/installer/index.ts --stencilDuetds",
-    "install-svelte-mui": "ts-node --project scripts/installer/frameworks/svelte/tsconfig.json scripts/installer/index.ts --svelteMUI",
+    "install-svelte-mui": "TS_NODE_COMPILER_OPTIONS='{\"isolatedModules\": false }' ts-node --project scripts/installer/frameworks/svelte/tsconfig.json scripts/installer/index.ts --svelteMUI",
     "build": "rollup -c",
     "build:demo": "cross-env NODE_ENV=production webpack --config webpack.config.demo.js",
     "generate:tests": "node scripts/generator/index.js --testsOnly",
@@ -33,7 +33,11 @@
     "test:e2e": "npx wdio run wdio.conf.js",
     "test:e2e:browserstack:ci": "npx wdio run wdio-ci.conf.js",
     "test:e2e:sauce:ci": "npx wdio run wdio-sauce-ci.conf.js",
-    "posttest": "npm run lint"
+    "posttest": "npm run lint",
+    "svelte:build": "npx rollup -c",
+    "svelte:dev": "npx rollup -c -w",
+    "svelte:start": "npx sirv demo/web/svelte/public --no-clear",
+    "svelte:check": "npx svelte-check --tsconfig ./tsconfig.json"
   },
   "pre-commit": [
     "lint",
@@ -43,7 +47,9 @@
     "cross-env": "7.0.3",
     "ts-node": "10.4.0",
     "shelljs": "0.8.4",
-    "typescript": "4.3.2"
+    "typescript": "4.3.2",
+    "ejs": "3.1.6",
+    "inquirer": "8.2.0"
   },
   "description": "universal-jsonschema-form with UI and XHR Schema.",
   "devDependencies": {

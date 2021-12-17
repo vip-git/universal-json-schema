@@ -16,6 +16,13 @@ const frameworkGenerator = ({
     interceptorFrameworkName,
     utilsFrameworkName
 }) => {
+    const cleanUpFiles = [
+        "custom-elements.json",
+        "tsconfig.json",
+        "stencil.config.ts",
+        "rollup.config.js",
+        "webpack.config.js"
+    ];
     const frameworkDir = `${shelljs.pwd()}/src/framework`;
     const helpersDir = `${shelljs.pwd()}/scripts/installer/frameworks/${frameworkName}/helpers`;
     const configDir = `${shelljs.pwd()}/scripts/installer/frameworks/${frameworkName}/config`;
@@ -26,6 +33,10 @@ const frameworkGenerator = ({
     // Dependancy and bundler info
     const frameworkPackageJson = `${shelljs.pwd()}/scripts/installer/frameworks/${frameworkName}/package.json`;
     const frameworkBuildJSON: { copy: Array<string> } = require(`./frameworks/${frameworkName}/build.json`);
+
+    cleanUpFiles.forEach((cf) => {
+        shelljs.rm('-rf', `${shelljs.pwd()}/${cf}`);
+    });
 
     shelljs.rm('-rf', frameworkDir);
     shelljs.rm('-rf', helpersDir);
