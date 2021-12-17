@@ -37,7 +37,15 @@
     "svelte:build": "npx rollup -c",
     "svelte:dev": "npx rollup -c -w",
     "svelte:start": "npx sirv demo/web/svelte/public --no-clear",
-    "svelte:check": "npx svelte-check --tsconfig ./tsconfig.json"
+    "svelte:check": "npx svelte-check --tsconfig ./tsconfig.json",
+    "stencil:build": "stencil build --docs",
+    "stencil:build-storybook": "build-storybook",
+    "stencil:dev": "stencil build --watch --serve",
+    "stencil:generate": "stencil generate",
+    "stencil:lint": "eslint src/**/*{.ts,.tsx}",
+    "stencil:serve": "serve www -p 5000",
+    "stencil:start": "run-p dev storybook",
+    "stencil:storybook": "start-storybook -p 6006 -s dist/"
   },
   "pre-commit": [
     "lint",

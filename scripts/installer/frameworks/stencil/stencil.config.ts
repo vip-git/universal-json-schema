@@ -59,6 +59,7 @@ async function generateCustomElementsJson(docsData: JsonDocs) {
 export const config: Config = {
   namespace: 'stencil-boilerplate',
   taskQueue: 'async',
+  srcDir: 'demo/web/stencil',
   outputTargets: [
     {
       type: 'dist',

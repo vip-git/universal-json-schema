@@ -3,7 +3,7 @@
   "tags": [
     {
       "name": "my-component",
-      "path": "./src/components/my-component/my-component.tsx",
+      "path": "./demo/web/stencil/components/my-component/my-component.tsx",
       "description": "",
       "attributes": [
         {
