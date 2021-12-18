@@ -57,28 +57,28 @@
         }
     },
     "utils": {
-        "@react-jsonschema-form-utils/enum-utils": {
+        "@universal-json-schema-utils/enum-utils": {
             "version": "2.0.1",
             "name": "enum-utils",
             "isRequired": true
         },
-        "@react-jsonschema-form-utils/parse-values": {
+        "@universal-json-schema-utils/parse-values": {
             "version": "2.0.1",
             "name": "parse-values",
             "isRequired": true
         }
     },
     "interceptors": {
-        "@react-jsonschema-form-interceptors/translate-ratings": {
+        "@universal-json-schema-interceptors/translate-ratings": {
             "version": "2.0.0",
             "name": "translate-ratings"
         },
-        "@react-jsonschema-form-interceptors/translate-currency": {
+        "@universal-json-schema-interceptors/translate-currency": {
             "version": "2.0.0",
             "name": "translate-currency",
             "isRequired": true
         },
-        "@react-jsonschema-form-interceptors/translate-range-date": {
+        "@universal-json-schema-interceptors/translate-range-date": {
             "version": "2.0.0",
             "name": "translate-range-date"
         }
