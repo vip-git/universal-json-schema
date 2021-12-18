@@ -29,7 +29,7 @@ const askWhichFrameworkToInstall = () => inquirer
     {
       type: 'list',
       name: 'framework',
-      message: 'What would you like to install ?',
+      message: 'Which framework would you like to install ?',
       choices: Object.keys(frameworks),
     },
 ])
@@ -147,6 +147,10 @@ if (process.argv && process.argv.length === 3) {
     if (framework) {
         console.log(framework + ' installed successfully');
     }
+} else if (process.env.FRAMEWORK) {
+    const framework = process.env.FRAMEWORK;
+    installFramework(framework);
+    console.log(framework + ' installed successfully');
 } else {
     askWhichFrameworkToInstall()
 }
