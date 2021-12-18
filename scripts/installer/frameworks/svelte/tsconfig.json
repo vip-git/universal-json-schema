@@ -22,6 +22,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"],
+  "include": ["demo/web/svelte/src/**/*"],
   "exclude": ["node_modules/*", "__sapper__/*", "demo/web/svelte/public/*"]
 }

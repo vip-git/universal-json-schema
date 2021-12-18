@@ -32,7 +32,7 @@ function serve() {
 }
 
 export default {
-	input: 'demo/web/svelte/main.ts',
+	input: 'demo/web/svelte/src/main.ts',
 	output: {
 		sourcemap: true,
 		format: 'iife',
