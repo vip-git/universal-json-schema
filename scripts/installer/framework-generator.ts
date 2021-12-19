@@ -17,6 +17,7 @@ const frameworkGenerator = ({
     utilsFrameworkName
 }) => {
     const cleanUpFiles = [
+        "package-lock.json",
         "custom-elements.json",
         "tsconfig.json",
         "stencil.config.ts",

@@ -1,0 +1,24 @@
+{
+    "generate": {
+        "Form": {
+            
+            "FormFields": {
+
+                "Fieldset": {
+
+                    "Field": {
+                        "Label": {
+        
+                        },
+                        "Component": {
+
+                        },
+                        "Helper": {
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

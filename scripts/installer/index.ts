@@ -128,13 +128,13 @@ const installFramework = (framework) => {
                 frameworkName: 'svelte',
                 uiFrameworkName: 'mui',
                 uiFrameworkTemplate: svelteUIFrameworkTemplate,
-                interceptorFrameworkName: 'svelte',
-                utilsFrameworkName: 'svelte'
+                interceptorFrameworkName: 'react',
+                utilsFrameworkName: 'react'
             });
             break;
         
         default:
-            console.log(' you selected ', framework );
+            console.log(' Unrecognized Framework selected ', framework );
             break;
     }
 }

@@ -21,6 +21,7 @@
       "types/jsx.d.ts"
     ],
     "exclude": [
+      "scripts/*",
       "node_modules"
     ]
 }

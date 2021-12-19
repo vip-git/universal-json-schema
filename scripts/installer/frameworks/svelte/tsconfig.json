@@ -1,9 +1,26 @@
 {
   "display": "Svelte",
   "_version": "2.0.0",
+  "paths": {
+    "@core-types/*": ["./src/types/*"],
+    "@utils/*": ["./src/helpers/utils/*"],
+    "@config/*": ["./src/config/*"],
+    "@helpers/*": ["./src/helpers/*"],
+    "@universal-schema/*": ["./src/universal-schema/*"],
+    "@cross-framework-wrapper/*": ["./src/cross-framework-wrapper/*"],
+    "@generated/*": ["./src/framework/generated/*"],
+    "@framework/*": ["./src/framework/*"],
+  },
   "compilerOptions": {
     "moduleResolution": "node",
-    "target": "es2017",
+    "target": "es6",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     /**
       Svelte Preprocess cannot figure out whether you have a value or a type, so tell TypeScript
       to enforce using `import type` instead of `import` for Types.
@@ -20,8 +37,9 @@
     "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
   },
   "include": ["demo/web/svelte/src/**/*"],
-  "exclude": ["node_modules/*", "__sapper__/*", "demo/web/svelte/public/*"]
+  "exclude": ["node_modules/*", "__sapper__/*", "scripts/*", "demo/web/svelte/public/*"]
 }

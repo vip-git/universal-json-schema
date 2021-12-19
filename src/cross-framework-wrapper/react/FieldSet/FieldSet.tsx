@@ -91,9 +91,9 @@ const RawFieldSet = React.memo(
     
     return (
       <FieldsetHTML className={classNames(className, classes.root, { [classes.listItem]: endsWith(path, ']') })}>
-        {/* {!noTitle && (<LegendTitle />)}
+        {!noTitle && (<LegendTitle />)}
         {!noTitle && (<LegendSubTitle />)}
-        {path === '' && <ValidationMessages validation={validation} />} */}
+        {path === '' && <ValidationMessages validation={validation} />}
         <FieldSetContent path={path} {...props} />
       </FieldsetHTML>
     );
