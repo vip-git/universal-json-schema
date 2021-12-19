@@ -1,6 +1,6 @@
 {
   "author": "Vipin Tanna",
-  "homepage": "https://react-json-schema.app",
+  "homepage": "https://docs.universal-json-schema.com/universal-json-schema/platform/web/react/material-ui",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vip-git/universal-json-schema.git"
@@ -174,7 +174,7 @@
   "peerDependencies": {
     "immutability-helper": "^2.6.5 || ^3.0.0"
   },
-  "version": "3.0.0-rc.1",
+  "version": "3.0.0-rc.2",
   "directories": {
     "doc": "docs"
   },
