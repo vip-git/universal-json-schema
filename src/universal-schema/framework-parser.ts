@@ -1,7 +1,7 @@
 // Library
 const { get, has } = require('lodash');
 const ejs = require('ejs');
-const format = require('xml-formatter');
+const formatXML = require('xml-formatter');
 const shelljs = require('shelljs');
 
 // Framework
@@ -19,13 +19,55 @@ type RenderComponent = {
 
 type Components = Array<string>;
 
+type SupportedFrameworks = 'svelte'
+| 'react'
+| 'angular'
+| 'stencil'
+| 'vue'
+| 'reactNative';
+
 const markupSyntax = {
     root: '',
 };
+
+type Frameworks = Record<string, SupportedFrameworks>;
+
+const frameworks: Frameworks = {
+    react: 'react',
+    vue: 'vue',
+    angular: 'angular',
+    svelte: 'svelte',
+    stencil: 'stencil',
+    reactNative: 'reactNative'
+}
+
+const selectedFramework = frameworks.svelte;
+
+const ifComp = 'If';
+const thenComp = 'Then';
+const elseComp = 'Else';
+const conditionalComponents = [ifComp, thenComp, elseComp];
+
 let currentComponentName = '';
 const components = {
     root: []
 };
+
+const format = (markup: string) => {
+    switch (selectedFramework) {
+        case frameworks.svelte:
+            const ifOpeningSyntax = '{#if true}';
+            const ifClosingSyntax = '{/if}';
+            const elseSyntax = '{:else}';
+            return formatXML(markup)
+                    .replaceAll(`<${ifComp}>`, ifOpeningSyntax)
+                    .replaceAll(`</${ifComp}>`, ifClosingSyntax)
+                    .replaceAll(`</${elseComp}>`, '')
+                    .replaceAll(`<${elseComp}>`, elseSyntax);
+        default:
+            return formatXML(markup);
+    }
+}
 
 const getComponentDefinitionByRef = ({
     ref,
@@ -56,9 +98,9 @@ const getComponentDefinitionByRef = ({
     };
 }
 
-const generateFrameworkCode = (frameworkName) => {
-    switch (frameworkName) {
-        case 'react':
+const generateFrameworkCode = () => {
+    switch (selectedFramework) {
+        case frameworks.react:
             return reactFrameworkGenerator({
                 shelljs,
                 transformJSONtoCode,
@@ -66,7 +108,7 @@ const generateFrameworkCode = (frameworkName) => {
                 format,
                 components
             });
-        case 'svelte':
+        case frameworks.svelte:
             return svelteFrameworkGenerator({
                 shelljs,
                 transformJSONtoCode,
@@ -87,18 +129,56 @@ const transformJSONtoCode = () => {
     );
 }
 
+const appendSyntaxToElement = (syntax: string, extraComponentName?: string) => {
+    markupSyntax.root += syntax;
+    if (extraComponentName) {
+        markupSyntax[extraComponentName] += syntax;
+    }
+}
+
+const conditionalSvelteOpeningBracket = (syntax: string) => {
+    switch (syntax) {
+        case thenComp:
+            return '';
+        default:
+            return `<${syntax}>`;
+    }
+}
+
+const conditionalSvelteClosingBracket = (syntax: string) => {
+    switch (syntax) {
+        case thenComp:
+            return '';
+        default:
+            return `</${syntax}>`;
+    }
+}
+
+const openingBracket = (syntax: string) => {
+    switch (selectedFramework) {
+        case frameworks.svelte:
+            return conditionalSvelteOpeningBracket(syntax);
+        default:
+            return `<${syntax}>`;
+    }
+};
+const closingBracket = (syntax: string) => {
+    switch (selectedFramework) {
+        case frameworks.svelte:
+            return conditionalSvelteClosingBracket(syntax);
+        default:
+            return `</${syntax}>`;
+    }
+}
+
+
 
 const generateTreeMarkup = (markupArray: any, parent, extraComponentName?: string) => {
     for (const mk in markupArray) {
         const ma = markupArray[mk];
         for (const componentName in ma) {
             currentComponentName = componentName;
-            const ifComp = 'If';
-            const thenComp = 'Then';
-            const elseComp = 'Else';
-            const conditionalComponents = [ifComp, thenComp, elseComp];
             const modifiedCompName = componentName.replace(componentName.charAt(0), componentName.charAt(0).toUpperCase());
-            
             if (
                 !components.root.includes(modifiedCompName) 
                 && !conditionalComponents.includes(modifiedCompName)
@@ -114,36 +194,44 @@ const generateTreeMarkup = (markupArray: any, parent, extraComponentName?: strin
                 components[extraComponentName].push(modifiedCompName);
             }
 
+            appendSyntaxToElement(
+                openingBracket(modifiedCompName), 
+                extraComponentName
+            );
 
-            markupSyntax.root += `<${modifiedCompName}>`;
-            if (extraComponentName) {
-                markupSyntax[extraComponentName] += `<${modifiedCompName}>`;
-            }
             /**
              * Finds if there is a if condition and generates the tag
              */
             if (componentName === 'if') {
                 if (ma[componentName].then) {
-                    markupSyntax.root += `<${thenComp}>`;
-                    if (extraComponentName) {
-                        markupSyntax[extraComponentName] += `<${thenComp}>`;
-                    }
-                        generateTreeMarkup(ma[componentName].then, parent, extraComponentName);
-                    markupSyntax.root += `</${thenComp}>`;
-                    if (extraComponentName) {
-                        markupSyntax[extraComponentName] += `</${thenComp}>`;
-                    }
+                    appendSyntaxToElement(
+                        openingBracket(thenComp),
+                        extraComponentName
+                    );
+                        generateTreeMarkup(
+                            ma[componentName].then, 
+                            parent, 
+                            extraComponentName
+                        );
+                    appendSyntaxToElement(
+                        closingBracket(thenComp),
+                        extraComponentName
+                    );
                 } 
                 if (ma[componentName].else) {
-                    markupSyntax.root += `<${elseComp}>`;
-                    if (extraComponentName) {
-                        markupSyntax[extraComponentName] += `<${elseComp}>`;
-                    }
-                        generateTreeMarkup(ma[componentName].else, parent, extraComponentName);
-                    markupSyntax.root += `</${elseComp}>`;
-                    if (extraComponentName) {
-                        markupSyntax[extraComponentName] += `</${elseComp}>`;
-                    }
+                    appendSyntaxToElement(
+                        openingBracket(elseComp),
+                        extraComponentName
+                    );
+                        generateTreeMarkup(
+                            ma[componentName].else, 
+                            parent, 
+                            extraComponentName
+                        );
+                    appendSyntaxToElement(
+                        closingBracket(elseComp),
+                        extraComponentName
+                    );
                 }
             }
             /**
@@ -160,19 +248,23 @@ const generateTreeMarkup = (markupArray: any, parent, extraComponentName?: strin
              * Finds if there are components mentioned to external json
              */
             else if (ma[componentName].components) {
-                generateTreeMarkup(ma[componentName].components, parent, extraComponentName);
+                generateTreeMarkup(
+                    ma[componentName].components, 
+                    parent, 
+                    extraComponentName
+                );
             }
-            markupSyntax.root += `</${modifiedCompName}>`;
-            if (extraComponentName) {
-                markupSyntax[extraComponentName] += `</${modifiedCompName}>`;
-            }
+            appendSyntaxToElement(
+                closingBracket(modifiedCompName), 
+                extraComponentName
+            );
         }
     };
     return markupSyntax;
 }
 
 try {
-    const jsonComponents = generateFrameworkCode('svelte');
+    const jsonComponents = generateFrameworkCode();
     // const transformedJsonComponents = addClosingBrackets(jsonComponents);
     // const fullMarkup = generateMarkup(
     //     transformedJsonComponents
