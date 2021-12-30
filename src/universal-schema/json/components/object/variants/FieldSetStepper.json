@@ -2,7 +2,7 @@
     "properties": {
         "schema": {},
         "uiSchema": {},
-        "path,": {},
+        "path": {},
         "onNext": {},
         "onBack": {},
         "onSkip": {},

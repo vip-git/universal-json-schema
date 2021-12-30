@@ -3,7 +3,8 @@ const generateSvelteFramework = ({
     transformJSONtoCode,
     format,
     ejs,
-    components
+    components,
+    properties
 }) => {
     const frameworkName = 'svelte';
     shelljs.rm('-rf', `${shelljs.pwd()}/src/universal-schema/json/generated`);
@@ -20,10 +21,15 @@ const generateSvelteFramework = ({
             reactSyntax = format(`<main>${jsonComponents[componentName]}</main>`);
         }
     
-        const appTsx = `<script>
+        const appTsx = `<script lang="ts">
 // Components
 <% components.${componentName}.forEach((componentName) => { %> import <%= componentName %> from '<% if(Object.keys(components).includes(componentName)) {%>./<% } else { %>./components/<%}%><%= componentName %>.svelte';
 <% }); %>
+
+// Properties
+<% properties.${componentName}.forEach((propName) => { %>
+export let <%= propName %>;<% }) %>
+
 </script>
 
 ${reactSyntax}
@@ -36,7 +42,7 @@ import { onDestroy, onMount } from "svelte";
 <slot />
 `;
             const template = ejs.compile(appTsx, {});
-            const finalString = template({ components });
+            const finalString = template({ components, properties });
             const shellFileString = new shelljs.ShellString(finalString);  
             shellFileString.to(`${shelljs.pwd()}/src/universal-schema/json/generated/${frameworkName}/${componentName}.${frameworkName}`);
         

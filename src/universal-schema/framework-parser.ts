@@ -52,6 +52,9 @@ let currentComponentName = '';
 const components = {
     root: []
 };
+const properties = {
+    root: []
+};
 
 const format = (markup: string) => {
     switch (selectedFramework) {
@@ -106,7 +109,8 @@ const generateFrameworkCode = () => {
                 transformJSONtoCode,
                 ejs,
                 format,
-                components
+                components,
+                properties
             });
         case frameworks.svelte:
             return svelteFrameworkGenerator({
@@ -114,7 +118,8 @@ const generateFrameworkCode = () => {
                 transformJSONtoCode,
                 ejs,
                 format,
-                components
+                components,
+                properties
             });    
         default:
             return {};
@@ -123,6 +128,7 @@ const generateFrameworkCode = () => {
 
 const transformJSONtoCode = () => {
     const component = require(framework.generate.ref);
+    properties.root.push(...Object.keys(component.properties));
     return generateTreeMarkup(
         component.components,
         component
@@ -242,6 +248,10 @@ const generateTreeMarkup = (markupArray: any, parent, extraComponentName?: strin
                 const { comps, comment } = getComponentDefinitionByRef({ ref, parent });
                 markupSyntax[componentName] = '';
                 components[componentName] = [];
+                properties[componentName] = [];
+                if (comps.properties) {
+                    properties[componentName].push(...Object.keys(comps.properties));
+                }
                 generateTreeMarkup(comps.components, comps, componentName);
             }
             /**
