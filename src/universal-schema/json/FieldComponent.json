@@ -1,0 +1,189 @@
+{
+    "properties": {
+        "className": "",
+        "path": "",
+        "schema": "",
+        "data": "",
+        "uiSchema": "",
+        "xhrSchema": "",
+        "onChange": "",
+        "onXHRSchemaEvent": "",
+        "onKeyDown": "",
+        "dynamicKeyField": "",
+        "prefixId": "",
+        "widget": {},
+        "type": {},
+        "descriptionText": {},
+        "activeCompColor": {},
+        "helpText": {},
+        "Component": {},
+        "LabelComponent": {},
+        "labelComponentProps": {},
+        "title": {},
+        "componentProps": {},
+        "id": {},
+        "htmlid": {},
+        "isHidden": {},
+        "isCustomComponent": {},
+        "hasError": {},
+        "hasInlineError": {},
+        "validation": {},
+        "xhrProgress": {}
+    },
+    "methods": {
+        "getFieldStyles": {
+            "returns": {
+
+            }
+        },
+        "getFormRoot": {
+            "returns": {
+
+            }
+        },
+        "getFormLabel": {
+            "returns": {
+
+            }
+        },
+        "getWidget": {
+            "returns": {
+
+            }
+        },
+        "getOptions": {
+            "returns": {
+
+            }
+        },
+        "getDescriptionText": {
+            "returns": {
+
+            }
+        },
+        "getActiveCompColor": {
+            "returns": {
+
+            }
+        },
+        "hasInlineError": {
+            "returns": {
+
+            }
+        },
+        "getHelpText": {
+            "returns": {
+
+            }
+        },
+        "isHidden": {
+            "returns": {
+
+            }
+        },
+        "hashRef": {
+            "returns": {
+
+            }
+        },
+        "getComponentToRender": {
+            "returns": { 
+                "Component": {},
+                "LabelComponent": {},
+                "componentProps": {},
+                "labelComponentProps": {},
+                "className": {},
+                "title": {},
+                "isCustomComponent": {}
+            }
+        }
+    },
+    "components": [
+        {
+            "if": {
+                "ref": "./rules/is-form-loading.json",
+                "then": [
+                    {
+                        "Div": {
+                            "src": "div.tsx"
+                        }
+                    }
+                ],
+                "else": [
+                    {
+                        "Component": {
+                            "components": [
+                                {
+                                    "FormRoot": {
+                                        "components": [
+                                            {
+                                                "if": {
+                                                    "ref": "./rules/is-allowed-to-render-label.json",
+                                                    "then": [
+                                                        {
+                                                            "LabelComponent": {
+                                                                "src": "label-comp.tsx"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "if": {
+                                                    "ref": "./rules/is-allowed-to-render-description-text.json",
+                                                    "then": [
+                                                        {
+                                                            "Para": {
+                                                                "src": "para-comp.tsx"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "if": {
+                                                    "ref": "./rules/is-allowed-to-render-active-comp.json",
+                                                    "then": [
+                                                        {
+                                                            "ActiveComp": {
+                                                                "src": "active-comp.tsx"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "if": {
+                                                    "ref": "./rules/is-allowed-to-render-component.json",
+                                                    "then": [
+                                                        {
+                                                            "Component": {
+                                                                "src": "./component.tsx"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "if": {
+                                                    "ref": "./rules/is-allowed-to-render-helper-text.json",
+                                                    "then": [
+                                                        {
+                                                            "FormHelperText": {
+                                                                "src": "form-helper-comp.tsx"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

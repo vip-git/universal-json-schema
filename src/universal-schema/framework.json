@@ -1,24 +1,5 @@
 {
     "generate": {
-        "Form": {
-            
-            "FormFields": {
-
-                "Fieldset": {
-
-                    "Field": {
-                        "Label": {
-        
-                        },
-                        "Component": {
-
-                        },
-                        "Helper": {
-
-                        }
-                    }
-                }
-            }
-        }
+        "ref": "./json/Form.json"
     }
 }

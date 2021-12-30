@@ -1,0 +1,21 @@
+{
+    "allOf": {
+        "anyOf": [
+            {
+                "isEqual": [
+                    { 
+                        "schemaType": "object"
+                    },
+                    {
+                        "schemaType": "array"
+                    }
+                ]
+            }
+        ],
+        "isEqual": [
+            {
+                "component": false
+            }
+        ]
+    }
+}

@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "theme": {},
+    "formData": {},
+    "schema": {},
+    "xhrSchema": {},
+    "uiSchema": {},
+    "validations": {},
+    "prefixId": {},
+    "submitOnEnter": {},
+    "onChange": {},
+    "onUpload": {},
+    "onSubmit": {},
+    "onStepNext": {},
+    "onStepBack": {},
+    "onStepSkip": {},
+    "onStepReset": {},
+    "formButtons": {},
+    "actionButtonPos": {},
+    "onCancel": {},
+    "activityIndicatorEnabled": {},
+    "submitValue": {},
+    "cancelValue": {},
+    "inProgressValue": {},
+    "disabled": {},
+    "cancelVariant": {},
+    "submitVariant": {},
+    "onError": {},
+    "interceptors": {}
+  },
+  "methods": {
+    "useFormStateMachine": {
+      "ref": "./methods/use-form-state-machine.json"
+    },
+    "useFormEvents": {
+      "ref": "./methods/use-form-events.json"
+    },
+    "useStepperEvents": {
+      "ref": "./methods/use-stepper-events.json"
+    },
+    "formStyles": {
+      "ref": "./methods/use-form-styles.json"
+    },
+    "getHashCodeFromXHRDef": {
+      "ref": "./methods/hash-code-from-xhr-def.json"
+    },
+    "RenderFormButtons": {
+      "src": "./rende-form-buttons.tsx",
+      "returns": {
+        "RenderFormButtons": {}
+      }
+    },
+    "getVariables": {
+      "ref": "./use-context-variables.json"
+    },
+    "getLoadingContext": {
+      "ref": "./use-loading-context.json"
+    },
+    "getStepperContext": {
+      "ref": "./use-stepper-context.json"
+    },
+    "getEventContext": {
+      "ref": "./use-event-context.json"
+    }
+  },
+  "components": [
+    {
+      "CrossPlatformWrapper": {
+        "properties": {
+          "classes": {},
+          "uiSchema": {},
+          "defaultTheme": {},
+          "theme": {},
+          "RenderFormButtons": {},
+          "actionButtonPos": {},
+          "hasPageLayoutSteps": {},
+          "isFormLoading": {}
+        },
+        "components": [
+          {
+            "if": {
+              "ref": "./rules/is-form-loading.json",
+              "then": [
+                {
+                  "CrossPlatformLoadingWrapper": {
+                    "src": "./platform-loading-wrapper.tsx"
+                  }
+                }
+              ],
+              "else": [
+                { 
+                  "FormField": {
+                    "ref": "./FormField.json"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

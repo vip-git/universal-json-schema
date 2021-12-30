@@ -58,3 +58,4 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 .env
+src/universal-schema/json/generated

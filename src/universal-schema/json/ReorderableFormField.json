@@ -1,0 +1,21 @@
+{
+    "properties": {
+        "key": {},
+        "objectData": {},
+        "path": {},
+        "required": {},
+        "schema": {},
+        "data": {},
+        "uiSchema": {},
+        "xhrSchema": {},
+        "validation": {},
+        "dynamicKeyField": {},
+        "onDeleteItem": {},
+        "canReorder": {},
+        "definitions": {},
+        "first": {},
+        "last": {},
+        "noTitle": {}
+    },
+    "components": []
+}

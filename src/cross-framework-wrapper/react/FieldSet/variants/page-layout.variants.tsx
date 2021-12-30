@@ -1,6 +1,3 @@
-// Library
-import React from 'react';
-
 // Config
 import CONFIG from '@config/index';
 

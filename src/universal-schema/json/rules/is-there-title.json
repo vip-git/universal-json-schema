@@ -1,0 +1,27 @@
+{
+    "allOf": {
+        "anyOf": [
+            {
+                "isEqual": [
+                    { 
+                        "hideTitle": false
+                    },
+                    {
+                        "path": ""
+                    }
+                ],
+                "contains": [
+                    {
+                        "path": "."
+                    }
+                ]
+            }
+        ],
+        "isNotDefined": [
+            "schemaItemsEnum"
+        ],
+        "isDefined": [
+            "schemaTitle"
+        ]
+    }
+}

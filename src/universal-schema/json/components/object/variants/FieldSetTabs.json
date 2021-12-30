@@ -1,0 +1,84 @@
+{
+    "properties": {
+        "schema": {},
+        "path": {},
+        "xhrSchema": {},
+        "uiSchema": {},
+        "xhrProgress": {},
+        "onTabChange": {}
+    },
+    "methods": {
+        "getFieldSetTabStyle": {
+            "returns": {
+
+            }
+        },
+        "getHashCodeFromXHRDef": {
+            "returns": {
+                "hashRef": {}
+            }
+        },
+        "getSchemaProperties": {
+            "returns": {
+                "schemaProperties": {}
+            }
+        }
+    },
+    "components": [
+        {
+            "Div": {
+                "components": [
+                    {
+                        "AppBar": {
+                            "components": [
+                                {
+                                    "Tabs": {
+                                        "iterator": "#/methods/getSchemaProperties/schemaProperties",
+                                        "components": [
+                                            {
+                                                "Tab": {
+                                                    "src": "tab.tsx"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "TabPanel": {
+                            "components": [
+                                {
+                                    "if": {
+                                        "ref": "../../../rules/is-tab-loading.json",
+                                        "then": [
+                                            {
+                                                "Div": {
+                                                    "components": [
+                                                        {
+                                                            "CircularProgress": {
+                                                                "src": "CircularProgress.tsx"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "else": [
+                                            {
+                                                "FieldSetObject": {
+                                                    "src": "field-set-object.tsx"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,84 @@
+{
+    "properties": {
+        "path": {},
+        "schema": {},
+        "data": {},
+        "uiSchema": {},
+        "xhrSchema": {},
+        "onKeyDown": {},
+        "onChange": {},
+        "onXHRSchemaEvent": {},
+        "hideTitle": {},
+        "onUpdateKeyProperty": {},
+        "dynamicKeyField": {},
+        "prefixId": {}
+    },
+    "methods": {
+        "fieldSetContentStyles": {
+            "returns": {
+                "classes": {}
+            }
+        },
+        "SchemaTypeComponents": {
+            "ref": "./methods/use-schema-type-to-render.json"
+        }
+    },
+    "components": [
+        {
+            "FieldsetHTML": {
+                "components": [
+                    {
+                        "if": {
+                            "ref": "./rules/is-there-title.json",
+                            "then": [
+                                {
+                                    "LegendTitle": {
+                                        "properties": {
+                                            "className": {}
+                                        },
+                                        "src": "./legend-title.tsx"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "if": {
+                            "ref": "./rules/is-there-sub-title.json",
+                            "then": [
+                                {
+                                    "LegendSubTitle": {
+                                        "src": "./legend-sub-title.tsx"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "if": {
+                            "ref": "./rules/is-path-empty.json",
+                            "then": [
+                                {
+                                    "ValidationMessages": {
+                                        "properties": {
+                                            "validation": {}
+                                        },
+                                        "src": "./validation-messages.tsx"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "FieldSetContent": {
+                            "properties": {
+                                "ref": "parent"
+                            },
+                            "ref": "#/methods/SchemaTypeComponents~FieldSetContent"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,129 @@
+- Form (1)     
+    if (isFormLoading && !hasPageLayoutTabs)
+        - CrossPlatformLoadingWrapper (65)
+    else    
+        - FormField (2) 
+            - if schema.type === "object" || schema.type === "array" && !customComponent
+                - FieldSet (3)  
+                    - FieldsetHTML (4)
+                        if (!noTitle)
+                            - LegendTitle (5)
+                                if (!has(schema, 'items.enum') && schema.title && (!hideTitle || path === '' || path?.includes('.')))
+                                    - Typography (59)
+                                    - Divider (58)
+                                else
+                                    - Div (60)
+
+                        if (!noTitle)            
+                            - LegendSubTitle (6)
+                                if (schema.description)
+                                    - Typography (57)
+                                else    
+                                    - Div (56)
+
+                        if (path === '')            
+                            - ValidationMessages (7)
+
+                        - FieldSetContent (8)
+                            - if schema.type === "object"
+                                - RenderObjectSchema (9)
+                                    if (!uiSchema.type)
+                                        - FieldSetObject (10)
+                                            if (isTabContent)
+                                                - Div (55)
+                                                    - FormField (2)
+                                            else
+                                                - Div (53)
+                                                    for(keys(schema.properties))
+                                                        - FormField (2)  
+
+                                                if (schema.additionalProperties)        
+                                                    - Typography (54)
+
+                                                if(schema.additionalProperties)
+                                                    for(keys(data))    
+                                                    - ReorderableFormField (11)
+
+                                                if(schema.additionalProperties)
+                                                    - Div (61)
+                                                        - IconButton (62)
+                                                            - AddCircle (63)
+                                                            - Span (64)
+
+                                                if (additionalProperties < properties)
+                                                    for(keys(schema.properties))
+                                                        - FormField (2)                       
+
+                                    if (uiSchema.type === "TABS")
+                                        - FieldSetTabs (12)   
+                                            - Div (46)
+                                                - AppBar (47)
+                                                    - Tabs (48)
+                                                        for (schema.properties)
+                                                            - Tab (49)
+                                                - TabPanel (50)
+                                                    if <loading>
+                                                        - Div (51)
+                                                            - CircularProgress (52)
+                                                    else        
+                                                        - FieldSetObject (5)  
+
+                                    if (uiSchema.type === "STEPS")                  
+                                        - FieldSetStepper (13) 
+                                            - Div (31)
+                                                - Stepper (32)
+                                                    for(loop in Object.keys(uiSchema))
+                                                        - Step (33)
+                                                        - StepLabel (34)
+                                            - Div (35)
+                                                if (activeStep === steps.length)
+                                                    - Div (36)
+                                                    - Typography (37)
+                                                    - Button (38)
+                                                else   
+                                                    - Div (39)
+                                                        - Div (40)
+                                                            - FieldSetObject (5)
+                                                        - Div (41)
+                                                            - Button (42)
+                                                            if (includeSkipButton && isStepOptional(activeStep))
+                                                                - Button (43)
+                                                            - Button (44)
+                            - else if schema.type === "array"      
+                                    - FieldSetArray (14)
+                                        - RecursiveFields (15)
+                                            - ReorderableFormField (16)
+                                                - Div (12)
+                                                    - FormField (2)
+                                                    - FormField (2)
+                                                    - ReorderControls (17)
+                                            - AddNewbutton (18)
+                                        - AdditionalItems (19)
+                                            - FieldSetArray (14)
+                                        - EnumValues (20)
+                                            - FormField (2)
+                                        - ItemsArray (21)
+                                            - FormField (2)
+            - else                        
+                - Field (22)
+                    if (hashRef && xhrProgress && xhrProgress[hashRef])
+                        - Div (Loading) (45)
+                    else     
+                        - ConfiguredField (23)
+                            - FormRoot (24)
+                                if (LabelComponent && title && !isCustomComponent)
+                                    - LabelComponent (25)
+
+                                if (descriptionText && !isCustomComponent)    
+                                    - Para (26)
+
+                                if (activeCompColor && !isCustomComponent)    
+                                    - Div (29)
+                                        - ActiveComp (30)
+
+                                - Component (27)
+                                    - (Rendered from UI Framework)
+
+                                if (helpText && !isCustomComponent)
+                                    - FormHelperText (28)
+        

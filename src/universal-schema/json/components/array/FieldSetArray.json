@@ -1,0 +1,18 @@
+{
+    "methods": {
+        "getFieldSetArrayComponent": {
+            "ref": "./methods/use-fieldset-array-component.json"
+        },
+        "hasAdditionalItems": {
+
+        }
+    },
+    "components": [
+        {
+            "Items": {
+                "iterartor": "#/methods/hasAdditionalItems",
+                "ref": "#/methods/getFieldSetArrayComponent~Items"
+            }
+        }
+    ]
+}

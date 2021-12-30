@@ -1,0 +1,32 @@
+{
+    "src": "./add-new-button.tsx",
+    "components": [
+        {
+            "Div": {
+                "components": [
+                    {
+                        "IconButton": {
+                            "events": {
+                                "onClick": {
+                                    "ref": "#/methods/onAddNewProperty"
+                                }
+                            },
+                            "components": [
+                                {
+                                    "AddCircle": {
+                                        "src": "add-circle.tsx"
+                                    }
+                                },
+                                {
+                                    "Span": {
+                                        "src": "add-span.tsx"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

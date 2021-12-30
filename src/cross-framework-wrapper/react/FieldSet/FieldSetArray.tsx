@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-
 // UI
 import Framework from '@universal-schema/framework';
 
@@ -77,26 +74,29 @@ export const RawFieldSetArray = (props: FieldSetArrayProps) => {
   return (
     <Div className={classes.root}>
       {
-        Utils.callFunctionIfExists(RENDER_ARRAY_WRAPPERS({
-          schema,
-          data,
-          isRecursiveHole,
-          canReorder,
-          definitions,
-          startIdx,
-          rest,
-          onMoveItemUp,
-          onMoveItemDown,
-          onDeleteItem,
-          uiSchema,
-          path,
-          allowRecursive,
-          classes,
-          RawFieldSetArray,
-        }), Utils.getFieldSetRenderComponent({
-          schema,
-          data,
-        }))
+        Utils.callFunctionIfExists(
+          RENDER_ARRAY_WRAPPERS({
+            schema,
+            data,
+            isRecursiveHole,
+            canReorder,
+            definitions,
+            startIdx,
+            rest,
+            onMoveItemUp,
+            onMoveItemDown,
+            onDeleteItem,
+            uiSchema,
+            path,
+            allowRecursive,
+            classes,
+            RawFieldSetArray,
+          }), 
+          Utils.getFieldSetRenderComponent({
+            schema,
+            data,
+          })
+        )
       }
       {
         Utils.callFunctionIfExists(

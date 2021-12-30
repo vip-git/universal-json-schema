@@ -1,0 +1,9 @@
+{
+    "allOf": {
+        "isEqual": [
+          { 
+            "schemaType": "Object"
+          }
+        ]
+    }
+}

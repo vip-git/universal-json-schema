@@ -1,0 +1,9 @@
+{
+    "allOf": {
+        "isEqual": [
+          { 
+            "uiSchemaType": "Tabs"
+          }
+        ]
+    }
+}

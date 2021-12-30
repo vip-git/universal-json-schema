@@ -1,0 +1,33 @@
+{
+    "type": "function",
+    "src": "./use-form-state-machine.ts",
+    "properties": {
+        "xhrSchema": {},
+        "interceptors": {},
+        "originalFormInfo": {
+            "schema": {},
+            "uiSchema": {},
+            "formData": {},
+            "validations": {},
+            "xhrSchema": {}
+        },
+        "effects": {
+            "onChange": {},
+            "onError": {}
+        }
+    },
+    "returns": {
+      "formInfo": {
+        "formSchemaXHR": {},
+        "uiData": {},
+        "uiSchema": {},
+        "formData": {},
+        "activeStep": {},
+        "xhrProgress": {},
+        "validation": {}
+      },
+      "loadingState": {},
+      "buttonDisabled": {},
+      "stateMachineService": {}
+    }
+}

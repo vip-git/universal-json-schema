@@ -1,0 +1,30 @@
+{
+    "type": "function",
+    "src": "./use-form-events.ts",
+    "properties": {
+        "validation": {},
+        "stateMachineService": {},
+        "formData": {},
+        "schema": {},
+        "uiData": {},
+        "uiSchema": {},
+        "xhrSchema": {},
+        "interceptors": {},
+        "submitOnEnter": {},
+        "onSubmit": {}
+    },
+    "returns": {
+        "onTabChange": {},
+        "onMoveItemUp": {},
+        "onMoveItemDown": {},
+        "onDeleteItem": {},
+        "onAddItem": {},
+        "onAddNewProperty": {},
+        "onRemoveProperty": {},
+        "onUpdateKeyProperty": {},
+        "onFormValuesChange": {},
+        "onFormSubmit": {},
+        "onXHRSchemaEvent": {},
+        "handleKeyEnter": {}
+    }
+}

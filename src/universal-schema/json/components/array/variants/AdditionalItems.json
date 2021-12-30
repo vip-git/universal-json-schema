@@ -1,0 +1,23 @@
+{
+    "properties": {
+        "RawFieldSetArray": {},
+        "classes": {},
+        "uiSchema": {},
+        "rest": {},
+        "onMoveItemUp": {},
+        "onMoveItemDown": {},
+        "onDeleteItem": {},
+        "definitions": {},
+        "schema": {},
+        "data": {},
+        "path": {}
+    },
+    "methods": {},
+    "components": [
+        {
+            "RawFieldSetArray": {
+                "src": "#/properties/RawFieldSetArray"
+            }
+        }
+    ]
+}

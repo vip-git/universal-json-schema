@@ -1,0 +1,68 @@
+{
+    "properties": {
+        "path": {},
+        "data": {},
+        "uiData": {},
+        "schemaVersion": {},
+        "schema": {},
+        "uiSchema": {},
+        "xhrSchema": {},
+        "definitions": {},
+        "interceptors": {},
+        "xhrProgress": {},
+        "id": {},
+        "onChange": {},
+        "onXHRSchemaEvent": {},
+        "onSubmit": {},
+        "validation": {},
+        "onKeyDown": {},
+        "onMoveItemUp": {},
+        "onMoveItemDown": {},
+        "onDeleteItem": {},
+        "onAddItem": {},
+        "onAddNewProperty": {},
+        "onRemoveProperty": {},
+        "onUpdateKeyProperty": {},
+        "onNext": {},
+        "onBack": {},
+        "onSkip": {},
+        "onTabChange": {},
+        "isSubmitDisabled": {}
+    },
+    "methods": {
+        "getFormFieldVariables": {
+            "returns": {
+                "schemaType": "",
+                "component": "",
+                "schemaDependencies": "",
+                "onChange": {}
+            }
+        },
+        "getFormFieldStyles": {
+            "returns": {
+                "classes": {}
+            }
+        }
+    },
+    "components": [
+        {
+            "if": {
+                "ref": "./rules/is-field-object-or-array.json",
+                "then": [
+                    { 
+                        "FieldSet": {
+                            "ref": "./FieldSet.json"
+                        }
+                    }
+                ],
+                "else": [
+                    { 
+                        "FieldComponent": {
+                            "ref": "./FieldComponent.json"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

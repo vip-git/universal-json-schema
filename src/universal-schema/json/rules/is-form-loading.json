@@ -1,0 +1,12 @@
+{
+    "allOf": {
+        "isEqual": [
+            { 
+                "isFormLoading": true
+            },
+            {
+                "hasPageLayoutTabs": false
+            }
+        ]
+    }
+}

@@ -1,0 +1,130 @@
+{
+    "properties": {
+        "schema": {},
+        "uiSchema": {},
+        "path,": {},
+        "onNext": {},
+        "onBack": {},
+        "onSkip": {},
+        "onSubmit": {}
+    },
+    "methods": {
+        "getSteps": {
+            "returns": {
+                "steps": {}
+            }
+        },
+        "getStepContent": {
+            "returns": {
+                "stepKey": {},
+                "stepPath": {},
+                "content": {
+                    "tabKey": {},
+                    "isTabContent": {},
+                    "components": []
+                }
+            }
+        },
+        "getActiveStepComponent": {
+            "returns": {
+                "component": {
+                    "ref": "#/methods/getStepContent/returns/content"
+                }
+            }
+        }
+    },
+    "components": [
+        {
+            "Div": {
+                "components": [
+                    {
+                        "Stepper": {
+                            "iterator": "#/methods/getSteps/returns/steps",
+                            "components": [
+                                {
+                                    "step": {
+                                        "src": "step.tsx"
+                                    }
+                                },
+                                {
+                                    "StepLabel": {
+                                        "src": "StepLabel.tsx"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "if": {
+                            "ref": "../../../rules/is-active-step-final-step.json",
+                            "then": [
+                                {
+                                    "Div": {
+                                        "components": [
+                                            {
+                                                "Div": {
+                                                    "src": "div.tsx"
+                                                }
+                                            },
+                                            {
+                                                "Typography": {
+                                                    "src": "Typography.tsx"
+                                                }
+                                            },
+                                            {
+                                                "Button": {
+                                                    "src": "Button.tsx"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "else": [
+                                {
+                                    "Div": {
+                                        "components": [
+                                            {
+                                                "Div": {
+                                                    "src": "#/methods/getActiveStepComponent/returns/component"
+                                                }
+                                            },
+                                            {
+                                                "Div": {
+                                                    "components": [
+                                                        {
+                                                            "Button": {
+                                                                "src": "Button.tsx"
+                                                            }
+                                                        },
+                                                        {
+                                                            "if": {
+                                                                "ref": "../../../rules/is-skip-step-to-be-shown.json",
+                                                                "then": [
+                                                                    {
+                                                                        "Button": {
+                                                                            "src": "button.tsx"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
+                                                            "Button": {
+                                                                "src": "button.tsx"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

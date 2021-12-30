@@ -45,6 +45,7 @@ export default function HorizontalNonLinearStepperWithError(props) {
   } = uiSchema['ui:page'];
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = Object.keys(schema.properties).map((sp) => schema.properties[sp].title || sp);
+  
   const stepContent = Object.keys(schema.properties).map((p, k) => {
     const newPath = path ? `${path}.${p}` : p;
     return {
@@ -59,6 +60,7 @@ export default function HorizontalNonLinearStepperWithError(props) {
       ),
     };
   });
+
   const isStepOptional = (step) => step === 1;
 
   // const isStepFailed = (step) => step === 1;

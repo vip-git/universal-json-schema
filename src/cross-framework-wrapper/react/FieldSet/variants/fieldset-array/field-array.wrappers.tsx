@@ -1,7 +1,3 @@
-/* eslint-disable no-param-reassign */
-// Library
-import React from 'react';
-
 // Helpers
 import getDefinitionSchemaFromRef from '@helpers/get-definition-schema';
 
@@ -40,7 +36,7 @@ const RENDER_ARRAY_WRAPPER = ({
             };
           }
           return Utils.callFunctionIfExists(
-            FIELDSET_ARRAY_VARIANTS, 
+            FIELDSET_ARRAY_VARIANTS,
             ARRAY_VARIANTS.HAS_REORDERABLE_BUTTONS,
             {
               path,
@@ -72,7 +68,7 @@ const RENDER_ARRAY_WRAPPER = ({
   ),
   [ARRAY_VARIANTS.HAS_ADDITIONAL_ITEMS]: () => Utils.callFunctionIfExists(
     FIELDSET_ARRAY_VARIANTS, 
-    'hasAdditionalItems', 
+    ARRAY_VARIANTS.HAS_ADDITIONAL_ITEMS, 
     {
       RawFieldSetArray,
       classes,

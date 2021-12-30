@@ -1,0 +1,81 @@
+{
+    "src": "./fieldset-array-wrapper.tsx",
+    "returns": {
+        "Items": {
+            "components": [
+                {
+                    "if": {
+                        "ref": "../rules/is-schema-type-array-recursive-field.json",
+                        "then": [
+                            {
+                                "RecursiveFields": {
+                                    "properties": {
+                                        "uiSchema": {},
+                                        "schema": {},
+                                        "xhrSchema": {}
+                                    },
+                                    "src": "./field-set-array-recursive-fields.tsx",
+                                    "ref": "./components/array/variants/RecursiveFields.json"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "if": {
+                        "ref": "../rules/is-schema-type-array-additional-items.json",
+                        "then": [
+                            {
+                                "AdditionalItems": {
+                                    "properties": {
+                                        "uiSchema": {},
+                                        "schema": {},
+                                        "xhrSchema": {}
+                                    },
+                                    "src": "./field-set-array-additional-items.tsx",
+                                    "refs": "./components/array/variants/AdditionalItems.json"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "if": {
+                        "ref": "../rules/is-schema-type-array-enum-values.json",
+                        "then": [
+                            {
+                                "EnumValues": {
+                                    "properties": {
+                                        "uiSchema": {},
+                                        "schema": {},
+                                        "xhrSchema": {}
+                                    },
+                                    "src": "./field-set-array-enum-values.tsx",
+                                    "refs": "./components/array/variants/EnumValues.json"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "if": {
+                        "ref": "../rules/is-schema-type-array-items-array.json",
+                        "then": [
+                            {
+                                "ItemsArray": {
+                                    "properties": {
+                                        "uiSchema": {},
+                                        "schema": {},
+                                        "xhrSchema": {}
+                                    },
+                                    "src": "./field-set-array-items-array.tsx",
+                                    "refs": "./components/array/variants/ItemsArray.json"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

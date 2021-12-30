@@ -1,0 +1,116 @@
+{
+    "properties": {
+        "className": {},
+        "schema": {},
+        "uiSchema": {},
+        "xhrSchema": {},
+        "data": {},
+        "uiData": {},
+        "definitions": {},
+        "id": {},
+        "idxKey": {},
+        "path": {},
+        "validation": {},
+        "isTabContent": {},
+        "tabKey": {}
+    },
+    "methods": {
+        "onAddNewProperty": {
+            "src": "./add-new-property.tsx"
+        },
+        "getSchemaAdditionalProperties": {
+            "returns": {
+                "schemaProperties": {},
+                "schemaPropertiesData": {},
+                "schemaAdditionalProperties": {}
+            }
+        },
+        "getFieldSetObjectStyles": {
+            "returns": {
+                "classes": {}
+            }
+        },
+        "getOrientation": {
+            "returns": {
+                "orientation": {}
+            }
+        }
+    },
+    "components": [
+        {
+            "if": {
+                "ref": "../../../rules/is-tab-content.json",
+                "then": [
+                    {
+                        "Div": {
+                            "components": [
+                                {
+                                    "FormField": {
+                                        "src": "./FormField.json"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "else": [
+                    {
+                        "Div": {
+                            "components": [
+                                {
+                                    "if": {
+                                        "ref": "../../../rules/is-schema-additional-properties-greater-than-properties.json",
+                                        "then": [
+                                            {
+                                                "FormField": {
+                                                    "iterator": "#/methods/getSchemaAdditionalProperties/schemaAdditionalProperties",
+                                                    "src": "./FormField.json"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "if": {
+                                        "ref": "../../../rules/is-schema-with-additional-properties.json",
+                                        "then": [
+                                            {
+                                                "Typography": {
+                                                    "src": "./typography.tsx"
+                                                }
+                                            },
+                                            {
+                                                "ReorderableFormField": {
+                                                    "iterator": "#/methods/getSchemaAdditionalProperties/schemaPropertiesData",
+                                                    "src": "./ReorderableFormField.json"
+                                                }
+                                            },
+                                            {
+                                                "AddNewButton": {
+                                                    "src": "./AddNewButton.json"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "if": {
+                                        "ref": "../../../rules/is-schema-additional-properties-less-than-properties.json",
+                                        "then": [
+                                            {
+                                                "FormField": {
+                                                    "iterator": "#/methods/getSchemaAdditionalProperties/schemaAdditionalProperties",
+                                                    "src": "./FormField.json"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

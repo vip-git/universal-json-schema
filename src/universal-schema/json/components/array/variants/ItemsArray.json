@@ -1,0 +1,20 @@
+{
+    "properties": {
+        "path": {},
+        "idx": {},
+        "schema": {},
+        "uiSchema": {},
+        "definitions": {},
+        "startIdx": {},
+        "d": {},
+        "rest": {}
+    },
+    "methods": {},
+    "components": [
+        {
+            "FormField": {
+                "src": "../../../FormField.json"
+            }
+        }
+    ]
+}

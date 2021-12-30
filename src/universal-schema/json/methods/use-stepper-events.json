@@ -1,0 +1,24 @@
+{
+    "type": "function",
+    "src": "./use-stepper-events.ts",
+    "properties": {
+        "stateMachineService": {},
+        "validation": {},
+        "formData": {},
+        "schema": {},
+        "uiData": {},
+        "uiSchema": {},
+        "xhrSchema": {},
+        "interceptors": {},
+        "onSubmit": {},
+        "givenOnStepNext": {},
+        "givenOnStepReset": {},
+        "givenOnStepBack": {},
+        "givenOnStepSkip": {}
+    },
+    "returns": {
+        "onStepNext": {},
+        "onStepBack": {},
+        "onStepSkip": {}
+    }
+}

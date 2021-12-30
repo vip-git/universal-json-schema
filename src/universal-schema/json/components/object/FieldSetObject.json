@@ -1,0 +1,58 @@
+{
+    "components": [
+        {
+            "if": {
+                "ref": "../../rules/is-ui-schema-page-type-steps.json",
+                "then": [
+                    {
+                        "FieldSetStepper": {
+                            "properties": {
+                                "uiSchema": {},
+                                "schema": {},
+                                "xhrSchema": {}
+                            },
+                            "src": "./field-set-steps.tsx",
+                            "ref": "./components/object/variants/FieldSetStepper.json"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "if": {
+                "ref": "../../rules/is-ui-schema-page-type-tabs.json",
+                "then": [
+                    {
+                        "FieldSetTabs": {
+                            "properties": {
+                                "uiSchema": {},
+                                "schema": {},
+                                "xhrSchema": {}
+                            },
+                            "src": "./field-set-tabs.tsx",
+                            "ref": "./components/object/variants/FieldSetTabs.json"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "if": {
+                "ref": "../../rules/is-ui-schema-page-type-default.json",
+                "then": [
+                    {
+                        "FieldSetDefault": {
+                            "properties": {
+                                "uiSchema": {},
+                                "schema": {},
+                                "xhrSchema": {}
+                            },
+                            "src": "./field-set-default.tsx",
+                            "ref": "./components/object/variants/FieldSetDefault.json"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

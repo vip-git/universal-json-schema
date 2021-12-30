@@ -1,0 +1,48 @@
+{
+    "properties": {
+        "path": {},
+        "schema": {},
+        "d": {},
+        "onMoveItemUp": {},
+        "onMoveItemDown": {},
+        "onDeleteItem": {},
+        "uiSchema": {},
+        "idx": {},
+        "data": {},
+        "canReorder": {},
+        "definitions": {},
+        "startIdx": {},
+        "rest": {},
+        "classes": {}
+    },
+    "methods": {},
+    "components": [
+        {
+            "Div": {
+                "components": [
+                    {
+                        "if": {
+                            "ref": "../../../rules/is-schema-data-array.json",
+                            "then": [
+                                {
+                                    "iterator": "#/properties/data",
+                                    "src": "../../../ReorderableFormField.json"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "if": {
+                            "ref": "../../../rules/is-schema-data-not-recursive-hole.json",
+                            "then": [
+                                {
+                                    "src": "../../../AddNewButton.json"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

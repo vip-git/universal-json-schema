@@ -1,0 +1,53 @@
+{
+    "src": "./fieldset-content.tsx",
+    "properties": {
+        "schema": {},
+        "uiSchema": {},
+        "xhrSchema": {},
+        "props": { 
+            "classes": {}
+        }
+    },
+    "returns": {
+        "FieldSetContent": {
+            "components": [
+                {
+                    "if": {
+                        "ref": "../rules/is-schema-type-array.json",
+                        "then": [
+                            {
+                                "FieldSetArray": {
+                                    "properties": {
+                                        "uiSchema": {},
+                                        "schema": {},
+                                        "xhrSchema": {}
+                                    },
+                                    "src": "./field-set-array.tsx",
+                                    "ref": "./components/array/FieldSetArray.json"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "if": {
+                        "ref": "../rules/is-schema-type-object.json",
+                        "then": [
+                            {
+                                "FieldSetObject": {
+                                    "properties": {
+                                        "uiSchema": {},
+                                        "schema": {},
+                                        "xhrSchema": {}
+                                    },
+                                    "src": "./field-set-object.tsx",
+                                    "ref": "./components/object/FieldSetObject.json"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}
