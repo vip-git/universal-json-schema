@@ -82,8 +82,17 @@ const frameworkGenerator = ({
 
     const shellFileString = new shelljs.ShellString(uiFrameworkTemplate);  
     shellFileString.to(`${shelljs.pwd()}/src/framework/ui-framework/index.ts`);
+    const basePackageJSON = require('../../package.json');
     shelljs.mv(`${shelljs.pwd()}/package.json`, `${shelljs.pwd()}/package-original.json`);
-    shelljs.cp(frameworkPackageJson, `${shelljs.pwd()}/package.json`);
+    const frameworkRequireJSON = require(frameworkPackageJson);
+    const shellPackageString = new shelljs.ShellString(JSON.stringify({
+        ...frameworkRequireJSON,
+        dependencies: {
+            ...basePackageJSON.dependencies,
+            ...frameworkRequireJSON.dependencies
+        }
+    }));  
+    shellPackageString.to(`${shelljs.pwd()}/package.json`);
     frameworkBuildJSON.copy.forEach((buildFile) => {
         shelljs.cp(`${shelljs.pwd()}/scripts/installer/frameworks/${frameworkName}/${buildFile}`, `${shelljs.pwd()}/${buildFile}`);
     });

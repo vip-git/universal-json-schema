@@ -33,7 +33,7 @@ ${reactSyntax}
 // Library
 import { onDestroy, onMount } from "svelte";
 </script>
-<div />
+<slot />
 `;
             const template = ejs.compile(appTsx, {});
             const finalString = template({ components });

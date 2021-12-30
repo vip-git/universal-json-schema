@@ -1,36 +1,11 @@
 <script>
-	import ReactAdapter from "./utils/ReactAdapter.svelte";
-	
-	// react mui components
-	import Button from "@material-ui/core/Button";
-	import Divider from '@material-ui/core/Divider';
-
 	// JSON Schema Form
-	// import Form from "../../../../src/framework";
-  </script>
+	import Form from "../../../../src/universal-schema/json/generated/svelte/FormField.svelte";
+</script>
   
   <main>
 	<h1>React inside Svelte</h1>
-	<h2>with React Material UI!</h2>
-	
-	<ReactAdapter 
-	  el={Divider} 
-	  variant="middle" 
-	  class={"mui-divider"}
-	/>
-	
-	<h3>A MUI React Button</h3>
-	<ReactAdapter
-	  el={Button}
-	  class="mui-btn"
-	  children="Say Hello"
-	  variant="contained"
-	  color="primary"
-	  onClick={() => alert("Hello Fella!")}
-	/>
-  
-	<h3>Simple Badge</h3>
-	<!-- <ReactAdapter el={Form} badgeContent={4} color="primary" /> -->
+	<Form />
   
   </main>
   
