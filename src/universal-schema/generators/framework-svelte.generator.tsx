@@ -12,7 +12,6 @@ const generateSvelteFramework = ({
     shelljs.mkdir(`${shelljs.pwd()}/src/universal-schema/json/generated/${frameworkName}`);
     shelljs.mkdir(`${shelljs.pwd()}/src/universal-schema/json/generated/${frameworkName}/components`);
     const jsonComponents = transformJSONtoCode(frameworkName);
-
     Object.keys(jsonComponents).forEach((componentName) => {
         let reactSyntax = jsonComponents[componentName];
         try {
@@ -26,7 +25,7 @@ const generateSvelteFramework = ({
 <% components.${componentName}.forEach((componentName) => { %> import <%= componentName %> from '<% if(Object.keys(components).includes(componentName)) {%>./<% } else { %>./components/<%}%><%= componentName %>.svelte';
 <% }); %>
 // Properties <% properties.${componentName}.forEach((propName) => { %> 
-export let <%= propName %>; <% }) %>
+export let <%= propName %> = ''; <% }) %>
 
 </script>
 
@@ -36,6 +35,10 @@ ${reactSyntax}
             const componentTsx = `<script>
 // Library
 import { onDestroy, onMount } from "svelte";
+
+// Properties <% if(Array.isArray(properties[compName])) { properties[compName].forEach((propName) => { %> 
+export let <%= propName %> = ''; <% }) } %>
+
 </script>
 <slot />
 `;
@@ -45,7 +48,9 @@ import { onDestroy, onMount } from "svelte";
             shellFileString.to(`${shelljs.pwd()}/src/universal-schema/json/generated/${frameworkName}/${componentName}.${frameworkName}`);
         
             components[componentName].filter((cname) => !Object.keys(components).includes(cname)).forEach((compName) => {
-                const shellFileString = new shelljs.ShellString(componentTsx);  
+                const template = ejs.compile(componentTsx, {});
+                const finalString = template({ components, properties, compName });
+                const shellFileString = new shelljs.ShellString(finalString);  
                 shellFileString.to(`${shelljs.pwd()}/src/universal-schema/json/generated/${frameworkName}/components/${compName}.${frameworkName}`);
             });
     });

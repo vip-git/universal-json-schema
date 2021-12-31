@@ -128,10 +128,17 @@ const generateFrameworkCode = () => {
 
 const transformJSONtoCode = () => {
     const component = require(framework.generate.ref);
+    const componentName = 'Form';
+    markupSyntax[componentName] = '';
+    components[componentName] = [];
+    properties[componentName] = [];
     properties.root.push(...Object.keys(component.properties));
+    properties[componentName].push(...Object.keys(component.properties));
+
     return generateTreeMarkup(
         component.components,
-        component
+        component,
+        componentName
     );
 }
 
@@ -168,6 +175,7 @@ const openingBracket = (syntax: string) => {
             return `<${syntax}>`;
     }
 };
+
 const closingBracket = (syntax: string) => {
     switch (selectedFramework) {
         case frameworks.svelte:
@@ -200,6 +208,13 @@ const generateTreeMarkup = (markupArray: any, parent, extraComponentName?: strin
                 components[extraComponentName].push(modifiedCompName);
             }
 
+            if (ma[componentName].properties && !properties[componentName]) {
+                properties[componentName] = [];
+                properties[componentName].push(
+                    ...Object.keys(ma[componentName].properties)
+                );
+            }
+            
             appendSyntaxToElement(
                 openingBracket(modifiedCompName), 
                 extraComponentName
