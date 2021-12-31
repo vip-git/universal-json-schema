@@ -4,6 +4,11 @@ node_modules
 mochawesome-report-unit
 todo
 generated
+generated-svelte
+generated-angular
+generated-react
+generated-react-native
+generated-vue
 demo/**/__e2e__
 _results_
 .DS_Store

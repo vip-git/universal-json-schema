@@ -22,7 +22,7 @@
                 "components": [
                     {
                         "if": {
-                            "ref": "../../../rules/is-schema-data-array.json",
+                            "ref": "./rules/is-schema-data-array.json",
                             "then": [
                                 {
                                     "iterator": "#/properties/data",
@@ -33,7 +33,7 @@
                     },
                     {
                         "if": {
-                            "ref": "../../../rules/is-schema-data-not-recursive-hole.json",
+                            "ref": "./rules/is-schema-data-not-recursive-hole.json",
                             "then": [
                                 {
                                     "src": "../../../AddNewButton.json"

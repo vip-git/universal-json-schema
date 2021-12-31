@@ -13,7 +13,7 @@
             "components": [
                 {
                     "if": {
-                        "ref": "../rules/is-schema-type-array.json",
+                        "ref": "./rules/is-schema-type-array.json",
                         "then": [
                             {
                                 "FieldSetArray": {
@@ -31,7 +31,7 @@
                 },
                 {
                     "if": {
-                        "ref": "../rules/is-schema-type-object.json",
+                        "ref": "./rules/is-schema-type-object.json",
                         "then": [
                             {
                                 "FieldSetObject": {

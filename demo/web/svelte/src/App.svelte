@@ -1,6 +1,6 @@
 <script>
 	// JSON Schema Form
-	import Form from "../../../../src/universal-schema/json/generated/svelte/Form.svelte";
+	import Form from "../../../../src/universal-schema/json/generated-svelte/Form.svelte";
 </script>
   
   <main>

@@ -49,21 +49,29 @@ const elseComp = 'Else';
 const conditionalComponents = [ifComp, thenComp, elseComp];
 
 let currentComponentName = '';
+
 const components = {
     root: []
 };
+
 const properties = {
     root: []
 };
 
+const rules = {
+    root: []
+}
+
 const format = (markup: string) => {
     switch (selectedFramework) {
         case frameworks.svelte:
-            const ifOpeningSyntax = '{#if true}';
+            const ifOpeningSyntax = (match, p1, p2, p3, offset, string) => {
+                return `{#if ${p2}}`;
+              };
             const ifClosingSyntax = '{/if}';
             const elseSyntax = '{:else}';
             return formatXML(markup)
-                    .replaceAll(`<${ifComp}>`, ifOpeningSyntax)
+                    .replaceAll(/(\<If condition="(.+?)">)/g, ifOpeningSyntax)
                     .replaceAll(`</${ifComp}>`, ifClosingSyntax)
                     .replaceAll(`</${elseComp}>`, '')
                     .replaceAll(`<${elseComp}>`, elseSyntax);
@@ -110,7 +118,8 @@ const generateFrameworkCode = () => {
                 ejs,
                 format,
                 components,
-                properties
+                properties,
+                rules
             });
         case frameworks.svelte:
             return svelteFrameworkGenerator({
@@ -119,7 +128,8 @@ const generateFrameworkCode = () => {
                 ejs,
                 format,
                 components,
-                properties
+                properties,
+                rules
             });    
         default:
             return {};
@@ -149,10 +159,24 @@ const appendSyntaxToElement = (syntax: string, extraComponentName?: string) => {
     }
 }
 
-const conditionalSvelteOpeningBracket = (syntax: string) => {
+const conditionalSvelteOpeningBracket = (syntax: string, conditionRef, extraComponentName) => {
     switch (syntax) {
         case thenComp:
             return '';
+        case ifComp:
+            const functionCondition = conditionRef.replaceAll('-', '').replaceAll('./rules/', '').replaceAll('.json', '');
+            let condition = [];
+            try {
+                condition = require(conditionRef);
+            } catch(err) {}
+            if (!rules[extraComponentName]) {
+                rules[extraComponentName] = [];
+            }
+            rules[extraComponentName].push({
+                name: functionCondition,
+                condition
+            });
+            return `<${syntax} condition="${functionCondition}()">`;    
         default:
             return `<${syntax}>`;
     }
@@ -167,10 +191,10 @@ const conditionalSvelteClosingBracket = (syntax: string) => {
     }
 }
 
-const openingBracket = (syntax: string) => {
+const openingBracket = (syntax: string, conditionRef?: string, extraComponentName?: string) => {
     switch (selectedFramework) {
         case frameworks.svelte:
-            return conditionalSvelteOpeningBracket(syntax);
+            return conditionalSvelteOpeningBracket(syntax, conditionRef, extraComponentName);
         default:
             return `<${syntax}>`;
     }
@@ -214,11 +238,22 @@ const generateTreeMarkup = (markupArray: any, parent, extraComponentName?: strin
                     ...Object.keys(ma[componentName].properties)
                 );
             }
-            
-            appendSyntaxToElement(
-                openingBracket(modifiedCompName), 
-                extraComponentName
-            );
+
+            if (componentName === 'if') { 
+                appendSyntaxToElement(
+                    openingBracket(
+                        modifiedCompName,
+                        ma[componentName].ref,
+                        extraComponentName
+                    ), 
+                    extraComponentName
+                );
+            } else {
+                appendSyntaxToElement(
+                    openingBracket(modifiedCompName), 
+                    extraComponentName
+                );
+            }
 
             /**
              * Finds if there is a if condition and generates the tag

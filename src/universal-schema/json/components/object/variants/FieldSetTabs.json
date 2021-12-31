@@ -51,7 +51,7 @@
                             "components": [
                                 {
                                     "if": {
-                                        "ref": "../../../rules/is-tab-loading.json",
+                                        "ref": "./rules/is-tab-loading.json",
                                         "then": [
                                             {
                                                 "Div": {

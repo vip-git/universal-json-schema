@@ -56,7 +56,7 @@
                     },
                     {
                         "if": {
-                            "ref": "../../../rules/is-active-step-final-step.json",
+                            "ref": "./rules/is-active-step-final-step.json",
                             "then": [
                                 {
                                     "Div": {
@@ -99,7 +99,7 @@
                                                         },
                                                         {
                                                             "if": {
-                                                                "ref": "../../../rules/is-skip-step-to-be-shown.json",
+                                                                "ref": "./rules/is-skip-step-to-be-shown.json",
                                                                 "then": [
                                                                     {
                                                                         "Button": {
