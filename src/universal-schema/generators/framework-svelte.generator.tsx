@@ -25,10 +25,8 @@ const generateSvelteFramework = ({
 // Components
 <% components.${componentName}.forEach((componentName) => { %> import <%= componentName %> from '<% if(Object.keys(components).includes(componentName)) {%>./<% } else { %>./components/<%}%><%= componentName %>.svelte';
 <% }); %>
-
-// Properties
-<% properties.${componentName}.forEach((propName) => { %>
-export let <%= propName %>;<% }) %>
+// Properties <% properties.${componentName}.forEach((propName) => { %> 
+export let <%= propName %>; <% }) %>
 
 </script>
 
