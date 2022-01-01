@@ -1,4 +1,5 @@
 {
     "workbench.editor.enablePreview": false,
-    "notebook.diff.enablePreview": false
+    "notebook.diff.enablePreview": false,
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
