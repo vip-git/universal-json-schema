@@ -1,17 +1,18 @@
 {
   "display": "Svelte",
   "_version": "2.0.0",
-  "paths": {
-    "@core-types/*": ["./src/types/*"],
-    "@utils/*": ["./src/helpers/utils/*"],
-    "@config/*": ["./src/config/*"],
-    "@helpers/*": ["./src/helpers/*"],
-    "@universal-schema/*": ["./src/universal-schema/*"],
-    "@cross-framework-wrapper/*": ["./src/cross-framework-wrapper/*"],
-    "@generated/*": ["./src/framework/generated/*"],
-    "@framework/*": ["./src/framework/*"],
-  },
   "compilerOptions": {
+    "paths": {
+      "@core-types/*": ["./src/types/*"],
+      "@utils/*": ["./src/helpers/utils/*"],
+      "@config/*": ["./src/config/*"],
+      "@parsers/*": ["./src/parsers/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@universal-schema/*": ["./src/universal-schema/*"],
+      "@cross-framework-wrapper/*": ["./src/cross-framework-wrapper/*"],
+      "@generated/*": ["./src/framework/generated/*"],
+      "@framework/*": ["./src/framework/*"],
+    },
     "moduleResolution": "node",
     "target": "es6",
     "lib": [
@@ -33,6 +34,7 @@
      */
     "sourceMap": true,
     "noImplicitAny": false,
+    "resolveJsonModule": true,
 
     "strict": false,
     "esModuleInterop": true,
@@ -40,6 +42,16 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react",
   },
-  "include": ["demo/web/svelte/src/**/*"],
-  "exclude": ["node_modules/*", "__sapper__/*", "scripts/*", "demo/web/svelte/public/*"]
+  "include": [
+    "src",
+    "demo/web/svelte/src/**/*"
+  ],
+  "exclude": [
+    "src/__e2e__",
+    "cross-framework-wrapper",
+    "node_modules/*",
+    "__sapper__/*",
+    "scripts/*",
+    "demo/web/svelte/public/*"
+  ]
 }
