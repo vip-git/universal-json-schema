@@ -1,33 +1,87 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "properties": {
-    "theme": {},
-    "formData": {},
-    "schema": {},
-    "xhrSchema": {},
-    "uiSchema": {},
-    "validations": {},
-    "prefixId": {},
-    "submitOnEnter": {},
-    "onChange": {},
-    "onUpload": {},
-    "onSubmit": {},
-    "onStepNext": {},
-    "onStepBack": {},
-    "onStepSkip": {},
-    "onStepReset": {},
-    "formButtons": {},
-    "actionButtonPos": {},
-    "onCancel": {},
-    "activityIndicatorEnabled": {},
-    "submitValue": {},
-    "cancelValue": {},
-    "inProgressValue": {},
-    "disabled": {},
-    "cancelVariant": {},
-    "submitVariant": {},
-    "onError": {},
-    "interceptors": {}
+    "theme": {
+      "type": "string"
+    },
+    "formData": {
+      "type": "object"
+    },
+    "schema": {
+      "type": "object"
+    },
+    "xhrSchema": {
+      "type": "object"
+    },
+    "uiSchema": {
+      "type": "object"
+    },
+    "validations": {
+      "type": "object"
+    },
+    "prefixId": {
+      "type": "string"
+    },
+    "submitOnEnter": {
+      "type": "function"
+    },
+    "onChange": {
+      "type": "function"
+    },
+    "onUpload": {
+      "type": "function"
+    },
+    "onSubmit": {
+      "type": "function"
+    },
+    "onStepNext": {
+      "type": "function"
+    },
+    "onStepBack": {
+      "type": "function"
+    },
+    "onStepSkip": {
+      "type": "function"
+    },
+    "onStepReset": {
+      "type": "function"
+    },
+    "formButtons": {
+      "type": "function"
+    },
+    "actionButtonPos": {
+      "type": "string"
+    },
+    "onCancel": {
+      "type": "function"
+    },
+    "activityIndicatorEnabled": {
+      "type": "boolean"
+    },
+    "submitValue": {
+      "type": "string"
+    },
+    "cancelValue": {
+      "type": "string"
+    },
+    "inProgressValue": {
+      "type": "string"
+    },
+    "disabled": {
+      "type": "boolean"
+    },
+    "cancelVariant": {
+      "type": "string"
+    },
+    "submitVariant": {
+      "type": "string"
+    },
+    "onError": {
+      "type": "function"
+    },
+    "interceptors": {
+      "type": "object"
+    }
   },
   "methods": {
     "useFormStateMachine": {

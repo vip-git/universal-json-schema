@@ -20,18 +20,67 @@ const generateSvelteFramework = ({
         } catch(err) {
             reactSyntax = format(`<main>${jsonComponents[componentName]}</main>`);
         }
+
+        const commonParsers = (compName, parserLocation) => `// Parsers
+import { RulesEngine } from '${parserLocation}/helpers/rules-parser';
+
+// Properties 
+<% if(Array.isArray(properties[${compName}])) { properties[${compName}].forEach((propObj) => { 
+    switch (propObj.type) {
+        case 'string':
+%>
+export let <%= propObj.propName %> = '';
+<%
+        return;
+        case 'function':
+%>            
+export let <%= propObj.propName %> = () => {};
+<%
+        return;
+        case 'boolean':
+%>   
+export let <%= propObj.propName %> = false; 
+<%
+        return;
+        case 'object':
+%>  
+export let <%= propObj.propName %> = {}; 
+<% 
+        return;
+        default: 
+%>
+export let <%= propObj.propName %> = ''; 
+<%
+        return;
+    }
+}) } %>
+
+
+// formData,
+// schema,
+// xhrSchema,
+// uiSchema,
+// validations,
+// prefixId,
+// submitOnEnter,
+// onChange,
+// onSubmit,
+// onStepNext,
+// onStepBack,
+// onStepSkip,
+// onStepReset,
+// onError,
+// interceptors,
+
+// Rules
+const { rulesParser } = RulesEngine({}); <% if(Array.isArray(rules[${compName}])) { rules[${compName}].forEach((ruleCondition) => { %>
+const <%= ruleCondition.name %> = () => rulesParser(<%- ruleCondition.condition || [] %>);<% }) } %>`;
     
         const appTsx = `<script lang="ts">
 // Components
 <% components.${componentName}.forEach((componentName) => { %> import <%= componentName %> from '<% if(Object.keys(components).includes(componentName)) {%>./<% } else { %>./components/<%}%><%= componentName %>.svelte';
 <% }); %>
-// Parsers
-import { rulesParser } from '../helpers/rules-parser';
-// Properties <% properties.${componentName}.forEach((propName) => { %> 
-export let <%= propName %> = ''; <% }) %>
-
-// Rules <% if(Array.isArray(rules.${componentName})) { rules.${componentName}.forEach((ruleCondition) => { %>
-const <%= ruleCondition.name %> = () => true; <% }) } %>
+${commonParsers(`"${componentName}"`, '..')}
 </script>
 
 ${reactSyntax}
@@ -41,15 +90,7 @@ ${reactSyntax}
 // Library
 import { onDestroy, onMount } from "svelte";
 
-// Parsers
-import { rulesParser } from '../../helpers/rules-parser';
-
-// Properties <% if(Array.isArray(properties[compName])) { properties[compName].forEach((propName) => { %> 
-export let <%= propName %> = ''; <% }) } %>
-
-// Rules <% if(Array.isArray(rules[compName])) { rules[compName].forEach((ruleCondition) => { %>
-const <%= ruleCondition.name %> = () => true; <% }) } %>
-
+${commonParsers('compName', '../..')}
 </script>
 <slot />
 `;

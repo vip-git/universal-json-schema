@@ -136,14 +136,31 @@ const generateFrameworkCode = () => {
     }
 }
 
+const pushProperties = (jsonPropObj, propertiesObj) => {
+    Object.keys(jsonPropObj).forEach((prop) => {
+        propertiesObj.push({
+            ...jsonPropObj[prop],
+            propName: prop
+        });
+    })
+}
+
 const transformJSONtoCode = () => {
     const component = require(framework.generate.ref);
     const componentName = 'Form';
     markupSyntax[componentName] = '';
     components[componentName] = [];
     properties[componentName] = [];
-    properties.root.push(...Object.keys(component.properties));
-    properties[componentName].push(...Object.keys(component.properties));
+
+    pushProperties(
+        component.properties,
+        properties.root
+    );
+
+    pushProperties(
+        component.properties,
+        properties[componentName]
+    );
 
     return generateTreeMarkup(
         component.components,
@@ -167,14 +184,14 @@ const conditionalSvelteOpeningBracket = (syntax: string, conditionRef, extraComp
             const functionCondition = conditionRef.replaceAll('-', '').replaceAll('./rules/', '').replaceAll('.json', '');
             let condition = [];
             try {
-                condition = require(conditionRef);
+                condition = require(`./json/${conditionRef}`);
             } catch(err) {}
             if (!rules[extraComponentName]) {
                 rules[extraComponentName] = [];
             }
             rules[extraComponentName].push({
                 name: functionCondition,
-                condition
+                condition: JSON.stringify(condition, null, 2)
             });
             return `<${syntax} condition="${functionCondition}()">`;    
         default:
@@ -234,8 +251,9 @@ const generateTreeMarkup = (markupArray: any, parent, extraComponentName?: strin
 
             if (ma[componentName].properties && !properties[componentName]) {
                 properties[componentName] = [];
-                properties[componentName].push(
-                    ...Object.keys(ma[componentName].properties)
+                pushProperties(
+                    ma[componentName].properties,
+                    properties[componentName]
                 );
             }
 
@@ -300,7 +318,10 @@ const generateTreeMarkup = (markupArray: any, parent, extraComponentName?: strin
                 components[componentName] = [];
                 properties[componentName] = [];
                 if (comps.properties) {
-                    properties[componentName].push(...Object.keys(comps.properties));
+                    pushProperties(
+                        comps.properties,
+                        properties[componentName]
+                    );
                 }
                 generateTreeMarkup(comps.components, comps, componentName);
             }
