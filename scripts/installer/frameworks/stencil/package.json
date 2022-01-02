@@ -26,10 +26,8 @@
     "test"
   ],
   "dependencies": {
-    "lodash": "4.17.21",
     "moment": "2.29.1",
-    "nanoid": "3.1.23",
-    "xstate": "4.19.2"
+    "nanoid": "3.1.23"
   },
   "description": "Ionic UI implementation of stencil-jsonschema-form with UI and XHR Schema.",
   "devDependencies": {

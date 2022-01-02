@@ -1,5 +1,5 @@
 // Internal
-import { isEnum } from '@react-jsonschema-form-utils/enum-utils';
+import { isEnum } from '@parsers/enum-utils/src';
 
 interface ConditionProps {
   callback: Function;

@@ -14,8 +14,8 @@ const Framework: UniversalSchemaFramework = {
     translateRangeDate: import('@react-jsonschema-form-interceptors/translate-range-date'),
   },
   parsers: {
-    enumUtils: import('@react-jsonschema-form-utils/enum-utils'),
-    parseValues: import('@react-jsonschema-form-utils/parse-values'),
+    enumUtils: import('@parsers/enum-utils/src'),
+    parseValues: import('@parsers/parse-values/src'),
   },
 };
 

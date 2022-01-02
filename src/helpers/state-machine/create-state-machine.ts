@@ -9,7 +9,7 @@ import { flattenSchemaPropFromDefinitions } from '../get-definition-schema';
 import createFormFieldStates, { stepperMutations, formMutations } from './form';
 
 // Types
-import { FormContext } from './types/form-state-machine.type';
+import type { FormContext } from './types/form-state-machine.type';
 
 interface XStateObj {
   initial: string;

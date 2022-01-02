@@ -1,5 +1,4 @@
 // Library
-import React from 'react';
 import { interpret, Interpreter } from 'xstate';
 import { get, isEqual, has } from 'lodash';
 
@@ -13,7 +12,7 @@ import persistXHRCall from '../../helpers/persist-xhr-call';
 
 // Hooks
 import useFormActions from '../actions';
-import { StateMachineInstance } from '../../types/form-state-machine.type';
+import type { StateMachineInstance } from '../../types/form-state-machine.type';
 
 interface FormContext {
   uiData?: any;
@@ -76,7 +75,7 @@ const useFormStateMachine = ({
     hasError: stateMachineService.state.context.hasError || stateMachineService.state.context.hasXHRError,
   } : {};
   const givenFormInfo = !formStateMachine ? originalFormInfo : stateFormInfo;
-  const [loadingState] = React.useState(null);
+  const loadingState = null;
   const isPartialUI = (uiSchema) => get(
     uiSchema, 'ui:page.ui:layout',
   ) === 'steps' || get(

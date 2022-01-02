@@ -127,7 +127,7 @@ export const RulesEngine = ({
       //                             && uiSchema['ui:page']['ui:layout'] 
       //                             && uiSchema['ui:page']['ui:layout'] === 'steps';
 
-      const rulesParser = (condition) => true; 
+      const rulesParser = (condition) => false; 
       
       return {
         rulesParser,

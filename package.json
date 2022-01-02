@@ -59,6 +59,9 @@
     "shelljs": "0.8.4",
     "ts-node": "10.4.0",
     "xml-formatter": "2.6.0",
+    "xstate": "4.27.0",
+    "lodash": "4.17.21",
+    "immutability-helper": "^2.6.5 || ^3.0.0",
     "typescript": "4.5.4"
   },
   "description": "universal-jsonschema-form with UI and XHR Schema.",

@@ -45,7 +45,7 @@ export default {
 	plugins: [
 		replace({
 			'process.env.NODE_ENV': JSON.stringify( 'development' ),
-				  preventAssignment: true
+			preventAssignment: true
 		}),
 		svelte({
 			preprocess: sveltePreprocess({ sourceMap: !production }),
