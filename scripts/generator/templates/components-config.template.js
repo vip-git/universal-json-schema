@@ -1,35 +1,7 @@
 const appConfigTemplate = `//  Imports
-<% Object.values(components).filter((c) => c.isEnum && !c.notAvailable).forEach((comp) => { %>
-  import <%= comp.name.replace(/-/g, '') %> from './<%= comp.name %>/dist/index';
-<% }); %>
-
-<% Object.values(components).filter((c) => c.isDefault && !c.notAvailable).forEach((comp) => { %>
- import <%= comp.name.replace(/-/g, '') %> from './<%= comp.name %>/dist/index';
-<% }); %>
-
 <% Object.values(components)
-    .filter((c) => !c.isEnum && c.type === "null" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
-import <%= comp.name.replace(/-/g, '') %> from './<%= comp.name %>/dist/index';
-<% }); %>
-
-<% Object.values(components)
-    .filter((c) => !c.isEnum && c.type === "integer" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
-import <%= comp.name.replace(/-/g, '') %> from './<%= comp.name %>/dist/index';
-<% }); %>
-
-<% Object.values(components)
-    .filter((c) => !c.isEnum && c.type === "number" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
-import <%= comp.name.replace(/-/g, '') %> from './<%= comp.name %>/dist/index';
-<% }); %>
-
-<% Object.values(components)
-    .filter((c) => !c.isEnum && c.type === "boolean" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
-import <%= comp.name.replace(/-/g, '') %> from './<%= comp.name %>/dist/index';
-<% }); %>
-
-<% Object.values(components)
-    .filter((c) => !c.isEnum && c.type === "string" && !c.notAvailable && !c.isDefault).forEach((comp) => { %>
-import <%= comp.name.replace(/-/g, '') %> from <% if(comp.hasDist) { %> './<%= comp.name %>/dist/index' <% } else { %> './<%= comp.name %>' <% } %>;
+    .filter((c) => !c.notAvailable).forEach((comp) => { %>
+import <%= comp.name.replace(/-/g, '') %> from '<%= comp.import %>';
 <% }); %>
 
 export const ENUM_COMPONENTS = {

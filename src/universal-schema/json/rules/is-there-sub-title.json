@@ -1,7 +1,0 @@
-{
-    "allOf": {
-        "isDefined": [
-            "schemaDescription"
-        ]
-    }
-}

@@ -134,7 +134,7 @@
         "components": [
           {
             "if": {
-              "ref": "./rules/is-form-loading.json",
+              "ref": "./rules/form/is-form-loading.json",
               "then": [
                 {
                   "CrossPlatformLoadingWrapper": {

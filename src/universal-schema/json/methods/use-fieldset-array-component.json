@@ -5,7 +5,7 @@
             "components": [
                 {
                     "if": {
-                        "ref": "./rules/is-schema-type-array-recursive-field.json",
+                        "ref": "./rules/field-set-array/is-schema-type-array-recursive-field.json",
                         "then": [
                             {
                                 "RecursiveFields": {
@@ -23,7 +23,7 @@
                 },
                 {
                     "if": {
-                        "ref": "./rules/is-schema-type-array-additional-items.json",
+                        "ref": "./rules/field-set-array/is-schema-type-array-additional-items.json",
                         "then": [
                             {
                                 "AdditionalItems": {
@@ -41,7 +41,7 @@
                 },
                 {
                     "if": {
-                        "ref": "./rules/is-schema-type-array-enum-values.json",
+                        "ref": "./rules/field-set-array/is-schema-type-array-enum-values.json",
                         "then": [
                             {
                                 "EnumValues": {
@@ -59,7 +59,7 @@
                 },
                 {
                     "if": {
-                        "ref": "./rules/is-schema-type-array-items-array.json",
+                        "ref": "./rules/field-set-array/is-schema-type-array-items-array.json",
                         "then": [
                             {
                                 "ItemsArray": {

@@ -2,7 +2,7 @@
     "components": [
         {
             "if": {
-                "ref": "./rules/is-ui-schema-page-type-steps.json",
+                "ref": "./rules/field-set-object/is-ui-schema-page-type-steps.json",
                 "then": [
                     {
                         "FieldSetStepper": {
@@ -20,7 +20,7 @@
         },
         {
             "if": {
-                "ref": "./rules/is-ui-schema-page-type-tabs.json",
+                "ref": "./rules/field-set-object/is-ui-schema-page-type-tabs.json",
                 "then": [
                     {
                         "FieldSetTabs": {
@@ -38,7 +38,7 @@
         },
         {
             "if": {
-                "ref": "./rules/is-ui-schema-page-type-default.json",
+                "ref": "./rules/field-set-object/is-ui-schema-page-type-default.json",
                 "then": [
                     {
                         "FieldSetDefault": {

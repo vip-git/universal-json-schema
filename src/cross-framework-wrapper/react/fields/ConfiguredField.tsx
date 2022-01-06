@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 import Framework from '@universal-schema/framework';
 
 // Types
-import { ConfiguredFieldProps } from '@core-types/ConfiguredField.type';
+import type { ConfiguredFieldProps } from '@core-types/ConfiguredField.type';
 
 const {
   wrapperComponents: {

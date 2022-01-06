@@ -1,0 +1,9 @@
+{
+    "all": [
+      {
+        "fact": "uiSchemaType",
+        "operator": "equal",
+        "value": "Steps"
+      }
+    ]
+}

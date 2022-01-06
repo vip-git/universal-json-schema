@@ -74,7 +74,7 @@ export let <%= propObj.propName %> = '';
 
 // Rules
 const { rulesParser } = RulesEngine({}); <% if(Array.isArray(rules[${compName}])) { rules[${compName}].forEach((ruleCondition) => { %>
-const <%= ruleCondition.name %> = () => rulesParser(<%- ruleCondition.condition || [] %>);<% }) } %>`;
+const <%= ruleCondition.name %> = async () => await rulesParser(<%- ruleCondition.condition || [] %>);<% }) } %>`;
     
         const appTsx = `<script lang="ts">
 // Components

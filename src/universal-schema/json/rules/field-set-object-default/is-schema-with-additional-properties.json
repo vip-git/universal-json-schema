@@ -1,0 +1,9 @@
+{
+    "all": [
+        {
+            "fact": "schemaAdditionalProperties",
+            "operator": "isDefined",
+            "value": true
+        }
+    ]
+}

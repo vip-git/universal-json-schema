@@ -1,139 +1,71 @@
-// State Machine Helpers
-import { 
-    useFormStateMachine,
-    useFormEvents,
-    useStepperEvents,
-    getHashCodeFromXHRDef,
-  } from '@helpers/state-machine/form/hooks';
+// Library
+import { Engine } from 'json-rules-engine';
 
 export const RulesEngine = ({
-    formData: originalFormData = {},
-    schema = {},
-    xhrSchema = {},
-    uiSchema: originalUISchema = {},
-    validations = {},
-    prefixId = '',
-    submitOnEnter = () => {},
-    onChange = () => {},
-    onSubmit = () => {},
-    onStepNext: givenOnStepNext = () => {},
-    onStepBack: givenOnStepBack = () => {},
-    onStepSkip: givenOnStepSkip = () => {},
-    onStepReset: givenOnStepReset = () => {},
-    onError = () => {},
-    interceptors = {}
-}) => {
-    // const {
-    //     formInfo: {
-    //       formSchemaXHR,
-    //       uiData,
-    //       uiSchema,
-    //       formData,
-    //       activeStep,
-    //       xhrProgress,
-    //       validation,
-    //     },
-    //     loadingState,
-    //     buttonDisabled,
-    //     stateMachineService,
-    //   } = useFormStateMachine({
-    //     xhrSchema,
-    //     interceptors,
-    //     originalFormInfo: {
-    //       schema,
-    //       uiSchema: originalUISchema,
-    //       formData: originalFormData,
-    //       validations,
-    //       xhrSchema,
-    //     },
-    //     effects: {
-    //       onChange,
-    //       onError,
-    //     },
-    //   });
-    
-    //   // Form Events
-    //   const {
-    //     onTabChange,
-    //     onMoveItemUp,
-    //     onMoveItemDown,
-    //     onDeleteItem,
-    //     onAddItem,
-    //     onAddNewProperty,
-    //     onRemoveProperty,
-    //     onUpdateKeyProperty,
-    //     onFormValuesChange,
-    //     onFormSubmit,
-    //     onXHRSchemaEvent,
-    //     handleKeyEnter,
-    //   } = useFormEvents({
-    //     validation,
-    //     stateMachineService,
-    //     formData,
-    //     schema,
-    //     uiData, 
-    //     uiSchema, 
-    //     xhrSchema,
-    //     interceptors,
-    //     submitOnEnter,
-    //     onSubmit,
-    //   });
-    
-    //   // Stepper Events
-    //   const {
-    //     onStepNext,
-    //     onStepBack,
-    //     onStepSkip,
-    //     // onStepReset,
-    //   } = useStepperEvents({
-    //     stateMachineService,
-    //     validation,
-    //     formData,
-    //     schema,
-    //     uiData, 
-    //     uiSchema,
-    //     xhrSchema,
-    //     interceptors,
-    //     onSubmit,
-    //     givenOnStepNext,
-    //     givenOnStepReset,
-    //     givenOnStepBack,
-    //     givenOnStepSkip,
-    //   });
-    
-      // const id = prefixId; // || generate();
-    
-      // const hashRef = getHashCodeFromXHRDef({
-      //   eventName: 'onload',
-      //   fieldPath: 'ui:page',
-      //   xhrSchema,
-      // });
-    
-      // const onSubmitHashRef = getHashCodeFromXHRDef({
-      //   eventName: 'onsubmit',
-      //   fieldPath: 'ui:page',
-      //   xhrSchema,
-      // });
-    
-      // const isFormLoading = xhrProgress && hashRef && xhrProgress[hashRef];
-    
-      // const isFormSubmitting = xhrProgress && onSubmitHashRef && xhrProgress[onSubmitHashRef];
-    
-      // const hasPageLayoutTabs = uiSchema['ui:page'] 
-      //                             && uiSchema['ui:page']['ui:layout'] 
-      //                             && uiSchema['ui:page']['ui:layout'] === 'tabs';
-    
-      // const hasPageLayoutSteps = uiSchema['ui:page'] 
-      //                             && uiSchema['ui:page']['ui:layout'] 
-      //                             && uiSchema['ui:page']['ui:layout'] === 'steps';
+    resolvedFacts = {},
+}) => {   
+      const translateConditionsToFacts = (conditions, givenFacts) => {
+          const facts = { ...givenFacts };
+          if (Array.isArray(conditions)) {
+            for (const condition in conditions) {
+              const cond = conditions[condition];
+              if (cond.any) {
+                return translateConditionsToFacts(cond.any, facts);
+              }
 
-      const rulesParser = (condition) => false; 
+              if (cond.all) {
+                return translateConditionsToFacts(cond.all, facts);
+              }
+
+              if (cond.fact) {
+                facts[cond.fact] = resolvedFacts[cond.fact];
+              }
+            }
+          } else {
+            if (conditions.any) {
+              return translateConditionsToFacts(conditions.any, facts);
+            }
+
+            if (conditions.all) {
+              return translateConditionsToFacts(conditions.all, facts);
+            }
+          }
+
+          return facts;
+      };                         
+
+      const getFactsFromConditions = (conditions) => {
+        const facts = {};
+        return translateConditionsToFacts(conditions, facts);
+      }                          
+
+      const rulesParser = async (conditions) => {
+        const engine = new Engine();
+        // console.log('conditions is', conditions);
+        engine.addOperator('isDefined', (factValue: string, jsonValue: string) => factValue ? true : false)
+        engine.addOperator('isNotDefined', (factValue: string, jsonValue: string) => !factValue ? true : false) 
+        engine.addOperator('caseInsenstiveEqual', (factValue: string, jsonValue: string) => factValue.toLowerCase() === jsonValue.toLowerCase())  
+
+        engine.addRule({
+          conditions,
+          event: {
+            type: 'isTrue',
+            params: {
+              message: true
+            }
+          }
+        });
+
+        // define fact(s) known at runtime
+        const facts = getFactsFromConditions(conditions);
+        // console.log('facts is',  facts);
+        const rules = await engine.run(facts);
+        const returnValue = rules.events.length >= 1;
+
+        return returnValue;
+      }; 
       
       return {
         rulesParser,
-        // isFormLoading,
-        // isFormSubmitting,
-        // hasPageLayoutTabs,
-        // hasPageLayoutSteps,
       }
 }

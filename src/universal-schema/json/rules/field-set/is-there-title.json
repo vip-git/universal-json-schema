@@ -1,0 +1,33 @@
+{
+    "all": [{
+        "any": [
+            {
+                "fact": "hideTitle",
+                "operator": "isNotDefined",
+                "value": false
+            },
+            {
+                "fact": "path",
+                "operator": "equal",
+                "value": ""
+            },
+            {
+                "fact": "path",
+                "operator": "contains",
+                "value": "."
+            }
+        ],
+        "all": [ 
+            {
+                "fact": "schemaItemsEnum",
+                "operator": "isNotDefined",
+                "value": false
+            },
+            {
+                "fact": "schemaTitle",
+                "operator": "isDefined",
+                "value": true
+            }
+        ]
+    }]
+}

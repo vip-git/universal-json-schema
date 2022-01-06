@@ -47,7 +47,7 @@
     "components": [
         {
             "if": {
-                "ref": "./rules/is-field-object-or-array.json",
+                "ref": "./rules/field-form/is-field-object-or-array.json",
                 "then": [
                     { 
                         "FieldSet": {

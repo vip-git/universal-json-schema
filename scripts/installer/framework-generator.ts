@@ -17,6 +17,7 @@ const frameworkGenerator = ({
     utilsFrameworkName
 }) => {
     const cleanUpFiles = [
+        ".babelrc",
         "package-lock.json",
         "custom-elements.json",
         "tsconfig.json",

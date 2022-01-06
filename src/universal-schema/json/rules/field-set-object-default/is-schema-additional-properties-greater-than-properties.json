@@ -1,0 +1,11 @@
+{
+    "all": [
+        {
+            "fact": "schemaAdditionalProperties",
+            "operator": "greaterThan",
+            "value": {
+                "fact": "schemaProperties"
+            }
+        }
+    ]
+}

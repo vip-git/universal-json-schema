@@ -39,7 +39,7 @@
     "components": [
         {
             "if": {
-                "ref": "./rules/is-tab-content.json",
+                "ref": "./rules/field-set-object-default/is-tab-content.json",
                 "then": [
                     {
                         "Div": {
@@ -59,7 +59,7 @@
                             "components": [
                                 {
                                     "if": {
-                                        "ref": "./rules/is-schema-additional-properties-greater-than-properties.json",
+                                        "ref": "./rules/field-set-object-default/is-schema-additional-properties-greater-than-properties.json",
                                         "then": [
                                             {
                                                 "FormField": {
@@ -72,7 +72,7 @@
                                 },
                                 {
                                     "if": {
-                                        "ref": "./rules/is-schema-with-additional-properties.json",
+                                        "ref": "./rules/field-set-object-default/is-schema-with-additional-properties.json",
                                         "then": [
                                             {
                                                 "Typography": {
@@ -95,7 +95,7 @@
                                 },
                                 {
                                     "if": {
-                                        "ref": "./rules/is-schema-additional-properties-less-than-properties.json",
+                                        "ref": "./rules/field-set-object-default/is-schema-additional-properties-less-than-properties.json",
                                         "then": [
                                             {
                                                 "FormField": {

@@ -1,6 +1,6 @@
 test*.js
 dist
-node_modules
+#node_modules
 mochawesome-report-unit
 todo
 generated
@@ -40,6 +40,8 @@ demo/web/svelte/public/build
 dist/
 www/
 loader/
+node_modules/
+!demo/web/svelte/**
 
 *~
 *.sw[mnpcod]
@@ -56,7 +58,6 @@ log.txt
 .vscode/
 .sass-cache/
 .versions/
-node_modules/
 $RECYCLE.BIN/
 
 .DS_Store

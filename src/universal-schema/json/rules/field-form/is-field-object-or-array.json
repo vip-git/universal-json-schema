@@ -1,0 +1,23 @@
+{
+    "all": [{
+        "any": [
+            {
+                "fact": "schemaType",
+                "operator": "caseInsenstiveEqual",
+                "value": "object"
+            },
+            {
+                "fact": "schemaType",
+                "operator": "caseInsenstiveEqual",
+                "value": "array"
+            }
+        ],
+        "all": [
+            {
+                "fact": "component",
+                "operator": "equal",
+                "value": false
+            }
+        ]
+    }]
+}

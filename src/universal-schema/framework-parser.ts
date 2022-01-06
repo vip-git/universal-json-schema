@@ -66,9 +66,13 @@ const format = (markup: string) => {
     switch (selectedFramework) {
         case frameworks.svelte:
             const ifOpeningSyntax = (match, p1, p2, p3, offset, string) => {
-                return `{#if ${p2}}`;
+                return `{#await ${p2}}
+        <div> </div>
+    {:then ${p2.replace('(', '').replace(')', '')}}                
+        {#if ${p2.replace('(', '').replace(')', '')}}`;
               };
-            const ifClosingSyntax = '{/if}';
+            const ifClosingSyntax = `   {/if}
+    {/await}`;
             const elseSyntax = '{:else}';
             return formatXML(markup)
                     .replaceAll(/(\<If condition="(.+?)">)/g, ifOpeningSyntax)

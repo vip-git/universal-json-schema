@@ -29,7 +29,7 @@
                 "components": [
                     {
                         "if": {
-                            "ref": "./rules/is-there-title.json",
+                            "ref": "./rules/field-set/is-there-title.json",
                             "then": [
                                 {
                                     "LegendTitle": {
@@ -44,7 +44,7 @@
                     },
                     {
                         "if": {
-                            "ref": "./rules/is-there-sub-title.json",
+                            "ref": "./rules/field-set/is-there-sub-title.json",
                             "then": [
                                 {
                                     "LegendSubTitle": {
@@ -56,7 +56,7 @@
                     },
                     {
                         "if": {
-                            "ref": "./rules/is-path-empty.json",
+                            "ref": "./rules/field-set/is-path-empty.json",
                             "then": [
                                 {
                                     "ValidationMessages": {

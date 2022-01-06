@@ -13,7 +13,7 @@ import getDefaultValue from '@helpers/get-default-value';
 import getDefinitionSchemaFromRef from '@helpers/get-definition-schema';
 
 // types
-import { FieldSetObjectProps } from '@core-types/FieldSetObject.type';
+import type { FieldSetObjectProps } from '@core-types/FieldSetObject.type';
 import FormField from '../FormField';
 import ReorderableFormField from './ReorderableFormField';
 

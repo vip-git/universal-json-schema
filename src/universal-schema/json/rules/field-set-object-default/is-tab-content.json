@@ -1,0 +1,9 @@
+{
+    "all": [
+        {
+            "fact": "isTabContent",
+            "operator": "equal",
+            "value": true
+        }
+    ]
+}

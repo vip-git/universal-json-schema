@@ -1,0 +1,14 @@
+{
+    "all": [
+        {
+            "fact": "descriptionText",
+            "operator": "isDefined",
+            "value": true
+        },
+        {
+            "fact": "isCustomComponent",
+            "operator": "isNotDefined",
+            "value": false
+        }
+    ]
+}

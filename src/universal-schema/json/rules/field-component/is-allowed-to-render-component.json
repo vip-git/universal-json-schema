@@ -1,0 +1,9 @@
+{
+    "all": [
+        {
+            "fact": "renderComponent",
+            "operator": "equal",
+            "value": true
+        }
+    ]
+}

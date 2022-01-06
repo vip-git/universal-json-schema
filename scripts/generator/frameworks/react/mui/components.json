@@ -89,6 +89,7 @@
             "type": "string",
             "isEnum": true,
             "name": "material-radio-group",
+            "import": "./material-radio-group/dist/index",
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/creatable-react-select": {
@@ -96,6 +97,7 @@
             "type": "string",
             "isEnum": true,
             "name": "creatable-react-select",
+            "import": "./creatable-react-select/dist/index",
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/react-select": {
@@ -103,6 +105,7 @@
             "type": "string",
             "isEnum": true,
             "name": "react-select",
+            "import": "./react-select/dist/index",
             "utils": [
                 "@react-jsonschema-form-utils/enum-utils",
                 "@react-jsonschema-form-utils/parse-values"
@@ -114,6 +117,7 @@
             "isEnum": true,
             "isRequired": true,
             "name": "material-select",
+            "import": "./material-select/dist/index",
             "utils": [
               "@react-jsonschema-form-utils/enum-utils",
               "@react-jsonschema-form-utils/parse-values"
@@ -124,6 +128,7 @@
             "type": "string",
             "isEnum": true,
             "name": "material-auto-complete",
+            "import": "./material-auto-complete/dist/index",
             "utils": [
               "@react-jsonschema-form-utils/enum-utils",
               "@react-jsonschema-form-utils/parse-values"
@@ -135,6 +140,7 @@
             "isEnum": true,
             "isRequired": true,
             "name": "material-checkbox",
+            "import": "./material-checkbox/dist/index",
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/switch-checkbox": {
@@ -142,29 +148,30 @@
             "type": "string",
             "isEnum": true,
             "name": "material-switch",
+            "import": "./material-switch/dist/index",
             "notAvailable": true,
             "utils": ["@react-jsonschema-form-utils/enum-utils"]
         },
         "@react-jsonschema-form-components/material-picker": {
             "version": "4.0.4",
             "type": "string",
-            "hasDist": true,
             "isEnum": false,
-            "name": "material-picker"
+            "name": "material-picker",
+            "import": "./material-picker/dist/index"
         },
         "@react-jsonschema-form-components/upload": {
             "version": "4.0.0",
             "type": "string",
             "isEnum": false,
-            "hasDist": true,
-            "name": "upload"
+            "name": "upload",
+            "import": "./upload/dist/index"
         },
         "@react-jsonschema-form-components/rich-text-editor": {
             "version": "3.0.0",
             "type": "string",
             "isEnum": false,
-            "hasDist": true,
-            "name": "rich-text-editor"
+            "name": "rich-text-editor",
+            "import": "./rich-text-editor/dist/index"
         },
         "@react-jsonschema-form-components/material-input": {
             "version": "3.0.0",
@@ -172,6 +179,7 @@
             "isEnum": false,
             "isDefault": true,
             "name": "material-input",
+            "import": "./material-input/dist/index",
             "utils": [
               "@react-jsonschema-form-utils/enum-utils",
               "@react-jsonschema-form-utils/parse-values"
@@ -181,15 +189,16 @@
             "version": "3.0.0",
             "type": "null",
             "isEnum": false,
-            "hasDist": true,
             "isDefault": true,
-            "name": "empty-div"
+            "name": "empty-div",
+            "import": "./empty-div/dist/index"
         },
         "@react-jsonschema-form-components/ratings": {
             "version": "1.0.0",
             "type": "string",
             "isEnum": false,
             "name": "ratings",
+            "import": "./ratings/dist/index",
             "notAvailable": true
         }
     }

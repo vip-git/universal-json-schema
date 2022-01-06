@@ -1,0 +1,7 @@
+{
+    "all": [{
+        "fact": "isDefined",
+        "operator": "contains",
+        "value": "schemaDescription"
+    }]
+}

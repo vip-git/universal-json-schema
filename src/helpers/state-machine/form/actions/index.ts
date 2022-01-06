@@ -1,5 +1,5 @@
 // Import
-import React from 'react';
+// import React from 'react';
 
 // Internal
 import useFormActions from './form.actions';
@@ -9,7 +9,7 @@ import useStepperActions from './stepper.actions';
 import FORM_STATE_CONFIG from '../config';
 
 // Types
-import { StateMachineInstance } from '../../types/form-state-machine.type';
+import type { StateMachineInstance } from '../../types/form-state-machine.type';
 
 interface ExecuteFormActions {
     state: StateMachineInstance;
@@ -19,8 +19,9 @@ interface ExecuteFormActions {
 const useActions = ({
   isPartialUI,
 }) => {
-  const [buttonDisabled, setButtonDisabled] = React.useState(false);
-
+  // const [buttonDisabled, setButtonDisabled] = React.useState(false);
+  const buttonDisabled = false;
+  const setButtonDisabled = (buttonDisabled) => buttonDisabled;
   const { 
     executeStepperActions,
     getValidStepperActionToExecute,

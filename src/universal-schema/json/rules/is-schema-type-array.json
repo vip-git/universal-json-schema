@@ -1,9 +1,0 @@
-{
-    "allOf": {
-        "isEqual": [
-          { 
-            "schemaType": "Array"
-          }
-        ]
-    }
-}

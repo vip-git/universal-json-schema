@@ -1,0 +1,9 @@
+{
+  "all": [
+      {
+          "fact": "path",
+          "operator": "equal",
+          "value": ""
+      }
+  ]
+}

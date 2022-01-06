@@ -1,0 +1,19 @@
+{
+    "all": [
+        {
+            "fact": "LabelComponent",
+            "operator": "isDefined",
+            "value": true
+        },
+        {
+            "fact": "title",
+            "operator": "isDefined",
+            "value": true
+        },
+        {
+            "fact": "isCustomComponent",
+            "operator": "isNotDefined",
+            "value": false
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "all": [
+      {
+        "fact": "schemaType",
+        "operator": "caseInsenstiveEqual",
+        "value": "Object"
+      }
+    ]
+}

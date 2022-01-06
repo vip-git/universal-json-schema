@@ -1,7 +1,7 @@
 // Library
-const get = require('lodash/get');
-const find = require('lodash/find');
-const omit = require('lodash/omit');
+import get from 'lodash/get';
+import find from 'lodash/find';
+import omit from 'lodash/omit';
 
 export const flattenDefinitionSchemaFromRef = (
   givenDefinitions,

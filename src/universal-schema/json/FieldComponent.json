@@ -101,7 +101,7 @@
     "components": [
         {
             "if": {
-                "ref": "./rules/is-form-loading.json",
+                "ref": "./rules/field-component/is-form-loading.json",
                 "then": [
                     {
                         "Div": {
@@ -118,7 +118,7 @@
                                         "components": [
                                             {
                                                 "if": {
-                                                    "ref": "./rules/is-allowed-to-render-label.json",
+                                                    "ref": "./rules/field-component/is-allowed-to-render-label.json",
                                                     "then": [
                                                         {
                                                             "UILabelComponent": {
@@ -130,7 +130,7 @@
                                             },
                                             {
                                                 "if": {
-                                                    "ref": "./rules/is-allowed-to-render-description-text.json",
+                                                    "ref": "./rules/field-component/is-allowed-to-render-description-text.json",
                                                     "then": [
                                                         {
                                                             "Para": {
@@ -142,7 +142,7 @@
                                             },
                                             {
                                                 "if": {
-                                                    "ref": "./rules/is-allowed-to-render-active-comp.json",
+                                                    "ref": "./rules/field-component/is-allowed-to-render-active-comp.json",
                                                     "then": [
                                                         {
                                                             "ActiveComp": {
@@ -154,7 +154,7 @@
                                             },
                                             {
                                                 "if": {
-                                                    "ref": "./rules/is-allowed-to-render-component.json",
+                                                    "ref": "./rules/field-component/is-allowed-to-render-component.json",
                                                     "then": [
                                                         {
                                                             "UIComponent": {
@@ -166,7 +166,7 @@
                                             },
                                             {
                                                 "if": {
-                                                    "ref": "./rules/is-allowed-to-render-helper-text.json",
+                                                    "ref": "./rules/field-component/is-allowed-to-render-helper-text.json",
                                                     "then": [
                                                         {
                                                             "FormHelperText": {

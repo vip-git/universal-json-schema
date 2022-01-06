@@ -2,7 +2,13 @@
     "name": "JSON Schema Components",
     "uiFramework": {
         "svelte-material-ui": {
-            "version": "6.0.0-beta.6"
+            "version": "6.0.0-beta.12"
+        },
+        "@smui/textfield": {
+            "version": "6.0.0-beta.12"
+        },
+        "@smui/form-field": {
+            "version": "6.0.0-beta.12"
         }
     },
     "utils": {
@@ -16,6 +22,7 @@
             "isEnum": true,
             "isRequired": true,
             "name": "material-select",
+            "import": "@smui/textfield",
             "utils": [
               "@react-jsonschema-form-utils/enum-utils",
               "@react-jsonschema-form-utils/parse-values"
@@ -27,6 +34,7 @@
             "isEnum": false,
             "isDefault": true,
             "name": "material-input",
+            "import": "@smui/textfield",
             "utils": [
               "@react-jsonschema-form-utils/enum-utils",
               "@react-jsonschema-form-utils/parse-values"
@@ -35,6 +43,7 @@
         "@react-jsonschema-form-components/empty-div": {
             "version": "3.0.0",
             "type": "null",
+            "import": "@smui/textfield",
             "isEnum": false,
             "hasDist": true,
             "isDefault": true,

@@ -1,0 +1,14 @@
+{
+    "all": [
+        {
+            "fact": "isFormLoading",
+            "operator": "equal",
+            "value": true
+        },
+        {
+            "fact": "hasPageLayoutTabs",
+            "operator": "equal",
+            "value": true
+        }
+    ]
+}

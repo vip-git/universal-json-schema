@@ -1,93 +1,138 @@
-// Library
-import svelte from 'rollup-plugin-svelte';
-import commonjs from '@rollup/plugin-commonjs';
+import path from 'path';
 import resolve from '@rollup/plugin-node-resolve';
+import replace from '@rollup/plugin-replace';
 import json from '@rollup/plugin-json';
-import livereload from 'rollup-plugin-livereload';
+import commonjs from '@rollup/plugin-commonjs';
+import url from '@rollup/plugin-url';
+import svelte from 'rollup-plugin-svelte';
+import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
-import replace from '@rollup/plugin-replace';
-import css from 'rollup-plugin-css-only';
-import nodePolyfills from 'rollup-plugin-polyfill-node'
+import config from 'sapper/config/rollup.js';
+import pkg from './package.json';
 
-const production = !process.env.ROLLUP_WATCH;
+const mode = process.env.NODE_ENV;
+const dev = mode === 'development';
+const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
-function serve() {
-	let server;
-
-	function toExit() {
-		if (server) server.kill(0);
-	}
-
-	return {
-		writeBundle() {
-			if (server) return;
-			server = require('child_process').spawn('npm', ['run', 'svelte:start', '--', '--dev'], {
-				stdio: ['ignore', 'inherit', 'inherit'],
-				shell: true
-			});
-
-			process.on('SIGTERM', toExit);
-			process.on('exit', toExit);
-		}
-	};
-}
+const onwarn = (warning, onwarn) =>
+	(warning.code === 'MISSING_EXPORT' && /'preload'/.test(warning.message)) ||
+	(warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) ||
+	(warning.code === 'THIS_IS_UNDEFINED') ||
+	onwarn(warning);
 
 export default {
-	input: 'demo/web/svelte/src/main.ts',
-	output: {
-		sourcemap: true,
-		format: 'iife',
-		name: 'app',
-		file: 'demo/web/svelte/public/build/bundle.js'
+	client: {
+		input: config.client.input().replace(/\.js$/, '.ts'),
+		output: config.client.output(),
+		plugins: [
+			replace({
+				preventAssignment: true,
+				values:{
+					'process.browser': true,
+					'process.env.NODE_ENV': JSON.stringify(mode)
+				},
+			}),
+			svelte({
+				preprocess: sveltePreprocess({ sourceMap: dev }),
+				compilerOptions: {
+					dev,
+					hydratable: true
+				}
+			}),
+			url({
+				sourceDir: path.resolve(__dirname, 'src/node_modules/images'),
+				publicPath: '/client/'
+			}),
+			resolve({
+				browser: true,
+				dedupe: ['svelte', '@smui/textfield', '@smui/form-field']
+			}),
+			commonjs(),
+			typescript({ sourceMap: dev }),
+
+			legacy && babel({
+				extensions: ['.js', '.mjs', '.html', '.svelte'],
+				babelHelpers: 'runtime',
+				exclude: ['node_modules/@babel/**'],
+				presets: [
+					['@babel/preset-env', {
+						targets: '> 0.25%, not dead'
+					}]
+				],
+				plugins: [
+					'@babel/plugin-syntax-dynamic-import',
+					['@babel/plugin-transform-runtime', {
+						useESModules: true
+					}]
+				]
+			}),
+
+			!dev && terser({
+				module: true
+			}),
+			json()
+		],
+
+		preserveEntrySignatures: false,
+		onwarn,
 	},
-	plugins: [
-		replace({
-			'process.env.NODE_ENV': JSON.stringify( 'development' ),
-			preventAssignment: true
-		}),
-		svelte({
-			preprocess: sveltePreprocess({ sourceMap: !production }),
-			compilerOptions: {
-				// enable run-time checks when not in production
-				dev: !production
-			}
-		}),
-		// we'll extract any component CSS out into
-		// a separate file - better for performance
-		css({ output: 'bundle.css' }),
 
-		// If you have external dependencies installed from
-		// npm, you'll most likely need these plugins. In
-		// some cases you'll need additional configuration -
-		// consult the documentation for details:
-		// https://github.com/rollup/plugins/tree/master/packages/commonjs
-		resolve({
-			browser: true,
-			dedupe: ['svelte', 'react', 'react-dom', '@material-ui/core', 'react-jsonschema-form-material-ui']
-		}),
-		nodePolyfills( /* options */ ),
-		commonjs(),
-		typescript({
-			sourceMap: !production,
-			inlineSources: !production
-		}),
+	server: {
+		input: { server: config.server.input().server.replace(/\.js$/, ".ts") },
+		output: config.server.output(),
+		plugins: [
+			replace({
+				preventAssignment: true,
+				values:{
+					'process.browser': false,
+					'process.env.NODE_ENV': JSON.stringify(mode)
+				},
+			}),
+			svelte({
+				preprocess: sveltePreprocess({ sourceMap: dev }),
+				compilerOptions: {
+					dev,
+					generate: 'ssr',
+					hydratable: true
+				},
+				emitCss: false
+			}),
+			url({
+				sourceDir: path.resolve(__dirname, 'src/node_modules/images'),
+				publicPath: '/client/',
+				emitFiles: false // already emitted by client build
+			}),
+			resolve({
+				dedupe: ['svelte', '@smui/textfield', '@smui/form-field']
+			}),
+			commonjs(),
+			typescript({ sourceMap: dev }),
+			json()
+		],
+		external: Object.keys(pkg.dependencies).concat(require('module').builtinModules),
+		preserveEntrySignatures: 'strict',
+		onwarn,
+	},
 
-		// In dev mode, call `npm run start` once
-		// the bundle has been generated
-		!production && serve(),
-
-		// Watch the `public` directory and refresh the
-		// browser on changes when not in production
-		!production && livereload('demo/web/svelte/public'),
-
-		// If we're building for production (npm run build
-		// instead of npm run dev), minify
-		production && terser(),
-		json()
-	],
-	watch: {
-		clearScreen: false
+	serviceworker: {
+		input: config.serviceworker.input().replace(/\.js$/, '.ts'),
+		output: config.serviceworker.output(),
+		plugins: [
+			resolve(),
+			replace({
+				preventAssignment: true,
+				values:{
+					'process.browser': true,
+					'process.env.NODE_ENV': JSON.stringify(mode)
+				},
+			}),
+			commonjs(),
+			typescript({ sourceMap: dev }),
+			!dev && terser()
+		],
+		preserveEntrySignatures: false,
+		onwarn,
 	}
 };
