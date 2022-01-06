@@ -41,7 +41,8 @@ dist/
 www/
 loader/
 node_modules/
-!demo/web/svelte/**
+!demo/web/svelte/node_modules/**
+__sapper__
 
 *~
 *.sw[mnpcod]
