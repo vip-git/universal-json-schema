@@ -17,5 +17,33 @@
         "last": {},
         "noTitle": {}
     },
-    "components": []
+    "components": [
+        {
+            "Div": {
+                "ref": "./div.tsx"
+            }
+        },
+        {
+            "if": {
+                "ref": "./rules/field-re-orderable/is-field-dynamic-key-field.json",
+                "then": [
+                    { 
+                        "FormField": {
+                            "ref": "./FormField.json"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "FormField": {
+                "ref": "./FormField.tsx"
+            }
+        },
+        {
+            "ReorderControls": {
+                "ref": "./ReorderControls.tsx"
+            }
+        }
+    ]
 }

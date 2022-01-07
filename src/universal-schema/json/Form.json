@@ -118,6 +118,74 @@
       "ref": "./use-event-context.json"
     }
   },
+  "imports": [
+    {
+      "path": "../helpers/form.side-effects",
+      "exports": "FormSideEffects"
+    },
+    {
+      "path": "../helpers/rules-parser",
+      "exports": ["RulesEngine"]
+    }
+  ],
+  "variables": [
+    {
+      "FormSideEffects": {
+        "implements": [
+          "formData",
+          "schema",
+          "xhrSchema",
+          "uiSchema",
+          "validations",
+          "prefixId",
+          "submitOnEnter",
+          "onChange",
+          "onSubmit",
+          "onStepNext",
+          "onStepBack",
+          "onStepSkip",
+          "onStepReset",
+          "onError",
+          "interceptors"
+        ],
+        "exports": [
+          "isFormLoading",
+          "isFormSubmitting",
+          "hasPageLayoutTabs",
+          "hasPageLayoutSteps",
+          {
+            "formEvents": ["onXHRSchemaEvent", "onUpdateKeyProperty"]
+          }
+        ]
+      }
+    },
+    {
+      "ruleProps": {
+        "resolvedFacts": [
+          "isFormLoading",
+          "isFormSubmitting",
+          "hasPageLayoutTabs",
+          "hasPageLayoutSteps"
+        ]
+      }
+    },
+    {
+      "formFieldProps": [
+        "schema",
+        {
+          "data": "formData"
+        },
+        "uiSchema",
+        "xhrSchema",
+        "onChange",
+        "onXHRSchemaEvent",
+        "onUpdateKeyProperty",
+        {
+          "resolvedFormFacts": "ruleProps"
+        }
+      ]
+    }
+  ],
   "components": [
     {
       "CrossPlatformWrapper": {

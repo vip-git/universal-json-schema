@@ -5,7 +5,7 @@ import Framework from '@universal-schema/framework';
 import getDefinitionSchemaFromRef from '@helpers/get-definition-schema';
 
 // Types
-import { FieldSetArrayProps } from '@core-types/FieldSetArray.type';
+import type { FieldSetArrayProps } from '@core-types/FieldSetArray.type';
 
 // Utils
 import Utils from '@helpers/utils';

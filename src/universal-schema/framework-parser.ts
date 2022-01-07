@@ -62,6 +62,14 @@ const rules = {
     root: []
 }
 
+const imports = {
+    root: []
+}
+
+const variables = {
+    root: []
+}
+
 const format = (markup: string) => {
     switch (selectedFramework) {
         case frameworks.svelte:
@@ -133,7 +141,9 @@ const generateFrameworkCode = () => {
                 format,
                 components,
                 properties,
-                rules
+                rules,
+                imports,
+                variables
             });    
         default:
             return {};
@@ -155,6 +165,8 @@ const transformJSONtoCode = () => {
     markupSyntax[componentName] = '';
     components[componentName] = [];
     properties[componentName] = [];
+    imports[componentName] = component.imports || [];
+    variables[componentName] = component.variables || [];
 
     pushProperties(
         component.properties,
@@ -185,7 +197,7 @@ const conditionalSvelteOpeningBracket = (syntax: string, conditionRef, extraComp
         case thenComp:
             return '';
         case ifComp:
-            const functionCondition = conditionRef.replaceAll('-', '').replaceAll('./rules/', '').replaceAll('.json', '');
+            const functionCondition = conditionRef.split('/')[conditionRef.split('/').length - 1].replaceAll('-', '').replaceAll('.json', '');
             let condition = [];
             try {
                 condition = require(`./json/${conditionRef}`);
@@ -321,6 +333,9 @@ const generateTreeMarkup = (markupArray: any, parent, extraComponentName?: strin
                 markupSyntax[componentName] = '';
                 components[componentName] = [];
                 properties[componentName] = [];
+                imports[componentName] = comps.imports || [];
+                variables[componentName] = comps.variables || [];
+                
                 if (comps.properties) {
                     pushProperties(
                         comps.properties,

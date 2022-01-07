@@ -1,0 +1,7 @@
+{
+    "all": [{
+        "fact": "dynamicKeyField",
+        "operator": "isDefined",
+        "value": false
+    }]
+}

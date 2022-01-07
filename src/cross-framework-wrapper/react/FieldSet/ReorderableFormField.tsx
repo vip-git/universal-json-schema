@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { ReorderableFormFieldProps } from '@core-types/ReoderableFormField.type';
+import type { ReorderableFormFieldProps } from '@core-types/ReoderableFormField.type';
 import Framework from '@universal-schema/framework';
 import FormField from '../FormField';
 import ReorderControls from './ReorderControls';
