@@ -1,33 +1,89 @@
 {
     "properties": {
-        "path": {},
-        "data": {},
-        "uiData": {},
-        "schemaVersion": {},
-        "schema": {},
-        "uiSchema": {},
-        "xhrSchema": {},
-        "definitions": {},
-        "interceptors": {},
-        "xhrProgress": {},
-        "id": {},
-        "onChange": {},
-        "onXHRSchemaEvent": {},
-        "onSubmit": {},
-        "validation": {},
-        "onKeyDown": {},
-        "onMoveItemUp": {},
-        "onMoveItemDown": {},
-        "onDeleteItem": {},
-        "onAddItem": {},
-        "onAddNewProperty": {},
-        "onRemoveProperty": {},
-        "onUpdateKeyProperty": {},
-        "onNext": {},
-        "onBack": {},
-        "onSkip": {},
-        "onTabChange": {},
-        "isSubmitDisabled": {}
+        "path": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object"
+        },
+        "uiData": {
+            "type": "object"
+        },
+        "schemaVersion": {
+            "type": "string"
+        },
+        "schema": {
+            "type": "object"
+        },
+        "uiSchema": {
+            "type": "object"
+        },
+        "xhrSchema": {
+            "type": "object"
+        },
+        "definitions": {
+            "type": "object"
+        },
+        "interceptors": {
+            "type": "object"
+        },
+        "xhrProgress": {
+            "type": "boolean"
+        },
+        "id": {
+            "type": "string"
+        },
+        "onChange": {
+            "type": "function"
+        },
+        "onXHRSchemaEvent": {
+            "type": "function"
+        },
+        "onSubmit": {
+            "type": "function"
+        },
+        "validation": {
+            "type": "string"
+        },
+        "onKeyDown": {
+            "type": "function"
+        },
+        "onMoveItemUp": {
+            "type": "function"
+        },
+        "onMoveItemDown": {
+            "type": "function"
+        },
+        "onDeleteItem": {
+            "type": "function"
+        },
+        "onAddItem": {
+            "type": "function"
+        },
+        "onAddNewProperty": {
+            "type": "function"
+        },
+        "onRemoveProperty": {
+            "type": "function"
+        },
+        "onUpdateKeyProperty": {
+            "type": "function"
+        },
+        "onNext": {
+            "type": "function"
+        },
+        "onBack": {
+            "type": "function"
+        },
+        "onSkip": {
+            "type": "function"
+        },
+        "onTabChange": {
+            "type": "function"
+        },
+        "isSubmitDisabled": {
+            "type": "boolean"
+        }
     },
     "methods": {
         "getFormFieldVariables": {

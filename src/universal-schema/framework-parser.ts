@@ -82,7 +82,11 @@ const format = (markup: string) => {
             const ifClosingSyntax = `   {/if}
     {/await}`;
             const elseSyntax = '{:else}';
+            const propsSyntax = (match, p1, p2, p3, offset, string) => {
+                return `{...${p2}}`;
+              };
             return formatXML(markup)
+                    .replaceAll(/(props="(.+?)")/g, propsSyntax)
                     .replaceAll(/(\<If condition="(.+?)">)/g, ifOpeningSyntax)
                     .replaceAll(`</${ifComp}>`, ifClosingSyntax)
                     .replaceAll(`</${elseComp}>`, '')
@@ -192,7 +196,7 @@ const appendSyntaxToElement = (syntax: string, extraComponentName?: string) => {
     }
 }
 
-const conditionalSvelteOpeningBracket = (syntax: string, conditionRef, extraComponentName) => {
+const conditionalSvelteOpeningBracket = (syntax: string, conditionRef, extraComponentName, extraComponentProps) => {
     switch (syntax) {
         case thenComp:
             return '';
@@ -211,7 +215,7 @@ const conditionalSvelteOpeningBracket = (syntax: string, conditionRef, extraComp
             });
             return `<${syntax} condition="${functionCondition}()">`;    
         default:
-            return `<${syntax}>`;
+            return extraComponentProps && extraComponentProps.length ? `<${syntax} props="${extraComponentProps[0]}">` : `<${syntax}>`;
     }
 }
 
@@ -224,10 +228,10 @@ const conditionalSvelteClosingBracket = (syntax: string) => {
     }
 }
 
-const openingBracket = (syntax: string, conditionRef?: string, extraComponentName?: string) => {
+const openingBracket = (syntax: string, conditionRef?: string, extraComponentName?: string, extraComponentProps?: Array<string>) => {
     switch (selectedFramework) {
         case frameworks.svelte:
-            return conditionalSvelteOpeningBracket(syntax, conditionRef, extraComponentName);
+            return conditionalSvelteOpeningBracket(syntax, conditionRef, extraComponentName, extraComponentProps);
         default:
             return `<${syntax}>`;
     }
@@ -278,13 +282,14 @@ const generateTreeMarkup = (markupArray: any, parent, extraComponentName?: strin
                     openingBracket(
                         modifiedCompName,
                         ma[componentName].ref,
-                        extraComponentName
+                        extraComponentName,
+                        ma[componentName].props || []
                     ), 
                     extraComponentName
                 );
             } else {
                 appendSyntaxToElement(
-                    openingBracket(modifiedCompName), 
+                    openingBracket(modifiedCompName, null, null, ma[componentName].props || []), 
                     extraComponentName
                 );
             }

@@ -122,10 +122,6 @@
     {
       "path": "../helpers/form.side-effects",
       "exports": "FormSideEffects"
-    },
-    {
-      "path": "../helpers/rules-parser",
-      "exports": ["RulesEngine"]
     }
   ],
   "variables": [
@@ -181,7 +177,7 @@
         "onXHRSchemaEvent",
         "onUpdateKeyProperty",
         {
-          "resolvedFormFacts": "ruleProps"
+          "resolvedFormFacts": "ruleProps.resolvedFacts"
         }
       ]
     }
@@ -213,6 +209,9 @@
               "else": [
                 { 
                   "FormField": {
+                    "props": [
+                      "formFieldProps"
+                    ],
                     "ref": "./FormField.json"
                   }
                 }

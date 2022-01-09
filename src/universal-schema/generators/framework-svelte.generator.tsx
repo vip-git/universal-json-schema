@@ -23,10 +23,14 @@ const generateSvelteFramework = ({
             reactSyntax = format(`<main>${jsonComponents[componentName]}</main>`);
         }
 
-        const commonParsers = (compName, parserLocation) => `// Side Effects
+        const commonParsers = (compName, parserLocation) => `// Rules Engine
+import { RulesEngine } from '../helpers/rules-parser';
 <% 
-if(Array.isArray(imports[${compName}])) { imports[${compName}].forEach((sObj) => {
-%>import <% if(typeof sObj.exports === "string"){%><%=sObj.exports%><%} else {%>{ <%=sObj.exports.join(", ")%> }<%}%> from '<%= sObj.path %>';
+if(Array.isArray(imports[${compName}]) && imports[${compName}].length) {%>
+// Side Effects <% 
+imports[${compName}].forEach((sObj) => {
+%>
+import <% if(typeof sObj.exports === "string"){%><%=sObj.exports%><%} else {%>{ <%=sObj.exports.join(", ")%> }<%}%> from '<%= sObj.path %>';
 <% }) } %>
 
 // Properties 
@@ -37,7 +41,7 @@ if(Array.isArray(imports[${compName}])) { imports[${compName}].forEach((sObj) =>
 <%
         return;
         case 'function':
-%>export let <%= propObj.propName %> = () => {};
+%>export let <%= propObj.propName %>: any = () => {};
 <%
         return;
         case 'boolean':
@@ -56,7 +60,7 @@ if(Array.isArray(imports[${compName}])) { imports[${compName}].forEach((sObj) =>
 }) } %>
 
 // Variables
-const ruleProps: any = {};
+const ruleProps = { resolvedFacts: {} };
 <%if(Array.isArray(variables[${compName}])) { variables[${compName}].forEach((vObj) => {if(vObj) {%><% if(Object.keys(vObj)[0] === "ruleProps") {%> 
 ruleProps.<%= Object.keys(vObj.ruleProps)[0] %> = {<% vObj.ruleProps[Object.keys(vObj.ruleProps)[0]].forEach((ruleProp, ruleIndex) => { %>
     <%=ruleProp%><%if(ruleIndex !== vObj.ruleProps[Object.keys(vObj.ruleProps)[0]].length - 1) {%>,<%}%><% }) %>
