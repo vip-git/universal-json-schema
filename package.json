@@ -42,7 +42,7 @@
   "dependencies": {
     "cross-env": "7.0.3",
     "ts-node": "10.4.0",
-    "shelljs": "0.8.4",
+    "shelljs": "0.8.5",
     "typescript": "4.3.2"
   },
   "description": "universal-jsonschema-form with UI and XHR Schema.",
