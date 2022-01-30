@@ -232,7 +232,7 @@ const conditionalSvelteOpeningBracket = (syntax: string, conditionRef, extraComp
         case thenComp:
             return '';
         case iteratorComp:
-            return `<each condition="${extraComponentProps.name}({ ${extraComponentProps.arguments.join(', ')} })" result="${extraComponentProps.result}">`;
+            return `<each condition="${extraComponentProps.functionName}({ ${extraComponentProps.arguments.join(', ')} })" result="${extraComponentProps.result}">`;
         case ifComp:
             return `<${syntax} condition="${getFunctionCondition({ conditionRef, extraComponentName })}()">`;    
         default:

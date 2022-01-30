@@ -140,7 +140,7 @@
                                             {
                                                 ":iterator:": {
                                                     "props": {
-                                                        "name": "Utils.getschemaproperties",
+                                                        "functionName": "Utils.getschemaproperties",
                                                         "arguments": [
                                                             "schema",
                                                             "data",
