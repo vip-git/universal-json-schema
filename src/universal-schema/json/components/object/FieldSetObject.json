@@ -1,4 +1,32 @@
 {
+    "properties": {
+        "schema": {
+            "type": "object"
+        },
+        "data": {
+            "type": "object"
+        },
+        "uiSchema": {
+            "type": "object"
+        },
+        "xhrSchema": {
+            "type": "object"
+        },
+        "onChange": {
+            "type": "function"
+        }
+    },
+    "variables": [
+        {
+            "fieldSetProps": [
+                "schema",
+                "data",
+                "uiSchema",
+                "xhrSchema",
+                "onChange"
+            ]
+        }
+    ],
     "components": [
         {
             "if": {
@@ -6,11 +34,9 @@
                 "then": [
                     {
                         "FieldSetStepper": {
-                            "properties": {
-                                "uiSchema": {},
-                                "schema": {},
-                                "xhrSchema": {}
-                            },
+                            "props": [
+                                "fieldSetProps"
+                            ],
                             "src": "./field-set-steps.tsx",
                             "ref": "./components/object/variants/FieldSetStepper.json"
                         }
@@ -24,11 +50,9 @@
                 "then": [
                     {
                         "FieldSetTabs": {
-                            "properties": {
-                                "uiSchema": {},
-                                "schema": {},
-                                "xhrSchema": {}
-                            },
+                            "props": [
+                                "fieldSetProps"
+                            ],
                             "src": "./field-set-tabs.tsx",
                             "ref": "./components/object/variants/FieldSetTabs.json"
                         }
@@ -42,11 +66,9 @@
                 "then": [
                     {
                         "FieldSetDefault": {
-                            "properties": {
-                                "uiSchema": {},
-                                "schema": {},
-                                "xhrSchema": {}
-                            },
+                            "props": [
+                                "fieldSetProps"
+                            ],
                             "src": "./field-set-default.tsx",
                             "ref": "./components/object/variants/FieldSetDefault.json"
                         }

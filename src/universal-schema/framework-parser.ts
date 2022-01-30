@@ -43,6 +43,8 @@ const frameworks: Frameworks = {
 
 const selectedFramework = frameworks.svelte;
 
+const iteratorComp = ':iterator:';
+
 const ifComp = 'If';
 const thenComp = 'Then';
 const elseComp = 'Else';
@@ -79,6 +81,13 @@ const format = (markup: string) => {
     {:then ${p2.replace('(', '').replace(')', '')}}                
         {#if ${p2.replace('(', '').replace(')', '')}}`;
               };
+
+            const eachOpeningSyntax = (match, p1, p2, p3, offset, string) => {
+            return `{#each ${p2} as ${p3}}`;
+            };
+
+            const eachClosingSyntax = `{/each}`;
+
             const ifClosingSyntax = `   {/if}
     {/await}`;
             const elseSyntax = '{:else}';
@@ -88,9 +97,11 @@ const format = (markup: string) => {
             return formatXML(markup)
                     .replaceAll(/(props="(.+?)")/g, propsSyntax)
                     .replaceAll(/(\<If condition="(.+?)">)/g, ifOpeningSyntax)
+                    .replaceAll(/(\<each condition="(.+?)" result="(.+?)">)/g, eachOpeningSyntax)
                     .replaceAll(`</${ifComp}>`, ifClosingSyntax)
                     .replaceAll(`</${elseComp}>`, '')
-                    .replaceAll(`<${elseComp}>`, elseSyntax);
+                    .replaceAll(`<${elseComp}>`, elseSyntax)
+                    .replaceAll(`</each>`, eachClosingSyntax);
         default:
             return formatXML(markup);
     }
@@ -196,24 +207,34 @@ const appendSyntaxToElement = (syntax: string, extraComponentName?: string) => {
     }
 }
 
+const getFunctionCondition = ({
+    conditionRef,
+    extraComponentName
+}) => {
+    const functionCondition = conditionRef.split('/')[conditionRef.split('/').length - 1].replaceAll('-', '').replaceAll('.json', '');
+    let condition = [];
+    try {
+        condition = require(`./json/${conditionRef}`);
+    } catch(err) {}
+    if (!rules[extraComponentName]) {
+        rules[extraComponentName] = [];
+    }
+    rules[extraComponentName].push({
+        name: functionCondition,
+        condition: JSON.stringify(condition, null, 2)
+    });
+
+    return functionCondition;
+}
+
 const conditionalSvelteOpeningBracket = (syntax: string, conditionRef, extraComponentName, extraComponentProps) => {
     switch (syntax) {
         case thenComp:
             return '';
+        case iteratorComp:
+            return `<each condition="${extraComponentProps.name}({ ${extraComponentProps.arguments.join(', ')} })" result="${extraComponentProps.result}">`;
         case ifComp:
-            const functionCondition = conditionRef.split('/')[conditionRef.split('/').length - 1].replaceAll('-', '').replaceAll('.json', '');
-            let condition = [];
-            try {
-                condition = require(`./json/${conditionRef}`);
-            } catch(err) {}
-            if (!rules[extraComponentName]) {
-                rules[extraComponentName] = [];
-            }
-            rules[extraComponentName].push({
-                name: functionCondition,
-                condition: JSON.stringify(condition, null, 2)
-            });
-            return `<${syntax} condition="${functionCondition}()">`;    
+            return `<${syntax} condition="${getFunctionCondition({ conditionRef, extraComponentName })}()">`;    
         default:
             return extraComponentProps && extraComponentProps.length ? `<${syntax} props="${extraComponentProps[0]}">` : `<${syntax}>`;
     }
@@ -223,6 +244,8 @@ const conditionalSvelteClosingBracket = (syntax: string) => {
     switch (syntax) {
         case thenComp:
             return '';
+        case iteratorComp:  
+            return '</each>';  
         default:
             return `</${syntax}>`;
     }
@@ -257,6 +280,7 @@ const generateTreeMarkup = (markupArray: any, parent, extraComponentName?: strin
             if (
                 !components.root.includes(modifiedCompName) 
                 && !conditionalComponents.includes(modifiedCompName)
+                && modifiedCompName !== iteratorComp
             ) {
                 components.root.push(modifiedCompName);
             }
@@ -265,6 +289,7 @@ const generateTreeMarkup = (markupArray: any, parent, extraComponentName?: strin
                 extraComponentName &&
                 !components[extraComponentName].includes(modifiedCompName) 
                 && !conditionalComponents.includes(modifiedCompName)
+                && modifiedCompName !== iteratorComp
             ) {
                 components[extraComponentName].push(modifiedCompName);
             }

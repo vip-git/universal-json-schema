@@ -23,6 +23,19 @@
             "ref": "./methods/use-schema-type-to-render.json"
         }
     },
+    "variables": [
+        {
+            "fieldSetProps": [
+                "schema",
+                "data",
+                "uiSchema",
+                "xhrSchema",
+                "onChange",
+                "onXHRSchemaEvent",
+                "onUpdateKeyProperty"
+            ]
+        }
+    ],
     "components": [
         {
             "FieldsetHTML": {
@@ -74,6 +87,9 @@
                             "properties": {
                                 "ref": "parent"
                             },
+                            "props": [
+                                "fieldSetProps"
+                            ],
                             "ref": "#/methods/SchemaTypeComponents~FieldSetContent"
                         }
                     }

@@ -2,33 +2,77 @@
     "properties": {
         "className": "",
         "path": "",
-        "schema": "",
-        "data": "",
-        "uiSchema": "",
-        "xhrSchema": "",
-        "onChange": "",
-        "onXHRSchemaEvent": "",
-        "onKeyDown": "",
+        "schema": {
+            "type": "object"
+        },
+        "data": {
+            "type": "object"
+        },
+        "uiSchema": {
+            "type": "object"
+        },
+        "xhrSchema": {
+            "type": "object"
+        },
+        "onChange": {
+            "type": "function"
+        },
+        "onXHRSchemaEvent": {
+            "type": "function"
+        },
+        "onKeyDown": {
+            "type": "function"
+        },
         "dynamicKeyField": "",
         "prefixId": "",
-        "widget": {},
-        "type": {},
-        "descriptionText": {},
-        "activeCompColor": {},
-        "helpText": {},
-        "Component": {},
-        "LabelComponent": {},
-        "labelComponentProps": {},
-        "title": {},
-        "componentProps": {},
-        "id": {},
-        "htmlid": {},
-        "isHidden": {},
-        "isCustomComponent": {},
-        "hasError": {},
-        "hasInlineError": {},
-        "validation": {},
-        "xhrProgress": {}
+        "widget": {
+            "type": "object"
+        },
+        "type": "",
+        "descriptionText": {
+            "type": "string"
+        },
+        "activeCompColor": {
+            "type": "string"
+        },
+        "helpText": {
+            "type": "string"
+        },
+        "Component": {
+            "type": "function"
+        },
+        "LabelComponent": {
+            "type": "function"
+        },
+        "labelComponentProps": {
+            "type": "object"
+        },
+        "title": {
+            "type": "string"
+        },
+        "componentProps": {
+            "type": "object"
+        },
+        "id": "",
+        "htmlid": "",
+        "isHidden": {
+            "type": "boolean"
+        },
+        "isCustomComponent": {
+            "type": "object"
+        },
+        "hasError": {
+            "type": "boolean"
+        },
+        "hasInlineError": {
+            "type": "boolean"
+        },
+        "validation": {
+            "type": "object"
+        },
+        "xhrProgress": {
+            "type": "boolean"
+        }
     },
     "methods": {
         "getFieldStyles": {
@@ -98,6 +142,32 @@
             }
         }
     },
+    "variables": [
+        {
+            "ruleProps": {
+                "resolvedFacts": [
+                    {
+                        "schemaType": "schema.type"
+                    },
+                    "LabelComponent",
+                    "title",
+                    "isCustomComponent",
+                    "descriptionText",
+                    "activeCompColor",
+                    "helpText"
+                ]
+            }
+        },
+        {
+            "uiComponentProps": [
+                "schema",
+                "data",
+                "uiSchema",
+                "xhrSchema",
+                "onChange"
+            ]
+        }
+    ],
     "components": [
         {
             "if": {
@@ -158,6 +228,9 @@
                                                     "then": [
                                                         {
                                                             "UIComponent": {
+                                                                "props": [
+                                                                    "uiComponentProps"
+                                                                ],
                                                                 "src": "./component.tsx"
                                                             }
                                                         }

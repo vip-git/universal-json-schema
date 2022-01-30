@@ -83,6 +83,9 @@
         },
         "isSubmitDisabled": {
             "type": "boolean"
+        },
+        "resolvedFormFacts": {
+            "type": "object"
         }
     },
     "methods": {
@@ -100,6 +103,39 @@
             }
         }
     },
+    "variables": [
+        {
+            "ruleProps": {
+                "resolvedFacts": [
+                    {
+                        "schemaType": "schema.type"
+                    }
+                ]
+            }
+        },
+        {
+            "fieldSetProps": [
+                "schema",
+                "data",
+                "uiSchema",
+                "xhrSchema",
+                "onChange",
+                "onXHRSchemaEvent",
+                "onUpdateKeyProperty"
+            ]
+        },
+        {
+            "fieldComponentProps": [
+                "schema",
+                "data",
+                "uiSchema",
+                "xhrSchema",
+                "onChange",
+                "onXHRSchemaEvent",
+                "resolvedFormFacts"
+            ]
+        }
+    ],
     "components": [
         {
             "if": {
@@ -107,6 +143,9 @@
                 "then": [
                     { 
                         "FieldSet": {
+                            "props": [
+                                "fieldSetProps"
+                            ],
                             "ref": "./FieldSet.json"
                         }
                     }
@@ -114,6 +153,9 @@
                 "else": [
                     { 
                         "FieldComponent": {
+                            "props": [
+                                "fieldComponentProps"
+                            ],
                             "ref": "./FieldComponent.json"
                         }
                     }

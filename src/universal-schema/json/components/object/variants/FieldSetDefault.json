@@ -1,18 +1,37 @@
 {
     "properties": {
         "className": {},
-        "schema": {},
-        "uiSchema": {},
-        "xhrSchema": {},
-        "data": {},
-        "uiData": {},
-        "definitions": {},
+        "schema": {
+            "type": "object"
+        },
+        "data": {
+            "type": "object"
+        },
+        "uiSchema": {
+            "type": "object"
+        },
+        "xhrSchema": {
+            "type": "object"
+        },
+        "onChange": {
+            "type": "function"
+        },
+        "uiData": {
+            "type": "object"
+        },
+        "definitions": {
+            "type": "object"
+        },
         "id": {},
         "idxKey": {},
         "path": {},
         "validation": {},
-        "isTabContent": {},
-        "tabKey": {}
+        "isTabContent": {
+            "type": "boolean"
+        },
+        "tabKey": {
+            "type": "string"
+        }
     },
     "methods": {
         "onAddNewProperty": {
@@ -36,6 +55,27 @@
             }
         }
     },
+    "variables": [
+        {
+            "ruleProps": {
+                "resolvedFacts": [
+                    {
+                        "uiSchemaType": "Utils.getUISchemaType(schema)"
+                    },
+                    "isTabContent",
+                    {
+                        "schemaAdditionalPropertiesLength": "Utils.getSchemaAdditionalPropertiesLength(schema)"
+                    },
+                    {
+                        "schemaPropertiesLength": "Utils.getSchemaPropertiesLength(schema)"
+                    },
+                    {
+                        "schemaAdditionalProperties": "schema.additionalProperties"
+                    }
+                ]
+            }
+        }
+    ],
     "components": [
         {
             "if": {
@@ -98,10 +138,27 @@
                                         "ref": "./rules/field-set-object-default/is-schema-additional-properties-less-than-properties.json",
                                         "then": [
                                             {
-                                                "FormField": {
-                                                    "iterator": "#/methods/getSchemaAdditionalProperties/schemaAdditionalProperties",
-                                                    "src": "./FormField.json"
+                                                ":iterator:": {
+                                                    "props": {
+                                                        "name": "Utils.getschemaproperties",
+                                                        "arguments": [
+                                                            "schema",
+                                                            "data",
+                                                            "uiSchema",
+                                                            "xhrSchema"
+                                                        ],
+                                                        "result": "fieldSchemaProps"
+                                                    },
+                                                    "components": [{
+                                                        "FormField": {
+                                                            "props": [
+                                                                "fieldSchemaProps"
+                                                            ],
+                                                            "src": "./FormField.json"
+                                                        }
+                                                    }]
                                                 }
+                                                
                                             }
                                         ]
                                     }
