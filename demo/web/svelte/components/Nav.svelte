@@ -50,6 +50,6 @@
 
 <nav>
 	<ul>
-		<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">Svelte JSON Schema Form</a></li>
+		<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">SVELTE - Json Schema Form</a></li>
 	</ul>
 </nav>

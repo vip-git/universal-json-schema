@@ -53,7 +53,6 @@
 	<link rel="stylesheet" href="https://unpkg.com/svelte-material-ui/bare.css" />
 </svelte:head>
 
-<h1>Svelte JSON Schema Form</h1>
 <Form 
 	schema={NumbersSchema.schema}
 	uiSchema={NumbersSchema.uiSchema}
