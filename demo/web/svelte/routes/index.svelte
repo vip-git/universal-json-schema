@@ -41,7 +41,7 @@
 </style>
 
 <svelte:head>
-	<title>Sapper project template</title>
+	<title>Svelte JSON Schema Form</title>
 	<!-- Fonts -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700">
