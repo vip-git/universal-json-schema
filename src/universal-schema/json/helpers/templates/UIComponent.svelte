@@ -1,5 +1,5 @@
 <script>
-    // Component
+    // Helpers
     import renderUIComponent from '../../helpers/render-ui-component';
     
     // Properties 
