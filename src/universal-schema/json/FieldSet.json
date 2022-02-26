@@ -1,7 +1,9 @@
 {
     "properties": {
         "path": {},
-        "schema": {},
+        "schema": {
+            "type": "object"
+        },
         "data": {},
         "uiSchema": {},
         "xhrSchema": {},
@@ -24,6 +26,15 @@
         }
     },
     "variables": [
+        {
+            "ruleProps": {
+                "resolvedFacts": [
+                    {
+                        "schemaType": "schema.type"
+                    }
+                ]
+            }
+        },
         {
             "fieldSetProps": [
                 "schema",

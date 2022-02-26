@@ -1,15 +1,45 @@
 {
     "src": "./fieldset-content.tsx",
-    "properties": {
-        "schema": {},
-        "uiSchema": {},
-        "xhrSchema": {},
-        "props": { 
-            "classes": {}
-        }
-    },
     "returns": {
         "FieldSetContent": {
+            "properties": {
+                "path": {},
+                "schema": {
+                    "type": "object"
+                },
+                "data": {},
+                "uiSchema": {},
+                "xhrSchema": {},
+                "onKeyDown": {},
+                "onChange": {},
+                "onXHRSchemaEvent": {},
+                "hideTitle": {},
+                "onUpdateKeyProperty": {},
+                "dynamicKeyField": {},
+                "prefixId": {}
+            },
+            "variables": [
+                {
+                    "ruleProps": {
+                        "resolvedFacts": [
+                            {
+                                "schemaType": "schema.type"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "fieldSetProps": [
+                        "schema",
+                        "data",
+                        "uiSchema",
+                        "xhrSchema",
+                        "onChange",
+                        "onXHRSchemaEvent",
+                        "onUpdateKeyProperty"
+                    ]
+                }
+            ],
             "components": [
                 {
                     "if": {
@@ -22,6 +52,9 @@
                                         "schema": {},
                                         "xhrSchema": {}
                                     },
+                                    "props": [
+                                        "fieldSetProps"
+                                    ],
                                     "src": "./field-set-array.tsx",
                                     "ref": "./components/array/FieldSetArray.json"
                                 }
@@ -40,6 +73,9 @@
                                         "schema": {},
                                         "xhrSchema": {}
                                     },
+                                    "props": [
+                                        "fieldSetProps"
+                                    ],
                                     "src": "./field-set-object.tsx",
                                     "ref": "./components/object/FieldSetObject.json"
                                 }

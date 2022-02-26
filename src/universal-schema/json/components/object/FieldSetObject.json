@@ -18,6 +18,15 @@
     },
     "variables": [
         {
+            "ruleProps": {
+                "resolvedFacts": [
+                    {
+                        "uiSchemaType": "uiSchema[`ui:page`] ? uiSchema[`ui:page`][`ui:layout`] : `Default`"
+                    }
+                ]
+            }
+        },
+        {
             "fieldSetProps": [
                 "schema",
                 "data",

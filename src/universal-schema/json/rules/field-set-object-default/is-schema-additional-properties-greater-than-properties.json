@@ -1,10 +1,15 @@
 {
     "all": [
         {
-            "fact": "schemaAdditionalProperties",
+            "fact": "schemaPropertiesLength",
+            "operator": "isDefined",
+            "value": true
+        },
+        {
+            "fact": "schemaAdditionalPropertiesLength",
             "operator": "greaterThan",
             "value": {
-                "fact": "schemaProperties"
+                "fact": "schemaPropertiesLength"
             }
         }
     ]

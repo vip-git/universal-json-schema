@@ -1,7 +1,7 @@
 {
     "all": [
         {
-            "fact": "renderComponent",
+            "fact": "canRenderComponent",
             "operator": "equal",
             "value": true
         }

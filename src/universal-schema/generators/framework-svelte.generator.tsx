@@ -32,8 +32,8 @@ const generateSvelteFramework = ({
          * @returns 
          */
         const commonParsers = (compName, parserLocation) => `// Helpers
-import { RulesEngine } from '../helpers/rules-parser';
-import { FormUtils } from '../helpers/form.utils';
+import { RulesEngine } from '${parserLocation}/helpers/rules-parser';
+import { FormUtils } from '${parserLocation}/helpers/form.utils';
 <% 
 if(Array.isArray(imports[${compName}]) && imports[${compName}].length) {%>
 // Side Effects <% 
@@ -114,10 +114,8 @@ ${commonParsers(`"${componentName}"`, '..')}
 ${reactSyntax}
 `;
         
-            const componentTsx = `<script>
-// Library
-import { onDestroy, onMount } from "svelte";
-
+            const componentTsx = `
+<script>
 ${commonParsers('compName', '../..')}
 </script>
 <slot />
@@ -128,10 +126,14 @@ ${commonParsers('compName', '../..')}
             shellFileString.to(`${shelljs.pwd()}/src/universal-schema/json/generated-${frameworkName}/${componentName}.${frameworkName}`);
         
             components[componentName].filter((cname) => !Object.keys(components).includes(cname)).forEach((compName) => {
-                const template = ejs.compile(componentTsx, {});
-                const finalString = template({ components, properties, compName, rules, imports, variables });
-                const shellFileString = new shelljs.ShellString(finalString);  
-                shellFileString.to(`${shelljs.pwd()}/src/universal-schema/json/generated-${frameworkName}/components/${compName}.${frameworkName}`);
+                if (!shelljs.test('-f', `${shelljs.pwd()}/src/universal-schema/json/helpers/templates/${compName}.${frameworkName}`)) {
+                    const template = ejs.compile(componentTsx, {});
+                    const finalString = template({ components, properties, compName, rules, imports, variables });
+                    const shellFileString = new shelljs.ShellString(finalString);  
+                    shellFileString.to(`${shelljs.pwd()}/src/universal-schema/json/generated-${frameworkName}/components/${compName}.${frameworkName}`);
+                } else {
+                    shelljs.cp('-rf', `${shelljs.pwd()}/src/universal-schema/json/helpers/templates/${compName}.${frameworkName}`, `${shelljs.pwd()}/src/universal-schema/json/generated-${frameworkName}/components/${compName}.${frameworkName}`)
+                }
             });
     });
     

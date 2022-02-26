@@ -11,7 +11,7 @@ export const FormUtils = () => {
     }
 
     const getSchemaPropertiesLength = (schema) => {
-        return Object.keys(schema).indexOf('additionalProperties');
+        return Object.keys(schema).indexOf('properties');
     }
 
     return {

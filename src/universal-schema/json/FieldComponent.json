@@ -72,6 +72,9 @@
         },
         "xhrProgress": {
             "type": "boolean"
+        },
+        "resolvedFormFacts": {
+            "type": "object"
         }
     },
     "methods": {
@@ -146,15 +149,29 @@
         {
             "ruleProps": {
                 "resolvedFacts": [
+                    "...resolvedFormFacts",
                     {
                         "schemaType": "schema.type"
                     },
-                    "LabelComponent",
+                    {
+                        "LabelComponent": true
+                    },
                     "title",
-                    "isCustomComponent",
-                    "descriptionText",
-                    "activeCompColor",
-                    "helpText"
+                    {
+                        "isCustomComponent": false
+                    },
+                    {
+                        "descriptionText": "`Hello World`"
+                    },
+                    {
+                        "activeCompColor": false
+                    },
+                    {
+                        "canRenderComponent": true
+                    },
+                    {
+                        "helpText": "`helper`"
+                    }
                 ]
             }
         },
@@ -171,7 +188,7 @@
     "components": [
         {
             "if": {
-                "ref": "./rules/field-component/is-form-loading.json",
+                "ref": "./rules/form/is-form-loading.json",
                 "then": [
                     {
                         "Div": {
