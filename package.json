@@ -41,7 +41,7 @@
   ],
   "dependencies": {
     "cross-env": "7.0.3",
-    "ts-node": "10.4.0",
+    "ts-node": "10.5.0",
     "shelljs": "0.8.5",
     "typescript": "4.3.2"
   },
