@@ -93,10 +93,10 @@ export interface UIFramework {
         FormGroup: any;
         FormHelperText: any;
         ActiveComp: any;
-        Div: FunctionComponent<{ className?: any; style?: React.CSSProperties; }>;
-        Span: FunctionComponent<{ className?: any; style?: React.CSSProperties; }>;
+        Div: any;
+        Span: any;
         FieldsetHTML: any;
-        Para: FunctionComponent<{ className: any; }>;
+        Para: any;
     };
     styles: {
         FieldSetStyles: any;
