@@ -95,7 +95,7 @@ export interface UIFramework {
         ActiveComp: any;
         Div: FunctionComponent<{ className?: any; style?: React.CSSProperties; }>;
         Span: FunctionComponent<{ className?: any; style?: React.CSSProperties; }>;
-        FieldsetHTML: FunctionComponent<{ className: any; }>;
+        FieldsetHTML: any;
         Para: FunctionComponent<{ className: any; }>;
     };
     styles: {
