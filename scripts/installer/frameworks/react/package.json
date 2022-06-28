@@ -174,7 +174,7 @@
   "peerDependencies": {
     "immutability-helper": "^2.6.5 || ^3.0.0"
   },
-  "version": "3.0.0-rc.5",
+  "version": "3.0.0-rc.6",
   "directories": {
     "doc": "docs"
   },
