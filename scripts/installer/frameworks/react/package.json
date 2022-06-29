@@ -178,5 +178,5 @@
   "directories": {
     "doc": "docs"
   },
-  "keywords": []
+  "keywords": ["json-schema-forms"]
 }
