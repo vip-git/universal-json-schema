@@ -1,5 +1,5 @@
 // Library
-import { nanoid as generate } from 'nanoid';
+import { nanoid as generate } from 'nanoid/non-secure';
 
 // Lodash
 import set from 'lodash/set';
