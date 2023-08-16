@@ -44,6 +44,11 @@ module.exports = {
 	],
 	testEnvironment: 'jsdom',
 	testURL: 'http://localhost',
+	globals: {
+		'ts-jest': {
+		  useESM: true,
+		},
+	},
 	transform: {
 		'^.+\\.(js|jsx|mjs)$': ['babel-jest', { configFile: paths.babelConfig }],
 		'\\.(ts|tsx)$': 'ts-jest',
