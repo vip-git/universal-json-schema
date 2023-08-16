@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x] # Add support for 12.x, 15.x later just build and unit tests
+        node-version: [20.x] # Add support for 12.x, 15.x later just build and unit tests
 
     steps:
     - uses: actions/checkout@v3
