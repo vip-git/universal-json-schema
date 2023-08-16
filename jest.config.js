@@ -44,14 +44,14 @@ module.exports = {
 	],
 	testEnvironment: 'jsdom',
 	testURL: 'http://localhost',
-	globals: {
-		'ts-jest': {
-		  useESM: true,
-		},
-	},
 	transform: {
 		'^.+\\.(js|jsx|mjs)$': ['babel-jest', { configFile: paths.babelConfig }],
-		'\\.(ts|tsx)$': 'ts-jest',
+		'\\.(ts|tsx)$': [
+		      'ts-jest',
+		      {
+			useESM: true,
+		      },
+		],
 		'^.+\\.css$': '<rootDir>/scripts/config/jest/cssTransform.js',
 		'^(?!.*\\.(js|jsx|mjs|css|json)$)':
 			'<rootDir>/scripts/config/jest/fileTransform.js'
