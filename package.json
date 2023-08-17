@@ -19,7 +19,7 @@
     "build": "rollup -c",
     "build:demo": "cross-env NODE_ENV=production webpack --config webpack.config.demo.js",
     "generate:tests": "node scripts/generator/index.js --testsOnly",
-    "test": "node scripts/test.js --env=jsdom --config=jest.config.js --coverage",
+    "test": "node --experimental-vm-modules --max-old-space-size=4096 node_modules/.bin/jest --env=jsdom --config=jest.config.js --coverage --updateSnapshot --detectOpenHandles --forceExit",
     "lint": "eslint src --fix",
     "test:watch": "node scripts/test.js --env=jsdom --config=jest.config.js",
     "heroku-postbuild": "npm run build:demo",
