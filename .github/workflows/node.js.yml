@@ -20,18 +20,18 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [15.x] # Add support for 12.x, 15.x later just build and unit tests
+        node-version: [16.x] # Add support for 12.x, 15.x later just build and unit tests
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Build and Test ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install --force
     - run: npm run install-react-mui
     - run: npm run build
-    - run: npx jest --env=jsdom --config=jest.config.js --coverage --ci --updateSnapshot --detectOpenHandles --forceExit
+    - run: node --experimental-vm-modules --max-old-space-size=4096 node_modules/.bin/jest --env=jsdom --config=jest.config.js --coverage --ci --updateSnapshot --detectOpenHandles --forceExit
     - name: Codecov
       uses: codecov/codecov-action@v1.5.2
 

@@ -44,30 +44,9 @@ export interface UIFramework {
     platform: UIFrameworkPlatforms;
     components: Components;
     internal: {
-        CrossPlatformWrapper: FunctionComponent<{
-            classes: any,
-            uiSchema: any,
-            defaultTheme: any, 
-            theme: any,
-            RenderFormButtons: any,
-            actionButtonPos: any,
-            hasPageLayoutSteps: any,
-            isFormLoading: any,
-        }>;
-        CrossPlatformLoadingWrapper: FunctionComponent<{}>;
-        FormButtons: FunctionComponent<{
-            classes: any; 
-            onCancel: any; 
-            onSubmit: any; 
-            submitValue: any; 
-            cancelValue: any; 
-            inProgressValue: any; 
-            disabled: any; 
-            cancelVariant: any; 
-            submitVariant: any; 
-            activityIndicatorEnabled: any; 
-            inProgress: any;
-        }>;
+        CrossPlatformWrapper: any;
+        CrossPlatformLoadingWrapper: any;
+        FormButtons: any;
         ValidationMessages: any;
     };
     wrapperComponents: {
@@ -93,10 +72,10 @@ export interface UIFramework {
         FormGroup: any;
         FormHelperText: any;
         ActiveComp: any;
-        Div: FunctionComponent<{ className?: any; style?: React.CSSProperties; }>;
-        Span: FunctionComponent<{ className?: any; style?: React.CSSProperties; }>;
-        FieldsetHTML: FunctionComponent<{ className: any; }>;
-        Para: FunctionComponent<{ className: any; }>;
+        Div: any;
+        Span: any;
+        FieldsetHTML: any;
+        Para: any;
     };
     styles: {
         FieldSetStyles: any;
