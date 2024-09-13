@@ -93,7 +93,7 @@
     "@babel/register": "7.13.16",
     "@babel/runtime": "7.12.5",
     "@monaco-editor/react": "4.0.6",
-    "body-parser": "1.19.0",
+    "body-parser": "1.20.3",
     "brace": "0.11.1",
     "braces": "3.0.2",
     "@rollup/plugin-commonjs": "19.0.0",
