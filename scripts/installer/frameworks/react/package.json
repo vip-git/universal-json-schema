@@ -140,7 +140,7 @@
     "jest-environment-jsdom": "26.6.2",
     "jest-transform-stub": "2.0.0",
     "jsdom": "16.5.3",
-    "mini-css-extract-plugin": "1.3.9",
+    "mini-css-extract-plugin": "1.6.2",
     "multiple-cucumber-html-reporter": "1.18.0",
     "namor": "2.0.2",
     "node-fetch": "2.6.7",
