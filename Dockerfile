@@ -1,6 +1,6 @@
 
 # Use an official node image
-FROM node:20.15.1-alpine3.20
+FROM node:20.18.0-alpine3.20
 
 RUN set -xe \
     && apk add --no-cache bash git openssh \
