@@ -116,7 +116,7 @@
     "css-hot-loader": "1.4.4",
     "css-loader": "5.1.0",
     "date-fns": "2.15.0",
-    "ejs": "3.1.7",
+    "ejs": "3.1.10",
     "enzyme": "3.11.0",
     "enzyme-to-json": "3.6.2",
     "eslint": "7.15.0",
