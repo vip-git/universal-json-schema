@@ -43,7 +43,7 @@
     "ajv": "6.12.6",
     "body-parser": "1.19.0",
     "brace": "0.11.1",
-    "braces": "3.0.2",
+    "braces": "3.0.3",
     "classnames": "2.2.6",
     "cross-env": "7.0.2",
     "immutability-helper": "^2.6.5 || ^3.0.0",
