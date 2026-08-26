@@ -81,7 +81,7 @@
   },
   "description": "Material UI implementation of angular-jsonschema-form with UI and XHR Schema.",
   "devDependencies": {
-    "@babel/core": "7.14.0",
+    "@babel/core": "7.29.6",
     "@babel/plugin-proposal-class-properties": "7.13.0",
     "@babel/plugin-proposal-object-rest-spread": "7.13.8",
     "@babel/plugin-proposal-optional-chaining": "7.13.12",
